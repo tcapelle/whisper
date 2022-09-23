@@ -1,0 +1,3833 @@
+WEBVTT
+
+00:00.000 --> 00:05.760
+ Hi everybody and welcome to practical deep learning for coders lesson 4,
+
+00:05.760 --> 00:11.560
+ which I think is the lesson that a lot of the regulars in the community have been most excited
+
+00:11.560 --> 00:17.160
+ about because it's where we're going to get some totally new material,
+
+00:17.160 --> 00:20.080
+ totally new topic we've never covered before.
+
+00:20.080 --> 00:25.880
+ We're going to cover natural language processing in LP and you'll find there is indeed a chapter
+
+00:25.880 --> 00:31.600
+ about that in the book, but we're going to do it in a totally different way to how it's done in the book.
+
+00:31.600 --> 00:40.400
+ In the book we do NLP using the fast.ai library using recurrent neural networks, iron ends.
+
+00:40.400 --> 00:48.200
+ Today we're going to do something else, which is we're going to do transformers
+
+00:48.200 --> 00:54.120
+ and we're not even going to use the fast.ai library at all, in fact.
+
+00:54.120 --> 01:02.040
+ So what we're going to be doing today is we're going to be fine tuning a pre trained NLP model
+
+01:02.040 --> 01:06.040
+ using a library called hugging face transformers.
+
+01:06.040 --> 01:13.800
+ Now given this is the fast.ai course, you might be wondering why we'd be using a different library other than fast.ai.
+
+01:13.800 --> 01:22.080
+ The reason is that I think that it's really useful for everybody to have experience and practice
+
+01:22.080 --> 01:30.920
+ of using more than one library because you'll get to see the same concepts applied in different ways.
+
+01:30.920 --> 01:36.840
+ And I think that's great for your understanding of what these concepts are.
+
+01:36.840 --> 01:40.360
+ Also, I really like the hugging face transformers library.
+
+01:40.360 --> 01:47.000
+ It's absolutely the state of the art in NLP and it's well worth knowing.
+
+01:47.000 --> 01:49.400
+ If you're watching this on video by the time you're watching it,
+
+01:49.400 --> 01:53.800
+ we will probably have completed our integration of the transformers library into fast.ai.
+
+01:53.800 --> 02:01.440
+ So it's in the process of becoming the main NLP kind of foundation for fast.ai.
+
+02:01.440 --> 02:08.560
+ So you'll be able to combine transformers and fast.ai together.
+
+02:08.560 --> 02:11.120
+ Yeah, so I think there's a lot of benefits to this.
+
+02:11.120 --> 02:15.560
+ And in the end, you're going to know how to do an NLP in a really fantastic library.
+
+02:15.560 --> 02:22.760
+ Now, the other thing is hugging face transformers doesn't have the same layered architecture
+
+02:22.760 --> 02:28.960
+ that fast.ai has, which means particularly for beginners,
+
+02:28.960 --> 02:34.840
+ the kind of high level, high top tier API that you'll be using most of the time
+
+02:34.840 --> 02:41.520
+ is not as kind of ready to go for beginners as you're used to from fast.ai.
+
+02:41.520 --> 02:43.200
+ And so that's actually, I think, a good thing.
+
+02:43.200 --> 02:44.800
+ You have to listen for.
+
+02:44.800 --> 02:52.280
+ You know the basic idea now of how gradient descent works and how parameters are learned
+
+02:52.280 --> 02:55.800
+ as part of a flexible function.
+
+02:55.800 --> 03:00.200
+ I think you're ready to try using a somewhat lower level library
+
+03:00.200 --> 03:02.160
+ that does a little bit less for you.
+
+03:02.160 --> 03:04.000
+ So it's going to be a little bit more work.
+
+03:04.000 --> 03:09.040
+ It's still a very well designed library and it's still reasonably high level,
+
+03:09.040 --> 03:11.600
+ but you're going to learn to go a little bit deeper.
+
+03:11.600 --> 03:14.800
+ And that's kind of how the rest of the course in general is going to be on the whole,
+
+03:14.800 --> 03:19.080
+ is we're going to get a bit deeper and a bit deeper and a bit deeper.
+
+03:19.080 --> 03:25.040
+ Now, so first of all, let's talk about what we're going to be doing
+
+03:25.040 --> 03:26.920
+ with fine tuning a pre trained model.
+
+03:26.920 --> 03:29.280
+ We've talked about that in passing before,
+
+03:29.280 --> 03:33.360
+ but we haven't really been able to describe it in any detail
+
+03:33.360 --> 03:35.360
+ because you haven't had the foundations.
+
+03:35.360 --> 03:36.880
+ Now you do.
+
+03:36.880 --> 03:39.720
+ You played with these sliders last week.
+
+03:39.720 --> 03:44.200
+ And hopefully you've all actually gone into this notebook and dragged them around
+
+03:44.200 --> 03:48.440
+ and tried to get an intuition for this idea of moving them up and down,
+
+03:48.440 --> 03:51.440
+ makes the loss go up and down and so forth.
+
+03:51.440 --> 03:58.080
+ So imagine that your job was to move these sliders to get this as nice as possible.
+
+03:58.080 --> 04:02.240
+ But when it was given to you, the person who gave it to you said,
+
+04:02.240 --> 04:07.360
+ oh, actually, slider A, that should be on 2.0.
+
+04:07.360 --> 04:08.560
+ We know for sure.
+
+04:08.560 --> 04:13.400
+ And slider B, we think it's like around 2.5.
+
+04:13.400 --> 04:16.160
+ Sliders C, we've got no idea.
+
+04:16.160 --> 04:18.200
+ Now that would be pretty helpful, wouldn't it?
+
+04:18.200 --> 04:22.680
+ Because you could immediately start focusing on the one we have no idea about,
+
+04:22.680 --> 04:24.040
+ get that in roughly the right spot.
+
+04:24.040 --> 04:26.480
+ And then the one you've got a vague idea about,
+
+04:26.480 --> 04:27.640
+ you could just tune it a little bit.
+
+04:27.640 --> 04:30.920
+ And the one that they said was totally confident you wouldn't move at all,
+
+04:30.920 --> 04:35.040
+ you would probably tune these sliders really quickly.
+
+04:35.040 --> 04:37.120
+ That's what a pre trained model is.
+
+04:37.120 --> 04:43.240
+ A pre trained model is a bunch of parameters that have already been fit,
+
+04:43.240 --> 04:48.200
+ where some of them were already pretty confident of what they should be.
+
+04:48.200 --> 04:50.640
+ And some of them we really have no idea at all.
+
+04:50.640 --> 04:53.880
+ And so fine tuning is the process of taking those ones,
+
+04:53.880 --> 04:57.080
+ we have no idea what they should be at all and trying to get them right.
+
+04:57.080 --> 05:01.320
+ And then moving the other ones a little bit.
+
+05:01.320 --> 05:07.920
+ The idea of fine tuning a pre trained NLP model in this way
+
+05:07.920 --> 05:12.160
+ was pioneered by an algorithm called ULM fit,
+
+05:12.160 --> 05:16.120
+ which was first presented actually in a fast AI course.
+
+05:16.120 --> 05:18.600
+ I think the very first fast AI course.
+
+05:18.600 --> 05:22.920
+ It was later turned into an academic paper by me in conjunction with a
+
+05:22.920 --> 05:27.960
+ then PhD student named Sebastian Ruder, who's now one of the world's top NLP researchers,
+
+05:27.960 --> 05:33.560
+ and went on to help inspire a huge change,
+
+05:33.560 --> 05:38.200
+ a huge kind of step improvement in NLP capabilities around the world,
+
+05:38.200 --> 05:43.000
+ along with a number of other important innovations at the time.
+
+05:43.000 --> 05:51.320
+ This is the basic process that ULM fit described.
+
+05:51.320 --> 05:55.120
+ Step one was to build something called a language model,
+
+05:55.120 --> 05:58.480
+ using basically nearly all of Wikipedia.
+
+05:58.480 --> 06:02.600
+ And what the language model did was it tried to predict
+
+06:02.600 --> 06:06.640
+ the next word of a Wikipedia article.
+
+06:06.640 --> 06:11.800
+ In fact, every next word of every Wikipedia article.
+
+06:11.800 --> 06:13.720
+ During that is very difficult.
+
+06:13.720 --> 06:21.000
+ You know, there are Wikipedia articles which would say things like,
+
+06:21.000 --> 06:25.640
+ you know, the 17th prime number is dot dot dot.
+
+06:25.640 --> 06:34.360
+ Or the 40th president of the United States, Blah, said at his residence, Blah, that.
+
+06:34.360 --> 06:38.440
+ You know, filling in these kinds of things requires understanding a lot
+
+06:38.440 --> 06:47.320
+ about how language is structured, and about the world, and about math, and so forth.
+
+06:47.320 --> 06:55.000
+ So to get good at being a language model, a neural network has to get good at a lot of things.
+
+06:55.000 --> 06:59.760
+ It has to understand how language works at a reasonably good level,
+
+06:59.760 --> 07:02.640
+ and it needs to understand what it's actually talking about,
+
+07:02.640 --> 07:05.560
+ and what is actually true, and what is actually not true,
+
+07:05.560 --> 07:10.280
+ and the different ways in which things are expressed, and so forth.
+
+07:10.280 --> 07:15.160
+ So this was trained using a very similar approach
+
+07:15.160 --> 07:18.920
+ to what we'll be looking at for fine tuning, but it started with random weights,
+
+07:18.920 --> 07:24.760
+ and at the end of it, there was a model that could predict more than 30% of the time,
+
+07:24.760 --> 07:31.000
+ correctly what the next word of a Wikipedia article would be.
+
+07:31.000 --> 07:35.600
+ So in this particular case for the URL MFit paper, we then took that,
+
+07:35.600 --> 07:40.640
+ and we were trying to, the first task I did actually for the fast AI course back
+
+07:40.640 --> 07:45.320
+ when I invented this, was to try and figure out whether IMDB movie reviews
+
+07:45.320 --> 07:51.320
+ were positive or negative sentiment, did the person like the movie or not.
+
+07:51.320 --> 07:55.080
+ So what I did was I created a second language model,
+
+07:55.080 --> 07:58.880
+ so again, a language model here is something that predicts the next word of a sentence,
+
+07:58.880 --> 08:03.880
+ but rather than using Wikipedia, I took this pretrained model that was trained on Wikipedia,
+
+08:03.880 --> 08:09.880
+ and I ran a few more epochs using IMDB movie reviews.
+
+08:09.880 --> 08:15.600
+ So I got very good at predicting the next word of an IMDB movie review.
+
+08:15.600 --> 08:21.920
+ And then finally, I took those weights, and I fine tuned them for the task
+
+08:21.920 --> 08:28.400
+ of predicting whether or not a movie review was positive or negative sentiment.
+
+08:28.400 --> 08:32.360
+ So those were the three steps.
+
+08:32.360 --> 08:37.360
+ This is a particularly interesting approach because this very first model,
+
+08:37.360 --> 08:39.600
+ in fact the first two models, if you think about it,
+
+08:39.600 --> 08:41.240
+ they don't require any labels.
+
+08:41.240 --> 08:48.040
+ I didn't have to collect any document categories or do any kind of surveys or collect anything.
+
+08:48.040 --> 08:52.680
+ All I needed was the actual text of Wikipedia and movie reviews themselves,
+
+08:52.680 --> 08:57.240
+ because the labels was what's the next word of a sentence.
+
+08:57.240 --> 09:04.520
+ Now, since we built ULM fit, and we used RNNs,
+
+09:04.520 --> 09:10.680
+ to current neural networks with this, at about the same time ish that we released this,
+
+09:10.680 --> 09:14.920
+ a new kind of architecture, particularly useful for NLP at the time,
+
+09:14.920 --> 09:17.680
+ was developed called Transformers.
+
+09:17.680 --> 09:22.000
+ And Transformers were particularly built because they can take really good advantage
+
+09:22.000 --> 09:29.160
+ of modern accelerators like Google's TPUs.
+
+09:29.160 --> 09:36.360
+ They didn't really allow you to predict the next word of a sentence.
+
+09:36.360 --> 09:39.720
+ It's just not how they're structured for reasons we'll talk about,
+
+09:39.720 --> 09:42.120
+ probably in part two of the course.
+
+09:42.120 --> 09:45.400
+ So they threw away the idea of predicting the next word of a sentence,
+
+09:45.400 --> 09:49.640
+ and then instead they did something just as good and pretty clever.
+
+09:49.640 --> 09:54.440
+ They took chunks of Wikipedia or whatever text they're looking at
+
+09:54.440 --> 09:59.680
+ and deleted at random a few words and asked the model to predict
+
+09:59.680 --> 10:03.320
+ which, what were the words that were deleted, essentially.
+
+10:03.320 --> 10:06.080
+ So it's a pretty similar idea.
+
+10:06.080 --> 10:09.040
+ Other than that, the basic concept was the same as ULM fit.
+
+10:09.040 --> 10:12.520
+ They replaced our RNN approach with a transformer model.
+
+10:12.520 --> 10:16.560
+ They replaced our language model approach with what's called a masked language model.
+
+10:16.560 --> 10:19.040
+ But other than that, the basic idea was the same.
+
+10:19.040 --> 10:24.760
+ So today we're going to be looking at models using what's become
+
+10:24.760 --> 10:28.520
+ the much more popular approach than ULM fit,
+
+10:28.520 --> 10:32.320
+ which is this transformers masked language model approach.
+
+10:32.320 --> 10:34.280
+ OK, John, do we have any questions?
+
+10:34.280 --> 10:40.640
+ And I should mention we do have a professor from University of Queensland,
+
+10:40.640 --> 10:45.360
+ John Williams joining us, who will be asking the highest voted questions
+
+10:45.360 --> 10:46.280
+ from the community.
+
+10:46.280 --> 10:48.040
+ What do you got, John?
+
+10:48.040 --> 10:49.280
+ Thanks, Jeremy.
+
+10:49.280 --> 10:50.920
+ And we might be jumping the gun here.
+
+10:50.920 --> 10:53.120
+ I suspect this is where you're going tonight.
+
+10:53.120 --> 10:56.160
+ But we've got a good question here on the forum, which is,
+
+10:56.160 --> 11:00.840
+ how do you go from a model that's trained to predict the next word
+
+11:00.840 --> 11:04.480
+ to a model that can be used for classification?
+
+11:04.480 --> 11:05.240
+ Sure.
+
+11:05.240 --> 11:09.400
+ So yeah, we'll be getting into that in more detail.
+
+11:09.400 --> 11:13.920
+ And in fact, maybe a good place to start would be the next slide.
+
+11:13.920 --> 11:16.040
+ I kind of give you a sense of this.
+
+11:16.040 --> 11:20.000
+ You might remember in lesson one, we looked at this fantastic Xyla and Fergus
+
+11:20.000 --> 11:23.800
+ paper, where we looked at visualizations of the first layer
+
+11:23.800 --> 11:27.920
+ of a ImageNet classification model.
+
+11:27.920 --> 11:34.320
+ And layer one had sets of weights that found diagonal edges.
+
+11:34.320 --> 11:36.400
+ And here are some examples of bits of photos
+
+11:36.400 --> 11:41.360
+ that successfully matched with and opposite diagonal edges.
+
+11:41.360 --> 11:42.840
+ And kind of color gradients.
+
+11:42.840 --> 11:46.080
+ And here's some examples of bits of pictures that matched.
+
+11:46.080 --> 11:49.720
+ And then layer two combined, those.
+
+11:49.720 --> 11:51.600
+ And now you know how those were combined, right?
+
+11:51.600 --> 11:56.560
+ These were rectified linear units that were added together.
+
+11:56.560 --> 11:59.280
+ And then sets of those rectified linear units,
+
+11:59.280 --> 12:01.320
+ the outputs of those, they're called activations,
+
+12:01.320 --> 12:03.800
+ within themselves run through a matrix model
+
+12:03.800 --> 12:06.440
+ player, rectified linear unit, added together.
+
+12:06.440 --> 12:09.200
+ So now you don't just have to have edge detectors,
+
+12:09.200 --> 12:12.360
+ but layer two had corner detectors.
+
+12:12.360 --> 12:14.000
+ And here's some examples of some corners
+
+12:14.000 --> 12:16.440
+ that that corner detector successfully found.
+
+12:16.440 --> 12:19.760
+ And remember, these were not engineered in any way.
+
+12:19.760 --> 12:24.760
+ They just evolved from the gradient descent training process.
+
+12:24.760 --> 12:29.080
+ Layer two had examples of circle detectors, as it turns out.
+
+12:29.080 --> 12:32.200
+ And skipping a bit, by the time we got to layer five,
+
+12:32.200 --> 12:38.400
+ we had bird and lizard eyeball detectors, and dog face
+
+12:38.400 --> 12:45.760
+ detectors, and flower detectors, and so forth.
+
+12:45.760 --> 12:49.760
+ Now, nowadays, you'd have something like a resident 50.
+
+12:49.760 --> 12:50.640
+ It would be something you'd probably
+
+12:50.640 --> 12:52.440
+ be training pretty regularly in this course,
+
+12:52.440 --> 12:56.800
+ so that you've got 50 layers, not just five layers.
+
+12:56.800 --> 13:00.160
+ Now, the later layers do things that
+
+13:00.160 --> 13:04.760
+ are much more specific to the training task, which
+
+13:04.760 --> 13:07.840
+ is actually predicting really what is it
+
+13:07.840 --> 13:09.320
+ that we're looking at.
+
+13:09.320 --> 13:11.920
+ The early layers, pretty unlikely,
+
+13:11.920 --> 13:13.440
+ you're going to need to change them much,
+
+13:13.440 --> 13:16.960
+ as long as you're looking at some kind of natural photos.
+
+13:16.960 --> 13:21.080
+ You've got to need edge detectors and gradient detectors.
+
+13:21.080 --> 13:27.240
+ So what we do in the fine tuning process
+
+13:27.240 --> 13:29.400
+ is there's actually one extra layer after this, which
+
+13:29.400 --> 13:31.960
+ is the layer that actually says, what is this?
+
+13:31.960 --> 13:33.640
+ It's a dog or a cat or whatever.
+
+13:33.640 --> 13:35.160
+ We actually delete that.
+
+13:35.160 --> 13:36.480
+ We throw it away.
+
+13:36.480 --> 13:41.840
+ So now, that last Beatrix Model Play has one output,
+
+13:41.840 --> 13:44.080
+ or one output per category you're predicting.
+
+13:44.080 --> 13:45.480
+ We throw that away.
+
+13:45.480 --> 13:50.280
+ So the model now has that last matrix that's spitting out.
+
+13:50.280 --> 13:53.160
+ You know, it depends, but generally a few hundred
+
+13:53.160 --> 13:54.760
+ activations.
+
+13:54.760 --> 13:58.120
+ And what we do is, as we'll learn more shortly,
+
+13:58.120 --> 14:02.560
+ in the coming lesson, we just stick a new random matrix
+
+14:02.560 --> 14:04.040
+ on the end of that.
+
+14:04.040 --> 14:06.040
+ And that's what we initially train.
+
+14:06.040 --> 14:10.480
+ So it learns to use these kinds of features
+
+14:10.480 --> 14:14.240
+ to predict whatever it is you're trying to predict.
+
+14:14.240 --> 14:18.360
+ And then we gradually train all of those layers.
+
+14:18.360 --> 14:19.800
+ So that's basically how it's done.
+
+14:19.800 --> 14:22.440
+ And so it's a bit hand wavy, but we'll,
+
+14:22.440 --> 14:27.080
+ in particular in part two, actually build that from scratch
+
+14:27.080 --> 14:28.120
+ ourselves.
+
+14:28.120 --> 14:30.200
+ And in fact, in this lesson, time permitting,
+
+14:30.200 --> 14:32.400
+ we're actually going to start going down the process of actually
+
+14:32.400 --> 14:37.400
+ building a real world deep neural net in Python.
+
+14:37.400 --> 14:39.480
+ So we'll be starting to actually make some progress
+
+14:39.480 --> 14:41.680
+ towards that goal.
+
+14:41.680 --> 14:47.040
+ OK, so let's jump into the notebook.
+
+14:47.040 --> 14:49.760
+ So we're going to look at a Kaggle competition that's
+
+14:49.760 --> 14:54.680
+ actually on, as I speak.
+
+14:54.680 --> 14:56.760
+ And I created this notebook called Getting Started
+
+14:56.760 --> 15:00.040
+ within LP for absolute beginners.
+
+15:00.040 --> 15:02.760
+ And so the competition is called the US patent
+
+15:02.760 --> 15:04.560
+ phrase to phrase matching competition.
+
+15:07.280 --> 15:14.920
+ And so I'm going to take you through a complete submission
+
+15:14.920 --> 15:16.400
+ to this competition.
+
+15:16.400 --> 15:18.240
+ And Kaggle competitions are interesting,
+
+15:18.240 --> 15:20.560
+ particularly the ones that are not playground competitions.
+
+15:20.560 --> 15:23.040
+ But the real competitions with the real money applied,
+
+15:23.040 --> 15:26.600
+ they're interesting because this is an actual project
+
+15:26.600 --> 15:30.520
+ that an actual organization is prepared to invest money
+
+15:30.520 --> 15:34.160
+ in getting solved using their actual data.
+
+15:34.160 --> 15:37.120
+ So a lot of people are a bit dismissive of Kaggle
+
+15:37.120 --> 15:40.240
+ competitions as being kind of like not very real.
+
+15:40.240 --> 15:41.360
+ And it's certainly true.
+
+15:41.360 --> 15:44.480
+ You're not worrying about stuff like productionizing the model.
+
+15:44.480 --> 15:48.880
+ But in terms of getting real data about a real problem,
+
+15:48.880 --> 15:51.200
+ that real organizations really care about,
+
+15:51.200 --> 15:55.320
+ and a very direct way to measure the accuracy of your solution,
+
+15:55.320 --> 15:58.000
+ you can't really get better than this.
+
+15:58.000 --> 16:00.280
+ So this is a good place, a good competition
+
+16:00.280 --> 16:04.040
+ to experiment with for trying NLP.
+
+16:04.040 --> 16:06.760
+ Now, as I mentioned here, probably the most widely useful
+
+16:06.760 --> 16:10.160
+ application for NLP is classification.
+
+16:10.160 --> 16:12.480
+ And as we've discussed in computer vision,
+
+16:12.480 --> 16:15.120
+ classification refers to taking an object
+
+16:15.120 --> 16:19.920
+ and trying to identify a category that object belongs to.
+
+16:19.920 --> 16:23.160
+ So previously, we've mainly been looking at images.
+
+16:23.160 --> 16:26.520
+ Today, we're going to be looking at documents.
+
+16:26.520 --> 16:29.680
+ Now, in NLP, when we say document,
+
+16:29.680 --> 16:36.320
+ we don't specifically mean a 20 page long essay.
+
+16:36.320 --> 16:39.040
+ A document could be three or four words,
+
+16:39.040 --> 16:41.680
+ or a document could be the entire encyclopedia.
+
+16:41.680 --> 16:46.800
+ So a document is just an input to an NLP model
+
+16:46.800 --> 16:50.320
+ that contains text.
+
+16:50.320 --> 16:53.520
+ Now, classifying a document, so deciding
+
+16:53.520 --> 16:56.840
+ what category a document belongs to,
+
+16:56.840 --> 17:00.840
+ is a surprisingly rich thing to do.
+
+17:00.840 --> 17:02.920
+ There's all kinds of stuff you could do with that.
+
+17:02.920 --> 17:05.600
+ So for example, we've already mentioned sentiment analysis.
+
+17:05.600 --> 17:07.680
+ That's a classification task.
+
+17:07.680 --> 17:09.020
+ We're trying to decide on the category,
+
+17:09.020 --> 17:11.320
+ positive or negative sentiment.
+
+17:11.320 --> 17:13.560
+ Author identification would be taking a document
+
+17:13.560 --> 17:17.960
+ and trying to find the category of author.
+
+17:17.960 --> 17:20.080
+ Legal discovery would be taking documents
+
+17:20.080 --> 17:22.520
+ and putting them into categories, according to in or out
+
+17:22.520 --> 17:25.520
+ of scope for a court case.
+
+17:25.520 --> 17:27.680
+ Triaging inbound emails would be putting them
+
+17:27.680 --> 17:34.120
+ into categories of throw away, send to customer service,
+
+17:34.120 --> 17:36.600
+ send to sales, et cetera.
+
+17:36.600 --> 17:41.240
+ So classification is a very, very rich area.
+
+17:41.240 --> 17:47.440
+ And for people interested in trying out NLP in real life,
+
+17:47.440 --> 17:49.520
+ I would suggest classification would be the place
+
+17:49.520 --> 17:54.200
+ I would start for looking for accessible, real world useful
+
+17:54.200 --> 17:58.160
+ problems you can solve right away.
+
+17:58.160 --> 18:02.280
+ Now, the Cargill Competition does not immediately
+
+18:02.280 --> 18:05.200
+ look like a classification competition.
+
+18:05.200 --> 18:09.480
+ What it contains, let me show you some data.
+
+18:13.000 --> 18:16.160
+ What it contains is data that looks like this.
+
+18:16.160 --> 18:17.960
+ It has a thing that they call anchor,
+
+18:17.960 --> 18:21.160
+ a thing they call target, a thing they call context,
+
+18:21.160 --> 18:22.520
+ and a score.
+
+18:22.520 --> 18:26.960
+ Now, these are, I can't remember exactly it.
+
+18:26.960 --> 18:29.760
+ I think these are from patents.
+
+18:29.760 --> 18:33.000
+ And I think on the patents, there are various things
+
+18:33.000 --> 18:35.840
+ they have to fill in in the patent.
+
+18:35.840 --> 18:38.560
+ And one of those things is called anchor.
+
+18:38.560 --> 18:40.760
+ One of those things is called target.
+
+18:40.760 --> 18:43.160
+ And in the competition, the goal is
+
+18:43.160 --> 18:45.280
+ to come up with a model that automatically determines
+
+18:45.280 --> 18:50.560
+ which anchor and target pairs are talking about the same thing.
+
+18:50.560 --> 18:55.240
+ So a score of one here, wood article and wooden article,
+
+18:55.240 --> 18:57.440
+ obviously talking about the same thing.
+
+18:57.440 --> 19:00.920
+ A score of zero here, abatement and forest region,
+
+19:00.920 --> 19:02.800
+ not talking about the same thing.
+
+19:02.800 --> 19:07.920
+ So the basic idea is we're trying to guess the score.
+
+19:07.920 --> 19:12.040
+ And it's kind of a classification problem, kind of not.
+
+19:12.040 --> 19:13.640
+ We're basically trying to classify things
+
+19:13.640 --> 19:16.000
+ into either these two things are the same,
+
+19:16.000 --> 19:18.000
+ or these two things aren't the same.
+
+19:18.000 --> 19:20.440
+ It's kind of not because we have not just one and zero,
+
+19:20.440 --> 19:24.400
+ but also 0.25, 0.5, 0.75.
+
+19:24.400 --> 19:27.680
+ There's also a column called context, which is, I believe,
+
+19:27.680 --> 19:31.720
+ is like the category that this patent was filed in.
+
+19:31.720 --> 19:35.520
+ And my understanding is that whether the anchor and the target
+
+19:35.520 --> 19:40.520
+ count as similar or not depends on what the patent was
+
+19:40.520 --> 19:42.200
+ filed under.
+
+19:42.200 --> 19:47.000
+ So how would we take this and turn it
+
+19:47.000 --> 19:50.960
+ into something like a classification problem?
+
+19:50.960 --> 19:58.000
+ So the suggestion I make here is that we could basically say,
+
+19:58.000 --> 20:03.280
+ OK, let's put some constant string like text one or field
+
+20:03.280 --> 20:07.880
+ one before the first column and then something else like text
+
+20:07.880 --> 20:09.200
+ two before the second column.
+
+20:09.200 --> 20:14.200
+ Oh, and maybe also the context I should have this well,
+
+20:14.200 --> 20:17.640
+ text three in the context, and then try to choose a category
+
+20:17.640 --> 20:20.200
+ of meaning similarity, different similar or identical.
+
+20:20.200 --> 20:24.080
+ So we could basically concatenate those three pieces together,
+
+20:24.080 --> 20:27.320
+ call that a document, and then try to train a model
+
+20:27.320 --> 20:30.160
+ that can predict these categories.
+
+20:30.160 --> 20:35.920
+ That'd be an example of how we can take this, basically,
+
+20:35.920 --> 20:39.720
+ similarity problem and turn it into something that
+
+20:39.720 --> 20:41.600
+ looks like a classification problem.
+
+20:41.600 --> 20:43.920
+ And we tend to do this a lot.
+
+20:43.920 --> 20:47.840
+ In deep learning is we kind of take problems
+
+20:47.840 --> 20:51.280
+ that look a bit novel and different and turn them
+
+20:51.280 --> 20:55.200
+ into a problem that looks like something we recognize.
+
+20:55.200 --> 21:02.080
+ Right, so on Kaggle, this is a larger data set
+
+21:02.080 --> 21:05.480
+ that you're going to need a GPU to run.
+
+21:05.480 --> 21:08.760
+ So you can click on the accelerator button and choose
+
+21:08.760 --> 21:11.720
+ GPU to make sure that you're using a GPU.
+
+21:11.720 --> 21:14.120
+ If you click copy and edit on my document,
+
+21:14.120 --> 21:17.960
+ I think that'll happen for you automatically.
+
+21:17.960 --> 21:23.640
+ Personally, I like using things like paper space
+
+21:23.640 --> 21:26.240
+ generally better than Kaggle.
+
+21:26.240 --> 21:28.240
+ Like Kaggle's pretty good, but you only
+
+21:28.240 --> 21:32.800
+ get 30 hours a week of GPU time and then notebook editor
+
+21:32.800 --> 21:35.280
+ for me is not as good as a real Jupyter lab.
+
+21:35.280 --> 21:36.320
+ Environment.
+
+21:36.320 --> 21:38.360
+ So there's some information here I won't go through,
+
+21:38.360 --> 21:43.560
+ but it basically describes how you can download stuff
+
+21:43.560 --> 21:48.040
+ to paper space or your own computer as well if you want to.
+
+21:48.040 --> 21:51.760
+ So I basically create this sort of Boolean always.
+
+21:51.760 --> 21:54.280
+ In my notebooks called is Kaggle, which is going to be true
+
+21:54.280 --> 21:56.200
+ if it's running on Kaggle and false otherwise.
+
+21:56.200 --> 21:58.720
+ And any little changes I need to make
+
+21:58.720 --> 22:01.200
+ are to say if is Kaggle and put those changes.
+
+22:01.200 --> 22:08.240
+ So here you can see here if I'm not on Kaggle,
+
+22:08.240 --> 22:11.040
+ and I don't have the data yet, then download it.
+
+22:11.040 --> 22:13.960
+ And Kaggle has a little API, which is quite handy,
+
+22:13.960 --> 22:15.800
+ for doing stuff like downloading data
+
+22:15.800 --> 22:17.560
+ and uploading notebooks and stuff like that,
+
+22:17.560 --> 22:18.680
+ submitting to competitions.
+
+22:22.000 --> 22:23.680
+ If we are on Kaggle, then the data
+
+22:23.680 --> 22:25.080
+ is already going to be there for us,
+
+22:25.080 --> 22:28.240
+ which is actually a good reason for beginners to use Kaggle
+
+22:28.240 --> 22:30.360
+ is you don't have to worry about grabbing the data at all.
+
+22:30.360 --> 22:35.360
+ It's sitting there for you as soon as you open the notebook.
+
+22:35.360 --> 22:39.560
+ Kaggle has a lot of Python packages installed,
+
+22:39.560 --> 22:42.280
+ but not necessarily all the ones you want.
+
+22:42.280 --> 22:44.640
+ And at the point I wrote this, they didn't have
+
+22:44.640 --> 22:47.720
+ hugging faces data sets package for some reason.
+
+22:47.720 --> 22:49.760
+ So you can always just install stuff.
+
+22:49.760 --> 22:52.560
+ So you might remember the explanation mark,
+
+22:52.560 --> 22:54.520
+ means this is not a Python command,
+
+22:54.520 --> 22:57.640
+ but a shell command, a bash command.
+
+22:57.640 --> 23:00.680
+ But it's quite neat, you can even put bash commands
+
+23:00.680 --> 23:03.280
+ inside Python conditionals.
+
+23:03.280 --> 23:06.160
+ So that's a pretty cool little trick in notebooks.
+
+23:09.560 --> 23:12.000
+ Another cool little trick in notebooks
+
+23:12.000 --> 23:15.520
+ is that if you do use a bash command, like LS,
+
+23:15.520 --> 23:17.320
+ but you then want to insert the contents
+
+23:17.320 --> 23:20.720
+ of a Python variable, just chuck it in parentheses.
+
+23:20.720 --> 23:24.640
+ So I've got a Python variable called path,
+
+23:24.640 --> 23:27.440
+ and I can go LS path in parentheses,
+
+23:27.440 --> 23:31.600
+ and that will LS the contents of the Python variable path.
+
+23:31.600 --> 23:34.440
+ So there's another little trick for you.
+
+23:34.440 --> 23:35.640
+ All right, so when we LS that,
+
+23:35.640 --> 23:37.600
+ we can see that there's some CSV files.
+
+23:37.600 --> 23:40.480
+ So what I'm going to do is kind of take you through,
+
+23:40.480 --> 23:43.200
+ roughly the process, the kind of process I,
+
+23:43.200 --> 23:45.200
+ you know, went through as, you know,
+
+23:45.200 --> 23:46.600
+ when I first look at a competition.
+
+23:46.600 --> 23:48.480
+ So the first thing is like already data set,
+
+23:48.480 --> 23:50.000
+ indeed, what's in it?
+
+23:50.000 --> 23:51.720
+ Okay, so it's got some CSV files.
+
+23:53.240 --> 23:54.760
+ You know, as well as looking at it here,
+
+23:54.760 --> 23:58.680
+ the other thing I would do is I would go
+
+23:58.680 --> 24:03.680
+ to the competition website, and if you go to data,
+
+24:07.400 --> 24:09.880
+ a lot of people skip over this, which is a terrible idea,
+
+24:09.880 --> 24:12.560
+ because it actually tells you what the dependent
+
+24:12.560 --> 24:14.960
+ variable means, what the different files are,
+
+24:14.960 --> 24:17.440
+ what the columns are, and so forth.
+
+24:17.440 --> 24:21.760
+ So don't just rely on looking at the data itself,
+
+24:21.760 --> 24:23.200
+ but look at the information that you've given
+
+24:23.200 --> 24:24.240
+ about the data.
+
+24:32.160 --> 24:35.880
+ So for CSV files, so CSV files are comma separated values.
+
+24:35.880 --> 24:39.640
+ So they're just text files with a comma between each field.
+
+24:39.640 --> 24:43.160
+ And we can read them using pandas,
+
+24:44.080 --> 24:46.160
+ which for some reason, always called PD.
+
+24:47.960 --> 24:52.120
+ Pandas is one of a gas lake,
+
+24:52.120 --> 24:55.480
+ I'm trying to think, probably like four key libraries
+
+24:55.480 --> 24:59.200
+ that you have to know to do data science in Python.
+
+25:00.480 --> 25:05.480
+ And specifically, those four libraries are NumPy,
+
+25:11.160 --> 25:16.160
+ Matplotlib, pandas, and PyTorch.
+
+25:16.160 --> 25:21.160
+ So NumPy is what we use for basic kind of numerical programming.
+
+25:23.160 --> 25:25.160
+ Matplotlib we use for plotting.
+
+25:25.160 --> 25:28.160
+ Pandas we use for tables of data,
+
+25:28.160 --> 25:31.160
+ and PyTorch we use for deep learning.
+
+25:34.160 --> 25:39.160
+ Those are all covered in a fantastic book
+
+25:41.160 --> 25:45.160
+ by the author as Pandas, which the new version
+
+25:45.160 --> 25:48.160
+ is actually available for free, I believe.
+
+25:51.160 --> 25:53.160
+ Python for data analysis.
+
+25:53.160 --> 25:56.160
+ So if you're not familiar with these libraries,
+
+25:57.160 --> 25:58.160
+ just read the whole book.
+
+25:58.160 --> 26:00.160
+ It doesn't take too long to get through
+
+26:00.160 --> 26:03.160
+ when it's got lots of cool tips and it's very readable.
+
+26:03.160 --> 26:06.160
+ I do find a lot of people doing this course.
+
+26:08.160 --> 26:11.160
+ Often I see people kind of trying to jump ahead
+
+26:11.160 --> 26:16.160
+ and want to be like, oh, I want to know how to create a new architecture
+
+26:16.160 --> 26:20.160
+ or build a speech recognition system or whatever.
+
+26:20.160 --> 26:22.160
+ But it then turns out that they don't know
+
+26:22.160 --> 26:24.160
+ how to use these fundamental libraries.
+
+26:24.160 --> 26:27.160
+ So it's always good to be bold and be trying to build things,
+
+26:27.160 --> 26:30.160
+ but do also take the time to make sure you finish reading
+
+26:30.160 --> 26:32.160
+ the first AI book and read at least,
+
+26:32.160 --> 26:34.160
+ whereas McKinney's book.
+
+26:34.160 --> 26:37.160
+ That would be enough to really give you
+
+26:37.160 --> 26:41.160
+ all the basic knowledge you need, I think.
+
+26:41.160 --> 26:43.160
+ So with Pandas, we can read a CSV file
+
+26:43.160 --> 26:45.160
+ and that creates something called a data frame,
+
+26:45.160 --> 26:50.160
+ which is just a table of data, as you see.
+
+26:50.160 --> 26:54.160
+ So now that we've got a data frame,
+
+26:54.160 --> 26:57.160
+ we can see what we're working with.
+
+26:57.160 --> 26:59.160
+ And when we ask, when in Jipita,
+
+26:59.160 --> 27:01.160
+ we just put the name of a variable containing a data frame.
+
+27:01.160 --> 27:03.160
+ We get the first five rows, the last five rows and the size.
+
+27:03.160 --> 27:07.160
+ So we've got 36,473 rows.
+
+27:07.160 --> 27:09.160
+ Okay.
+
+27:09.160 --> 27:13.160
+ So other things I like to use for understanding a data frame
+
+27:13.160 --> 27:18.160
+ is the describe method.
+
+27:18.160 --> 27:20.160
+ If you pass include equals object,
+
+27:20.160 --> 27:23.160
+ that will describe basically all the kind of the string fields,
+
+27:23.160 --> 27:25.160
+ the non numeric fields.
+
+27:25.160 --> 27:28.160
+ So in this case, there's four of those.
+
+27:28.160 --> 27:31.160
+ And so you can see here that that anchor field we looked at,
+
+27:31.160 --> 27:34.160
+ there's actually only 733 unique values.
+
+27:34.160 --> 27:35.160
+ Okay.
+
+27:35.160 --> 27:37.160
+ So this thing, you can see that there's lots of repetition
+
+27:37.160 --> 27:41.160
+ out of 30, 36,000.
+
+27:41.160 --> 27:45.160
+ So there's lots of repetition.
+
+27:45.160 --> 27:46.160
+ This is the most common one.
+
+27:46.160 --> 27:49.160
+ It appears 152 times.
+
+27:49.160 --> 27:51.160
+ And then context, we also see lots of repetition.
+
+27:51.160 --> 27:53.160
+ There's 106 of those contexts.
+
+27:53.160 --> 27:55.160
+ So this is a nice little method.
+
+27:55.160 --> 27:58.160
+ We can see a lot about the data in a glance.
+
+27:58.160 --> 28:01.160
+ And when I first saw this in this competition, I thought,
+
+28:01.160 --> 28:06.160
+ well, this is actually not that much language data when you think about it.
+
+28:06.160 --> 28:12.160
+ The, you know, each document is very short, you know, three or four words, really.
+
+28:12.160 --> 28:15.160
+ And lots of it is repeated.
+
+28:15.160 --> 28:18.160
+ So that's like, as I'm looking through it, I'm thinking like,
+
+28:18.160 --> 28:20.160
+ what are some key features to this data set?
+
+28:20.160 --> 28:22.160
+ And that would be something I'd be thinking, wow, that's, you know,
+
+28:22.160 --> 28:27.160
+ we've got to do a lot with not very much unique data here.
+
+28:27.160 --> 28:33.160
+ So here's how we can just go ahead and create a single string like I described,
+
+28:33.160 --> 28:39.160
+ which contains, you know, some kind of field separator plus the context,
+
+28:39.160 --> 28:42.160
+ the target, and the anchor.
+
+28:42.160 --> 28:46.160
+ So we've got to pop that into a field called input.
+
+28:46.160 --> 28:51.160
+ Something slightly weird in pandas is there's two ways of referring to a column.
+
+28:51.160 --> 28:55.160
+ You can use square brackets and a string to get the input column,
+
+28:55.160 --> 28:59.160
+ or you can just treat it as an attribute.
+
+28:59.160 --> 29:04.160
+ When you're setting it, you should always use the form seen here.
+
+29:04.160 --> 29:06.160
+ When reading it, you can use either.
+
+29:06.160 --> 29:08.160
+ I tend to use this one because it's less typing.
+
+29:08.160 --> 29:12.160
+ So you can see now we've got these concatenated rows.
+
+29:12.160 --> 29:17.160
+ So head is the first few rows.
+
+29:17.160 --> 29:22.160
+ So we've now got some documents to do an LP with.
+
+29:22.160 --> 29:26.160
+ Now, the problem is, as you know from the last lesson,
+
+29:26.160 --> 29:29.160
+ neural networks work with numbers.
+
+29:29.160 --> 29:35.160
+ We've got to take some numbers and we're going to multiply them by matrices.
+
+29:35.160 --> 29:37.160
+ We're going to replace the negatives with zeros,
+
+29:37.160 --> 29:40.160
+ net them up, and we're going to do that a few times.
+
+29:40.160 --> 29:41.160
+ That's our neural network.
+
+29:41.160 --> 29:44.160
+ Now with some little wrinkles, but that's the basic idea.
+
+29:44.160 --> 29:51.160
+ So how on earth do we do that for these strings?
+
+29:51.160 --> 29:54.160
+ So there's basically two steps we're going to take.
+
+29:54.160 --> 29:59.160
+ The first step is to split each of these into tokens.
+
+29:59.160 --> 30:02.160
+ Tokens are basically words.
+
+30:02.160 --> 30:07.160
+ We're going to split it into words.
+
+30:07.160 --> 30:11.160
+ There's a few problems with splitting things into words, though.
+
+30:11.160 --> 30:15.160
+ The first is that some languages like Chinese don't have words.
+
+30:15.160 --> 30:18.160
+ Or at least certainly not space separated words.
+
+30:18.160 --> 30:24.160
+ And in fact, in Chinese, sometimes it's a bit fuzzy to even say where a word begins and ends.
+
+30:24.160 --> 30:29.160
+ And some words are kind of not even the pieces are not next to each other.
+
+30:29.160 --> 30:34.160
+ Another reason is that what we're going to be doing is after we've split it into words,
+
+30:34.160 --> 30:39.160
+ or something like words, we're going to be getting a list of all of the unique words that appear,
+
+30:39.160 --> 30:41.160
+ which is called the vocabulary.
+
+30:41.160 --> 30:45.160
+ And every one of those unique words is going to get a number.
+
+30:45.160 --> 30:54.160
+ As you'll see later on, the bigger the vocabulary, the more memory is going to get used, the more data we'll need to train.
+
+30:54.160 --> 31:02.160
+ In general, we don't want a vocabulary to be too big.
+
+31:02.160 --> 31:10.160
+ So instead, nowadays people tend to tokenize into something called sub words, which is pieces of words.
+
+31:10.160 --> 31:12.160
+ So I'll show you what it looks like.
+
+31:12.160 --> 31:18.160
+ So the process of turning it into smaller units like words is called tokenization.
+
+31:18.160 --> 31:25.160
+ And because of them tokens instead of words, the token is just like the more general concept of whatever we're splitting it into.
+
+31:25.160 --> 31:32.160
+ So we're going to get hugging face transformers and hugging face data sets doing our work for us.
+
+31:32.160 --> 31:42.160
+ And so what we're going to do is we're going to turn our pandas data frame into a hugging face data sets dataset.
+
+31:42.160 --> 31:45.160
+ It's a bit confusing.
+
+31:45.160 --> 31:51.160
+ PyTorch has a class called dataset, and hugging face has a class called dataset, and they're different things.
+
+31:51.160 --> 31:54.160
+ So this is a hugging face dataset.
+
+31:54.160 --> 31:55.160
+ Hugging face datasets.
+
+31:55.160 --> 32:03.160
+ So we can turn a data frame into a dataset just using the from pandas method, and so we've now got a dataset.
+
+32:03.160 --> 32:07.160
+ So if we take a look, it just tells us all it's got these features.
+
+32:07.160 --> 32:09.160
+ Okay.
+
+32:09.160 --> 32:13.160
+ And remember, input is the one we just created with the concat and other strings.
+
+32:13.160 --> 32:17.160
+ And here's those 36,000 rows.
+
+32:17.160 --> 32:21.160
+ Okay, so now we're going to do these two things.
+
+32:21.160 --> 32:27.160
+ So we're going to do this tokenization, which is to split each text up into tokens, and then numericalization,
+
+32:27.160 --> 32:32.160
+ which is to turn each token into its unique ID based on where it is in the vocabulary.
+
+32:32.160 --> 32:38.160
+ The vocabulary remember being the unique, the list of unique tokens.
+
+32:38.160 --> 32:47.160
+ Now, particularly in this stage, tokenization, there's a lot of little decisions that have to be made.
+
+32:47.160 --> 32:53.160
+ The good news is you don't have to make them because whatever pre trained model you used,
+
+32:53.160 --> 32:59.160
+ the people that pre trained it made some decisions, and you're going to have to do exactly the same thing,
+
+32:59.160 --> 33:04.160
+ otherwise you'll end up with a different vocabulary to them, and that's going to mess everything up.
+
+33:04.160 --> 33:09.160
+ So that means before you start tokenizing, you have to decide on what model to use.
+
+33:09.160 --> 33:13.160
+ Hugging face transformers is a lot like Tim.
+
+33:13.160 --> 33:21.160
+ It has a library of, I believe, hundreds of models.
+
+33:21.160 --> 33:23.160
+ I guess I shouldn't say hugging face transformers.
+
+33:23.160 --> 33:26.160
+ It's really the hugging face model hub.
+
+33:26.160 --> 33:33.160
+ 44,000 models. So even many more, even than Tim's image models.
+
+33:33.160 --> 33:36.160
+ And so these models, they vary in a couple of ways.
+
+33:36.160 --> 33:41.160
+ There's a variety of different architectures, just like in Tim.
+
+33:41.160 --> 33:46.160
+ But then something which is different to Tim is that each of those architectures can be trained on different
+
+33:46.160 --> 33:49.160
+ corpses for solving different problems.
+
+33:49.160 --> 33:54.160
+ So, for example, I could type patent and see if there's any pre trained patent, there is.
+
+33:54.160 --> 33:59.160
+ So there's a patent, there's a whole lot of pre trained patent models.
+
+33:59.160 --> 34:05.160
+ Isn't that amazing? So quite often, thanks to the hugging face model hub,
+
+34:05.160 --> 34:12.160
+ you can start your pre trained model with something that's actually pretty similar to what you actually want to do.
+
+34:12.160 --> 34:18.160
+ Or at least was trained on the same kind of documents.
+
+34:18.160 --> 34:29.160
+ Having said that, there are some just generally pretty good models that work for a lot of things a lot of the time.
+
+34:29.160 --> 34:36.160
+ And DeBerta V3 is certainly one of those.
+
+34:36.160 --> 34:40.160
+ This is a very new area.
+
+34:40.160 --> 34:53.160
+ NLP has been practically really effective for general users for only a year or two.
+
+34:53.160 --> 34:56.160
+ Whereas for computer vision, it's been quite a while.
+
+34:56.160 --> 35:00.160
+ So you'll find that a lot of things aren't as quite well better down.
+
+35:00.160 --> 35:08.160
+ I don't have a picture to show you of which models are the best or the fastest and the most accurate and whatever.
+
+35:08.160 --> 35:15.160
+ There's a lot of this stuff is like stuff that we're figuring out as a community using competitions like this.
+
+35:15.160 --> 35:22.160
+ In fact, and this is one of the first NLP competitions actually in the kind of modern NLP era.
+
+35:22.160 --> 35:32.160
+ So we've been studying these competitions closely and I can tell you that DeBerta is actually a really good starting point for a lot of things.
+
+35:32.160 --> 35:34.160
+ So that's why we've picked it.
+
+35:34.160 --> 35:40.160
+ So we pick our model and just like in Tim's image, our model is often going to be a small, medium, a large.
+
+35:40.160 --> 35:43.160
+ And of course, we should start with small.
+
+35:43.160 --> 35:52.160
+ Small is going to be faster to train, we're going to be able to do more iterations and so forth.
+
+35:52.160 --> 36:07.160
+ So at this point, remember, the only reason we picked our model is because we have to make sure we tokenize in the same way.
+
+36:07.160 --> 36:15.160
+ So tell transformers that we want to tokenize the same way that the people that built a model did, we use something called auto tokenizer.
+
+36:15.160 --> 36:16.160
+ It's nothing fancy.
+
+36:16.160 --> 36:20.160
+ It's basically just a dictionary which says, oh, which model uses which tokenizer.
+
+36:20.160 --> 36:35.160
+ So when we say auto tokenizer from pre trained, it will download the vocabulary and the details about how this particular model, tokenized data set.
+
+36:35.160 --> 36:41.160
+ At this point, we can now take that tokenizer and pass the string to it.
+
+36:41.160 --> 36:53.160
+ So if I pass the string, good a folks, I'm Jeremy from fast.ai, you'll see it's kind of putting it into words, kind of not.
+
+36:53.160 --> 37:01.160
+ So if you've ever wondered whether good a is one word or two, you know, it's actually three tokens according to this tokenizer.
+
+37:01.160 --> 37:05.160
+ And I'm three tokens and fast.ai is three tokens.
+
+37:05.160 --> 37:07.160
+ This punctuation is a token.
+
+37:07.160 --> 37:09.160
+ So you kind of get the idea.
+
+37:09.160 --> 37:13.160
+ These underscores here, that represents the start of a word.
+
+37:13.160 --> 37:19.160
+ So that's kind of this concept that like the start of a word is kind of part of the token.
+
+37:19.160 --> 37:23.160
+ So if you see a capital I in the middle of a word versus the start of a word, that's kind of means a different thing.
+
+37:23.160 --> 37:30.160
+ So this is what happens when we tokenize this sentence using the tokenizer that the deburd of the tokenizer is going to be a little bit different.
+
+37:30.160 --> 37:34.160
+ So that's the deburd of the three developers used.
+
+37:34.160 --> 37:46.160
+ So here's a less common, unless you're a big platypus fan like me, less common sentence.
+
+37:46.160 --> 37:50.160
+ A platypus is an orno throuincus sanitinus.
+
+37:50.160 --> 37:58.160
+ And so, okay, in this particular vocabulary, platypus got its own word, it's own token, but orno throuincus didn't.
+
+37:58.160 --> 38:04.160
+ So I still remember grade one, for some reason our teacher got us all to learn how to spell orno throuincus.
+
+38:04.160 --> 38:08.160
+ So one of my favorite words.
+
+38:08.160 --> 38:16.160
+ So you can see here it's been split into all, knee, toe, rink, us.
+
+38:16.160 --> 38:21.160
+ So every one of these tokens you see here is going to be in the vocabulary, right?
+
+38:21.160 --> 38:30.160
+ So we have the list of unique tokens that was created when this particular model, this pretrain model was first trained.
+
+38:30.160 --> 38:37.160
+ So somewhere in that list we'll find underscore capital A, and it'll have a number.
+
+38:37.160 --> 38:41.160
+ And so that's how we'll be able to turn these into numbers.
+
+38:41.160 --> 38:50.160
+ So this first process is called tokenization, and then the thing where we take these tokens and turn them into numbers is called numericalization.
+
+38:50.160 --> 38:57.160
+ So our data set, remember we put our string into the input field.
+
+38:57.160 --> 39:04.160
+ So here's a function that takes a document, grabs its input and tokenizes it.
+
+39:04.160 --> 39:08.160
+ Okay, so we'll call this our tokenization function.
+
+39:08.160 --> 39:15.160
+ Tokenization can take a minute or two, so we may as well get all of our processes doing it at the same time to save some time.
+
+39:15.160 --> 39:21.160
+ So if you use the data set dot map, it will parallelize that process and just pass in your function.
+
+39:21.160 --> 39:25.160
+ Make sure you pass batch equals true so it can do a bunch at a time.
+
+39:25.160 --> 39:36.160
+ And behind the scenes this is going through something called the tokenizes library, which is a pretty optimized rust library that uses, you know, SIMD and parallel processing and so forth.
+
+39:36.160 --> 39:41.160
+ So with batch equals true, it'll be able to do more stuff at once.
+
+39:41.160 --> 39:45.160
+ So look, it only took six seconds, so pretty fast.
+
+39:45.160 --> 39:56.160
+ So now when we look at a row of our tokenized data set, it's going to contain exactly the same as our original data set.
+
+39:56.160 --> 39:59.160
+ No, it's not going to take exactly the same as the original data set.
+
+39:59.160 --> 40:03.160
+ It's going to contain exactly the same input as our original data set.
+
+40:03.160 --> 40:06.160
+ And it's also going to contain a bunch of numbers.
+
+40:06.160 --> 40:16.160
+ So these numbers are the position in the vocabulary of each of the tokens in the string.
+
+40:16.160 --> 40:21.160
+ So we've now successfully turned a string into a list of numbers.
+
+40:21.160 --> 40:24.160
+ So that is a great first step.
+
+40:24.160 --> 40:27.160
+ So we can see how this works.
+
+40:27.160 --> 40:36.160
+ We can see, for example, that we've got of at a separate word, so that's going to be an underscore OF in the vocabulary.
+
+40:36.160 --> 40:44.160
+ We can grab the vocabulary, look up of, find that it's 265, and check here.
+
+40:44.160 --> 40:46.160
+ Yep, here it is, 265.
+
+40:46.160 --> 40:56.160
+ Okay, so it's not rocket science right, it's just looking stuff up in a dictionary to get the numbers.
+
+40:56.160 --> 41:09.160
+ Okay, so that is the tokenization and the numericalization necessary in NLP to turn our documents into numbers to allow us to put it into our model.
+
+41:09.160 --> 41:13.160
+ Any questions so far, John?
+
+41:13.160 --> 41:14.160
+ Excuse me, yeah, thanks Jeremy.
+
+41:14.160 --> 41:24.160
+ So there's a couple and this seems like a good time to throw them out and it's related to how you've formatted your input data into these sentences that you've just tokenized.
+
+41:24.160 --> 41:33.160
+ Yeah, so one question was really about how you choose those keywords and the order of the fields.
+
+41:33.160 --> 41:40.160
+ So I guess just interested in an explanation, is it more art or science?
+
+41:40.160 --> 41:42.160
+ No, it's arbitrary.
+
+41:42.160 --> 41:49.160
+ I tried a few things, I tried X, I tried putting them backwards, it doesn't matter.
+
+41:49.160 --> 41:53.160
+ We just want some way, something that it can learn from.
+
+41:53.160 --> 42:03.160
+ So if I just concatenated it without these headers before each one, it wouldn't know where abatement of pollution ended and where abatement started.
+
+42:03.160 --> 42:10.160
+ So I did just something that it can learn from, this is a nice thing about neural nets, they're so flexible.
+
+42:10.160 --> 42:19.160
+ As long as you give it the information somehow, it doesn't really matter how you give it to give it the information as long as it's there.
+
+42:19.160 --> 42:26.160
+ I could have used punctuation, I could have put like, I don't know, one semicolon here and two here and three here.
+
+42:26.160 --> 42:28.160
+ Yeah, it's not a big deal.
+
+42:28.160 --> 42:34.160
+ At the level where you're trying to get an extra half a percent to get up the later border of Kaggle competition,
+
+42:34.160 --> 42:43.160
+ you may find tweaking these things makes tiny differences, but in practice, you won't generally find it, it matters too much.
+
+42:43.160 --> 42:45.160
+ Right, thank you.
+
+42:45.160 --> 42:53.160
+ And I guess the second part of that, excuse me again, somebody's asking if one of their fields was a particularly long,
+
+42:53.160 --> 42:58.160
+ say it was a thousand characters, is there any special handling required there?
+
+42:58.160 --> 43:03.160
+ Do you need to re inject those kind of special market tokens?
+
+43:03.160 --> 43:08.160
+ Does it change if you've got much bigger fields that you're trying to learn and query?
+
+43:08.160 --> 43:16.160
+ Long documents and ULM fit require no special consideration.
+
+43:16.160 --> 43:23.160
+ So IMDB in fact has multi thousand word movie reviews and it works great.
+
+43:23.160 --> 43:33.160
+ To this day, ULM fit is probably the best approach for reasonably quickly and easily using large documents.
+
+43:33.160 --> 43:41.160
+ Otherwise, if you use transformer based approaches, large documents are challenging.
+
+43:41.160 --> 43:48.160
+ Specifically, transformers have to do the whole document at once,
+
+43:48.160 --> 43:52.160
+ where ULM fit can split it into multiple pieces and read it gradually.
+
+43:52.160 --> 43:57.160
+ And so that means you'll find that people trying to work with large documents tend to spend a lot of money on GPUs
+
+43:57.160 --> 44:01.160
+ because they need the big fancy ones with lots of memory.
+
+44:01.160 --> 44:09.160
+ So generally speaking, I would say if you're trying to do stuff with documents of over two thousand words,
+
+44:09.160 --> 44:11.160
+ you might want to look at ULM fit.
+
+44:11.160 --> 44:16.160
+ Try transformers, see if it works for you, but I'd certainly try both.
+
+44:16.160 --> 44:27.160
+ For under two thousand words, transformers should be fine unless you've got a, you know, nothing but like a laptop GPU or something with not much memory.
+
+44:27.160 --> 44:41.160
+ So, how can face transformers have these, you know, as I say it right now that I find them somewhat obscure
+
+44:41.160 --> 44:47.160
+ and not particularly well documented expectations about your data that you kind of have to figure out.
+
+44:47.160 --> 44:53.160
+ And one of those is that it expects that your target is a column called labels.
+
+44:53.160 --> 45:02.160
+ So once I figured that out, I just went, got our tokenized data set and renamed our score column to labels and everything started working.
+
+45:02.160 --> 45:06.160
+ So probably is, you know, I don't know if at some point they'll make this a bit more flexible,
+
+45:06.160 --> 45:13.160
+ but probably best to just call your target labels and life will be easy.
+
+45:13.160 --> 45:20.160
+ You might have seen back when I went LS path that there was another data set there called test.csv.
+
+45:20.160 --> 45:28.160
+ And if you look at it, it looks a lot like our training set, our other CSV that we've been working with,
+
+45:28.160 --> 45:33.160
+ but it's missing the score, the labels.
+
+45:33.160 --> 45:37.160
+ This is called a test set.
+
+45:37.160 --> 45:46.160
+ And so we're going to talk a little bit about that now because my claim here is perhaps the most important idea in machine learning
+
+45:46.160 --> 45:52.160
+ is the idea of having separate training, validation and test data sets.
+
+46:03.160 --> 46:11.160
+ So test and validation sets are all about identifying and controlling for something called overfitting.
+
+46:11.160 --> 46:16.160
+ And we're going to try and learn about this through example.
+
+46:16.160 --> 46:27.160
+ So this is the same information that's in that Kaggle notebook. I've just put it on some slides here.
+
+46:27.160 --> 46:33.160
+ So I'm going to create a function here called plot poly.
+
+46:33.160 --> 46:37.160
+ And I'm actually going to use the same data that I don't know if you remember.
+
+46:37.160 --> 46:43.160
+ We used it earlier for trying to fit this quadratic.
+
+46:43.160 --> 46:49.160
+ We created some x and some y data. This is the data we're going to use.
+
+46:49.160 --> 46:54.160
+ And we're going to use this to look at overfitting.
+
+46:54.160 --> 46:57.160
+ So the details of this function don't matter too much.
+
+46:57.160 --> 47:06.160
+ What matters is what we do with it, which is that it allows us to basically pass in the degree of a polynomial.
+
+47:06.160 --> 47:12.160
+ So for those of you that remember, a first degree polynomial is just a line.
+
+47:12.160 --> 47:19.160
+ It's y equals ax. A second degree polynomial will be y equals a squared x plus b x plus c.
+
+47:19.160 --> 47:25.160
+ Third degree polynomial will have a cubic fourth degree, you know, quartic and so forth.
+
+47:25.160 --> 47:32.160
+ And what I've done here is I've plotted what happens if we try to fit a line to our data.
+
+47:32.160 --> 47:42.160
+ It doesn't fit very well. So what happened here is we did a linear regression.
+
+47:42.160 --> 47:46.160
+ And what we're using here is a very cool library called scikit.
+
+47:46.160 --> 47:53.160
+ Scikit. I think it's mainly designed for classic machine learning methods,
+
+47:53.160 --> 47:56.160
+ like linear regression and stuff like that.
+
+47:56.160 --> 48:02.160
+ I mean very advanced versions of these things. But it's also great for doing these quick and dirty things.
+
+48:02.160 --> 48:08.160
+ So in this case, I wanted to do a, what's called a polynomial regression, which is fitting the polynomial to data.
+
+48:08.160 --> 48:11.160
+ And it's just these two lines of code. It's a super nice library.
+
+48:11.160 --> 48:14.160
+ So in this case, a degree one polynomial is just a line.
+
+48:14.160 --> 48:18.160
+ So I fit it and then I show it with the data. And there it is.
+
+48:18.160 --> 48:25.160
+ Now that's what we call underfit, which is to say there's not enough kind of complexity in this model.
+
+48:25.160 --> 48:30.160
+ I fit to match the data that's there.
+
+48:30.160 --> 48:37.160
+ So an underfit model is a problem. It's going to be systematically biased.
+
+48:37.160 --> 48:40.160
+ All the stuff up here, we're going to predict in too low.
+
+48:40.160 --> 48:43.160
+ All the stuff down here, we're predicting too low. All the stuff in the middle.
+
+48:43.160 --> 48:52.160
+ We'll be predicting too high. A common misunderstanding is that like simpler models are kind of more reliable in some way.
+
+48:52.160 --> 49:01.160
+ But models that are too simple will be systematically incorrect, as you see here.
+
+49:01.160 --> 49:08.160
+ What happens if we fit a 10 degree polynomial?
+
+49:08.160 --> 49:15.160
+ That's not great either. In this case, it's not really showing us what the actual,
+
+49:15.160 --> 49:18.160
+ remember this is originally a quadratic, this is meant to match, right?
+
+49:18.160 --> 49:25.160
+ And at the end here, it's predicting things that are way above what we would expect in real life.
+
+49:25.160 --> 49:28.160
+ And it's trying really hard to get through this point.
+
+49:28.160 --> 49:34.160
+ But clearly this point was just some noise. So this is what we call overfit.
+
+49:34.160 --> 49:38.160
+ It's done a good job of fitting to our exact data points.
+
+49:38.160 --> 49:43.160
+ But if we sample some more data points from this distribution,
+
+49:43.160 --> 49:49.160
+ honestly, we probably would suspect they're not going to be very close to this, particularly if they're a bit beyond the edges.
+
+49:49.160 --> 49:53.160
+ So that's what overfitting looks like. We don't want underfitting all overfitting.
+
+49:53.160 --> 50:02.160
+ Now, underfitting is actually pretty easy to recognize because we can actually look at our training data and see that it's not very close.
+
+50:02.160 --> 50:12.160
+ Overfitting is a bit harder to recognize because the training data is actually very close.
+
+50:12.160 --> 50:19.160
+ On the other hand, here's what happens if we fit the quadratic.
+
+50:19.160 --> 50:26.160
+ And here I've got both the real line and the fit line, and you can see they're pretty close.
+
+50:26.160 --> 50:35.160
+ And that's, of course, what we actually want.
+
+50:35.160 --> 50:43.160
+ So how do we tell whether we have something more like this or something more like this?
+
+50:43.160 --> 50:50.160
+ Well, what we do is we do something pretty straightforward, is we take our original data set, these points,
+
+50:50.160 --> 50:56.160
+ and we remove a few of them. Let's say 20% of them.
+
+50:56.160 --> 51:02.160
+ We then fit our model using only those points we haven't removed.
+
+51:02.160 --> 51:09.160
+ And then we measure how good it is by looking at only the points we removed.
+
+51:09.160 --> 51:20.160
+ So in this case, let's say we had removed, I'm just trying to think, if I'd removed this point here,
+
+51:20.160 --> 51:23.160
+ then it might have kind of gone off down over here.
+
+51:23.160 --> 51:30.160
+ And so then when we look at how well it fits, we would say, oh, this one's miles away.
+
+51:30.160 --> 51:40.160
+ The data that we take away and don't let the model see it when it's training is called the validation set.
+
+51:40.160 --> 51:43.160
+ So in first AI, we've seen splitters before, right?
+
+51:43.160 --> 51:46.160
+ The splitters are the things that separate out the validation set.
+
+51:46.160 --> 51:50.160
+ First AI won't let you train a model without a validation set.
+
+51:50.160 --> 51:57.160
+ First AI always shows you your metrics, so things like accuracy, measured only on the validation set.
+
+51:57.160 --> 52:04.160
+ This is really unusual. Most libraries make it really easy to shoot yourself in the foot by not having a validation set
+
+52:04.160 --> 52:09.160
+ or accidentally not using it correctly. So first AI won't even let you do that.
+
+52:09.160 --> 52:13.160
+ So you've got to be particularly careful when using other libraries.
+
+52:13.160 --> 52:27.160
+ So Huckingface transformers is good about this, so they make sure that they do show you your metrics on a validation set.
+
+52:27.160 --> 52:35.160
+ Now creating a good validation set is not generally as simple as just randomly pulling some of your data out of your model,
+
+52:35.160 --> 52:38.160
+ out of the data that you've passed, that you train with your model.
+
+52:38.160 --> 52:46.160
+ The reason why is imagine that this was the data you were trying to fit something to.
+
+52:46.160 --> 52:52.160
+ Okay. And you randomly remove some, so it looks like this.
+
+52:52.160 --> 52:59.160
+ That looks very easy, doesn't it? Because you've kind of like still got all the data you would want around the points.
+
+52:59.160 --> 53:07.160
+ And in a time series like this, this is dates and sales, in real life you're probably going to want to predict future dates.
+
+53:07.160 --> 53:11.160
+ So if you created your validation set by randomly removing stuff from the middle,
+
+53:11.160 --> 53:15.160
+ it's not really a good indication of how you're going to be using this model.
+
+53:15.160 --> 53:20.160
+ Instead, you should truncate and remove the last couple of weeks.
+
+53:20.160 --> 53:24.160
+ So if this was your validation set, and this is your training set,
+
+53:24.160 --> 53:33.160
+ that's going to be actually testing whether you can use this to predict the future rather than using it to predict the past.
+
+53:33.160 --> 53:40.160
+ Kaggle competitions are a fantastic way to test your ability to create a good validation set.
+
+53:40.160 --> 53:47.160
+ Because Kaggle competitions only allow you to submit generally a couple of times a day.
+
+53:47.160 --> 53:56.160
+ The data set that you are scored on in the leaderboard during that time is actually only a small subset.
+
+53:56.160 --> 54:01.160
+ In fact, it's a totally separate subset to the one you'll be scored on on the end of the competition.
+
+54:01.160 --> 54:05.160
+ And so most beginners on Kaggle overfit.
+
+54:05.160 --> 54:10.160
+ And it's not until you've done it that you will get that visceral feeling of like,
+
+54:10.160 --> 54:13.160
+ oh my God, I overfit.
+
+54:13.160 --> 54:20.160
+ In the real world outside of Kaggle, you will often not even know that you overfit.
+
+54:20.160 --> 54:23.160
+ You just destroy value if you're an organization silently.
+
+54:23.160 --> 54:29.160
+ So it's a really good idea to do this kind of stuff on Kaggle a few times first in real competitions
+
+54:29.160 --> 54:34.160
+ to really make sure that you are confident you know how to avoid overfitting,
+
+54:34.160 --> 54:38.160
+ how to find a good validation set and how to interpret it correctly.
+
+54:38.160 --> 54:44.160
+ And you really don't get that until you screw it up a few times.
+
+54:44.160 --> 54:50.160
+ A good example of this was there was a distracted driver competition on Kaggle.
+
+54:50.160 --> 54:54.160
+ There were these kind of pictures from inside a car.
+
+54:54.160 --> 55:02.160
+ And the idea was that you had to try and predict whether somebody was driving in a distracted way or not.
+
+55:02.160 --> 55:04.160
+ And on Kaggle, they did something pretty smart.
+
+55:04.160 --> 55:07.160
+ The test set, so the thing that they scored you on on the leaderboard,
+
+55:07.160 --> 55:14.160
+ contained people that didn't exist at all in the competition data that you trained the model with.
+
+55:14.160 --> 55:18.160
+ So if you wanted to create an effective validation set in this competition,
+
+55:18.160 --> 55:22.160
+ you would have to make sure that you separated the photos
+
+55:22.160 --> 55:30.160
+ so that your validation set contained photos of people that aren't in the data you're training your model on.
+
+55:30.160 --> 55:35.160
+ There was another one like that, the Kaggle fisheries competition,
+
+55:35.160 --> 55:38.160
+ which had boats that didn't appear.
+
+55:38.160 --> 55:44.160
+ So there were basically pictures of boats and you meant to try to predict what fish were in the pictures.
+
+55:44.160 --> 55:49.160
+ And it turned out that a lot of people accidentally figured out what the fish were
+
+55:49.160 --> 55:54.160
+ by looking at the boat because certain boats tended to catch certain kinds of fish.
+
+55:54.160 --> 56:04.160
+ And so by messing up their validation set, they were really overconfident of the accuracy of their model.
+
+56:04.160 --> 56:11.160
+ I'll mention in passing, if you've been around Kaggle a bit, you'll see people talk about cross validation a lot.
+
+56:11.160 --> 56:14.160
+ I'm just going to mention, be very, very careful.
+
+56:14.160 --> 56:19.160
+ Cross validation is explicitly not about building a good validation set.
+
+56:19.160 --> 56:26.160
+ So you've got to be super, super careful if you ever do that.
+
+56:26.160 --> 56:33.160
+ Another thing I'll mention is that scikit learn conveniently offers something called train test split
+
+56:33.160 --> 56:40.160
+ as does hugging face data sets, as does fast AI, we have something called random splitter.
+
+56:40.160 --> 56:48.160
+ It can be encouraged, it can almost feel like it's encouraging you to use a randomised validation set
+
+56:48.160 --> 56:52.160
+ because there are these methods that do it for you.
+
+56:52.160 --> 56:57.160
+ But be very, very careful because very, very often that's not what you want.
+
+56:57.160 --> 57:02.160
+ Okay, so if you want what a validation set is, so that's the bit that you pull out of your data
+
+57:02.160 --> 57:07.160
+ that you don't train with, but you do measure your accuracy with.
+
+57:07.160 --> 57:10.160
+ So what's a test set?
+
+57:10.160 --> 57:13.160
+ It's basically another validation set.
+
+57:13.160 --> 57:19.160
+ But you don't even use it for tracking your accuracy while you build your model.
+
+57:19.160 --> 57:20.160
+ Why not?
+
+57:20.160 --> 57:24.160
+ Well, imagine you tried two new models every day for three months.
+
+57:24.160 --> 57:26.160
+ That's how long a Kaggle competition goes for.
+
+57:26.160 --> 57:29.160
+ So you would have tried 180 models.
+
+57:29.160 --> 57:33.160
+ And then you look at the accuracy on the validation set for each one.
+
+57:33.160 --> 57:38.160
+ Some of those models, you would have got a good accuracy on the validation set, potentially,
+
+57:38.160 --> 57:41.160
+ because of pure chance, just a coincidence.
+
+57:41.160 --> 57:45.160
+ And then you get all excited and you submit that to Kaggle and you think you're going to win the competition
+
+57:45.160 --> 57:47.160
+ and you mess it up.
+
+57:47.160 --> 57:52.160
+ And that's because you actually overfit using the validation set.
+
+57:52.160 --> 57:58.160
+ So you actually want to know whether you've really found a good model or not.
+
+57:58.160 --> 58:02.160
+ So in fact, on Kaggle, they have two test sets.
+
+58:02.160 --> 58:08.160
+ They've got the one that gives you feedback on the leaderboard during the competition and a second test set,
+
+58:08.160 --> 58:12.160
+ which you don't get to see until after the competition is finished.
+
+58:12.160 --> 58:20.160
+ So in real life, you've got to be very careful about this not to try so many models during your model building process
+
+58:20.160 --> 58:24.160
+ that you accidentally find one that's good by coincidence.
+
+58:24.160 --> 58:28.160
+ And only if you have a test set that you've held out or you know that.
+
+58:28.160 --> 58:31.160
+ Now that leads to the obvious question, which is very challenging.
+
+58:31.160 --> 58:37.160
+ Is if you spent three months working on a model, worked well on your validation set,
+
+58:37.160 --> 58:41.160
+ you did a good job of locking that test set away in a safe so you weren't allowed to use it.
+
+58:41.160 --> 58:46.160
+ And at the end of the three months, you finally checked in on the test set and it's terrible.
+
+58:46.160 --> 58:48.160
+ What do you do?
+
+58:48.160 --> 58:51.160
+ Honestly, you have to go back to square one.
+
+58:51.160 --> 58:55.160
+ You know, there really isn't any choice other than starting again.
+
+58:55.160 --> 58:58.160
+ So this is tough, but it's better to know, right?
+
+58:58.160 --> 59:00.160
+ Better to know than to not know.
+
+59:00.160 --> 59:05.160
+ That's what a test sets for.
+
+59:05.160 --> 59:06.160
+ So you've got a validation set.
+
+59:06.160 --> 59:08.160
+ What are you going to do with it?
+
+59:08.160 --> 59:14.160
+ What you're going to do with a validation set is you're going to measure some metrics.
+
+59:14.160 --> 59:17.160
+ So a metric is something like accuracy.
+
+59:17.160 --> 59:22.160
+ It's a number that tells you how good is your model.
+
+59:22.160 --> 59:26.160
+ Now on Kaggle, this is very easy.
+
+59:26.160 --> 59:30.160
+ What metric should we use?
+
+59:30.160 --> 59:37.160
+ Go to overview, click on evaluation, and find out and it says, oh, we will evaluate on the
+
+59:37.160 --> 59:40.160
+ Pearson correlation coefficient.
+
+59:40.160 --> 59:49.160
+ Therefore, this is the metric you care about.
+
+59:49.160 --> 59:52.160
+ So one obvious question is, is this the same as the lost function?
+
+59:52.160 --> 59:59.160
+ Is this the thing that we will take the derivative of and find the gradient and use that to improve
+
+59:59.160 --> 1:00:02.160
+ our parameters during training?
+
+1:00:02.160 --> 1:00:09.160
+ And the answer is maybe sometimes, but probably not.
+
+1:00:09.160 --> 1:00:13.160
+ For example, consider accuracy.
+
+1:00:13.160 --> 1:00:19.160
+ Now, if we were using accuracy to calculate our derivative and get the gradient, you could have a
+
+1:00:19.160 --> 1:00:22.160
+ model that's actually slightly better.
+
+1:00:22.160 --> 1:00:26.160
+ It's doing a better job of recognizing dogs and cats.
+
+1:00:26.160 --> 1:00:32.160
+ But not so much better that it's actually caused any incorrectly classified cat to become a
+
+1:00:32.160 --> 1:00:33.160
+ dog.
+
+1:00:33.160 --> 1:00:35.160
+ So the accuracy doesn't change at all.
+
+1:00:35.160 --> 1:00:39.160
+ So the gradient is zero.
+
+1:00:39.160 --> 1:00:40.160
+ You don't want stuff like that.
+
+1:00:40.160 --> 1:00:44.160
+ You don't want bumpy functions because they don't have nice gradients.
+
+1:00:44.160 --> 1:00:46.160
+ Often they don't have gradients at all.
+
+1:00:46.160 --> 1:00:48.160
+ They're basically zero nearly everywhere.
+
+1:00:48.160 --> 1:00:52.160
+ You want to function that's nice and smooth.
+
+1:00:52.160 --> 1:01:00.160
+ Something like, for instance, the average absolute error, which we've used before.
+
+1:01:00.160 --> 1:01:03.160
+ So that's the difference between your metrics and your loss.
+
+1:01:03.160 --> 1:01:04.160
+ Now, be careful, right?
+
+1:01:04.160 --> 1:01:09.160
+ Because when you're training, your model is spending all of its time trying to improve the loss.
+
+1:01:09.160 --> 1:01:13.160
+ And most of the time, that's not the same as the thing you actually care about, which is your
+
+1:01:13.160 --> 1:01:14.160
+ metric.
+
+1:01:14.160 --> 1:01:17.160
+ So you've got to keep those two different things in mind.
+
+1:01:17.160 --> 1:01:24.160
+ The other thing to keep in mind is that in real life, you can't go to a website and be
+
+1:01:24.160 --> 1:01:28.160
+ told what metric to use.
+
+1:01:28.160 --> 1:01:35.160
+ In real life, the model that you choose, there isn't one number that tells you whether it's
+
+1:01:35.160 --> 1:01:37.160
+ good or bad.
+
+1:01:37.160 --> 1:01:41.160
+ And even if there was, you wouldn't be able to find it out ahead of time.
+
+1:01:41.160 --> 1:01:50.160
+ In real life, the model you use is a part of a complex process, often involving humans,
+
+1:01:50.160 --> 1:01:58.160
+ both as users and customers and as people involved in as part of the process.
+
+1:01:58.160 --> 1:02:01.160
+ There's all kinds of things that are changing over time.
+
+1:02:01.160 --> 1:02:07.160
+ And there's lots and lots of outcomes of decisions that are made.
+
+1:02:07.160 --> 1:02:10.160
+ One metric is not enough to capture all of that.
+
+1:02:10.160 --> 1:02:21.160
+ Unfortunately, because it's so convenient to pick one metric and use that to say, I've
+
+1:02:21.160 --> 1:02:29.560
+ got a good model, that very often finds its way into industry, into government, where
+
+1:02:29.560 --> 1:02:33.880
+ people roll out these things that are good on the one metric that happened to be easy
+
+1:02:33.880 --> 1:02:35.880
+ to measure.
+
+1:02:35.880 --> 1:02:44.200
+ And again and again, we found people's lives turned upside down because of how badly they
+
+1:02:44.200 --> 1:02:49.880
+ get screwed up by models that have been incorrectly measured using a single metric.
+
+1:02:49.880 --> 1:02:54.280
+ So my partner Rachel Thomas has written this article, which I recommend you read about
+
+1:02:54.280 --> 1:03:04.280
+ the problem with metrics is a big problem for AI.
+
+1:03:04.280 --> 1:03:05.800
+ It's not just an AI thing.
+
+1:03:05.800 --> 1:03:10.440
+ There's actually this thing called Guttart's law that states when a measure becomes a target,
+
+1:03:10.440 --> 1:03:13.440
+ it ceases to be a good measure.
+
+1:03:13.440 --> 1:03:21.520
+ The thing is, so when I was a management consultant, 20 years ago, we were always kind of part
+
+1:03:21.520 --> 1:03:28.080
+ of these strategic things, trying to find key performance indicators and ways to kind
+
+1:03:28.080 --> 1:03:30.880
+ of set commission rates for salespeople.
+
+1:03:30.880 --> 1:03:36.000
+ We were doing a lot of this stuff, which is basically about picking metrics.
+
+1:03:36.000 --> 1:03:41.280
+ And we see that happen go wrong in industry all the time.
+
+1:03:41.280 --> 1:03:47.320
+ AI is dramatically worse because AI is so good at optimizing metrics.
+
+1:03:47.320 --> 1:03:52.920
+ And so that's why you have to be extra, extra, extra careful about metrics when you are trying
+
+1:03:52.920 --> 1:03:54.840
+ to use a model in real life.
+
+1:03:54.840 --> 1:04:00.320
+ Anyway, as I said in Kaggle, we don't have to worry about any of that.
+
+1:04:00.320 --> 1:04:04.160
+ We are going to use the Pearson correlation coefficient, which is all very well, as long
+
+1:04:04.160 --> 1:04:09.440
+ as you know what the hell the Pearson correlation coefficient is.
+
+1:04:09.440 --> 1:04:12.000
+ If you don't, let's learn about it.
+
+1:04:12.000 --> 1:04:17.760
+ So Pearson correlation coefficient is usually a beauty of using the other R, and it's the
+
+1:04:17.760 --> 1:04:22.560
+ most widely used measure of how similar two variables are.
+
+1:04:22.560 --> 1:04:29.840
+ And so if your predictions are very similar to the real values, then the Pearson correlation
+
+1:04:29.840 --> 1:04:37.840
+ coefficient will be high, and that's what you want.
+
+1:04:37.840 --> 1:04:40.640
+ R can be between minus one and one.
+
+1:04:40.640 --> 1:04:45.200
+ Minus one means you predicted exactly the wrong answer, which in a Kaggle competition
+
+1:04:45.200 --> 1:04:50.200
+ would be great because then you can just reverse all of your answers and you'll be perfect.
+
+1:04:50.200 --> 1:04:55.600
+ Plus one means you got everything exactly correct.
+
+1:04:55.600 --> 1:04:59.440
+ Generally speaking, in courses or textbooks, when they teach you about the Pearson correlation
+
+1:04:59.440 --> 1:05:04.480
+ coefficient, at this point they will show you a mathematical function.
+
+1:05:04.480 --> 1:05:07.840
+ I'm not going to do that because that tells you nothing about the Pearson correlation
+
+1:05:07.840 --> 1:05:08.840
+ coefficient.
+
+1:05:08.840 --> 1:05:14.200
+ What we actually care about is not the mathematical function but how it behaves.
+
+1:05:14.200 --> 1:05:19.520
+ And I find most people, even who work in data science, have not actually looked at a bunch
+
+1:05:19.520 --> 1:05:23.480
+ of data sets to understand how R behaves.
+
+1:05:23.480 --> 1:05:27.920
+ So let's do that right now so that you're not one of those people.
+
+1:05:27.920 --> 1:05:31.680
+ The best way I find to understand how data behaves in real life is to look at real life
+
+1:05:31.680 --> 1:05:32.680
+ data.
+
+1:05:32.680 --> 1:05:37.280
+ So there's a dataset, a Scikit Learn comes with a number of datasets, and one of them
+
+1:05:37.280 --> 1:05:45.960
+ is called California Housing, and it's a dataset where each row is a district.
+
+1:05:45.960 --> 1:05:49.760
+ And it's kind of demographic, sorry, it's information, demographic information about
+
+1:05:49.760 --> 1:05:57.880
+ different districts and about the value of houses in that district.
+
+1:05:57.880 --> 1:06:03.280
+ I'm not going to try to plot the whole things that's too big, and this is a very common
+
+1:06:03.280 --> 1:06:09.320
+ question I have from people is how do I plot datasets with far too many points?
+
+1:06:09.320 --> 1:06:12.280
+ The answer is very simple, debtless points.
+
+1:06:12.280 --> 1:06:16.280
+ So I just randomly grab a thousand points.
+
+1:06:16.280 --> 1:06:18.600
+ Whatever you see with a thousand points, it's going to be the same as what you see with
+
+1:06:18.600 --> 1:06:19.600
+ a million points.
+
+1:06:19.600 --> 1:06:24.000
+ There's no point, no reason to plot huge amounts of data generally.
+
+1:06:24.000 --> 1:06:27.160
+ Describe a random sample.
+
+1:06:27.160 --> 1:06:33.560
+ Now NumPy has something called core coef to get the correlation coefficient between every
+
+1:06:33.560 --> 1:06:36.920
+ variable and every other variable.
+
+1:06:36.920 --> 1:06:38.880
+ And it returns a matrix.
+
+1:06:38.880 --> 1:06:42.400
+ So I can look down here and so for example here is the correlation coefficient between
+
+1:06:42.400 --> 1:06:47.680
+ variable one and variable one, which of course is exactly perfectly 1.0, right?
+
+1:06:47.680 --> 1:06:50.600
+ Because variable one is the same as variable one.
+
+1:06:50.600 --> 1:06:57.680
+ Here is the small inverse correlation between variable one and variable two, and medium sized
+
+1:06:57.680 --> 1:07:01.760
+ positive correlation between variable one and variable three and so forth.
+
+1:07:01.760 --> 1:07:06.080
+ This is symmetric about the diagonal because the correlation between variable one and variable
+
+1:07:06.080 --> 1:07:10.600
+ eight is the same as the correlation between variable eight and variable one.
+
+1:07:10.600 --> 1:07:17.280
+ So this is a correlation coefficient matrix.
+
+1:07:17.280 --> 1:07:20.680
+ So that's great when we want to get a bunch of values all at once.
+
+1:07:20.680 --> 1:07:22.400
+ For the Kaggle competition, we don't want that.
+
+1:07:22.400 --> 1:07:24.760
+ We just want a single correlation number.
+
+1:07:24.760 --> 1:07:31.520
+ If we just pass in a pair of variables, we still get a matrix, which is kind of weird.
+
+1:07:31.520 --> 1:07:33.760
+ It's kind of weird, but it's not what we want.
+
+1:07:33.760 --> 1:07:35.640
+ So we should grab one of these.
+
+1:07:35.640 --> 1:07:42.000
+ So when I want to grab a correlation coefficient, I'll just return the zero through first column.
+
+1:07:42.000 --> 1:07:43.080
+ So that's what core is.
+
+1:07:43.080 --> 1:07:46.200
+ That's going to be our single correlation coefficient.
+
+1:07:46.200 --> 1:07:50.240
+ So let's look at the correlation between two things.
+
+1:07:50.240 --> 1:07:55.840
+ For example, median income and medium house value.
+
+1:07:55.840 --> 1:07:56.840
+ 0.67.
+
+1:07:56.840 --> 1:07:57.840
+ Okay.
+
+1:07:57.840 --> 1:07:58.840
+ Is that high?
+
+1:07:58.840 --> 1:07:59.840
+ Medium?
+
+1:07:59.840 --> 1:08:00.840
+ Low?
+
+1:08:00.840 --> 1:08:01.840
+ How big is that?
+
+1:08:01.840 --> 1:08:03.480
+ What does it look like?
+
+1:08:03.480 --> 1:08:07.520
+ So the main thing we need to understand is what these things look like.
+
+1:08:07.520 --> 1:08:12.400
+ So what I suggest we do is we're going to take a 10 minute break, nine minute break.
+
+1:08:12.400 --> 1:08:16.280
+ We'll come back in half past, and then we're going to look at some examples of correlation
+
+1:08:16.280 --> 1:08:19.400
+ coefficients.
+
+1:08:19.400 --> 1:08:21.400
+ Okay.
+
+1:08:21.400 --> 1:08:27.600
+ Welcome back.
+
+1:08:27.600 --> 1:08:31.560
+ So what I've done here is I've created a little function called show correlations.
+
+1:08:31.560 --> 1:08:36.480
+ I'm going to pass in a data frame and a couple of columns as strings.
+
+1:08:36.480 --> 1:08:42.200
+ I'm going to grab each of those columns as series, do a scatter plot, and then show the
+
+1:08:42.200 --> 1:08:43.840
+ correlation.
+
+1:08:43.840 --> 1:08:49.320
+ So we already mentioned medium income and medium house valuation of 0.68.
+
+1:08:49.320 --> 1:08:50.320
+ So here it is.
+
+1:08:50.320 --> 1:08:52.080
+ Here's what 0.68 looks like.
+
+1:08:52.080 --> 1:08:57.800
+ So I don't know if you had some intuition about what you expected, but as you can see,
+
+1:08:57.800 --> 1:09:05.920
+ it's still plenty of variation, even at that reasonably high correlation.
+
+1:09:05.920 --> 1:09:13.520
+ Also, you can see here that visualizing your data is very important if you're working with
+
+1:09:13.520 --> 1:09:18.480
+ this data set, because you can immediately see all these dots along here.
+
+1:09:18.480 --> 1:09:20.360
+ That's clearly truncation.
+
+1:09:20.360 --> 1:09:21.360
+ Right?
+
+1:09:21.360 --> 1:09:24.360
+ So this is like when it's not until you look at pictures like this that you're going to
+
+1:09:24.360 --> 1:09:27.000
+ pick stuff like this.
+
+1:09:27.000 --> 1:09:28.560
+ Pictures are great.
+
+1:09:28.560 --> 1:09:30.920
+ Oh, little trick.
+
+1:09:30.920 --> 1:09:36.320
+ On the scatter plot, I put alpha is 0.5, that creates some transparency.
+
+1:09:36.320 --> 1:09:41.760
+ For these kind of scatter plots, that really helps because it kind of creates darker areas
+
+1:09:41.760 --> 1:09:43.880
+ in places where there's lots of dots.
+
+1:09:43.880 --> 1:09:48.320
+ So yeah, alpha in scatter plots is nice.
+
+1:09:48.320 --> 1:09:49.840
+ Okay, here's another pair.
+
+1:09:49.840 --> 1:09:55.840
+ So this one's gone down from 0.68 to 0.43, median income versus the number of rooms per
+
+1:09:55.840 --> 1:09:56.840
+ house.
+
+1:09:56.840 --> 1:10:03.880
+ As you would expect, more rooms, it's more income.
+
+1:10:03.880 --> 1:10:06.520
+ But this is a very weird looking thing.
+
+1:10:06.520 --> 1:10:13.960
+ Now, you'll find that a lot of these statistical measures, like correlation, rely on the square
+
+1:10:13.960 --> 1:10:15.920
+ of the difference.
+
+1:10:15.920 --> 1:10:21.400
+ And when you have big outliers like this, the square of the difference goes crazy.
+
+1:10:21.400 --> 1:10:25.680
+ And so this is another place we'd want to look at the data first and say, oh, that's
+
+1:10:25.680 --> 1:10:28.240
+ going to be a bit of an issue.
+
+1:10:28.240 --> 1:10:30.000
+ There's probably more correlation here.
+
+1:10:30.000 --> 1:10:35.440
+ But there's a few examples of some houses with lots and lots of room where people that
+
+1:10:35.440 --> 1:10:36.600
+ aren't very rich live.
+
+1:10:36.600 --> 1:10:42.880
+ Maybe these are some kind of shared accommodation or something.
+
+1:10:42.880 --> 1:10:46.640
+ So R is very sensitive to outliers.
+
+1:10:46.640 --> 1:10:51.720
+ So let's get rid of the houses, the rooms with 15 rooms, the houses with 15 rooms or
+
+1:10:51.720 --> 1:10:53.720
+ more.
+
+1:10:53.720 --> 1:10:59.160
+ And now you can see it's gone up from 0.43 to 0.68.
+
+1:10:59.160 --> 1:11:03.000
+ Even though we probably only got rid of 1, 2, 3, 4, 5, 6, even, we only got rid of 7 data
+
+1:11:03.000 --> 1:11:04.000
+ points.
+
+1:11:04.000 --> 1:11:06.400
+ So we're going to be very careful of outliers.
+
+1:11:06.400 --> 1:11:11.640
+ And that means if you're trying to win a cackle competition where the metric is correlation
+
+1:11:11.640 --> 1:11:16.760
+ and you just get a couple of rows really badly wrong, then it's going to be a disaster to
+
+1:11:16.760 --> 1:11:18.560
+ your score.
+
+1:11:18.560 --> 1:11:23.880
+ So you've got to make sure that you do a pretty good job of every row.
+
+1:11:23.880 --> 1:11:27.400
+ So there's what a correlation of 0.68 looks like.
+
+1:11:27.400 --> 1:11:30.720
+ Okay, here's a correlation of 0.34.
+
+1:11:30.720 --> 1:11:33.080
+ And this is kind of interesting, isn't it?
+
+1:11:33.080 --> 1:11:40.560
+ Because 0.34 sounds like quite a good relationship, but you almost can't see it.
+
+1:11:40.560 --> 1:11:45.200
+ So this is something I strongly suggest is if you're working with a new metric, it's
+
+1:11:45.200 --> 1:11:51.120
+ to draw some pictures of a few different levels of that metric to kind of try to get a feel
+
+1:11:51.120 --> 1:11:53.120
+ for like, what does it mean?
+
+1:11:53.120 --> 1:11:54.360
+ What does 0.6 look like?
+
+1:11:54.360 --> 1:11:55.480
+ What does 0.3 look like?
+
+1:11:55.480 --> 1:11:58.480
+ And so forth.
+
+1:11:58.480 --> 1:12:03.200
+ And here's an example of a correlation of minus 0.2.
+
+1:12:03.200 --> 1:12:06.160
+ This is very slight negative slope.
+
+1:12:06.160 --> 1:12:11.240
+ Okay, so there's just more of a kind of a general tip of something I like to do when
+
+1:12:11.240 --> 1:12:12.320
+ playing with a new metric.
+
+1:12:12.320 --> 1:12:13.840
+ And I recommend you do as well.
+
+1:12:13.840 --> 1:12:17.200
+ I think we've now got a sense of what the correlation feels like.
+
+1:12:17.200 --> 1:12:23.760
+ Now you can go look up the equation on Wikipedia if you're into that kind of thing.
+
+1:12:23.760 --> 1:12:29.560
+ We need to report the correlation after each epoch because we want to know how our training
+
+1:12:29.560 --> 1:12:31.400
+ is going.
+
+1:12:31.400 --> 1:12:38.080
+ Hugging face expects you to return a dictionary because it's going to use the keys of the
+
+1:12:38.080 --> 1:12:41.440
+ dictionary to label each metric.
+
+1:12:41.440 --> 1:12:48.160
+ So here's something that gets the correlation and returns it as a dictionary with the label
+
+1:12:48.160 --> 1:12:49.960
+ Pearson.
+
+1:12:49.960 --> 1:12:52.960
+ Okay, so we've done metrics.
+
+1:12:52.960 --> 1:12:56.680
+ We've done our training validation split.
+
+1:12:56.680 --> 1:13:02.240
+ Oh, we might have actually skipped over the bit where we actually did the split, did I?
+
+1:13:02.240 --> 1:13:03.640
+ I did.
+
+1:13:03.640 --> 1:13:11.360
+ So to actually do the split, because in this Kaggle competition, I've got another one
+
+1:13:11.360 --> 1:13:15.280
+ that we'll look at later where we actually split this properly.
+
+1:13:15.280 --> 1:13:19.880
+ But here we're just going to do a random split just to keep things simple for now.
+
+1:13:19.880 --> 1:13:24.080
+ Of 25% of the data will be a validation set.
+
+1:13:24.080 --> 1:13:33.680
+ So if we go Ds train test split, it returns a data set dict, which has a train and a test.
+
+1:13:33.680 --> 1:13:42.240
+ So that looks a lot like a data sets object in fast.io, very similar idea.
+
+1:13:42.240 --> 1:13:44.320
+ So this will be the thing that we'll be able to train with.
+
+1:13:44.320 --> 1:13:49.320
+ So it's going to train with this data set and return the metrics on this data set.
+
+1:13:49.320 --> 1:13:58.960
+ This is really a validation set, but hugging face data sets calls a test.
+
+1:13:58.960 --> 1:14:01.560
+ Okay.
+
+1:14:01.560 --> 1:14:03.880
+ We're now ready to train our model.
+
+1:14:03.880 --> 1:14:07.040
+ In Fast.io, we use something called a learner.
+
+1:14:07.040 --> 1:14:10.600
+ The equivalent in hugging face transformers is called trainer.
+
+1:14:10.600 --> 1:14:14.440
+ So we'll bring that in.
+
+1:14:14.440 --> 1:14:19.480
+ Something we'll learn about quite shortly is the idea of mini batches and batch sizes.
+
+1:14:19.480 --> 1:14:25.920
+ In short, each time we pass some data to our model for training, it's going to send through
+
+1:14:25.920 --> 1:14:33.040
+ a few rows at a time to the GPU so that it can calculate those in parallel.
+
+1:14:33.040 --> 1:14:38.000
+ Those bunch of rows is called a batch or a mini batch and the number of rows is called
+
+1:14:38.000 --> 1:14:40.160
+ the batch size.
+
+1:14:40.160 --> 1:14:43.360
+ So here we're going to set the batch size to 128.
+
+1:14:43.360 --> 1:14:47.720
+ Generally speaking, the larger your batch size, the more it can do in parallel at once
+
+1:14:47.720 --> 1:14:49.640
+ and it'll be faster.
+
+1:14:49.640 --> 1:14:54.440
+ But if you make it too big, you're going to add a memory error on your GPU.
+
+1:14:54.440 --> 1:14:58.120
+ So it's a bit of trial and error to find a batch size that works.
+
+1:14:58.120 --> 1:15:02.160
+ Epoxy we've seen before.
+
+1:15:02.160 --> 1:15:04.200
+ Then we've got the learning rate.
+
+1:15:04.200 --> 1:15:11.840
+ We'll talk in the next lesson, unless we get to this lesson, about a technique to automatically
+
+1:15:11.840 --> 1:15:14.640
+ find a, or semi automatically find a good learning rate.
+
+1:15:14.640 --> 1:15:17.400
+ We already know what a learning rate is from the last lesson.
+
+1:15:17.400 --> 1:15:23.160
+ I played around and found one that seems to train quite quickly without falling apart.
+
+1:15:23.160 --> 1:15:26.880
+ So I just tried a few.
+
+1:15:26.880 --> 1:15:33.640
+ Generally if I don't have a, so Hackingface transformers doesn't have something to help
+
+1:15:33.640 --> 1:15:38.600
+ you find the learning rate, the integration we're doing in FastDI will let you do that.
+
+1:15:38.600 --> 1:15:42.160
+ But if you're using a framework that doesn't have that, you can just start with a really
+
+1:15:42.160 --> 1:15:51.320
+ low learning rate and then kind of double it and keep doubling it until it falls apart.
+
+1:15:51.320 --> 1:15:55.120
+ Hackingface transformers uses this thing called training arguments, which is a class where
+
+1:15:55.120 --> 1:15:58.560
+ you just provide all of the kind of configuration.
+
+1:15:58.560 --> 1:16:05.560
+ So you have to tell it what your learning rate is.
+
+1:16:05.560 --> 1:16:10.960
+ This stuff here is the same as what we call basically fit one cycle in FastDI.
+
+1:16:10.960 --> 1:16:16.400
+ You always want this to be true because it's going to be faster pretty much.
+
+1:16:16.400 --> 1:16:19.960
+ And then this stuff here, you can probably use exactly the same every time.
+
+1:16:19.960 --> 1:16:26.840
+ There's a lot of boilerplate compared to FastDI as you see.
+
+1:16:26.840 --> 1:16:30.360
+ This stuff you can probably use the same every time.
+
+1:16:30.360 --> 1:16:34.080
+ So we now need to create our model.
+
+1:16:34.080 --> 1:16:39.960
+ So the equivalent of the vision learner function that we've used to automatically create a
+
+1:16:39.960 --> 1:16:46.160
+ reasonable vision model in Hackingface transformers.
+
+1:16:46.160 --> 1:16:50.200
+ We've got lots of different ones depending on what you're trying to do.
+
+1:16:50.200 --> 1:16:55.320
+ So we're trying to do classification as we've discussed of sequences.
+
+1:16:55.320 --> 1:17:00.480
+ So if we call auto model for sequence classification, it will create a model that is appropriate
+
+1:17:00.480 --> 1:17:04.600
+ for classifying sequences from a pretrained model.
+
+1:17:04.600 --> 1:17:10.840
+ And this is the name of the model that we used earlier, the de Burda V3.
+
+1:17:10.840 --> 1:17:15.040
+ It has to know when it adds that random matrix to the end, how many outputs it needs to
+
+1:17:15.040 --> 1:17:16.040
+ have.
+
+1:17:16.040 --> 1:17:19.880
+ So we have one label, which is the score.
+
+1:17:19.880 --> 1:17:21.920
+ So that's going to create our model.
+
+1:17:21.920 --> 1:17:24.640
+ And then this is the equivalent of creating a learner.
+
+1:17:24.640 --> 1:17:28.440
+ It contains a model and the data.
+
+1:17:28.440 --> 1:17:30.440
+ The training data and the test data.
+
+1:17:30.440 --> 1:17:34.360
+ Again, there's a lot more boilerplate here than FastDI, but you can kind of see the same
+
+1:17:34.360 --> 1:17:35.680
+ basic steps here.
+
+1:17:35.680 --> 1:17:37.440
+ We just have to do a little bit more manually.
+
+1:17:37.440 --> 1:17:39.840
+ But it's not, you know, there's nothing too crazy.
+
+1:17:39.840 --> 1:17:43.760
+ So it's going to tokenize it for us using that function.
+
+1:17:43.760 --> 1:17:48.080
+ And then these are the matrix that will print out each time.
+
+1:17:48.080 --> 1:17:53.360
+ That's that little function we created, which returns a dictionary.
+
+1:17:53.360 --> 1:17:56.280
+ At the moment, I find hugging face transformers very verbose.
+
+1:17:56.280 --> 1:18:01.040
+ It spits out lots and lots and lots of text, which you can ignore.
+
+1:18:01.040 --> 1:18:04.280
+ And we can finally call train, which will spit out much more text again, which you can
+
+1:18:04.280 --> 1:18:06.560
+ ignore.
+
+1:18:06.560 --> 1:18:11.200
+ And as you can see, as it trains, it's printing out the loss.
+
+1:18:11.200 --> 1:18:15.080
+ And here's our Pearson correlation coefficient.
+
+1:18:15.080 --> 1:18:16.480
+ So it's training.
+
+1:18:16.480 --> 1:18:19.120
+ And we've got a.834 correlation.
+
+1:18:19.120 --> 1:18:20.120
+ That's pretty cool, right?
+
+1:18:20.120 --> 1:18:24.600
+ I mean, it took, what does it actually say, but it just took a, oh, here we are, five
+
+1:18:24.600 --> 1:18:25.600
+ minutes to run.
+
+1:18:25.600 --> 1:18:30.080
+ Maybe that's five minutes per epoch on Kaggle, which doesn't have particularly great GPUs,
+
+1:18:30.080 --> 1:18:32.800
+ but good for free.
+
+1:18:32.800 --> 1:18:39.200
+ And we've got something that is, you know, got a very high level of correlation in assessing
+
+1:18:39.200 --> 1:18:41.920
+ how similar the two columns are.
+
+1:18:41.920 --> 1:18:46.720
+ And the only reason it could do that is because it used a pre trained model, right?
+
+1:18:46.720 --> 1:18:50.640
+ There's no way you could just have that tiny amount of information and figure out whether
+
+1:18:50.640 --> 1:18:54.200
+ those two columns are very similar.
+
+1:18:54.200 --> 1:18:57.240
+ This pre trained model already knows a lot about language.
+
+1:18:57.240 --> 1:19:01.240
+ It already has a good sense of whether two phrases are similar or not.
+
+1:19:01.240 --> 1:19:02.960
+ And we've just fine tuned it.
+
+1:19:02.960 --> 1:19:07.920
+ You can see, given that after one epoch, it was already at.8, you know, we, this was
+
+1:19:07.920 --> 1:19:11.800
+ a model that already did something pretty close to what we needed.
+
+1:19:11.800 --> 1:19:18.200
+ It didn't really need that much extra tuning for this particular task.
+
+1:19:18.200 --> 1:19:23.600
+ I've got any questions there, John?
+
+1:19:23.600 --> 1:19:25.160
+ Yeah, we do.
+
+1:19:25.160 --> 1:19:30.320
+ It's actually a bit back on the topic before where you were showing us the visual interpretation
+
+1:19:30.320 --> 1:19:31.480
+ of the Pearson coefficient.
+
+1:19:31.480 --> 1:19:33.200
+ And you were talking about outliers.
+
+1:19:33.200 --> 1:19:40.000
+ Yeah, and we've got a question here from Kevin asking, how do you decide when it's okay
+
+1:19:40.000 --> 1:19:41.360
+ to remove outliers?
+
+1:19:41.360 --> 1:19:45.600
+ Like you pointed out some in that data set.
+
+1:19:45.600 --> 1:19:50.440
+ And clearly your model is going to train a lot better if you clean that up.
+
+1:19:50.440 --> 1:19:56.800
+ But I think Kevin's point here is, you know, those kinds of outliers will probably exist
+
+1:19:56.800 --> 1:19:58.120
+ in the test set as well.
+
+1:19:58.120 --> 1:20:01.960
+ So I think he's just looking for some practical advice on how you handle that in a more general
+
+1:20:01.960 --> 1:20:02.960
+ sense.
+
+1:20:02.960 --> 1:20:16.600
+ So outliers should never just be removed, like for modeling.
+
+1:20:16.600 --> 1:20:21.040
+ So if we take the example of the California housing data set, you know, if I was really
+
+1:20:21.040 --> 1:20:25.520
+ working with that data set in real life, I would be saying, oh, that's interesting.
+
+1:20:25.520 --> 1:20:29.160
+ It seems like there's a separate group of districts with a different kind of behavior.
+
+1:20:29.160 --> 1:20:32.760
+ Yeah, my guess is that they're going to be kind of like dorms or something like that,
+
+1:20:32.760 --> 1:20:35.880
+ probably low income housing.
+
+1:20:35.880 --> 1:20:40.720
+ And so I would be saying like, oh, clearly from looking at this data set, these two different
+
+1:20:40.720 --> 1:20:42.680
+ groups can't be treated the same way.
+
+1:20:42.680 --> 1:20:44.000
+ They have very different behaviors.
+
+1:20:44.000 --> 1:20:50.800
+ And I would probably split them into two separate analyses.
+
+1:20:50.800 --> 1:20:59.200
+ You know, the word outlier, it kind of exists in a statistical sense, right?
+
+1:20:59.200 --> 1:21:02.880
+ There can be things that are well outside our normal distribution and mess up our kind
+
+1:21:02.880 --> 1:21:04.520
+ of metrics and things.
+
+1:21:04.520 --> 1:21:06.360
+ It doesn't exist in a real sense.
+
+1:21:06.360 --> 1:21:11.720
+ It doesn't exist in a sense of like, oh, things that we should like ignore or throw
+
+1:21:11.720 --> 1:21:12.720
+ away.
+
+1:21:12.720 --> 1:21:18.680
+ You know, some of the most useful kind of insights I've had in my life in data projects
+
+1:21:18.680 --> 1:21:24.840
+ has been by digging into outliers, so called outliers and understanding, well, what are
+
+1:21:24.840 --> 1:21:25.840
+ they?
+
+1:21:25.840 --> 1:21:28.320
+ Where did they come from?
+
+1:21:28.320 --> 1:21:33.680
+ And it's kind of often in those edge cases that you discover really important things
+
+1:21:33.680 --> 1:21:39.960
+ about like where processes go wrong or about kinds of behaviors you didn't even know existed
+
+1:21:39.960 --> 1:21:45.320
+ or indeed about kind of labeling problems or process problems which you really want to
+
+1:21:45.320 --> 1:21:49.160
+ fix them at the source because otherwise when you go into production, you're going to have
+
+1:21:49.160 --> 1:21:52.480
+ more of those so called outliers.
+
+1:21:52.480 --> 1:22:02.400
+ So yeah, I'd say never delete outliers without investigating them and having a strategy for
+
+1:22:02.400 --> 1:22:06.600
+ like understanding where they came from and like, what should you do about them?
+
+1:22:06.600 --> 1:22:13.520
+ All right, so now that we've got a trained model, you'll see that it actually behaves
+
+1:22:13.520 --> 1:22:19.040
+ really a lot like a fast AI learner and hopefully the impression you'll get from going through
+
+1:22:19.040 --> 1:22:23.160
+ this process is largely a sense of familiarity.
+
+1:22:23.160 --> 1:22:29.040
+ And I've like, oh, yeah, this looks like stuff I've seen before, you know, like a bit more
+
+1:22:29.040 --> 1:22:34.320
+ wordy and some slight changes, but it really is very, very similar to the way we've done
+
+1:22:34.320 --> 1:22:41.400
+ it before because now that we've got a trained trainer rather than learner, we can call predict.
+
+1:22:41.400 --> 1:22:48.480
+ And now we're going to pass in our data set from the Kaggle test file.
+
+1:22:48.480 --> 1:22:55.200
+ And so that's going to give us our predictions which we can cast to float.
+
+1:22:55.200 --> 1:22:57.200
+ And here they are.
+
+1:22:57.200 --> 1:23:03.640
+ So here are the predictions we made of similarity.
+
+1:23:03.640 --> 1:23:10.000
+ Now again, not just for your inputs, but also for your outputs, always look at them,
+
+1:23:10.000 --> 1:23:11.600
+ always, right?
+
+1:23:11.600 --> 1:23:17.680
+ And interestingly, I looked at quite a few Kaggle notebooks from other people for this
+
+1:23:17.680 --> 1:23:25.000
+ competition and nearly all of them had the problem we have right now, which is negative
+
+1:23:25.000 --> 1:23:28.800
+ predictions and predictions over one.
+
+1:23:28.800 --> 1:23:34.760
+ So I'll be showing you how to fix this in a more proper way, maybe hopefully in the
+
+1:23:34.760 --> 1:23:37.280
+ next lesson.
+
+1:23:37.280 --> 1:23:42.120
+ But for now, we could at least just round these off, right?
+
+1:23:42.120 --> 1:23:45.640
+ Because we know that none of the scores are going to be bigger than one or smaller than
+
+1:23:45.640 --> 1:23:46.640
+ zero.
+
+1:23:46.640 --> 1:23:50.480
+ So our correlation coefficient will definitely improve if we at least round this up to zero
+
+1:23:50.480 --> 1:23:53.040
+ and round this down to one.
+
+1:23:53.040 --> 1:23:57.600
+ As I say, there are better ways to do this, but that's certainly better than nothing.
+
+1:23:57.600 --> 1:24:02.360
+ So in PyTorch, you might remember from when we looked at RallyU, there's a thing called
+
+1:24:02.360 --> 1:24:08.720
+ clip, and that will clip everything under zero to zero and everything over one to one.
+
+1:24:08.720 --> 1:24:13.120
+ And so now that looks much better.
+
+1:24:13.120 --> 1:24:15.640
+ So here's our predictions.
+
+1:24:15.640 --> 1:24:22.560
+ So Kaggle expects submissions to generally be in a CSV file and Hacking Face data sets,
+
+1:24:22.560 --> 1:24:24.600
+ kind of looks a lot like pandas, really.
+
+1:24:24.600 --> 1:24:31.840
+ We can create our submission file from without two columns, called dot to CSV.
+
+1:24:31.840 --> 1:24:36.280
+ And there we go.
+
+1:24:36.280 --> 1:24:41.160
+ That's basically it.
+
+1:24:41.160 --> 1:24:52.120
+ So yeah, it's kind of nice to see how, in the sense how far deep learning has come since
+
+1:24:52.120 --> 1:24:58.480
+ we started this course a few years ago, that nowadays there are multiple libraries around
+
+1:24:58.480 --> 1:25:02.440
+ to kind of do the same thing.
+
+1:25:02.440 --> 1:25:05.320
+ We can use them in multiple application areas.
+
+1:25:05.320 --> 1:25:07.440
+ They all look kind of pretty familiar.
+
+1:25:07.440 --> 1:25:10.880
+ They're reasonably beginner friendly.
+
+1:25:10.880 --> 1:25:19.840
+ And NLP, because it's kind of like the most recent area that's really become effective
+
+1:25:19.840 --> 1:25:27.440
+ in the last year or two, is probably where the biggest opportunities are for big wins
+
+1:25:27.440 --> 1:25:33.160
+ both in research and commercialization.
+
+1:25:33.160 --> 1:25:37.000
+ And so if you're looking to build a startup, for example, one of the key things that VCs
+
+1:25:37.000 --> 1:25:42.320
+ look for, that they'll ask is like, well, why now?
+
+1:25:42.320 --> 1:25:44.120
+ Why would you build this company now?
+
+1:25:44.120 --> 1:25:46.760
+ And of course, with NLP, the answer is really simple.
+
+1:25:46.760 --> 1:25:51.720
+ It's like, it can often be like, well, until last year, this wasn't possible.
+
+1:25:51.720 --> 1:25:58.280
+ Or it took 10 times more time, or it took 10 times more money, or whatever.
+
+1:25:58.280 --> 1:26:05.000
+ So I think NLP is a huge opportunity area.
+
+1:26:05.000 --> 1:26:17.640
+ Okay, so it's worth thinking about both use and misuse of modern NLP.
+
+1:26:17.640 --> 1:26:22.400
+ And I want to show you a subreddit.
+
+1:26:22.400 --> 1:26:24.520
+ Here is a conversation on a subreddit from a couple of years ago.
+
+1:26:24.520 --> 1:26:29.520
+ I'll let you have a quick read of it.
+
+1:26:29.520 --> 1:26:38.960
+ So the question I want you to be thinking about is, what subreddit do you think this
+
+1:26:38.960 --> 1:26:41.120
+ comes from?
+
+1:26:41.120 --> 1:26:46.240
+ This debate about military spending.
+
+1:26:46.240 --> 1:26:50.280
+ And the answer is it comes from a subreddit that post automatically generated conversations
+
+1:26:50.280 --> 1:26:54.840
+ between GPT two models.
+
+1:26:54.840 --> 1:26:58.520
+ Now this is a totally previous generation of model.
+
+1:26:58.520 --> 1:27:00.680
+ They're much, much better now.
+
+1:27:00.680 --> 1:27:06.760
+ So even then, you could see these models were generating context appropriate, believable
+
+1:27:06.760 --> 1:27:12.680
+ pros.
+
+1:27:12.680 --> 1:27:20.440
+ You know, I would strongly believe that like any of our kind of like, our peteer of competent
+
+1:27:20.440 --> 1:27:27.200
+ fast AI alumni would be fairly easily able to create a bot which could create context
+
+1:27:27.200 --> 1:27:35.480
+ appropriate pros on Twitter or Facebook groups or whatever, you know, arguing for a side
+
+1:27:35.480 --> 1:27:37.200
+ of an argument.
+
+1:27:37.200 --> 1:27:41.960
+ And you could scale that up such that 99% of Twitter was these bots.
+
+1:27:41.960 --> 1:27:46.560
+ And nobody would know, you know, nobody would know.
+
+1:27:46.560 --> 1:27:57.040
+ And that's very worrying to me because a lot of, you know, a lot of kind of the way people
+
+1:27:57.040 --> 1:28:02.160
+ see the world is now really coming out of their social media conversations, which at
+
+1:28:02.160 --> 1:28:03.920
+ this point they're controllable.
+
+1:28:03.920 --> 1:28:11.000
+ Like, it would not be that hard to create something that's kind of optimized towards
+
+1:28:11.000 --> 1:28:14.960
+ being a point of view amongst a billion people.
+
+1:28:14.960 --> 1:28:18.760
+ You know, in a very subtle way, very gradually over a long period of time by multiple bots
+
+1:28:18.760 --> 1:28:23.800
+ each pretending to argue with each other and one of them getting the upper hand and so
+
+1:28:23.800 --> 1:28:29.240
+ forth.
+
+1:28:29.240 --> 1:28:52.920
+ Here is the start of an article in The Guardian, which I'll let you read.
+
+1:28:52.920 --> 1:28:54.600
+ This article was, you know, quite long.
+
+1:28:54.600 --> 1:28:57.320
+ These are just the first few paragraphs.
+
+1:28:57.320 --> 1:29:01.360
+ And at the end it explains that this article was written by GPT3.
+
+1:29:01.360 --> 1:29:05.120
+ It was given the instruction, please write a short op out around 500 words, keep the
+
+1:29:05.120 --> 1:29:11.160
+ language simple and concise, focus on why humans have nothing to fear from AI.
+
+1:29:11.160 --> 1:29:18.560
+ So GPT3 produced eight outputs and then they say basically the editors at The Guardian did
+
+1:29:18.560 --> 1:29:21.760
+ about the same level of editing that they would do for humans.
+
+1:29:21.760 --> 1:29:25.920
+ In fact, they found it a bit less editing required than humans.
+
+1:29:25.920 --> 1:29:33.480
+ So, you know, again, you can create longer pieces of context appropriate prose designed
+
+1:29:33.480 --> 1:29:36.960
+ to argue a particular point of view.
+
+1:29:36.960 --> 1:29:40.800
+ What kind of things might this be used for?
+
+1:29:40.800 --> 1:29:46.240
+ We won't know probably for decades, if ever, but sometimes we get a clue based on older
+
+1:29:46.240 --> 1:29:47.240
+ technology.
+
+1:29:47.240 --> 1:29:54.240
+ Here's something from back 2017 in the pre kind of deep learning in our P days.
+
+1:29:54.240 --> 1:30:02.560
+ There were millions of submissions to the FTC about the net neutrality situation in America.
+
+1:30:02.560 --> 1:30:08.880
+ Very, very heavily biased towards the point of view of saying we want to get rid of net
+
+1:30:08.880 --> 1:30:11.600
+ neutrality.
+
+1:30:11.600 --> 1:30:18.000
+ An analysis by Jeff Cow showed that something like 99% of them, and in particular nearly
+
+1:30:18.000 --> 1:30:24.920
+ all of the ones which were pro removal of net neutrality, were clearly auto generated.
+
+1:30:24.920 --> 1:30:29.520
+ By basically if you look at the green, there's like selecting from a menu.
+
+1:30:29.520 --> 1:30:33.840
+ So we've got Americans as opposed to Washington bureaucrats deserve to enjoy the services they
+
+1:30:33.840 --> 1:30:34.840
+ desire.
+
+1:30:34.840 --> 1:30:38.960
+ Individuals as opposed to Washington bureaucrats should be just little people like me as opposed
+
+1:30:38.960 --> 1:30:40.000
+ to so called experts should be.
+
+1:30:40.000 --> 1:30:41.400
+ And you get the idea.
+
+1:30:41.400 --> 1:30:49.360
+ Now this is an example of a very, very simple approach to auto generating huge amounts of
+
+1:30:49.360 --> 1:30:50.360
+ text.
+
+1:30:50.360 --> 1:30:55.600
+ We don't know for sure, but it looks like this might have been successful because this went
+
+1:30:55.600 --> 1:30:56.600
+ through.
+
+1:30:56.600 --> 1:31:03.560
+ You know, despite what seems to be actually overwhelming disagreement from the public
+
+1:31:03.560 --> 1:31:09.160
+ that everybody, almost everybody likes, net neutrality, the FTC got rid of it.
+
+1:31:09.160 --> 1:31:12.920
+ And this was a big part of the basis was like, oh, we got all these comments from the public
+
+1:31:12.920 --> 1:31:16.840
+ and everybody said they don't want net neutrality.
+
+1:31:16.840 --> 1:31:21.280
+ So imagine a similar thing where you absolutely couldn't do this.
+
+1:31:21.280 --> 1:31:27.560
+ You couldn't figure it out because everyone was really very compelling and very different.
+
+1:31:27.560 --> 1:31:33.240
+ That's, you know, it's kind of worrying about how we do with that.
+
+1:31:33.240 --> 1:31:36.760
+ You know, I will say when I talk about this stuff often people say, oh, no worries, we'll
+
+1:31:36.760 --> 1:31:43.800
+ be able to model to recognize, you know, bot generated content.
+
+1:31:43.800 --> 1:31:49.320
+ But, you know, if I put my black hat on, I'm like, no, that's not going to work, right?
+
+1:31:49.320 --> 1:31:55.480
+ If you told me to build something that beats the bot classifiers, I'd say, no worries,
+
+1:31:55.480 --> 1:31:56.480
+ easy.
+
+1:31:56.480 --> 1:32:00.600
+ You know, I will take the code or the service or service or whatever that does the bot
+
+1:32:00.600 --> 1:32:06.160
+ classifying and I will include beating that in my loss function and I will fine tune my
+
+1:32:06.160 --> 1:32:08.560
+ model until it beats the bot classifier.
+
+1:32:08.560 --> 1:32:13.760
+ You know, when I used to run an email company we had a similar problem with spam prevention.
+
+1:32:13.760 --> 1:32:20.480
+ You know, spammers could always take a spam prevention algorithm and change their emails
+
+1:32:20.480 --> 1:32:26.640
+ until it didn't get the spam prevention algorithm anymore, for example.
+
+1:32:26.640 --> 1:32:37.120
+ So yeah, so I'm really excited about the opportunities for students in this course to build, you
+
+1:32:37.120 --> 1:32:44.760
+ know, I think very valuable businesses, really cool research and so forth using these pretty
+
+1:32:44.760 --> 1:32:49.680
+ new NLP techniques that are now pretty accessible and I'm also really worried about the things
+
+1:32:49.680 --> 1:32:50.680
+ that might go wrong.
+
+1:32:50.680 --> 1:32:55.360
+ I do think though that the more people that understand these capabilities, the less chance
+
+1:32:55.360 --> 1:32:57.080
+ they'll go wrong.
+
+1:32:57.080 --> 1:32:59.240
+ John, was there some questions?
+
+1:32:59.240 --> 1:33:06.080
+ Yeah, I mean it's a throwback to the workbook that you had before.
+
+1:33:06.080 --> 1:33:09.640
+ Yeah, that's the one.
+
+1:33:09.640 --> 1:33:20.360
+ The question, Manakhandan is asking, shouldn't num labels be 5, 0, 0.25, 0.5, 0.751 instead
+
+1:33:20.360 --> 1:33:21.360
+ of 1?
+
+1:33:21.360 --> 1:33:26.240
+ Isn't the target a categorical or are we considering this as a regression problem?
+
+1:33:26.240 --> 1:33:27.760
+ Yeah, it's a good question.
+
+1:33:27.760 --> 1:33:33.960
+ So there's one label because there's one column.
+
+1:33:33.960 --> 1:33:39.120
+ Even if this was being treated as a categorical problem with five categories, it's still considered
+
+1:33:39.120 --> 1:33:42.120
+ one label.
+
+1:33:42.120 --> 1:33:48.920
+ In this case though, we're actually treating it as a regression problem.
+
+1:33:48.920 --> 1:33:51.560
+ It's just one of the things that's a bit tricky, I was trying to figure this out just the other
+
+1:33:51.560 --> 1:33:52.560
+ day.
+
+1:33:52.560 --> 1:33:56.560
+ It's not documented as far as I can tell on the Hugging First Transformers website but
+
+1:33:56.560 --> 1:34:01.600
+ if you pass in one label to auto model for sequence classification, it turns it into
+
+1:34:01.600 --> 1:34:06.760
+ a regression problem which is actually why we ended up with predictions that were less
+
+1:34:06.760 --> 1:34:09.040
+ than 0 and bigger than 1.
+
+1:34:09.040 --> 1:34:16.840
+ So we'll be learning next time about the use of sick void functions to resolve this problem
+
+1:34:16.840 --> 1:34:20.160
+ and that should fix it up for us.
+
+1:34:20.160 --> 1:34:22.640
+ Okay, great.
+
+1:34:22.640 --> 1:34:23.640
+ Well thanks everybody.
+
+1:34:23.640 --> 1:34:26.800
+ I hope you enjoyed learning about NLP.
+
+1:34:26.800 --> 1:34:30.840
+ As much as I enjoyed putting this together, I'm really excited about it and can't wait
+
+1:34:30.840 --> 1:34:33.160
+ for next week's lesson.
+
+1:34:33.160 --> 1:34:51.660
+ So yeah.
+

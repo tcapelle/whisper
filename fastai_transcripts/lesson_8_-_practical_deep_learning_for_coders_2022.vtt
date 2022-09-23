@@ -1,0 +1,2258 @@
+WEBVTT
+
+00:00.000 --> 00:12.000
+ So welcome to the last lesson of part one of practical deep learning for coders.
+
+00:12.000 --> 00:22.000
+ It's been a really fun time doing this course.
+
+00:22.000 --> 00:42.000
+ And depending on when you're watching and listening to this, you may want to check the forums or the fast.ai website to see whether we have a part two planned, which is going to be sometime towards the end of 2022.
+
+00:42.000 --> 01:02.000
+ Or if it's already passed that, then maybe there's even a part two already on the website. So part two goes a lot deeper than part one, technically, in terms of getting to the point that you should be able to read and implement research papers
+
+01:02.000 --> 01:11.000
+ and deploy models in a very kind of real life situation.
+
+01:11.000 --> 01:13.000
+ Yeah.
+
+01:13.000 --> 01:24.000
+ Last lesson we started on the collaborative filtering notebook.
+
+01:24.000 --> 01:38.000
+ And we were looking at collaborative filtering and this is where we got to, which is creating your own embedding module. And this is a very cool, this is a very cool place to start the lesson, because you're going to learn a lot about what's really going on.
+
+01:38.000 --> 01:54.000
+ And it's really important, before you dig into this, to make sure that you're really comfortable with the zero five, the model and neural net from scratch notebook.
+
+01:54.000 --> 02:03.000
+ So if parts of this are not totally clear, put it aside and redo this notebook.
+
+02:03.000 --> 02:16.000
+ Because what we're looking at from here are kind of the abstractions that pie torch and fast AI add on top of functionality that we've built ourselves from scratch.
+
+02:16.000 --> 02:39.000
+ So if you remember in the neural network from scratch we built, we initialized a number of coefficients, a couple of different layers, you know, and a bias term, and then during as the model trained we updated those coefficients by going through each layer of them
+
+02:39.000 --> 02:46.000
+ and subtracting out the gradients by the learning rate.
+
+02:46.000 --> 02:52.000
+ In you probably noticed that in pie torch we don't have to go to all that trouble.
+
+02:52.000 --> 02:56.000
+ And I wanted to show you how pie torch does this pie torch.
+
+02:56.000 --> 03:07.000
+ We don't have to keep track of what our coefficients or parameters or weights are pie torch does that for us.
+
+03:07.000 --> 03:23.000
+ And what it does that is it looks inside our, our module, and it tries to find anything that looks like a neural network parameter, a tensor of neural network parameters.
+
+03:23.000 --> 03:30.000
+ And it keeps track of them. And so here is a class we've created called T, which is a sub class of module.
+
+03:30.000 --> 03:38.000
+ And we've created one thing inside it which is something with the attribute A. So this is a in the T module.
+
+03:38.000 --> 03:40.000
+ And it just contains three ones.
+
+03:40.000 --> 03:47.000
+ And so the idea is, you know, maybe we're creating the module and this is we're initializing some parameter that we want to train.
+
+03:47.000 --> 04:04.000
+ And we can find out what trainable parameters or just what parameters in general pie torch knows about in our model by instantiating our model and then asking for the parameters, which you then have to turn that into a list
+
+04:04.000 --> 04:13.000
+ or in first call we have a thing called capital L, which is like a fancy list, which prints out the number of items in the list and shows you those items.
+
+04:13.000 --> 04:26.000
+ Now in this case, when we create our object of type T and ask for its parameters, we get told there are zero tensors of parameters and a list with nothing in it.
+
+04:26.000 --> 04:33.000
+ And why is that we actually said we wanted to create three, a tensor with three ones in it. How would we make those parameters.
+
+04:33.000 --> 04:47.000
+ Well, the answer is that the way you create your way you tell pie torch what your parameters are is you actually just have to put them inside a special object called an nn dot parameter.
+
+04:47.000 --> 04:51.000
+ This thing almost doesn't really do anything.
+
+04:51.000 --> 05:02.000
+ In fact, last time I checked it really quite literally had almost no code and sometimes these things change but let's take a look.
+
+05:02.000 --> 05:13.000
+ Yeah, okay so it's about a dozen lines of code or 20 lines of code, which does almost nothing it's got a way of being copied.
+
+05:13.000 --> 05:20.000
+ It's got a way of printing itself, it's got a way of saving itself, and it's got a way of being initialized.
+
+05:20.000 --> 05:35.000
+ So the parameter hardly does anything the key thing is though that when pie torch checks to see which parameters to the update when it optimizes, it just looks for anything that's been wrapped in this parameter class.
+
+05:35.000 --> 05:41.000
+ So if we do exactly the same thing as before which is to set an attribute containing a tensor with three ones and not.
+
+05:41.000 --> 05:47.000
+ But this case we wrap it in a parameter.
+
+05:47.000 --> 05:57.000
+ We now get told okay there's one parameter tensor in this model, and it contains a tensor with three ones.
+
+05:57.000 --> 06:02.000
+ And you can see it also actually by default assumes that we're going to want require gradient.
+
+06:02.000 --> 06:08.000
+ It's assuming that anything that's a parameter is something that you want to calculate gradients for.
+
+06:08.000 --> 06:23.000
+ Now most of the time we don't have to do this because pie torch provides lots of convenient things for us such as what you've seen before and end up linear, which is something that also contains creates a tensor.
+
+06:23.000 --> 06:30.000
+ So this would contain a created tensor of one by three without a bias term in it.
+
+06:30.000 --> 06:39.000
+ This has not been wrapped in an end parameter, but that's okay pie torch knows that anything which is basically a layer in a neural net.
+
+06:39.000 --> 06:45.000
+ It's going to be a parameter. So it automatically considers this a parameter.
+
+06:45.000 --> 06:51.000
+ So here's exactly the same thing again I construct my object of type T of check for its parameters.
+
+06:51.000 --> 07:04.000
+ And I can see there's three of one tensor of parameters and there's our three things. And you'll notice that it's also automatically randomly initial initialize them, which again is generally what we want.
+
+07:04.000 --> 07:13.000
+ So pie torch does go to some effort to try to make things easy for you.
+
+07:13.000 --> 07:33.000
+ So the, this attribute a is a, is a linear layer and it's kind of a bunch of things in it. One of the things in it is the weights.
+
+07:33.000 --> 07:43.000
+ And that's where you'll actually find the parameters that is of type parameter. So a linear layer is something that contains attributes of type parameter.
+
+07:43.000 --> 08:02.000
+ Okay, so what we want to do is we want to create something that works just like this did, which is something that creates a matrix, which will be trained as we train the model.
+
+08:02.000 --> 08:12.000
+ Okay, so an embedding is something which, yeah, it's going to create a matrix of this by this.
+
+08:12.000 --> 08:19.000
+ And it will be a parameter and it's something that we need to be able to index into as we did here.
+
+08:19.000 --> 08:32.000
+ And so how yeah what is what is happening behind the scenes, you know, we're in pie torch it's nice to create these things ourselves and scratch because it means we really understand it.
+
+08:32.000 --> 08:38.000
+ And so that's create that exact same module that we did last time.
+
+08:38.000 --> 08:45.000
+ But this time we're going to use a function of created called create params, you pass in a size.
+
+08:45.000 --> 08:52.000
+ Such as in this case, and uses by N factors.
+
+08:52.000 --> 09:02.000
+ And it's going to call torch.zeros to create a tensor of zeros of the size that you request.
+
+09:02.000 --> 09:15.000
+ And then it's going to do a normal random distribution so a Gaussian distribution of mean zero standard deviation 0.01 to randomly initialize those.
+
+09:15.000 --> 09:18.000
+ And it'll put the whole thing into an end up parameter.
+
+09:18.000 --> 09:35.000
+ So that so this here is going to create an attribute called user factors, which will be a parameter containing some tensor of normally distributed random numbers of this size.
+
+09:35.000 --> 09:49.000
+ Excuse me. And because it's a parameter that's going to be stored inside that's going to be available as in parameters in the module.
+
+09:49.000 --> 09:51.000
+ I'm sneezing.
+
+09:51.000 --> 10:06.000
+ So user bias will be a vector parameters user factors will be a matrix of parameters movie factors will be a matrix and movies by N factors movie bias will be a vector and movies.
+
+10:06.000 --> 10:08.000
+ And this is the same as before.
+
+10:08.000 --> 10:11.000
+ So now in the forward we can do exactly what we did before.
+
+10:11.000 --> 10:22.000
+ The thing is when you put a tensor inside a parameter, it has all the exact same features that a tensor has.
+
+10:22.000 --> 10:28.000
+ So, for example, we can index into it.
+
+10:28.000 --> 10:41.000
+ So this whole thing is identical to what we had before. And so that's actually, believe it or not, all that's required to replicate pie torches embedding layer from scratch.
+
+10:41.000 --> 10:47.000
+ So let's run those and see if it works.
+
+10:47.000 --> 10:49.000
+ And there it is, it's training.
+
+10:49.000 --> 10:57.000
+ So we'll be able to have a look when this is done at, for example.
+
+10:57.000 --> 11:09.000
+ Model dot, let's have a look movie bias.
+
+11:09.000 --> 11:18.000
+ And here it is, right? It's a parameter containing a bunch of numbers that have been trained.
+
+11:18.000 --> 11:26.000
+ And as we had expect, it's got 1665 things in because that's how many movies we have.
+
+11:26.000 --> 11:35.000
+ So our question from Jonah Raphael was, does torch dot zeros not produce all zeros?
+
+11:35.000 --> 11:38.000
+ Yes, torch dot zeros does produce all zeros.
+
+11:38.000 --> 11:46.000
+ But remember a method that ends in underscore changes in place, the tensor is being applied to.
+
+11:46.000 --> 12:04.000
+ And so if you look up pytorch normal underscore, you'll see it fills itself with elements sampled from the normal distribution.
+
+12:04.000 --> 12:10.000
+ So this is actually modifying this tensor in place.
+
+12:10.000 --> 12:21.000
+ And so that's why we end up with something which isn't just zeros.
+
+12:21.000 --> 12:26.000
+ Now this is the bit I find really fun is we train this model.
+
+12:26.000 --> 12:32.000
+ But what did it do?
+
+12:32.000 --> 12:37.000
+ How is it going about predicting who's going to like what movie?
+
+12:37.000 --> 12:48.000
+ Well, one of the things that's happened is we've created this movie bias parameter, which has been optimized.
+
+12:48.000 --> 13:00.000
+ And what we could do is we could find which movie IDs have the highest numbers here and the lowest numbers.
+
+13:00.000 --> 13:02.000
+ So I think this is going to start lowest.
+
+13:02.000 --> 13:17.000
+ And then we can print out we can look inside our data loaders and grab the names of those movies for each of those five lowest numbers.
+
+13:17.000 --> 13:19.000
+ And what's happened here?
+
+13:19.000 --> 13:24.000
+ Well, we can see broadly speaking that it has printed out some pretty crappy movies.
+
+13:24.000 --> 13:34.000
+ And why is that? Well, that's because when it does that matrix product that we saw in the Excel spreadsheet last week,
+
+13:34.000 --> 13:41.000
+ it's trying to figure out who's going to like what movie based on previous movies people have enjoyed or not.
+
+13:41.000 --> 13:45.000
+ And then it adds movie bias, which can be positive or negative.
+
+13:45.000 --> 13:47.000
+ That's a different number for each movie.
+
+13:47.000 --> 13:54.000
+ So in order to do a good job of predicting whether you're going to like a movie or not, it has to know which movies are crap.
+
+13:54.000 --> 14:01.000
+ And so the crap movies are going to end up with a very low movie bias parameter.
+
+14:01.000 --> 14:10.000
+ And so we can actually find out which movies to people, not only which movies to people really not like,
+
+14:10.000 --> 14:19.000
+ but which movies to people like like less than one would expect given the kind of movie that it is.
+
+14:19.000 --> 14:26.000
+ So, lawnmower man to, for example, not only apparently is it a crappy movie,
+
+14:26.000 --> 14:35.000
+ but based on the kind of movie it is, you know, it's kind of like a high tech pop kind of sci fi movie.
+
+14:35.000 --> 14:40.000
+ So people who like those kinds of movies still don't like lawnmower man too.
+
+14:40.000 --> 14:46.000
+ So that's what this is meaning. So it's kind of nice that we can like use a model not just to predict things,
+
+14:46.000 --> 14:54.000
+ but to understand things about the data. So if we saw it by descending, it'll give us the exact opposite.
+
+14:54.000 --> 15:01.000
+ So here are movies that people enjoy, even when they don't normally enjoy that kind of movie.
+
+15:01.000 --> 15:06.000
+ So for example, LA confidential, classic kind of film,
+
+15:06.000 --> 15:14.000
+ detective movie with the Aussie guy, Pierce, even if you don't really like film,
+
+15:14.000 --> 15:18.000
+ while detective movies, you might like this one.
+
+15:18.000 --> 15:26.000
+ You know, silence of the lambs, classic kind of, I guess you'd say like horror kind of, not horror is it,
+
+15:26.000 --> 15:36.000
+ it's a suspense movie. Even people who don't normally like kind of serial killers as bands movies tend to like this, this one.
+
+15:36.000 --> 15:41.000
+ Now, the other thing we can do is not just look at what's happening in the bias.
+
+15:41.000 --> 15:49.000
+ By the way, we could do the same thing with users and find out like which user just loves movies, even the crappy ones, you know,
+
+15:49.000 --> 15:54.000
+ just likes all movies and vice versa.
+
+15:54.000 --> 16:04.000
+ But what about the other thing? We didn't just have bias. We also had movie factors, which has got the number of movies as one axis
+
+16:04.000 --> 16:11.000
+ and the number of factors as the other and we passed in 50. What's in that huge matrix?
+
+16:11.000 --> 16:16.000
+ Well, pretty hard to visualize such a huge matrix. And we're not going to talk about the details,
+
+16:16.000 --> 16:20.000
+ but you can do something called PCA, which stands for principal component analysis.
+
+16:20.000 --> 16:28.000
+ And that basically tries to compress those 50 columns down into three columns.
+
+16:28.000 --> 16:34.000
+ And then we can draw a chart of the top two.
+
+16:34.000 --> 16:43.000
+ And so this is PCA component number one, and this is PCA component number two.
+
+16:43.000 --> 16:52.000
+ And this is a compressed view of these latent factors that it created.
+
+16:52.000 --> 16:56.000
+ And you can see that they obviously have some kind of meaning.
+
+16:56.000 --> 17:05.000
+ So over here towards the right, we've got kind of, you know, very pop mainstream kind of movies.
+
+17:05.000 --> 17:12.000
+ And over here on the left, we've got more of the kind of critically acclaimed gritty kind of movies.
+
+17:12.000 --> 17:18.000
+ And then towards the top, we've got very kind of action oriented and sci fi movies.
+
+17:18.000 --> 17:22.000
+ And then down towards the bottom, we've got very dialogue driven movies.
+
+17:22.000 --> 17:32.000
+ So remember, we didn't program in any of these things and we don't have any data at all about what movie is what kind of movie.
+
+17:32.000 --> 17:41.000
+ But thanks to the magic of SGD, we just told it to please try and optimize.
+
+17:41.000 --> 17:44.000
+ These parameters.
+
+17:44.000 --> 17:49.000
+ And the way it was able to predict who would like what movie was it had to figure out.
+
+17:49.000 --> 17:55.000
+ What kinds of movies are there or what kind of taste is there for each movie.
+
+17:55.000 --> 17:58.000
+ So I think that's pretty interesting.
+
+17:58.000 --> 18:03.000
+ So this is called visualizing embeddings.
+
+18:03.000 --> 18:09.000
+ And then this is visualizing the bias.
+
+18:09.000 --> 18:27.000
+ We, we obviously would rather not do everything by hand like this, or even like this.
+
+18:27.000 --> 18:32.000
+ And fast AI provides an application for collaborative learner.
+
+18:32.000 --> 18:40.000
+ And so we can create one and this is going to look much the same as what we just had. We're going to say how many latent factors we want.
+
+18:40.000 --> 18:44.000
+ And what the Y range is to do the sigmoid in the model play.
+
+18:44.000 --> 18:47.000
+ And then we can do fit.
+
+18:47.000 --> 18:55.000
+ And away it goes.
+
+18:55.000 --> 18:59.000
+ So let's see how it does.
+
+18:59.000 --> 19:04.000
+ All right, so it's done a bit better than our manual one.
+
+19:04.000 --> 19:08.000
+ Let's take a look at the model it created.
+
+19:08.000 --> 19:13.000
+ The model looks very similar to what we created in terms of the parameters.
+
+19:13.000 --> 19:18.000
+ You can see these are the two embeddings and these are the two biases.
+
+19:18.000 --> 19:25.000
+ And we can do exactly the same thing. We can look in that model and we can find the, you'll see it's not called movies.
+
+19:25.000 --> 19:33.000
+ It's I for items. It's users and items. This is the item bias. So we can look at the item bias grab the weights.
+
+19:33.000 --> 19:42.000
+ Sort. And we get a very similar result. And this case, it's very even more confident that LA Confidential is a movie that you should probably try watching, even if you don't like those kind of movies.
+
+19:42.000 --> 19:50.000
+ And Titanic's right up there as well, even if you don't really like romance, he kind of movies, you might like this one.
+
+19:50.000 --> 19:58.000
+ Even if you don't like classic detective, you might like this one.
+
+19:58.000 --> 20:06.000
+ You know, we can have a look at the source code for collab learner.
+
+20:06.000 --> 20:12.000
+ And we can see that.
+
+20:12.000 --> 20:24.000
+ Let's see, use and it is false by default. So our model is going to be of this type embedding.bias. So we can take a look at that.
+
+20:24.000 --> 20:41.000
+ Here it is. And look, this does look very similar. Okay, it's creating an embedding using the size we requested for each of users by factors and items by factors and users and items.
+
+20:41.000 --> 20:49.000
+ And then it's grabbing each thing from the embedding in the forward. And it's doing the model play.
+
+20:49.000 --> 20:55.000
+ And it's adding it up and it's doing the sigmoid.
+
+20:55.000 --> 20:57.000
+ So yeah, it looks.
+
+20:57.000 --> 20:59.000
+ It looks exactly the same.
+
+20:59.000 --> 21:01.000
+ Isn't that neat.
+
+21:01.000 --> 21:08.000
+ So you can see that what's actually happening in real models is not.
+
+21:08.000 --> 21:18.000
+ Yeah, it's not. It's not that weird or magic.
+
+21:18.000 --> 21:26.000
+ So, Korean is asking is PCA useful in any other areas. And the answer is absolutely.
+
+21:26.000 --> 21:40.000
+ And what I suggest you do. If you're interested is check out our content computational linear algebra course.
+
+21:40.000 --> 21:47.000
+ It's five years old now, but it's, I mean, this is stuff which hasn't changed for decades really.
+
+21:47.000 --> 21:53.000
+ And this will teach you all about things like PCA and stuff like that.
+
+21:53.000 --> 22:01.000
+ It's not nearly as directly practical as practical deep learning for coders, but it's definitely like very interesting.
+
+22:01.000 --> 22:13.000
+ And it's the kind of thing which if you want to go deeper, you know, it's, it can become pretty useful later along your path.
+
+22:13.000 --> 22:15.000
+ Okay.
+
+22:15.000 --> 22:18.000
+ So here's something else interesting we can do.
+
+22:18.000 --> 22:27.000
+ Let's grab the movie factors. So that's in our model. It's the item weights and it's the weight attribute that PyTorch creates.
+
+22:27.000 --> 22:31.000
+ Okay. And now we can convert.
+
+22:31.000 --> 22:41.000
+ The movie silence of the lambs into its class ID and we can do that with object to ID for the titles.
+
+22:41.000 --> 23:01.000
+ And so that's the movie index of silence of the lambs. And what we can do now is we can look through all of the movies in our latent factors and calculate how far apart the each vector is each each embedding vector is from this one.
+
+23:01.000 --> 23:16.000
+ And this cosine similarity is very similar to basically the Euclidean distance, you know, the kind of the root sum squared of the differences, but it normalizes it.
+
+23:16.000 --> 23:19.000
+ So it's basically the angle between the vectors.
+
+23:19.000 --> 23:28.000
+ So this is going to calculate how similar each movie is to the silence of the lambs on based on these latent factors.
+
+23:28.000 --> 23:37.000
+ And so then we can find which ID is the closest.
+
+23:37.000 --> 23:45.000
+ Yeah, so based on this embedding distance, the closest is dial M for murder.
+
+23:45.000 --> 23:56.000
+ It makes a lot of sense.
+
+23:56.000 --> 24:08.000
+ I'm not going to discuss it today, but in the book, there's also some discussion about what's called the boots japping problem, which is the question of like, if you've got a new company or a new product.
+
+24:08.000 --> 24:25.000
+ How would you get started with making recommendations given that you don't have any previous history with which to make recommendations. And that's a very interesting problem that you can read about in the book.
+
+24:25.000 --> 24:37.000
+ Now, that's one way to, to do collaborative filtering, which is where we create that.
+
+24:37.000 --> 24:41.000
+ Do that matrix completion exercise using all those dot products.
+
+24:41.000 --> 24:46.000
+ There's a different way, however, which is we can use deep learning.
+
+24:46.000 --> 25:00.000
+ And to do it with deep learning, what we could do is we can, we could basically create our user and item embeddings as per usual.
+
+25:00.000 --> 25:09.000
+ And then we could create a sequential model. So sequential model is just layers of a deep learning neural network in order.
+
+25:09.000 --> 25:21.000
+ And what we could do is we could just concatenate. So in forward, we could just concatenate the user and item embeddings together.
+
+25:21.000 --> 25:28.000
+ And then do a value. So this is this is basically a single hidden layer neural network.
+
+25:28.000 --> 25:31.000
+ And then a linear layer at the end to create a single output.
+
+25:31.000 --> 25:41.000
+ So this is a very, you know, world's most simple neural net exactly the same as the style that we created.
+
+25:41.000 --> 25:48.000
+ Back here in our neural net from scratch. This is exactly the same.
+
+25:48.000 --> 25:55.000
+ But we're using pytorches functionality to do it more easily.
+
+25:55.000 --> 26:05.000
+ So in the forward here, we're going to in the same exactly the same ways we have before, we'll look up the user embeddings and we'll look up the item embeddings.
+
+26:05.000 --> 26:15.000
+ And then this is new. This is where we can concatenate those two things together and put it through our neural network and then finally do our sigmoid.
+
+26:15.000 --> 26:26.000
+ Now, one thing different this time is that we're going to ask fast AI to figure out how big are embeddings should be.
+
+26:26.000 --> 26:41.000
+ And so fast AI has something called get embedding sizes. And it just uses a rule of thumb that says that for 944 users, we recommend 74 factor embeddings and for 1665 movies.
+
+26:41.000 --> 26:47.000
+ Or is it the other way around? I can't remember. We recommend 102 factors here embeddings.
+
+26:47.000 --> 26:51.000
+ So that's what those sizes are.
+
+26:51.000 --> 27:06.000
+ So now we can create that model and we can pop it into a learner and fit in the usual way.
+
+27:06.000 --> 27:18.000
+ And so rather than doing all that from scratch, what you can do is you can do exactly the same thing that we've done before, which is to call collaborative learner.
+
+27:18.000 --> 27:24.000
+ But you can pass in the parameter used neural network equals true.
+
+27:24.000 --> 27:35.000
+ And you can then say how big do you want each layer. So this is going to create a two hidden layer deep learning neural net. The first will have 1500 and the second will have 50.
+
+27:35.000 --> 27:38.000
+ And then you can say fit.
+
+27:38.000 --> 27:48.000
+ And away it goes.
+
+27:48.000 --> 27:54.000
+ Okay, so here is our, we've got 0.87.
+
+27:54.000 --> 28:05.000
+ So these are doing less well than our product version, which is not too surprising because kind of the product version is really trying to take advantage of our understanding of the problem domain.
+
+28:05.000 --> 28:19.000
+ In practice, nowadays, a lot of companies kind of combine, they kind of create a combined model that have a has a product component and also has a neural net component.
+
+28:19.000 --> 28:33.000
+ The, the, the neural net components particularly helpful if you've got metadata, for example, information about your users, like when did they sign up, how old are they, what sex, are they, you know, where are they from.
+
+28:33.000 --> 28:49.000
+ And then those are all things that you could can catenate in with your embeddings and did I with metadata about the movie, how old is it what genre is it and so forth.
+
+28:49.000 --> 29:09.000
+ All right, so we've got a question from Jonah, which I think it's interesting and the question is, is there an issue where the bias components are overwhelmingly determined by the non experts in a genre.
+
+29:09.000 --> 29:16.000
+ In general, actually there's a there's a more general issue which is in collaborative filtering.
+
+29:16.000 --> 29:20.000
+ And so, we have a lot of recommendations systems.
+
+29:20.000 --> 29:22.000
+ Very often.
+
+29:22.000 --> 29:27.000
+ A small number of users are a small number of movies.
+
+29:27.000 --> 29:30.000
+ Overwhelm everybody else.
+
+29:30.000 --> 29:34.000
+ And the classic one is anime.
+
+29:34.000 --> 29:41.000
+ A relatively small number of people watch anime and those group of people watch a lot of anime.
+
+29:41.000 --> 29:47.000
+ And so, you can imagine what's happening in the matrix completion exercise.
+
+29:47.000 --> 29:49.000
+ Is that there are.
+
+29:49.000 --> 29:53.000
+ Yeah, some some users that just.
+
+29:53.000 --> 29:58.000
+ You know, really watch this one genre of movie and they watch an awful lot of them.
+
+29:58.000 --> 30:03.000
+ So in general, you've actually do have to be pretty careful about the.
+
+30:03.000 --> 30:06.000
+ You know, these subtlety kind of issues.
+
+30:06.000 --> 30:15.000
+ And yeah, we're going to details about how to deal with them, but they're generally involved kind of taking various kinds of ratios or normalizing things or so forth.
+
+30:15.000 --> 30:16.000
+ All right.
+
+30:16.000 --> 30:19.000
+ So that's collaborative filtering.
+
+30:19.000 --> 30:22.000
+ And I wanted to show you something interesting.
+
+30:22.000 --> 30:38.000
+ And I wanted to show you something interesting then about embeddings, which is that embeddings are not just for collaborative filtering.
+
+30:38.000 --> 30:50.000
+ And in fact, if you've heard about embeddings before, you've probably heard about them in the context of natural language processing.
+
+30:50.000 --> 30:56.000
+ So you might have been wondering back when we did the hugging face transformers stuff.
+
+30:56.000 --> 31:00.000
+ How did we go about.
+
+31:00.000 --> 31:05.000
+ You know, using text as inputs to models.
+
+31:05.000 --> 31:09.000
+ And we talked about how you can turn words into integers.
+
+31:09.000 --> 31:10.000
+ We make a list.
+
+31:10.000 --> 31:12.000
+ So here's, here's the movie.
+
+31:12.000 --> 31:13.000
+ Sorry, movie.
+
+31:13.000 --> 31:14.000
+ Here's the poem.
+
+31:14.000 --> 31:15.000
+ I am Sam.
+
+31:15.000 --> 31:16.000
+ I am Daniel.
+
+31:16.000 --> 31:17.000
+ I am Sam.
+
+31:17.000 --> 31:17.000
+ Sam.
+
+31:17.000 --> 31:18.000
+ I am.
+
+31:18.000 --> 31:22.000
+ I am, et cetera, et cetera.
+
+31:22.000 --> 31:27.000
+ We can find a list of all the unique words in that poem and make this list here.
+
+31:27.000 --> 31:31.000
+ And then we can give each of those words.
+
+31:31.000 --> 31:34.000
+ A unique ID, just arbitrarily.
+
+31:34.000 --> 31:39.000
+ Well, actually in this case it's alphabetical order, but it doesn't have to be.
+
+31:39.000 --> 31:40.000
+ And so we kind of talked about that.
+
+31:40.000 --> 31:43.000
+ And that's what we do with categories in general.
+
+31:43.000 --> 31:48.000
+ But how do we turn those into like, you know, lists of random numbers.
+
+31:48.000 --> 31:54.000
+ And you might not be surprised to hear what we do is we create an embedding matrix.
+
+31:54.000 --> 32:03.000
+ So here's an embedding matrix containing four latent factors for each word in the vocab.
+
+32:03.000 --> 32:06.000
+ So here's each word in the vocab and here's the embedding matrix.
+
+32:06.000 --> 32:20.000
+ So if we then want to present this poem to a neural net, then what we do is we list out
+
+32:20.000 --> 32:21.000
+ our poem.
+
+32:21.000 --> 32:23.000
+ I do not like that Sam.
+
+32:23.000 --> 32:24.000
+ I am.
+
+32:24.000 --> 32:26.000
+ Do you like green eggs and ham, et cetera?
+
+32:26.000 --> 32:28.000
+ Then for each word, we look it up.
+
+32:28.000 --> 32:32.000
+ So in Excel, for example, we use match.
+
+32:32.000 --> 32:38.000
+ So that will find this word over here and find it is word ID eight.
+
+32:38.000 --> 32:51.000
+ And then we will find the eighth word and the first embedding.
+
+32:51.000 --> 32:57.000
+ And so that's gives us.
+
+32:57.000 --> 32:59.000
+ That's not right.
+
+32:59.000 --> 33:08.000
+ So it's just weird column.
+
+33:08.000 --> 33:12.000
+ So it's going to be point two, two, then point one, point one.
+
+33:12.000 --> 33:13.000
+ And here it is.
+
+33:13.000 --> 33:15.000
+ Point one, point one, et cetera.
+
+33:15.000 --> 33:20.000
+ So this is the embedding matrix we end up with for this poem.
+
+33:20.000 --> 33:27.000
+ And so if you wanted to train or use a train neural network on this poem,
+
+33:27.000 --> 33:32.000
+ you basically turn it into this matrix of numbers.
+
+33:32.000 --> 33:38.000
+ And so this is what an embedding matrix looks like in an NLP model.
+
+33:38.000 --> 33:43.000
+ And it works exactly the same way as you can see.
+
+33:43.000 --> 33:49.000
+ And then you can do exactly the same things in terms of interpretation of an NLP model
+
+33:49.000 --> 34:01.000
+ by looking at both the bias factors and the latent factors in a word embedding matrix.
+
+34:01.000 --> 34:12.000
+ So hopefully you're getting the idea here that our, you know, our different models,
+
+34:12.000 --> 34:20.000
+ you know, the inputs to them, they're based on a relatively small number of kind of basic principles.
+
+34:20.000 --> 34:24.000
+ And these principles are generally things like lock up something in a ray.
+
+34:24.000 --> 34:29.000
+ And then we know inside the model, we're basically multiplying things together,
+
+34:29.000 --> 34:32.000
+ adding them up and replacing the negatives of zeros.
+
+34:32.000 --> 34:39.000
+ So hopefully you're getting the idea that what's going on inside a neural network is generally not that complicated.
+
+34:39.000 --> 34:48.000
+ But it happens very quickly and it's going.
+
+34:48.000 --> 35:01.000
+ Now, it's not just collaborative filtering and NLP, but also tabular analysis.
+
+35:01.000 --> 35:09.000
+ So in chapter nine of the book, we've talked about how random forests can be used for this,
+
+35:09.000 --> 35:18.000
+ which was for this is for the thing where we're predicting the auction sale price of industrial heavy equipment like bulldozers.
+
+35:18.000 --> 35:23.000
+ Instead of using a random forest, we can use a neural net.
+
+35:23.000 --> 35:34.000
+ Now, in this data set, there are some continuous columns.
+
+35:34.000 --> 35:39.000
+ And there are some categorical columns.
+
+35:39.000 --> 35:49.000
+ Now, I'm not going to go into the details too much, but in short, the, we can separate out the continuous columns and categorical problem columns using content,
+
+35:49.000 --> 35:58.000
+ and that will automatically find which is rich based on their data types.
+
+35:58.000 --> 36:02.000
+ And so in this case, it looks like.
+
+36:02.000 --> 36:07.000
+ Okay, yes, so continuous columns, the elapsed sale date.
+
+36:07.000 --> 36:16.000
+ So I think it's the number of seconds or years or something since the start of the data set is a continuous variable.
+
+36:16.000 --> 36:20.000
+ And then here are the cut the categorical variables.
+
+36:20.000 --> 36:25.000
+ So, for example, there are six different product sizes and two couple of systems.
+
+36:25.000 --> 36:35.000
+ 5,059 model descriptions, six enclosures, 17 tire sizes and so forth.
+
+36:35.000 --> 36:52.000
+ And so, we can use fast AI basically to say, okay, we'll take that data frame and pass in the categorical and continuous variables and create some random splits.
+
+36:52.000 --> 36:55.000
+ And what's the dependent variable?
+
+36:55.000 --> 37:02.000
+ And we can create data loaders from that.
+
+37:02.000 --> 37:06.000
+ And from that, we can create a tabular learner.
+
+37:06.000 --> 37:23.000
+ And basically, what that's going to do is it's going to create a pretty regular multi layer neural network, not that different to this one that we created by hand.
+
+37:23.000 --> 37:29.000
+ And each of the categorical variables, it's going to create an embedding for it.
+
+37:29.000 --> 37:42.000
+ And so I can actually show you this, right? So we're going to use tabular learner to create the learner. And so tabular learner is 123456789 lines of code.
+
+37:42.000 --> 37:46.000
+ And basically, the main thing it does is create a tabular model.
+
+37:46.000 --> 37:49.000
+ And so then tabular model.
+
+37:49.000 --> 37:53.000
+ You're not going to understand all of it, but you might be surprised at how much.
+
+37:53.000 --> 37:57.000
+ So a tabular model is a module.
+
+37:57.000 --> 38:01.000
+ We're going to be passing in how big is each embedding going to be.
+
+38:01.000 --> 38:06.000
+ And tabular learner.
+
+38:06.000 --> 38:08.000
+ What's that passing in?
+
+38:08.000 --> 38:15.000
+ It's going to call get embedding sizes, just like we did manually before, automatically.
+
+38:15.000 --> 38:17.000
+ So that's how it gets us embedding sizes.
+
+38:17.000 --> 38:29.000
+ And then it's going to create an embedding for each of those embedding sizes from number of inputs to number of factors.
+
+38:29.000 --> 38:34.000
+ Dropout, we're going to come back to later. Batch norm, we won't do to your part two.
+
+38:34.000 --> 38:45.000
+ So then it's going to create a layer for each of the layers we want, which is going to contain a linear layer followed by batch norm followed by dropout.
+
+38:45.000 --> 38:50.000
+ It's going to add the sigmoid range we've talked about at the very end.
+
+38:50.000 --> 38:55.000
+ And so the forward, this is the entire thing.
+
+38:55.000 --> 39:01.000
+ If there's some embeddings, it'll go through and get each of the embeddings using the same indexing approach we've used before.
+
+39:01.000 --> 39:06.000
+ It'll concatenate them all together.
+
+39:06.000 --> 39:13.000
+ And then it'll run it through the layers of the neural net, which of these.
+
+39:13.000 --> 39:19.000
+ So yeah, we don't know all of those details yet, but we know quite a few of them.
+
+39:19.000 --> 39:32.000
+ So that's encouraging, hopefully.
+
+39:32.000 --> 39:37.000
+ And once we've got that, we can do the standard L R find and fit.
+
+39:37.000 --> 39:47.000
+ Now, this exact data set was used in a, um, a Kaggle competition.
+
+39:47.000 --> 39:56.000
+ This, this data set was in a Kaggle competition and the third place getter published a paper about their technique.
+
+39:56.000 --> 40:00.000
+ And it's basically the exact, almost the exact one I'm showing you here.
+
+40:00.000 --> 40:07.000
+ Um, so it wasn't this, sorry, it wasn't this data set. It was a data set. It was a different one.
+
+40:07.000 --> 40:15.000
+ Um, it was about us predicting the amount of sales in different stores.
+
+40:15.000 --> 40:19.000
+ But they, they use this basic kind of technique.
+
+40:19.000 --> 40:24.000
+ And one of the interesting things is that they used a lot less.
+
+40:24.000 --> 40:32.000
+ Manual feature engineering than the, the other high placed entries, like they had a much simpler approach.
+
+40:32.000 --> 40:35.000
+ And one of the interesting things they published a paper.
+
+40:35.000 --> 40:41.000
+ About their approach.
+
+40:41.000 --> 40:47.000
+ So they published a paper about their approach.
+
+40:47.000 --> 40:51.000
+ Um, so this is the team from this company.
+
+40:51.000 --> 41:03.000
+ Um, and they basically describe here exactly what I just showed you, these, um, different embedding layers being concatenated together and then going through a couple of layers of a neural network.
+
+41:03.000 --> 41:15.000
+ And it's showing here, it's, it points out in the paper exactly what we learned in the last lesson, which is embedding layers are exactly equivalent to linear layers on top of a one hot encoded import.
+
+41:15.000 --> 41:32.000
+ Um, and, um, yeah, they found that, uh, their, their technique worked really well. One of the interesting things they also showed is that you can take, you can create your neural net, get your trained embeddings.
+
+41:32.000 --> 41:38.000
+ And then you can put those embeddings into a random forest or gradient booster tree.
+
+41:38.000 --> 41:53.000
+ And your main average percent error will dramatically improve. So you can actually combine, um, random forests and embeddings or gradient booster trees and embeddings, which is really interesting.
+
+41:53.000 --> 42:05.000
+ Now what I really wanted to show you though, is what they then did. So as I said, this was a thing about, um, the predicted amount that different products would sell for different shops.
+
+42:05.000 --> 42:15.000
+ Um, around Germany. And what they did was they, um, they had a, so one of their embedding matrices was embeddings by region.
+
+42:15.000 --> 42:21.000
+ And then they did, I think this is a PCA principal component analysis of the embeddings.
+
+42:21.000 --> 42:24.000
+ Um, for their German regions.
+
+42:24.000 --> 42:38.000
+ And when they, um, could a chart of them, you can see that the locations that are close together in the embedding matrix are the same locations that are close together in Germany.
+
+42:38.000 --> 42:49.000
+ So you can see here's the blue ones. And here's the blue ones. And again, it's important to recognize that the data that they used had no information about the location of these places.
+
+42:49.000 --> 43:02.000
+ Um, the fact that they are close together geographically is something that was figured out as being something that actually helped it to predict sales.
+
+43:02.000 --> 43:15.000
+ Um, and so in fact, they then did a plot showing each of these dots is a shop, a store, and it's showing for each pair of stores.
+
+43:15.000 --> 43:24.000
+ How far away is it, um, in real life in metric space, and then how far away is it in embedding space.
+
+43:24.000 --> 43:31.000
+ Um, and there's this very strong correlation. Right. So it's, you know, it's kind of reconstructed somehow.
+
+43:31.000 --> 43:37.000
+ Um, this kind of the kind of the geography of Germany by figuring out how how people shop.
+
+43:37.000 --> 43:47.000
+ And similar for days of the week. So there was no information really about days of the week, but when they put it on the embedding matrix, the days of the week.
+
+43:47.000 --> 43:54.000
+ Monday, Tuesday, Wednesday, close to each other, Thursday, Friday, close to each other. As you can see, Saturday and Sunday, close to each other.
+
+43:54.000 --> 43:59.000
+ And did over months of the year. January, February, March, April, May, June.
+
+43:59.000 --> 44:04.000
+ So, yeah, really interesting cool stuff, I think.
+
+44:04.000 --> 44:25.000
+ Um, what's actually going on and since inside a neural network.
+
+44:25.000 --> 44:35.000
+ All right, let's take a 10 minute break, and I will see you back here at 7 10.
+
+44:35.000 --> 44:44.000
+ All right, folks, this is something I think is really fun, which is we're going to we've looked at.
+
+44:44.000 --> 44:49.000
+ What goes into the, the start of the model, the input.
+
+44:49.000 --> 45:01.000
+ We've learned about how they can be categories or embeddings and embeddings are basically kind of one hot encoded categories, whether it'll compute trick, or they can just be continuous numbers.
+
+45:01.000 --> 45:18.000
+ We've learned about what comes the other out the other side, which is a bunch of activation. So just a bunch of tensor of numbers, which we can use things like softmax to constrain them to add up to one and, and so forth.
+
+45:18.000 --> 45:32.000
+ And we've looked at what can go in the middle, which is the matrix model place, sandwiched together with, you know, as rectified linear units.
+
+45:32.000 --> 45:41.000
+ And I mentioned that there are other things that can go in the middle as well, but we haven't really talked about what those other things are.
+
+45:41.000 --> 45:49.000
+ So I thought we might look at one of the most important and interesting version of things that can go in the middle.
+
+45:49.000 --> 45:57.000
+ But what you'll see is it turns out it's actually just another kind of matrix modification, which might not be obvious at first, but I'll explain.
+
+45:57.000 --> 46:03.000
+ We're going to look at something called a convolution, and convolutions are at the heart of a convolutional neural network.
+
+46:03.000 --> 46:21.000
+ So the first thing to realize is a convolutional neural network is very, very, very similar to the neural networks we've seen so far. It's got imports. It's got things that are a lot like are actually are a form of matrix multiplication sandwich with activation functions, which can be rectified linear.
+
+46:21.000 --> 46:34.000
+ But there's a particular thing, which makes them very useful for computer vision. And I'm going to show you using this Excel spreadsheet that's in our repo called conv example.
+
+46:34.000 --> 46:49.000
+ And we're going to look at it using an image from MNIST. So MNIST is kind of the world's most famous computer vision data set, I think, because it was like the first one, really, which really showed
+
+46:49.000 --> 47:01.000
+ image recognition being cracked. It's pretty small by today's standards. It's a data set of handwritten digits. Each one is 28 by 28 pixels.
+
+47:01.000 --> 47:07.000
+ But yeah, back in the mid 90s, Jan LeCun showed
+
+47:07.000 --> 47:20.000
+ really practically useful performance on this data set and as a result, ended up with conv nets being used in the American banking system for reading checks.
+
+47:20.000 --> 47:26.000
+ So here's an example of one of those digits. This is a seven that somebody drew. It's one of those ones with a stroke through it.
+
+47:26.000 --> 47:29.000
+ And this is what it looks like.
+
+47:29.000 --> 47:32.000
+ This is this is the image.
+
+47:32.000 --> 47:38.000
+ And so I got it from this is just one of the images from MNIST, which I put into Excel.
+
+47:38.000 --> 47:55.000
+ And what you see in the in the next column is a version of the image where the horizontal lines being recognized.
+
+47:55.000 --> 48:10.000
+ And another one where the vertical lines are being recognized. And if you think back to that Xyla and Fergus paper that talked about what the layers of a neural net does, this is an absolutely an example of something that we know that the first layer of a neural network
+
+48:10.000 --> 48:13.000
+ tends to learn how to do.
+
+48:13.000 --> 48:17.000
+ Now, how did I do this? I did this using something called a convolution.
+
+48:17.000 --> 48:23.000
+ And so what we're going to do now is we're going to zoom in to this Excel notebook.
+
+48:23.000 --> 48:31.000
+ And we're going to keep zooming in. We're going to keep zooming in. So take a look. Keep a layer on this on this image and you'll see that once we've seen enough.
+
+48:31.000 --> 48:40.000
+ It's actually just made of numbers, which as we discussed in the very first.
+
+48:40.000 --> 48:46.000
+ In the very first lesson, we saw how images are made of numbers.
+
+48:46.000 --> 49:04.000
+ So here they are right here the numbers between zero and one. And what I just did is I just use little trick. I used Microsoft Excels condition or formatting to basically make things that higher numbers more red.
+
+49:04.000 --> 49:16.000
+ So that's how I turn this Excel sheet and I've just rounded it off to the nearest decimal, but it's actually they're actually bigger than that.
+
+49:16.000 --> 49:22.000
+ And so, yeah, so here is the images numbers.
+
+49:22.000 --> 49:28.000
+ And so let me show you how we went about creating this top edge detector.
+
+49:28.000 --> 49:36.000
+ What we did was we created this formula. Don't worry about the max.
+
+49:36.000 --> 49:39.000
+ Let's focus on this.
+
+49:39.000 --> 49:44.000
+ What it's doing is have a look at the colored in areas.
+
+49:44.000 --> 49:54.000
+ It's taking each of these cells and multiplying them by each of these cells.
+
+49:54.000 --> 50:00.000
+ And then adding them up.
+
+50:00.000 --> 50:07.000
+ And then we do the rectified linear part, which is if that ends up less than zero, then make it zero.
+
+50:07.000 --> 50:17.000
+ So this is a this is like a rectified linear unit, but it's not doing the normal matrix product.
+
+50:17.000 --> 50:26.000
+ It's doing the equivalent of a dot product, but just on these nine cells and with just these nine weights.
+
+50:26.000 --> 50:33.000
+ So you might not be surprised to hear that if I move now one to the right.
+
+50:33.000 --> 50:37.000
+ Then now it's using the next nine cells.
+
+50:37.000 --> 50:43.000
+ So if I move like to the right quite a bit and down quite a bit here.
+
+50:43.000 --> 50:45.000
+ It's using these nine cells.
+
+50:45.000 --> 50:52.000
+ So it's still doing a dot product, right, which as we know is a form of matrix multiplication.
+
+50:52.000 --> 51:00.000
+ But it's doing it this way where it's kind of taking advantage of the geometry of the situation that the things that are close to each other.
+
+51:00.000 --> 51:06.000
+ Being multiplied by this consistent group of the same nine weights each time.
+
+51:06.000 --> 51:12.000
+ Because there's actually 28 by 28 numbers here, right, which I think is 768.
+
+51:12.000 --> 51:20.000
+ That plus enough, 784.
+
+51:20.000 --> 51:25.000
+ But we don't want we don't we don't have 784 parameters really have nine parameters.
+
+51:25.000 --> 51:27.000
+ And so this is called a convolution.
+
+51:27.000 --> 51:36.000
+ So a convolution is where you basically slide this kind of little three by three matrix across a bigger matrix.
+
+51:36.000 --> 51:48.000
+ And at each location, you do a dot product of the corresponding elements of that three by three with the corresponding elements of this three by three matrix of coefficients.
+
+51:48.000 --> 51:53.000
+ Now, why does that create something that finds as you see top edges?
+
+51:53.000 --> 51:58.000
+ Well, it's because of the particular way I can start to this three by three matrix.
+
+51:58.000 --> 52:09.000
+ What I said was that all of the rows just above. So these ones are going to get a one.
+
+52:09.000 --> 52:13.000
+ And all of the ones just below are going to get a minus one.
+
+52:13.000 --> 52:16.000
+ And all of the ones in the middle are going to get a zero.
+
+52:16.000 --> 52:22.000
+ So let's think about what happens somewhere like here.
+
+52:22.000 --> 52:23.000
+ Right.
+
+52:23.000 --> 52:30.000
+ That is. Let's try to find the right one.
+
+52:30.000 --> 52:37.000
+ Here it is. So here we're going to get one times one plus one times one.
+
+52:37.000 --> 52:44.000
+ Minus one times one minus one times one minus one times one. We're going to get zero.
+
+52:44.000 --> 52:48.000
+ But what about up here?
+
+52:48.000 --> 52:57.000
+ Here we're going to get one times one plus one times one plus one times one.
+
+52:57.000 --> 53:02.000
+ These do nothing because they're times zero minus one times zero.
+
+53:02.000 --> 53:15.000
+ So we're going to get three. So we're only going to get three, the highest possible number in the situation where these are all as black as possible, or in this case as red as possible, and these are all white.
+
+53:15.000 --> 53:23.000
+ And so that's only going to happen at a horizontal edge.
+
+53:23.000 --> 53:30.000
+ So the one underneath that does exactly the same thing, exactly the same formulas.
+
+53:30.000 --> 53:33.000
+ Oopsie daisy.
+
+53:33.000 --> 53:37.000
+ The one underneath are exactly the same formulas.
+
+53:37.000 --> 53:49.000
+ Three by three sliding thing here. But this time we've got a different matrix, different little mini matrix of coefficients, which is all ones going down and all minus ones going down.
+
+53:49.000 --> 54:00.000
+ And so for exactly the same reason, this will only be three in situations where they're all one here and they're all zero here.
+
+54:00.000 --> 54:12.000
+ So you can think of a convolution as being a sliding window of little mini dot products of these little three by three matrices.
+
+54:12.000 --> 54:14.000
+ And they don't have to be three by three.
+
+54:14.000 --> 54:24.000
+ Right? You could have, we could just have easily done five by five, and then we'd have a five by five matrix of coefficients, or whatever, whatever size you like.
+
+54:24.000 --> 54:35.000
+ So the size of this is called its kernel size. This is a three by three kernel for this convolution.
+
+54:35.000 --> 54:43.000
+ So then, because this is deep learning, we just repeat the, we just repeat these steps again and again and again.
+
+54:43.000 --> 54:48.000
+ So this is this layer I'm calling conv one, it's the first convolutional layer.
+
+54:48.000 --> 55:04.000
+ So con two, it's going to be a little bit different because on con one, we only had a single channel input. It's just black and white or, you know, yeah, black and white, grayscale one channel.
+
+55:04.000 --> 55:10.000
+ But now we've got two channels, we've got the, let's make it a little smaller so we can see better.
+
+55:10.000 --> 55:16.000
+ We've got the horizontal edges channel and the vertical edges channel.
+
+55:16.000 --> 55:22.000
+ And we'd have a similar thing in the first layer of its color would have a red channel, a green channel and blue channel.
+
+55:22.000 --> 55:33.000
+ So now our, our filter, this is called the filter, this little mini matrix is called the filter.
+
+55:33.000 --> 55:46.000
+ Our filter.
+
+55:46.000 --> 55:58.000
+ Our filter now contains a three by three by depth two, or if you give one thing of another way to three by three kernels or one three by three by two kernel.
+
+55:58.000 --> 56:07.000
+ And we basically do exactly the same thing, which is we're going to multiply each of these by each of these and sum them up.
+
+56:07.000 --> 56:15.000
+ But then we do it for the second bit as well we multiply each of these by each of these and sum them up.
+
+56:15.000 --> 56:19.000
+ And so that gives us, I think I just picked some random numbers here.
+
+56:19.000 --> 56:30.000
+ Right, so this is going to now be something which can combine, sorry, the second one, the second set. So it's, sorry, each of the red ones, by each of the blue ones.
+
+56:30.000 --> 56:36.000
+ That's here. Plus each of the green ones times each of the mauve ones.
+
+56:36.000 --> 56:42.000
+ That's here. So this first filter is being applied to the horizontal edge detector.
+
+56:42.000 --> 56:52.000
+ And the second filter is being applied to the vertical edge detector. And as a result, we can end up with something that combines features of the two things.
+
+56:52.000 --> 57:04.000
+ And so then we can have a second channel over here, which is just a different bunch of convolutions for each of the two channels. This one times this one.
+
+57:04.000 --> 57:07.000
+ Again, you can see the colors.
+
+57:07.000 --> 57:19.000
+ So what we could do is if, you know, once we kind of get to the end, we'll end up as I'll show you how in a moment, we'll end up with a single.
+
+57:19.000 --> 57:24.000
+ Set of 10 activations, one per.
+
+57:24.000 --> 57:35.000
+ Number digit we're recognizing zero to nine, or in this case, I think we could just create one, you know, maybe we're just trying to recognize nothing but the number number seven or not the number seven. So we could just have one activation.
+
+57:35.000 --> 57:42.000
+ And then we would back propagate through this using SGD in the usual way.
+
+57:42.000 --> 57:46.000
+ And that is going to end up optimizing these numbers.
+
+57:46.000 --> 58:00.000
+ So in this case, I manually put in the numbers I knew would create edge detectors in real life, you start with random numbers, and then you use SGD to optimize these parameters.
+
+58:00.000 --> 58:03.000
+ Okay, so there's a few things we can do next.
+
+58:03.000 --> 58:12.000
+ And I'm going to, I'm going to show you the way that was more common a few years ago, and then I'll explain some changes that have been made more recently.
+
+58:12.000 --> 58:25.000
+ What happened a few years ago was we would then take these, these activations, which as you can see these activations now kind of in a grid pattern.
+
+58:25.000 --> 58:32.000
+ And we would do something called max polling and Max Pauling is kind of like a convolution it's a sliding window.
+
+58:32.000 --> 58:41.000
+ But this time as the sliding window goes across so you're up to here, we don't do a dot product over a filter.
+
+58:41.000 --> 58:47.000
+ But instead we just take a maximum. So here just this is the maximum of these four numbers.
+
+58:47.000 --> 58:57.000
+ And if we go across a little bit, this is the maximum of these four numbers go across a bit, go across a bit, and so forth.
+
+58:57.000 --> 58:59.000
+ That goes off the edge.
+
+58:59.000 --> 59:09.000
+ And you can see what happens when this is called a two by two Max Pauling.
+
+59:09.000 --> 59:20.000
+ So you can see what happens with a two by two Max Pauling, we end up losing half of our activations on each dimension.
+
+59:20.000 --> 59:26.000
+ So we're going to end up with only one quarter of the number of activations we used to have.
+
+59:26.000 --> 59:36.000
+ And that's actually a good thing, because if we keep on doing convolution Max Paul convolution Max Paul,
+
+59:36.000 --> 59:45.000
+ we're going to get fewer and fewer and fewer activations until eventually we'll just have one left, which is what we want.
+
+59:45.000 --> 59:49.000
+ That's effectively what we used to do.
+
+59:49.000 --> 59:54.000
+ But the other thing I mentioned is we didn't normally keep going until there's only one left.
+
+59:54.000 --> 1:00:02.000
+ What we used to then do is we'd basically say, okay, at some point, we're going to take all of the activations that are left.
+
+1:00:02.000 --> 1:00:13.000
+ And we're going to basically just do a dot product of those with a bunch of coefficients, not as a convolution,
+
+1:00:13.000 --> 1:00:15.000
+ but just as a normal linear layer.
+
+1:00:15.000 --> 1:00:17.000
+ And this is called the dense layer.
+
+1:00:17.000 --> 1:00:20.000
+ And then we would add them all up.
+
+1:00:20.000 --> 1:00:31.000
+ So we basically end up with their final big product of all of the Max Pauled activations by all of the weights.
+
+1:00:31.000 --> 1:00:33.000
+ And we do that for each channel.
+
+1:00:33.000 --> 1:00:36.000
+ And so that would give us our final activation.
+
+1:00:36.000 --> 1:00:40.000
+ And as I say here, amnest would actually have 10 activations.
+
+1:00:40.000 --> 1:00:47.000
+ So you'd have a separate set of weights for each of the digits you're predicting, and then soft Max after that.
+
+1:00:47.000 --> 1:00:51.000
+ Okay, nowadays, we do things very slightly differently.
+
+1:00:51.000 --> 1:00:54.000
+ Nowadays, we normally don't have Max Paul layers.
+
+1:00:54.000 --> 1:01:08.000
+ But instead, what we normally do is when we do our sliding window, like this one here, we don't normally, let's go back to see.
+
+1:01:08.000 --> 1:01:19.000
+ So when I go one to the right, so currently we're starting in cell column G, if I go one to the right, the next one is column H.
+
+1:01:19.000 --> 1:01:24.000
+ And if I go one to the right, the next one starts in column I.
+
+1:01:24.000 --> 1:01:28.000
+ So you can see it's sliding the window every every every three by three.
+
+1:01:28.000 --> 1:01:32.000
+ Nowadays, what we tend to do instead is we generally skip one.
+
+1:01:32.000 --> 1:01:35.000
+ So we would normally only look at every second.
+
+1:01:35.000 --> 1:01:42.000
+ So we would after doing column I, we would skip columns J and would just go straight to column K.
+
+1:01:42.000 --> 1:01:45.000
+ And that's called a stride to convolution.
+
+1:01:45.000 --> 1:01:47.000
+ We do that both across the rows and down the columns.
+
+1:01:47.000 --> 1:01:58.000
+ And what that means is every time we do a convolution, we reduce our effective kind of feature size grid size by two on each axis.
+
+1:01:58.000 --> 1:02:01.000
+ So it reduces it by four in total.
+
+1:02:01.000 --> 1:02:06.000
+ So that's basically instead of doing Max Pauling.
+
+1:02:06.000 --> 1:02:17.000
+ And then the other thing that we do differently is nowadays we don't normally have a single dense layer at the end, a single matrix model play at the end.
+
+1:02:17.000 --> 1:02:21.000
+ But instead what we do, we generally keep doing straight to convolutions.
+
+1:02:21.000 --> 1:02:25.000
+ So each one's going to reduce the grid size by two by two.
+
+1:02:25.000 --> 1:02:31.000
+ We keep going down until we've got about a seven by seven grid.
+
+1:02:31.000 --> 1:02:36.000
+ And then we do a single pooling at the end and we don't normally do Max Paul.
+
+1:02:36.000 --> 1:02:38.000
+ Nowadays, instead we do an average pool.
+
+1:02:38.000 --> 1:02:47.000
+ So we average the, the activations of each one of the seven by seven features.
+
+1:02:47.000 --> 1:03:00.000
+ This is actually quite important to know because if you think about what that means, it means that something like an image net style image detector is going to end up with a seven by seven grid size.
+
+1:03:00.000 --> 1:03:02.000
+ So it's a seven by seven grid.
+
+1:03:02.000 --> 1:03:04.000
+ Let's try to say, is this a bear?
+
+1:03:04.000 --> 1:03:09.000
+ And in each of the parts of the seven by seven grid, it's basically saying, is there a bear in this part of the photo?
+
+1:03:09.000 --> 1:03:11.000
+ Is there a bear in this part of the photo?
+
+1:03:11.000 --> 1:03:13.000
+ Is there a bear in this part of the photo?
+
+1:03:13.000 --> 1:03:20.000
+ And then to take the average of those 49 seven by seven predictions to decide whether there's a bear in the photo.
+
+1:03:20.000 --> 1:03:22.000
+ That works very well.
+
+1:03:22.000 --> 1:03:33.000
+ If it's basically a photo of a bear, right, because most, you know, if it's, if the bear is big and takes up most of the frame, then most of those seven by seven bits are bits of a bear.
+
+1:03:33.000 --> 1:03:44.000
+ On the other hand, if it's a teeny tiny bear in the corner, then potentially only one of those 49 squares has a bear in it.
+
+1:03:44.000 --> 1:03:49.000
+ And even worse, if it's like a picture of lots and lots of different things, only one of which is a bear.
+
+1:03:49.000 --> 1:03:53.000
+ It could end up not being a great bear detector.
+
+1:03:53.000 --> 1:04:00.000
+ And so this is where like the details of how we construct our model turn out to be important.
+
+1:04:00.000 --> 1:04:16.000
+ And so if you're trying to find like just one part of a photo that has a small bear in it, you might decide to use average pool, sorry, maximum pooling instead of average pooling, because Max pooling will just say, I think this is a picture of a bear.
+
+1:04:16.000 --> 1:04:24.000
+ If any one of those 49 bits of my grid has something that looks like a bear in it.
+
+1:04:24.000 --> 1:04:33.000
+ So these are, you know, these are potentially important details which often get hand waved over.
+
+1:04:33.000 --> 1:04:45.000
+ Although, you know, again, like the key thing here is that this is happening right at the very end, right, that that Max pool or that average pooling is a little bit more than the average pooling.
+
+1:04:45.000 --> 1:04:59.000
+ And actually, fast AI handles this for you. We do a special thing, which we kind of independently invented. I think we did it first, which is we do both Max pool and average pool and we can cat let them together.
+
+1:04:59.000 --> 1:05:07.000
+ We call that can cat pulling. And that has since been reinvented in at least one paper.
+
+1:05:07.000 --> 1:05:15.000
+ And so that means that you don't have to think too much about it because we're going to try both for you, basically.
+
+1:05:15.000 --> 1:05:21.000
+ So I mentioned that this is actually really just matrix modification.
+
+1:05:21.000 --> 1:05:39.000
+ And to show you that, I'm going to show you some images created by a guy called Matthew Kleinsmith who did this actually I think this is in our very first ever course but I've been the part two first part two course.
+
+1:05:39.000 --> 1:05:52.000
+ And he basically pointed out that in a certain way of thinking about it, it turns out that convolution is the same thing as a matrix model play so I want to show you how he shows this.
+
+1:05:52.000 --> 1:06:05.000
+ He basically says okay, let's take this three by three image and a two by two kernel, containing the coefficients alpha beta gamma delta.
+
+1:06:05.000 --> 1:06:15.000
+ And so in this as we slide the window over each of the colors.
+
+1:06:15.000 --> 1:06:23.000
+ Each of the colors the model play together red by red plus green by green plus what is that orange by orange plus blue play blue gives you this.
+
+1:06:23.000 --> 1:06:37.000
+ And so to put it another way algebraically p equals alpha times a plus beta times b, etc.
+
+1:06:37.000 --> 1:06:40.000
+ And so then as we slide to this part.
+
+1:06:40.000 --> 1:06:59.000
+ And so this is how we calculate a convolution using the approach we just described as a sliding window.
+
+1:06:59.000 --> 1:07:03.000
+ But here's another way of thinking about it.
+
+1:07:03.000 --> 1:07:14.000
+ I could say, okay, we've got all these different things a BCD FTH J. Let's put them all into a single vector.
+
+1:07:14.000 --> 1:07:24.000
+ And then let's create a single matrix that has alpha alpha alpha alpha beta beta beta beta etc.
+
+1:07:24.000 --> 1:07:43.000
+ And then if we do this matrix multiplied by this vector, we get this with these gray zeros in the appropriate places, which gives us this, which is the same as this.
+
+1:07:43.000 --> 1:07:58.000
+ And so this shows that a convolution is actually a special kind of matrix modification. It's a matrix modification where there are some zeros that are fixed, and some numbers that are forced to be the same.
+
+1:07:58.000 --> 1:08:12.000
+ Now in practice, it's going to be faster to do it this way. But it's a useful kind of thing to think about I think that just to realize like oh, it's just another of these special types of matrix.
+
+1:08:12.000 --> 1:08:24.000
+ So, we have two special types of matrix modifications.
+
+1:08:24.000 --> 1:08:26.000
+ Okay.
+
+1:08:26.000 --> 1:08:29.000
+ I think.
+
+1:08:29.000 --> 1:08:32.000
+ Well, let's look at one more thing.
+
+1:08:32.000 --> 1:08:40.000
+ Because there was one other thing that we saw, and I mentioned we would look at in the tabular model, which is called dropout.
+
+1:08:40.000 --> 1:08:43.000
+ And then we have a spreadsheet.
+
+1:08:43.000 --> 1:08:52.000
+ If you go to the con example dropout page.
+
+1:08:52.000 --> 1:09:03.000
+ You'll see we've actually got a little bit more stuff here. We've got the same input as before, and the same first convolution is before, and the same second convolution is before.
+
+1:09:03.000 --> 1:09:13.000
+ And then we've got a bunch of random numbers.
+
+1:09:13.000 --> 1:09:27.000
+ They're showing as between zero and one, but they're actually that's just because they're rounding off. They're actually random numbers between, you know, that floats between zero and one.
+
+1:09:27.000 --> 1:09:31.000
+ So, here.
+
+1:09:31.000 --> 1:09:35.000
+ We're then saying.
+
+1:09:35.000 --> 1:09:40.000
+ If.
+
+1:09:40.000 --> 1:09:44.000
+ So look.
+
+1:09:44.000 --> 1:09:48.000
+ So way up here was we mean a bit.
+
+1:09:48.000 --> 1:09:55.000
+ I've got a dropout factor. Let's change this to zero point five.
+
+1:09:55.000 --> 1:10:05.000
+ So over here, this is something that says, if the random number in the equivalent place is greater than point five.
+
+1:10:05.000 --> 1:10:14.000
+ Then one, otherwise zero. And so here's a whole bunch of ones and zeros. Now this thing here is called a dropout mask.
+
+1:10:14.000 --> 1:10:20.000
+ Now what happens is we multiply over here.
+
+1:10:20.000 --> 1:10:28.000
+ We multiply the dropout mask and we multiply it by our filtered image.
+
+1:10:28.000 --> 1:10:34.000
+ And what that means is we end up with exactly the same image we started with.
+
+1:10:34.000 --> 1:10:39.000
+ Here's the image we started with.
+
+1:10:39.000 --> 1:10:50.000
+ But it's corrupted random bits of it has been deleted and based on the amount of dropout we use, so if we change it to say point two.
+
+1:10:50.000 --> 1:10:54.000
+ Not very much of it's deleted at all, so it's still very easy to recognize.
+
+1:10:54.000 --> 1:10:58.000
+ We also if we use lots of dropouts say point eight.
+
+1:10:58.000 --> 1:11:03.000
+ It's almost impossible to see what the number was.
+
+1:11:03.000 --> 1:11:08.000
+ And then we use this as the input to the next layer.
+
+1:11:08.000 --> 1:11:24.000
+ So that seems weird. Why would we delete some data at random from our processed image from our activations after a layer of the convolutions?
+
+1:11:24.000 --> 1:11:32.000
+ Well, the reason is that a human is able to look at this corrupted image and still recognize it's a seven.
+
+1:11:32.000 --> 1:11:37.000
+ And the idea is that a computer should be able to as well.
+
+1:11:37.000 --> 1:11:43.000
+ And if we randomly delete different bits of the activations.
+
+1:11:43.000 --> 1:11:45.000
+ Each time.
+
+1:11:45.000 --> 1:11:49.000
+ Then the computer is forced to learn.
+
+1:11:49.000 --> 1:11:54.000
+ The underlying real representation rather than overfitting.
+
+1:11:54.000 --> 1:12:04.000
+ You can think of this as data augmentation, but it's data augmentation not for the inputs, but data augmentation for the activations.
+
+1:12:04.000 --> 1:12:07.000
+ So this is called a dropout layer.
+
+1:12:07.000 --> 1:12:14.000
+ And so dropout layers are really helpful for avoiding overfitting.
+
+1:12:14.000 --> 1:12:25.000
+ And you can decide how much you want to compromise between good generalization.
+
+1:12:25.000 --> 1:12:32.000
+ So lack of so good, you know, avoiding overfitting versus getting something that works really well in the training data.
+
+1:12:32.000 --> 1:12:43.000
+ And so the more dropout you use, the less good it's going to be on the training data, but the better it ought to generalize.
+
+1:12:43.000 --> 1:12:52.000
+ And so this comes from a paper by Jeffrey Hinton's group quite a few years ago now.
+
+1:12:52.000 --> 1:13:03.000
+ Russellins now at Apple, I think, and then Kojeski and Hinton went on to found Google brain.
+
+1:13:03.000 --> 1:13:10.000
+ And to you can see here, they've got this picture of a like fully connected neural network, two layers, just like the one we built.
+
+1:13:10.000 --> 1:13:16.000
+ And here look, they're kind of randomly deleting some of the activations and all that's left is these connections.
+
+1:13:16.000 --> 1:13:19.000
+ And so there's a different bunch that's going to be deleted.
+
+1:13:19.000 --> 1:13:28.000
+ And then there's a different bunch that's going to be deleted.
+
+1:13:28.000 --> 1:13:30.000
+ And so I think this is an interesting point.
+
+1:13:30.000 --> 1:13:36.000
+ So dropout, which is super important, was actually developed in a master's thesis.
+
+1:13:36.000 --> 1:13:43.000
+ And it was rejected from the main neural networks conference, then called NIPS, now called NURIPS.
+
+1:13:43.000 --> 1:13:51.000
+ And it's been being disseminated through through archive, which is a preprint server.
+
+1:13:51.000 --> 1:14:00.000
+ And as it's just been pointed out on our chat that Iliya was one of the founders of OpenAI.
+
+1:14:00.000 --> 1:14:01.000
+ I don't know what happened to NITI.
+
+1:14:01.000 --> 1:14:06.000
+ I think he went to Google brain as well, maybe.
+
+1:14:06.000 --> 1:14:15.000
+ So, you know, peer review is a very fallible thing in both directions.
+
+1:14:15.000 --> 1:14:22.000
+ And it's great that we have preprint servers so we can read stuff like this, even if reviewers decide it's not worthy.
+
+1:14:22.000 --> 1:14:27.000
+ It's been one of the most important papers ever.
+
+1:14:27.000 --> 1:14:32.000
+ Okay.
+
+1:14:32.000 --> 1:14:37.000
+ Now, I think that's given us a good tour now.
+
+1:14:37.000 --> 1:14:44.000
+ We've really seen quite a few ways of dealing with input to a neural network, quite a few of the things that can happen in the middle of a neural network.
+
+1:14:44.000 --> 1:14:56.000
+ We've already talked about rectified linear units, which is this one here, zero, if X is less than zero or X otherwise.
+
+1:14:56.000 --> 1:15:00.000
+ These are some of the other activations you can use.
+
+1:15:00.000 --> 1:15:04.000
+ Don't use this one, of course, because you end up with a linear model.
+
+1:15:04.000 --> 1:15:07.000
+ But they're all just different functions.
+
+1:15:07.000 --> 1:15:11.000
+ As should mention, like it turns out these don't matter very much.
+
+1:15:11.000 --> 1:15:18.000
+ Basically, pretty much any nonlinearity works fine.
+
+1:15:18.000 --> 1:15:25.000
+ So we don't spend much time talking about activation functions, even in part two of the course just a little bit.
+
+1:15:25.000 --> 1:15:36.000
+ So, yeah, so we understand there are, there's our imports, they can be 100 encoded or embeddings, which is a compute computational shortcut.
+
+1:15:36.000 --> 1:15:42.000
+ There are sandwich layers of matrix model plays and activation functions.
+
+1:15:42.000 --> 1:15:49.000
+ The matrix model plays can sometimes be special cases, such as the convolutions or the embeddings.
+
+1:15:49.000 --> 1:16:03.000
+ The output can go through some tweaking, such as the softmax, and then of course you've got the loss function, such as cross entropy loss, or means grid error, or mean absolute error.
+
+1:16:03.000 --> 1:16:10.000
+ But, you know, it's not, there's nothing too crazy going on in there.
+
+1:16:10.000 --> 1:16:23.000
+ So I feel like we've got a good sense now of like what goes inside, you know, a wide range of neural nets, you're not going to see anything too weird from here.
+
+1:16:23.000 --> 1:16:27.000
+ And we've also seen a wide range of applications.
+
+1:16:27.000 --> 1:16:34.000
+ So before you come back to do part two.
+
+1:16:34.000 --> 1:16:37.000
+ You know, what now?
+
+1:16:37.000 --> 1:16:45.000
+ And we're going to have a little session here and in fact one of the questions was what now.
+
+1:16:45.000 --> 1:16:51.000
+ So this is quite, quite good.
+
+1:16:51.000 --> 1:16:55.000
+ One thing I strongly suggest is if you've got this far.
+
+1:16:55.000 --> 1:17:09.000
+ It's probably worth you investing your time in reading Radix book, which is meta learning.
+
+1:17:09.000 --> 1:17:24.000
+ And so meta learning is very heavily based on the kind of teachings of fast AI over the last few years and is all about how to learn deep learning and learn pretty much anything.
+
+1:17:24.000 --> 1:17:34.000
+ Yeah, because you know you've got to this point, you may as well know how to get to the next point as well as possible.
+
+1:17:34.000 --> 1:17:41.000
+ And.
+
+1:17:41.000 --> 1:17:55.000
+ The main thing you'll see that Radix talks about or one of the main things is, is practicing and writing.
+
+1:17:55.000 --> 1:18:05.000
+ So if you've kind of zipped through the videos on, you know, two X and haven't done any exercises.
+
+1:18:05.000 --> 1:18:11.000
+ You know, go back and watch the videos again, you know, a lot of the best students end up watching them two or three times.
+
+1:18:11.000 --> 1:18:13.000
+ Probably more like three times.
+
+1:18:13.000 --> 1:18:20.000
+ And, and actually go through and code as you watch, you know, and experiment.
+
+1:18:20.000 --> 1:18:26.000
+ You know, right posts blog posts about what you're doing.
+
+1:18:26.000 --> 1:18:33.000
+ Spend time on the forum, both helping others and seeing other people's answers to questions.
+
+1:18:33.000 --> 1:18:41.000
+ Read the success stories on the forum and of people's projects to get inspiration for things you could try.
+
+1:18:41.000 --> 1:18:45.000
+ One of the most important things to do is to get together with other people.
+
+1:18:45.000 --> 1:18:53.000
+ For example, you couldn't do, you know, a zoom study group in fact on our discord, which you can find through our forum.
+
+1:18:53.000 --> 1:18:58.000
+ There's always study groups going on, or you can create your own.
+
+1:18:58.000 --> 1:19:04.000
+ You know, a study group to go through the book together.
+
+1:19:04.000 --> 1:19:06.000
+ Yeah, and of course, you know, build stuff.
+
+1:19:06.000 --> 1:19:11.000
+ And sometimes it's tricky to.
+
+1:19:11.000 --> 1:19:19.000
+ Always be able to build stuff for work, because maybe there isn't, you're not quite in the right area or they're not quite ready to try out deep learning yet.
+
+1:19:19.000 --> 1:19:22.000
+ But that's okay.
+
+1:19:22.000 --> 1:19:30.000
+ Build some hobby projects, build some stuff just for fun or build some stuff that you're passionate about.
+
+1:19:30.000 --> 1:19:44.000
+ Yeah, so it's really important to, to not just put the videos away and go away and do something else because you'll forget everything you've learned and you want to practice.
+
+1:19:44.000 --> 1:20:13.000
+ So one of our community members went on to create an activation function, for example, which is mesh, which is now as Tunisian has just reminded me on our forums is now used in many of the state of the art networks around the world.
+
+1:20:13.000 --> 1:20:15.000
+ Which is pretty cool.
+
+1:20:15.000 --> 1:20:22.000
+ This is and he's now at Mila, I think a research one of the top research labs in the world.
+
+1:20:22.000 --> 1:20:24.000
+ I wonder how that's doing.
+
+1:20:24.000 --> 1:20:33.000
+ Let's have a look. Go to Google scholar.
+
+1:20:33.000 --> 1:20:35.000
+ Nice 486 citations.
+
+1:20:35.000 --> 1:20:40.000
+ They're doing great.
+
+1:20:40.000 --> 1:20:57.000
+ All right, let's have a look at how our topic is going and pick out some of the highest ranked ama's.
+
+1:20:57.000 --> 1:21:02.000
+ Okay.
+
+1:21:02.000 --> 1:21:12.000
+ So the first one is from Lucas and actually maybe I should actually let's switch our view here.
+
+1:21:12.000 --> 1:21:20.000
+ So our first ama is from Lucas and Lucas asks, how do you stay motivated?
+
+1:21:20.000 --> 1:21:35.000
+ I often find myself overwhelmed in this field. There are so many new things coming up that I feel like I have to put so much energy just to keep my head above the waterline.
+
+1:21:35.000 --> 1:21:49.000
+ Yeah, that's a very interesting question. I mean, I think Lucas, the important thing is to realize you don't have to know everything, you know, in fact, nobody knows everything.
+
+1:21:49.000 --> 1:21:52.000
+ And that's okay.
+
+1:21:52.000 --> 1:22:06.000
+ What people do is they take an interest in some some area and they follow that and they try and do their best the best job they can of of keeping up with some little sub area.
+
+1:22:06.000 --> 1:22:13.000
+ And if your little sub area is too much to keep up on pick a sub sub area.
+
+1:22:13.000 --> 1:22:20.000
+ Yeah, there's nothing like there's no need for it to be demotivating that there's a lot of people doing a lot of interesting work and a lot of different sub fields.
+
+1:22:20.000 --> 1:22:31.000
+ That's cool. You know, it is to be kind of dull with up here, you know, but then there's only basically five labs in the world working on your own it's.
+
+1:22:31.000 --> 1:22:40.000
+ And yeah, from time to time, you know, take a dip into other areas that maybe you're not following us closely. But when you're but when you're just starting out.
+
+1:22:40.000 --> 1:22:50.000
+ You'll find that things are not changing that fast at all really, they can kind of look that way because people are always putting out press releases about their new tweaks.
+
+1:22:50.000 --> 1:23:01.000
+ But fundamentally the stuff that is in the course now is not that different to what was in the course five years ago.
+
+1:23:01.000 --> 1:23:12.000
+ The foundations haven't changed. And it's not that different in fact to the convolutional neural network that Jan LeCun used on MNIST back in 1996.
+
+1:23:12.000 --> 1:23:21.000
+ It's, you know, the basic ideas I've described are forever, you know, the way the inputs work and the sandwiches of matrix,
+
+1:23:21.000 --> 1:23:32.000
+ and the model applies and activation functions and the stuff you do to the final layer, you know, everything else is tweaks.
+
+1:23:32.000 --> 1:23:40.000
+ And the more you learn about those basic ideas, the more you'll recognize those tweaks as simple little tricks that you'll be able to quickly get your head around.
+
+1:23:40.000 --> 1:23:50.000
+ So then Lucas goes on to ask to order comment. Another thing that constantly bothers me is I feel the field is getting more and more skewed towards bigger and more computationally expensive models.
+
+1:23:50.000 --> 1:24:01.000
+ I keep wondering if in some years now, I would still be able to train reasonable models with a single GPU, or if everything is going to require a compute cluster.
+
+1:24:01.000 --> 1:24:05.000
+ Yeah, that's a great question. I get that a lot.
+
+1:24:05.000 --> 1:24:16.000
+ But interestingly, you know, I've been teaching people machine learning and data science stuff for nearly 30 years.
+
+1:24:16.000 --> 1:24:21.000
+ And I've had a variation of this question throughout.
+
+1:24:21.000 --> 1:24:35.000
+ And the reason is that engineers always want to push the envelope in like the on the biggest computers they can find, you know, that's just this like fun thing engineers love to do.
+
+1:24:35.000 --> 1:24:45.000
+ And by definition, they're going to get slightly better results than people doing exactly the same thing on smaller computers.
+
+1:24:45.000 --> 1:24:53.000
+ So it always looks like, oh, you need big computers to be state of the art.
+
+1:24:53.000 --> 1:25:02.000
+ But that's actually never true. Right, because there's always smarter ways to do things, not just bigger ways to do things.
+
+1:25:02.000 --> 1:25:17.000
+ And so, you know, when you look at fast a eyes, Dawn bench success, when we trained image net faster than anybody had trained it before on standard GPUs, you know, me and a bunch of students.
+
+1:25:17.000 --> 1:25:33.000
+ That was not meant to happen. You know, Google was working very hard with their TPU introduction to try to show how good they were Intel was using like 256 PCs and parallel or something.
+
+1:25:33.000 --> 1:25:40.000
+ But yeah, you know, we used common sense and smarts and showed showed what can be done.
+
+1:25:40.000 --> 1:25:55.000
+ You know, it's also a case of picking the problems you solve. So I would not be probably doing like going head to head up against codecs and trying to create code from English descriptions.
+
+1:25:55.000 --> 1:26:03.000
+ You know, because that's that's a problem that does probably require very large neural nets and very large amounts of data.
+
+1:26:03.000 --> 1:26:17.000
+ But if you pick areas in different domains, you know, there's still huge areas where much smaller models are still going to be state of the art.
+
+1:26:17.000 --> 1:26:21.000
+ So hopefully that helped answer your question.
+
+1:26:21.000 --> 1:26:27.000
+ Let's see what else we got here.
+
+1:26:27.000 --> 1:26:44.000
+ So Daniel, as I was saying, following my journey with teaching my daughter, math. He's so I homeschool my daughter. And Daniel asks, how do you homeschool young children science in general and math in particular.
+
+1:26:44.000 --> 1:26:49.000
+ Would you share your experiences by blogging or lectures someday.
+
+1:26:49.000 --> 1:27:00.000
+ So I could do that. So I actually spent quite a few months just reading research papers about education recently.
+
+1:27:00.000 --> 1:27:05.000
+ So I do probably have a lot I probably need to talk about at some stage.
+
+1:27:05.000 --> 1:27:09.000
+ But yeah, broadly speaking.
+
+1:27:09.000 --> 1:27:21.000
+ I lean into using computers and tablets a lot more than most people, because actually there's an awful lot of really great apps that are super compelling.
+
+1:27:21.000 --> 1:27:28.000
+ They're adaptive so they go at the right speed for the student and they're fun.
+
+1:27:28.000 --> 1:27:36.000
+ And I really like my daughter to have fun. You know, I really don't like to force her to do things.
+
+1:27:36.000 --> 1:27:49.000
+ For example, there's a really cool app called dragon box algebra five plus, which teaches algebra to five year olds by using a really fun computer game involving helping dragon eggs to hatch.
+
+1:27:49.000 --> 1:28:00.000
+ And it turns out that yeah, algebra, the basic ideas of algebra are no more complex than the basic ideas that we do in other kindergarten math.
+
+1:28:00.000 --> 1:28:08.000
+ And all the parents I know of who've given their kids dragon box algebra five plus their kids have successfully learned algebra.
+
+1:28:08.000 --> 1:28:20.000
+ So that would be an example. But yeah, we should talk about this more at some point.
+
+1:28:20.000 --> 1:28:27.000
+ Alright, let's see what else we've got here.
+
+1:28:27.000 --> 1:28:32.000
+ So far, says the walkthroughs have been a game changer for me.
+
+1:28:32.000 --> 1:28:40.000
+ The knowledge and tips you shared in those sessions are skills required to become an effective machine learning practitioner and utilize faster, more effectively.
+
+1:28:40.000 --> 1:28:49.000
+ Have you considered making the walkthroughs a more formal part of the course doing a separate software engineering course or continuing live coding sessions between part one and two.
+
+1:28:49.000 --> 1:28:58.000
+ So yes, I am going to keep doing live coding sessions. At the moment we've switched to those specifically to focusing on a PL.
+
+1:28:58.000 --> 1:29:02.000
+ And then in a couple of weeks they're going to be going to fast study groups.
+
+1:29:02.000 --> 1:29:07.000
+ And then after that they'll gradually turn back into more live coding sessions.
+
+1:29:07.000 --> 1:29:18.000
+ But yeah, the thing I try to do in my live coding or study groups, whatever is definitely try to show the foundational techniques that just make life.
+
+1:29:18.000 --> 1:29:22.000
+ Easier as a coder or a data scientist.
+
+1:29:22.000 --> 1:29:39.000
+ When I say foundational, I mean, yeah, the stuff which you can reuse again and again and again, like learning regular expressions really well or knowing how to use VM or understanding how to use the terminal and command line, you know, all that kind of stuff.
+
+1:29:39.000 --> 1:29:48.000
+ Never goes out of style, it never gets old. And yeah, I do plan to.
+
+1:29:48.000 --> 1:30:01.000
+ At some point, hopefully actually do a course really all about that stuff specifically. But yeah, for now, for now the best approaches follow along with the live coding and stuff.
+
+1:30:01.000 --> 1:30:08.000
+ Okay, WG pubs, which is Wade asks, how do you turn a model into a business.
+
+1:30:08.000 --> 1:30:17.000
+ So, you know, the other coder with a little or no startup experience turn an ML based radio prototype into a legitimate business venture.
+
+1:30:17.000 --> 1:30:23.000
+ Okay, I plan to do a course about this at some point as well.
+
+1:30:23.000 --> 1:30:26.000
+ So,
+
+1:30:26.000 --> 1:30:37.000
+ you know, obviously there isn't a two minute version to this but the key thing with creating a legitimate business venture is to solve a legitimate problem.
+
+1:30:37.000 --> 1:30:45.000
+ You know, a problem that people need solve solving and which they will pay you to solve.
+
+1:30:45.000 --> 1:30:56.000
+ And so it's important not to start with your fun radio prototype as a basis your business, but instead start with here's a problem I want to solve.
+
+1:30:56.000 --> 1:30:59.000
+ And generally speaking,
+
+1:30:59.000 --> 1:31:16.000
+ you should try to pick a problem that you understand better than most people. So it's either a problem that you face day to day in your work or in some hobby or passion that you have or that, you know, your club has or your local score has or your,
+
+1:31:16.000 --> 1:31:20.000
+ your spouse deals with in their workplace.
+
+1:31:20.000 --> 1:31:28.000
+ You know, it's something where you understand that there's a something that doesn't work as well as it ought to.
+
+1:31:28.000 --> 1:31:40.000
+ Particularly something where you think yourself, you know, if they just used deep learning here or some algorithm here or some better compute here.
+
+1:31:40.000 --> 1:31:43.000
+ That problem would go away.
+
+1:31:43.000 --> 1:31:47.000
+ And that's that's the start of a business.
+
+1:31:47.000 --> 1:31:58.000
+ And then my friend Eric Rees wrote a book called the lean startup where he describes what you do next, which is basically you fake it.
+
+1:31:58.000 --> 1:32:03.000
+ You create. So he calls it the minimum viable product. You create something that solves that problem.
+
+1:32:03.000 --> 1:32:10.000
+ It takes you as little time as possible to create. It could be very manual. It can be loss making. It's fine.
+
+1:32:10.000 --> 1:32:19.000
+ The bit in the middle where you're like, Oh, there's going to be a neural net here. It's fine to like launch without the neural net and do everything by hand.
+
+1:32:19.000 --> 1:32:23.000
+ You're just trying to find out if people going to pay for this and this is actually useful.
+
+1:32:23.000 --> 1:32:39.000
+ And then once you have, you know, hopefully confirmed that the need is real and that people will pay for it and you can solve the needs. You can gradually make it less and less of a fake, you know, and do, you know, more and more.
+
+1:32:39.000 --> 1:32:48.000
+ Product to where you want it to be.
+
+1:32:48.000 --> 1:32:54.000
+ Okay, I don't know how to pronounce the name M i w j c.
+
+1:32:54.000 --> 1:33:06.000
+ And my w jc says Jeremy, can you share some of your productivity hacks from the content you produce it may seem you worked 24 hours a day.
+
+1:33:06.000 --> 1:33:10.000
+ I certainly don't do that.
+
+1:33:10.000 --> 1:33:15.000
+ I think one of my main productivity hacks actually is not to work too hard.
+
+1:33:15.000 --> 1:33:20.000
+ Or at least not to work too hard, not to work too much.
+
+1:33:20.000 --> 1:33:27.000
+ I spent probably less hours a day working than most people, I would guess.
+
+1:33:27.000 --> 1:33:31.000
+ But I think I do a couple of things differently when I'm working.
+
+1:33:31.000 --> 1:33:42.000
+ I've spent half at least half of every working day since I was about 18 learning or practicing something new.
+
+1:33:42.000 --> 1:33:48.000
+ Could be a new language could be a new algorithm could be something I read about.
+
+1:33:48.000 --> 1:33:55.000
+ And nearly all of that time, therefore I've been doing that thing.
+
+1:33:55.000 --> 1:34:02.000
+ More slowly than I would if I just use something I already knew.
+
+1:34:02.000 --> 1:34:09.000
+ Which often drives my co workers crazy because they're like, you know, why aren't you focusing on getting that thing done.
+
+1:34:09.000 --> 1:34:13.000
+ But in the other 50% of the time.
+
+1:34:13.000 --> 1:34:18.000
+ I'm constantly, you know, building up this kind of exponentially improving.
+
+1:34:18.000 --> 1:34:28.000
+ And I'm a very invasive expertise in a wide range of areas.
+
+1:34:28.000 --> 1:34:41.000
+ And so now I do find, you know, I can do things often orders of magnitude faster than people around me or certainly many multiples faster than people around me because I, you know, know a whole bunch of tools and skills and ideas which.
+
+1:34:41.000 --> 1:34:58.000
+ Yeah, no other people don't necessarily know so I think that's one thing that's been helpful and then another is yeah like trying to really not overdo things like get good sleep and eat well and exercise well.
+
+1:34:58.000 --> 1:35:09.000
+ And also I think it's a case of like tenacity, you know, I've noticed a lot of people give up much earlier than I do.
+
+1:35:09.000 --> 1:35:13.000
+ So yeah, if you.
+
+1:35:13.000 --> 1:35:18.000
+ If you just keep going until something's actually finished.
+
+1:35:18.000 --> 1:35:27.000
+ Then that's going to put you in a small minority, to be honest, most people don't do that when I say finished like finish something really nicely.
+
+1:35:27.000 --> 1:35:33.000
+ And I try to make it like so I'm particularly like coding and so I try to do a lot of coding related stuff.
+
+1:35:33.000 --> 1:35:41.000
+ So I create things like Nbdev and Nbdev makes it much, much easier for me to finish something nicely.
+
+1:35:41.000 --> 1:35:55.000
+ You know, so in my kind of chosen area I've spent quite a bit of time trying to make sure it's really easy for me to like get out a blog post, get out a Python library, get out a notebook analysis, whatever.
+
+1:35:55.000 --> 1:36:05.000
+ So yeah, trying to make these things I want to do easier and so then I'll do them more.
+
+1:36:05.000 --> 1:36:11.000
+ So, well thank you everybody. That's been a lot of fun.
+
+1:36:11.000 --> 1:36:16.000
+ Really appreciate you taking the time to go through this course with me.
+
+1:36:16.000 --> 1:36:28.000
+ Yeah, if you enjoyed it, it would really help if you would give a like on YouTube, because it really helps other people find the course goes into the YouTube recommendation system.
+
+1:36:28.000 --> 1:36:33.000
+ And please do come and help other beginners on forums.fast.ai.
+
+1:36:33.000 --> 1:36:38.000
+ It's a great way to learn yourself is to try to teach other people.
+
+1:36:38.000 --> 1:36:43.000
+ And yeah, I hope you'll join us in in part two.
+
+1:36:43.000 --> 1:36:53.000
+ Thanks everybody very much. I really enjoyed this process and I hope to get to meet more of you in person in the future.
+
+1:36:53.000 --> 1:37:20.000
+ Bye.
+

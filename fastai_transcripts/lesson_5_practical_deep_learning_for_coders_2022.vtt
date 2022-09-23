@@ -1,0 +1,3509 @@
+WEBVTT
+
+00:00.000 --> 00:08.400
+ Okay, hey everybody and welcome to practical deep learning for coders lesson five.
+
+00:08.400 --> 00:12.960
+ We're at a stage now where we're going to be getting deeper and deeper into the details
+
+00:12.960 --> 00:16.560
+ of how these networks actually work.
+
+00:16.560 --> 00:23.120
+ Last week we saw how to use a slightly lower level library than fast AI, being hugging
+
+00:23.120 --> 00:29.480
+ first transformers, to train a pretty nice NLP model.
+
+00:29.480 --> 00:35.520
+ And today we're going to be going back to tabular data and we're going to be trying
+
+00:35.520 --> 00:38.280
+ to build a tabular model actually from scratch.
+
+00:38.280 --> 00:42.760
+ We're going to build a couple of different types of tabular model from scratch.
+
+00:42.760 --> 00:47.920
+ So the problem that I'm going to be working through is the Titanic problem, which if you
+
+00:47.920 --> 00:54.520
+ remember back a couple of weeks is the data set that we looked at on Microsoft Excel.
+
+00:54.520 --> 00:58.720
+ And it has each row is one passenger on the Titanic.
+
+00:58.720 --> 01:05.200
+ This is a real world data set, historic data set, tells you both of that passenger survived,
+
+01:05.200 --> 01:09.280
+ what class they were on in the ship, their sex age, how many siblings, how many other
+
+01:09.280 --> 01:13.640
+ family members, how much they spent in the fair and whereabouts they embarked on one
+
+01:13.640 --> 01:16.160
+ of three different cities.
+
+01:16.160 --> 01:20.640
+ And you might remember that we built a linear model.
+
+01:20.640 --> 01:25.560
+ We then did the same thing using matrix multiplication.
+
+01:25.560 --> 01:32.280
+ And we also created a very, very simple neural network.
+
+01:32.280 --> 01:38.840
+ You know, Excel can do nearly everything we need, as you saw, to build a neural network,
+
+01:38.840 --> 01:41.720
+ but it starts to get unwieldy.
+
+01:41.720 --> 01:46.840
+ And so that's why people don't use Excel for neural networks in practice.
+
+01:46.840 --> 01:50.720
+ Instead we use a programming language like Python.
+
+01:50.720 --> 01:58.000
+ So what we're going to do today is we're going to do the same thing with Python.
+
+01:58.000 --> 02:04.560
+ So we're going to start working through the linear model and neural net from scratch notebook,
+
+02:04.560 --> 02:10.760
+ which you can find on Kaggle or on the course repository.
+
+02:10.760 --> 02:13.360
+ And today what we're going to do is we're going to work through the one in the clean
+
+02:13.360 --> 02:14.360
+ folder.
+
+02:14.360 --> 02:21.160
+ We're both for fast book, the book, and course 22, these lessons.
+
+02:21.160 --> 02:32.040
+ The clean folder contains all of our notebooks, but without any pros or any outputs.
+
+02:32.040 --> 02:37.800
+ So here's what it looks like when I open up the linear model and neural net from scratch.
+
+02:37.800 --> 02:39.880
+ And Jupiter.
+
+02:39.880 --> 02:47.320
+ What I'm using here is paper space gradient, which as I mentioned a couple of weeks ago,
+
+02:47.320 --> 02:49.880
+ is what I'm going to be doing most things in.
+
+02:49.880 --> 02:58.160
+ That looks a little bit different to the normal paper space gradient.
+
+02:58.160 --> 03:06.120
+ Because the default view for paper space gradient, at least as I do this course, is
+
+03:06.120 --> 03:17.960
+ there rather awkward notebook editor, which at first glance has the same features as the
+
+03:17.960 --> 03:23.600
+ real Jupiter notebook and Jupiter lab environments.
+
+03:23.600 --> 03:26.120
+ But in practice, we're actually missing lots of things.
+
+03:26.120 --> 03:28.840
+ So this is the normal paper space.
+
+03:28.840 --> 03:32.440
+ So remember you have to click this button.
+
+03:32.440 --> 03:37.320
+ And the only reason you might keep this window running is then you might go over here to
+
+03:37.320 --> 03:43.320
+ the machine to remind yourself when you close the other tab to click stop machine.
+
+03:43.320 --> 03:46.080
+ If you're using the free one, it doesn't matter too much.
+
+03:46.080 --> 03:51.320
+ And also when I started, I make sure I've got something to shut down automatically if
+
+03:51.320 --> 03:56.120
+ case I forget.
+
+03:56.120 --> 03:58.440
+ So other than that, we can stay in this tab.
+
+03:58.440 --> 04:03.480
+ And because Jupiter, this is Jupiter lab that runs.
+
+04:03.480 --> 04:16.800
+ And you can always switch over to classic Jupiter notebook if you want to.
+
+04:16.800 --> 04:22.280
+ So given that they've got tabs inside tabs, I normally maximize it at this point.
+
+04:22.280 --> 04:23.280
+ And it's really good.
+
+04:23.280 --> 04:24.960
+ It's really helpful to know the keyboard shortcuts.
+
+04:24.960 --> 04:29.160
+ So Ctrl shift, square bracket, right and left switch between tabs.
+
+04:29.160 --> 04:31.000
+ That's one of the key things to know about.
+
+04:31.000 --> 04:32.000
+ Okay.
+
+04:32.000 --> 04:39.320
+ So I've opened up the clean version of the linear model and neural net from scratch notebook.
+
+04:39.320 --> 04:45.800
+ And so remember when you go back through the video kind of the second time or through the
+
+04:45.800 --> 04:49.600
+ notebook a second time, this is generally what you want to be doing is going through
+
+04:49.600 --> 04:51.040
+ the clean notebook.
+
+04:51.040 --> 04:54.960
+ And before you run each cell, try to think about like, oh, what do Jeremy say?
+
+04:54.960 --> 04:57.120
+ Why are we doing this?
+
+04:57.120 --> 04:58.480
+ What output would I expect?
+
+04:58.480 --> 05:00.600
+ Make sure you get the output you'd expect.
+
+05:00.600 --> 05:05.960
+ And if you're not sure why something is the way it is, try changing it and see what happens.
+
+05:05.960 --> 05:09.360
+ And then if you're still not sure, well, why did that thing not work the way I expect?
+
+05:09.360 --> 05:11.080
+ I'll search the forums.
+
+05:11.080 --> 05:14.760
+ If anybody's asked that question before and you can ask the question on the forum yourself
+
+05:14.760 --> 05:18.360
+ if you're still not sure.
+
+05:18.360 --> 05:23.880
+ So as I think we've mentioned briefly before, I find it really nice to be able to use the
+
+05:23.880 --> 05:26.800
+ same notebook both on Kaggle and off Kaggle.
+
+05:26.800 --> 05:31.080
+ So most of my notebooks start with basically the same cell, which is something that just
+
+05:31.080 --> 05:33.000
+ checks whether we're on Kaggle.
+
+05:33.000 --> 05:36.360
+ So Kaggle sets an environment variable.
+
+05:36.360 --> 05:39.440
+ So we can just check for it in that way we know if we're on Kaggle.
+
+05:39.440 --> 05:43.600
+ And so then if we are on Kaggle, you know, a notebook that's part of a competition will
+
+05:43.600 --> 05:47.280
+ already have the data downloaded and unzipped for you.
+
+05:47.280 --> 05:54.000
+ Otherwise, if I haven't downloaded the data before, then I need to download it and unzipped.
+
+05:54.000 --> 05:58.840
+ So Kaggle is a pip installable module.
+
+05:58.840 --> 06:03.400
+ So you type pip install Kaggle.
+
+06:03.400 --> 06:10.120
+ If you're not sure how to do that, you should check out deep dive lessons to see exactly
+
+06:10.120 --> 06:11.120
+ the steps.
+
+06:11.120 --> 06:17.240
+ But roughly speaking, you can use your console, pip install and whatever you want to install.
+
+06:17.240 --> 06:24.840
+ Or, as we've seen before, you can do it directly in a notebook by putting an explanation mark
+
+06:24.840 --> 06:27.120
+ at the start.
+
+06:27.120 --> 06:32.360
+ So that's going to run not Python, but a shell command.
+
+06:32.360 --> 06:33.520
+ Okay.
+
+06:33.520 --> 06:39.120
+ So that's enough to ensure that we have the data downloaded and a variable called path
+
+06:39.120 --> 06:41.640
+ that's pointing at it.
+
+06:41.640 --> 06:48.560
+ Most of the time we're going to be using at least PyTorch and NumPy.
+
+06:48.560 --> 06:52.240
+ So we import those so that they're available to Python.
+
+06:52.240 --> 06:56.840
+ And when we're working with tabular data, as we talked about before, we're generally
+
+06:56.840 --> 06:58.840
+ also going to want to use pandas.
+
+06:58.840 --> 07:03.960
+ And it's really important that you're somewhat familiar with the kind of basic API of these
+
+07:03.960 --> 07:06.320
+ three libraries.
+
+07:06.320 --> 07:12.440
+ And I've recommended Wes McKinney's book before, particularly for these ones.
+
+07:12.440 --> 07:16.600
+ One thing just by the way is that these things tend to assume you've got a very narrow screen,
+
+07:16.600 --> 07:18.320
+ which is really annoying because it always wraps things.
+
+07:18.320 --> 07:21.360
+ So if you want to put these three lines as well, then it just makes sure that everything
+
+07:21.360 --> 07:24.080
+ is going to use up the screen properly.
+
+07:24.080 --> 07:25.080
+ Okay.
+
+07:25.080 --> 07:30.440
+ So as we've seen before, you can read a common separated values file with pandas.
+
+07:30.440 --> 07:33.280
+ And you can take a look at the first two lines and the last two lines and how big it
+
+07:33.280 --> 07:34.640
+ is.
+
+07:34.640 --> 07:38.880
+ And so here's the same thing as our spreadsheet.
+
+07:38.880 --> 07:39.880
+ Okay.
+
+07:39.880 --> 07:44.600
+ So there's our data from the spreadsheet.
+
+07:44.600 --> 07:49.080
+ And here it is as a data frame.
+
+07:49.080 --> 08:05.720
+ So if we go dataframe.is and a, that returns a new data frame in which every column it
+
+08:05.720 --> 08:10.720
+ tells us whether or not that particular value is NAN.
+
+08:10.720 --> 08:12.920
+ So NAN is not a number.
+
+08:12.920 --> 08:16.720
+ And the most common reason you get that is because it was missing.
+
+08:16.720 --> 08:21.720
+ Okay, so a missing value is obviously not a number.
+
+08:21.720 --> 08:27.000
+ So we, in the Excel version, we did something you should never usually do.
+
+08:27.000 --> 08:31.720
+ We deleted all the rows with missing data.
+
+08:31.720 --> 08:34.240
+ Just because in Excel, it's a little bit harder to work with.
+
+08:34.240 --> 08:36.640
+ In pandas, it's very easy to work with.
+
+08:36.640 --> 08:41.600
+ First of all, we can just sum up what I just showed you.
+
+08:41.600 --> 08:45.600
+ Now if you call sum on a data frame, it sums up each column.
+
+08:45.600 --> 08:54.240
+ Okay, so you can see that there's kind of some small foundational concepts in pandas,
+
+08:54.240 --> 08:56.400
+ which when you put them together, take you a long way.
+
+08:56.400 --> 09:01.000
+ So one idea is this idea that you can call a method on a data frame and it calls it on
+
+09:01.000 --> 09:02.480
+ every row.
+
+09:02.480 --> 09:08.240
+ And then you can call a reduction on that and it reduces each column.
+
+09:08.240 --> 09:14.760
+ And so now we've got the total and in Python and pandas and NumPy and PyTorch, you can
+
+09:14.760 --> 09:18.480
+ treat a Boolean as a number and true will be one, false will be zero.
+
+09:18.480 --> 09:23.120
+ So this is the number of missing values in each column.
+
+09:23.120 --> 09:29.040
+ So we can see that cabin out of 891 rows, it's nearly always empty.
+
+09:29.040 --> 09:32.760
+ Age is empty a bit of the time, but it's almost never empty.
+
+09:32.760 --> 09:40.360
+ So if you remember from Excel, we need to multiply a coefficient by each column.
+
+09:40.360 --> 09:41.920
+ That's how we create a linear model.
+
+09:41.920 --> 09:45.240
+ So how would you multiply a coefficient by a missing value?
+
+09:45.240 --> 09:47.160
+ You can't.
+
+09:47.160 --> 09:51.320
+ There's lots of ways of it's called imputing missing values, so replacing missing value
+
+09:51.320 --> 09:53.680
+ with a number.
+
+09:53.680 --> 09:59.720
+ The easiest which always works is to replace missing values with the mode of a column.
+
+09:59.720 --> 10:02.000
+ The mode is the most common value.
+
+10:02.000 --> 10:06.200
+ That works both the categorical variables, it's the most common category, and continuous
+
+10:06.200 --> 10:07.200
+ variables.
+
+10:07.200 --> 10:11.080
+ That's the most common number.
+
+10:11.080 --> 10:17.600
+ So you can get the mode by calling df.mode.
+
+10:17.600 --> 10:22.880
+ One thing that's a bit awkward is that if there's a tie for the mode, so there's more
+
+10:22.880 --> 10:27.600
+ than one thing that's the most common, it's going to return multiple rows, so I need to
+
+10:27.600 --> 10:30.560
+ return the 0th row.
+
+10:30.560 --> 10:33.080
+ So here is the mode of every column.
+
+10:33.080 --> 10:38.440
+ So we can replace the missing values for age with 24, and the missing values for cabin
+
+10:38.440 --> 10:43.080
+ with B9, 6, B9, 8, invert with S.
+
+10:43.080 --> 10:47.960
+ I'll just mention impassing.
+
+10:47.960 --> 10:54.480
+ I am not going to describe every single method we call and every single function we use.
+
+10:54.480 --> 10:59.200
+ And that is not because you're an idiot if you don't already know them, nobody knows
+
+10:59.200 --> 11:00.840
+ them all.
+
+11:00.840 --> 11:05.840
+ But I don't know which particular subset of them you don't know.
+
+11:05.840 --> 11:12.800
+ So let's assume just to pick a number at random that the average fast AI student knows 80%
+
+11:12.800 --> 11:16.360
+ of the functions we call.
+
+11:16.360 --> 11:23.120
+ Then I could tell you what every function is, in which case 80% of the time I'm wasting
+
+11:23.120 --> 11:26.720
+ your time because I already know.
+
+11:26.720 --> 11:30.120
+ Or I could pick 20% of the random, in which case I'm still not helping, because most of
+
+11:30.120 --> 11:32.320
+ the time it's not the ones you don't know.
+
+11:32.320 --> 11:35.280
+ My approach is that for the ones that are pretty common, I'm just not going to mention
+
+11:35.280 --> 11:37.880
+ it at all because I'm assuming that you'll Google it.
+
+11:37.880 --> 11:39.280
+ So it's really important to know.
+
+11:39.280 --> 11:42.840
+ So for example, if you don't know what I like is, that's not a problem.
+
+11:42.840 --> 11:44.440
+ It doesn't mean you're stupid.
+
+11:44.440 --> 11:48.840
+ It just means you haven't used it yet, and you should Google it.
+
+11:48.840 --> 11:54.600
+ So I'll mention in this particular case, this is one of the most important pandas, methods,
+
+11:54.600 --> 12:01.240
+ because it gives you the row located at this index, i for index and lock for location.
+
+12:01.240 --> 12:03.000
+ So this is a zero throw.
+
+12:03.000 --> 12:09.360
+ But yeah, I do kind of go through things a little bit quickly on the assumption that
+
+12:09.360 --> 12:15.240
+ students, fast AI students are proactive, curious people.
+
+12:15.240 --> 12:18.280
+ And if you're not a proactive, curious person, then you could either decide to become one
+
+12:18.280 --> 12:22.720
+ for the purpose of this course, or maybe this course isn't for you.
+
+12:22.720 --> 12:24.200
+ All right.
+
+12:24.200 --> 12:30.480
+ So a data frame has a very convenient method called failNA.
+
+12:30.480 --> 12:35.680
+ And that's going to replace the not a numbers with whatever I put here.
+
+12:35.680 --> 12:39.680
+ And the nice thing about pandas is it kind of has this understanding that columns match
+
+12:39.680 --> 12:40.680
+ to columns.
+
+12:40.680 --> 12:47.400
+ So it's going to take the mode from each column and match it to the same column in the data
+
+12:47.400 --> 12:52.000
+ frame and fill in those missing values.
+
+12:52.000 --> 12:55.440
+ Normally that would return a new data frame.
+
+12:55.440 --> 12:59.120
+ Many things, including this one in pandas, have an in place argument that says actually
+
+12:59.120 --> 13:01.840
+ modify the original one.
+
+13:01.840 --> 13:09.440
+ And so if I run that, now if I call dot is a name dot sum, they're all zero.
+
+13:09.440 --> 13:13.640
+ So that's like the world's simplest way to get rid of missing values.
+
+13:13.640 --> 13:19.920
+ Okay, so why did we do it the world's simplest way?
+
+13:19.920 --> 13:26.400
+ Because honestly, this doesn't make much difference most of the time.
+
+13:26.400 --> 13:33.440
+ And so I'm not going to spend time the first time I go through and build a baseline model
+
+13:33.440 --> 13:40.160
+ doing complicated things when I don't necessarily know that I need complicated things.
+
+13:40.160 --> 13:45.360
+ And so imputing missing values is an example of something that most of the time, this dumb
+
+13:45.360 --> 13:50.640
+ way, which always works without even thinking about it, will be quite good enough, you know,
+
+13:50.640 --> 13:52.800
+ for nearly all the time.
+
+13:52.800 --> 13:55.040
+ So we keep things simple where we can.
+
+13:55.040 --> 13:57.040
+ John question.
+
+13:57.040 --> 14:00.480
+ Jeremy, we've got a question on this topic.
+
+14:00.480 --> 14:06.160
+ Javier's sort of commenting on the assumption involved in substituting with the mode.
+
+14:06.160 --> 14:10.880
+ And he's asking in your experience, what are the pros and cons of doing this versus, for
+
+14:10.880 --> 14:15.840
+ example, discarding cabin or age as fields that we even train the model.
+
+14:15.840 --> 14:20.400
+ Yeah, so I would certainly never throw them out, right?
+
+14:20.400 --> 14:23.400
+ There's just no reason to throw away data.
+
+14:23.400 --> 14:25.840
+ There's lots of reasons to not throw away data.
+
+14:25.840 --> 14:31.040
+ So for example, when we use the first AI library, which we'll use later, one of the things it
+
+14:31.040 --> 14:35.600
+ does, which is actually a really good idea, is it creates a new column for everything
+
+14:35.600 --> 14:40.360
+ that's got missing values, which is Boolean, which is did that column have a missing value
+
+14:40.360 --> 14:41.640
+ for this row.
+
+14:41.640 --> 14:47.640
+ And so maybe it turns out that cabin being empty is a great predictor.
+
+14:47.640 --> 14:54.520
+ So yeah, I don't throw out rows and I don't throw out columns.
+
+14:54.520 --> 15:04.400
+ Okay, so it's helpful to understand a bit more about our data set and a really helpful,
+
+15:04.400 --> 15:09.440
+ I've already imported this, a really helpful, you know, quick method.
+
+15:09.440 --> 15:14.840
+ And again, it's kind of nice to know like a few quick things you can do to get a picture
+
+15:14.840 --> 15:18.280
+ of what's happening in your data is describe.
+
+15:18.280 --> 15:23.720
+ And so describe, you can say, okay, describe all the numeric variables.
+
+15:23.720 --> 15:27.320
+ And that gives me a quick sense of what's going on here.
+
+15:27.320 --> 15:32.760
+ So you can see survived clearly is just zeros and ones, because all of the quartiles are
+
+15:32.760 --> 15:33.760
+ zeros and ones.
+
+15:33.760 --> 15:40.640
+ It looks like P class is one, two, three.
+
+15:40.640 --> 15:41.640
+ What else do we see?
+
+15:41.640 --> 15:45.120
+ Fares an interesting one, right?
+
+15:45.120 --> 15:48.200
+ Lots of small numbers and one really big number, so probably long tailed.
+
+15:48.200 --> 15:53.480
+ So yeah, good to have a look at this to see what's going on for your numeric variables.
+
+15:53.480 --> 15:57.000
+ So as I said, fair looks kind of interesting.
+
+15:57.000 --> 16:00.960
+ To find out what's going on there, I would generally go with a histogram.
+
+16:00.960 --> 16:06.440
+ So if you can't quite remember what a histogram is, again, Google it, but in short, it shows
+
+16:06.440 --> 16:10.120
+ you for each amount of fair, how often does that fair appear?
+
+16:10.120 --> 16:14.600
+ And it shows me here that the vast majority of fairs are less than $50, but there's a
+
+16:14.600 --> 16:17.880
+ few right up here to 500.
+
+16:17.880 --> 16:24.080
+ So this is what we call a long tailed distribution, a small number of really big values and lots
+
+16:24.080 --> 16:27.960
+ of small ones.
+
+16:27.960 --> 16:34.000
+ There are some types of model which do not like long tailed distributions.
+
+16:34.000 --> 16:36.760
+ Linear models is certainly one of them.
+
+16:36.760 --> 16:40.200
+ And neural nets are generally better behaved without them as well.
+
+16:40.200 --> 16:46.160
+ Luckily, there's an almost sure way to turn a long tailed distribution into a more reasonably
+
+16:46.160 --> 16:51.600
+ centered distribution, and that is to take the log.
+
+16:51.600 --> 16:55.920
+ We use logs a lot in machine learning.
+
+16:55.920 --> 17:03.320
+ For those of you that haven't touched them since year 10 math, it would be a very good
+
+17:03.320 --> 17:08.160
+ time to go to Khan Academy or something and remind yourself about what logs are and what
+
+17:08.160 --> 17:13.280
+ they look like because they're actually really, really important.
+
+17:13.280 --> 17:19.880
+ But the basic shape of the log curve causes it to make really big numbers less really
+
+17:19.880 --> 17:24.280
+ big and doesn't change really small numbers very much at all.
+
+17:24.280 --> 17:28.560
+ So if we take the log, now log of zero is nan.
+
+17:28.560 --> 17:33.120
+ So a useful trick is to just do log plus one.
+
+17:33.120 --> 17:38.600
+ In fact, there is a log P one if you want to do that does the same thing.
+
+17:38.600 --> 17:44.840
+ So if we look at the histogram of that, you can see it's much more sensible.
+
+17:44.840 --> 17:48.840
+ Now it's kind of centered and it doesn't have this big long tail.
+
+17:48.840 --> 17:49.800
+ So that's pretty good.
+
+17:49.800 --> 17:54.120
+ So we'll be using that column in the future.
+
+17:54.120 --> 18:03.560
+ As a rule of thumb, stuff like money or population, things that kind of can grow exponentially,
+
+18:03.560 --> 18:05.480
+ you very often want to take the log of.
+
+18:05.480 --> 18:09.120
+ So if you have a column with a dollar sign on it, that's a good sign that might be something
+
+18:09.120 --> 18:12.200
+ to take the log of.
+
+18:12.200 --> 18:15.960
+ So there was another one here which is we had a numeric, which actually doesn't look
+
+18:15.960 --> 18:16.960
+ numeric at all.
+
+18:16.960 --> 18:20.720
+ It looks like it's actually categories.
+
+18:20.720 --> 18:24.720
+ So pandas gives us a dot unique.
+
+18:24.720 --> 18:29.040
+ And so we can see, yep, they're just one, two, and three are all the levels of P class.
+
+18:29.040 --> 18:33.280
+ That's their first class, second class, or third class.
+
+18:33.280 --> 18:37.680
+ We can also describe all the non numeric variables.
+
+18:37.680 --> 18:42.440
+ And so we can see here that not surprisingly names are unique because the count of names
+
+18:42.440 --> 18:52.160
+ is the same as count unique is two sexes, 681 different tickets, 147 different cabins,
+
+18:52.160 --> 19:00.280
+ and three levels of embarked.
+
+19:00.280 --> 19:09.720
+ So we cannot multiply the letter S by a coefficient.
+
+19:09.720 --> 19:17.000
+ Of the word male by a coefficient.
+
+19:17.000 --> 19:20.600
+ So what do we do?
+
+19:20.600 --> 19:26.760
+ What we do is we create something called dummy variables.
+
+19:26.760 --> 19:36.160
+ Dummy variables are, and we can just go get dummies, a column that says, for example,
+
+19:36.160 --> 19:41.320
+ is sex female, is sex male, is P class one, is P class two, is P class three.
+
+19:41.320 --> 19:45.720
+ So for every possible level of every possible categorical variable, it's a Boolean column
+
+19:45.720 --> 19:50.920
+ that did that row, have that value of that column.
+
+19:50.920 --> 19:53.600
+ So I think we've briefly talked about this before, that there's a couple of different
+
+19:53.600 --> 19:55.360
+ ways we can do this.
+
+19:55.360 --> 20:01.960
+ One is that for n level categorical variable, we could use n minus one levels, in which case
+
+20:01.960 --> 20:05.600
+ we also need a constant term in our model.
+
+20:05.600 --> 20:13.720
+ This is by default, shows all n levels, although you can pass an argument to change that if
+
+20:13.720 --> 20:14.720
+ you want.
+
+20:14.720 --> 20:19.480
+ Here we are, drop first.
+
+20:19.480 --> 20:22.880
+ I kind of like having all of them sometimes, because then you don't have to put in a constant
+
+20:22.880 --> 20:29.760
+ term, and it's a bit less annoying, and it can be a bit easier to interpret, but I don't
+
+20:29.760 --> 20:32.240
+ feel strongly about it either way.
+
+20:32.240 --> 20:38.400
+ Okay, so here's a list of all of the columns that Pandas added.
+
+20:38.400 --> 20:42.440
+ I guess, strictly speaking, I probably should have automated that, but never mind.
+
+20:42.440 --> 20:46.200
+ I just copied and posted them.
+
+20:46.200 --> 20:50.360
+ And so here are a few examples of the added columns.
+
+20:50.360 --> 20:55.400
+ In Unix Pandas, lots of things like that, head means the first few rows, or the first
+
+20:55.400 --> 20:56.400
+ few lines.
+
+20:56.400 --> 20:59.320
+ So five by default in Pandas.
+
+20:59.320 --> 21:04.160
+ So here you can see they're never both male and female, they're never neither, they're
+
+21:04.160 --> 21:07.480
+ always one or the other.
+
+21:07.480 --> 21:15.320
+ So with that now we've got numbers, which we can multiply by coefficients.
+
+21:15.320 --> 21:23.600
+ It's not going to work for name, obviously, because we would have 891 columns, and all
+
+21:23.600 --> 21:25.600
+ of them would be unique.
+
+21:25.600 --> 21:28.440
+ So we'll ignore that for now.
+
+21:28.440 --> 21:32.000
+ That doesn't mean it's have to always ignore it.
+
+21:32.000 --> 21:41.320
+ And in fact, something I did do on the forum topic, because I made a list of some nice
+
+21:41.320 --> 21:44.560
+ Titanic notebooks that I found.
+
+21:44.560 --> 21:50.200
+ And quite a few of them really go hard on this name column.
+
+21:50.200 --> 21:59.680
+ And in fact, one of them, yeah, this one, in what I believe is, yes, Crestiott's first
+
+21:59.680 --> 22:00.680
+ ever Kaggle notebook.
+
+22:00.680 --> 22:04.840
+ He's now the number one ranked Kaggle notebook person in the world.
+
+22:04.840 --> 22:07.440
+ So this is a very good start.
+
+22:07.440 --> 22:11.520
+ He got a much better score than any model that we're going to create in this course using
+
+22:11.520 --> 22:14.720
+ only that column name.
+
+22:14.720 --> 22:23.800
+ And basically, yeah, he came up with this simple little decision tree by recognizing
+
+22:23.800 --> 22:28.320
+ all of the information that's in a name column.
+
+22:28.320 --> 22:36.760
+ So yeah, we don't have to treat a big string of letters like this as a random big string
+
+22:36.760 --> 22:37.760
+ of letters.
+
+22:37.760 --> 22:43.120
+ We can use our domain expertise to recognize that things like Mr have meaning and that
+
+22:43.120 --> 22:48.000
+ people with the same surname might be in the same family.
+
+22:48.000 --> 22:52.160
+ And actually figure out quite a lot from that.
+
+22:52.160 --> 22:53.840
+ But that's not something I'm going to do.
+
+22:53.840 --> 22:57.960
+ I'll let you look at those notebooks if you're interested in the feature engineering.
+
+22:57.960 --> 22:59.880
+ And I do think that they're very interesting.
+
+22:59.880 --> 23:02.160
+ So do you check them out?
+
+23:02.160 --> 23:07.640
+ Our focus today is on building a linear model in a neural net from scratch, not on
+
+23:07.640 --> 23:13.080
+ tabular feature engineering, even though that's also a very important subject.
+
+23:13.080 --> 23:23.720
+ Okay, so we talked about how matrix modification makes linear models much easier.
+
+23:23.720 --> 23:27.200
+ And the other thing we did in Excel was element wise multiplication.
+
+23:27.200 --> 23:32.520
+ Both of those things are much easier if we use PyTorch instead of plain Python.
+
+23:32.520 --> 23:34.000
+ Or we could use NumPy.
+
+23:34.000 --> 23:38.240
+ And I tend to stick with PyTorch when I can, because it's easier to learn one library than
+
+23:38.240 --> 23:39.240
+ two.
+
+23:39.240 --> 23:41.840
+ So I just do everything in PyTorch.
+
+23:41.840 --> 23:44.200
+ I almost never touch NumPy nowadays.
+
+23:44.200 --> 23:45.200
+ They're both great.
+
+23:45.200 --> 23:51.080
+ But they do everything each other does except PyTorch also does differentiation and GPUs.
+
+23:51.080 --> 23:54.200
+ So why not just learn PyTorch?
+
+23:54.200 --> 24:04.920
+ So to turn a column into something that I can do PyTorch calculations on, I have to
+
+24:04.920 --> 24:06.960
+ do it into a tensor.
+
+24:06.960 --> 24:12.640
+ So a tensor is just what NumPy calls an array.
+
+24:12.640 --> 24:17.640
+ It's what mathematicians will call either a vector or a matrix.
+
+24:17.640 --> 24:24.320
+ Or once you've got a higher ranks, mathematicians and physicists just call them tensors.
+
+24:24.320 --> 24:30.120
+ In fact, this idea originally in computer science came from a notation developed in
+
+24:30.120 --> 24:35.040
+ the 50s called APL, which is turned into a programming language in the 60s by a guy called
+
+24:35.040 --> 24:36.040
+ Ken Iverson.
+
+24:36.040 --> 24:42.680
+ And Ken Iverson actually came up with this idea from, he said, his time doing tensor
+
+24:42.680 --> 24:44.880
+ analysis in physics.
+
+24:44.880 --> 24:48.920
+ So these areas are very related.
+
+24:48.920 --> 24:52.160
+ So we can turn the survive column into a tensor.
+
+24:52.160 --> 24:54.360
+ And we'll call that tensor our dependent variable.
+
+24:54.360 --> 24:56.360
+ That's the thing we're trying to predict.
+
+24:56.360 --> 24:57.920
+ Okay.
+
+24:57.920 --> 24:59.600
+ So now we need some independent variables.
+
+24:59.600 --> 25:06.760
+ So our independent variables are age, siblings.
+
+25:06.760 --> 25:17.000
+ That one is, oh yeah, number of other family members, the log of fair that we just created
+
+25:17.000 --> 25:20.640
+ plus all of those dummy columns we added.
+
+25:20.640 --> 25:29.000
+ And so we can now grab those values and turn them into a tensor.
+
+25:29.000 --> 25:31.600
+ And we have to make sure they're floats.
+
+25:31.600 --> 25:36.920
+ We want them all to be the same data type and PyTorch wants things to be floats if you're
+
+25:36.920 --> 25:39.880
+ going to multiply things together.
+
+25:39.880 --> 25:44.880
+ So there we are.
+
+25:44.880 --> 25:50.920
+ And so one of the most important attributes of a tensor, probably the most important attribute
+
+25:50.920 --> 25:58.200
+ is its shape, which is how many rows does it have and how many columns does it have.
+
+25:58.200 --> 26:05.600
+ The length of the shape is called its rank.
+
+26:05.600 --> 26:06.600
+ That's the rank of the tensor.
+
+26:06.600 --> 26:11.120
+ It's a number of dimensions or axes that it has.
+
+26:11.120 --> 26:14.560
+ So a vector is ranked one.
+
+26:14.560 --> 26:17.360
+ A matrix is rank two.
+
+26:17.360 --> 26:22.560
+ A scalar is rank zero.
+
+26:22.560 --> 26:26.000
+ And so forth.
+
+26:26.000 --> 26:31.120
+ I try not to use too much jargon, but there's some pieces of jargon that are really important
+
+26:31.120 --> 26:36.200
+ because otherwise you're going to have to say the length of the shape again and again.
+
+26:36.200 --> 26:37.880
+ It's much easier to say rank.
+
+26:37.880 --> 26:41.920
+ So we'll say we'll use that word a lot.
+
+26:41.920 --> 26:46.640
+ So a table is a rank two tensor.
+
+26:46.640 --> 26:51.520
+ Okay, so we've now got the data in good shape.
+
+26:51.520 --> 26:56.160
+ Use our independent variables and we've got our dependent variable.
+
+26:56.160 --> 27:04.520
+ So we can now go ahead and do exactly what we did in Excel, which is to multiply our
+
+27:04.520 --> 27:09.360
+ rows of data by some coefficients.
+
+27:09.360 --> 27:14.800
+ And remember to start with we create random coefficients.
+
+27:14.800 --> 27:18.320
+ So we're going to need one coefficient for each column.
+
+27:18.320 --> 27:24.920
+ Now in Excel we also had a constant, but in our case now we've got every column, every
+
+27:24.920 --> 27:27.840
+ level in our dummy variables, so we don't need a constant.
+
+27:27.840 --> 27:33.040
+ So the number of coefficients we need is equal to the shape of the independent variables
+
+27:33.040 --> 27:36.440
+ and it's the index one element.
+
+27:36.440 --> 27:38.040
+ That's the number of columns.
+
+27:38.040 --> 27:40.640
+ That's how many coefficients we want.
+
+27:40.640 --> 27:48.040
+ So we can now ask Torch, PyTorch to give us some random numbers and coef of them.
+
+27:48.040 --> 27:49.800
+ So between zero and one.
+
+27:49.800 --> 27:53.760
+ So if we subtract a half then they'll be centered.
+
+27:53.760 --> 27:55.880
+ And there we go.
+
+27:55.880 --> 27:59.280
+ Before I do that I set the seed.
+
+27:59.280 --> 28:09.880
+ What that means is in computers, computers in general cannot create truly random numbers.
+
+28:09.880 --> 28:16.160
+ Instead they can calculate a sequence of numbers that behave in a random like way.
+
+28:16.160 --> 28:19.920
+ That's actually good for us because often in my teaching I like to be able to say in
+
+28:19.920 --> 28:24.000
+ the pros, oh look that was two, now it's three or whatever.
+
+28:24.000 --> 28:28.760
+ And if I was using really random numbers then I couldn't do that because it'd be different
+
+28:28.760 --> 28:29.760
+ each time.
+
+28:29.760 --> 28:33.720
+ So this makes my results reproducible.
+
+28:33.720 --> 28:40.200
+ That means if you run it you'll get the same random numbers as I do by saying start the pseudo
+
+28:40.200 --> 28:45.720
+ random sequence with this number.
+
+28:45.720 --> 28:51.560
+ I mention in passing a lot of people are very very into reproducible results.
+
+28:51.560 --> 28:55.600
+ They think it's really important to always do this.
+
+28:55.600 --> 28:58.160
+ I strongly disagree with that.
+
+28:58.160 --> 29:03.720
+ In my opinion an important part of understanding your data is understanding how much it varies
+
+29:03.720 --> 29:05.040
+ from run to run.
+
+29:05.040 --> 29:11.160
+ So if I'm not teaching and wanting to be able to write things about these pseudo random
+
+29:11.160 --> 29:16.120
+ numbers I almost never use a manual seed.
+
+29:16.120 --> 29:19.720
+ Instead I like to run things a few times and get an intuitive sense of like oh this is
+
+29:19.720 --> 29:23.520
+ like very very stable or oh this is all over the place.
+
+29:23.520 --> 29:27.760
+ I'm putting an intuitive understanding of how your data behaves and your model behaves
+
+29:27.760 --> 29:30.920
+ is really important.
+
+29:30.920 --> 29:37.600
+ Now here's one of the coolest lines of code you'll ever see.
+
+29:37.600 --> 29:47.240
+ I know it doesn't look like much but think about what it's doing.
+
+29:47.240 --> 29:55.360
+ Okay so we've multiplied a matrix by a vector.
+
+29:55.360 --> 29:56.360
+ Now that's pretty interesting.
+
+29:56.360 --> 30:02.360
+ Now mathematicians amongst you will know that you can certainly do a matrix vector product
+
+30:02.360 --> 30:06.600
+ but that's not what we've done here at all.
+
+30:06.600 --> 30:09.120
+ We've used element wise multiplication.
+
+30:09.120 --> 30:15.440
+ So normally if we did the element wise multiplication of two vectors it would multiply you know
+
+30:15.440 --> 30:19.960
+ element one with element one, element two with element two and so forth and create a
+
+30:19.960 --> 30:23.480
+ vector of the same size output.
+
+30:23.480 --> 30:26.960
+ But here we've done a matrix times a vector.
+
+30:26.960 --> 30:29.600
+ How does that work?
+
+30:29.600 --> 30:33.800
+ This is using the incredibly powerful technique of broadcasting.
+
+30:33.800 --> 30:39.480
+ And broadcasting again comes from APL, a notation invented in the 50s and a programming language
+
+30:39.480 --> 30:43.120
+ developed in the 60s.
+
+30:43.120 --> 30:45.120
+ And it's got a number of benefits.
+
+30:45.120 --> 30:50.840
+ Basically what it's going to do is it's going to take each coefficient and multiply them
+
+30:50.840 --> 30:55.560
+ in turn by every row in our matrix.
+
+30:55.560 --> 31:06.120
+ So if you look at the shape of our independent variable and the shape of our coefficients
+
+31:06.120 --> 31:12.680
+ you can see that each one of these coefficients can be multiplied by each of these 891 values
+
+31:12.680 --> 31:15.480
+ in turn.
+
+31:15.480 --> 31:20.800
+ And so the reason we call it broadcasting is it's as if this is 891 columns by 12 rows
+
+31:20.800 --> 31:27.920
+ by 12 columns it's as if this was broadcast 891 times.
+
+31:27.920 --> 31:33.760
+ It's as if we had a loop looping 891 times and doing coefficients times row zero, coefficients
+
+31:33.760 --> 31:37.400
+ times row one, coefficients times row zero, two and so forth.
+
+31:37.400 --> 31:40.000
+ Which is exactly what we want.
+
+31:40.000 --> 31:48.280
+ Now reasons to use broadcasting, obviously the code is much more concise.
+
+31:48.280 --> 31:53.960
+ It looks more like math rather than clunky programming with lots of boilerplate.
+
+31:53.960 --> 31:56.040
+ So that's good.
+
+31:56.040 --> 32:02.440
+ Also that broadcasting all happened in optimized C code.
+
+32:02.440 --> 32:07.720
+ And if in fact it's being done on a GPU it's being done in optimized GPU assembler, code
+
+32:07.720 --> 32:09.360
+ of code.
+
+32:09.360 --> 32:12.560
+ It's going to run very, very fast indeed.
+
+32:12.560 --> 32:17.640
+ And this is the trick of why we can use a so called slow language like Python to do
+
+32:17.640 --> 32:24.440
+ very fast big models is because a single line of code like this can run very quickly on
+
+32:24.440 --> 32:29.280
+ optimized hardware on lots and lots of data.
+
+32:29.280 --> 32:36.000
+ The rules of broadcasting are a little bit subtle and important to know.
+
+32:36.000 --> 32:51.960
+ And so I would strongly encourage you to Google NumPy broadcasting rules and see exactly
+
+32:51.960 --> 32:53.040
+ how they work.
+
+32:53.040 --> 32:56.160
+ But you know the kind of intuitive understanding of them hopefully you'll get pretty quickly
+
+32:56.160 --> 33:03.000
+ which is generally speaking you can kind of as long as the last axes match it'll broadcast
+
+33:03.000 --> 33:04.240
+ over those axes.
+
+33:04.240 --> 33:10.600
+ You can broadcast a rank three thing with a rank one thing or you know most simple version
+
+33:10.600 --> 33:20.520
+ would be tensor one, two, three times two.
+
+33:20.520 --> 33:28.960
+ So broadcast a
+
+33:28.960 --> 33:35.200
+ scalar over a vector does exactly what you would expect so it's copying effectively that
+
+33:35.200 --> 33:39.720
+ too into each of these spots and multiplying them together but it doesn't use it up any
+
+33:39.720 --> 33:41.080
+ memory to do that.
+
+33:41.080 --> 33:44.160
+ It's kind of a virtual copying if you like.
+
+33:44.160 --> 33:49.000
+ So this line of code independence by coefficients is very, very important.
+
+33:49.000 --> 33:54.120
+ And it's the key step that we wanted to take which is now we know exactly how what happens
+
+33:54.120 --> 33:57.320
+ when we multiply the coefficients in.
+
+33:57.320 --> 34:10.760
+ And if you remember back to Excel we did that product and then in Excel there's a sum product
+
+34:10.760 --> 34:14.320
+ we then added a rule together because that's what a linear model is.
+
+34:14.320 --> 34:18.840
+ It's the coefficients times the values added together.
+
+34:18.840 --> 34:22.720
+ So we're now going to add those together.
+
+34:22.720 --> 34:30.480
+ But before we do that if we did add up this row you can see that the very first value
+
+34:30.480 --> 34:34.040
+ has a very large magnitude and all the other ones are small.
+
+34:34.040 --> 34:35.680
+ Same with row two.
+
+34:35.680 --> 34:36.680
+ Same with row three.
+
+34:36.680 --> 34:37.880
+ Same with row four.
+
+34:37.880 --> 34:38.880
+ What's going on here?
+
+34:38.880 --> 34:44.920
+ Well what's going on is that the very first column was age.
+
+34:44.920 --> 34:50.040
+ And age is much bigger than any of the other columns.
+
+34:50.040 --> 34:52.960
+ It's not the end of the world but it's not ideal.
+
+34:52.960 --> 34:59.240
+ Because that means that a coefficient of say.5 times age means something very different
+
+34:59.240 --> 35:04.440
+ to a coefficient of say.5 times log fare.
+
+35:04.440 --> 35:08.840
+ And that means that that random coefficient we start with it's going to mean very different
+
+35:08.840 --> 35:09.840
+ things, very different columns.
+
+35:09.840 --> 35:12.760
+ And that's going to make it really hard to optimize.
+
+35:12.760 --> 35:16.680
+ So we would like all the columns to have about the same range.
+
+35:16.680 --> 35:26.160
+ So what we could do as we did in Excel is to divide them by the maximum.
+
+35:26.160 --> 35:29.120
+ So the maximum, so we did it for age and we also did it for fare.
+
+35:29.120 --> 35:34.720
+ In this case I didn't use log.
+
+35:34.720 --> 35:40.080
+ So we can get the max of each row by calling.max.
+
+35:40.080 --> 35:41.720
+ And you can pass in a dimension.
+
+35:41.720 --> 35:45.240
+ Do you want the maximum of the rows or the maximum of the columns?
+
+35:45.240 --> 35:47.720
+ Do you want the maximum over the rows?
+
+35:47.720 --> 35:50.600
+ So we pass in dimension zero.
+
+35:50.600 --> 35:56.720
+ So those different parts of the shape are called either axes or dimensions.
+
+35:56.720 --> 35:58.520
+ PyTorch calls them dimensions.
+
+35:58.520 --> 36:01.320
+ So that's going to give us the maximum of each row.
+
+36:01.320 --> 36:05.840
+ And if you look at the docs for PyTorch's max function it will tell you it returns two
+
+36:05.840 --> 36:12.680
+ things, the actual value of each maximum and the index of which row it was.
+
+36:12.680 --> 36:14.440
+ We want the values.
+
+36:14.440 --> 36:19.720
+ So now thanks to broadcasting we can just say take the independent variables and divide
+
+36:19.720 --> 36:21.560
+ them by the vector of values.
+
+36:21.560 --> 36:25.440
+ Again, we've got a matrix and a vector.
+
+36:25.440 --> 36:32.800
+ And so this is going to do an element wise division of each row of this divided by this
+
+36:32.800 --> 36:33.960
+ vector.
+
+36:33.960 --> 36:38.320
+ Again in a very optimized way.
+
+36:38.320 --> 36:45.000
+ So if we now look at our normalized independent variables by the coefficients you can see
+
+36:45.000 --> 36:47.440
+ they're all pretty similar values.
+
+36:47.440 --> 36:49.520
+ So that's good.
+
+36:49.520 --> 36:52.640
+ There's lots of different ways of normalizing but the main ones you'll come across is either
+
+36:52.640 --> 36:59.040
+ dividing by the maximum or subtracting the mean and dividing by the standard deviation.
+
+36:59.040 --> 37:02.480
+ It normally doesn't matter too much.
+
+37:02.480 --> 37:06.360
+ Because I'm lazy I just pick the easier one and being lazy and picking the easier one
+
+37:06.360 --> 37:09.040
+ is a very good plan in my opinion.
+
+37:09.040 --> 37:13.520
+ So now that we can see that multiplying them together is working pretty well we can now
+
+37:13.520 --> 37:21.200
+ add them up and now we want to add up over the columns.
+
+37:21.200 --> 37:22.880
+ And that would give us predictions.
+
+37:22.880 --> 37:27.120
+ Now obviously just like an Excel when we started out they're not useful predictions because
+
+37:27.120 --> 37:30.720
+ they're random coefficients but they are predictions nonetheless.
+
+37:30.720 --> 37:34.480
+ And here's the first ten of them.
+
+37:34.480 --> 37:42.440
+ So then remember we want to use gradient descent to try to make these better.
+
+37:42.440 --> 37:45.760
+ So to do gradient descent we need a loss.
+
+37:45.760 --> 37:51.760
+ The loss is the measure of how good or bad are these coefficients.
+
+37:51.760 --> 37:57.440
+ My favorite loss function as I kind of like don't think about it just chuck something
+
+37:57.440 --> 37:59.760
+ out there is the mean absolute value.
+
+37:59.760 --> 38:06.800
+ And here it is torch dot absolute value of the error difference.
+
+38:06.800 --> 38:08.600
+ Take the mean.
+
+38:08.600 --> 38:17.280
+ And often stuff like this you'll see people will use pre written mean absolute error functions
+
+38:17.280 --> 38:21.960
+ which is also fine but I quite like to write it out because I can see exactly what's going
+
+38:21.960 --> 38:22.960
+ on.
+
+38:22.960 --> 38:23.960
+ No confusion.
+
+38:23.960 --> 38:27.640
+ No chance of misunderstanding.
+
+38:27.640 --> 38:35.800
+ So those are all the steps I'm going to need to create coefficients, run a linear model
+
+38:35.800 --> 38:37.600
+ and get its loss.
+
+38:37.600 --> 38:42.180
+ So what I like to do in my notebooks like not just for teaching but all the time is to
+
+38:42.180 --> 38:47.760
+ like do everything step by step manually and then just copy and paste the steps into a
+
+38:47.760 --> 38:48.760
+ function.
+
+38:48.760 --> 38:52.640
+ So here's my CalcPets function is exactly what I just did.
+
+38:52.640 --> 38:54.960
+ Here's my Calc loss function.
+
+38:54.960 --> 38:57.560
+ Exactly what I just did.
+
+38:57.560 --> 39:03.920
+ And that way you know a lot of people like go back and delete all their explorations or
+
+39:03.920 --> 39:07.560
+ they like do them in a different notebook or they're like working in an IDE they'll go
+
+39:07.560 --> 39:11.280
+ and do it in some you know line oriented rep or whatever.
+
+39:11.280 --> 39:15.920
+ But if you you know think about the benefits of keeping it here when you come back to it
+
+39:15.920 --> 39:19.400
+ in six months you'll see exactly why you did what you did and how we got there or if you're
+
+39:19.400 --> 39:24.560
+ showing it to your boss or your colleague you can see you know exactly what's happening.
+
+39:24.560 --> 39:30.400
+ What does each step look like I think this is really very helpful indeed.
+
+39:30.400 --> 39:37.000
+ I know not many people code that way but I feel strongly that it's a huge productivity
+
+39:37.000 --> 39:40.880
+ win to individuals and teams.
+
+39:40.880 --> 39:47.640
+ So remember from our gradient descent from scratch that the one bit we don't want to
+
+39:47.640 --> 39:52.000
+ do from scratch is calculating derivatives because it's just menial and boring.
+
+39:52.000 --> 39:55.360
+ So to get PyTorch to do it for us you have to say well what things do you want derivatives
+
+39:55.360 --> 39:58.520
+ for and of course we want it for the coefficients.
+
+39:58.520 --> 40:01.080
+ So then we have to say requires grad.
+
+40:01.080 --> 40:05.560
+ And remember very important in PyTorch if there's an underscore at the end that's an
+
+40:05.560 --> 40:06.880
+ in place operation.
+
+40:06.880 --> 40:10.520
+ So this is actually going to change cofs.
+
+40:10.520 --> 40:14.400
+ It also returns them right but it also changes them in place.
+
+40:14.400 --> 40:18.880
+ So now we've got exactly the same numbers as before but with requires grad turned on.
+
+40:18.880 --> 40:23.800
+ So now when we calculate our loss that doesn't do any other calculations but what it does
+
+40:23.800 --> 40:26.560
+ store is a gradient function.
+
+40:26.560 --> 40:31.840
+ It's the function that Python has remembered that it would have to do to undo those steps
+
+40:31.840 --> 40:38.720
+ to get back to the gradient and to say oh please actually call that backward gradient
+
+40:38.720 --> 40:42.320
+ function you call backward.
+
+40:42.320 --> 40:50.080
+ So at that point it sticks into a dot grad attribute the coefficients gradients.
+
+40:50.080 --> 40:57.920
+ So this tells us that if we increased the age coefficient the loss would go down.
+
+40:57.920 --> 41:03.440
+ So therefore we should do that.
+
+41:03.440 --> 41:09.680
+ So since negative means increasing this would decrease the loss that means we need to if
+
+41:09.680 --> 41:16.800
+ you remember back to the gradient descent from scratch notebook we need to subtract the coefficients
+
+41:16.800 --> 41:19.280
+ times a learning rate.
+
+41:19.280 --> 41:23.720
+ So we haven't got any particular ideas yet of how to set the learning rate.
+
+41:23.720 --> 41:27.680
+ So for now I just pick a just try a few and still find out what works best.
+
+41:27.680 --> 41:32.040
+ In this case I found point one worked pretty well.
+
+41:32.040 --> 41:34.320
+ So I now subtract.
+
+41:34.320 --> 41:41.120
+ So again this is sub underscore so subtract in place from the coefficients the gradient
+
+41:41.120 --> 41:43.560
+ times the learning rate.
+
+41:43.560 --> 41:50.960
+ And so the loss has gone down that's great from point five four to point five two.
+
+41:50.960 --> 41:55.160
+ So there is one step.
+
+41:55.160 --> 42:05.720
+ So we've now got everything we need to train a linear model.
+
+42:05.720 --> 42:07.000
+ So let's do it.
+
+42:07.000 --> 42:12.880
+ Now as we discussed last week to see whether your model is any good it's important that
+
+42:12.880 --> 42:18.360
+ you split your data into training and validation.
+
+42:18.360 --> 42:23.880
+ For the Titanic data set it's actually pretty much fine to use a random split because backward
+
+42:23.880 --> 42:28.080
+ friend Margit and I actually created this competition for Kaggle many years ago that's
+
+42:28.080 --> 42:31.480
+ basically what we did if I remember correctly.
+
+42:31.480 --> 42:37.440
+ So we can split them randomly into a training set and a validation set.
+
+42:37.440 --> 42:41.120
+ So we're just going to use fast di for that.
+
+42:41.120 --> 42:45.560
+ You know it's very easy to do it manually with NumPy or PyTorch.
+
+42:45.560 --> 42:49.600
+ You can use scikit learns train test split.
+
+42:49.600 --> 42:54.320
+ I'm using fast ais here partly because it's easy just to remember one way to do things
+
+42:54.320 --> 42:58.080
+ and this works everywhere and partly because in the next notebook we're going to be seeing
+
+42:58.080 --> 43:04.600
+ how to do more stuff in fast ai so I want to make sure we have exactly the same split.
+
+43:04.600 --> 43:13.560
+ So those are a list of the indexes of the rows that will be for example in the validation
+
+43:13.560 --> 43:14.560
+ set.
+
+43:14.560 --> 43:17.440
+ That's why I call it validation split.
+
+43:17.440 --> 43:23.360
+ So to create the validation independent variables you have to use those to index into the independent
+
+43:23.360 --> 43:28.040
+ variables and do it over the dependent variables.
+
+43:28.040 --> 43:37.520
+ And so now we've got our independent variable training set and our validation set and we've
+
+43:37.520 --> 43:42.160
+ also got the same for the dependent variables.
+
+43:42.160 --> 43:47.000
+ So like I said before I normally take stuff that I've already done in a notebook seems
+
+43:47.000 --> 43:49.240
+ to be working and put them into functions.
+
+43:49.240 --> 43:52.520
+ So here's the step which actually updates coefficients.
+
+43:52.520 --> 43:55.280
+ So let's chuck that into a function.
+
+43:55.280 --> 43:59.760
+ And then the steps that go cat last stop backward update coefficients and then print the loss
+
+43:59.760 --> 44:01.520
+ or chuck that in one function.
+
+44:01.520 --> 44:05.680
+ That is copying and pasting stuff into cells here.
+
+44:05.680 --> 44:10.040
+ And then the bit on the very top of the previous section that got the random numbers minus
+
+44:10.040 --> 44:13.760
+ point five requires grad chuck that in the function.
+
+44:13.760 --> 44:17.760
+ So here we've got something that initializes coefficients, something that does one epoch
+
+44:17.760 --> 44:20.360
+ by updating coefficients.
+
+44:20.360 --> 44:25.040
+ So we can put that into a together into something that trains the model for any parks with some
+
+44:25.040 --> 44:32.480
+ learning rate by setting the manual seed, initializing the coefficients, doing one epoch
+
+44:32.480 --> 44:37.480
+ in a loop and then return the coefficients.
+
+44:37.480 --> 44:41.280
+ So let's go ahead and run that function.
+
+44:41.280 --> 44:45.840
+ So it's printing at the end of each one the loss and you can see the loss going down from
+
+44:45.840 --> 44:50.760
+ point five three down, down, down, down, down to a bit under point three.
+
+44:50.760 --> 44:51.760
+ So that's good.
+
+44:51.760 --> 44:58.080
+ We have successfully built and trained a linear model on a real data set.
+
+44:58.080 --> 45:03.920
+ I mean it's a caggle data set but it's important to like not underestimate how real caggle
+
+45:03.920 --> 45:04.920
+ data sets are.
+
+45:04.920 --> 45:06.840
+ They're real data.
+
+45:06.840 --> 45:08.240
+ This one's a playground data set.
+
+45:08.240 --> 45:12.400
+ It's not like anybody actually cares about predicting who survived the Titanic because
+
+45:12.400 --> 45:14.440
+ we already know.
+
+45:14.440 --> 45:19.320
+ But it has all the same features of different data types and missing values and normalization
+
+45:19.320 --> 45:20.320
+ and so forth.
+
+45:20.320 --> 45:25.200
+ So it's a good playground.
+
+45:25.200 --> 45:29.520
+ So it'd be nice to see what the coefficients are attached to each variable.
+
+45:29.520 --> 45:34.960
+ So if we just zip together the independent variables and the coefficients and we don't
+
+45:34.960 --> 45:41.320
+ need the regret anymore and create a dict of that, there we go.
+
+45:41.320 --> 45:47.600
+ So it looks like older people had less chance of surviving.
+
+45:47.600 --> 45:49.880
+ That makes sense.
+
+45:49.880 --> 45:51.880
+ Males had less chance of surviving.
+
+45:51.880 --> 45:54.560
+ Also makes sense.
+
+45:54.560 --> 46:02.520
+ So it's good to kind of eyeball these and check that they seem reasonable.
+
+46:02.520 --> 46:10.080
+ Now the metric for this caggle competition is not main absolute error.
+
+46:10.080 --> 46:11.640
+ It's accuracy.
+
+46:11.640 --> 46:15.360
+ Now of course we can't use accuracy as a loss function because it doesn't have a sensible
+
+46:15.360 --> 46:18.040
+ gradient really.
+
+46:18.040 --> 46:22.840
+ But we should measure accuracy to see how we're doing because that's going to tell us how
+
+46:22.840 --> 46:26.600
+ we're going against the thing that the caggle competition cares about.
+
+46:26.600 --> 46:28.240
+ So we can calculate our predictions.
+
+46:28.240 --> 46:35.360
+ And we'll just say okay well any times the predictions over point five, we'll say that's
+
+46:35.360 --> 46:37.560
+ predicting survival.
+
+46:37.560 --> 46:39.680
+ So that's our predictors of survival.
+
+46:39.680 --> 46:42.280
+ This is the actual in a validation set.
+
+46:42.280 --> 46:46.760
+ So if they're the same, then we predicted it correctly.
+
+46:46.760 --> 46:52.080
+ So here's, are we right or wrong for the first 16 rows?
+
+46:52.080 --> 46:55.120
+ We're right more often than not.
+
+46:55.120 --> 47:00.520
+ So if we take the mean of those, remember true equals one, then that's our accuracy.
+
+47:00.520 --> 47:03.080
+ So we're right about 79% of the time.
+
+47:03.080 --> 47:04.560
+ So that's not bad.
+
+47:04.560 --> 47:11.160
+ So we've successfully created something that's actually predicting who survived the Titanic.
+
+47:11.160 --> 47:14.000
+ That's cool from scratch.
+
+47:14.000 --> 47:21.120
+ So let's create a function for that, an accuracy function that just does what I showed.
+
+47:21.120 --> 47:22.120
+ And there it is.
+
+47:22.120 --> 47:29.920
+ Now I say another thing like, you know, my weird coding thing for me, you know, weird
+
+47:29.920 --> 47:36.320
+ as a not that common is I use less comments than most people because all of my code lives
+
+47:36.320 --> 47:37.320
+ in notebooks.
+
+47:37.320 --> 47:43.960
+ And of course, and that the real version of this notebook is full of pros.
+
+47:43.960 --> 47:44.960
+ Right.
+
+47:44.960 --> 47:50.240
+ So when I've taken people through a whole journey about what I've built here and why
+
+47:50.240 --> 47:55.040
+ I've built it and what intermediate results are and check them along the way, the function
+
+47:55.040 --> 47:59.440
+ itself, then I, you know, for me doesn't need extensive comments.
+
+47:59.440 --> 48:04.360
+ You know, I'd rather explain the thinking of how I got there and show examples of how
+
+48:04.360 --> 48:07.920
+ to use it and so forth.
+
+48:07.920 --> 48:09.320
+ Okay.
+
+48:09.320 --> 48:17.840
+ Now, here's the first few predictions we made.
+
+48:17.840 --> 48:25.440
+ In some of the time we're predicting negatives for survival and greater than one for survival,
+
+48:25.440 --> 48:28.480
+ which doesn't really make much sense, right?
+
+48:28.480 --> 48:31.960
+ People either survived one or they didn't zero.
+
+48:31.960 --> 48:40.000
+ It would be nice if we had a way to automatically squish everything between zero and one.
+
+48:40.000 --> 48:44.360
+ That's going to make it much easier to optimize.
+
+48:44.360 --> 48:48.400
+ So optimize, it doesn't have to try hard to hit exactly one or hit exactly zero, but it
+
+48:48.400 --> 48:53.760
+ can just like try to create a really big number to mean survive to a really small number
+
+48:53.760 --> 48:57.640
+ to mean perished.
+
+48:57.640 --> 49:03.800
+ Here's a great function.
+
+49:03.800 --> 49:11.720
+ Here's a function that as I increase, let's make it even bigger range.
+
+49:11.720 --> 49:20.480
+ As my numbers get beyond four or five, it's asymptoting to one.
+
+49:20.480 --> 49:23.960
+ And on the negative side, as they get beyond negative four or five, they asymptote to
+
+49:23.960 --> 49:24.960
+ zero.
+
+49:24.960 --> 49:31.560
+ Or to zoom in a bit.
+
+49:31.560 --> 49:36.200
+ But then around about zero, it's pretty much a straight line.
+
+49:36.200 --> 49:37.200
+ This is actually perfect.
+
+49:37.200 --> 49:39.680
+ This is exactly what we want.
+
+49:39.680 --> 49:45.360
+ So here is the equation, one over one plus e to the negative minus x.
+
+49:45.360 --> 49:49.880
+ And this is called the sigmoid function.
+
+49:49.880 --> 49:55.120
+ By the way, if you haven't checked out sim pi before, definitely do so.
+
+49:55.120 --> 50:02.080
+ This is the symbolic Python package, which can do, it's kind of like Mathematica or Wolfram's
+
+50:02.080 --> 50:09.840
+ style symbolic calculations, including the ability to plot symbolic expressions, which
+
+50:09.840 --> 50:13.280
+ is pretty nice.
+
+50:13.280 --> 50:15.080
+ PyTorch already has a sigmoid function.
+
+50:15.080 --> 50:19.760
+ I mean, it just calculates this, but it does it in an all optimized way.
+
+50:19.760 --> 50:22.880
+ So what if we replaced cat threads?
+
+50:22.880 --> 50:28.320
+ Remember before cat threads was just this.
+
+50:28.320 --> 50:31.520
+ What if we took that and then put it through a sigmoid?
+
+50:31.520 --> 50:42.000
+ So cat threads were now basically the bigger, the bigger this number is, the closer it's
+
+50:42.000 --> 50:45.720
+ going to get to one, and the smaller it is, the closer it's going to get to zero.
+
+50:45.720 --> 50:50.160
+ This should be a much easier thing to optimize and ensures that all of our values are in
+
+50:50.160 --> 50:52.160
+ a sensible range.
+
+50:52.160 --> 51:00.360
+ Now, here's another cool thing about using Jupyter plus Python.
+
+51:00.360 --> 51:09.040
+ Python is a dynamic language, even though I called cat threads train model calls one
+
+51:09.040 --> 51:17.120
+ epoch, which calls cat loss, which calls cat threads.
+
+51:17.120 --> 51:22.760
+ I can redefine cat threads now, and I don't have to do anything.
+
+51:22.760 --> 51:28.120
+ That's now inserted into Python symbol table, and that's the cat threads that train model
+
+51:28.120 --> 51:29.640
+ will eventually call.
+
+51:29.640 --> 51:37.040
+ So if I now call train model, that's actually going to call my new version of cat threads.
+
+51:37.040 --> 51:43.040
+ So that's a really neat way of doing exploratory programming in Python.
+
+51:43.040 --> 51:51.520
+ I wouldn't release a library that redefines cat threads multiple times.
+
+51:51.520 --> 51:54.080
+ When I'm done, I would just keep the final version, of course.
+
+51:54.080 --> 51:58.320
+ But it's a great way to try things, as you'll see.
+
+51:58.320 --> 51:59.440
+ And so look what's happened.
+
+51:59.440 --> 52:02.600
+ I found I was able to increase the learning rate from 0.1 to 2.
+
+52:02.600 --> 52:05.960
+ It was much easier to optimize, as I guessed.
+
+52:05.960 --> 52:15.480
+ And the loss has improved from 0.295 to 0.197.
+
+52:15.480 --> 52:23.160
+ The accuracy has improved from 0.79 to 0.82, from nearly 0.03.
+
+52:23.160 --> 52:29.840
+ So as a rule, this is something that we're pretty much always going to do when we have
+
+52:29.840 --> 52:31.520
+ a binary dependent variable.
+
+52:31.520 --> 52:38.640
+ So dependent variable that's 1 or 0 is the very last step is chuck it through a sigmoid.
+
+52:38.640 --> 52:44.320
+ Generally speaking, if you're wondering, why is my model with a binary dependent variable
+
+52:44.320 --> 52:48.440
+ not training very well, this is the thing you want to check.
+
+52:48.440 --> 52:50.880
+ Oh, are you chucking it through a sigmoid?
+
+52:50.880 --> 52:55.400
+ Or is the thing you're calling, chucking it through a sigmoid or not?
+
+52:55.400 --> 52:58.160
+ It can be surprisingly hard to find out if that's happening.
+
+52:58.160 --> 53:01.640
+ So for example, with hugging face transformers, I actually found I had to look in this source
+
+53:01.640 --> 53:04.120
+ code to find out.
+
+53:04.120 --> 53:06.320
+ And I discovered that something I was doing wasn't.
+
+53:06.320 --> 53:09.880
+ It didn't seem to be documented anywhere.
+
+53:09.880 --> 53:14.360
+ But it is important to find these things out.
+
+53:14.360 --> 53:23.200
+ Let's more discuss in the next lesson, we'll talk a lot about neural net architecture details.
+
+53:23.200 --> 53:27.600
+ But the details we'll focus on are what happens to the inputs at the very first stage and
+
+53:27.600 --> 53:29.720
+ what happens to the outputs at the very last stage.
+
+53:29.720 --> 53:33.400
+ We'll talk a bit about what happens in the middle, but a lot less.
+
+53:33.400 --> 53:38.240
+ And the reason why is it's a thing that you put into the inputs that's going to change
+
+53:38.240 --> 53:40.880
+ for every single data set you do.
+
+53:40.880 --> 53:45.080
+ And what do you want to happen to the outputs that are going to happen for every different
+
+53:45.080 --> 53:47.600
+ target that you're trying to hit?
+
+53:47.600 --> 53:50.840
+ So those are the things that you actually need to know about.
+
+53:50.840 --> 53:54.200
+ So for example, this thing of like, well, you need to know about the sigmoid function
+
+53:54.200 --> 53:57.920
+ and you need to know that you need to use it.
+
+53:57.920 --> 54:01.960
+ Fast AI is very good at handling this for you.
+
+54:01.960 --> 54:04.440
+ That's why we haven't had to talk about it much until now.
+
+54:04.440 --> 54:09.360
+ If you say it's a category block dependent variable, it's going to use the right kind
+
+54:09.360 --> 54:11.800
+ of thing for you.
+
+54:11.800 --> 54:15.760
+ But most things are not so convenient.
+
+54:15.760 --> 54:17.560
+ John, is there a question?
+
+54:17.560 --> 54:19.760
+ Yes, there is.
+
+54:19.760 --> 54:24.000
+ It's back in the sort of the feature engineering topic.
+
+54:24.000 --> 54:28.360
+ But a couple of people have liked it, so I thought we'd put it out there.
+
+54:28.360 --> 54:32.840
+ So Siobhan says, one concern I have while using get dummies, right?
+
+54:32.840 --> 54:37.960
+ So it's in that get dummies phase is what happens while using test data?
+
+54:37.960 --> 54:41.840
+ I have a new category, let's say male, female and other.
+
+54:41.840 --> 54:46.320
+ And this will have an extra column missing from the training data.
+
+54:46.320 --> 54:48.200
+ How do you take care of that?
+
+54:48.200 --> 54:49.840
+ That's a great question.
+
+54:49.840 --> 54:57.720
+ So normally you've got to think about this pretty carefully and check pretty carefully
+
+54:57.720 --> 54:59.720
+ unless you use Fast AI.
+
+54:59.720 --> 55:05.600
+ So Fast AI always creates an extra category called other.
+
+55:05.600 --> 55:11.560
+ And at test time, inference time, if you have some level that didn't exist before, we put
+
+55:11.560 --> 55:14.640
+ it into the other category for you.
+
+55:14.640 --> 55:22.800
+ Otherwise, you basically have to do that yourself or at least check.
+
+55:22.800 --> 55:31.200
+ Generally speaking, it's pretty likely that otherwise your extra level will be silently
+
+55:31.200 --> 55:34.840
+ ignored, you know, because it's going to be in the data set, but it's not going to be
+
+55:34.840 --> 55:36.120
+ matched to a column.
+
+55:36.120 --> 55:39.920
+ So yeah, it's a good point and definitely worth checking.
+
+55:39.920 --> 55:45.240
+ For categorical variables with lots of levels, I actually normally like to put the less common
+
+55:45.240 --> 55:47.080
+ ones into an other category.
+
+55:47.080 --> 55:51.520
+ And again, that's something that Fast AI will do for you automatically.
+
+55:51.520 --> 55:58.040
+ But yeah, definitely something to keep an eye out for.
+
+55:58.040 --> 56:00.040
+ Good question.
+
+56:00.040 --> 56:07.000
+ Okay, so before we take our break, we'll just do one last thing, which is we will submit
+
+56:07.000 --> 56:11.760
+ this to Kaggle because I think it's quite cool that we have successfully built a model
+
+56:11.760 --> 56:13.560
+ from scratch.
+
+56:13.560 --> 56:18.560
+ So Kaggle provides us with a test.csv, which is exactly the same structure as the training
+
+56:18.560 --> 56:23.320
+ CSV, except that it doesn't have a survived column.
+
+56:23.320 --> 56:29.800
+ Now interestingly, when I tried to submit to Kaggle, I got an error in my code saying
+
+56:29.800 --> 56:32.920
+ that, oh, one of my fares is empty.
+
+56:32.920 --> 56:38.560
+ So that was interesting because the training set doesn't have any empty fares.
+
+56:38.560 --> 56:43.160
+ So sometimes this will happen that the training set and the test set have different things
+
+56:43.160 --> 56:44.160
+ to deal with.
+
+56:44.160 --> 56:46.280
+ So in this case, I just said, oh, there's only one row.
+
+56:46.280 --> 56:47.280
+ I don't care.
+
+56:47.280 --> 56:53.040
+ So I just replaced the empty one with a zero for fare.
+
+56:53.040 --> 57:01.800
+ So then I just copied and posted the preprocessing steps from my training data frame and stuck
+
+57:01.800 --> 57:06.560
+ them here for the test data frame and the normalization as well.
+
+57:06.560 --> 57:08.840
+ And so now I just call cutprets.
+
+57:08.840 --> 57:12.080
+ Is it greater than.5?
+
+57:12.080 --> 57:16.480
+ Turn it into a zero or one because that's what Kaggle expects and put that into the survived
+
+57:16.480 --> 57:20.760
+ column, which previously remember didn't exist.
+
+57:20.760 --> 57:27.560
+ So then finally I created data frame with just the two columns, ID and survived.
+
+57:27.560 --> 57:32.520
+ Stick it in a CSV file and then I can call the Unix command head just to look at the first
+
+57:32.520 --> 57:34.120
+ year rows.
+
+57:34.120 --> 57:39.640
+ And if you look at the Kaggle competitions data page, you'll see this is what the submission
+
+57:39.640 --> 57:41.120
+ file is expected to look like.
+
+57:41.120 --> 57:42.520
+ So that made me feel good.
+
+57:42.520 --> 57:44.840
+ So I went ahead and submitted it.
+
+57:44.840 --> 57:47.400
+ I didn't mention it.
+
+57:47.400 --> 57:52.800
+ Anyway, I submitted it and I remember I got like, I think I was basically a bright in the
+
+57:52.800 --> 57:57.160
+ middle, about 50%, you know, better than half the people who have entered the competition,
+
+57:57.160 --> 57:58.760
+ worse than half the people.
+
+57:58.760 --> 58:03.920
+ So you know, solid middle of the pack result for a linear model from scratch.
+
+58:03.920 --> 58:06.200
+ I think it's a pretty good result.
+
+58:06.200 --> 58:07.720
+ So that's a great place to start.
+
+58:07.720 --> 58:09.400
+ So let's take a 10 minute break.
+
+58:09.400 --> 58:16.200
+ We'll come back at 7.17 and continue on our journey.
+
+58:16.200 --> 58:18.200
+ All right.
+
+58:18.200 --> 58:29.440
+ Welcome back.
+
+58:29.440 --> 58:42.200
+ You might remember from Excel that after we did the some product version, we then replaced
+
+58:42.200 --> 58:46.720
+ it with a matrix model play.
+
+58:46.720 --> 58:48.720
+ Wait, not there.
+
+58:48.720 --> 58:53.080
+ Here we are with a matrix model play.
+
+58:53.080 --> 58:55.000
+ So let's do that step now.
+
+58:55.000 --> 59:06.080
+ So matrix times vector dot sum over axis equals one is the same thing as matrix model play.
+
+59:06.080 --> 59:10.200
+ So here is the times dot sum version.
+
+59:10.200 --> 59:16.400
+ Now we can't use this character for a matrix model play because it means element wise operation.
+
+59:16.400 --> 59:22.680
+ All of the times plus minus divide in pie torch numpy mean element wise.
+
+59:22.680 --> 59:26.560
+ So corresponding elements.
+
+59:26.560 --> 59:28.680
+ So in Python, instead we use this character.
+
+59:28.680 --> 59:30.800
+ As far as I know, it's pretty arbitrary.
+
+59:30.800 --> 59:34.400
+ It's one of the ones that wasn't used.
+
+59:34.400 --> 59:36.040
+ So that is an official Python.
+
+59:36.040 --> 59:39.000
+ It's a visual Python operator.
+
+59:39.000 --> 59:40.840
+ It means matrix model play.
+
+59:40.840 --> 59:43.520
+ But Python doesn't come with an implementation of it.
+
+59:43.520 --> 59:49.400
+ So because we've imported because these are tenses and in pie torch, it will use pie torches.
+
+59:49.400 --> 59:52.160
+ And as you can see, they're exactly the same.
+
+59:52.160 --> 59:54.600
+ So we can now just simplify a little bit.
+
+59:54.600 --> 1:00:01.440
+ What we have before, CAC threads is now torch dot sigmoid of the matrix model play.
+
+1:00:01.440 --> 1:00:06.680
+ Now there is one thing I'd like to move towards now is that we're going to try to create a
+
+1:00:06.680 --> 1:00:09.200
+ neural net in a moment.
+
+1:00:09.200 --> 1:00:15.480
+ And so that means rather than treat this as a matrix times a vector, I want to treat this
+
+1:00:15.480 --> 1:00:23.640
+ as a matrix times a matrix because we're about to add some more columns of coefficients.
+
+1:00:23.640 --> 1:00:31.720
+ So we're going to change in a cof's so that rather than creating an n cof vector, we're
+
+1:00:31.720 --> 1:00:37.640
+ going to create an n cof by one matrix.
+
+1:00:37.640 --> 1:00:40.640
+ So in math, we would probably call that a column vector.
+
+1:00:40.640 --> 1:00:45.200
+ But I think that's a kind of a dumb name in some ways because it's a matrix, right?
+
+1:00:45.200 --> 1:00:51.920
+ It's a rank two tensor.
+
+1:00:51.920 --> 1:00:56.960
+ So like the matrix model play will work fine either way.
+
+1:00:56.960 --> 1:01:02.840
+ The key difference is that if we do it this way, then the result of the matrix model play
+
+1:01:02.840 --> 1:01:05.200
+ will also be a matrix.
+
+1:01:05.200 --> 1:01:11.040
+ It'll be again, a n rows by one matrix.
+
+1:01:11.040 --> 1:01:14.480
+ That means when we compare it to the dependent variable, we need the dependent variable to
+
+1:01:14.480 --> 1:01:17.400
+ be an n rows by one matrix as well.
+
+1:01:17.400 --> 1:01:22.960
+ So effectively, we need to take the n rows long vector and turn it into an n rows by
+
+1:01:22.960 --> 1:01:26.360
+ one matrix.
+
+1:01:26.360 --> 1:01:34.240
+ So there's some useful, very useful, and at first maybe a bit weird notation in PyTorch
+
+1:01:34.240 --> 1:01:41.360
+ NumPy for this, which is if I take my training dependent variables vector, I index into
+
+1:01:41.360 --> 1:01:46.720
+ it and colon means every row.
+
+1:01:46.720 --> 1:01:55.120
+ So in other words, that just means the whole vector, right?
+
+1:01:55.120 --> 1:02:01.920
+ It's the same basically as that.
+
+1:02:01.920 --> 1:02:05.240
+ And then I index into a second dimension.
+
+1:02:05.240 --> 1:02:09.080
+ Now this doesn't have a second dimension.
+
+1:02:09.080 --> 1:02:12.920
+ So there's a special thing you can do, which is if you index into a second dimension with
+
+1:02:12.920 --> 1:02:19.000
+ a special value done, it creates that dimension.
+
+1:02:19.000 --> 1:02:28.240
+ So this has the effect of adding an extra trailing dimension to train dependence.
+
+1:02:28.240 --> 1:02:36.040
+ So it turns it from a vector to a matrix with one column.
+
+1:02:36.040 --> 1:02:45.880
+ So if we look at the shape after that, as you see, it's now got, we call this a unit
+
+1:02:45.880 --> 1:02:46.880
+ access.
+
+1:02:46.880 --> 1:02:48.520
+ It's got a trailing unit access.
+
+1:02:48.520 --> 1:03:06.640
+ So now if we train our model, we'll get coefficients just like before, except that
+
+1:03:06.640 --> 1:03:16.120
+ it's now a column vector also known as a rank two matrix with a trailing unit access.
+
+1:03:16.120 --> 1:03:18.760
+ Okay, so that hasn't changed anything.
+
+1:03:18.760 --> 1:03:23.720
+ It's just repeated what we did in the previous section, but it's kind of set us up to expand
+
+1:03:23.720 --> 1:03:28.400
+ because now that we've done this using matrix model play, we can go crazy and we can go
+
+1:03:28.400 --> 1:03:32.120
+ ahead and create a neural network.
+
+1:03:32.120 --> 1:03:40.680
+ So with a neural network, remember back to the Excel days, notice here is the same thing,
+
+1:03:40.680 --> 1:03:41.680
+ right?
+
+1:03:41.680 --> 1:03:48.600
+ A column vector, but we didn't create a column vector, we actually created a matrix with
+
+1:03:48.600 --> 1:03:52.360
+ kind of two sets of coefficients.
+
+1:03:52.360 --> 1:03:59.800
+ So when we did our matrix model play, every row gave us two sets of outputs, which we
+
+1:03:59.800 --> 1:04:06.800
+ then chucked through value, right, which remember we just used an if statement, and we added
+
+1:04:06.800 --> 1:04:08.520
+ them together.
+
+1:04:08.520 --> 1:04:21.360
+ So our cof's now, to make a proper neural net, we need one set of cof's here, and so here
+
+1:04:21.360 --> 1:04:25.640
+ they are, torch.round and cof by what?
+
+1:04:25.640 --> 1:04:31.160
+ Well, in Excel, we just did two because I kind of got bored of getting everything working
+
+1:04:31.160 --> 1:04:32.160
+ properly.
+
+1:04:32.160 --> 1:04:37.160
+ But you don't have to worry about filling right and creating columns and blah, blah,
+
+1:04:37.160 --> 1:04:40.100
+ and in pytorch, you can create as many as you like.
+
+1:04:40.100 --> 1:04:44.920
+ So I made it something you can change, I call it nhidden, number of hidden activations.
+
+1:04:44.920 --> 1:04:47.260
+ And I just set it to 20.
+
+1:04:47.260 --> 1:04:54.560
+ And as before, we centralized them by making them go from minus 0.5 to 0.5.
+
+1:04:54.560 --> 1:04:59.360
+ Now when we do stuff by hand, everything does get more fiddly.
+
+1:04:59.360 --> 1:05:05.800
+ If our coefficients aren't, if they're too big or too small, it's not going to train
+
+1:05:05.800 --> 1:05:10.080
+ at all. Basically the gradients still kind of vaguely point in the right direction, but
+
+1:05:10.080 --> 1:05:15.200
+ you're jumped too far or not far enough or whatever. So I want my gradients to be about
+
+1:05:15.200 --> 1:05:21.640
+ the same as they were before. So I divide by n hidden because otherwise at the next step
+
+1:05:21.640 --> 1:05:28.720
+ when I add up the next matrix multiply, it's going to be much bigger than it was before.
+
+1:05:28.720 --> 1:05:34.840
+ So it's all very fiddly. So then I want to take, so that's going to give me for every
+
+1:05:34.840 --> 1:05:43.040
+ row, it's going to give me 20 activations, 20 values, right? Just like in Excel we had
+
+1:05:43.040 --> 1:05:49.200
+ two values because we had two sets of coefficients. And so to create a neural net, I now need
+
+1:05:49.200 --> 1:05:58.240
+ to multiply each of those 20 things by a coefficient. And this time it's going to be
+
+1:05:58.240 --> 1:06:04.280
+ a column vector because I want to create one output, predictor of survival. So again, torch.round
+
+1:06:04.280 --> 1:06:11.820
+ and this time the n hidden will be the number of coefficients by one. And again, like try
+
+1:06:11.820 --> 1:06:16.880
+ to find something that actually trains properly required, be some fiddling around to figure
+
+1:06:16.880 --> 1:06:24.920
+ out how much to subtract. And I found if I subtract 0.3, I could get it to train. And
+
+1:06:24.920 --> 1:06:29.880
+ then finally, I didn't need a constant term for the first layer as we discussed because
+
+1:06:29.880 --> 1:06:39.600
+ our dummy variables have n columns rather than n minus one columns. But layer two absolutely
+
+1:06:39.600 --> 1:06:44.120
+ needs a constant term. And we could do that as we discussed last time by having a column
+
+1:06:44.120 --> 1:06:49.000
+ of ones. Although in practice, I actually find it just easier just to create a constant
+
+1:06:49.000 --> 1:06:57.480
+ term. So here is a single scalar random number. So those are the coefficients we need. One
+
+1:06:57.480 --> 1:07:03.080
+ set of coefficients to go from input to hidden. One goes from hidden to a single output and
+
+1:07:03.080 --> 1:07:09.680
+ a constant. So they're all going to need grad. And so now we can change how we calculate
+
+1:07:09.680 --> 1:07:16.360
+ predictions. So we're going to pass in all of our coefficients. So a nice thing in Python
+
+1:07:16.360 --> 1:07:22.840
+ is if you've got a list or a tuple of values, on the left hand side, you can expand them
+
+1:07:22.840 --> 1:07:28.760
+ out into variables. So this is going to be a list of three things. So call them L1, layer
+
+1:07:28.760 --> 1:07:35.680
+ one, layer two, and the constant term. Because those are the list of three things we returned.
+
+1:07:35.680 --> 1:07:40.000
+ So in Python, if you just chuck things with commas between them like this, it creates
+
+1:07:40.000 --> 1:07:46.360
+ a tuple. A tuple is a list. It's an immutable list. So now we're going to grab those three
+
+1:07:46.360 --> 1:07:53.520
+ things. So step one is to do our matrix bottle play. And as we discussed, we then have to
+
+1:07:53.520 --> 1:07:58.440
+ replace the negatives with zeros. And then we put that through our second matrix bottle
+
+1:07:58.440 --> 1:08:04.080
+ play. So our second layer and add the constant term. And remember, of course, at the end,
+
+1:08:04.080 --> 1:08:12.440
+ we've just chuck it through a sigmoid. So here is a neural network. Now update cof's previously
+
+1:08:12.440 --> 1:08:17.160
+ subtracted the coefficients, the gradients times the learning rate from the coefficients.
+
+1:08:17.160 --> 1:08:24.080
+ But now we've got three sets of those. So we have to just chuck that in a for loop. So
+
+1:08:24.080 --> 1:08:31.680
+ change that as well. And now we can go ahead and train our model. We just trained a model.
+
+1:08:31.680 --> 1:08:44.040
+ And how does that compare? So the loss function is a little better than before. Accuracy.
+
+1:08:44.040 --> 1:08:51.640
+ Exactly the same as before. And, you know, I will say it was very annoying to get to
+
+1:08:51.640 --> 1:08:56.600
+ this point, trying to get these constants right and find a learning rate that worked
+
+1:08:56.600 --> 1:09:03.080
+ like it was super fiddly. But, you know, we got there. We got there. And it's a very
+
+1:09:03.080 --> 1:09:07.520
+ small test set. I don't know if this is necessarily better or worse than the linear model, but
+
+1:09:07.520 --> 1:09:13.800
+ it's certainly fine. And I think that's pretty cool that we were able to build a neural net
+
+1:09:13.800 --> 1:09:20.800
+ from scratch. That's doing pretty well. But I hear that all the cool kids nowadays are
+
+1:09:20.800 --> 1:09:25.480
+ doing deep learning, not just neural nets. So we better make this deep learning. So this
+
+1:09:25.480 --> 1:09:33.840
+ one only has one hidden layer. So let's create one with n hidden layers. So for example,
+
+1:09:33.840 --> 1:09:39.040
+ let's say we want two hidden layers, ten activations in each. You can put as many as
+
+1:09:39.040 --> 1:09:49.440
+ you like here. Right? So in a coefs now is going to have to create a torch dot round
+
+1:09:49.440 --> 1:09:55.400
+ for every one of those hidden layers. And then another torch dot round for your constant
+
+1:09:55.400 --> 1:10:03.760
+ terms. Stick requires grad and all of them. And then we can return that. So that's how
+
+1:10:03.760 --> 1:10:10.680
+ we can just initialize as many layers as we want of coefficients. So the first one, the
+
+1:10:10.680 --> 1:10:17.200
+ first layer. So the sizes of each one, the first layer will go from n coef to 10. The
+
+1:10:17.200 --> 1:10:23.680
+ second matrix will go from 10 to 10. And the third matrix will go from 10 to 1. So it's
+
+1:10:23.680 --> 1:10:27.680
+ worth like working through these matrix model pliers on like a spreadsheet or a piece of
+
+1:10:27.680 --> 1:10:31.200
+ paper or something to kind of convince yourself that there's a right number of activations
+
+1:10:31.200 --> 1:10:40.920
+ at each point. And so then we need to update cuck threads so that rather than doing each
+
+1:10:40.920 --> 1:10:48.640
+ of these steps manually, we now need to look through all the layers, do the matrix model
+
+1:10:48.640 --> 1:10:56.440
+ play at the constant. And as long as it's not the last layer, do the value. Why not the
+
+1:10:56.440 --> 1:11:03.560
+ last layer? Because remember the last layer has sigmoid. So these things about like, remember
+
+1:11:03.560 --> 1:11:07.520
+ what happens on the last layer? This is an important thing you need to know about. You
+
+1:11:07.520 --> 1:11:13.520
+ need to kind of check if things aren't working. What's your, this thing here is called the
+
+1:11:13.520 --> 1:11:19.800
+ activation function, taut.sigmoid and f.relu. They're the activation functions for these
+
+1:11:19.800 --> 1:11:26.400
+ layers. One of the most common mistakes amongst people trying to kind of create their own
+
+1:11:26.400 --> 1:11:35.440
+ architectures or kind of variants of architectures is to mess up their final activation function.
+
+1:11:35.440 --> 1:11:39.280
+ And that makes things very hard to train. So make sure we've got a taut.sigmoid at the
+
+1:11:39.280 --> 1:11:47.200
+ end and no value at the end. So there's our deep learning cuck threads. And then just
+
+1:11:47.200 --> 1:11:51.440
+ one last change is now when we update our coefficients, we go through all the layers
+
+1:11:51.440 --> 1:11:58.240
+ and all the constants. And again, there was so much messing around here with trying to
+
+1:11:58.240 --> 1:12:04.640
+ find like exact ranges of random numbers that end up training okay. But eventually I found
+
+1:12:04.640 --> 1:12:16.280
+ some and as you can see, it gets to about the same loss and about the same accuracy.
+
+1:12:16.280 --> 1:12:23.400
+ This code is worth spending time with. And when the codes inside a function, it can be
+
+1:12:23.400 --> 1:12:27.400
+ a little difficult to experiment with. So you know, what I would be inclined to do to
+
+1:12:27.400 --> 1:12:32.200
+ understand this code is to kind of copy and paste this cell, make it so it's not in a
+
+1:12:32.200 --> 1:12:38.320
+ function anymore. And then use control shift dash to separate these out into separate cells.
+
+1:12:38.320 --> 1:12:42.240
+ Right. And then try to kind of set it up so you can run a single layer at a time or
+
+1:12:42.240 --> 1:12:49.200
+ a single coefficient like make sure you can see what's going on. Okay. And that's why
+
+1:12:49.200 --> 1:12:55.840
+ we use notebooks. And so that we can experiment. And it's only through experimenting like that
+
+1:12:55.840 --> 1:13:00.840
+ that at least to me, I find that I can really understand what's going on. Nobody can look
+
+1:13:00.840 --> 1:13:06.360
+ at this code and immediately say, I don't think anybody can. I get it. That all makes
+
+1:13:06.360 --> 1:13:12.680
+ perfect sense. But once you try running through it yourself, you'll be like, Oh, I see why
+
+1:13:12.680 --> 1:13:25.520
+ that's as it is. So, you know, one thing to point out here is that our neural nets and
+
+1:13:25.520 --> 1:13:33.600
+ deep learning models didn't particularly seem to help. So does that mean that deep learning
+
+1:13:33.600 --> 1:13:41.320
+ is a waste of time? And you just did five lessons that you shouldn't have done. No, not necessarily.
+
+1:13:41.320 --> 1:13:46.400
+ This is a playground competition. We're doing it because it's easy to get your head around.
+
+1:13:46.400 --> 1:13:50.080
+ But for very small data sets like this, with very, very few columns and the columns are
+
+1:13:50.080 --> 1:13:57.480
+ really simple. You know, deep learning is not necessarily going to give you the best result.
+
+1:13:57.480 --> 1:14:10.880
+ In fact, as I mentioned, nothing we do is going to be as good as a carefully designed
+
+1:14:10.880 --> 1:14:18.080
+ model that uses just the name column. So, you know, I think that's an interesting insight,
+
+1:14:18.080 --> 1:14:25.880
+ right, is that for the kind of data types which have a very consistent structure, like, for
+
+1:14:25.880 --> 1:14:35.120
+ example, images or natural language text documents, quite often you can somewhat brainlessly
+
+1:14:35.120 --> 1:14:42.480
+ chuck a deep learning neural net at it and get a great result. Generally, for tapular
+
+1:14:42.480 --> 1:14:48.000
+ data, I find that's not the case. I find I normally have to think pretty long and hard
+
+1:14:48.000 --> 1:14:53.720
+ about the feature engineering in order to get good results. But once you've got good features,
+
+1:14:53.720 --> 1:15:01.040
+ you then want a good model. And generally, like the more features you have and the more
+
+1:15:01.040 --> 1:15:06.400
+ levels in your categorical features and stuff like that, the more value you'll get from more
+
+1:15:06.400 --> 1:15:13.960
+ sophisticated models. But yeah, I definitely would say an insight here is that, you know,
+
+1:15:13.960 --> 1:15:18.760
+ you want to include simple baselines as well. And we're going to be seeing even more of
+
+1:15:18.760 --> 1:15:24.800
+ that in a couple of notebooks time.
+
+1:15:24.800 --> 1:15:35.960
+ So, we've just seen how you can build stuff from scratch. We're now seeing why you shouldn't.
+
+1:15:35.960 --> 1:15:40.960
+ I mean, I say you shouldn't. You should to learn that why you probably won't want to
+
+1:15:40.960 --> 1:15:46.200
+ in real life. When you're doing stuff in real life, you don't want to be fiddling around
+
+1:15:46.200 --> 1:15:53.120
+ with all this annoying initialization stuff and learning rate stuff and dummy variable
+
+1:15:53.120 --> 1:16:00.360
+ stuff and normalization stuff and so forth. Because we can do it for you. And it's not
+
+1:16:00.360 --> 1:16:05.200
+ like everything's so automated that you don't get to make choices, but you want like, you
+
+1:16:05.200 --> 1:16:10.080
+ want to make the choice not to do things the obvious way and have everything else done
+
+1:16:10.080 --> 1:16:15.160
+ the obvious way for you. So that's why we're going to look at this, why you should use
+
+1:16:15.160 --> 1:16:19.960
+ a framework notebook. And again, I'm going to look at the clean version of it. And again,
+
+1:16:19.960 --> 1:16:25.560
+ in the clean version of it, step one is to download the data as appropriate for the Kaggle
+
+1:16:25.560 --> 1:16:32.640
+ or non Kaggle environment and set the display options and set the random seed and read the
+
+1:16:32.640 --> 1:16:42.280
+ data later frame. Now, there was so much fussing around with the doing it from scratch version
+
+1:16:42.280 --> 1:16:46.080
+ that I did not want to do any feature engineering because every column I added was another thing
+
+1:16:46.080 --> 1:16:53.480
+ I had to think about dummy variables and normalization and random coefficient initialization and blah,
+
+1:16:53.480 --> 1:17:01.120
+ blah, blah. But with the framework, everything's so easy, you can do all the feature engineering
+
+1:17:01.120 --> 1:17:07.320
+ you want. Because this isn't a lesson about feature engineering, instead, I plagiarized
+
+1:17:07.320 --> 1:17:18.360
+ entirely from this fantastic advanced feature engineering tutorial on Kaggle. And what this
+
+1:17:18.360 --> 1:17:24.760
+ tutorial found was that in addition to the log fair, we've already done that you can do
+
+1:17:24.760 --> 1:17:29.040
+ cool stuff with the deck with adding up the number of family members, whether people are
+
+1:17:29.040 --> 1:17:33.200
+ having a loan, how many people are on each ticket. And finally, we're going to do stuff with the
+
+1:17:33.200 --> 1:17:40.880
+ name, which is we're going to grab the Mr. Miss Mrs. Master, whatever. So we're going to
+
+1:17:40.880 --> 1:17:46.760
+ create a function to like do some feature engineering. And if you want to learn a bit of pandas,
+
+1:17:46.760 --> 1:17:54.240
+ here's some great lines of code to step through one by one. And again, like take this out of a
+
+1:17:54.240 --> 1:18:00.240
+ function, put them into individual cells, run each one, look up the tutorials, what is
+
+1:18:00.240 --> 1:18:07.240
+ your do, what is Mac do, what is group by and transform do, what does value accounts do.
+
+1:18:07.240 --> 1:18:11.520
+ Like, these are all like part of the reason I put this here was the folks that haven't
+
+1:18:11.520 --> 1:18:16.760
+ done much of any pandas to have some, you know, examples of functions that I think are useful.
+
+1:18:16.760 --> 1:18:22.680
+ And I actually refactored this code quite a bit to try to show off some features of pandas,
+
+1:18:22.680 --> 1:18:28.720
+ I think are really nice. So we'll do the same random split as before, so passing in the same
+
+1:18:28.720 --> 1:18:37.600
+ seed. And so now we're going to do the same set of steps that we did manually with Fast.io.
+
+1:18:37.600 --> 1:18:45.320
+ So we want to create a tapular model data set based on a pandas data frame. And here is the
+
+1:18:45.320 --> 1:18:53.400
+ tap data frame. These are the train versus validation splits I want to use. Here's a list of all
+
+1:18:53.400 --> 1:19:00.240
+ the stuff I want done, please. Deal with dummy variables for me, deal with missing values for
+
+1:19:00.240 --> 1:19:06.960
+ me, normalize continuous variables for me. I'm going to tell you which ones are the categorical
+
+1:19:06.960 --> 1:19:12.160
+ variables. So here's for example, P class was a number, but I'm telling Fast.io to treat it as
+
+1:19:12.160 --> 1:19:19.640
+ categorical. Here's all the continuous variables. Here's my dependent variable. And the dependent
+
+1:19:19.640 --> 1:19:29.040
+ variable is a category. So create data loaders from that place and save models right here in
+
+1:19:29.040 --> 1:19:36.920
+ this directory. That's it. That's all the pre processing I need to do, even with all those extra
+
+1:19:36.920 --> 1:19:45.400
+ engineered features. Create a learner. Okay, so this remember is something that contains a model
+
+1:19:45.400 --> 1:19:54.280
+ and data. And I want you to put in two hidden layers with 10 units and 10 units, just like we did in
+
+1:19:54.280 --> 1:20:02.040
+ our final example. What learning rate should I use? Make a suggestion for me, please. So call
+
+1:20:02.040 --> 1:20:10.200
+ our find. You can use this for any Fast.io model. Now what this does is it starts at a learning rate
+
+1:20:10.200 --> 1:20:15.840
+ that's very, very small, 10 to the negative seven, and it puts in one batch of data and it
+
+1:20:15.840 --> 1:20:21.560
+ calculates the loss. And then it puts through, then it increases the learning rate slightly and puts
+
+1:20:21.560 --> 1:20:26.040
+ through another batch of data. And it keeps doing that for higher and higher learning rates, and it
+
+1:20:26.040 --> 1:20:31.560
+ keeps track of the loss as it increases the learning rate. Just one batch of data at a time. And
+
+1:20:31.560 --> 1:20:38.280
+ what happens is for the very small learning rates, nothing happens. But then once you get high enough,
+
+1:20:38.280 --> 1:20:43.880
+ the loss starts improving. And then as it gets higher, it improves faster. And until you make
+
+1:20:43.880 --> 1:20:49.240
+ the learning rate so big that it overshoots and then it kills it. And so generally somewhere around
+
+1:20:49.240 --> 1:20:55.160
+ here is the learning rate you want. Fast.io has a few different ways of recommending a learning
+
+1:20:55.160 --> 1:20:59.960
+ rate. You can look up the docs to see what they mean. I generally find if you choose slide and
+
+1:20:59.960 --> 1:21:06.520
+ value and pick one between the two, you get a pretty good learning rate. So here we've got about
+
+1:21:06.520 --> 1:21:14.680
+ point oh one and about point oh eight. So I picked point oh three. So just run a bunch of epochs
+
+1:21:16.440 --> 1:21:24.040
+ away it goes. Ta da. This is a bit crazy. After all that, we've ended up exactly the same accuracy
+
+1:21:24.040 --> 1:21:28.200
+ as the last two models. That's just a coincidence, right? I mean, there's nothing particularly about
+
+1:21:28.200 --> 1:21:36.920
+ that accuracy. And so at this point, we can now submit that to Kaggle. Now remember with the linear
+
+1:21:36.920 --> 1:21:43.000
+ model, we had to repeat all of the pre processing steps on the test set in exactly the same way.
+
+1:21:44.680 --> 1:21:49.320
+ Don't have to worry about it with Fast.io. In Fast.io, I mean, we still have to deal with the fill
+
+1:21:49.960 --> 1:21:56.040
+ missing for fair because that's that's that we have to add our feature engineering features.
+
+1:21:56.040 --> 1:21:59.880
+ But all the pre processing, we just have to use this one function called test dl.
+
+1:22:00.680 --> 1:22:05.560
+ That says created data loader that contains exactly the same pre processing steps that our
+
+1:22:05.560 --> 1:22:12.120
+ learner used. And that's it. That's all you need. So just because you want to make sure that your
+
+1:22:12.120 --> 1:22:17.560
+ inference time transformations pre processing are exactly the same as a training time.
+
+1:22:18.600 --> 1:22:22.120
+ So this is the magic method, which does that. Just one line of code.
+
+1:22:22.120 --> 1:22:30.280
+ And then to get your predictions, you just say get threads and pass in that data loader I just
+
+1:22:30.280 --> 1:22:38.200
+ built. And so then these three lines of code are the same as the previous notebook. And we can take
+
+1:22:38.200 --> 1:22:53.400
+ a look at the top and you can see there it is. So how did that go? I don't remember.
+
+1:22:55.400 --> 1:23:01.320
+ Oh, I didn't say I think it was again, basically middle of the pack, if I remember correctly.
+
+1:23:01.320 --> 1:23:13.320
+ So one of the nice things about now that it's so easy to like add features and build models is
+
+1:23:13.320 --> 1:23:19.880
+ we can experiment with things much more quickly. So I'm going to show you how easy it is to
+
+1:23:19.880 --> 1:23:24.360
+ experiment with, you know, what's often considered a fairly advanced idea, which is called Ensembling.
+
+1:23:25.480 --> 1:23:28.200
+ There's lots of ways of doing ensembleing. But basically,
+
+1:23:28.200 --> 1:23:35.480
+ Ensembling is about creating multiple models and combining their predictions.
+
+1:23:36.360 --> 1:23:45.240
+ And the easiest kind of ensemble to do is just to literally just build one of the models. And so
+
+1:23:45.240 --> 1:23:50.600
+ each one is going to have a different set of randomly initialized coefficients. And therefore,
+
+1:23:50.600 --> 1:23:55.160
+ each one is going to end up with a different set of predictions. So I just create a function
+
+1:23:55.160 --> 1:24:02.360
+ called ensemble, which creates a learner exactly the same as before, fits exactly the same as before
+
+1:24:02.360 --> 1:24:07.800
+ and returns the predictions. And so we'll just use a list comprehension to do that five times.
+
+1:24:09.400 --> 1:24:13.640
+ So that's going to create a set of five predictions.
+
+1:24:19.320 --> 1:24:23.720
+ Done. So now we can take all those predictions and stack them together.
+
+1:24:23.720 --> 1:24:30.360
+ And take the mean over the rows. So that's going to give us the, well, it's actually, sorry, the mean
+
+1:24:30.360 --> 1:24:37.240
+ over the, over the first dimension. So the mean over the sets of predictions. And so that will give
+
+1:24:37.240 --> 1:24:44.920
+ us the average prediction of our five models. And again, we can turn that into a CSV and submit it
+
+1:24:44.920 --> 1:24:57.160
+ to cattle. And that one, I think that went a bit better. Let's check. Yeah, okay, so that one
+
+1:24:57.160 --> 1:25:03.400
+ actually finally gets into the top 20%, 25% in the competition. So I mean, not amazing by any means,
+
+1:25:03.400 --> 1:25:10.040
+ but you can see that, you know, this simple step of creating five independently trained models,
+
+1:25:10.040 --> 1:25:15.720
+ just starting from different starting points in terms of random coefficients, actually improved
+
+1:25:15.720 --> 1:25:19.960
+ us from top 50% to top 25%. John.
+
+1:25:22.600 --> 1:25:26.920
+ Is there an argument because you've got a categorical result, you're zero one effectively. Is there
+
+1:25:26.920 --> 1:25:30.600
+ an argument that you might use the mode of the ensemble rather than the numerical mean?
+
+1:25:30.600 --> 1:25:42.360
+ I mean, yes, there's an argument that's been made. And yeah, something I would just try.
+
+1:25:43.000 --> 1:25:51.000
+ I generally find it's less good, but not always. And I don't feel like I've got a great intuition
+
+1:25:51.000 --> 1:25:58.760
+ as to why. And I don't feel like I've seen any studies as to why you could predict like there's
+
+1:25:58.760 --> 1:26:03.480
+ there's at least three things you could do, right? You could take the is it greater or less than 0.5
+
+1:26:05.720 --> 1:26:11.000
+ ones and zeros and average them, or you could take the mode of them, or you could take the actual
+
+1:26:11.000 --> 1:26:14.520
+ probable probability predictions and take the average of those and then threshold that.
+
+1:26:15.480 --> 1:26:20.280
+ And I've seen examples where certainly both of the different averaging versions,
+
+1:26:20.280 --> 1:26:23.880
+ each of them has been better. I don't think I've seen one with the modes better, but
+
+1:26:23.880 --> 1:26:36.520
+ that was very popular back in the 90s. So yeah, so it'd be so easy to try. You may as well give it a go.
+
+1:26:40.200 --> 1:26:46.360
+ Okay, we don't have time to finish the next notebook, but let's make a start on it.
+
+1:26:46.360 --> 1:26:57.080
+ So the next notebook is random forests, how random forests really work.
+
+1:26:59.800 --> 1:27:06.280
+ Who here has heard of random forests before? Nearly everybody. Okay, so very popular.
+
+1:27:06.280 --> 1:27:15.320
+ I developed, I think initially in 1999, but gradually improved in popularity during the 2000s. I was like
+
+1:27:16.760 --> 1:27:26.520
+ everybody kind of knew me as Mr. Random Forests for years. I implemented a couple of days after
+
+1:27:26.520 --> 1:27:31.800
+ the original technical report came out. I was such a fan. All of my early caggle results
+
+1:27:31.800 --> 1:27:39.240
+ are random forests. I love them. And I think hopefully you'll see why I'm such a fan of them,
+
+1:27:39.240 --> 1:27:47.640
+ because they're so elegant and they're almost impossible to mess up. A lot of people will say,
+
+1:27:48.840 --> 1:27:54.920
+ oh, why are you using machine learning? Why don't you use something simple, like logistic regression?
+
+1:27:55.960 --> 1:28:01.400
+ And I think like, oh gosh, in industry, I've seen far more examples of people screwing up
+
+1:28:01.400 --> 1:28:05.080
+ logistic regression than successfully using logistic regression, because it's very, very,
+
+1:28:05.080 --> 1:28:10.920
+ very, very difficult to do correctly. You've got to make sure you've got the correct transformations
+
+1:28:10.920 --> 1:28:15.720
+ and the correct interactions and the correct outlier handling and blah, blah, blah, and anything
+
+1:28:15.720 --> 1:28:25.000
+ you get wrong, the entire thing falls apart. Random forests, it's very rare that I've seen
+
+1:28:25.000 --> 1:28:29.400
+ somebody screw up a random forest in industry. They're very hard to screw up because they're
+
+1:28:29.400 --> 1:28:41.160
+ so resilient and just see why. So in this notebook, just by the way, rather than importing
+
+1:28:41.160 --> 1:28:45.960
+ NumPy and Pandas and that plot, blah, blah, blah, there's a little handy shortcut, which is if you
+
+1:28:45.960 --> 1:28:51.000
+ just import everything from fast.io.imports, that imports all the things that you normally want.
+
+1:28:52.120 --> 1:28:56.280
+ So I mean, doesn't do anything special, but it's just save some messing around.
+
+1:28:56.280 --> 1:29:05.560
+ So again, we've got our cell here to grab the data. And I'm just going to do some basic preprocessing
+
+1:29:05.560 --> 1:29:13.320
+ here with my fill in A for the fare, only needed for the test set, of course.
+
+1:29:17.080 --> 1:29:21.400
+ Grab the modes and do the fill in A on the modes, take the log fare.
+
+1:29:21.400 --> 1:29:29.000
+ And then I've got a couple of new steps here, which is converting embarked in sex
+
+1:29:31.000 --> 1:29:35.720
+ into categorical variables. What does that mean? Well, let's just run this on both the
+
+1:29:35.720 --> 1:29:42.360
+ data frame and the test data frame. Split things into categories and continuous.
+
+1:29:42.360 --> 1:29:51.240
+ And sex is a categorical variable. So let's look at it. Well, that's interesting. It looks
+
+1:29:51.240 --> 1:29:56.920
+ exactly the same as before, male and female, but now it's got a category and it's got a list of
+
+1:29:56.920 --> 1:30:03.960
+ categories. What's happened here? Well, what's happened is Pandas has made a list of all of the
+
+1:30:03.960 --> 1:30:10.840
+ unique values of this field. And behind the scenes, if you look at the cat codes, you can see behind
+
+1:30:10.840 --> 1:30:19.960
+ the scenes. It's actually turned them into numbers. It looks up this one into this list to get male.
+
+1:30:19.960 --> 1:30:24.680
+ It looks up this zero into this list to get female. So when it printed out, it prints out
+
+1:30:24.680 --> 1:30:35.560
+ the friendly version, but it stores it as numbers. Now, you'll see in a moment why this is helpful.
+
+1:30:35.560 --> 1:30:41.000
+ But a key thing to point out is we're not going to have to create any dummy variables.
+
+1:30:42.520 --> 1:30:49.720
+ And even that first, second or third class, we're not going to consider that categorical at all.
+
+1:30:50.920 --> 1:31:01.880
+ And just see why in a moment. A random forest is an ensemble of trees. A tree is an ensemble
+
+1:31:01.880 --> 1:31:07.480
+ of binary splits. And so we're going to work from the bottom up. We're going to first learn
+
+1:31:07.480 --> 1:31:15.800
+ about what is a binary split. And we're going to do it by looking at an example.
+
+1:31:16.840 --> 1:31:23.480
+ Let's consider what would happen if we talk all the passengers on the Titanic and group them into
+
+1:31:23.480 --> 1:31:28.600
+ males and females. And let's look at two things. The first is let's look at their survival rate.
+
+1:31:28.600 --> 1:31:36.280
+ So about 20% survival rate for males and about 75% for females. And let's look at the histogram,
+
+1:31:36.280 --> 1:31:41.880
+ how many of them are there? About twice as many males as females. Consider what would happen if
+
+1:31:41.880 --> 1:31:49.880
+ you created the world's simplest model, which was what sex are they? That wouldn't be bad, would it?
+
+1:31:49.880 --> 1:31:54.760
+ Because there's a big difference between the males and the females, a huge difference
+
+1:31:54.760 --> 1:32:00.920
+ in survival rate. So if we said, if you're a man, you probably died. If you're a woman,
+
+1:32:00.920 --> 1:32:06.360
+ you probably survived. Or not just a man or a boy, so a male or a female. That would be a pretty
+
+1:32:06.360 --> 1:32:12.040
+ good model because it's done a good job of splitting it into two groups that have very
+
+1:32:12.040 --> 1:32:19.960
+ different survival rates. This is called a binary split. A binary split is something that splits
+
+1:32:19.960 --> 1:32:27.480
+ the rows into two groups, tense binary. Let's talk about another example of a binary split.
+
+1:32:27.480 --> 1:32:34.120
+ I'm getting ahead of myself. Before we do that, let's look at what would happen if we used this
+
+1:32:34.120 --> 1:32:40.600
+ model. So if we created a model which just looked at sex, how good would it be? So to figure that
+
+1:32:40.600 --> 1:32:47.320
+ out, we first have to split into training and test sets. So let's go ahead and do that.
+
+1:32:47.320 --> 1:32:54.320
+ And then let's convert all of our categorical variables into their codes. So we've now got 0, 1, 2,
+
+1:32:54.320 --> 1:33:05.320
+ whatever. We don't have male or female there anymore. And let's also create something that's
+
+1:33:05.320 --> 1:33:14.320
+ returns the independent variables, which are all the x's, and the dependent variable, which
+
+1:33:14.320 --> 1:33:22.320
+ are core y. And so we can now get the x's and the y for each of the training set and the validation
+
+1:33:22.320 --> 1:33:30.320
+ set. And so now let's create some predictions. We'll predict that they survived if their sex is
+
+1:33:30.320 --> 1:33:38.320
+ 0, so if they're female. So how good is that model? Remember I told you that to calculate
+
+1:33:38.320 --> 1:33:44.320
+ mean absolute error, we can get psychic learn or pytorch, whatever, for us instead of doing
+
+1:33:44.320 --> 1:33:50.320
+ it ourselves. So just showing you here is how you do it just by importing it directly. This is
+
+1:33:50.320 --> 1:33:58.320
+ exactly the same as the one we did manually in the last notebook. So that's a 21.5% error.
+
+1:33:58.320 --> 1:34:08.240
+ So that's a pretty good model. Could we do better? Well, here's another example. What
+
+1:34:08.240 --> 1:34:14.240
+ about fair? So fair is different to sex because fair is continuous or log fair, I'll take it.
+
+1:34:14.240 --> 1:34:22.240
+ But we could still split it into two groups. So here's for all the people that didn't survive,
+
+1:34:22.240 --> 1:34:31.240
+ this is their median fair here. And then this is their quartiles for bigger fairs and quartiles
+
+1:34:31.240 --> 1:34:39.240
+ for small affairs. And here's the median fair for those that survived and their quartiles.
+
+1:34:39.240 --> 1:34:43.240
+ So you can see the median fair for those that survived is higher than the median fair for those that
+
+1:34:43.240 --> 1:34:51.240
+ didn't. We can't create a histogram exactly for fair because it's continuous. We could
+
+1:34:51.240 --> 1:34:57.240
+ bucket it into groups to create a histogram. So I guess we can create a histogram that wasn't true.
+
+1:34:57.240 --> 1:35:03.240
+ So what we can say is we can create something better which is a kernel density plot which is just like a
+
+1:35:03.240 --> 1:35:09.240
+ histogram but it's like with infinitely small bins. So we can see most people have a log fair of about
+
+1:35:09.240 --> 1:35:17.240
+ two. So what if we split on about a bit under three? You know, that seems to be a point at which there's a
+
+1:35:17.240 --> 1:35:25.240
+ difference in survival between people that are greater than or less than that amount. So here's another
+
+1:35:25.240 --> 1:35:45.240
+ model. Log fair greater than.2.7. Oh, much worse.336 versus.215. Well, I don't know. Maybe is there something better? We could create a little
+
+1:35:45.240 --> 1:36:02.240
+ interactive tool. So what I want is something that can give us a quick score of how good a binary split is. And I want it to be able to work regardless of whether we're dealing with categorical or
+
+1:36:02.240 --> 1:36:24.240
+ continuous or whatever data. So I just came up with a simple little way of scoring which is I said, OK, if you split your data into two groups, a good split would be one in which all of the values of the dependent variable on one side are all pretty much the same.
+
+1:36:24.240 --> 1:36:39.240
+ And all of the dependent variables on the other side are all pretty much the same. For example, if pretty much all the males had the same survival outcome, which is didn't survive. And all the females had about the same survival outcome, which is they did survive.
+
+1:36:39.240 --> 1:36:53.240
+ That would be a good split. Right. It doesn't just work for categorical variables. It would work if your dependent variable was continuous as well. You basically want each of your groups within group to be as similar as possible on the dependent variable.
+
+1:36:53.240 --> 1:37:07.240
+ So how similar is all the things in a group? That's the standard deviation. So what I want to do is basically add the standard deviations of the two groups of the dependent variable.
+
+1:37:07.240 --> 1:37:21.240
+ And then if there's a really small standard deviation, but it's a really small group, that's not very interesting. So I'll multiply it by the size. Right. So this is something which says, I'm going to do this with a set of variables.
+
+1:37:21.240 --> 1:37:31.240
+ Right. So this is something which says, what's the score for one of my groups, one of my sides? It's the standard deviation, multiplied by how many things are in that group.
+
+1:37:31.240 --> 1:37:45.240
+ So the total score is the score for the left hand side. So all the things in one group, plus the score for the right hand side, which is tilde means not. So not left hand side is right hand side.
+
+1:37:45.240 --> 1:38:01.240
+ And then we'll just take the average of that. So for example, if we split by sex is greater than or less than.5, that'll create two groups, males and females, and that gives us this score.
+
+1:38:01.240 --> 1:38:19.240
+ And if we do log fair, greater than or less than 2.7, it gives us this score and lower scores better. So sex is better than log fair. So now that we've got that, we can use our favorite interact tool to create a little GUI.
+
+1:38:19.240 --> 1:38:33.240
+ And so we can say, you know, let's try like, oh, what about this one? Can we find something that's a bit better? 4.8, 4.5? No, not very good.
+
+1:38:33.240 --> 1:38:57.240
+ What about p class.468.460? So we can fiddle around of these. We could do the same thing for the categorical variables. So you know that sex, we can get to.407. What about embarked?
+
+1:38:57.240 --> 1:39:07.240
+ All right, so it looks like sex might be our best. But that was pretty inefficient. Right? It would be nice if we could find some automatic way to do all that.
+
+1:39:07.240 --> 1:39:17.240
+ Well, of course we can. For example, if we were to define what's the best point for age, then we just have to create.
+
+1:39:17.240 --> 1:39:35.240
+ Let's do this again. If we want to find the best split point for age, we could just like create a list of all of the unique values of age and try each one in turn and see what score we get if we made a binary split on that level of age.
+
+1:39:35.240 --> 1:39:41.240
+ So here's a list of all of the possible binary split thresholds for age.
+
+1:39:41.240 --> 1:39:47.240
+ Let's go through all of them for each of them.
+
+1:39:47.240 --> 1:39:50.240
+ Let the score.
+
+1:39:50.240 --> 1:39:59.240
+ And then NumPy and PyTorch have an argmin function which tells you what index into that list is the smallest.
+
+1:39:59.240 --> 1:40:13.240
+ So just to show you here's the scores. And 0123456.
+
+1:40:13.240 --> 1:40:20.240
+ Oh, sorry, 0123456. So apparently that.
+
+1:40:20.240 --> 1:40:25.240
+ That value has the smallest score.
+
+1:40:25.240 --> 1:40:30.240
+ So that tells us that for age, the threshold of six would be best.
+
+1:40:30.240 --> 1:40:39.240
+ So here's something that just calculates that for a column. It calculates the best split point.
+
+1:40:39.240 --> 1:40:41.240
+ So here's six.
+
+1:40:41.240 --> 1:40:46.240
+ And it also tells us what the score is at that point, which is 0.478.
+
+1:40:46.240 --> 1:40:58.240
+ So now we can just go through and calculates the score for the best split point for each column.
+
+1:40:58.240 --> 1:41:08.240
+ And if we do that, we find that the lowest score is sex.
+
+1:41:08.240 --> 1:41:14.240
+ So that is how we calculate the best binary split.
+
+1:41:14.240 --> 1:41:20.240
+ So we now know that the model that we created earlier.
+
+1:41:20.240 --> 1:41:27.240
+ This one is the best single binary split model we can find.
+
+1:41:27.240 --> 1:41:37.240
+ So next week we're going to be, we're going to learn how we can recursively do this to create a decision tree and then do that multiple times to create a random forest.
+
+1:41:37.240 --> 1:41:49.240
+ But before we do, I want to point something out, which is this ridiculously simple thing, which is find a single binary split and stock is a type of model.
+
+1:41:49.240 --> 1:41:52.240
+ It has a name is called one R.
+
+1:41:52.240 --> 1:42:06.240
+ And the one R model, it turned out in a review of machine learning methods in the 90s turned out to be one of the best, if not the best machine learning classifiers for a wide range of real world datasets.
+
+1:42:06.240 --> 1:42:14.240
+ So that is to say, don't assume that you have to go complicated.
+
+1:42:14.240 --> 1:42:24.240
+ It's not a bad idea to always start creating a baseline of one R, a decision tree with a single binary split.
+
+1:42:24.240 --> 1:42:28.240
+ And in fact, for the Titanic competition, that's exactly what we do.
+
+1:42:28.240 --> 1:42:39.240
+ If you look at the Titanic competition on Kaggle, you'll find that what we did is our sample submission is one that just splits into male versus female.
+
+1:42:39.240 --> 1:43:07.240
+ Alright, thanks everybody, hope you found that interesting and I will see you next lesson. Bye.
+

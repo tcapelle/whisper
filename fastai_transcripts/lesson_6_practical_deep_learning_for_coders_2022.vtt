@@ -1,0 +1,3059 @@
+WEBVTT
+
+00:00.000 --> 00:03.440
+ Okay, so welcome back to,
+
+00:03.440 --> 00:06.240
+ well not welcome back to, welcome to lesson six,
+
+00:06.240 --> 00:08.160
+ first time we've been in lesson six.
+
+00:08.160 --> 00:10.560
+ Welcome back to practical deep learning for coders.
+
+00:13.000 --> 00:18.000
+ We just started looking at tabular data last time
+
+00:21.720 --> 00:25.420
+ and for those of you who've forgotten,
+
+00:25.420 --> 00:27.380
+ what we did was we,
+
+00:27.380 --> 00:31.980
+ we were looking at the Titanic data set
+
+00:33.380 --> 00:37.660
+ and we were looking at creating binary splits
+
+00:37.660 --> 00:42.580
+ by looking at categorical variables or binary variables
+
+00:42.580 --> 00:47.580
+ like sex and continuous variables
+
+00:49.180 --> 00:52.160
+ like the log of the fair that they paid.
+
+00:52.160 --> 00:57.160
+ And using those, we also kind of came up with a score
+
+01:00.040 --> 01:05.040
+ which was basically how good a job to that split
+
+01:05.360 --> 01:10.360
+ to grouping the survival characteristics into two groups,
+
+01:11.160 --> 01:13.080
+ nearly all of one of whom survived,
+
+01:13.080 --> 01:14.800
+ nearly all of whom the other didn't survive.
+
+01:14.800 --> 01:17.880
+ So they had like small standard deviation in each group.
+
+01:20.320 --> 01:21.960
+ And so then we created the world's simplest
+
+01:21.960 --> 01:23.840
+ but all UI to allow us to fiddle around
+
+01:23.840 --> 01:27.360
+ and try to find a good binary split.
+
+01:27.360 --> 01:32.360
+ And we did come up with a very good binary split
+
+01:35.360 --> 01:39.240
+ which was on sex and actually we created this
+
+01:39.240 --> 01:42.200
+ little automated version.
+
+01:42.200 --> 01:44.320
+ And so this is, I think the first time we can,
+
+01:44.320 --> 01:45.640
+ well not quite the first time is it, no,
+
+01:45.640 --> 01:48.720
+ this is yet another time I should say
+
+01:48.720 --> 01:53.720
+ that we have successfully created a actual machine learning
+
+01:53.800 --> 01:54.800
+ algorithm from scratch.
+
+01:54.800 --> 01:56.400
+ This one is about the world's simplest one.
+
+01:56.400 --> 02:00.080
+ It's one R, creating the single rule
+
+02:00.080 --> 02:03.560
+ which does a good job of splitting your data set
+
+02:03.560 --> 02:06.920
+ into two parts which differ as much as possible
+
+02:06.920 --> 02:08.360
+ on the dependent variable.
+
+02:10.600 --> 02:13.680
+ One R is probably not gonna cut it for a lot of things though.
+
+02:13.680 --> 02:18.680
+ It's surprisingly effective but so maybe we could go a step further.
+
+02:19.320 --> 02:21.400
+ And the other step further we could go is we could create
+
+02:21.400 --> 02:22.800
+ like a two R.
+
+02:22.800 --> 02:27.800
+ What if we took each of those groups, males and females
+
+02:27.800 --> 02:31.200
+ in the Titanic data set and split each of those
+
+02:31.200 --> 02:32.400
+ into two other groups?
+
+02:32.400 --> 02:33.880
+ So split the males into two groups
+
+02:33.880 --> 02:35.680
+ and split the females into two groups.
+
+02:37.480 --> 02:42.480
+ So to do that, we can repeat the exact same
+
+02:42.480 --> 02:47.480
+ piece of code we just did but let's remove sex from it
+
+02:49.760 --> 02:53.240
+ and then split the data set into males and females
+
+02:54.240 --> 02:56.840
+ and run the same piece of code that we just did before
+
+02:56.840 --> 02:58.080
+ but just for the males.
+
+02:59.240 --> 03:01.720
+ And so this is gonna be like a one R rule
+
+03:01.720 --> 03:06.720
+ for how do we predict which males survive the Titanic.
+
+03:06.720 --> 03:10.720
+ And let's have a look, 3837, 383838.
+
+03:10.720 --> 03:15.720
+ Okay, so it's age, were they greater than or less than six?
+
+03:17.160 --> 03:20.080
+ Turns out to be for the males, the biggest predictor
+
+03:20.080 --> 03:23.840
+ of whether they were gonna survive that shipwreck.
+
+03:23.840 --> 03:26.080
+ And we can do the same thing for females.
+
+03:26.080 --> 03:29.080
+ So for females, there we go, no great supplies, P class.
+
+03:35.520 --> 03:39.520
+ So whether they were in first class or not
+
+03:39.520 --> 03:42.600
+ was the biggest predictor for females
+
+03:42.600 --> 03:44.960
+ of whether they would survive the shipwreck.
+
+03:48.800 --> 03:53.800
+ So that has now given us a decision tree.
+
+03:55.560 --> 03:59.320
+ It is a series of binary splits
+
+03:59.320 --> 04:03.560
+ which we'll gradually split up our data more and more
+
+04:03.560 --> 04:08.600
+ such that in the end, in the leaf nodes as we call them,
+
+04:08.600 --> 04:13.600
+ we will hopefully get as much stronger prediction
+
+04:13.760 --> 04:15.440
+ as possible about survival.
+
+04:17.720 --> 04:19.400
+ So we could just repeat this step
+
+04:19.400 --> 04:21.560
+ for each of the four groups we've now created,
+
+04:21.560 --> 04:25.880
+ males, kids and older than six,
+
+04:25.880 --> 04:29.920
+ females, first class and everybody else.
+
+04:29.920 --> 04:31.280
+ And we could do it again.
+
+04:31.280 --> 04:32.800
+ And then we'd have eight groups.
+
+04:34.400 --> 04:35.840
+ We could do that manually
+
+04:35.840 --> 04:37.880
+ with another couple of lines of code.
+
+04:37.880 --> 04:40.840
+ Or we can just use decision tree classifier,
+
+04:40.840 --> 04:43.800
+ which is a class which does exactly that for us.
+
+04:43.800 --> 04:46.040
+ So there's no magic in here.
+
+04:46.040 --> 04:48.280
+ It's just doing what we've just described.
+
+04:49.280 --> 04:52.120
+ And decision tree classifier comes
+
+04:52.120 --> 04:54.560
+ from a library called scikitlearn.
+
+04:56.760 --> 04:59.960
+ scikitlearn is a fantastic library that focuses
+
+04:59.960 --> 05:04.960
+ on kind of classical non deep learning ish machine learning
+
+05:04.960 --> 05:07.960
+ methods like decision trees.
+
+05:08.960 --> 05:11.960
+ So to create the exact same decision tree,
+
+05:11.960 --> 05:13.960
+ we can say, please create a decision tree
+
+05:13.960 --> 05:17.960
+ to have a classifier with at most four leaf nodes.
+
+05:19.960 --> 05:21.960
+ And one very nice thing it has
+
+05:22.960 --> 05:24.960
+ is it can draw the tree for us.
+
+05:25.960 --> 05:27.960
+ So here's a tiny little draw tree function.
+
+05:29.960 --> 05:32.960
+ And you can see here,
+
+05:32.960 --> 05:34.960
+ it's going to first of all split on sex.
+
+05:34.960 --> 05:37.960
+ Now it looks a bit weird to say sex is less than or equal to 0.5.
+
+05:38.960 --> 05:39.960
+ But remember,
+
+05:39.960 --> 05:43.960
+ what our binary characteristics are coded as zero or one.
+
+05:43.960 --> 05:45.960
+ So that's just how we, you know,
+
+05:45.960 --> 05:48.960
+ easy way to say males versus females.
+
+05:51.960 --> 05:54.960
+ And then here we've got for the females.
+
+05:55.960 --> 05:59.960
+ What class are they in and for the males, what age are they?
+
+05:59.960 --> 06:01.960
+ And here's our four leaf nodes.
+
+06:01.960 --> 06:06.960
+ So for the females in first class,
+
+06:08.960 --> 06:11.960
+ 116 of them survived and four of them didn't.
+
+06:11.960 --> 06:17.960
+ So very good idea to be a well to do woman on the Titanic.
+
+06:19.960 --> 06:21.960
+ On the other hand,
+
+06:21.960 --> 06:25.960
+ males, adults,
+
+06:26.960 --> 06:29.960
+ 68 survived 350 died.
+
+06:29.960 --> 06:34.960
+ So very bad idea to be a male adult on the Titanic.
+
+06:36.960 --> 06:40.960
+ So you can see you can kind of get a quick summary of what's going on.
+
+06:40.960 --> 06:43.960
+ And one of the reasons people tend to like decision trees,
+
+06:43.960 --> 06:48.960
+ particularly for exploratory data analysis is it does allow us to get a quick picture
+
+06:49.960 --> 06:53.960
+ of what are the key driving variables in this data set
+
+06:53.960 --> 06:59.960
+ and how much do they kind of predict what was happening in the data.
+
+06:59.960 --> 07:03.960
+ Okay, so it's found the same splits as us.
+
+07:03.960 --> 07:06.960
+ And it's got one additional piece of information we haven't seen before.
+
+07:06.960 --> 07:08.960
+ This is sitting called Jenny.
+
+07:08.960 --> 07:13.960
+ Jenny is just another way of measuring how good a split is.
+
+07:13.960 --> 07:18.960
+ And I've put the code to calculate Jenny here.
+
+07:18.960 --> 07:21.960
+ Here's how you can think of Jenny.
+
+07:21.960 --> 07:27.960
+ How likely is it that if you go into that sample and grab one item
+
+07:27.960 --> 07:30.960
+ and then go in again and grab another item,
+
+07:30.960 --> 07:34.960
+ how likely is it that you're going to grab the same item each time?
+
+07:34.960 --> 07:39.960
+ And so if that,
+
+07:39.960 --> 07:44.960
+ if the entire leaf node is just people who survived or just people who didn't survive,
+
+07:44.960 --> 07:45.960
+ the probability would be one.
+
+07:45.960 --> 07:47.960
+ You get the same time, same every time.
+
+07:47.960 --> 07:51.960
+ If it was an exactly equal mix, the probability would be 0.5.
+
+07:51.960 --> 07:58.960
+ So that's why we just, yeah, that's where this formula comes from in the binary case.
+
+07:58.960 --> 08:01.960
+ And in fact, you can see it here, right?
+
+08:01.960 --> 08:03.960
+ This group here is pretty much 5050.
+
+08:03.960 --> 08:05.960
+ So Jenny's 0.5.
+
+08:05.960 --> 08:08.960
+ Whereas this group here is nearly 100% in one class.
+
+08:08.960 --> 08:10.960
+ So Jenny is nearly zero.
+
+08:10.960 --> 08:11.960
+ So I had it backwards.
+
+08:11.960 --> 08:17.960
+ It's one minus.
+
+08:17.960 --> 08:19.960
+ And I think I've written it backwards here as well.
+
+08:19.960 --> 08:26.960
+ So I've got to fix that.
+
+08:26.960 --> 08:31.960
+ So this decision tree is, you know, we would expect it to be all accurate.
+
+08:31.960 --> 08:33.960
+ So we can calculate it's been absolute error.
+
+08:33.960 --> 08:40.960
+ And for the one R, so just doing males versus females.
+
+08:40.960 --> 08:42.960
+ What was our score?
+
+08:42.960 --> 08:44.960
+ Here we go.
+
+08:44.960 --> 08:46.960
+ 0.407.
+
+08:46.960 --> 08:48.960
+ Actually, we have, do we have an accuracy score?
+
+08:48.960 --> 08:49.960
+ So here we are.
+
+08:49.960 --> 08:51.960
+ 0.336.
+
+08:51.960 --> 08:55.960
+ Oh, that was for log fair.
+
+08:55.960 --> 09:02.960
+ And for sex, it was 0.215.
+
+09:02.960 --> 09:03.960
+ Okay.
+
+09:03.960 --> 09:04.960
+ So 0.215.
+
+09:04.960 --> 09:08.960
+ So that was for the one R version for the decision tree with four leaf nodes.
+
+09:08.960 --> 09:11.960
+ 0.224. So it's actually a little worse.
+
+09:11.960 --> 09:12.960
+ Right.
+
+09:12.960 --> 09:16.960
+ And I think this just reflects the fact that this is such a small data set.
+
+09:16.960 --> 09:19.960
+ And the one R.
+
+09:19.960 --> 09:21.960
+ Version was so good.
+
+09:21.960 --> 09:24.960
+ We haven't really improved it that much.
+
+09:24.960 --> 09:26.960
+ I'm not enough to really see it.
+
+09:26.960 --> 09:30.960
+ Amongst the randomness of such a small validation set.
+
+09:30.960 --> 09:33.960
+ We could go further.
+
+09:33.960 --> 09:39.960
+ To 50, a minimum of 50 samples per leaf node.
+
+09:39.960 --> 09:42.960
+ So that means that in each of these, so you have it says samples,
+
+09:42.960 --> 09:45.960
+ which in this case is passengers on the Titanic.
+
+09:45.960 --> 09:49.960
+ There's at least there's 67 people that were.
+
+09:49.960 --> 09:52.960
+ Female first class.
+
+09:52.960 --> 09:55.960
+ Less than 28.
+
+09:55.960 --> 09:56.960
+ That's how you define that.
+
+09:56.960 --> 09:59.960
+ So this decision tree keeps building keeps splitting.
+
+09:59.960 --> 10:03.960
+ And to a point where there's going to be less than 50 at which point it stops
+
+10:03.960 --> 10:04.960
+ splitting that that leaf.
+
+10:04.960 --> 10:07.960
+ So you can see they're all got at least 50 samples.
+
+10:07.960 --> 10:11.960
+ And so here's the decision tree that builds.
+
+10:11.960 --> 10:14.960
+ As you can see, it doesn't have to be like constant depth.
+
+10:14.960 --> 10:15.960
+ Right.
+
+10:15.960 --> 10:18.960
+ So this group here, which is males.
+
+10:18.960 --> 10:21.960
+ Who had cheaper fares.
+
+10:21.960 --> 10:25.960
+ And who were older than 20.
+
+10:25.960 --> 10:29.960
+ But younger than 32.
+
+10:29.960 --> 10:31.960
+ Actually younger than 24.
+
+10:31.960 --> 10:36.960
+ And actually super cheap fares and so forth.
+
+10:36.960 --> 10:37.960
+ Right.
+
+10:37.960 --> 10:39.960
+ So kids going down until we get to that group.
+
+10:39.960 --> 10:42.960
+ So let's try that decision trees.
+
+10:42.960 --> 10:46.960
+ That decision tree has an absolute error of point one eight three.
+
+10:46.960 --> 10:51.960
+ So not surprisingly, you know, once we get there, it's starting to look like it's a little bit better.
+
+10:51.960 --> 10:55.960
+ So there's a model.
+
+10:55.960 --> 10:59.960
+ And this is a cable competition.
+
+10:59.960 --> 11:02.960
+ So therefore we should submit it to the leaderboard.
+
+11:02.960 --> 11:09.960
+ And, you know, one of the biggest mistakes I see.
+
+11:09.960 --> 11:15.960
+ Not just beginners, but every level of practitioner make on Kaggle is not to submit to the leaderboard.
+
+11:15.960 --> 11:18.960
+ Spend months making some perfect thing.
+
+11:18.960 --> 11:26.960
+ Right. But you actually going to see how you're going and you should try and submit something to the leaderboard every day.
+
+11:26.960 --> 11:32.960
+ So, you know, regardless of how rubbish it is, because you want to improve every day.
+
+11:32.960 --> 11:34.960
+ So you want to keep iterating.
+
+11:34.960 --> 11:42.960
+ So to submit something to the leaderboard, you generally have to provide a CSV file.
+
+11:42.960 --> 11:48.960
+ And so we're going to create a CSV file.
+
+11:48.960 --> 11:55.960
+ And we're going to apply the category codes to get the category for each one in our test set.
+
+11:55.960 --> 12:00.960
+ We're going to set the survived column to our predictions.
+
+12:00.960 --> 12:05.960
+ And then we're going to send that off to a CSV.
+
+12:05.960 --> 12:08.960
+ And so, yeah, so I submitted that.
+
+12:08.960 --> 12:14.960
+ So we're going to score a little bit worse than most of our linear models and neural nets, but not terrible.
+
+12:14.960 --> 12:21.960
+ You know, it was, it's, it's, it's doing an okay job.
+
+12:21.960 --> 12:27.960
+ Now one interesting thing for the decision tree is there was a lot less pre processing to do.
+
+12:27.960 --> 12:33.960
+ Did you notice that we didn't have to create any dummy variables for our, for our categories?
+
+12:33.960 --> 12:39.960
+ And like, you certainly can create dummy variables, but you often don't have to.
+
+12:39.960 --> 12:55.960
+ So, for example, you know, for, for class, you know, it's one, two or three, you can just split on one, two or three, you know, even for like, what was that thing like the, the embarkation city code.
+
+12:55.960 --> 13:02.960
+ Like we just convert them kind of arbitrarily to numbers one, two and three, and you can split on those numbers.
+
+13:02.960 --> 13:07.960
+ So with random forest, or so not random forest, but not the decision trees.
+
+13:07.960 --> 13:14.960
+ Yeah, you can generally get away with not doing stuff like dummy variables.
+
+13:14.960 --> 13:17.960
+ In fact, even taking the log of fair.
+
+13:17.960 --> 13:20.960
+ We only did that to make our graph look better.
+
+13:20.960 --> 13:31.960
+ But if you think about it, splitting on log fair less than 2.7 is exactly the same as putting on fair is less than either the 2.7, you know, or whatever log base we use.
+
+13:31.960 --> 13:34.960
+ I can't remember.
+
+13:34.960 --> 13:40.960
+ So all that a decision tree cares about is the ordering of the data.
+
+13:40.960 --> 13:58.960
+ And this is another reason that decision tree based approaches are fantastic, because they don't care at all about outliers, you know, long tail distributions, categorical variables, whatever, you can throw it all in, and it'll do a perfectly fine job.
+
+13:58.960 --> 14:08.960
+ So, for tabular data, I would always start by using a decision tree based approach.
+
+14:08.960 --> 14:15.960
+ And kind of prints and baselines and so forth, because it's really hard to mess it up.
+
+14:15.960 --> 14:20.960
+ And that's important.
+
+14:20.960 --> 14:32.960
+ So, yeah, so here, for example, is embarked, right, it was coded originally as the first letter of the city they embarked in.
+
+14:32.960 --> 14:40.960
+ But we turned it into a categorical variable. And so pandas for us creates this this this vocab, this list of all of the possible values.
+
+14:40.960 --> 14:52.960
+ And if you look at the codes attribute, you can see it's that s is the 012 so s has become 2 c has become 0.
+
+14:52.960 --> 15:04.960
+ And so forth. All right, so that's how we converting the categories, the strings into numbers that we can sort and group by.
+
+15:04.960 --> 15:13.960
+ So, yeah, so if we wanted to split C into one group and Q and S in the other, we can just do okay less than a record of 1.5.
+
+15:13.960 --> 15:21.960
+ Now, of course, if we wanted to split C and S into one group and Q into the other, we would need two binary splits first see.
+
+15:21.960 --> 15:30.960
+ On one side and Qs at Q and S on the other, and then Q and S into Q versus S, and then the Q and S leaf nodes could get similar predictions.
+
+15:30.960 --> 15:35.960
+ So like you do have sometimes it can take a little bit more messing around.
+
+15:35.960 --> 15:52.960
+ But most of the time, I find categorical variables work fine as numeric in decision tree, both approaches. And as I say here, I tend to use dummy variables only if there's like less than four levels.
+
+15:52.960 --> 16:02.960
+ Now, what if we wanted to make this more accurate? Could we grow the tree further? I mean, we could.
+
+16:02.960 --> 16:17.960
+ But, you know, there's only 50 samples in these leaves, right? It's, it's not really.
+
+16:17.960 --> 16:24.960
+ You know, if I keep splitting it, the leaf nodes are going to have subtle data that that's not really going to make very useful predictions.
+
+16:24.960 --> 16:33.960
+ Now, there are limitations to how accurate a decision tree can be.
+
+16:33.960 --> 16:42.960
+ So, what can we do? We can do something that's actually very, I mean, I find it amazing and fascinating.
+
+16:42.960 --> 16:52.960
+ Comes from a guy called Leo Briman. And Leo Briman came with his, came up with this idea called bagging.
+
+16:52.960 --> 16:57.960
+ And here's a basic idea of bagging. Let's say we've got a model.
+
+16:57.960 --> 17:00.960
+ That's not very good.
+
+17:00.960 --> 17:07.960
+ Because let's say it's a decision tree. It's really small. We've hardly used any data for it. Right. It's not very good.
+
+17:07.960 --> 17:13.960
+ So, it's got error. It's got errors on predictions. It's not a systematically biased error.
+
+17:13.960 --> 17:20.960
+ It's not always predicting too high or always predicting too low. I mean, decision trees, you know, on average will predict the average.
+
+17:20.960 --> 17:33.960
+ But it has errors. So, what I could do is I could build another decision tree in some slightly different way that would have different splits.
+
+17:33.960 --> 17:41.960
+ And it would also be not a great model, but predicts the correct thing on average. It's not completely hopeless.
+
+17:41.960 --> 17:45.960
+ And again, you know, some of the errors are a bit too high and some are a bit too low.
+
+17:45.960 --> 17:51.960
+ I could keep doing this. So, I could keep building lots and lots of slightly different decision trees.
+
+17:51.960 --> 17:58.960
+ I'm going to end up with say 100 different models, all of which are unbiased.
+
+17:58.960 --> 18:04.960
+ All of which are better than nothing. And all of which have some errors, bit high, some bit low, whatever.
+
+18:04.960 --> 18:08.960
+ So, what would happen if I average their predictions?
+
+18:08.960 --> 18:20.960
+ Assuming that the models are not correlated with each other, then you're going to end up with errors on either side of the correct prediction.
+
+18:20.960 --> 18:25.960
+ Some are a bit high, some are a bit low. There'll be this kind of distribution of errors.
+
+18:25.960 --> 18:31.960
+ And the average of those errors will be zero.
+
+18:31.960 --> 18:44.960
+ And so that means the average of the predictions of these multiple uncorrelated models, each of which is unbiased, will be the correct prediction, because they have an error of zero.
+
+18:44.960 --> 19:06.960
+ And this is a mind blowing insight. It says that if we can generate a whole bunch of uncorrelated, unbiased models, we can average them and get something better than any of the individual models, because the average of the error will be zero.
+
+19:06.960 --> 19:16.960
+ So, all we need is a way to generate lots of models. Well, we already have a great way to build models, which is to create a decision tree.
+
+19:16.960 --> 19:23.960
+ How do we create lots of them? How do we create lots of unbiased, but different models?
+
+19:23.960 --> 19:38.960
+ Well, let's just grab a different subset of the data each time. Let's just grab at random half the rows and build a decision tree, and then grab another half the rows and build a decision tree.
+
+19:38.960 --> 19:54.960
+ Each of those decision trees is going to be not great. It's only using half the data, but it will be unbiased. It will be predicting the average on average. It will certainly be better than nothing because it's using, you know, some real data to try and create a real decision tree.
+
+19:54.960 --> 20:04.960
+ They won't be correlated with each other because they're each random subsets. So that meets all of our criteria for bagging.
+
+20:04.960 --> 20:09.960
+ When you do this, you create something called a random forest.
+
+20:09.960 --> 20:15.960
+ So, let's create one in four lines of code.
+
+20:15.960 --> 20:30.960
+ So, here is a function to create a decision tree. So, let's say what, this is just the proportion of data. So, let's say we put 75% of the data in each time, or we could change it to 50%, whatever.
+
+20:30.960 --> 20:48.960
+ So, this is the number of samples in this subset, so let's at random choose n times the proportion we requested from the sample and build a decision tree from that.
+
+20:48.960 --> 20:59.960
+ And so now let's go 100 times get a tree and stick them all in a list using a list comprehension.
+
+20:59.960 --> 21:04.960
+ And now, let's grab the predictions for each one of those trees.
+
+21:04.960 --> 21:10.960
+ And then let's stack all those predictions up together and take their mean.
+
+21:10.960 --> 21:20.960
+ And that is a random forest.
+
+21:20.960 --> 21:25.960
+ So, random forests are very simple.
+
+21:25.960 --> 21:36.960
+ This is a slight simplification. There's one other difference that random forests do, which is when they build the decision tree, they also randomly select a subset of columns.
+
+21:36.960 --> 21:41.960
+ And they select a different random subset of columns each time they do a split.
+
+21:41.960 --> 21:58.960
+ And so the idea is you kind of want it to be as random as possible, but also somewhat useful.
+
+21:58.960 --> 22:02.960
+ So, we can do that by creating a random forest classifier.
+
+22:02.960 --> 22:10.960
+ So, how many trees do we want? How many samples per leaf? And then fit does what we just did.
+
+22:10.960 --> 22:19.960
+ And here's our mean absolute error, which again, it's like not as good as that decision tree, but it's still pretty good.
+
+22:19.960 --> 22:23.960
+ And again, it's such a small data set. It's hard to tell if that means anything.
+
+22:23.960 --> 22:31.960
+ And so we can submit that to cable. So earlier on, I created a little function to submit to cable. So now I just create some predictions and I submit to cable.
+
+22:31.960 --> 22:38.960
+ And yeah, it looks like it gave nearly identical results to a single tree.
+
+22:38.960 --> 22:43.960
+ Now to one of my favorite things about random forests.
+
+22:43.960 --> 22:51.960
+ And I should say in most real world data sets of reasonable size, random forests basically always give you much better results than decision trees.
+
+22:51.960 --> 22:56.960
+ This is just a small data set to show you what to do.
+
+22:56.960 --> 23:02.960
+ One of my favorite things about random forests is we can do something quite cool with it.
+
+23:02.960 --> 23:07.960
+ What we can do is we can look at the underlying decision trees they create.
+
+23:07.960 --> 23:10.960
+ So, we've never had 100 decision trees.
+
+23:10.960 --> 23:15.960
+ And we can see what columns did it find to split on.
+
+23:15.960 --> 23:19.960
+ And so it's a here. Okay. Well, the first thing it split on was sex.
+
+23:19.960 --> 23:31.960
+ And improved the Gini from.472. Now just take the weighted average of.38 and.31 weighted by the samples.
+
+23:31.960 --> 23:40.960
+ So that's probably going to be about.33. So it's like.14 improvement in Gini thanks to sex.
+
+23:40.960 --> 23:46.960
+ And we can do that again. Okay. Well, then P class, you know, how much did that improve Gini?
+
+23:46.960 --> 23:49.960
+ And again, we keep waiting it by the number of samples as well.
+
+23:49.960 --> 24:01.960
+ Log fair. How much did that improve Gini? And we can keep track for each column of how much in total did they improve the Gini in this decision tree.
+
+24:01.960 --> 24:04.960
+ And then do that for every decision tree.
+
+24:04.960 --> 24:07.960
+ And then add them up per column.
+
+24:07.960 --> 24:12.960
+ And that gives you something called a feature importance plot.
+
+24:12.960 --> 24:15.960
+ And here it is.
+
+24:15.960 --> 24:20.960
+ And a feature importance plot tells you how important is each feature.
+
+24:20.960 --> 24:26.960
+ How often did the trees pick it and how much did it improve the Gini when it did.
+
+24:26.960 --> 24:32.960
+ And so we can see from the feature importance plot that sex was the most important.
+
+24:32.960 --> 24:39.960
+ And class was the second most important and everything else was a long way back.
+
+24:39.960 --> 24:47.960
+ And this is another reason, by the way, why our random forest isn't really particularly helpful because it's just such a easy split to do.
+
+24:47.960 --> 24:56.960
+ Right. I basically all that matters is, you know, what class you're in and whether you're male and female.
+
+24:56.960 --> 25:00.960
+ And these feature importance plots.
+
+25:00.960 --> 25:04.960
+ Remember, because they're built on random forests.
+
+25:04.960 --> 25:13.960
+ And random forests don't care about really the distribution of your data and they can handle categorical variables and stuff like that.
+
+25:13.960 --> 25:20.960
+ That means that you can basically any tabular data set you have, you can just plot this right away.
+
+25:20.960 --> 25:25.960
+ And random forests, you know, for most data sets only take a few seconds to train.
+
+25:25.960 --> 25:29.960
+ You know, really at most of a minute or two.
+
+25:29.960 --> 25:34.960
+ And so if you've got a big data set and, you know, hundreds of columns.
+
+25:34.960 --> 25:42.960
+ Do this first and find the 30 columns that might matter.
+
+25:42.960 --> 25:45.960
+ It's such a helpful thing to do.
+
+25:45.960 --> 25:53.960
+ So I've done that, for example, I did some work in credit scoring, so we're trying to find out which things would predict who's going to default on a loan.
+
+25:53.960 --> 26:01.960
+ And I was given something like 7000 columns from the database.
+
+26:01.960 --> 26:09.960
+ And I put it straight into a random forest and found I think there was about 30 columns that seemed kind of interesting. I did that.
+
+26:09.960 --> 26:12.960
+ Like two hours after I started the job.
+
+26:12.960 --> 26:21.960
+ And I went to the head of marketing and the head of risk and I told them here's the columns. I think that we should focus on.
+
+26:21.960 --> 26:28.960
+ And they were like, Oh my God, we just finished a two year consulting project with one of the big consultants.
+
+26:28.960 --> 26:30.960
+ Paid the millions of dollars.
+
+26:30.960 --> 26:38.960
+ And they came up with a subset of these.
+
+26:38.960 --> 26:44.960
+ There are other things that you can do with with random forests along this path.
+
+26:44.960 --> 26:52.960
+ I'll touch on them briefly.
+
+26:52.960 --> 27:10.960
+ And specifically, I'm going to look at chapter eight of the book, which goes into this in a lot more detail and particularly interestingly chapter eight of the book uses a much bigger and more interesting data set, which is auction prices of heavy industrial equipment.
+
+27:10.960 --> 27:19.960
+ I mean, it's less interesting historically, but more interestingly, numerically.
+
+27:19.960 --> 27:25.960
+ And so some of the things I did there on this data set.
+
+27:25.960 --> 27:29.960
+ So this is from the data set. This is from the psychic learn documentation.
+
+27:29.960 --> 27:35.960
+ They looked at how as you increase the number of estimators, so the number of trees.
+
+27:35.960 --> 27:38.960
+ How much does the accuracy improve.
+
+27:38.960 --> 27:42.960
+ So I did the same thing on our data set. So I actually just.
+
+27:42.960 --> 27:47.960
+ Added up to 40 more and more and more trees.
+
+27:47.960 --> 27:54.960
+ And you can see that basically as as predicted by that kind of an initial bit of.
+
+27:54.960 --> 27:58.960
+ Hand wave theory, I gave you that you'd expect the more trees.
+
+27:58.960 --> 28:02.960
+ The lower the error because the more things you're averaging.
+
+28:02.960 --> 28:07.960
+ And that's exactly what we find the accuracy improves as we have more trees.
+
+28:07.960 --> 28:09.960
+ John, what's up.
+
+28:09.960 --> 28:23.960
+ Victor is possibly you might have just answered his question actually as he typed it, but he's he's asking on the same thing the number of trees in a random forest does increasing the number of trees always translate to a better era.
+
+28:23.960 --> 28:26.960
+ Yes, it does always.
+
+28:26.960 --> 28:32.960
+ I mean, tiny bumps, right, but yeah, once you smooth it out.
+
+28:32.960 --> 28:37.960
+ But decreasing returns.
+
+28:37.960 --> 28:40.960
+ And.
+
+28:40.960 --> 28:46.960
+ If you end up productionizing around in forest, then of course, every one of these trees, you have to.
+
+28:46.960 --> 28:50.960
+ You know, go through for at inference time.
+
+28:50.960 --> 28:54.960
+ So it's not that there's no cost. I mean, having said that.
+
+28:54.960 --> 28:58.960
+ Zipping through a binary tree is the kind of thing you can.
+
+28:58.960 --> 29:02.960
+ Really.
+
+29:02.960 --> 29:18.960
+ Do fast. In fact, it's, it's quite easy to let literally spit out C plus plus code with a bunch of if statements and compile it and get extremely fast performance.
+
+29:18.960 --> 29:21.960
+ I don't often use more than 100 trees.
+
+29:21.960 --> 29:26.960
+ This is a rule of thumb.
+
+29:26.960 --> 29:32.960
+ Anyone John.
+
+29:32.960 --> 29:44.960
+ So then there's another interesting feature around forests, which is remember how in our example, we trained with 75% of the data on each tree.
+
+29:44.960 --> 29:49.960
+ So that means for each tree, there was 25% of the data we didn't train on.
+
+29:49.960 --> 29:56.960
+ Now, this actually means if you don't have much data in some situations, you can get away with not having a validation set.
+
+29:56.960 --> 30:11.960
+ And the reason why is because for each tree, we can pick the 25% of rows that weren't in that tree and see how accurate that tree was on those rows.
+
+30:11.960 --> 30:19.960
+ And we can average for each row their accuracy on all of the trees in which they were not part of the training.
+
+30:19.960 --> 30:22.960
+ And that is called the out of bag error.
+
+30:22.960 --> 30:32.960
+ Or OOB error. And this is built in also to ask K learn. You can ask for an OOB prediction.
+
+30:32.960 --> 30:37.960
+ John.
+
+30:37.960 --> 30:43.960
+ Just before we move on, Zaki has a question about bagging.
+
+30:43.960 --> 30:48.960
+ So we know that bagging is powerful as an ensemble approach to machine learning.
+
+30:48.960 --> 30:57.960
+ Would it be advisable to try out bagging them first when approaching a particular tabular task before deep learning?
+
+30:57.960 --> 31:01.960
+ So that's the first part of the question.
+
+31:01.960 --> 31:09.960
+ The second part is could we create a bagging model which includes fast AI deep learning models?
+
+31:09.960 --> 31:11.960
+ Yes, absolutely.
+
+31:11.960 --> 31:15.960
+ So to be clear, you know, bagging is kind of like a meta method.
+
+31:15.960 --> 31:17.960
+ It's not a prediction.
+
+31:17.960 --> 31:20.960
+ It's not a method of modeling itself.
+
+31:20.960 --> 31:25.960
+ It's just a method of combining other models.
+
+31:25.960 --> 31:43.960
+ The random forests in particular as a particular approach to bagging is a, you know, I would probably always start personally a tabular project with a random forest because they're nearly impossible to mess up and they give good insight and they give a good base case.
+
+31:43.960 --> 31:50.960
+ But yeah, your question then about can you bag other models is a very interesting one.
+
+31:50.960 --> 31:53.960
+ And the answer is you absolutely can.
+
+31:53.960 --> 31:57.960
+ And people very rarely do.
+
+31:57.960 --> 31:59.960
+ But we will.
+
+31:59.960 --> 32:01.960
+ We will quite soon.
+
+32:01.960 --> 32:08.960
+ Maybe even today.
+
+32:08.960 --> 32:20.960
+ So, you know, you might be getting the impression I'm a bit of a fan of random forests and before I was, before, you know, people thought of me as the deep learning guy, people thought of me as the random forests guy.
+
+32:20.960 --> 32:23.960
+ I used to go on about random forests all the time.
+
+32:23.960 --> 32:32.960
+ And one of the reasons I'm so enthused about them isn't just that they're very accurate or that they require, you know, that they're very hard to mess up and require very little processing pre processing.
+
+32:32.960 --> 32:38.960
+ But they give you a lot of quick and easy insight.
+
+32:38.960 --> 32:45.960
+ And specifically, these are the five things which I think that we're interested in and all of which are things that random forests are good at.
+
+32:45.960 --> 32:50.960
+ They will tell us how confident are we in our predictions on some particular row.
+
+32:50.960 --> 32:59.960
+ So when somebody, you know, when we're giving a loan to somebody, we don't necessarily just want to know how likely are they to repay.
+
+32:59.960 --> 33:14.960
+ So it also like to know how confident are we that we know, because if we're, if we like, well, we think they'll repay, but we're not confident of that, we would probably want to give them less of a loan.
+
+33:14.960 --> 33:18.960
+ And another thing that's very important is when we're then making a prediction.
+
+33:18.960 --> 33:32.960
+ So again, for example, for credit, let's say you rejected that person's loan. Why? And a random forest will tell us what what is the what is the reason that we made a prediction.
+
+33:32.960 --> 33:35.960
+ And you'll see why and all these things.
+
+33:35.960 --> 33:40.960
+ Which columns are the strongest predictors you've already seen that one right that's the feature importance plot.
+
+33:40.960 --> 33:49.960
+ Which columns are effectively redundant with each other, i.e. they're basically highly correlated with each other.
+
+33:49.960 --> 33:58.960
+ And then one of the most important ones is you vary a column. How does it vary the predictions? So, for example, in your credit model.
+
+33:58.960 --> 34:07.960
+ How does your prediction of risk vary as you vary.
+
+34:07.960 --> 34:22.960
+ Well, something that probably the regulator would want to know might be some, you know, some protected variable like, you know, race or some socio demographic characteristics that you're not allowed to use in your model so they might check things like that.
+
+34:22.960 --> 34:38.960
+ But for the first thing, how confident are we in our predictions using a particular row of data. There's a really simple thing we can do, which is remember how when we calculated our predictions manually we stacked up the predictions together and took their mean.
+
+34:38.960 --> 34:42.960
+ Well, what if you took their standard deviation instead.
+
+34:42.960 --> 34:47.960
+ So if you stack up your predictions and take their standard deviation.
+
+34:47.960 --> 34:54.960
+ And if that standard deviation is high, that means all of them, all of the trees are predicting something different.
+
+34:54.960 --> 35:06.960
+ And that suggests that we don't really know what we're doing. And so that would happen if different subsets of the data end up giving completely different trees for this particular row.
+
+35:06.960 --> 35:20.960
+ So there's like a really simple thing you can do to get a sense of your prediction confidence. Okay, feature importance we've already discussed.
+
+35:20.960 --> 35:27.960
+ After I do feature importance, you know, like I said, when I had the what 7000 or so columns, I got rid of like all but 30.
+
+35:27.960 --> 35:42.960
+ That doesn't tend to improve the predictions of your random forest very much, if at all, but it certainly helps. Like, you know, kind of logistically thinking about cleaning up the data, you can focus on cleaning those 30 columns, stuff like that.
+
+35:42.960 --> 35:48.960
+ So I tend to remove the low importance variables.
+
+35:48.960 --> 35:58.960
+ I'm going to skip over this bit about removing redundant features, because it's a little bit outside what we're talking about, but definitely check it out in the book, something called a dendogram.
+
+35:58.960 --> 36:12.960
+ But what I do want to mention is is the partial dependence. This is the thing, which says, what is the relationship between a column and the dependent variable.
+
+36:12.960 --> 36:23.960
+ And so this is something called a partial dependence plot. Now this one's actually not specific to random forests. A partial dependence plot is something you can do to basically any machine learning model.
+
+36:23.960 --> 36:27.960
+ Let's first of all look at one and then talk about how we make it.
+
+36:27.960 --> 36:42.960
+ So in this data set, we're looking at the relationship, we're looking at the sale price at auction of heavy industrial equipment like bulldozers. This is specifically the blue books for bulldozers, capital competition.
+
+36:42.960 --> 36:54.960
+ And a partial dependence plot between the year that the bulldozer or whatever was made, and the price that was sold for this is actually the law price is that it goes up.
+
+36:54.960 --> 37:00.960
+ More recent bulldozers more recently made bulldozers are more expensive.
+
+37:00.960 --> 37:13.960
+ And as you go back back to older and older builder bulldozers, they're less and less expensive to a point. And maybe these ones are some old classic bulldozers you pay a bit extra for.
+
+37:13.960 --> 37:23.960
+ Now, you might think that you could easily create this plot by simply looking at your data at each year and taking the average sale price.
+
+37:23.960 --> 37:25.960
+ But that doesn't really work very well.
+
+37:25.960 --> 37:29.960
+ I mean, it kind of does, but it kind of doesn't. Let me give you an example.
+
+37:29.960 --> 37:37.960
+ It turns out that one of the biggest predictors of sale price for industrial equipment is whether it has air conditioning.
+
+37:37.960 --> 37:45.960
+ And so air conditioning is, you know, it's an expensive thing to add, and it makes the equipment more expensive to buy.
+
+37:45.960 --> 37:50.960
+ And most things didn't have air conditioning back in the 60s and 70s and most of them do now.
+
+37:50.960 --> 37:58.960
+ So if you plot the relationship between year made and price, you're actually going to be seeing a whole bunch of.
+
+37:58.960 --> 38:01.960
+ When, you know, how popular was air conditioning.
+
+38:01.960 --> 38:11.960
+ Right. So you get this cross correlation going on that we just want to know, no, what's, what's just the impact of the year it was made all else being equal.
+
+38:11.960 --> 38:17.960
+ So there's actually a really easy way to do that, which is we take our data set.
+
+38:17.960 --> 38:23.960
+ We take the, we leave it exactly as it is that just use the training data set, but we take every single row.
+
+38:23.960 --> 38:27.960
+ And for the year made column, we set it to 1950.
+
+38:27.960 --> 38:35.960
+ And so then we predict for every row, what would the sale price of that have been if it was made in 1950.
+
+38:35.960 --> 38:41.960
+ And then we repeat it for 1951 and they repeat it for 1952 and so forth. And then we plot the averages.
+
+38:41.960 --> 38:47.960
+ And that does exactly what I just said. Remember, I said the special words all else being equal.
+
+38:47.960 --> 38:52.960
+ This is setting everything else equal. It's the everything else is the data as it actually occurred.
+
+38:52.960 --> 38:55.960
+ And we're only varying year made.
+
+38:55.960 --> 38:58.960
+ And that's what a partial dependence plot is.
+
+38:58.960 --> 39:05.960
+ That works just as well for deep learning or gradient boosting trees, or logistic regressions or whatever.
+
+39:05.960 --> 39:11.960
+ It's a really cool thing you can do.
+
+39:11.960 --> 39:21.960
+ And you can do more than one column at a time, you know, you can do two way partial dependence plots, for example, another one.
+
+39:21.960 --> 39:29.960
+ Okay, so then another one I mentioned was, can you describe why a particular prediction was made?
+
+39:29.960 --> 39:36.960
+ So how did you decide for this particular row to predict this particular value?
+
+39:36.960 --> 39:45.960
+ And this is actually pretty easy to do. There's a thing called tree interpreter, but we could easily create this in about half a dozen lines of code.
+
+39:45.960 --> 39:54.960
+ And what we do is we're saying, okay, this customer's come in, they've asked for a loan.
+
+39:54.960 --> 39:59.960
+ We've put in all of their data through the random forest. It's about out of prediction.
+
+39:59.960 --> 40:07.960
+ We can actually have a look and say, okay, well, that in tree number one, what's the path that went down through the tree to get to the leaf node.
+
+40:07.960 --> 40:13.960
+ And we can say, oh, well, first of all, it looked at sex and then it looked at postcode and then it looked at income.
+
+40:13.960 --> 40:24.960
+ And so we can see exactly in tree number one, which variables were used and what was the change in Jenny for each one.
+
+40:24.960 --> 40:29.960
+ And then we can do the same entry to 73, three, 24. This is sound familiar.
+
+40:29.960 --> 40:34.960
+ It's basically the same as our feature importance plot, right? But it's just for this one row of data.
+
+40:34.960 --> 40:39.960
+ And so that will tell you basically the feature importance is for that one particular prediction.
+
+40:39.960 --> 40:49.960
+ And so then we can plot them like this. So, for example, this is an example of an auction price prediction.
+
+40:49.960 --> 40:56.960
+ And according to this plot, you know, so we predicted that the net would be.
+
+40:56.960 --> 41:06.960
+ Oh, this is just a change from from. So I don't actually know what the price is, but this is this is how much each one impacted the price.
+
+41:06.960 --> 41:12.960
+ Year made, I guess this must have been an older tractor, it caused a prediction of the price to go down.
+
+41:12.960 --> 41:17.960
+ But then it must have been a larger machine. The product size caused it to go up.
+
+41:17.960 --> 41:21.960
+ Couple of system made it go up, model ID made it go up.
+
+41:21.960 --> 41:28.960
+ And so forth, right? So you can see the reds says this made this made our prediction go down green made our prediction go up.
+
+41:28.960 --> 41:35.960
+ And so overall, you can see which things have the biggest impact on the prediction and what was the direction.
+
+41:35.960 --> 41:44.960
+ For each one. So it's basically a feature importance plot, but just for a single role for a single row.
+
+41:44.960 --> 41:49.960
+ Any questions, John.
+
+41:49.960 --> 41:57.960
+ Yeah, there are a couple that are sort of queued up. This is a good spot to jump to them.
+
+41:57.960 --> 42:10.960
+ So first of all, Andrew is asking jumping back to the, the OOB era. Would you ever exclude a tree from a forest if it had a bad out of bag era?
+
+42:10.960 --> 42:17.960
+ Like if you if you had a, I guess if you had a particularly bad tree in your ensemble, like might you just.
+
+42:17.960 --> 42:24.960
+ Would you delete a tree that was not doing its thing? It's not playing its part. No, you wouldn't.
+
+42:24.960 --> 42:34.960
+ If you start deleting trees, then you are no longer having a unbiased prediction of the dependent variable.
+
+42:34.960 --> 42:45.960
+ You are biasing it by making a choice. So even the bad ones will be improving the quality of the overall average.
+
+42:45.960 --> 42:55.960
+ All right, thank you. Zach here followed up with the question about bagging and we're just going, you know, layers and layers here.
+
+42:55.960 --> 43:02.960
+ You know, we could go on and create on symbols of bagged models. And is it reasonable to assume that they would.
+
+43:02.960 --> 43:08.960
+ So that's not going to make much difference, right? If they're all like, you could take your 100 trees.
+
+43:08.960 --> 43:17.960
+ Split them into groups of 10, create 10 bagged on symbols and then average those, but the average of an average is the same as the average.
+
+43:17.960 --> 43:23.960
+ You could like have a wider range of other kinds of models. You could have like neural nets trained on different subsets as well.
+
+43:23.960 --> 43:26.960
+ But again, it's just the average of an average will still give you the average.
+
+43:26.960 --> 43:31.960
+ Right. So there's not a lot of value in kind of structuring the ensemble.
+
+43:31.960 --> 43:39.960
+ I mean, some some ensembles you can structure, but but not bagging bagging is the simplest one. It's the one I mainly use.
+
+43:39.960 --> 43:44.960
+ There are more sophisticated approaches, but this one is nice and easy.
+
+43:44.960 --> 43:51.960
+ All right, and there's this one that is a bit specific and it's referencing content you haven't covered, but we're here now.
+
+43:51.960 --> 43:54.960
+ So, and it's on explainability.
+
+43:54.960 --> 44:07.960
+ So feature importance of random forest model sometimes has different results when you compare to other explainability techniques, like SHAP, or LIME.
+
+44:07.960 --> 44:18.960
+ And we haven't covered these in the course, but Amir is just curious if you've got any thoughts on which is more accurate or reliable random forest feature importance or other techniques.
+
+44:18.960 --> 44:36.960
+ I would lean towards more immediately trusting random forest feature importance is over other techniques on the whole on the basis that it's very hard to mess up a random forest.
+
+44:36.960 --> 44:50.960
+ So, yeah, I feel like pretty confident that a random forest feature importance is going to be pretty reasonable.
+
+44:50.960 --> 45:01.960
+ As long as this is the kind of data which a random forest is likely to be pretty good at, you know, doing, you know, if it's like a computer vision model random forest son, particularly good at that.
+
+45:01.960 --> 45:16.960
+ And so one of the things that Brian talked about a lot was explainability and he's got a great essay called the two cultures of statistics in which he talks about, I guess what nowadays call kind of like data scientists machine learning folks versus classic statisticians.
+
+45:16.960 --> 45:31.960
+ And he was, you know, definitely a data scientist, well before the label existed, and he pointed out, yeah, you know, first and foremost, you need a model that's accurate, and needs to make good predictions.
+
+45:31.960 --> 45:39.960
+ A model that makes bad predictions will also be bad for making explanations, because it doesn't actually know what's going on.
+
+45:39.960 --> 45:56.960
+ So if you know, if you, if you've got a deep learning model that's far more accurate than your random forest, then it, you know, explainability methods from the deep learning model will probably be more useful, because it's explaining a model that's actually correct.
+
+45:56.960 --> 46:08.960
+ All right, let's take a 10 minute break, and we'll come back at five past seven.
+
+46:08.960 --> 46:20.960
+ Welcome back. One person pointed out I noticed I got the chapter wrong it's chapter nine, not chapter eight in the book, I guess I can't read.
+
+46:20.960 --> 46:25.960
+ Somebody asked during the break about overfitting.
+
+46:25.960 --> 46:29.960
+ Can you overfit a random forest.
+
+46:29.960 --> 46:32.960
+ Basically no, not really.
+
+46:32.960 --> 46:37.960
+ Adding more trees will make it more accurate.
+
+46:37.960 --> 46:48.960
+ It kind of asymptotes so you can't make it infinitely accurate by using infinite trees, but certainly, you know, adding more trees won't make it worse.
+
+46:48.960 --> 46:58.960
+ If you don't have enough trees, and you let the trees grow very deep, that could overfit.
+
+46:58.960 --> 47:08.960
+ So you just have to make sure you have enough trees.
+
+47:08.960 --> 47:11.960
+ Radik told me about experiment he did during that.
+
+47:11.960 --> 47:26.960
+ Radik told me during the break about an experiment he did, which is something I've done something similar, which is adding lots and lots of randomly generated columns to a data set, and try to break the random forest.
+
+47:26.960 --> 47:41.960
+ And if you try it, it basically doesn't work. It's like it's really hard to confuse a random forest by giving it lots of meaningless data. It does an amazingly good job of picking out the useful stuff.
+
+47:41.960 --> 47:49.960
+ As I said, you know, I had 30 useful columns out of 7000 and it found them perfectly well.
+
+47:49.960 --> 48:02.960
+ And then when you find those 30 columns, you could go to, I was doing consulting at the time, go back to the client and say, tell me more about these columns and say, oh, well that one there, we've actually got a better version of that now.
+
+48:02.960 --> 48:04.960
+ There's a new system, we should grab that.
+
+48:04.960 --> 48:25.960
+ Oh, this column, actually that was because of this thing that happened last year, but we don't do it anymore, or, you know, like you can really have this kind of discussion about the stuff you've zoomed into.
+
+48:25.960 --> 48:39.960
+ You know, there are other things that you have to think about with lots of kinds of models, like particular regression models things like interactions. You don't have to worry about that with random forests, like because you split on one column and then split on another column.
+
+48:39.960 --> 48:45.960
+ You get interactions for free as well.
+
+48:45.960 --> 48:52.960
+ Normalization, you don't have to worry about. You don't have to have normally distributed columns.
+
+48:52.960 --> 48:54.960
+ It's not going to be that much of a
+
+48:54.960 --> 48:56.960
+ slightly worth a try.
+
+48:56.960 --> 49:04.960
+ Now, something I haven't gone into
+
+49:04.960 --> 49:08.960
+ is gradient boosting.
+
+49:08.960 --> 49:12.960
+ But if you go to explain.ai
+
+49:12.960 --> 49:21.960
+ you'll see that my friend, Terrence and I have a three part series about gradient boosting, including pictures of golf made by Terrence.
+
+49:21.960 --> 49:30.960
+ But to explain gradient boosting is a lot like random forests, but rather than training.
+
+49:30.960 --> 49:38.960
+ A lot of training, fitting a tree again and again and again on different random subsets of the data.
+
+49:38.960 --> 49:44.960
+ Instead, what we do is we fit very, very, very small trees, hardly ever any splits.
+
+49:44.960 --> 49:54.960
+ And we then say, okay, what's the error? So, you know, so imagine the simplest tree would be a one hour rule tree of.
+
+49:54.960 --> 49:56.960
+ My algorithm is female say.
+
+49:56.960 --> 50:03.960
+ And then you take what's called the residual. That's the difference between the prediction and the actual error.
+
+50:03.960 --> 50:08.960
+ And then you create another tree, which attempts to predict that.
+
+50:08.960 --> 50:10.960
+ Very small tree.
+
+50:10.960 --> 50:16.960
+ And then you create another very small tree, which tries to predict the error from that.
+
+50:16.960 --> 50:18.960
+ And so forth.
+
+50:18.960 --> 50:21.960
+ Each one is predicting the residual from all of the previous ones.
+
+50:21.960 --> 50:29.960
+ And so then to calculate a prediction, rather than taking the average of all the trees, you take the sum of all the trees,
+
+50:29.960 --> 50:36.960
+ because each one is predicted the difference between the actual and all of the previous trees.
+
+50:36.960 --> 50:39.960
+ And that's called boosting versus bagging.
+
+50:39.960 --> 50:43.960
+ So boosting and bagging are two kind of measure, ensembleing techniques.
+
+50:43.960 --> 50:47.960
+ And when bagging is applied to trees, it's called a random forest.
+
+50:47.960 --> 50:58.960
+ And when boosting is applied to trees, it's called a gradient boosting machine, or gradient boosted decision tree.
+
+50:58.960 --> 51:09.960
+ So gradient boosting is generally speaking more accurate than random forests.
+
+51:09.960 --> 51:12.960
+ But you can absolutely overfit.
+
+51:12.960 --> 51:16.960
+ And so therefore, it's not necessarily my first go to thing.
+
+51:16.960 --> 51:19.960
+ Having said that, there are ways to avoid overfitting.
+
+51:19.960 --> 51:23.960
+ But yeah, it's just it's, it's not.
+
+51:23.960 --> 51:28.960
+ Because it's breakable, it's not my first choice.
+
+51:28.960 --> 51:30.960
+ But yeah, check out our stuff here.
+
+51:30.960 --> 51:34.960
+ If you're interested and there is stuff which largely automates the process.
+
+51:34.960 --> 51:37.960
+ There's lots of hyperparameters you have to select.
+
+51:37.960 --> 51:41.960
+ People generally just try every combination of hyperparameters.
+
+51:41.960 --> 51:48.960
+ And in the end, you're generally should be able to get a more accurate gradient boosting model than random forest.
+
+51:48.960 --> 51:53.960
+ But not necessarily by much.
+
+51:53.960 --> 51:56.960
+ Okay.
+
+51:56.960 --> 52:02.960
+ So that was the.
+
+52:02.960 --> 52:08.960
+ Kaggle notebook on random forests.
+
+52:08.960 --> 52:14.960
+ How random first really work.
+
+52:14.960 --> 52:29.960
+ So what we've been doing is having this daily walkthrough where me and I don't know how many 20 or 30 folks get together on a zoom call and chat about.
+
+52:29.960 --> 52:37.960
+ You know, getting through the course and setting up machines and stuff like that.
+
+52:37.960 --> 52:44.960
+ And, you know, we've been trying to kind of practice what, you know, things along the way.
+
+52:44.960 --> 52:54.960
+ And so a couple of weeks ago, I wanted to show like, what does it look like to pick a Kaggle competition and just like.
+
+52:54.960 --> 52:58.960
+ Do the normal sensible.
+
+52:58.960 --> 53:04.960
+ Kind of mechanical steps that you would do for any computer vision model.
+
+53:04.960 --> 53:08.960
+ And so the.
+
+53:08.960 --> 53:19.960
+ Competition I picked was Patty disease classification, which is about recognizing diseases, race diseases and race petties.
+
+53:19.960 --> 53:24.960
+ And yeah, I spent, I don't know, a couple of hours or three. I can't remember a few hours.
+
+53:24.960 --> 53:27.960
+ Throwing together something.
+
+53:27.960 --> 53:32.960
+ And I found that I was number one on the leaderboard.
+
+53:32.960 --> 53:38.960
+ And I thought, oh, that's, that's interesting. Like, because you never quite have a sense of.
+
+53:38.960 --> 53:41.960
+ How well these things work.
+
+53:41.960 --> 53:45.960
+ And then I thought, well, there's all these other things we should be doing as well.
+
+53:45.960 --> 53:46.960
+ And I tried.
+
+53:46.960 --> 53:48.960
+ Three more things.
+
+53:48.960 --> 53:54.960
+ And each time I tried another thing, I got further ahead at the top of the leaderboard.
+
+53:54.960 --> 53:58.960
+ So I thought it'd be cool to take you through.
+
+53:58.960 --> 54:06.960
+ The process. I'm going to do it reasonably quickly, because.
+
+54:06.960 --> 54:08.960
+ The walkthroughs are all available.
+
+54:08.960 --> 54:17.960
+ For you to see the entire thing in, you know, seven hours of detail or however long we probably six to seven hours of conversations.
+
+54:17.960 --> 54:27.960
+ But I want to kind of take you through the basic process that I went through.
+
+54:27.960 --> 54:31.960
+ So since I've been starting to do more stuff on Kaggle.
+
+54:31.960 --> 54:34.960
+ You know, I realize there's some.
+
+54:34.960 --> 54:41.960
+ Kind of menial steps I have to do each time, particularly because I like to run stuff on my own machine.
+
+54:41.960 --> 54:44.960
+ And then kind of upload it to Kaggle.
+
+54:44.960 --> 54:48.960
+ So to do to make my life easier, I created a little.
+
+54:48.960 --> 54:52.960
+ Module called fast Kaggle, which you'll see in my notebooks.
+
+54:52.960 --> 54:58.960
+ Now on which you can download from pet or Kanda.
+
+54:58.960 --> 55:00.960
+ And as you'll see, it makes some things a bit easier.
+
+55:00.960 --> 55:05.960
+ For example, downloading the data for the Patty disease classification.
+
+55:05.960 --> 55:08.960
+ If you just run set up comp.
+
+55:08.960 --> 55:11.960
+ And pass in the name of the competition.
+
+55:11.960 --> 55:17.960
+ If you are on Kaggle, it will return a path to that.
+
+55:17.960 --> 55:25.960
+ Competition data that's already on Kaggle, if you are not on Kaggle and you haven't downloaded it, it will download and unzip the data for you.
+
+55:25.960 --> 55:31.960
+ If you're not on Kaggle and you have downloaded unzip the data, it will return a path to the one that you've already downloaded.
+
+55:31.960 --> 55:35.960
+ Also, if you are on Kaggle, you can ask it to make sure that.
+
+55:35.960 --> 55:39.960
+ Pip things are installed that might not be up to date otherwise.
+
+55:39.960 --> 55:44.960
+ So this basically one line of code now gets us all set up and ready to go.
+
+55:44.960 --> 55:47.960
+ So this path.
+
+55:47.960 --> 55:49.960
+ So I ran this particular one on my own machine.
+
+55:49.960 --> 55:53.960
+ So it's downloaded and unzipped the data.
+
+55:53.960 --> 55:58.960
+ I've also got links to the six walkthroughs so far.
+
+55:58.960 --> 56:01.960
+ These are the videos.
+
+56:01.960 --> 56:08.960
+ Oh yes, and here's my result after these four attempts.
+
+56:08.960 --> 56:13.960
+ That's a few fiddling around at the start.
+
+56:13.960 --> 56:20.960
+ So the overall approach is, well, and this is not just a Kaggle competition, right?
+
+56:20.960 --> 56:29.960
+ The reason I like looking at Kaggle competitions is you can't hide from the truth in a Kaggle competition.
+
+56:29.960 --> 56:42.960
+ You know, when you're working on some work project or something, you might be able to convince yourself and everybody around you that you've done a fantastic job of not overfitting and your models better than what anybody else could have made
+
+56:42.960 --> 56:43.960
+ or whatever else.
+
+56:43.960 --> 56:52.960
+ But the brutal assessment of the private leaderboard will tell you the truth.
+
+56:52.960 --> 56:55.960
+ Is your model actually predicting things correctly?
+
+56:55.960 --> 57:01.960
+ And is it overfit?
+
+57:01.960 --> 57:05.960
+ Until you've been through that process, you know, you're never going to know.
+
+57:05.960 --> 57:12.960
+ And a lot of people don't go through that process because at some level they don't want to know.
+
+57:12.960 --> 57:14.960
+ But it's okay, you know, nobody needed it.
+
+57:14.960 --> 57:18.960
+ You don't have to put your own name there.
+
+57:18.960 --> 57:20.960
+ I always did right from the very first one.
+
+57:20.960 --> 57:27.960
+ I wanted, you know, if I was going to screw up really, I wanted to have the pressure on myself of people seeing me in last place.
+
+57:27.960 --> 57:29.960
+ But, you know, it's fine.
+
+57:29.960 --> 57:31.960
+ You could do it all, honestly.
+
+57:31.960 --> 57:40.960
+ And you'll actually find, as you improve, you'll have so much self confidence, you know.
+
+57:40.960 --> 57:47.960
+ And the stuff we do in a Kaggle competition is indeed a subset of the things we need to do in real life.
+
+57:47.960 --> 57:55.960
+ But it's an important subset, you know, building a model that actually predicts things correctly and doesn't overfit is important.
+
+57:55.960 --> 58:12.960
+ And furthermore, structuring your code and analysis in such a way that you can keep improving over a three month period without gradually getting into more and more of a tangled, massive impossible to understand code and having no idea what untitled copy 13 was
+
+58:12.960 --> 58:15.960
+ and why it was better than 25.
+
+58:15.960 --> 58:16.960
+ Right?
+
+58:16.960 --> 58:19.960
+ This is all stuff you want to be practicing.
+
+58:19.960 --> 58:28.960
+ Ideally, well away from customers or whatever, you know, before you've kind of figured things out.
+
+58:28.960 --> 58:39.960
+ So the things I talk about here about doing things well in this Kaggle competition should work, you know, in other settings as well.
+
+58:39.960 --> 58:44.960
+ And so these are the two focuses that I recommend.
+
+58:44.960 --> 58:56.960
+ Get a really good validation set together we've talked about that before right, and in a Kaggle competition that's like it's very rare to see people do well in a Kaggle competition who don't have a good validation set.
+
+58:56.960 --> 58:57.960
+ Sometimes that's easy.
+
+58:57.960 --> 59:05.960
+ And this competition actually it is easy because the, the test set seems to be a random example.
+
+59:05.960 --> 59:08.960
+ But most of the time it's not actually I would say.
+
+59:08.960 --> 59:20.960
+ And then how quickly can you iterate how quickly can you try things and find out what worked so obviously you need a good validation set otherwise it's impossible to iterate.
+
+59:20.960 --> 59:26.960
+ And so quickly iterating means not saying what is the biggest.
+
+59:26.960 --> 59:34.960
+ You know, open AI takes four months on 100 TPUs model that I can train.
+
+59:34.960 --> 59:48.960
+ It's what can I do that's going to train in a minute or so, and will quickly give me a sense of like well I could try this I could try that what things going to work, and then try, you know, 80 things.
+
+59:48.960 --> 59:53.960
+ It also doesn't mean that saying like oh I heard this is amazing you.
+
+59:53.960 --> 1:00:01.960
+ Bayesian hyper parameter tuning approach I'm going to spend three months implementing that because that's going to like, if you one thing.
+
+1:00:01.960 --> 1:00:12.960
+ But actually do well in these competitions or in machine learning in general you actually have to do everything reasonably well.
+
+1:00:12.960 --> 1:00:18.960
+ And doing just one thing really well will still put you somewhere about last place.
+
+1:00:18.960 --> 1:00:21.960
+ I actually saw that couple of years ago Aussie guys.
+
+1:00:21.960 --> 1:00:28.960
+ Very, very distinguished machine learning practitioner.
+
+1:00:28.960 --> 1:00:41.960
+ Actually put together a team entered the Kaggle competition and literally came in last place, because they spent the entire three months trying to build this amazing new fancy thing.
+
+1:00:41.960 --> 1:00:45.960
+ And never actually never actually iterated.
+
+1:00:45.960 --> 1:00:52.960
+ If you iterate, I guarantee you won't be in last place.
+
+1:00:52.960 --> 1:01:03.960
+ Okay, so here's how we can grab our data with fast Kaggle, and it gives us tells us what path it's in.
+
+1:01:03.960 --> 1:01:06.960
+ And then I set my random seed.
+
+1:01:06.960 --> 1:01:10.960
+ And I only do this, because I'm creating a notebook to share.
+
+1:01:10.960 --> 1:01:19.960
+ You know when I share a notebook I like to be able to see as you can see this is point eight three blah blah blah right and know that when you see it'll be point eight three as well.
+
+1:01:19.960 --> 1:01:34.960
+ So when doing stuff otherwise I would never set a random seed I want to be able to run things multiple times and see how much it changes each time, because that'll give me a sense of like the modifications I'm making changing it because they're improving it making it worse or
+
+1:01:34.960 --> 1:01:35.960
+ as a just random variation.
+
+1:01:35.960 --> 1:01:42.960
+ So if you, or if you always set a random seed, that's a bad idea because you won't be able to see the random variation.
+
+1:01:42.960 --> 1:01:46.960
+ So this is just here for presenting a notebook.
+
+1:01:46.960 --> 1:01:54.960
+ Okay, so the data they've given us as usual they've got a sample submission. They've got some test set images.
+
+1:01:54.960 --> 1:02:00.960
+ They've got some training set images a CSV file about the training set.
+
+1:02:00.960 --> 1:02:03.960
+ And then these other two you can ignore so I created them.
+
+1:02:03.960 --> 1:02:07.960
+ So let's grab a path to train images.
+
+1:02:07.960 --> 1:02:17.960
+ And so do you remember get image files so that gets us a list of the file names of all the images here recursively.
+
+1:02:17.960 --> 1:02:24.960
+ So we could just grab the first one and take a look so it's 480 by 640.
+
+1:02:24.960 --> 1:02:26.960
+ Now we've got to be careful.
+
+1:02:26.960 --> 1:02:30.960
+ This is a pillow image python imaging library image.
+
+1:02:30.960 --> 1:02:35.960
+ In the imaging world they generally say columns by rows.
+
+1:02:35.960 --> 1:02:40.960
+ In the array slash tensor world we always say rows by columns.
+
+1:02:40.960 --> 1:02:45.960
+ So if you ask hi torch what the size of this is it'll say 640 by 480.
+
+1:02:45.960 --> 1:02:48.960
+ And I guarantee at some point this is going to bite you.
+
+1:02:48.960 --> 1:02:51.960
+ So try to recognize it now.
+
+1:02:51.960 --> 1:02:53.960
+ Okay, so they're kind of taller than they are.
+
+1:02:53.960 --> 1:02:58.960
+ At least this one is taller than it is wide.
+
+1:02:58.960 --> 1:03:06.960
+ So I actually actually know they all this size because it's really helpful if they are all the same size or at least similar.
+
+1:03:06.960 --> 1:03:13.960
+ Believe it or not the amount of time it takes to decode a jpeg is actually quite significant.
+
+1:03:13.960 --> 1:03:19.960
+ And so figuring out what size these things are is actually going to be pretty slow.
+
+1:03:19.960 --> 1:03:26.960
+ But my fast core library has a parallel sub module which can basically do anything that you can do in python.
+
+1:03:26.960 --> 1:03:31.960
+ So in this case we wanted to create a pillow image and get it size.
+
+1:03:31.960 --> 1:03:38.960
+ So if we create a function that does that and pass it to parallel passing in the function and the list of files.
+
+1:03:38.960 --> 1:03:41.960
+ It does it in parallel and that actually runs pretty fast.
+
+1:03:41.960 --> 1:03:44.960
+ And so here is the answer.
+
+1:03:44.960 --> 1:03:52.960
+ I don't know how this happened 10,403 images are indeed 480 by 640 and four of them aren't.
+
+1:03:52.960 --> 1:04:04.960
+ So basically what this says to me is that we should pre process them or you know at some point process them so that they're probably all for 80 by 640 or all basically the kind of same size will pretend they're all this size.
+
+1:04:04.960 --> 1:04:17.960
+ But we can't not do some initial resizing otherwise this is going to screw things up.
+
+1:04:17.960 --> 1:04:27.960
+ So I like that probably the easiest way to do things the most common way to do things is to either squish or crop every image to be a square.
+
+1:04:27.960 --> 1:04:35.960
+ So squishing is when you just squish the aspect ratio down.
+
+1:04:35.960 --> 1:04:38.960
+ As opposed to cropping randomly a section out.
+
+1:04:38.960 --> 1:04:42.960
+ So if we call resize squish, it will squish it down.
+
+1:04:42.960 --> 1:04:51.960
+ And so this is 480 by 480 squared. So this is what it's going to do to all of the images first on the CPU.
+
+1:04:51.960 --> 1:04:59.960
+ That allows them to be all batch together into a single mini batch everything in a mini batch has to be the same shape.
+
+1:04:59.960 --> 1:05:02.960
+ Otherwise the GPU won't like it.
+
+1:05:02.960 --> 1:05:16.960
+ And then that mini batch is put through data augmentation and it will grab a random subset of the image and make it a 128 by 128 pixel.
+
+1:05:16.960 --> 1:05:20.960
+ And here's what that looks like. Here's our data.
+
+1:05:20.960 --> 1:05:31.960
+ So show batch works for pretty much everything, not just in the fast AI library, but even for things like fast audio, which are kind of community based things.
+
+1:05:31.960 --> 1:05:39.960
+ You should be to use show batch on anything and see or hear or whatever what your data looks like.
+
+1:05:39.960 --> 1:05:42.960
+ I don't know anything about race disease.
+
+1:05:42.960 --> 1:05:51.960
+ But apparently these are various race diseases and this is what they look like.
+
+1:05:51.960 --> 1:06:03.960
+ I jump into creating models much more quickly than most people because I find models are a great way to understand my data, as we've seen before.
+
+1:06:03.960 --> 1:06:08.960
+ So I basically build a model as soon as I can.
+
+1:06:08.960 --> 1:06:14.960
+ And I want to create a model that's going to let me iterate quickly.
+
+1:06:14.960 --> 1:06:18.960
+ So that means that I'm going to need a model that can train quickly.
+
+1:06:18.960 --> 1:06:29.960
+ So Thomas Capell and I recently did this big project for best vision models of fine tuning,
+
+1:06:29.960 --> 1:06:43.960
+ where we looked at nearly 100 different architectures from Ross Whiteman's Tim library, PyTorch image model library.
+
+1:06:43.960 --> 1:06:48.960
+ And looked at which ones could we fine tune?
+
+1:06:48.960 --> 1:06:52.960
+ Which ones had the best transfer learning results?
+
+1:06:52.960 --> 1:06:55.960
+ And we tried two different data sets, very different data sets.
+
+1:06:55.960 --> 1:06:59.960
+ One is the pets data set that we've seen before.
+
+1:06:59.960 --> 1:07:05.960
+ So trying to predict what breed of pet is from 37 different breeds.
+
+1:07:05.960 --> 1:07:10.960
+ And the other was a satellite imagery data set called Planet.
+
+1:07:10.960 --> 1:07:16.960
+ So very, very different data sets in terms of what they contain and also very different sizes.
+
+1:07:16.960 --> 1:07:19.960
+ The planet ones a lot smaller, the pets ones a lot bigger.
+
+1:07:19.960 --> 1:07:27.960
+ And so the main things we measured were how much memory did it use, how accurate was it, and how long did it take to fit.
+
+1:07:27.960 --> 1:07:34.960
+ And then I created this score, which combines the fit time and error rate together.
+
+1:07:34.960 --> 1:07:42.960
+ And so this is a really useful table for picking a model.
+
+1:07:42.960 --> 1:07:48.960
+ And now in this case, I want to pick something that's really fast.
+
+1:07:48.960 --> 1:07:53.960
+ And there's one clear winner on speed, which is ResNet 26D.
+
+1:07:53.960 --> 1:07:59.960
+ And so its accuracy was 6% versus the best was like 4.1%.
+
+1:07:59.960 --> 1:08:05.960
+ So okay, it's not amazingly accurate, but it's still pretty good and it's going to be really fast.
+
+1:08:05.960 --> 1:08:09.960
+ So that's why I picked ResNet 26D.
+
+1:08:09.960 --> 1:08:19.960
+ A lot of people think that when they do deep learning, they're going to spend all of their time learning about exactly how a ResNet 26D is made and
+
+1:08:19.960 --> 1:08:23.960
+ convolutions and ResNet blocks and transformers and blah, blah, blah.
+
+1:08:23.960 --> 1:08:29.960
+ We will cover all that stuff in part two and a little bit of it next week.
+
+1:08:29.960 --> 1:08:31.960
+ But it almost never matters.
+
+1:08:31.960 --> 1:08:34.960
+ It's just a function.
+
+1:08:34.960 --> 1:08:41.960
+ And what matters is the inputs to it and the outputs to it and how fast it is and how accurate it is.
+
+1:08:41.960 --> 1:08:48.960
+ So let's create a learner with a ResNet 26D from our data loaders.
+
+1:08:48.960 --> 1:08:52.960
+ And let's run LrFind.
+
+1:08:52.960 --> 1:09:00.960
+ So LrFind will put through one mini batch at a time, starting at a very, very, very low learning rate,
+
+1:09:00.960 --> 1:09:04.960
+ and gradually increase the learning rate and track the loss.
+
+1:09:04.960 --> 1:09:11.960
+ And initially the loss won't improve because the learning rate is so small, it doesn't really do anything.
+
+1:09:11.960 --> 1:09:15.960
+ And at some point the learning rate is high enough that the loss will start coming down.
+
+1:09:15.960 --> 1:09:23.960
+ At some other point the learning rate is so high that it's going to start jumping past the answer and it's going to get worse.
+
+1:09:23.960 --> 1:09:30.960
+ And so somewhere around here is a learning rate we'd want to pick.
+
+1:09:30.960 --> 1:09:35.960
+ We've got a couple of different ways of making suggestions.
+
+1:09:35.960 --> 1:09:47.960
+ I generally ignore them because these suggestions are specifically designed to be conservative.
+
+1:09:47.960 --> 1:09:53.960
+ But I kind of like to say like, well, how far right can I go and still see it clearly improving quickly?
+
+1:09:53.960 --> 1:09:59.960
+ And so I'd pick somewhere around.01 for this.
+
+1:09:59.960 --> 1:10:05.960
+ So I can now fine tune our model with a learning rate of.01, three epochs.
+
+1:10:05.960 --> 1:10:07.960
+ So look, the whole thing took a minute.
+
+1:10:07.960 --> 1:10:08.960
+ That's what we want, right?
+
+1:10:08.960 --> 1:10:12.960
+ We want to be able to iterate rapidly, just a minute or so.
+
+1:10:12.960 --> 1:10:17.960
+ So that's enough time for me to go and grab a glass of water or do some reading.
+
+1:10:17.960 --> 1:10:20.960
+ Like it's not going to get too distracted.
+
+1:10:20.960 --> 1:10:24.960
+ And what do we do before we submit?
+
+1:10:24.960 --> 1:10:25.960
+ Nothing.
+
+1:10:25.960 --> 1:10:27.960
+ We submit as soon as we can.
+
+1:10:27.960 --> 1:10:29.960
+ Okay, let's get our submission in.
+
+1:10:29.960 --> 1:10:30.960
+ So we've got a model.
+
+1:10:30.960 --> 1:10:33.960
+ Let's get it in.
+
+1:10:33.960 --> 1:10:37.960
+ So we read in our CSV file of the sample submission.
+
+1:10:37.960 --> 1:10:50.960
+ And so the CSV file basically looks like we're going to have to have a list of the image file names in order and then a column of labels.
+
+1:10:50.960 --> 1:10:54.960
+ So we can get all the image files in the test image.
+
+1:10:54.960 --> 1:10:57.960
+ And we can sort them.
+
+1:10:57.960 --> 1:11:09.960
+ And so now we want is what we want is a data loader, which is exactly like the data loader we used to train the model except pointing at the test set.
+
+1:11:09.960 --> 1:11:11.960
+ We want to use exactly the same transformations.
+
+1:11:11.960 --> 1:11:16.960
+ So there's actually a dls.test.io method, which does that.
+
+1:11:16.960 --> 1:11:19.960
+ You just pass in the new set of items.
+
+1:11:19.960 --> 1:11:21.960
+ So the test set files.
+
+1:11:21.960 --> 1:11:29.960
+ So this is a data loader, which we can use for our test set.
+
+1:11:29.960 --> 1:11:36.960
+ A test data loader has a key difference to a normal data loader, which is that it does not have any labels.
+
+1:11:36.960 --> 1:11:41.960
+ So that's a key distinction.
+
+1:11:41.960 --> 1:11:47.960
+ So we can get the predictions for our learner passing in that data loader.
+
+1:11:47.960 --> 1:11:53.960
+ And in the case of a classification problem, you can also ask for them to be decoded.
+
+1:11:53.960 --> 1:12:06.960
+ Decoded means rather than just get returned the probability of every race disease, wherever you class, it'll tell you what is the index of the most probable race disease.
+
+1:12:06.960 --> 1:12:08.960
+ That's what decoded means.
+
+1:12:08.960 --> 1:12:22.960
+ So that'll return with probabilities, targets, which obviously will be empty because it's a test set, so throw them away and those decoded indexes, which look like this numbers from not nine because there's 10 possible race diseases.
+
+1:12:22.960 --> 1:12:30.960
+ The capital submission does not expect numbers not nine. It expects to see strings like these.
+
+1:12:30.960 --> 1:12:35.960
+ So what do those numbers from not to nine represent?
+
+1:12:35.960 --> 1:12:39.960
+ We can look up our vocab to get a list.
+
+1:12:39.960 --> 1:12:44.960
+ So that's zero, that's one, etc. That's nine.
+
+1:12:44.960 --> 1:12:54.960
+ So I realized later this is a slightly inefficient way to do it, but it does the job. I need to be able to map these two strings.
+
+1:12:54.960 --> 1:13:06.960
+ So if I enumerate the vocab, that gives me pairs of numbers zero, bacteria, leaf, light, one bacteria, leaf streak, etc. They could then create a dictionary out of that.
+
+1:13:06.960 --> 1:13:13.960
+ And then I can use pandas to look up each thing in a dictionary. They call that map.
+
+1:13:13.960 --> 1:13:20.960
+ If you're a pandas user, you've probably seen map used before being passed a function, which is really, really slow.
+
+1:13:20.960 --> 1:13:26.960
+ But if you pass map addict, it's actually really, really fast. Do it this way if you can.
+
+1:13:26.960 --> 1:13:32.960
+ So here's our predictions.
+
+1:13:32.960 --> 1:13:45.960
+ So we've got our submission sample submission file SS. So if we replace this column label with our predictions, like so,
+
+1:13:45.960 --> 1:13:54.960
+ then we can turn that into a CSV. And remember, this means this means run a bash command, a shell command.
+
+1:13:54.960 --> 1:14:00.960
+ Head is the first few rows. Let's just take a look. That looks reasonable.
+
+1:14:00.960 --> 1:14:03.960
+ So we can now submit that to Kaggle. Now,
+
+1:14:03.960 --> 1:14:15.960
+ iterating rapidly means everything needs to be fast and easy. Things that are slow and hard. Don't just take up your time, but they take up your mental energy.
+
+1:14:15.960 --> 1:14:25.960
+ So even submitting to Kaggle needs needs to be fast. So I put it into a cell. So I can just run this cell.
+
+1:14:25.960 --> 1:14:34.960
+ API competitions admit this CSV file, give it a description. So just run the cell and it submits to Kaggle.
+
+1:14:34.960 --> 1:14:39.960
+ And as you can see, it says, here we go, successfully submitted.
+
+1:14:39.960 --> 1:14:44.960
+ So that submission was terrible.
+
+1:14:44.960 --> 1:14:54.960
+ Top 80%, also known as bottom 20%, which is not too surprising, right? I mean, it's, it's one minute of training time.
+
+1:14:54.960 --> 1:15:04.960
+ But it's something that we can start with. And that would be like, however long it takes to get to this point, you put in our submission.
+
+1:15:04.960 --> 1:15:11.960
+ Now you've really started, right? Because then tomorrow you can try to make a slightly better one.
+
+1:15:11.960 --> 1:15:20.960
+ So I like to share my notebooks. And so even sharing the notebook, I've automated.
+
+1:15:20.960 --> 1:15:34.960
+ So part of fast Kaggle is you can use this thing called push notebook, and that sends it off to Kaggle to create a notebook on Kaggle.
+
+1:15:34.960 --> 1:15:40.960
+ There it is. And there's my score.
+
+1:15:40.960 --> 1:15:47.960
+ As you can see, it's exactly the same thing.
+
+1:15:47.960 --> 1:15:56.960
+ Why would you create public notebooks on Kaggle?
+
+1:15:56.960 --> 1:16:06.960
+ Well, it's the same brutality of feedback that you get for entering the competition.
+
+1:16:06.960 --> 1:16:12.960
+ But this time, rather than finding out in no uncertain terms, whether you can predict things accurately,
+
+1:16:12.960 --> 1:16:20.960
+ this time you can find out no, no one said in terms whether you can communicate things in a way that people find interesting and useful.
+
+1:16:20.960 --> 1:16:26.960
+ And if you get zero votes, you know, so be it, right? That's something to know.
+
+1:16:26.960 --> 1:16:32.960
+ And then, you know, ideally go and ask some friends like, what do you think I could do to improve?
+
+1:16:32.960 --> 1:16:36.960
+ And if they say, oh, nothing, it's fantastic. You can tell, no, that's not true.
+
+1:16:36.960 --> 1:16:42.960
+ I didn't get me votes. Tell, try again. This isn't good. How do I make it better?
+
+1:16:42.960 --> 1:16:50.960
+ And you can try and improve because if you can create models that predict things well,
+
+1:16:50.960 --> 1:16:55.960
+ and you can communicate your results in a way that is clear and compelling,
+
+1:16:55.960 --> 1:17:00.960
+ you're a pretty good data scientist, you know, like they're two pretty important things.
+
+1:17:00.960 --> 1:17:06.960
+ So here's a great way to test yourself out on those things and improve. Yes, John.
+
+1:17:06.960 --> 1:17:14.960
+ Yes, Jeremy, we have a sort of, I think, a timely question here from Zarkia about your iterative approach.
+
+1:17:14.960 --> 1:17:20.960
+ And they're asking, do you create different Kaggle notebooks for each model that you try?
+
+1:17:20.960 --> 1:17:27.960
+ So one Kaggle book for the first one, then separate notebooks subsequently, or do you do append to the bottom of a single book?
+
+1:17:27.960 --> 1:17:30.960
+ What's your strategy? That's a great question.
+
+1:17:30.960 --> 1:17:35.960
+ And I know Zarkia is going through the daily walkthroughs, but isn't quite caught up yet.
+
+1:17:35.960 --> 1:17:45.960
+ So I will say, keep it up because in the six hours of going through this, you'll see me create all the notebooks.
+
+1:17:45.960 --> 1:17:54.960
+ But if I go to the actual directory I used, you can see them.
+
+1:17:54.960 --> 1:18:04.960
+ So basically, yeah, I started with what you just saw a bit messier without the pros, but that same basic thing.
+
+1:18:04.960 --> 1:18:11.960
+ I then duplicated it to create the next one, which is here.
+
+1:18:11.960 --> 1:18:15.960
+ And because I duplicated it, you know, this stuff, which I still need, it's still there, right?
+
+1:18:15.960 --> 1:18:16.960
+ And so I run it.
+
+1:18:16.960 --> 1:18:23.960
+ And I don't always know what I'm doing, you know, and so at first, if I don't really know what I'm doing next,
+
+1:18:23.960 --> 1:18:34.960
+ when I duplicate it, it will be called, you know, first steps in the road to the top part one dash copy one, you know, and that's okay.
+
+1:18:34.960 --> 1:18:43.960
+ And as soon as I can, I'll try to rename that once I know what I'm doing, you know,
+
+1:18:43.960 --> 1:18:49.960
+ or if it doesn't say to go anywhere, I rename it into something like, you know, experiment, blah, blah, blah,
+
+1:18:49.960 --> 1:18:53.960
+ and I put notes at the bottom and I put it into a firewood folder or something.
+
+1:18:53.960 --> 1:19:02.960
+ But yeah, it's like, it's a very low tech approach that I find works really well,
+
+1:19:02.960 --> 1:19:10.960
+ which is just duplicating notebooks and editing them and naming them carefully and putting them in order.
+
+1:19:10.960 --> 1:19:16.960
+ And, you know, put the file name in when you submit as well.
+
+1:19:16.960 --> 1:19:23.960
+ And then of course also, if you've got things in Git, you know, you can have a link to the Git commit so you know exactly what it is.
+
+1:19:23.960 --> 1:19:29.960
+ Generally speaking for me, you know, my notebooks will only have one submission in and then I'll move on and create a new notebook.
+
+1:19:29.960 --> 1:19:32.960
+ So I don't really worry about versioning so much.
+
+1:19:32.960 --> 1:19:36.960
+ But you can do that as well if that helps you.
+
+1:19:36.960 --> 1:19:40.960
+ Yeah, so that's basically what I do.
+
+1:19:40.960 --> 1:19:47.960
+ And I've worked with a lot of people who use much more sophisticated and complex processes and tools and stuff,
+
+1:19:47.960 --> 1:19:53.960
+ but none of them seem to be able to stay as well organized as I am.
+
+1:19:53.960 --> 1:19:56.960
+ I think they kind of get a little lost in their tools sometimes.
+
+1:19:56.960 --> 1:20:02.960
+ And file systems and file names, I think are good.
+
+1:20:02.960 --> 1:20:13.960
+ Great, thanks. So away from that kind of dev process more towards the specifics of, you know, finding the best model and all that sort of stuff.
+
+1:20:13.960 --> 1:20:20.960
+ We've got a couple of questions that are in the same space, which is, you know, we've got some people here talking about auto ML frameworks,
+
+1:20:20.960 --> 1:20:24.960
+ which you might want to touch on for people who haven't heard of those.
+
+1:20:24.960 --> 1:20:30.960
+ If you've got any particular auto ML frameworks, you think are worth recommending.
+
+1:20:30.960 --> 1:20:36.960
+ Or just more generally, how do you go trying different models, random forest, gradient boosting neural network.
+
+1:20:36.960 --> 1:20:39.960
+ So in that space, if you can comment a bit.
+
+1:20:39.960 --> 1:20:44.960
+ Sure.
+
+1:20:44.960 --> 1:20:50.960
+ I use auto ML less than anybody I know, I would guess.
+
+1:20:50.960 --> 1:20:55.960
+ Which is to say never.
+
+1:20:55.960 --> 1:21:01.960
+ Hyper parameter optimization, never.
+
+1:21:01.960 --> 1:21:14.960
+ And the reason why is I like being highly intentional, you know, I like to think more like a scientist and have hypotheses and test them carefully.
+
+1:21:14.960 --> 1:21:24.960
+ And come up with conclusions, which then I implement, you know, so for example, in this best vision models to fine tuning.
+
+1:21:24.960 --> 1:21:33.960
+ I didn't try a huge grid search of every possible model, every possible learning rate, every possible pre processing approach.
+
+1:21:33.960 --> 1:21:34.960
+ Right.
+
+1:21:34.960 --> 1:21:39.960
+ Instead, step one was to find out, well, which things matter, right.
+
+1:21:39.960 --> 1:21:47.960
+ So, for example, does whether we squish or crop.
+
+1:21:47.960 --> 1:21:53.960
+ Make a difference, you know, as some models better with squished and some models better with crop.
+
+1:21:53.960 --> 1:22:03.960
+ And so we just tested that for again, not for every possible architecture, but for one or two versions of each of the main families that took 20 minutes.
+
+1:22:03.960 --> 1:22:07.960
+ And the answer was no, in every single case, the same thing was better.
+
+1:22:07.960 --> 1:22:14.960
+ So we don't need to do a grid search over that anymore, you know, or another classic one is like learning rates.
+
+1:22:14.960 --> 1:22:22.960
+ Most people do a kind of grid search over learning rates or they'll train a thousand models, you know, with different learning rates.
+
+1:22:22.960 --> 1:22:28.960
+ And so, I think that this fantastic research and name Leslie Smith invented the learning rate finder a few years ago.
+
+1:22:28.960 --> 1:22:34.960
+ We implemented it, I think within days of it first coming out as a technical report.
+
+1:22:34.960 --> 1:22:36.960
+ And that's what I've used ever since.
+
+1:22:36.960 --> 1:22:37.960
+ Because it works.
+
+1:22:37.960 --> 1:22:43.960
+ Well, and runs in a minute or so.
+
+1:22:43.960 --> 1:22:53.960
+ Yeah, I mean, then like neural nets versus GBM sources random forests. I mean, that's.
+
+1:22:53.960 --> 1:22:59.960
+ That shouldn't be too much of a question on the whole, like they have pretty clear.
+
+1:22:59.960 --> 1:23:02.960
+ Places that they go.
+
+1:23:02.960 --> 1:23:04.960
+ Like.
+
+1:23:04.960 --> 1:23:10.960
+ If I'm doing computer vision, I'm obviously going to use a computer vision deep learning model.
+
+1:23:10.960 --> 1:23:17.960
+ And which one I would use, well, if I'm transfer learning, which hopefully is always I would look up the two tables here.
+
+1:23:17.960 --> 1:23:24.960
+ This is my table for pets, which is which are the best at fine tuning to very similar things to what they're pre trained on.
+
+1:23:24.960 --> 1:23:27.960
+ And then the same thing for planet.
+
+1:23:27.960 --> 1:23:32.960
+ Is which ones are best for fine tuning to datasets that are very different to what they trained on.
+
+1:23:32.960 --> 1:23:39.960
+ And it happens in both case they're very similar in particular, Com next is right up towards the top in both cases.
+
+1:23:39.960 --> 1:23:42.960
+ So I just like to have these rules of thumb.
+
+1:23:42.960 --> 1:23:49.960
+ And yeah, my rule of thumb for tapala is random forest is going to be the fastest easiest way to get a pretty good result.
+
+1:23:49.960 --> 1:23:57.960
+ GBM's probably going to give me a slightly better result if I need it and can be bothered fussing around.
+
+1:23:57.960 --> 1:24:06.960
+ GBM I would probably, yeah, actually, I probably would run a hyper parameter sweep.
+
+1:24:06.960 --> 1:24:18.960
+ Because it is fitly and and it's fast. So you may as well.
+
+1:24:18.960 --> 1:24:26.960
+ So, yeah, so, you know, we were now going to make a slightly better submission slightly better model.
+
+1:24:26.960 --> 1:24:29.960
+ And so.
+
+1:24:29.960 --> 1:24:32.960
+ I had a couple of thoughts about this. The first thing was.
+
+1:24:32.960 --> 1:24:36.960
+ That thing trained.
+
+1:24:36.960 --> 1:24:45.960
+ In a minute on my home computer and then when I uploaded it to Kaggle, it took about four minutes per epoch, which was horrifying.
+
+1:24:45.960 --> 1:24:51.960
+ And Kaggle's GPUs are not amazing, but they're not that bad.
+
+1:24:51.960 --> 1:24:53.960
+ So I do something was up.
+
+1:24:53.960 --> 1:24:57.960
+ And what was up is I realized that they only have two.
+
+1:24:57.960 --> 1:25:08.960
+ Virtual CPUs, which nowadays is tiny, like, you know, you generally want as a rule of thumb about eight physical CPUs per GPU.
+
+1:25:08.960 --> 1:25:14.960
+ And so spending all of its time just reading the damn data.
+
+1:25:14.960 --> 1:25:20.960
+ Now the data was 640 by 480 and we were ending up with any 128 pixels size bits to speed.
+
+1:25:20.960 --> 1:25:24.960
+ So there's no point doing that every epoch.
+
+1:25:24.960 --> 1:25:30.960
+ So step one was to make my Kaggle iteration faster as well.
+
+1:25:30.960 --> 1:25:32.960
+ And so very simple thing to do.
+
+1:25:32.960 --> 1:25:34.960
+ Resize the images.
+
+1:25:34.960 --> 1:25:46.960
+ So fast AI has a function called resize images and you say, okay, take all the train images and stick them in the destination, making them this size.
+
+1:25:46.960 --> 1:25:48.960
+ Recursively.
+
+1:25:48.960 --> 1:25:52.960
+ And it will recreate the same folder structure over here.
+
+1:25:52.960 --> 1:25:58.960
+ And so that's why I called this the training path because this is now my training data.
+
+1:25:58.960 --> 1:26:12.960
+ And so when I then trained on that on Kaggle, it went down to four times faster with no loss of accuracy.
+
+1:26:12.960 --> 1:26:20.960
+ So that was kind of step one was to actually get my fast iteration working.
+
+1:26:20.960 --> 1:26:23.960
+ Now still a minute so long time.
+
+1:26:23.960 --> 1:26:30.960
+ And on Kaggle, you can actually see this little graph showing how much the CPU is being used, how much the GPU is being used on your own home machine.
+
+1:26:30.960 --> 1:26:34.960
+ There are tools free, you know, free tools to do the same thing.
+
+1:26:34.960 --> 1:26:37.960
+ So the GPU was still hardly being used.
+
+1:26:37.960 --> 1:26:41.960
+ So still CPU was being driven really hard.
+
+1:26:41.960 --> 1:26:45.960
+ I wanted to use a better model anyway to move up the leaderboard.
+
+1:26:45.960 --> 1:26:51.960
+ So I moved from a.
+
+1:26:51.960 --> 1:26:58.960
+ Oh, by the way, this graph is very useful. So this is.
+
+1:26:58.960 --> 1:27:04.960
+ This is speed versus error rate by family.
+
+1:27:04.960 --> 1:27:08.960
+ And so we're about to be looking at these.
+
+1:27:08.960 --> 1:27:18.960
+ So we're going to be looking at this one, complex tiny.
+
+1:27:18.960 --> 1:27:25.960
+ Here it is, complex tiny. So we were looking at resident 26 day, which took this long on this data set.
+
+1:27:25.960 --> 1:27:32.960
+ But this one here is nearly the best. It's third best, but it's still very fast.
+
+1:27:32.960 --> 1:27:36.960
+ And so it's a best overall score. So let's use this.
+
+1:27:36.960 --> 1:27:40.960
+ Particularly because, you know, we're still spending all of our time waiting for the CPU anyway.
+
+1:27:40.960 --> 1:27:45.960
+ So it turned out that when I switched my architecture to con next.
+
+1:27:45.960 --> 1:27:49.960
+ It basically ran just as fast on Kaggle.
+
+1:27:49.960 --> 1:27:51.960
+ So we can then.
+
+1:27:51.960 --> 1:27:54.960
+ Train that.
+
+1:27:54.960 --> 1:28:01.960
+ Let me switch to the Kaggle version because my outputs are missing for some reason.
+
+1:28:01.960 --> 1:28:07.960
+ So, yeah, so I started out by running the resident 26 day on the resized images and got.
+
+1:28:07.960 --> 1:28:11.960
+ Similar error rate, but I ran a few more epochs.
+
+1:28:11.960 --> 1:28:13.960
+ Got 12% error rate.
+
+1:28:13.960 --> 1:28:16.960
+ And so then I do exactly the same thing.
+
+1:28:16.960 --> 1:28:18.960
+ But with con next small.
+
+1:28:18.960 --> 1:28:21.960
+ And 4.5% error rate.
+
+1:28:21.960 --> 1:28:26.960
+ So don't think that different architectures are just tiny little differences.
+
+1:28:26.960 --> 1:28:30.960
+ This is over twice as good.
+
+1:28:30.960 --> 1:28:34.960
+ And.
+
+1:28:34.960 --> 1:28:40.960
+ A lot of folks you talk to will never have heard of this kind of next because it's very new.
+
+1:28:40.960 --> 1:28:44.960
+ And I've noticed a lot of people tend not to.
+
+1:28:44.960 --> 1:28:47.960
+ Keep up to date with new things.
+
+1:28:47.960 --> 1:28:50.960
+ They kind of learn something at university and then they stop stop learning.
+
+1:28:50.960 --> 1:28:54.960
+ So if somebody's still just using res nets all the time.
+
+1:28:54.960 --> 1:28:58.960
+ You know, he can tell them we've we've actually we've moved on.
+
+1:28:58.960 --> 1:29:03.960
+ You know, res nets are still probably the fastest.
+
+1:29:03.960 --> 1:29:09.960
+ But for the mix of speed and performance, you know, not so much.
+
+1:29:09.960 --> 1:29:13.960
+ Con next, you know, again, you want these rules of thumb, right?
+
+1:29:13.960 --> 1:29:16.960
+ If you're not sure what to do.
+
+1:29:16.960 --> 1:29:18.960
+ This on next.
+
+1:29:18.960 --> 1:29:21.960
+ Okay. And then like most things, there's different sizes.
+
+1:29:21.960 --> 1:29:22.960
+ There's a tiny.
+
+1:29:22.960 --> 1:29:23.960
+ There's a small.
+
+1:29:23.960 --> 1:29:24.960
+ There's a base.
+
+1:29:24.960 --> 1:29:25.960
+ There's a large.
+
+1:29:25.960 --> 1:29:26.960
+ There's an extra large.
+
+1:29:26.960 --> 1:29:34.960
+ And you know, it's just, well, let's talk at the picture.
+
+1:29:34.960 --> 1:29:37.960
+ This is it here.
+
+1:29:37.960 --> 1:29:39.960
+ Right.
+
+1:29:39.960 --> 1:29:43.960
+ Large takes longer, but lower era.
+
+1:29:43.960 --> 1:29:48.960
+ Tiny takes less time, but higher era. Right. So you, you pick.
+
+1:29:48.960 --> 1:29:52.960
+ About your speed versus accuracy trade off for you.
+
+1:29:52.960 --> 1:29:56.960
+ So for us, small is great.
+
+1:29:56.960 --> 1:30:03.960
+ And so, yeah, now we've got a 4.5 cent era. That's that's terrific.
+
+1:30:03.960 --> 1:30:06.960
+ Now let's get a rate on Kaggle.
+
+1:30:06.960 --> 1:30:09.960
+ This is taking about a minute per epoch on my computer.
+
+1:30:09.960 --> 1:30:13.960
+ It was probably taking about 20 seconds per epoch. So not too bad.
+
+1:30:13.960 --> 1:30:20.960
+ So, you know, one thing we could try is instead of using squish.
+
+1:30:20.960 --> 1:30:24.960
+ As our pre processing, let's try using crop. So that will randomly crop out.
+
+1:30:24.960 --> 1:30:26.960
+ An area.
+
+1:30:26.960 --> 1:30:30.960
+ And that's the default. So if I remove the method equals squish, that will crop.
+
+1:30:30.960 --> 1:30:34.960
+ So you see how I've tried to get everything into a single function.
+
+1:30:34.960 --> 1:30:36.960
+ Right. The single function.
+
+1:30:36.960 --> 1:30:37.960
+ I can tell it.
+
+1:30:37.960 --> 1:30:40.960
+ Let's go and find the definition.
+
+1:30:40.960 --> 1:30:42.960
+ What architecture do I want to train?
+
+1:30:42.960 --> 1:30:47.960
+ How do I want to transform the items? How do I want to transform the batches and how many epochs do I want to do?
+
+1:30:47.960 --> 1:30:49.960
+ That's basically it.
+
+1:30:49.960 --> 1:30:51.960
+ Right.
+
+1:30:51.960 --> 1:30:55.960
+ So this time I want to use the same architecture conf next.
+
+1:30:55.960 --> 1:31:00.960
+ I want to resize without cropping and then use the same data augmentation.
+
+1:31:00.960 --> 1:31:03.960
+ And okay, error rates about the same.
+
+1:31:03.960 --> 1:31:10.960
+ So not particularly it's a tiny bit worse, but not enough to be interesting.
+
+1:31:10.960 --> 1:31:12.960
+ Instead of cropping, we can pad.
+
+1:31:12.960 --> 1:31:16.960
+ Now padding is interesting. Do you see how these are all square?
+
+1:31:16.960 --> 1:31:19.960
+ Right. But they've got black borders.
+
+1:31:19.960 --> 1:31:27.960
+ So padding is interesting because it's the only way of preprocessing images which doesn't distort them and doesn't lose anything.
+
+1:31:27.960 --> 1:31:32.960
+ If you crop, you lose things. If you squish, you distort things.
+
+1:31:32.960 --> 1:31:34.960
+ This doesn't either.
+
+1:31:34.960 --> 1:31:38.960
+ Now, of course, the downside is that there's pixels that are literally pointless.
+
+1:31:38.960 --> 1:31:40.960
+ They contain zeros.
+
+1:31:40.960 --> 1:31:50.960
+ Every way of getting this working has its compromises, but this approach of resizing where we pad with zeros is not used enough.
+
+1:31:50.960 --> 1:31:52.960
+ And it can actually often work quite well.
+
+1:31:52.960 --> 1:31:58.960
+ And in this case, it was about as good as our best so far.
+
+1:31:58.960 --> 1:32:00.960
+ But no, not huge differences yet.
+
+1:32:00.960 --> 1:32:03.960
+ What else could we do?
+
+1:32:03.960 --> 1:32:13.960
+ Well, what we could do is,
+
+1:32:13.960 --> 1:32:14.960
+ see these pictures?
+
+1:32:14.960 --> 1:32:17.960
+ This is all the same picture.
+
+1:32:17.960 --> 1:32:20.960
+ But it's gone through our data augmentation.
+
+1:32:20.960 --> 1:32:23.960
+ So sometimes it's a bit darker. Sometimes it's picked horizontally.
+
+1:32:23.960 --> 1:32:26.960
+ Sometimes it's slightly rotated. Sometimes it's slightly warped.
+
+1:32:26.960 --> 1:32:29.960
+ Sometimes it's zooming into a slightly different section.
+
+1:32:29.960 --> 1:32:33.960
+ But this is all the same picture.
+
+1:32:33.960 --> 1:32:38.960
+ Maybe our model would like some of these versions better than others.
+
+1:32:38.960 --> 1:32:47.960
+ So what we can do is we can pass all of these to our model, get predictions for all of them, and take the average.
+
+1:32:47.960 --> 1:32:51.960
+ Right? So it's our own kind of like little mini bagging approach.
+
+1:32:51.960 --> 1:32:55.960
+ And this is called test time augmentation.
+
+1:32:55.960 --> 1:32:59.960
+ Fast AI is very unusual in making that available in a single method.
+
+1:32:59.960 --> 1:33:01.960
+ You just pass TTA.
+
+1:33:01.960 --> 1:33:12.960
+ And it will pass multiple augmented versions of the image and average them for you.
+
+1:33:12.960 --> 1:33:18.960
+ And so this is the same model as before, which had a 4.5%.
+
+1:33:18.960 --> 1:33:26.960
+ So instead of we get TTA predictions and then get the error rate.
+
+1:33:26.960 --> 1:33:30.960
+ Wait, what does this say? 4.8? Last time I did this, it was way better.
+
+1:33:30.960 --> 1:33:38.960
+ Well, that's messing things up, isn't it?
+
+1:33:38.960 --> 1:33:43.960
+ So when I did this originally on my home computer, it went from like 4.5 to 3.9.
+
+1:33:43.960 --> 1:33:49.960
+ So possibly I got a very bad luck. It's time.
+
+1:33:49.960 --> 1:33:55.960
+ So this is the first time I've actually ever seen TTA give it a worse result.
+
+1:33:55.960 --> 1:33:58.960
+ So that's very weird.
+
+1:33:58.960 --> 1:34:01.960
+ I wonder if it's...
+
+1:34:01.960 --> 1:34:04.960
+ If I should do something other than the crop padding.
+
+1:34:04.960 --> 1:34:12.960
+ All right, I'll have to check that out and I'll try and come back to you and find out why in this case, this one was worse.
+
+1:34:12.960 --> 1:34:18.960
+ Anyway, take my word for it every other time I've tried it. TTA has been better.
+
+1:34:18.960 --> 1:34:28.960
+ So then, you know, now that we've got a pretty good way of resizing, we've got TTA, we've got a good training process.
+
+1:34:28.960 --> 1:34:30.960
+ Let's just make bigger images.
+
+1:34:30.960 --> 1:34:36.960
+ And something that's really interesting and a lot of people don't realize is your images don't have to be square.
+
+1:34:36.960 --> 1:34:39.960
+ They just all have to be the same size.
+
+1:34:39.960 --> 1:34:46.960
+ And given that nearly all of our images are 640 by 480, we can just pick, you know, that aspect ratio.
+
+1:34:46.960 --> 1:34:54.960
+ So for example, 256 by 192 and will resize everything to the same aspect ratio rectangular.
+
+1:34:54.960 --> 1:35:01.960
+ And that should work even better still. So if we do that, we'll do 12 epochs.
+
+1:35:01.960 --> 1:35:06.960
+ Okay, now our error rates down to 2.2%.
+
+1:35:06.960 --> 1:35:09.960
+ Then we'll do TTA.
+
+1:35:09.960 --> 1:35:13.960
+ Okay, this time you can see it actually improving down to under 2%.
+
+1:35:13.960 --> 1:35:24.960
+ So that's pretty cool, right? We've got our error rate at the start of this notebook. We were at 12%.
+
+1:35:24.960 --> 1:35:34.960
+ And by the time we've got through our little experiments, we're down to under 2%.
+
+1:35:34.960 --> 1:35:41.960
+ And nothing about this is in any way specific to rice or this competition.
+
+1:35:41.960 --> 1:35:59.960
+ You know, it's like this is a very mechanistic, you know, standardized approach, which you can use for certainly any kind of this type of computer vision competition and computer vision data set almost.
+
+1:35:59.960 --> 1:36:07.960
+ But, you know, it looked very similar for a collaborative filtering model or a tapular model, NLP model, whatever.
+
+1:36:07.960 --> 1:36:18.960
+ So, of course, again, I want to submit as soon as I can. So just copy and paste the exact same steps I took last time, basically for creating a submission.
+
+1:36:18.960 --> 1:36:22.960
+ So, as I said, last time we did it using pandas, but there's actually an easier way.
+
+1:36:22.960 --> 1:36:30.960
+ So the step where here I've got the numbers from 0 to 9, which is like which, which rice disease is it.
+
+1:36:30.960 --> 1:36:39.960
+ So here's a cute idea. We can take our vocab and make it an array. So that's going to be a list of 10 things.
+
+1:36:39.960 --> 1:36:47.960
+ And then we can index into that vocab with our indices, which is kind of weird. This is a list of 10 things.
+
+1:36:47.960 --> 1:36:57.960
+ This is a list of, I don't know, four or 5,000 things. So this will give me four or 5,000 results, which is each vocab item for that thing.
+
+1:36:57.960 --> 1:37:14.960
+ So this is another way of doing the same mapping. And I would spend time playing with this code to understand what it does, because it's the kind of like very fast, you know, not just in terms of writing, but this, this, this would
+
+1:37:14.960 --> 1:37:25.960
+ optimize, you know, on the CPU very, very well. So this is the kind of coding you want to get used to this kind of indexing.
+
+1:37:25.960 --> 1:37:34.960
+ Anyway, so then we can submit it just like last time. And when I did that, I got in the top 25%.
+
+1:37:34.960 --> 1:37:43.960
+ And that's, that's where you want to be, right? Like generally speaking, I find in CACL competitions, the top 25% is like
+
+1:37:43.960 --> 1:37:53.960
+ you're kind of like solid competent level, you know, look, it's not to say like, it's not easy. You've got to know what you're doing.
+
+1:37:53.960 --> 1:38:03.960
+ But if you get in the top 25%, and I think you can really feel like, yeah, this is, this is a, you know, very reasonable attempt.
+
+1:38:03.960 --> 1:38:14.960
+ Okay, before we wrap up, John, any last questions?
+
+1:38:14.960 --> 1:38:24.960
+ Yeah, there's, there's two I think that would be good if we could touch on quickly before you wrap up. One from Victor asking about TTA.
+
+1:38:24.960 --> 1:38:34.960
+ When I use TTA during my training process, do I need to do something special during inference, or is this something you use only during valid day? Okay, so just explain.
+
+1:38:34.960 --> 1:38:48.960
+ TTA means test time augmentation. So specifically, it means inference. I think you mean, augmentation during training. So yeah, so during training, you basically always do augmentation, which means you're varying each image slightly.
+
+1:38:48.960 --> 1:38:56.960
+ So that the model never seems the same image exactly the same twice, and so it can't memorize it.
+
+1:38:56.960 --> 1:39:15.960
+ On the first day, I, and as I say, I don't think anybody else does this as far as I know, if you call TTA, it will use the exact same augmentation approach on whatever data set you pass it and average out the prediction, but like multiple times on the same image, and we'll average them out.
+
+1:39:15.960 --> 1:39:26.960
+ So you don't have to do anything different, but if you didn't have any data augmentation in training, you can't use TTA. It uses the same by default, same data augmentation you use for training.
+
+1:39:26.960 --> 1:39:41.960
+ Great, thank you. And the other one is about how, you know, when you first started this example, you squared the models and the images rather and you talked about squashing versus cropping versus clipping and scaling and so on.
+
+1:39:41.960 --> 1:40:01.960
+ But then you went on to say that these models can actually take rectangular inputs. So there's a question that's kind of probing at that, you know, if the, if the models can take rectangular inputs, why would you ever even care as long as they're all the same size.
+
+1:40:01.960 --> 1:40:12.960
+ So, I find most of the time, data sets tend to have a wide variety of input sizes and aspect ratios.
+
+1:40:12.960 --> 1:40:30.960
+ So, you know, if there's just as many tall skinny ones as wide, short ones, you know, you, doesn't make sense to create a rectangle because some of them you're going to really destroy them so that square is the kind of best compromise in some ways.
+
+1:40:30.960 --> 1:40:51.960
+ There are better things we can do, which we don't have any off the shelf library support for yet and I don't think I don't know that anybody else has even published about this but we experimented with kind of trying to batch things that are similar aspect ratios together
+
+1:40:51.960 --> 1:41:06.960
+ and use the kind of median rectangle for those and have had some good results with that but honestly, 90 blind point 99% of people given a wide variety of aspect ratios chucky for the into a square.
+
+1:41:06.960 --> 1:41:11.960
+ A follow up. This is my own interest. Have you ever looked at.
+
+1:41:11.960 --> 1:41:18.960
+ You know, so the issue with with padding as you say is that you're putting black pixels there.
+
+1:41:18.960 --> 1:41:28.960
+ Those are not namps. Those are black pixels. That's right. That's your own. And so there's there's something problematic to me, you know, conceptually about that.
+
+1:41:28.960 --> 1:41:39.960
+ You know, when you when you see, for example, four to three aspect ratio footage presented for broadcast on 16 to nine, you get the kind of the blurred stretch stuff.
+
+1:41:39.960 --> 1:41:51.960
+ No, we played with that a lot. Yeah, I used to be really into it actually and fast I still by default, uses a reflection padding, which means if this is I don't know that says this is a 20 pixel wide thing.
+
+1:41:51.960 --> 1:42:06.960
+ It takes the 20 pixels next to it and flips it over and sticks it here. And it looks pretty good. You know, another one is copy, which simply takes the outside pixel and it's a bit more like TV.
+
+1:42:06.960 --> 1:42:15.960
+ You know, much to my chagrin. It turns out none of them really help. Plus, you know, if anything, they make it worse.
+
+1:42:15.960 --> 1:42:29.960
+ Because in the end, the computer wants to know, no, this is the end of the image. There's nothing else here. And if you reflect it, for example, then you're kind of creating weird spikes that didn't exist in the computer's got to be like, Oh, I wonder what that spike is.
+
+1:42:29.960 --> 1:42:42.960
+ So, yes, a great question. And I obviously spent like couple of years assuming that we should be doing things that look more image like, but actually the computer likes things to be presented to it.
+
+1:42:42.960 --> 1:42:45.960
+ It's straightforward away as possible.
+
+1:42:45.960 --> 1:43:04.960
+ Thanks everybody and hope to see some of you in the walkthroughs and otherwise see you next time.
+

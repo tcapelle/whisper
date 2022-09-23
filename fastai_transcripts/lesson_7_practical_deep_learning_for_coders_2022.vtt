@@ -1,0 +1,2609 @@
+WEBVTT
+
+00:00.000 --> 00:08.640
+ All right. Welcome to lesson seven, the penultimate lesson of practical deep learning for code
+
+00:08.640 --> 00:19.400
+ as part one. And today we're going to be digging into what's inside a neural net. We've already
+
+00:19.400 --> 00:27.440
+ seen what's inside a kind of the most basic possible neural net, which is a sandwich of
+
+00:27.440 --> 00:38.040
+ fully connected layers or linear layers and and values. And so we built that from scratch.
+
+00:38.040 --> 00:47.120
+ But there's a lot of tweaks that we can do. And so most of the tweaks actually that we probably
+
+00:47.120 --> 00:56.480
+ care about are the tweaking the very first layer or the very last layer. So that's where we'll
+
+00:56.480 --> 01:02.760
+ focus. But over the next couple of weeks, we'll look at some of the tricks we can do inside as
+
+01:02.760 --> 01:14.280
+ well. So I'm going to do this through the lens of the the patty rice patty competition we've been
+
+01:14.280 --> 01:35.080
+ talking about. And we got to a point where, let's have a look. So we created a conf next model. We
+
+01:35.080 --> 01:46.520
+ tried a few different types of basic pre processing. We added test time augmentation. And then we
+
+01:46.520 --> 02:02.080
+ scaled that up to larger images and rectangular images. And that got us into the top 25% of the
+
+02:02.080 --> 02:10.160
+ competition. So that's part two of the so called road to the top series, which is increasingly
+
+02:10.160 --> 02:19.680
+ misnamed since we've been presenting these notebooks. More and more of our students have been
+
+02:19.680 --> 02:30.680
+ passing me on the leaderboard. So currently, first and second place are both people from this class,
+
+02:30.680 --> 02:44.760
+ Korean and Nick. Go to hell. You're in my target. And leave my class immediately. And congratulations.
+
+02:44.760 --> 02:55.640
+ Good luck to you. So in part three, I'm going to show you a really interesting trick, a very simple
+
+02:55.640 --> 03:02.600
+ trick for scaling up these models further. What you'll discover if you've tried to use larger models,
+
+03:02.600 --> 03:08.200
+ so you can replace the words more with the word large in those architectures and try to train a
+
+03:08.200 --> 03:14.600
+ larger model. A larger model has more parameters. More parameters means they can find more tricky
+
+03:14.600 --> 03:19.800
+ little features and broadly speaking models with more parameters, therefore ought to be more accurate.
+
+03:19.800 --> 03:29.720
+ The problem is that those activations, or more specifically, the gradients that have to be calculated,
+
+03:29.720 --> 03:39.400
+ choose up memory on your GPU. And your GPU is not as clever as your CPU at kind of sticking stuff.
+
+03:39.400 --> 03:43.720
+ It doesn't need right now into virtual memory on the hard drive. When it runs out of memory, it runs
+
+03:43.720 --> 03:49.400
+ out of memory. And it also doesn't do such a good job as your CPU at kind of shuffling things around
+
+03:49.400 --> 03:55.560
+ to try and find memory. It just allocates blocks of memory and stays allocated until you remove them.
+
+03:56.440 --> 04:00.040
+ So if you try to scale up your models to bigger models, unless you have
+
+04:02.120 --> 04:10.120
+ very expensive GPUs, you will run out of space. And you'll get an error. Something like CUDA out
+
+04:10.120 --> 04:17.640
+ of memory error. So if that happens, first thing I mentioned is it's not a bad idea to restart your
+
+04:17.640 --> 04:23.240
+ notebook because they can be a bit tricky to recover from otherwise. And then I'll show you how you
+
+04:23.240 --> 04:31.000
+ can use as large a model as you like. Almost, you know, basically you'll be able to use an
+
+04:31.000 --> 04:38.040
+ x large model on Kaggle. So let me explain.
+
+04:38.040 --> 04:47.960
+ Now, I want to, when you run something on Kaggle, like actually on Kaggle, you're generally going
+
+04:47.960 --> 04:54.600
+ to be on a 16 gig GPU. And you don't have to run stuff on Kaggle. You can run stuff on your home
+
+04:54.600 --> 05:00.840
+ computer or paper space or whatever. But sometimes you're, if you want to do Kaggle competition,
+
+05:00.840 --> 05:04.920
+ sometimes you have to run stuff on Kaggle because a lot of competitions are what they call code
+
+05:04.920 --> 05:09.720
+ competitions, which is where the only way to submit is from a notebook that you're running on Kaggle.
+
+05:10.680 --> 05:20.440
+ And then a second reason to run stuff on Kaggle is that, you know, your notebooks will appear,
+
+05:20.440 --> 05:24.600
+ you know, with the leaderboard score on them. And so people can see which which notebooks are
+
+05:24.600 --> 05:30.600
+ actually good. And I kind of like, even in things that aren't code competitions, I love trying to
+
+05:30.600 --> 05:35.640
+ be the person who's number one on the notebook score leaderboard, because that's something which,
+
+05:36.840 --> 05:43.480
+ you know, you can't just work it in video and use 1000 GPUs and win a competition through
+
+05:43.480 --> 05:50.520
+ a combination of skill and brute force. Everybody has the same nine hour timeout to work with.
+
+05:51.480 --> 06:00.120
+ So I think it's a good way of keeping the things a bit more fair. Now, so my home
+
+06:00.120 --> 06:08.120
+ GPU has 24 gig. So I wanted to find out, what can I get away with, you know, in 16 gig? And the way
+
+06:08.120 --> 06:13.800
+ I did that is I think a useful thing to discuss because again, it's all about fast iteration.
+
+06:14.520 --> 06:19.560
+ So I wanted to really quickly find out how much memory will a model use.
+
+06:22.200 --> 06:26.920
+ So there's a really quick hacky way I can do that, which is to say, okay, for the training set,
+
+06:26.920 --> 06:32.120
+ let's not use. So here's the value counts of labels. So the number of each disease.
+
+06:32.120 --> 06:37.720
+ Let's not look at all the diseases. Let's just pick one, the smallest one, right?
+
+06:37.720 --> 06:41.400
+ And let's make that our training set. Our training set is the bacterial
+
+06:41.400 --> 06:47.240
+ counter core blade images. And now I can train a model with just 337 images without changing
+
+06:47.240 --> 06:54.600
+ anything else. Not that I care about that model, but then I can see how much memory it used.
+
+06:54.600 --> 06:58.680
+ It's important to realize that, you know, each image you pass through with the same size,
+
+06:58.680 --> 07:03.400
+ each batch size is the same size. So training for longer won't use more memory.
+
+07:03.400 --> 07:06.200
+ So that'll tell us how much memory we're going to need.
+
+07:09.560 --> 07:19.480
+ So what I then did was I then tried training different models to see how much memory
+
+07:19.480 --> 07:25.160
+ they used up. Now, what happens if we train a model, so obviously, ConfNEX small doesn't use
+
+07:25.160 --> 07:31.320
+ too much memory. So here's something that reports the amount of GPU memory just by basically printing
+
+07:31.320 --> 07:38.360
+ out CUDA's GPU processes. And you can see ConfNEX small took up for gig.
+
+07:41.160 --> 07:47.080
+ And also, this might be interesting to you. If you then call Python's garbage collection,
+
+07:47.080 --> 07:54.360
+ gc.collect, and then call PyTorch's empty cache, that should basically get your GPU back to a
+
+07:55.560 --> 07:59.720
+ clean state of not using any more memory than it needs to when you can start training the next
+
+07:59.720 --> 08:08.200
+ model without restarting the kernel. So what would happen if we tried to train this little model
+
+08:08.200 --> 08:14.440
+ and it crashed with a CUDA out of memory error? What do we do? We can use a call little trick
+
+08:14.440 --> 08:22.840
+ called gradient accumulation. What's gradient accumulation? So what's gradient accumulation?
+
+08:23.880 --> 08:29.080
+ Well, I added this parameter to my train method here. That's my train method.
+
+08:29.880 --> 08:37.720
+ Creates by data loaders, creates my learner, and then depending on whether I'm fine tuning or not,
+
+08:37.720 --> 08:45.960
+ either fits or fine tunes it. But there's one other thing it does. It does this gradient
+
+08:45.960 --> 08:52.600
+ accumulation thing. What's that about? Well, the key step is here. I set my batch size. So that's
+
+08:52.600 --> 09:00.520
+ the number of images that I pass through to the GPU all at once. To 64, which is my default,
+
+09:00.520 --> 09:07.560
+ divided by slash, slash means integer divide in Python, divided by this number. So if I pass two,
+
+09:08.440 --> 09:13.640
+ it's going to use a batch size of 32. If I pass four, it'll use a batch size of 16.
+
+09:15.320 --> 09:21.560
+ Now that obviously should let me cure any memory problems, use a smaller batch size.
+
+09:22.120 --> 09:27.720
+ But the problem is that now the dynamics of my training are different, right? The smaller your
+
+09:27.720 --> 09:32.040
+ batch size, the more volatility there is from batch to batch. So now you're learning rates,
+
+09:32.040 --> 09:37.640
+ you're all messed up. You don't want to be messing around with trying to find a different set of
+
+09:37.640 --> 09:45.560
+ kind of optimal parameters for every batch size, for every architecture. So what we want to do is
+
+09:45.560 --> 09:51.880
+ find a way to run just, let's say, accumus two, accumulat equals two. Let's say we just want to
+
+09:51.880 --> 10:01.160
+ run 62 images at a time through. How do we make it behave as if it was 64 images? Well, the solution
+
+10:01.160 --> 10:07.240
+ to that problem is to consider our training loop. This is basically the training loop we
+
+10:07.240 --> 10:13.240
+ used from a couple of lessons ago, the one we created manually. We go through each xy pair in
+
+10:13.240 --> 10:20.520
+ the data loader. We calculate the loss using some coefficients based on that xy pair. And then we
+
+10:20.520 --> 10:26.920
+ call backward on that loss to calculate the gradients. And then we subtract from the coefficients,
+
+10:27.960 --> 10:32.760
+ the gradients times the learning rate. And then we zero out the gradients. So I've skipped a bit
+
+10:32.760 --> 10:39.240
+ of stuff like the with torch.no grad thing. Actually, no, I don't need that because I've got data.
+
+10:39.240 --> 10:43.480
+ No, that's it. That should all work fine. I skipped out printing the loss. That's about it.
+
+10:43.480 --> 10:57.320
+ So here is a variation of that loop where I do not always subtract the gradient times the learning
+
+10:57.320 --> 11:07.640
+ rate. Instead, I go through each xy pair in the data loader. I calculate the loss. I look at
+
+11:07.640 --> 11:14.600
+ how many images are in this batch. So initially, I start at zero and this count is going to be 32,
+
+11:14.600 --> 11:21.480
+ say, if I've divided the batch size by two. And then if count is greater than 64, I do my
+
+11:22.040 --> 11:27.560
+ gradient up my coefficients update. Well, it's not. So I skip back to here.
+
+11:29.800 --> 11:35.800
+ And I do this again. And if you remember, there was this interesting subtlety in pie torch,
+
+11:35.800 --> 11:41.720
+ which is if you call backward again, without zeroing out the gradients,
+
+11:43.240 --> 11:52.200
+ then it adds this set of gradients to the old gradients. So by doing these two half size batches,
+
+11:52.760 --> 11:57.880
+ without zeroing out the gradients between them, it's adding them up. So I'm going to end up with
+
+11:57.880 --> 12:09.160
+ the total gradient of a 64 image batch size, but passing only 32 at a time. If I used accumulate
+
+12:09.160 --> 12:16.040
+ equals four, it would go through this four times adding them up before it subtracted out the
+
+12:16.040 --> 12:23.240
+ coefficients dot grad times learning rate and zeroed it out. If I put in a queue equals 64,
+
+12:23.240 --> 12:29.880
+ it would go through into a single image one at a time. And after 64 passes through,
+
+12:29.880 --> 12:36.120
+ eventually count would be greater than 64. And we'll do the update. So that's gradient accumulation.
+
+12:36.840 --> 12:46.040
+ It's a very simple idea, right, which is that you don't have to actually update your weights
+
+12:46.040 --> 12:52.360
+ every loop through for every mini batch. You can just do it from time to time.
+
+12:54.840 --> 13:02.200
+ But it has quite significant implications, which I find most people seem not to realize,
+
+13:02.200 --> 13:07.320
+ which is if you look on like Twitter or Reddit or whatever, people can say,
+
+13:07.320 --> 13:13.720
+ oh, I need to buy a bigger GPU to train bigger models, but they don't. They could just use
+
+13:13.720 --> 13:23.640
+ gradient accumulation. And so given the huge price differential between, say, a RTX 3080 and an
+
+13:23.640 --> 13:31.640
+ RTX 3090 Ti, huge price differential, the performance is not that different. The big difference is the
+
+13:31.640 --> 13:38.600
+ memory. So what? Just put in a bit smaller batch size and do gradient accumulation. So there's actually
+
+13:38.600 --> 13:44.120
+ not that much reason to buy giant GPUs. John.
+
+13:46.840 --> 13:50.280
+ Other results with gradient accumulation numerically identical?
+
+13:51.160 --> 14:01.480
+ They're numerically identical for this particular architecture. There is something called batch
+
+14:01.480 --> 14:08.520
+ normalization, which we will look at in part two of the course, which keeps track of the moving
+
+14:08.520 --> 14:22.360
+ average of data deviations and averages. And does it in a mathematically slightly incorrect way,
+
+14:23.000 --> 14:27.480
+ as a result of which, if you've got batch normalization, then it could, it basically will
+
+14:27.480 --> 14:31.880
+ introduce more volatility, which is not necessarily a bad thing. But because it's not mathematically
+
+14:31.880 --> 14:38.280
+ identical, you won't necessarily get the same results. Conf next doesn't use batch normalization,
+
+14:38.520 --> 14:45.000
+ so it is the same. And in fact, a lot of the models people want to use really big versions of,
+
+14:45.000 --> 14:51.000
+ which is NLP ones, transformers, tend not to use batch normalization, but instead they use
+
+14:51.000 --> 14:57.800
+ something called layer normalization, which, yeah, doesn't have the same issue. I think that's
+
+14:57.800 --> 15:04.280
+ probably fair to say. I haven't thought about it that deeply. In practice, I found adding
+
+15:04.280 --> 15:10.760
+ gradient accumulation for Conf next has not caused any issues for me. I don't have to change any
+
+15:10.760 --> 15:15.800
+ parameters when I do it. Any other questions on the forum, John?
+
+15:15.800 --> 15:31.640
+ Am I asking, shouldn't it be count greater than or equal to 64? I don't think so. So we started at
+
+15:31.640 --> 15:38.440
+ zero, then it's going to be 32. Yeah, yeah. You could probably tell I didn't actually run this
+
+15:38.440 --> 15:45.880
+ code. I just, Madar was asking, does this mean that L.R. Find is based on the batch size set
+
+15:45.880 --> 15:52.600
+ during the data block? Yeah, so L.R. Find just uses your data loaders batch size.
+
+15:55.240 --> 16:01.960
+ Edward is asking, why do we need gradient accumulation rather than just using a smaller batch size
+
+16:01.960 --> 16:08.680
+ and follows up with how would we pick a good batch size? Well, just if you use a smaller batch size,
+
+16:08.680 --> 16:17.480
+ here's the thing, right? Different architectures have different amounts of memory, which they take up.
+
+16:18.760 --> 16:24.200
+ And so you'll end up with different batch sizes for different architectures,
+
+16:25.880 --> 16:29.720
+ which is not necessarily a bad thing, but each of them is going to then need a different learning
+
+16:29.720 --> 16:35.000
+ rate and maybe even different weight decay or whatever. Like the kind of the settings that's
+
+16:35.000 --> 16:39.880
+ working really well for batch size 64 won't necessarily work really well for batch size 32.
+
+16:40.600 --> 16:43.880
+ And you want to be able to experiment as easily and quickly as possible.
+
+16:46.600 --> 16:51.240
+ I think the second part of your question was, how do you pick an optimal batch size? Honestly,
+
+16:53.640 --> 16:59.640
+ the standard approach is to pick the largest one you can, just because it's faster that way,
+
+16:59.640 --> 17:07.960
+ you're getting more parallel processing going on. Although, to be honest, I quite often use batch
+
+17:07.960 --> 17:13.160
+ sizes that are quite a bit smaller than I need, because quite often it doesn't make that much
+
+17:13.160 --> 17:21.240
+ difference. But yeah, the rule of thumb would be, you know, pick a batch size that fits in your GPU.
+
+17:22.040 --> 17:25.720
+ And for performance reasons, I think it's generally a good idea to have a BMOF pollinate.
+
+17:25.720 --> 17:31.880
+ Everybody seems to always use powers of two. I don't know. I don't think it actually matters.
+
+17:33.400 --> 17:38.440
+ And look, there's one other, just a clarification or a check if the learning rate should be scaled
+
+17:38.440 --> 17:43.640
+ according to the batch size. Yeah, so generally speaking, the rule of thumb is that if you divide
+
+17:43.640 --> 17:48.120
+ the batch size by two, you divide the learning rate by two, but unfortunately it's not quite
+
+17:48.760 --> 17:53.720
+ perfect. Did you have a question? Nick, if you do, you can. Okay, cool. Yeah.
+
+17:53.720 --> 17:58.520
+ Yeah. No, that's all caught up. Thanks, Jeremy. Good questions. Thank you.
+
+18:02.440 --> 18:11.480
+ So, gradient accumulation in fast AI is very straightforward. You just divide the batch size by
+
+18:12.040 --> 18:15.720
+ however much you would have divided it by. And then add a, you get something called a callback.
+
+18:16.440 --> 18:19.000
+ And a callback is something which changes the way the model trains.
+
+18:19.000 --> 18:24.360
+ This callback is called gradient accumulation. And you pass in the effective batch size you want.
+
+18:25.320 --> 18:30.840
+ And then you say, when you create the learner, you say these are the callbacks I want. And so it's
+
+18:30.840 --> 18:36.280
+ going to pass in gradient accumulation callbacks. So it's going to only update the weights once it's
+
+18:36.280 --> 18:48.200
+ got 64 images. So if we pass in a chemicals one, it won't do any gradient accumulation.
+
+18:48.200 --> 18:55.480
+ And that uses four gig. If we use a Q equals two, about three gig.
+
+18:57.080 --> 19:03.240
+ Q equals four, about two and a half gig. And generally, the bigger the model, the closer you'll
+
+19:03.240 --> 19:09.960
+ get to a kind of a linear scaling, because models have a kind of a bit of overhead that they have
+
+19:09.960 --> 19:16.120
+ anyway. So what I then did was I just went through all the different models I wanted to try. So I
+
+19:16.120 --> 19:27.480
+ wanted to try Comfnext large at 320 by 240, VIT large, Swin V2 large, Swin large. And on each of
+
+19:27.480 --> 19:33.000
+ these, I just tried running it with a Q equals one. And actually, every single time for all of these,
+
+19:33.000 --> 19:37.560
+ I got a amount of memory error. And then I tried each of them independently with a Q equals two.
+
+19:37.560 --> 19:42.360
+ And it turns out that all of these worked with a Q equals two. And it only taught me 12 seconds
+
+19:42.360 --> 19:47.640
+ each time. So that was a very quick thing for me then. Okay. I now know how to train all of these
+
+19:47.640 --> 19:53.320
+ models on a 16 gigabyte card. So I can check here. They all in less than 16 gig.
+
+19:56.200 --> 20:04.200
+ So then I just created a little dictionary of all the architectures I wanted. And for each
+
+20:04.200 --> 20:09.640
+ architecture, all of the resize methods I wanted and final sizes I wanted.
+
+20:09.640 --> 20:18.040
+ So that was good. Now, these models, VIT, Swin V2 and Swin are all transformers models,
+
+20:19.400 --> 20:26.360
+ which means that well, most transformers models nearly all of them have a fixed size.
+
+20:26.360 --> 20:32.120
+ This one's 224. This one's 192. This one's 224. So I have to make sure that my final size is a
+
+20:32.120 --> 20:41.200
+ square of the size required, otherwise I get an error. There is a way of working around
+
+20:41.200 --> 20:46.320
+ this, but I haven't experimented with it enough to know when it works well and when it doesn't,
+
+20:46.320 --> 20:50.760
+ so we'll probably come back to that in part two. So for now we're just going to use the
+
+20:50.760 --> 20:56.800
+ size that they ask us to use. So with this dictionary of architectures and for each architecture
+
+20:56.800 --> 21:03.400
+ kind of pre processing details, we switch the training path back to using all of our images
+
+21:03.400 --> 21:10.240
+ and then we can loop through each architecture and loop through each item transforms and
+
+21:10.240 --> 21:24.520
+ sizes and train the model. And then the training script, if you're fine tuning,
+
+21:24.520 --> 21:41.640
+ returns the TTA predictions. So I append all those TTA predictions for each model for each
+
+21:41.640 --> 21:48.720
+ type into a list. And after each one, it's a good idea to do this garbage collection and empty
+
+21:48.720 --> 21:55.240
+ cache. Otherwise I find what happens is your GPU memory kind of, I don't know, I think
+
+21:55.240 --> 21:58.880
+ it gets fragmented or something. And after a while it runs out of memory even when you
+
+21:58.880 --> 22:02.080
+ thought it wouldn't. So this way you can really do as much as you like without running out
+
+22:02.080 --> 22:11.200
+ of memory. So they will train, train, train, train. And one key thing to note here is that
+
+22:11.200 --> 22:23.840
+ in my train script, my data loaders does not have the seed equals parameter. So I'm using
+
+22:23.840 --> 22:35.320
+ a different training set every time. So that means that for each of these different runs,
+
+22:35.320 --> 22:39.640
+ they're using also different validation sets. So they're not directly comparable. But you
+
+22:39.640 --> 22:48.400
+ can kind of see they're all doing pretty well, 2.1%, 2.3%, 1.7% and so forth. So why am I using
+
+22:48.400 --> 22:54.920
+ different training and validation sets for each of these? That's because I want to ensemble
+
+22:54.920 --> 23:06.240
+ them. So I'm going to use bagging, which is I am going to take the average of their
+
+23:06.240 --> 23:10.320
+ predictions. Now, I mean, really, when we talked about random forest bagging, we were
+
+23:10.320 --> 23:15.360
+ taking the average of like intentionally weak models. These are not intentionally weak models.
+
+23:15.360 --> 23:18.800
+ They're going to be good models, but they're all different. They're using different architectures
+
+23:18.800 --> 23:23.320
+ and different pre processing approaches. And so in general, we would hope that these different
+
+23:23.320 --> 23:28.200
+ approaches, some might work well for some images and some might work well for other images.
+
+23:28.200 --> 23:32.200
+ And so when we average them out, hopefully we'll get a good blend of kind of different
+
+23:32.200 --> 23:41.240
+ ideas, which is kind of what you want in bagging. So we can stack up that list of different,
+
+23:41.240 --> 23:48.800
+ all the different probabilities and take their main. And so that's going to give us 3,469
+
+23:48.800 --> 23:55.120
+ predictions. That's our test set size. And each one has 10 probabilities, the probability
+
+23:55.120 --> 24:05.640
+ of each disease. And so then we can use argmax to find which probability index is the highest.
+
+24:05.640 --> 24:11.600
+ So that's going to give us our list of indexes. So this is basically the same steps as we used
+
+24:11.600 --> 24:20.200
+ before to create our CSV submission file. So at the time of creating this analysis, that
+
+24:20.200 --> 24:26.440
+ got me to the top of the leaderboard. And in fact, these are my four submissions. And
+
+24:26.440 --> 24:31.240
+ you can see each one got better. Now you're not always going to get this nice monotonic
+
+24:31.240 --> 24:36.600
+ improvement, right? But you want to be trying to submit something every day to kind of like
+
+24:36.600 --> 24:44.320
+ try out something new, right? And the more you practice, the more you'll get a good intuition
+
+24:44.320 --> 24:50.440
+ of what's going to help, right? So partly I'm showing you this to say it's not like purely
+
+24:50.440 --> 24:55.040
+ random as to whether things work or don't. Once you've been doing this for a while, you
+
+24:55.040 --> 25:02.360
+ know, you've rolled generally be improving things most of the time. So as you can see
+
+25:02.360 --> 25:06.760
+ from the descriptions, my first submission was our conf next small, the 12 epochs with
+
+25:06.760 --> 25:14.320
+ TTA. And then a ensemble of conf next. So it's basically this exact same thing, but just
+
+25:14.320 --> 25:20.440
+ retraining a few with different training subsets. And then this is the same thing again. This
+
+25:20.440 --> 25:27.440
+ is the thing we just saw, basically, the the sample of large bottles with TTA. And then
+
+25:27.440 --> 25:35.840
+ the last one was something I skipped over, which was I, the the VIT models were the best
+
+25:35.840 --> 25:42.760
+ in my testing. So I basically weighted them as double in the ensemble. I'm pretty unscientific,
+
+25:42.760 --> 25:53.560
+ but again, it gave it a another boost. And so that was that was it. All right, John.
+
+25:53.560 --> 26:00.680
+ Yes, thanks, Jeremy. So no particular order, Korean is asking would trying out cross validation
+
+26:00.680 --> 26:07.000
+ with K folds with the same architecture makes sense to do an assembling of models. Yeah,
+
+26:07.000 --> 26:14.600
+ so a popular thing is to do K fold cross validation. So K fold cross validation is something very,
+
+26:14.600 --> 26:20.720
+ very similar to what I've done here. So what I've done here is I've trained a bunch of models
+
+26:20.720 --> 26:30.800
+ with different training sets. Each one is a different random 80% of the data. Five fold cross
+
+26:30.800 --> 26:36.560
+ validation does something similar. But what it says is rather than picking, like say, five
+
+26:36.560 --> 26:46.480
+ samples out with different random subsets. In fact, instead, first, like, do all except for the
+
+26:46.480 --> 26:51.120
+ first 20% of the data, and then all but the second 20% and then all but the third and so forth.
+
+26:51.120 --> 26:59.200
+ And so you end up with five subsets, each of which have non overlapping validation sets. And then
+
+26:59.200 --> 27:08.960
+ you'll assemble those. You know, in a theory, maybe that could be slightly better because you're
+
+27:08.960 --> 27:17.440
+ kind of guaranteed that every row is appears four times, you know, effectively. It also has a benefit
+
+27:17.440 --> 27:24.000
+ that you could average those five validation sets, because there's no kind of overlap between them
+
+27:24.000 --> 27:30.880
+ to get a cross validation. Personally, I generally don't bother. And the reason I don't is because
+
+27:30.880 --> 27:42.800
+ this way, I can add and remove models very easily. I don't, you know, I can just, you know, add
+
+27:42.800 --> 27:47.680
+ another architecture and whatever to my ensemble without trying to find a different overlapping
+
+27:47.680 --> 27:57.280
+ non overlapping subset. So, yeah, cross validation is therefore something that I use probably less
+
+27:57.280 --> 28:05.280
+ than most people, or almost, or almost never. Awesome. Thank you. Are there any just going back
+
+28:05.280 --> 28:09.680
+ to gradient accumulation, any other kind of drawbacks or potential gotchas with gradient
+
+28:09.680 --> 28:19.520
+ accumulation? No, not really. Yeah, like, amazingly, it doesn't even really slow things down much,
+
+28:19.520 --> 28:25.600
+ you know, going from a batch size of 64 to a batch size of 32. By definition, you had to do it
+
+28:25.600 --> 28:31.360
+ because you're GP useful. So you're obviously giving a lot of data. So it's probably going to be
+
+28:31.360 --> 28:39.840
+ using its processing speed pretty effectively. So yeah, no, it's just, it's just a good technique
+
+28:39.840 --> 28:45.520
+ that we should all be buying cheaper graphics cards with less memory in them and using, you know,
+
+28:45.520 --> 28:50.560
+ have, like, I don't know the prices, I suspect, like, you could probably buy like two 30 eighties
+
+28:50.560 --> 28:55.520
+ for the price of one 30 90 TI or something. That would be a very good deal.
+
+28:57.600 --> 29:03.440
+ Yes, clearly you're not on the Nvidia payroll. So look, this is a good segue then. We did have
+
+29:04.000 --> 29:08.480
+ a question about sort of GPU recommendations, and there's been a bit of chat on that as well.
+
+29:09.280 --> 29:13.840
+ So any, any, you know, commentary, any additional commentary around GPU recommendations?
+
+29:13.840 --> 29:22.960
+ No, not really. I mean, obviously at the moment, Nvidia is the only game in town. You know,
+
+29:22.960 --> 29:30.800
+ if you buy, if you try to use a, you know, Apple M one or M two or an AMD card, you're basically
+
+29:30.800 --> 29:37.920
+ in for a world of pain in terms of compatibility and stuff and unoptimized libraries and whatever.
+
+29:37.920 --> 29:48.880
+ The, the Nvidia consumer cards, so the ones that start with RTX are much cheaper,
+
+29:51.040 --> 29:58.240
+ but are just as good as the expensive enterprise cards. So you might be wondering why anybody
+
+29:58.240 --> 30:03.600
+ would buy the expensive enterprise cards. And the reason is that there's a licensing issue that
+
+30:03.600 --> 30:11.280
+ Nvidia will not allow you to use an RTX consumer card in a data center, which is also why
+
+30:11.280 --> 30:18.320
+ cloud computing is more expensive than they're kind of ought to be because everybody selling
+
+30:18.320 --> 30:23.120
+ cloud computing GPUs is selling these cards that are like, I can't remember, I think they're like
+
+30:23.120 --> 30:28.480
+ three times more expensive for kind of the same features. So yeah, if you do get serious about
+
+30:28.480 --> 30:36.160
+ deep learning to the point that you're prepared to invest, you know, a few days in administering a
+
+30:36.160 --> 30:41.360
+ box and, you know, I guess depending on your prices, hopefully we'll start to come down,
+
+30:41.360 --> 30:46.720
+ but currently a thousand or $2,000 or $2,000 and buying a GPU, then, you know, that'll probably
+
+30:47.760 --> 30:54.240
+ pay you back pretty quickly. Great. Thank you. Let's see. Some other ones come in.
+
+30:54.240 --> 31:01.280
+ If you have a back on models, not hardware, if you have a well functioning but large model,
+
+31:01.920 --> 31:08.240
+ can it make sense to train a smaller model to produce the same final activations as the larger
+
+31:08.240 --> 31:12.240
+ model? Oh, yeah, absolutely. I'm not sure we'll get into that this time around, but
+
+31:15.600 --> 31:21.840
+ yeah, we'll cover that in part two, I think, but yeah, basically, there's a kind of teacher
+
+31:21.840 --> 31:26.240
+ student models and model distillation, which broadly speaking, there are ways to
+
+31:28.240 --> 31:34.000
+ make inference faster by trainings more models that work the same way as large models.
+
+31:34.560 --> 31:37.440
+ Great. Thank you. All clear. All right. So
+
+31:40.400 --> 31:45.520
+ that is the actual real end of road to the top because beyond that, we don't actually cover how
+
+31:45.520 --> 31:50.560
+ to get closer to the top. You'd have to ask Curie and to share his techniques to find out that,
+
+31:50.560 --> 31:55.760
+ or Nick, to get the second place to the top. Part four is actually
+
+31:58.560 --> 32:02.560
+ something that I think is very useful to know about for learning, and it's got to teach us a whole
+
+32:02.560 --> 32:11.360
+ lot about how the last layer of a neural networks. And specifically, what we're going to try to do
+
+32:13.280 --> 32:17.840
+ is we're going to try to build a model that doesn't just predict the disease,
+
+32:17.840 --> 32:25.760
+ but also predict the type of race. So how would you do that? So here's the data loader we're going to
+
+32:25.760 --> 32:32.800
+ try to build. It's going to be something that for each image, it tells us the disease and the type
+
+32:32.800 --> 32:38.240
+ of race. I say disease, sometimes normal, I guess some of them are not diseased.
+
+32:41.280 --> 32:47.680
+ So to build a model that can predict two things, the first thing is going to need data
+
+32:47.680 --> 32:56.560
+ loaders that have two dependent variables. And that is shockingly easy to do in Fast.ai.
+
+32:58.000 --> 33:03.760
+ Thanks to the data block. So we've seen the data block before. We haven't been using it for the
+
+33:03.760 --> 33:09.120
+ patty competition so far because we haven't needed it. We could just use image data loader from folder.
+
+33:10.240 --> 33:15.920
+ So that's like the highest level API, the simplest API. If we go down a level deeper into the data
+
+33:15.920 --> 33:23.280
+ block, we have a lot more flexibility. So if you've been following the walkthroughs, you'll know that
+
+33:23.280 --> 33:28.240
+ as I built this, the first thing I actually did was to simply replicate the previous notebook,
+
+33:28.800 --> 33:34.720
+ but replace the image data loader from folders with a data block to try to do, first of all,
+
+33:34.720 --> 33:42.480
+ exactly the same thing. And then I added the second dependent variable. So if we look at the previous
+
+33:42.480 --> 33:54.400
+ image data loader from folders thingy, here it is, we were passing in some item transforms
+
+33:55.440 --> 34:01.920
+ and some batch transforms. And we had something saying what percentage should be the validation set.
+
+34:01.920 --> 34:14.000
+ So in a data block, if you remember, we have to pass in a blocks argument saying what kind of data is
+
+34:14.000 --> 34:19.280
+ the independent variable and what is the dependent variable. So to replicate what we had before,
+
+34:19.280 --> 34:24.240
+ we would just pass in image block, category block, because we've got an image as our independent variable
+
+34:24.800 --> 34:30.000
+ and a category, one type of rice is the dependent variable. So the new thing I'm going to show you
+
+34:30.000 --> 34:34.240
+ here is that you don't have to when you put in two things, you can put in as many as you like.
+
+34:35.040 --> 34:40.320
+ So if you put in three things, we're going to generate one image and two categories.
+
+34:41.920 --> 34:46.560
+ Now, first AI, if you're saying I want three things, first AI doesn't know which of those
+
+34:46.560 --> 34:50.800
+ is the independent variable and which is the dependent variable. So the next thing you have
+
+34:50.800 --> 34:56.000
+ to tell it is how many inputs are there, number of inputs. And so here I've said there's one input.
+
+34:56.000 --> 35:01.680
+ So that means this is the input and therefore by definition, two categories will be the output.
+
+35:01.680 --> 35:05.360
+ Because remember, we're trying to predict two things, the type of rice and the disease.
+
+35:07.040 --> 35:11.440
+ Okay, this is the same as what we've seen before to find out to get our list of items we'll call
+
+35:11.440 --> 35:18.160
+ get image files. Now here's something we haven't seen before. Get why is our labeling function.
+
+35:18.800 --> 35:23.600
+ Normally, we pass to get why a single thing such as the parent label function,
+
+35:23.600 --> 35:31.200
+ which looks at the name of the parent directory, which remember is how these images are structured.
+
+35:31.760 --> 35:37.280
+ And that would tell us the label. But get why can also take an array. And in this case,
+
+35:37.280 --> 35:43.360
+ we want two different labels. One is the name of the parent directory, because that's the disease.
+
+35:43.920 --> 35:49.600
+ The second is the variety. So what's get variety? Get variety is a function.
+
+35:49.600 --> 35:57.600
+ So let me explain how this function works. So we can create a data frame containing our training
+
+35:57.600 --> 36:03.440
+ data that came from Kaggle. So for each image, it tells us the disease and the variety.
+
+36:06.960 --> 36:11.600
+ And what I did is something I haven't shown before. In pandas, you can set one column to be the index.
+
+36:12.560 --> 36:18.800
+ And when you do that, in this case image ID, it makes this series, this sorry, the data frame
+
+36:18.800 --> 36:26.000
+ kind of like a dictionary. I can index into it by saying, tell me the row for this image.
+
+36:27.200 --> 36:33.680
+ And to do that, you use the lock attribute, the location. So we want in the data frame
+
+36:34.720 --> 36:41.360
+ the location of this image. And then you can also say optionally what column you want,
+
+36:41.360 --> 36:50.400
+ this column. And so here's this image. And here's this column. And as you can see, it returns that thing.
+
+36:51.680 --> 36:56.480
+ So hopefully now you can see it's pretty easy for us to create a function that takes
+
+37:00.080 --> 37:09.840
+ a row, sorry, a path and returns the location and the data frame of the name of that file,
+
+37:09.840 --> 37:14.880
+ because remember, these are the names of files for the variety column.
+
+37:17.680 --> 37:24.240
+ So that's our second gateway. Okay. And then we've seen this before randomly split the data into the
+
+37:24.240 --> 37:32.560
+ 20% and 80%. And so we could just squish them all to 192 just for this example.
+
+37:32.560 --> 37:38.720
+ And then use data augmentation to get us down to 128 square images just for this example.
+
+37:42.720 --> 37:47.760
+ And so that's what we get when we say show batch, we get what we just discussed.
+
+37:51.120 --> 38:01.520
+ So now we need a model that predicts two things. How do we create a model that predicts two things?
+
+38:01.520 --> 38:07.360
+ Well, the key thing to realize is we never actually had a model that predicts two things.
+
+38:07.360 --> 38:15.600
+ We had a model that predicts 10 things before. The 10 things we predicted is the probability of each
+
+38:15.600 --> 38:21.040
+ disease. So we don't actually now want a model that predicts two things. We want a model that
+
+38:21.040 --> 38:27.040
+ predicts 20 things, the probability of each of the 10 diseases and the probability of each of the
+
+38:27.040 --> 38:42.080
+ 10 varieties. So how could we do that? Well, let's first of all try to just create the same disease
+
+38:42.080 --> 38:48.320
+ model we had before with our new data loader. And so this is going to be reasonably straightforward.
+
+38:48.320 --> 38:57.440
+ The key thing to know is that since we told FastAI that there's one input and therefore by definition
+
+38:57.440 --> 39:07.440
+ there's two outputs, it's going to pass to our metrics and to our loss functions, three things
+
+39:07.440 --> 39:16.480
+ instead of two, the predictions from the model and the disease and the variety. So we can't just
+
+39:16.480 --> 39:22.240
+ use error rate as our metric anymore because error rate takes two things. Instead, we have to create
+
+39:22.240 --> 39:29.840
+ a function that takes three things and return error rate on the two things we want, which is the
+
+39:29.840 --> 39:35.680
+ predictions from the model and the disease. So predictions from the model, this is the target.
+
+39:36.560 --> 39:42.720
+ So that's actually all we need to do to define a metric that's going to work with our new
+
+39:42.720 --> 39:49.440
+ dataset with a new data loader. This is not going to actually tell us anything about variety. First,
+
+39:49.440 --> 39:54.560
+ it is going to try to replicate something that can do just disease. So when we create our learner,
+
+39:55.680 --> 40:03.360
+ we'll pass in this new disease error function. Okay, so we're halfway there. The other thing
+
+40:03.360 --> 40:09.680
+ we're going to need is to change our loss function. Now we never actually talked about what loss
+
+40:09.680 --> 40:17.440
+ function to use. And that's because vision learner guessed what loss function to use.
+
+40:18.160 --> 40:24.560
+ Vision learner saw that our dependent variable is a single category and it knows the best loss
+
+40:24.560 --> 40:28.080
+ function that's probably going to be the case for things with a single category. And it knows
+
+40:28.080 --> 40:33.520
+ how big the category is. So it just didn't bother us at all. Just said, okay, I'll figure it out for
+
+40:33.520 --> 40:41.760
+ you. So the only time we've provided our own loss function is when we were kind of doing
+
+40:41.760 --> 40:47.280
+ linear models and neural nets from scratch. And we did, I think, mean squared error. We might also
+
+40:47.280 --> 40:56.400
+ have done mean absolute error. Neither of those work when the dependent variable is a category.
+
+40:56.400 --> 41:03.360
+ Now, how would you use mean squared error or mean absolute error to say how close were these 10
+
+41:03.360 --> 41:11.520
+ probability predictions to this one correct answer? So in this case, we have to use a different
+
+41:11.520 --> 41:16.000
+ loss function. We have to use something called cross entropy loss. And this is actually the
+
+41:16.000 --> 41:22.560
+ loss function that fast AI picked for us before without us knowing. But now that we are having
+
+41:22.560 --> 41:29.520
+ to pick it out manually, I'm going to explain to you exactly what cross entropy loss does. Okay.
+
+41:32.720 --> 41:39.040
+ And you know, these details are very important indeed. Like, remember, I said at the start of this
+
+41:39.040 --> 41:43.600
+ class, the stuff that happens in the middle of the model, you're not going to have to care about
+
+41:43.600 --> 41:49.040
+ much in your life, if ever. But the stuff that happens in the first layer and the last layer,
+
+41:49.040 --> 41:52.320
+ including the loss function that sits between the last layer and the loss, you're going to have
+
+41:52.320 --> 41:58.320
+ to care about a lot. This stuff comes up all the time. So you definitely want to know about
+
+41:58.320 --> 42:04.080
+ cross entropy loss. And so I'm going to explain it using a spreadsheet.
+
+42:06.800 --> 42:12.000
+ And this spreadsheet is in the course repo. And so let's say you were predicting something like a
+
+42:12.000 --> 42:17.440
+ kind of a mini image net thing where you're trying to predict whether something an image is a cat,
+
+42:17.440 --> 42:24.000
+ a dog, a plane, a fish, or a building. So you set up some model, whatever it is, a comf, next model,
+
+42:24.000 --> 42:32.400
+ or just a big bunch of linear layers connected up or whatever. And initially, you've got some
+
+42:32.400 --> 42:40.160
+ random weights. And it spits out at the end. Five predictions. Right. So remember to predict
+
+42:40.160 --> 42:45.440
+ something with five categories, your model will spit out five probabilities. Now it doesn't
+
+42:45.440 --> 42:50.240
+ initially spit out probabilities. There's nothing making them probabilities. It just spits out
+
+42:50.240 --> 42:56.720
+ five numbers. Could be negative, could be positive. Okay. So here's the output of the model.
+
+43:00.000 --> 43:06.000
+ So what we want to do is we want to convert these into probabilities.
+
+43:06.000 --> 43:14.800
+ And so we do that in two steps. The first thing we do is we go
+
+43:17.600 --> 43:21.520
+ X, that's e to the power of, we go e to the power of each of those things.
+
+43:23.120 --> 43:28.320
+ Like so. Okay. And so here's the mathematical formula we're using. This is called the softmax
+
+43:28.320 --> 43:38.320
+ that we're working through. We're going to go through each of the categories. So these are our
+
+43:38.320 --> 43:43.040
+ five categories. So here K is five. We've got to go through each of our categories. And we're
+
+43:43.040 --> 43:51.520
+ going to go e to the power of the output. So ZJ is the output for the Jth category. So here's that.
+
+43:51.520 --> 43:58.800
+ And then we're going to sum them all together. Here it is. Sum up together. Okay. So this is the
+
+43:58.800 --> 44:07.760
+ denominator. And then the numerator is just e to the power of the thing we care about. So this
+
+44:07.760 --> 44:14.720
+ row. So the numerator is e to the power of cat on this row.
+
+44:14.720 --> 44:22.560
+ So e to the power of dog on this row. And so forth. Now if you think about it,
+
+44:24.480 --> 44:31.440
+ since the denominator adds up all the e to the power ofs, then when we do each one divided by
+
+44:31.440 --> 44:40.000
+ the sum, that means the sum of these will equal one by definition. Right. And so now we have
+
+44:40.000 --> 44:48.240
+ things that can be treated as probabilities. They're all numbers between zero and one. Numbers that
+
+44:48.240 --> 44:53.200
+ were bigger in the output will be bigger here. But there's something else interesting, which is
+
+44:53.200 --> 45:00.080
+ because we did e to the power of. It means that the bigger numbers will be like pushed up to numbers
+
+45:00.080 --> 45:06.560
+ closer to one, like we're saying like, Oh, really try to pick one thing as having most of the
+
+45:06.560 --> 45:12.160
+ probability because we are trying to predict, you know, one thing we're trying to predict,
+
+45:12.160 --> 45:20.880
+ which one is it? And so this is called softmax. So sometimes you'll see people complaining about
+
+45:20.880 --> 45:28.000
+ the fact that their model, which they said, let's say, is it a teddy bear or a grizzly bear or a
+
+45:28.000 --> 45:33.520
+ black bear? And they feed it a picture of the cat. And they say, Oh, the model's wrong because
+
+45:33.520 --> 45:38.560
+ it predicted grizzly bear. It's not a grizzly bear. As you can see, there's no way for this to predict
+
+45:38.560 --> 45:44.720
+ anything other than the categories we're giving it. We're forcing it to that. Now we don't, if you
+
+45:44.720 --> 45:50.160
+ want that like there's something else you could do, which is you could actually have them not add
+
+45:50.160 --> 45:55.760
+ up to one. Right. You could instead have something which simply says what's the probability it's a
+
+45:55.760 --> 46:00.240
+ cat, what's probably it's a dog was probably played totally separately. And they could add up to
+
+46:00.240 --> 46:05.760
+ less than one. And in that situation, you can say, you know, or more than one, which case you could
+
+46:05.760 --> 46:11.440
+ have like more than one thing being true, or zero things being true. But in this particular case,
+
+46:11.440 --> 46:20.960
+ where we want to predict one and one thing only, we use softmax. The first part of the cross entropy
+
+46:20.960 --> 46:29.920
+ formula, the first part of the cross entry formula, in fact, let's look it up and end across
+
+46:29.920 --> 46:37.760
+ entropy loss. The first part of what cross entropy loss in PyTorch does
+
+46:42.720 --> 46:48.720
+ is to calculate the softmax. It's actually the log of the softmax, but don't worry about that too
+
+46:48.720 --> 46:58.640
+ much. It's just a slightly faster to do the log. Okay, so now for each one of our five things,
+
+46:58.640 --> 47:06.560
+ we've got a probability. The next step is the actual cross entropy calculation,
+
+47:06.560 --> 47:13.360
+ which is we take our five things, we've got our five probabilities, and then we've got our actuals.
+
+47:14.320 --> 47:18.800
+ Now, the truth is the actual, you know, the five things would have indices, right?
+
+47:19.520 --> 47:25.600
+ 0, 1, 2, 3, or 4, and the actual turned out to be the number one. But what we tend to do is we
+
+47:25.600 --> 47:32.000
+ think of it as being one hot encoded, which is we put a 1 next to the thing for which it's true,
+
+47:32.720 --> 47:41.200
+ and a 0 everywhere else. And so now we can compare these five numbers to these five numbers,
+
+47:42.000 --> 47:51.040
+ and we would expect to have a smaller loss if the softmax was high, where the actual is high.
+
+47:51.040 --> 47:58.560
+ And so here's how we calculate, this is the formula, the cross entropy loss.
+
+47:58.560 --> 48:05.360
+ We sum up, they switch to M this time, for some reason, but the same thing, we sum up across the
+
+48:05.360 --> 48:13.760
+ five categories, so M is 5. And for each one, we multiply the actual target value, so that's 0,
+
+48:13.760 --> 48:27.840
+ so here it is here, the actual target value. And we multiply that by the log of the predicted
+
+48:27.840 --> 48:36.000
+ probability, the log of red, the predicted probability. And so, of course, for four of these,
+
+48:36.000 --> 48:47.200
+ that value is 0. Because here, yj equals 0, by definition, for all but one of them, because it's
+
+48:47.200 --> 48:57.040
+ one hot encoded. So for the one that it's not, we've got our actual times the log softmax.
+
+48:57.040 --> 49:06.800
+ Okay, and so now actually you can see why PyTorch prefers to use log softmax, because that it kind
+
+49:06.800 --> 49:15.280
+ of skips over having to do this log at all. So this equation looks slightly frightening,
+
+49:16.160 --> 49:21.760
+ but when you think about it, all it's actually doing is it's finding the probability for the
+
+49:21.760 --> 49:28.400
+ one that is one and taking its log, right? It's kind of weird doing it as a sum, but in math,
+
+49:28.400 --> 49:31.760
+ it could be a little bit tricky to kind of say, oh, look, this up in an array, which is basically
+
+49:31.760 --> 49:38.560
+ all it's doing. But yeah, basically, at least in this case, for a single result with softmax,
+
+49:38.560 --> 49:43.680
+ this is all it's doing is it's finding the 0.87 where it's one four and taking the log,
+
+49:43.680 --> 49:51.600
+ and then finally negative. So that is what cross entropy loss does.
+
+49:57.120 --> 50:06.160
+ We add that together for every row. So here's what it looks like if we add it together over every row,
+
+50:06.160 --> 50:14.240
+ right? So n is the number of rows. And here's a special case. This is called binary cross entropy.
+
+50:15.200 --> 50:19.280
+ What happens if we're not predicting which of five things it is, but we're just predicting
+
+50:19.280 --> 50:26.800
+ is it a catch? So in that case, if you look at this approach, you end up with this formula,
+
+50:26.800 --> 50:37.120
+ which it's it's this is identical to this formula, but in for just two cases, which is you've either
+
+50:37.120 --> 50:44.160
+ you either are a cat, or you're not a cat, right? And so if you're not a cat, it's one minus you are a
+
+50:44.160 --> 50:49.680
+ cat. And same with the probability, you've got the probability you are a cat, and then not a cat
+
+50:49.680 --> 50:57.200
+ is one minus that. So here's this special case of binary cross entropy, and now our rows represent
+
+50:57.200 --> 51:02.480
+ rows of data. Okay, so each one of these is a different image, a different prediction. And so
+
+51:02.480 --> 51:08.560
+ for each one, I'm just predicting are you a cat? And this is the actual. And so the actual are you
+
+51:08.560 --> 51:16.080
+ not a cat is just one minus that. And so then these are the predictions that came out of the model.
+
+51:16.080 --> 51:24.320
+ And again, we can use softmax or it's it's binary equivalent. And so that will give you a prediction
+
+51:24.320 --> 51:32.320
+ that you're a cat. And the prediction that it's not a cat is one minus that. And so here is
+
+51:32.320 --> 51:43.600
+ each of the part yi times log of P yi. And here is what do I subtract? That was weird.
+
+51:49.280 --> 51:53.280
+ Oh, because I've got minus of both. So you'll see this way avoids parentheses.
+
+51:55.520 --> 51:59.920
+ Yeah, minus the are you not a cat times the log of the prediction of are you not a cat?
+
+51:59.920 --> 52:06.320
+ And then we can add those together. And so that would be the binary cross entropy loss of this
+
+52:06.320 --> 52:10.160
+ data set of five cat or not cat images.
+
+52:20.400 --> 52:29.200
+ Now, if you've got an equal i, you may have noticed that I am currently looking at the
+
+52:29.200 --> 52:35.520
+ documentation for something called an end cross entropy loss. But over here, I had something
+
+52:35.520 --> 52:43.440
+ called f dot cross entropy. Basically, it turns out that all of the loss functions in PyTorch have
+
+52:43.440 --> 52:52.240
+ two versions. There's a version which is a class. This is a class which you can instantiate passing
+
+52:52.240 --> 52:58.000
+ in various tweaks you might want. And there's also a version which is just a function.
+
+52:58.000 --> 53:06.640
+ And so if you don't need any of these tweaks, you can just use the function. The functions live in a
+
+53:06.640 --> 53:13.120
+ kind of remember the sub module called. I think it might be like torch dot end functional, but
+
+53:13.120 --> 53:18.400
+ everybody including the PyTorch official docs just calls a capital F. So that's what this capital
+
+53:18.400 --> 53:25.120
+ F refers to. So our loss, if we just care about disease, we're going to be past the three things,
+
+53:25.120 --> 53:32.880
+ we're just going to calculate cross entropy on our input versus disease. All right. So that's all
+
+53:32.880 --> 53:38.800
+ fine. We passed. So now when we create our vision learner, you can't rely on fast AI to know what
+
+53:38.800 --> 53:43.440
+ loss function to use because we've got multiple targets. So you have to say this is the loss
+
+53:43.440 --> 53:48.240
+ function I want to use. This is the metrics I want to use. And the other thing you can't rely on
+
+53:48.240 --> 53:55.040
+ is that fast AI no longer knows how many activations to create. Because again, there's more than
+
+53:55.040 --> 54:00.640
+ one target. So you have to say the number of outputs to create at the last layer is 10. So this
+
+54:00.640 --> 54:09.760
+ is just saying what's the size of the last matrix? And once we've done that, we can train it. And we
+
+54:09.760 --> 54:14.640
+ get, you know, basically the same kind of result as we always get because this model at this point
+
+54:15.200 --> 54:23.040
+ is identical to our previous conv next mall model. We've just done it in a slightly more roundabout
+
+54:23.040 --> 54:31.360
+ way. So finally, before our break, I'll show you how to expand this now into a multi target model.
+
+54:33.040 --> 54:38.000
+ And the trick is actually very simple. And you might have almost got the idea of it when I talked
+
+54:38.000 --> 54:45.440
+ about it earlier. Our vision learner now requires 20 outputs. We now need that last matrix
+
+54:45.440 --> 54:54.880
+ to have to produce 20 activations, not 10. 10 of those activations are going to predict the disease.
+
+54:55.920 --> 55:02.160
+ And 10 of the activations are going to predict the variety. So you might be then asking like,
+
+55:02.160 --> 55:06.320
+ well, how does the model know what it's meant to be predicting? And the answer is,
+
+55:06.960 --> 55:09.600
+ with the loss function, you're going to have to talent.
+
+55:09.600 --> 55:18.640
+ So for example, disease loss, remember, it's going to get the input, the disease, and the variety.
+
+55:19.680 --> 55:25.760
+ This is now going to have 20 columns in. So we're just going to decide, all right, we're just
+
+55:25.760 --> 55:30.880
+ going to decide the first 10 columns. We're going to decide the prediction of what the disease is,
+
+55:30.880 --> 55:35.040
+ which of the probability of each disease. So we can now pass to cross entropy,
+
+55:35.040 --> 55:45.040
+ the first 10 columns, and the disease target. So the way you read this, colon means every row.
+
+55:45.040 --> 55:56.720
+ And then colon 10 means every column up to the 10th. So these are the first 10 columns. And that
+
+55:56.720 --> 56:02.000
+ will, that's a loss function that just works on predicting disease using the first 10 columns.
+
+56:02.000 --> 56:08.800
+ For variety, we'll use cross entropy loss with a target of variety. And this time we'll use the
+
+56:08.800 --> 56:17.840
+ second 10 columns. So here's column 10 onwards. So then the overall loss function is the sum
+
+56:17.840 --> 56:21.600
+ of those two things, disease loss, plus variety loss.
+
+56:21.600 --> 56:34.480
+ And that's actually it. That's all the model needs to basically it's now going to, if you kind of
+
+56:34.480 --> 56:41.280
+ think through the manual neural nets we've created, this loss function will be reduced
+
+56:42.240 --> 56:46.560
+ when the first 10 columns are doing good job of predicting the disease probabilities,
+
+56:46.560 --> 56:50.240
+ and the second 10 columns are doing a good job of predicting the variety probabilities. And
+
+56:50.240 --> 56:56.240
+ therefore the gradients will point in an appropriate direction that the coefficients will get better
+
+56:56.240 --> 57:05.920
+ and better at using those columns for those purposes. It would be nice to see the error rate as well
+
+57:05.920 --> 57:10.960
+ for each of disease and variety. So we can call error rate passing in the first 10 columns and
+
+57:10.960 --> 57:14.960
+ disease, and then variety the second 10 columns and variety.
+
+57:14.960 --> 57:22.240
+ And we may as well also add to the metrics the losses. And so now when we create our learner,
+
+57:22.240 --> 57:27.200
+ we're going to pass in as the loss function, the combined loss.
+
+57:28.640 --> 57:35.200
+ And as the metrics, our list of all the metrics, and nout equals 20. And now look what happens when
+
+57:35.200 --> 57:41.120
+ we train. As well as telling us the overall train invalid loss, it also tells us the disease and
+
+57:41.120 --> 57:46.960
+ variety error and the disease and variety loss. And you can see our disease error is getting down
+
+57:46.960 --> 57:56.320
+ to similar levels it was before. It's slightly less good. But it's similar. It's not surprising
+
+57:56.320 --> 58:02.960
+ it's slightly less good, because we've only given it the same number of epochs. And we're now asking
+
+58:02.960 --> 58:08.160
+ it to try to do more stuff, which is to learn to recognize what the rice variety looks like.
+
+58:08.160 --> 58:14.240
+ And also learns to recognize what the disease looks like. Here's the counterintuitive thing,
+
+58:14.240 --> 58:20.720
+ though. If we train it for longer, it may well turn out that this model, which is trying to predict
+
+58:20.720 --> 58:27.920
+ two things, actually gets better at predicting disease than our disease specific model.
+
+58:27.920 --> 58:33.680
+ Why is that? Like that sounds weird, right? Because we're trying to have it to do more stuff.
+
+58:33.680 --> 58:40.640
+ That's the same size model. Or the reason is that quite often it'll turn out that the kinds of
+
+58:40.640 --> 58:48.640
+ features that help you recognize a variety of rice are also useful for recognizing the disease.
+
+58:48.640 --> 58:55.840
+ You know, maybe there are certain textures, right? Or maybe some diseases impact different
+
+58:55.840 --> 59:01.040
+ varieties in different ways. So it'd be really helpful to know what variety it looks like.
+
+59:01.040 --> 59:07.440
+ So it'd be really helpful to know what variety it was. So I haven't tried training this for a
+
+59:07.440 --> 59:13.200
+ long time, and I don't know the answer is in this particular case, does a multi target model do
+
+59:13.200 --> 59:18.000
+ better than a single target model at predicting disease? But I just want to let you know, sometimes
+
+59:18.000 --> 59:23.840
+ it does. So for example, a few years ago, there was a Kaggle competition for recognizing the
+
+59:23.840 --> 59:32.480
+ kinds of fish on a boat. And I remember we ended up doing a multi target model where we tried to
+
+59:32.480 --> 59:37.280
+ predict a second thing. I can't even remember what it was. Maybe it was a type of boat or something.
+
+59:37.280 --> 59:40.960
+ And it definitely turned out in that Kaggle competition that predicting two things helped
+
+59:40.960 --> 59:44.560
+ you predict the type of fish better than predicting just the type of fish.
+
+59:46.400 --> 59:51.600
+ So there's at least, you know, there's two reasons to learn about multi target models.
+
+59:51.600 --> 59:55.280
+ One is that sometimes you just want to be able to predict more than one thing.
+
+59:56.000 --> 59:59.840
+ So this is useful. And the second is that sometimes this will actually be better at
+
+59:59.840 --> 1:00:05.520
+ predicting just one thing than a just one thing model. And of course, the third reason is it really
+
+1:00:05.520 --> 1:00:13.040
+ forced us to dig quite deeply into these loss functions and activations in a way we haven't
+
+1:00:13.040 --> 1:00:23.840
+ quite done before. So it's okay. It's absolutely okay if this is confusing.
+
+1:00:27.520 --> 1:00:32.720
+ The way to make it not confusing is well, the first thing I do is like go back to our earlier
+
+1:00:32.720 --> 1:00:39.680
+ models where we did stuff by hand on like the Titanic data set and built our own architectures.
+
+1:00:39.680 --> 1:00:45.840
+ And maybe you could try to build a model that predicts two things in the Titanic data set.
+
+1:00:45.840 --> 1:00:53.760
+ Maybe you could try to predict both sex and survival or something like that or class and
+
+1:00:53.760 --> 1:00:59.360
+ survival. Because that's kind of forced you to look at it on very small data sets. And then the
+
+1:00:59.360 --> 1:01:07.520
+ other thing I'd say is run this notebook and really experiment at trying to see what kind of
+
+1:01:07.520 --> 1:01:11.520
+ outputs you get. Like actually look at the imports and look at the outputs and look at the data
+
+1:01:11.520 --> 1:01:19.200
+ loaders and so forth. Alright, let's have a six minute break. So I see you back here at 10 past seven.
+
+1:01:24.480 --> 1:01:32.640
+ Okay, welcome back. Oh, before I continue, I very rudely forgot to mention this very nice
+
+1:01:32.640 --> 1:01:40.560
+ equation image here is from an article by Chris said called things that confused me about cross
+
+1:01:40.560 --> 1:01:46.960
+ entropy. It's a very good article. So I recommend you check it out if you want to go a bit deeper
+
+1:01:46.960 --> 1:01:49.520
+ there. There's a link to it inside the spreadsheet.
+
+1:01:57.440 --> 1:02:01.520
+ So the next notebook we're going to be looking at is this one called collaborative filtering deep
+
+1:02:01.520 --> 1:02:10.880
+ dive. And this is going to cover our last of the four major application areas. Collaborative filtering.
+
+1:02:15.280 --> 1:02:21.440
+ And this is actually the first time I'm going to be presenting a chapter of the book largely
+
+1:02:22.480 --> 1:02:28.000
+ without variation. Because this is one where I looked back at the chapter and I was like,
+
+1:02:28.000 --> 1:02:32.240
+ Oh, I can't think of any way to improve this. So I thought I'll just leave what it is.
+
+1:02:34.480 --> 1:02:39.600
+ But we have put the whole chapter up on Kaggle. So that's where we're going to be showing it to you.
+
+1:02:42.960 --> 1:02:46.560
+ And so we're going to be looking at a data set called the movie lens.
+
+1:02:47.920 --> 1:02:52.560
+ Data set, which is a data set of movie ratings.
+
+1:02:52.560 --> 1:02:59.280
+ And we're going to grab a smaller version of it, 100,000 record version of it.
+
+1:03:03.680 --> 1:03:09.040
+ And it comes as a CSV file, which we can read in. But it's not really a CSV file. It's a
+
+1:03:09.040 --> 1:03:19.120
+ TSP file. This here means a tab in Python. These are the names of the columns.
+
+1:03:19.120 --> 1:03:24.800
+ So here's what it looks like. It's got a user, a movie, a rating and a timestamp. We're not going
+
+1:03:24.800 --> 1:03:32.000
+ to use the timestamp at all. So basically three columns we care about. This is a user ID. So maybe
+
+1:03:32.000 --> 1:03:41.520
+ 196 is Jeremy and maybe 186 is Rachel. And 22 is John, I don't know. Maybe this movie is
+
+1:03:42.080 --> 1:03:47.840
+ Return of the Jedi and this one's Casablanca. This one's LA confidential. And then this rating
+
+1:03:47.840 --> 1:03:54.720
+ says how did Jeremy feel about Return of the Jedi? He gave it a three out of five. That's how we
+
+1:03:54.720 --> 1:04:06.720
+ can read this data set. This kind of data is very common. Anytime you've got a user and a product
+
+1:04:07.280 --> 1:04:14.160
+ or a service and you might not even have ratings. Maybe just the fact that they bought that product.
+
+1:04:14.160 --> 1:04:25.440
+ You can have a similar table with zeros and ones. So for example, Radak who's in the audience here
+
+1:04:25.440 --> 1:04:29.760
+ is now at NVIDIA doing like basically does this, right? Recommendation systems. So
+
+1:04:29.760 --> 1:04:36.960
+ Recommendation systems, it's a huge industry. And so what we're learning today is a really key
+
+1:04:36.960 --> 1:04:45.520
+ foundation of it. So these are the first two rows. This is not a particularly great way to see it.
+
+1:04:45.520 --> 1:04:50.320
+ I prefer to cross tabulate it like that, like this. This is the same information.
+
+1:04:52.160 --> 1:04:59.600
+ So for each movie, for each user, here's the rating. So user 212 never watched movie 49.
+
+1:04:59.600 --> 1:05:09.760
+ Now, if you're wondering why there's so few empty cells here, I actually
+
+1:05:10.640 --> 1:05:16.880
+ grabbed the most watched movies and the most movie watching users for this particular
+
+1:05:18.160 --> 1:05:24.880
+ sample matrix. So that's why it's particularly full. So yeah, so this is what kind of a
+
+1:05:24.880 --> 1:05:34.640
+ collaborative filtering data set looks like when we cross tabulate it. So how do we fill in this gap?
+
+1:05:36.080 --> 1:05:43.120
+ So maybe user 212 is Nick and movie 49. What's the movie you haven't seen Nick and you'd quite
+
+1:05:43.120 --> 1:05:50.800
+ like to maybe not sure about it? The new Elvis movie, Baz Luerman, good choice Australian director,
+
+1:05:50.800 --> 1:06:00.720
+ filmed in Queensland. Yeah. Okay, so that's movie number 49. So is Nick going to like the new Elvis
+
+1:06:00.720 --> 1:06:13.200
+ movie? Well, to figure this out, what we could do, ideally would like to know, for each movie,
+
+1:06:13.200 --> 1:06:20.240
+ what kind of movie is it? Like what are the kind of features of it? Is it like actiony,
+
+1:06:21.200 --> 1:06:28.320
+ science fictiony, dialogue driven, critical acclaimed, you know? So let's say, for example,
+
+1:06:28.320 --> 1:06:33.280
+ we were trying to look at the last Skywalker. Maybe that was the movie the next one during
+
+1:06:33.280 --> 1:06:43.120
+ about watching. And so if we like had three categories being science fiction, action or kind of classic
+
+1:06:43.120 --> 1:06:47.920
+ old movies would say the last Skywalker is very science fiction. Let's see, this is from like
+
+1:06:47.920 --> 1:06:55.760
+ negative one to one. Pretty action, definitely not an old classic, or at least not yet.
+
+1:06:55.760 --> 1:07:06.080
+ And so then maybe we then could say like, okay, well, maybe like Nick's tastes in movies are that he
+
+1:07:06.080 --> 1:07:12.480
+ really likes science fiction, quite likes action movies and doesn't really like old classics.
+
+1:07:13.280 --> 1:07:19.840
+ Right? So then we could kind of like match these up to see how much we think this user might like
+
+1:07:19.840 --> 1:07:29.680
+ this movie. To calculate the match, we could just multiply the corresponding values, user one times
+
+1:07:29.680 --> 1:07:37.360
+ last Skywalker and add them up, 0.9 times 0.98 plus 0.8 times 0.9 plus negative 0.6 times negative 0.9,
+
+1:07:37.360 --> 1:07:43.040
+ that's going to give us a pretty high number, right? With a maximum of three. So that would suggest
+
+1:07:43.040 --> 1:07:53.200
+ Nick probably would like the last Skywalker. On the other hand, the movie Casablanca, we would say
+
+1:07:53.200 --> 1:08:00.480
+ definitely not very science fiction, not really very action, definitely very old classic. So then
+
+1:08:00.480 --> 1:08:08.000
+ we'd do exactly the same calculation and get this negative result here. So you probably wouldn't like
+
+1:08:08.000 --> 1:08:15.120
+ Casablanca. This thing here, when we multiply the corresponding parts of a vector together and add
+
+1:08:15.120 --> 1:08:24.400
+ them up is called a dot product in math. So this is the dot product of the user's preferences and
+
+1:08:24.400 --> 1:08:32.960
+ the type of movie. Now, the problem is we weren't given that information. We know nothing about
+
+1:08:32.960 --> 1:08:42.320
+ these users or about the movies. So what are we going to do? We want to try to create these factors
+
+1:08:43.280 --> 1:08:49.680
+ without knowing ahead of time what they are. We wouldn't even know what factors to create. What
+
+1:08:49.680 --> 1:08:53.200
+ are the things it really matters when it just people decide what movies they want to watch?
+
+1:08:55.680 --> 1:09:01.120
+ What we can do is we can create things called latent factors. Latent factors is this weird idea
+
+1:09:01.120 --> 1:09:09.280
+ that we can say, I don't know what things about movies matter to people, but there's probably something
+
+1:09:10.800 --> 1:09:19.680
+ and let's just try like using SGD to find them. And we can do it in everybody's
+
+1:09:20.960 --> 1:09:25.200
+ favorite mathematical optimization software, Microsoft Excel.
+
+1:09:25.200 --> 1:09:40.080
+ So here is that table. And what we can do, let's head over here actually, here's that table.
+
+1:09:41.280 --> 1:09:44.880
+ So what we could do is we could say for each of those movies,
+
+1:09:46.320 --> 1:09:53.440
+ so let's say for movie 27, let's assume there are five latent factors. I don't know what they're
+
+1:09:53.440 --> 1:10:01.520
+ for. They're just five latent factors. We'll figure them out later. And for now, I certainly
+
+1:10:01.520 --> 1:10:05.680
+ don't know what the value of those five latent factors for movie 27. So we're going to just
+
+1:10:05.680 --> 1:10:13.680
+ chuck a little random numbers in them. And we're going to do the same thing for movie 49,
+
+1:10:13.680 --> 1:10:19.600
+ pick another five random numbers. And the same thing for movie 57, pick another five numbers.
+
+1:10:19.600 --> 1:10:23.600
+ And you might not be surprised to hear, we're going to do the same thing for each user.
+
+1:10:24.640 --> 1:10:30.160
+ So if we use a 14, we're going to pick five random numbers for them. And for user 29,
+
+1:10:30.160 --> 1:10:35.520
+ we'll pick five random numbers for them. And so the idea is that this number here,
+
+1:10:35.520 --> 1:10:39.760
+ point one nine, is saying if it was true that user ID 14
+
+1:10:39.760 --> 1:10:48.800
+ feels not very strongly about the fact that for movie 27 has a value of 0.71.
+
+1:10:49.680 --> 1:10:53.040
+ So therefore in here, we do the dot product.
+
+1:10:55.440 --> 1:11:00.560
+ The details of why I don't matter too much, but well, actually you can figure this out from
+
+1:11:00.560 --> 1:11:06.880
+ what we've said so far. If you go back to our definition of matrix product, you might notice that
+
+1:11:06.880 --> 1:11:13.760
+ the matrix product of a row with a column is the same thing as a dot product.
+
+1:11:14.400 --> 1:11:18.240
+ And so here in Excel, I have a row and a column. So therefore I say matrix,
+
+1:11:18.240 --> 1:11:23.760
+ multiply that by that. That gives us the dot product. So here's the dot product of that
+
+1:11:24.560 --> 1:11:28.240
+ by that or the matrix, multiply, given that they're row and column.
+
+1:11:28.240 --> 1:11:41.280
+ The only other slight quirk here is that if the actual rating is zero, is empty, I'm just going
+
+1:11:41.280 --> 1:11:51.360
+ to leave it blank. I'm going to set it to zero actually. So here is everybody's rating,
+
+1:11:51.360 --> 1:11:57.040
+ predicted rating of movies. I say predicted, of course these are currently random numbers,
+
+1:11:57.040 --> 1:12:01.280
+ so they are terrible predictions. But when we have some way to predict things,
+
+1:12:02.000 --> 1:12:05.840
+ and we start with terrible random predictions, we know how to make them better, don't we?
+
+1:12:06.480 --> 1:12:11.280
+ We used to cast a gradient descent. Now to do that, we're going to need a loss function.
+
+1:12:12.240 --> 1:12:21.440
+ So that's easy enough. We can just calculate the sum of x minus y squared divided by the count.
+
+1:12:21.440 --> 1:12:26.960
+ That is the main squared error. And if we take the square root, that is the root main squared
+
+1:12:26.960 --> 1:12:35.760
+ error. So here is the root main squared error in Excel between these predictions and these actuals.
+
+1:12:38.160 --> 1:12:42.000
+ And so now that we have a loss function, we can optimize it, data,
+
+1:12:42.000 --> 1:12:56.400
+ solver, set objective, this one here, by changing cells, these ones here, and these ones here,
+
+1:12:59.440 --> 1:13:07.440
+ solve. Okay, and initially our loss is 2.81. So we hope it's going to go down.
+
+1:13:07.440 --> 1:13:14.320
+ And as it solves, not a great choice of background color, but it says 0.68. So this number is going
+
+1:13:14.320 --> 1:13:21.920
+ down. So this is using, actually in Excel, it's not quite using stochastic gradient descent,
+
+1:13:21.920 --> 1:13:26.160
+ because Excel doesn't know how to calculate gradients. There are actually optimization
+
+1:13:26.160 --> 1:13:32.160
+ techniques that don't need gradients. They calculate them numerically as they go, but that's a minor
+
+1:13:32.160 --> 1:13:39.600
+ quick. One thing you'll notice is it's doing it very, very slowly. There's not much data here,
+
+1:13:39.600 --> 1:13:46.080
+ it's still going. One reason for that is that if it's because it's not using gradients,
+
+1:13:46.080 --> 1:13:52.720
+ it's much slower, and the second is Excel is much slower than PyTorch. Anyway, it's come up with an
+
+1:13:52.720 --> 1:14:00.000
+ answer. And look at that. It's got to 0.42. So it's got a pretty good prediction. And so
+
+1:14:00.000 --> 1:14:09.040
+ we can kind of get a sense of this. For example, looking at the last three,
+
+1:14:13.200 --> 1:14:21.200
+ movie user 14 likes dislikes, likes. Let's see somebody else like that. Here's somebody else.
+
+1:14:21.200 --> 1:14:26.720
+ This person likes dislikes, likes. So based on our kind of approach, we're saying, okay,
+
+1:14:26.720 --> 1:14:30.960
+ since they have the same feeling about these three movies, maybe they'll feel the same about
+
+1:14:30.960 --> 1:14:38.320
+ these three movies. So this person likes all three of those movies, and this person likes two out of
+
+1:14:38.320 --> 1:14:43.040
+ three of them. So you know, you kind of, this is the idea, right? As if somebody says to you,
+
+1:14:43.040 --> 1:14:47.280
+ I like this movie, this movie, this movie. And you're like, oh, they like those movies too.
+
+1:14:47.840 --> 1:14:52.400
+ What other movies do you like? And they'll say, oh, how about this? There's a chance, good chance
+
+1:14:52.400 --> 1:14:58.240
+ that you're going to like the same thing. That's the basis of collaborative filtering. Okay. It's
+
+1:14:58.240 --> 1:15:05.120
+ and and mathematically, we call this matrix completion. So this matrix is missing values. We just want
+
+1:15:05.120 --> 1:15:11.120
+ to complete them. So the core of collaborative filtering is it's a matrix completion exercise.
+
+1:15:11.120 --> 1:15:19.760
+ How can you grab a microphone?
+
+1:15:21.040 --> 1:15:28.240
+ Oh, is that that? My question was, is with the dot products, right? So if we think about the
+
+1:15:28.240 --> 1:15:32.320
+ math of that for a minute, is, yeah, if we think about the coastline of the angle between the
+
+1:15:32.320 --> 1:15:37.760
+ two vectors, that's going to roughly approximate the correlation. Is that essentially what's going
+
+1:15:37.760 --> 1:15:42.160
+ on here in one sense with the way that we're. Okay. So is the cosine of the angle between the
+
+1:15:42.160 --> 1:15:48.720
+ vectors much the same thing as the dot product? The answer is yes. They're the same once you
+
+1:15:48.720 --> 1:15:54.480
+ normalize them. So, yeah. Is that still on?
+
+1:15:57.760 --> 1:16:02.400
+ It's correlation. What we're doing here at scale as well. Yeah, you can fit. Yeah, you can think
+
+1:16:02.400 --> 1:16:07.920
+ of it that way. Okay. Cool. So now.
+
+1:16:11.920 --> 1:16:19.120
+ This looks pretty different to how PyTorch looks. PyTorch has things in rows, right? We've got a
+
+1:16:19.120 --> 1:16:26.480
+ user, a movie rating, user movie rating, right? So how do we do the same kind of thing in PyTorch?
+
+1:16:26.480 --> 1:16:33.360
+ So let's do the same kind of thing in Excel, but using the table in the same format that PyTorch
+
+1:16:33.360 --> 1:16:39.600
+ has it. Okay. So to do that next cell, the first thing I'm going to do is I'm going to see, okay,
+
+1:16:39.600 --> 1:16:46.720
+ this I've got to look at user number 14. And I want to know what index, like how far down this
+
+1:16:46.720 --> 1:16:51.600
+ list is 14. Okay. So we'll just match means find the index. So this is user index one.
+
+1:16:51.600 --> 1:16:57.120
+ And then what I'm going to do is I'm going to say the,
+
+1:16:59.120 --> 1:17:07.680
+ these five numbers is basically I want to find row one over here. And in Excel, that's called offset.
+
+1:17:07.680 --> 1:17:17.360
+ So we're going to offset from here by one row. And so you can see here it is 0.19, 0.63, 0.19,
+
+1:17:17.360 --> 1:17:24.960
+ 0.69, 0.60, et cetera. Right. So here's the second user, 0.25, 0.03, et cetera. And we can do
+
+1:17:24.960 --> 1:17:35.760
+ the same thing for movies. Right. So movie four, one, seven is index 14. That's going to be 0.75,
+
+1:17:35.760 --> 1:17:45.120
+ 0.47, et cetera. And so same thing, right. But now we're going to offset from here by 14.
+
+1:17:45.120 --> 1:17:57.280
+ To get this row, which is 0.75, 0.47, et cetera. And so the prediction now is the dot product is
+
+1:17:57.280 --> 1:18:03.120
+ called some product in Excel. This is some product of those two things. So this is exactly the same
+
+1:18:04.960 --> 1:18:09.760
+ as we had before. Right. But when we kind of put everything next to each other, we have to like
+
+1:18:09.760 --> 1:18:17.920
+ manually look up the index. And so then for each one, we can calculate the error squared,
+
+1:18:17.920 --> 1:18:24.160
+ prediction minus rating squared. And then we could add those all up. And if you remember,
+
+1:18:24.160 --> 1:18:27.600
+ this is actually the same root mean squared error we had before we optimized before,
+
+1:18:28.320 --> 1:18:33.840
+ 2.81, because we've got the same numbers as before. And so this is mathematically identical.
+
+1:18:33.840 --> 1:18:42.800
+ So what's this weird word up here? Embedding. You've probably heard it before, and you might have
+
+1:18:42.800 --> 1:18:48.880
+ come across the impression at some very complex fancy mathematical thing. But actually, it turns
+
+1:18:48.880 --> 1:18:55.760
+ out that it is just looking something up at an array. That is what an embedding is. So
+
+1:18:55.760 --> 1:19:09.120
+ we call this an embedding matrix. And these are our user embeddings and our movie embeddings.
+
+1:19:11.440 --> 1:19:17.440
+ So let's take a look at that in PyTorch. And you know, at this point, if you've heard about
+
+1:19:17.440 --> 1:19:24.640
+ embeddings before, you might be thinking that can't be it. And yeah, it's just as complex as the
+
+1:19:24.640 --> 1:19:31.200
+ rectified linear unit, which turned out to be replaced negatives with zeros. Embedding actually
+
+1:19:31.200 --> 1:19:36.400
+ means look something up in an array. So there's a lot of things that we use as deep learning
+
+1:19:36.400 --> 1:19:44.560
+ practitioners to try to make you as intimidated as possible so that you don't wander into our
+
+1:19:44.560 --> 1:19:49.920
+ territory and start winning our Kaggle competitions. And unfortunately, once you discover the simplicity
+
+1:19:49.920 --> 1:19:54.320
+ of it, you might start to think that you can do it yourself. And then it turns out you can.
+
+1:19:55.440 --> 1:20:00.640
+ So yeah, that's what basically it turns out pretty much all of this jargon turns out to be.
+
+1:20:03.280 --> 1:20:10.240
+ So we're going to try to learn these latent factors, which is exactly what we just did in Excel. We
+
+1:20:10.240 --> 1:20:18.080
+ just learned the latent factors. All right, so if we're going to learn things in PyTorch,
+
+1:20:18.080 --> 1:20:26.320
+ we're going to need data loaders. One thing I did is there is actually a movies table as well
+
+1:20:26.320 --> 1:20:31.680
+ with the names of the movies. So I merged that together with the ratings so that then we've now
+
+1:20:31.680 --> 1:20:36.400
+ got the user ID and the actual name of the movie. We don't need that obviously for the model,
+
+1:20:36.400 --> 1:20:41.680
+ but it's just going to make it a bit more fun to interpret later. So this is called
+
+1:20:41.680 --> 1:20:48.960
+ ratings. We have something called collaborative data loaders. So collaborative filtering data
+
+1:20:48.960 --> 1:20:56.400
+ loaders, and we can get that from a data frame by passing in the data frame. And it expects a
+
+1:20:56.400 --> 1:21:02.880
+ user column and an item column. So the user column is what it sounds like, the person that is rating
+
+1:21:02.880 --> 1:21:07.920
+ this thing. And the item column is the product or service that they're rating. In our case,
+
+1:21:07.920 --> 1:21:12.480
+ the user columns called user, so we don't have to pass that in. And the item column is called
+
+1:21:13.200 --> 1:21:17.920
+ title. So we do have to pass this in because by default, the user column should be called user,
+
+1:21:18.480 --> 1:21:26.080
+ and the item column will be called item. Give it a batch size. And as usual, we can call show batch.
+
+1:21:27.040 --> 1:21:34.000
+ And so here's our data loaders, a batch of data loaders, or at least a bit of it.
+
+1:21:34.000 --> 1:21:40.880
+ And so now that we're since we're told the names, we actually get to see the names, which is nice.
+
+1:21:44.960 --> 1:21:52.720
+ All right. So now we're going to create the user factors and movie factors,
+
+1:21:52.720 --> 1:22:04.880
+ I.E. This one and this one. So the number of rows of the movie factors will be equal to the
+
+1:22:04.880 --> 1:22:09.520
+ number of movies, and the number of rows of the user factors will be equal to the number of users.
+
+1:22:10.240 --> 1:22:14.880
+ And the number of columns will be whatever we want. However, many factors we want to create.
+
+1:22:17.760 --> 1:22:22.640
+ John. This might be a pertinent time to jump in with a question. Any comments about
+
+1:22:22.640 --> 1:22:24.160
+ choosing the number of factors?
+
+1:22:30.800 --> 1:22:32.240
+ Well, we've got a lot of them.
+
+1:22:32.240 --> 1:22:38.000
+ We have defaults that we use for embeddings in Fast.DI.
+
+1:22:40.480 --> 1:22:45.040
+ It's a very obscure formula, and people often ask me for the mathematical derivation of where
+
+1:22:45.040 --> 1:22:50.720
+ it came from. But what actually happened is I wrote down how many factors I think is appropriate
+
+1:22:50.720 --> 1:22:55.520
+ for different size categories on a piece of paper at a table, or actually an Excel.
+
+1:22:55.520 --> 1:23:00.560
+ And then I fitted a function to that, and that's the function. So it's basically a mathematical
+
+1:23:00.560 --> 1:23:05.680
+ function that fits my intuition about what works well. But it seems to work pretty well.
+
+1:23:05.680 --> 1:23:11.120
+ I said it used in lots of other places now. Lots of papers will be like using Fast.DI's
+
+1:23:11.120 --> 1:23:13.680
+ rule of thumb for embedding sizes is the formula.
+
+1:23:13.680 --> 1:23:21.520
+ Cool. Thank you. It's pretty fast to train these things so you can try a few.
+
+1:23:23.680 --> 1:23:29.200
+ So the number of users is just the length of how many users there are.
+
+1:23:29.200 --> 1:23:33.520
+ The number of movies is the length of how many titles there are. So we create a matrix of random
+
+1:23:33.520 --> 1:23:45.920
+ numbers of users by five, and movies of movies by five. And now we need to look up the index of
+
+1:23:45.920 --> 1:23:53.600
+ the movie in our movie, Late in Factor Matrix. The thing is, when we've learned about deep learning,
+
+1:23:53.600 --> 1:24:04.240
+ we learned that we do matrix modifications, not look something up in a matrix in an array. So in Excel,
+
+1:24:07.600 --> 1:24:15.600
+ we were saying offset, which is to say find element number 14 in the table, which that's not
+
+1:24:15.600 --> 1:24:25.920
+ a matrix multiply. How does that work? Well, actually it is. It actually is for the same reason
+
+1:24:27.760 --> 1:24:37.920
+ that we talked about here, which is we can represent, find the element number one thing
+
+1:24:37.920 --> 1:24:49.120
+ in this list is actually the same as multiplying by a one hot encoded matrix. So remember how
+
+1:24:51.120 --> 1:24:53.360
+ if we just take off the log for a moment.
+
+1:24:59.280 --> 1:25:01.680
+ Look, this is returned 0.87.
+
+1:25:01.680 --> 1:25:10.160
+ And particularly if I take the negative off here, if I add this up, this is 0.87, which is the result
+
+1:25:10.160 --> 1:25:17.040
+ of finding the index number one thing in this list. But we didn't do it that way. We did this by
+
+1:25:17.040 --> 1:25:26.000
+ taking the dot product of this, sorry, of this, and this. But that's actually the same thing.
+
+1:25:26.000 --> 1:25:35.120
+ Taking the dot product of a one hot encoded vector with something is the same as looking up this index
+
+1:25:36.400 --> 1:25:45.680
+ in the vector. So that means that this exercise here of looking up the 14 thing is the same
+
+1:25:45.680 --> 1:25:55.600
+ as doing a matrix model play with a one hot encoded vector. And we can see that here. This is how we
+
+1:25:55.600 --> 1:26:03.040
+ create a one hot encoded vector of length and users in which the third element is set to one
+
+1:26:03.040 --> 1:26:10.640
+ and everything else is zero. And if we multiply that, so at means to remember matrix multiply in
+
+1:26:10.640 --> 1:26:17.520
+ Python. So if we multiply that by our user factors, we get back this answer. And if we just ask for
+
+1:26:17.520 --> 1:26:24.080
+ user factors number three, we get back the exact same answer. They're the same thing.
+
+1:26:24.080 --> 1:26:33.520
+ So you can think of an embedding as being a computational shortcut for multiplying something
+
+1:26:33.520 --> 1:26:39.520
+ by a one hot encoded vector. And so if you think back to what we did with this, we can see that
+
+1:26:39.520 --> 1:26:47.040
+ back to what we did with dummy variables. This basically means embeddings are like a cool
+
+1:26:48.160 --> 1:26:53.840
+ math trick for speeding up doing matrix model pliers with dummy variables. Not a speeding up,
+
+1:26:53.840 --> 1:26:58.960
+ we never even have to create the dummy variables. We never have to create the one hot encoded vectors.
+
+1:26:58.960 --> 1:27:15.520
+ We can just look up in an array. All right. So we're now ready to build a collaborative
+
+1:27:15.520 --> 1:27:22.800
+ mil, a collaborative filtering model. And we're going to create one from scratch.
+
+1:27:22.800 --> 1:27:38.000
+ And as we've discussed before, in PyTorch, a model is a class. And so we briefly touched on this,
+
+1:27:38.000 --> 1:27:46.000
+ but I'm going to touch on it again. This is how we create a class in Python. You give it a name.
+
+1:27:46.000 --> 1:27:53.280
+ And then you say how to initialize it, how to construct it. So in Python, remember, they call
+
+1:27:53.280 --> 1:28:00.400
+ these things dunder whatever. This is dunder edit. These are magic methods that Python will call for
+
+1:28:00.400 --> 1:28:10.480
+ you at certain times. The method called dunder edit is called when you create an object of this
+
+1:28:10.480 --> 1:28:19.760
+ class. So we could pass it a value. And so now we set the attribute called a equal to that value.
+
+1:28:20.320 --> 1:28:27.120
+ And so then later on, we could call a method called say that will say hello to whatever you
+
+1:28:27.120 --> 1:28:34.400
+ passed in here. And this is what it will say. So for example, if you construct an object type
+
+1:28:34.400 --> 1:28:42.960
+ example, passing in silver, self dot a now equal silver. So if you say use the dot method, the dot
+
+1:28:42.960 --> 1:28:50.640
+ say method, nice to meet you, acts is now nice to meet you. So it will say hello, silver, nice to
+
+1:28:50.640 --> 1:28:57.760
+ meet you. So that's, that's kind of all you need to know about object oriented programming in
+
+1:28:57.760 --> 1:29:05.360
+ PyTorch to create a model. Oh, there is one more thing we need to know, sorry, which is
+
+1:29:07.040 --> 1:29:12.240
+ you can put something in parentheses after your class name. And that's called the superclass.
+
+1:29:12.240 --> 1:29:18.320
+ It's basically get a give you some stuff for free, give you some functionality for free.
+
+1:29:18.320 --> 1:29:28.240
+ And if you create a model in PyTorch, you have to make module your superclass. This is actually
+
+1:29:28.240 --> 1:29:35.840
+ fast AI's version of module, but it's nearly the same as PyTorch's. So when we create this dot
+
+1:29:35.840 --> 1:29:40.800
+ product object, it's going to call done to init. And we have to say, well, how many users are going
+
+1:29:40.800 --> 1:29:48.320
+ to be in our model? And how many movies and how many factors? And so we can now create an embedding
+
+1:29:48.320 --> 1:29:56.000
+ of users by factors for users and an embedding of movies by factors for movies. And so then
+
+1:29:58.400 --> 1:30:07.280
+ PyTorch does something quite magic, which is that if you create a dot product object like so,
+
+1:30:07.280 --> 1:30:15.120
+ it then you can treat it like a function. You can call it and calculate values on it. And when you
+
+1:30:15.120 --> 1:30:23.200
+ do that, it's really important to know PyTorch is going to call a method called forward in your
+
+1:30:23.200 --> 1:30:27.760
+ class. So this is where you put your calculation of your model. It has to be called forward. And
+
+1:30:27.760 --> 1:30:35.360
+ it's going to be past the object itself and the thing you're calculating on. In this case,
+
+1:30:35.360 --> 1:30:49.160
+ the user and movie for a batch. So this is your batch of data. Each row will be one user and movie
+
+1:30:49.160 --> 1:30:56.720
+ combination, and the columns will be users and movies. So we can grab the first column,
+
+1:30:58.160 --> 1:31:05.200
+ so this is every row of the first column, and look it up. And the user factors embedding to get
+
+1:31:05.200 --> 1:31:12.880
+ our users embeddings. So that is the same as doing this. Let's say this is one mini batch.
+
+1:31:15.200 --> 1:31:17.680
+ And then we do exactly the same thing for the second column,
+
+1:31:18.560 --> 1:31:27.120
+ passing it into our movie factors to look up the movie embeddings. And then take the dot product.
+
+1:31:27.120 --> 1:31:35.520
+ DIM equals one because we're summing across the columns for each row. We're calculating a
+
+1:31:35.520 --> 1:31:44.800
+ prediction for each row. So once we've got that, we can pass it to a learner,
+
+1:31:46.160 --> 1:31:51.840
+ passing in our data loaders and our model, and our loss function means squared error.
+
+1:31:51.840 --> 1:32:03.920
+ And we can call fit. And away it goes. And this, by the way, is running on CPU.
+
+1:32:03.920 --> 1:32:12.160
+ Now, these are very fast to run. So this is doing 100,000 rows in 10 seconds, which is a whole lot
+
+1:32:12.160 --> 1:32:21.360
+ faster than our few dozen rows in Excel. And so you can see the loss going down. And so we've
+
+1:32:21.360 --> 1:32:35.120
+ trained a model. It's not going to be a great model. And one of the problems is that,
+
+1:32:36.000 --> 1:32:44.960
+ let's see if we can see this in our Excel one. Look at this one here. This prediction is bigger than
+
+1:32:44.960 --> 1:32:52.720
+ five. But nothing's bigger than five. So that seems like a problem. We're predicting things
+
+1:32:52.720 --> 1:33:00.960
+ that are bigger than the highest possible number. And in fact, these are very much movie enthusiasts.
+
+1:33:00.960 --> 1:33:07.920
+ Nobody gave anything a one. Yeah, nobody even gave anything a one here. So
+
+1:33:07.920 --> 1:33:16.080
+ do you remember when we learned about sigmoid, the idea of squishing things between zero and one?
+
+1:33:17.360 --> 1:33:21.600
+ We could do stuff still without a sigmoid, but when we added a sigmoid, it trained better,
+
+1:33:21.600 --> 1:33:25.040
+ because the model didn't have to work so hard to get it kind of into the right zone.
+
+1:33:26.160 --> 1:33:29.600
+ Now, if you think about it, if you take something and put it through a sigmoid,
+
+1:33:30.240 --> 1:33:35.280
+ and then multiply it by five, now you've got something that's going to be between zero and five.
+
+1:33:35.280 --> 1:33:41.440
+ Used to have something which is between zero and one. So we could do that. In fact, we could do that
+
+1:33:41.440 --> 1:33:50.080
+ in Excel. I'll leave that as an exercise to the reader. Let's do it over here in PyTorch.
+
+1:33:53.200 --> 1:33:59.440
+ So if we take the exact same classes before, and this time we call sigmoid range. And so
+
+1:33:59.440 --> 1:34:08.640
+ sigmoid range is something which will take our prediction and then squash it into our range.
+
+1:34:08.640 --> 1:34:14.240
+ And by default, we'll use a range of zero through to 5.5. So it can't be smaller than zero,
+
+1:34:14.240 --> 1:34:20.720
+ it can't be bigger than 5.5. Why didn't I use five? That's because a sigmoid can never hit one.
+
+1:34:22.240 --> 1:34:27.760
+ And a sigmoid times five can never hit five. But some people do give things movies of five.
+
+1:34:27.760 --> 1:34:35.520
+ So you want to make it a bit bigger than our highest. So this one got a loss of 0.8628.
+
+1:34:39.120 --> 1:34:44.240
+ 8.6. Oh, it's not better. Isn't that always the way? All right. Didn't actually help,
+
+1:34:44.240 --> 1:34:53.840
+ doesn't always. So be it. Let's keep trying to improve it. Let me show you something I noticed.
+
+1:34:53.840 --> 1:35:07.600
+ Some of the users like this one, this person here just loved movies. They give nearly everything a
+
+1:35:07.600 --> 1:35:14.480
+ four or five. Their worst score is a three. Okay. This person, oh, here's a one. This person's got
+
+1:35:14.480 --> 1:35:23.680
+ much more range. Some things are twos, some ones, some fives. This person doesn't seem to like movies
+
+1:35:23.680 --> 1:35:27.680
+ very much considering how many they watch. Nothing gets a five. They've got discerning tastes, I guess.
+
+1:35:29.680 --> 1:35:38.560
+ At the moment, we don't have any way in our kind of formulation of this model to say,
+
+1:35:39.200 --> 1:35:44.800
+ this user tends to give low scores and this user tends to give high scores. This is nothing like
+
+1:35:44.800 --> 1:35:55.120
+ that. But that would be very easy to add. Let's add one more number to our five factors
+
+1:35:56.320 --> 1:36:05.920
+ just here for each user. And now rather than doing just the matrix multiply, let's add.
+
+1:36:05.920 --> 1:36:19.600
+ Oh, it's actually the top one. Let's add this number to it, H 19. And so for this one, let's add
+
+1:36:20.640 --> 1:36:28.880
+ I 19 to it. Yeah, so I've got it wrong. This one here, so this row here, we're going to add
+
+1:36:28.880 --> 1:36:34.560
+ to each rating. And then we're going to do the same thing here.
+
+1:36:38.320 --> 1:36:48.480
+ H movies now got an extra number here. So again, we're going to add a 26. So it's our matrix
+
+1:36:48.480 --> 1:36:56.640
+ modification plus we call it the bias, the user bias plus the movie bias. So effectively, that's
+
+1:36:56.640 --> 1:37:04.160
+ like making it so we don't have an intercept of zero anymore. And so if we now train this model,
+
+1:37:07.840 --> 1:37:20.960
+ data, solve up, solve. So previously, we got to 0.42. Okay. And so we're going to let that go
+
+1:37:20.960 --> 1:37:24.480
+ along for a while. And then let's also go back and look at the PyTorch version.
+
+1:37:24.480 --> 1:37:33.360
+ So for PyTorch now, we're going to have a user bias, which is an embedding of add users by one.
+
+1:37:33.360 --> 1:37:39.120
+ Right? Remember, there was just one number for each user. And movie bias is an embedding of
+
+1:37:39.120 --> 1:37:48.720
+ add movies also by one. And so we can now look up the user embedding, the movie embedding,
+
+1:37:48.720 --> 1:37:57.600
+ do the dot product, and then look up the user bias and the movie bias and add them.
+
+1:38:00.000 --> 1:38:06.000
+ Check that through the sigmoid. Let's train that. So if we beat 0.865.
+
+1:38:11.200 --> 1:38:16.880
+ Wow, we're not training very well, are we? Still not too great. 0.894. I think Excel
+
+1:38:16.880 --> 1:38:24.560
+ normally does do better though. Let's see. Okay, Excel. Oh, Excel's done a lot better. It's
+
+1:38:24.560 --> 1:38:39.280
+ gone from 0.42 to 0.35. Okay. So what happened here? Why did it get worse? Well, look at this.
+
+1:38:39.280 --> 1:38:43.120
+ The valid loss got better. And then it started getting worse again.
+
+1:38:43.120 --> 1:38:52.400
+ So we think we might be overfitting, which, you know, we have got a lot of parameters
+
+1:38:52.400 --> 1:39:03.520
+ in our embeddings. So how do we avoid overfitting? So a classic way to avoid overfitting is to use
+
+1:39:03.520 --> 1:39:13.120
+ something called weight decay, also known as L2 regularization, which sounds much more fancy.
+
+1:39:15.600 --> 1:39:20.720
+ What we're going to do is when we compute the gradients,
+
+1:39:22.720 --> 1:39:28.480
+ we're going to first add to our loss function the sum of the weights squared.
+
+1:39:29.280 --> 1:39:33.360
+ This is something you should go back and add to your Titanic model, not that it's overfitting,
+
+1:39:33.360 --> 1:39:42.000
+ but just to try it. So previously, our gradients have just been, and our loss function, has just
+
+1:39:42.000 --> 1:39:48.400
+ been about the difference between our predictions and our actuals. And so our gradients were based
+
+1:39:48.400 --> 1:39:57.360
+ on the derivative of that with respect to the coefficients. But we're saying now, let's add
+
+1:39:57.360 --> 1:40:07.600
+ the sum of the square of the weights times sum small number. So what would make that loss function
+
+1:40:07.600 --> 1:40:16.880
+ go down? That loss function would go down if we reduce our weights. For example, if we reduce
+
+1:40:16.880 --> 1:40:23.280
+ all of our weights to zero, I should say we reduce the magnitude of our weights. If we reduce
+
+1:40:23.280 --> 1:40:29.120
+ the model to zero, that part of the loss function will be zero, because the sum of zero squared is zero.
+
+1:40:30.800 --> 1:40:34.480
+ Now, the problem is if our weights are all zero, our model doesn't do anything,
+
+1:40:35.440 --> 1:40:41.600
+ so we'd have crappy predictions. So we want to increase the weights, so that's actually
+
+1:40:41.600 --> 1:40:51.680
+ predicting something useful. But if it increases the weights too much, then it starts overfitting.
+
+1:40:51.680 --> 1:40:58.320
+ So how is it going to actually get the lowest possible value of the loss function? By finding the
+
+1:40:58.320 --> 1:41:06.800
+ right mix, the weight's not too high, but high enough to be useful at predicting. If there's some
+
+1:41:07.760 --> 1:41:14.320
+ parameter that's not useful, for example, say we asked for five factors and we only need four,
+
+1:41:14.320 --> 1:41:22.240
+ it can just set the weights for the fifth factor to zero. And then problem solved.
+
+1:41:23.120 --> 1:41:29.840
+ It won't be used to predict anything, but it also won't contribute to our weight decay part.
+
+1:41:37.040 --> 1:41:41.920
+ So previously, we had something calculated in the loss function. So now we're going to do exactly
+
+1:41:41.920 --> 1:41:46.560
+ the same thing, but we're going to square the parameters, we're going to sum them up,
+
+1:41:47.200 --> 1:41:52.560
+ and we're going to multiply them by some small number, like 0.01 or 0.001.
+
+1:41:55.840 --> 1:42:03.440
+ And in fact, we don't even need to do this, because remember, the whole purpose of the loss is to
+
+1:42:03.440 --> 1:42:14.320
+ take its gradient, and to print it out, the gradient of parameters squared is two times
+
+1:42:14.320 --> 1:42:19.120
+ parameters. It's okay if you don't remember that from high school, but you can take my word for
+
+1:42:19.120 --> 1:42:28.480
+ it. The gradient of y equals x squared is 2x. So actually, all we need to do is take our gradient
+
+1:42:28.480 --> 1:42:36.160
+ and add the weight decay coefficient 0.01 or whatever times two times parameters. And given this
+
+1:42:36.160 --> 1:42:40.560
+ is just some number we get to pick, we might as well fold the two into it and just get rid of it.
+
+1:42:43.600 --> 1:42:52.080
+ So when you call fit, you can pass in a wd parameter, which does adds this times the parameters
+
+1:42:52.080 --> 1:42:58.800
+ to the gradient for you. And so that's going to ask the model, to say to the model, please don't
+
+1:42:58.800 --> 1:43:09.280
+ make the weights any bigger than they have to be. And finally, our loss actually improved.
+
+1:43:09.280 --> 1:43:12.160
+ Okay, you can see it getting better and better.
+
+1:43:12.160 --> 1:43:23.680
+ In fast AI applications like vision, we try to set this for you appropriately, and we generally
+
+1:43:23.680 --> 1:43:29.840
+ do a reasonably good job, just the defaults are normally fine. But in things like table or
+
+1:43:29.840 --> 1:43:34.800
+ collaborative filtering, we don't really know enough about your data to know what to use here.
+
+1:43:34.800 --> 1:43:41.680
+ So you should just try a few things. Let's try a few models of 10, start at 0.1, and then divide
+
+1:43:41.680 --> 1:43:45.840
+ by 10 a few times, you know, and just see which one gives you the best result.
+
+1:43:49.360 --> 1:43:54.480
+ So this is called regularization. So regularization is about making your model
+
+1:43:55.680 --> 1:44:02.560
+ no more complex than it has to be, right? But it has a lower capacity. And so the higher the weights,
+
+1:44:02.560 --> 1:44:07.040
+ the more they're moving the model around, right? So we want to keep the weights down,
+
+1:44:07.040 --> 1:44:12.800
+ but not so far down that they don't make good predictions. And so the value of this, if it's higher,
+
+1:44:12.800 --> 1:44:18.960
+ we'll keep the weights down more. It will reduce overfitting, but it will also reduce the capacity
+
+1:44:18.960 --> 1:44:24.720
+ of your model to make good predictions. And if it's lower, it increases the capacity of model
+
+1:44:24.720 --> 1:44:26.240
+ and increases overfitting.
+
+1:44:26.240 --> 1:44:39.760
+ All right, I'm going to take this bit for next time. Before we wrap up, John, are there any more questions?
+
+1:44:45.680 --> 1:44:53.840
+ Yeah, there are some from back at the start of the collaborative filtering. So we had a bit
+
+1:44:53.840 --> 1:45:02.480
+ of a conversation a while back about the size of the embedding vectors. And you talked about your
+
+1:45:02.480 --> 1:45:07.360
+ fast AI rule of thumb. So there was a question if anyone has ever done a kind of a hyperparameter
+
+1:45:07.360 --> 1:45:13.440
+ search, an exploration for people often will do a hyperparameter search, for sure.
+
+1:45:13.440 --> 1:45:21.120
+ People will often do a hyperparameter search for their model, but I haven't seen any other rules
+
+1:45:21.120 --> 1:45:27.280
+ other than my rule of thumb. Right, so not productively to your knowledge. Oh, productively for an
+
+1:45:27.280 --> 1:45:36.560
+ individual model that somebody's built. Right. And then there's a question here from Zaki,
+
+1:45:36.560 --> 1:45:41.760
+ which I didn't quite wrap my head around. So Zaki, if you want to maybe clarify in the chat as well,
+
+1:45:41.760 --> 1:45:48.480
+ but can recommendation systems be built based on average ratings of users experience rather than
+
+1:45:48.480 --> 1:45:54.480
+ collaborative filtering? Not really, right? I mean, if you've got lots of metadata, you could,
+
+1:45:54.480 --> 1:46:00.480
+ right? So if you've got lots of information about demographic data, about where the user's from,
+
+1:46:02.640 --> 1:46:06.960
+ you know, what loyalty scheme results they've had and blah, blah, blah, and then for products,
+
+1:46:06.960 --> 1:46:13.360
+ there's metadata about that as well, then sure, averages would be fine. But if all you've got is
+
+1:46:13.360 --> 1:46:20.400
+ kind of purchasing history, then you really want the granular data. Otherwise, how could you say,
+
+1:46:21.280 --> 1:46:25.280
+ they like this movie, this movie, and this movie, therefore they might also like that movie,
+
+1:46:25.280 --> 1:46:29.360
+ or you've got it's like, oh, they kind of like movies. There's just not enough information there.
+
+1:46:29.360 --> 1:46:31.600
+ Yep. Great. That's about it. Thanks.
+
+1:46:31.600 --> 1:46:47.520
+ Okay, great. All right. Thanks everybody. See you next time for our last lesson.
+

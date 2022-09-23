@@ -1,0 +1,3830 @@
+WEBVTT
+
+00:00.000 --> 00:06.200
+ Hi everybody and welcome to lesson three of practical deep learning for coders.
+
+00:06.200 --> 00:15.560
+ We did a quick survey this week to see how people feel the course is tracking and over
+
+00:15.560 --> 00:19.720
+ half of you think it's about right pace and of the rest who aren't.
+
+00:19.720 --> 00:23.360
+ Some of you think it's a bit slow and some of you think it's a bit, sorry, some of you
+
+00:23.360 --> 00:27.640
+ think it's a bit fast so hopefully we're at about the best we can do.
+
+00:27.640 --> 00:32.840
+ Generally speaking the first two lessons are a little more easy pacing for anybody who's
+
+00:32.840 --> 00:40.040
+ already familiar with the kind of basic technology pieces and then the later lessons get more
+
+00:40.040 --> 00:44.680
+ into kind of some of the foundations and today we're going to be talking about, you know,
+
+00:44.680 --> 00:51.320
+ things like the matrix modifications and gradients and capitalists and stuff like that.
+
+00:51.320 --> 00:55.280
+ So for those of you who are more mathy and less computery you might find this one more
+
+00:55.280 --> 01:00.880
+ comfortable and vice versa.
+
+01:00.880 --> 01:08.160
+ So remember that there is a official course update thread where you can see all of the
+
+01:08.160 --> 01:14.600
+ up to date info about everything you need to know and of course the course website as
+
+01:14.600 --> 01:15.760
+ well.
+
+01:15.760 --> 01:20.840
+ So by the time you know you watch the video of the lesson it's pretty likely that if you
+
+01:20.840 --> 01:26.440
+ come across a question or an issue somebody else will have so definitely search the forum
+
+01:26.440 --> 01:31.440
+ and check the facts first and then of course feel free to ask a question yourself on the
+
+01:31.440 --> 01:35.800
+ forum if you can't find your answer.
+
+01:35.800 --> 01:40.240
+ One thing I did want to point out which you'll see in the lessons thread and the course website
+
+01:40.240 --> 01:44.080
+ is there is also a lesson zero.
+
+01:44.080 --> 01:52.320
+ lesson zero is based heavily on Radix book meta learning which internally is based heavily
+
+01:52.320 --> 01:57.320
+ on all the things that I've said over the years about how to learn fast.
+
+01:57.320 --> 02:03.760
+ It's we try to make the course full of tidbits about the science of learning itself and put
+
+02:03.760 --> 02:05.720
+ them into the course.
+
+02:05.720 --> 02:11.360
+ It's a different course to probably any other you've taken and it's strongly said recommend
+
+02:11.360 --> 02:14.280
+ watching lessons zero as well.
+
+02:14.280 --> 02:18.400
+ The last bit of lesson zero was about how to set up a Linux box from scratch which you
+
+02:18.400 --> 02:24.040
+ can happily skip over unless that's of interest but the rest of it is full of juicy information
+
+02:24.040 --> 02:27.600
+ that I think you'll find useful.
+
+02:27.600 --> 02:37.800
+ So the basic idea of what to do to do a faster AI lesson is watch the lecture and I generally
+
+02:37.800 --> 02:43.720
+ on the video recommend watching it all the way through without stopping once and then
+
+02:43.720 --> 02:49.000
+ go back and watch it with lots of pauses running the notebook as you go.
+
+02:49.000 --> 02:53.280
+ Because otherwise you're kind of like running the notebook without really knowing where
+
+02:53.280 --> 02:56.640
+ it's heading if that makes sense.
+
+02:56.640 --> 03:00.200
+ And the idea of running the notebook is you could you know there's a few notebooks you
+
+03:00.200 --> 03:03.440
+ could go through so obviously there's the book.
+
+03:03.440 --> 03:07.760
+ So going through chapter one of the book, go through chapter two of the book as notebooks,
+
+03:07.760 --> 03:12.960
+ running every code cell and experimenting with inputs and outputs to try and understand
+
+03:12.960 --> 03:15.720
+ what's going on.
+
+03:15.720 --> 03:21.280
+ And then trying to reproduce those results and then trying to repeat the whole thing
+
+03:21.280 --> 03:22.760
+ with a different data set.
+
+03:22.760 --> 03:28.080
+ And if you can do that last step you know that's quite a stretch goal particularly at
+
+03:28.080 --> 03:31.280
+ the start of the course because there's so many new concepts but that really shows that
+
+03:31.280 --> 03:33.480
+ you've got it sorted.
+
+03:33.480 --> 03:36.840
+ Now first bit reproduce results.
+
+03:36.840 --> 03:41.920
+ I recommend using you'll find in the fast book repo so the repository for the book there
+
+03:41.920 --> 03:48.680
+ is a special folder called plane and plane contains all of the same chapters of the book
+
+03:48.680 --> 03:53.800
+ but with all of the text removed except the headings and all the outputs removed.
+
+03:53.800 --> 03:59.720
+ And this is a great way for you to test your understanding of the chapter is before you
+
+03:59.720 --> 04:06.360
+ run each cell, try to say to yourself okay what's this for and what's it going to output
+
+04:06.360 --> 04:07.520
+ if anything.
+
+04:07.520 --> 04:11.600
+ And if you kind of work through that slowly that's a great way and at any time you're
+
+04:11.600 --> 04:16.880
+ not sure you can jump back to the version of the notebook with the text to remind yourself
+
+04:16.880 --> 04:22.560
+ and then head back over to the clean version.
+
+04:22.560 --> 04:28.720
+ So there's an idea for something which a lot of people find really useful for self study.
+
+04:28.720 --> 04:35.760
+ I say self study but of course as we've mentioned before the best kind of study is study done
+
+04:35.760 --> 04:38.000
+ to some extent with others for most people.
+
+04:38.000 --> 04:43.280
+ You know the research shows that you're more likely to stick with things if you're doing
+
+04:43.280 --> 04:45.960
+ it as kind of a bit of a social activity.
+
+04:45.960 --> 04:53.520
+ The forums are a great place to find and create study groups and you'll also find on the forums
+
+04:53.520 --> 04:57.480
+ a link to our discord server.
+
+04:57.480 --> 05:01.880
+ So our discord server where there are some study groups there as well.
+
+05:01.880 --> 05:08.680
+ So you know in person study groups virtual study groups are a great way to you know really
+
+05:08.680 --> 05:13.160
+ make good progress and find other people at a similar level to you.
+
+05:13.160 --> 05:19.440
+ If there's not a study group going at your level in your area in your time zone, create
+
+05:19.440 --> 05:20.440
+ one.
+
+05:20.440 --> 05:24.680
+ So just post something saying hey let's create a study group.
+
+05:24.680 --> 05:28.120
+ So this week there's been a lot of fantastic activity.
+
+05:28.120 --> 05:33.600
+ I can't show all of it so what I did was I used the summary functionality in the forums
+
+05:33.600 --> 05:36.640
+ to grab all of the things with the highest votes and so I'll just quickly show a few
+
+05:36.640 --> 05:37.640
+ of those.
+
+05:37.640 --> 05:42.920
+ We have a marvel detector created this week.
+
+05:42.920 --> 05:45.960
+ Identify your favorite marvel character.
+
+05:45.960 --> 05:46.960
+ I love this.
+
+05:46.960 --> 05:51.760
+ A rock paper scissors game where you actually use pictures of the rock paper scissors symbols
+
+05:51.760 --> 05:57.640
+ and apparently the computer always loses, that's my favorite kind of game.
+
+05:57.640 --> 06:02.960
+ There is a lot of Elon around so very handy to have an Elon detector to either find more
+
+06:02.960 --> 06:07.440
+ of him if that's what you need or maybe less of him.
+
+06:07.440 --> 06:09.440
+ I thought this one is very interesting.
+
+06:09.440 --> 06:11.640
+ I love these kind of really interesting ideas.
+
+06:11.640 --> 06:14.360
+ It's like gee I wonder if this would work.
+
+06:14.360 --> 06:23.360
+ Can you predict the average temperature of an area based on an aerial photograph?
+
+06:23.360 --> 06:27.840
+ And apparently the answer is yeah actually you can predict it pretty well.
+
+06:27.840 --> 06:34.720
+ Here in Brisbane it was predicted I believe it was in one and a half Celsius.
+
+06:34.720 --> 06:38.520
+ I think this student is actually a genuine meteorologist if I remember correctly.
+
+06:38.520 --> 06:41.640
+ He built a cloud detector.
+
+06:41.640 --> 06:45.200
+ So then building on top of what's your favorite marvel character?
+
+06:45.200 --> 06:48.680
+ There's now a, oh sorry, is it a marvel character?
+
+06:48.680 --> 06:50.280
+ My daughter loves this one.
+
+06:50.280 --> 06:51.960
+ What dinosaur is this?
+
+06:51.960 --> 06:54.320
+ I'm not as good about dinosaurs as I should be.
+
+06:54.320 --> 06:59.320
+ I feel like there's 10 times more dinosaurs than there was when I was a kid.
+
+06:59.320 --> 07:00.720
+ So I never know their name.
+
+07:00.720 --> 07:02.720
+ So this is very handy.
+
+07:02.720 --> 07:03.720
+ This is cool.
+
+07:03.720 --> 07:08.640
+ Choose your own adventure where you choose your path using facial expressions.
+
+07:08.640 --> 07:16.000
+ I think this music genre classification is also really cool.
+
+07:16.000 --> 07:21.800
+ Brian Smith created a Microsoft Power App application that actually runs on a mobile
+
+07:21.800 --> 07:22.800
+ phone.
+
+07:22.800 --> 07:23.800
+ So it's pretty cool.
+
+07:23.800 --> 07:26.960
+ I'm pretty surprised to hear that Brian actually works at Microsoft.
+
+07:26.960 --> 07:32.000
+ So also an opportunity to promote his own stuff there.
+
+07:32.000 --> 07:35.800
+ I thought this art movement classifier was interesting in that there's a really interesting
+
+07:35.800 --> 07:38.600
+ discussion on the forum about what it actually looks like.
+
+07:38.600 --> 07:43.120
+ It actually shows about similarities between different art movements.
+
+07:43.120 --> 07:48.760
+ And I thought this reduction detector project was really cool as well.
+
+07:48.760 --> 07:52.840
+ And there's a whole tweet thread and blog post and everything about this one.
+
+07:52.840 --> 07:55.720
+ Particularly great piece of work.
+
+07:55.720 --> 07:56.720
+ Okay.
+
+07:56.720 --> 08:04.440
+ So I'm going to quickly show you a couple of little tips before we kind of jump into the
+
+08:04.440 --> 08:08.080
+ mechanics of what's behind a neural network.
+
+08:08.080 --> 08:14.400
+ Which is I was playing a little bit with how do you make your neural network more accurate
+
+08:14.400 --> 08:15.840
+ during the week.
+
+08:15.840 --> 08:18.720
+ And so I created this pet detector.
+
+08:18.720 --> 08:24.960
+ And this pet detector is not just protecting dogs or cats, but what breed is it?
+
+08:24.960 --> 08:29.240
+ That's obviously a much more difficult exercise.
+
+08:29.240 --> 08:37.440
+ Now because I put this out on hugging faces, you can download and look at my code because
+
+08:37.440 --> 08:42.240
+ if you just click files and versions on the space, which you can find a link on the forum
+
+08:42.240 --> 08:48.920
+ and the course website, you can see them all here and you can download it to your own
+
+08:48.920 --> 08:51.240
+ computer.
+
+08:51.240 --> 08:55.920
+ So I'll show you what I've got here.
+
+08:55.920 --> 09:02.360
+ Now one thing I mentioned is today I'm using a different platform.
+
+09:02.360 --> 09:08.080
+ So in the past I've shown you coLab and I've shown you Kaggle and we've also looked at
+
+09:08.080 --> 09:09.720
+ doing stuff on your own computer.
+
+09:09.720 --> 09:14.560
+ Not so much training models on your computer, but using the models you've trained to create
+
+09:14.560 --> 09:16.960
+ applications.
+
+09:16.960 --> 09:24.800
+ PaperSpace is another website a bit like Kaggle and Google.
+
+09:24.800 --> 09:30.040
+ But in particular they have a product called Gradient Notebooks, which is at least as I
+
+09:30.040 --> 09:32.960
+ speak and things change all the time, so check the course website.
+
+09:32.960 --> 09:40.560
+ But as I speak, in my opinion is by far the best platform for running this course and
+
+09:40.560 --> 09:42.400
+ for doing experimentation.
+
+09:42.400 --> 09:45.160
+ I'll explain why as we go.
+
+09:45.160 --> 09:47.680
+ So why haven't I been using the past two weeks?
+
+09:47.680 --> 09:52.640
+ Because I've been waiting for them to build some stuff for us to make it particularly good
+
+09:52.640 --> 09:54.000
+ and they just finished.
+
+09:54.000 --> 09:59.480
+ So I've been using it all week and it's totally amazing.
+
+09:59.480 --> 10:02.000
+ This is what it looks like.
+
+10:02.000 --> 10:04.120
+ So you've got a machine running in the cloud.
+
+10:04.120 --> 10:11.240
+ But the thing that was very special about it is it's a real computer you're using.
+
+10:11.240 --> 10:16.840
+ It's not like that kind of weird virtual version of things that Kaggle or CoLab has.
+
+10:16.840 --> 10:24.360
+ So if you whack on this button down here you'll get a full version of Jipit or Lab.
+
+10:24.360 --> 10:29.920
+ Or you can switch over to a full version of plastic Jipit and Notebooks.
+
+10:29.920 --> 10:35.480
+ And I'm actually going to do stuff in Jipit or Lab today because it's a pretty good environment
+
+10:35.480 --> 10:39.560
+ for beginners who are not familiar with the terminal, which I know a lot of people in
+
+10:39.560 --> 10:40.760
+ the course in that situation.
+
+10:40.760 --> 10:44.680
+ You can do really everything kind of graphically.
+
+10:44.680 --> 10:46.160
+ There's a file browser.
+
+10:46.160 --> 10:50.440
+ So here you can see I've got my pets repo.
+
+10:50.440 --> 10:58.360
+ I've got a git repository thing you can pull and push to git.
+
+10:58.360 --> 11:06.320
+ And then you can also open up a terminal, create new Notebooks and so forth.
+
+11:06.320 --> 11:09.240
+ So what I tend to do with this is I tend to go into a full screen.
+
+11:09.240 --> 11:16.560
+ It's kind of like its own whole IDE.
+
+11:16.560 --> 11:20.720
+ And so you can see I've got here my terminal.
+
+11:20.720 --> 11:23.160
+ Here's my notebook.
+
+11:23.160 --> 11:26.480
+ They have free GPUs.
+
+11:26.480 --> 11:28.760
+ And most importantly there's two good features.
+
+11:28.760 --> 11:33.080
+ One is that you can pay, I think it's $8 or $9 a month to get better GPUs.
+
+11:33.080 --> 11:37.320
+ And basically as many hours as you want.
+
+11:37.320 --> 11:38.880
+ And they have persistent storage.
+
+11:38.880 --> 11:42.160
+ So with CoLab, if you've played with it you might have noticed it's annoying.
+
+11:42.160 --> 11:45.640
+ You have to map around with saving things to Google Drive and stuff.
+
+11:45.640 --> 11:52.200
+ Some cackle that isn't really a way of having a persistent environment.
+
+11:52.200 --> 11:56.680
+ Where else on paper space you have, whatever you save in your storage it's going to be
+
+11:56.680 --> 11:59.440
+ there the next time you come back.
+
+11:59.440 --> 12:07.440
+ So I'm going to be adding walk throughs of all of this functionality.
+
+12:07.440 --> 12:12.960
+ So if you're interested in really taking advantage of this, check those out.
+
+12:12.960 --> 12:22.000
+ Okay, so I think the main thing that I wanted you to take away from lesson two isn't necessarily
+
+12:22.000 --> 12:29.600
+ all the details of how do you use a particular platform to train models and deploy them into
+
+12:29.600 --> 12:34.600
+ applications through JavaScript or online platforms.
+
+12:34.600 --> 12:37.880
+ But the key thing I wanted you to understand was the concept.
+
+12:37.880 --> 12:39.640
+ There's really two pieces.
+
+12:39.640 --> 12:43.440
+ There's the training piece and at the end of the training piece you end up with this
+
+12:43.440 --> 12:46.520
+ model.pickle file.
+
+12:46.520 --> 12:51.960
+ And once you've got that, that's now a thing where you feed it inputs and it spits out
+
+12:51.960 --> 12:54.800
+ outputs based on that model that you trained.
+
+12:54.800 --> 12:59.080
+ And then so you don't need, you know, because that happens pretty fast you generally don't
+
+12:59.080 --> 13:02.280
+ need a GPU once you've got that trained.
+
+13:02.280 --> 13:06.000
+ And so then there's a separate step which is deploying.
+
+13:06.000 --> 13:13.200
+ So I'll show you how I trained my pet classifier.
+
+13:13.200 --> 13:18.120
+ So you can see I've got two IPython notebooks.
+
+13:18.120 --> 13:21.720
+ One is app which is the one that's going to be doing the inference and production.
+
+13:21.720 --> 13:24.720
+ One is the one where I train the model.
+
+13:24.720 --> 13:27.720
+ So this first bit I'm going to skip over because you've seen it before.
+
+13:27.720 --> 13:33.680
+ I create my image data loaders, check that my data looks okay with show batch, train
+
+13:33.680 --> 13:40.240
+ to resident 34 and I get 7% accuracy.
+
+13:40.240 --> 13:47.640
+ So that's pretty good.
+
+13:47.640 --> 13:48.640
+ But check this out.
+
+13:48.640 --> 13:54.120
+ There's a link here to a notebook I created.
+
+13:54.120 --> 13:59.480
+ Actually most of the work was done by Ross Whiteman where we can try to improve this
+
+13:59.480 --> 14:03.520
+ by finding a better architecture.
+
+14:03.520 --> 14:09.880
+ Here I think at the moment in the PyTorch image models libraries over 500 architectures
+
+14:09.880 --> 14:15.240
+ and we'll be learning over the course what they are, how they differ.
+
+14:15.240 --> 14:20.320
+ But you know, broadly speaking they're all mathematical functions, you know, which are
+
+14:20.320 --> 14:28.280
+ basically matrix modifications and these nonlinearities such as values that we're talking
+
+14:28.280 --> 14:29.440
+ about today.
+
+14:29.440 --> 14:34.680
+ So most of the time those details don't matter, what we care about is three things.
+
+14:34.680 --> 14:35.680
+ How fast are they?
+
+14:35.680 --> 14:39.520
+ How much memory do they use and how accurate are they?
+
+14:39.520 --> 14:43.840
+ And so what I've done here with Ross is we've grabbed all of the models from PyTorch
+
+14:43.840 --> 14:51.560
+ image models and you can see all the code we've got is very, very little code to create
+
+14:51.560 --> 14:55.920
+ this plot.
+
+14:55.920 --> 15:01.680
+ Now my screen resolution is a bit, there we go, let's do that.
+
+15:01.680 --> 15:10.640
+ And so on this plot on the next axis we've got seconds per sample, so how fast is it?
+
+15:10.640 --> 15:13.880
+ So the left is better, it's faster.
+
+15:13.880 --> 15:15.520
+ And on the right is how accurate is it?
+
+15:15.520 --> 15:19.520
+ So how accurate was it on ImageNet in particular?
+
+15:19.520 --> 15:26.520
+ And so generally speaking you want things that are up towards the top and left.
+
+15:26.520 --> 15:31.400
+ Now we've been mainly working with ResNet and you can see down here here's ResNet 18.
+
+15:31.400 --> 15:36.240
+ Now ResNet 18 is a particularly small and fast version for prototyping, we often use
+
+15:36.240 --> 15:39.920
+ ResNet 34, which is this one here.
+
+15:39.920 --> 15:44.640
+ And you can see this kind of like classic model that's very widely used, actually nowadays
+
+15:44.640 --> 15:48.640
+ isn't the state of the art anymore.
+
+15:48.640 --> 15:53.840
+ So we can start to look up at these ones up here and find out some of these better models.
+
+15:53.840 --> 16:01.240
+ The ones that seem to be the most accurate and fast for these levered models, so I tried
+
+16:01.240 --> 16:05.480
+ them out on my pets and I found that they didn't work particularly well, so I thought
+
+16:05.480 --> 16:07.440
+ okay let's try something else out.
+
+16:07.440 --> 16:15.200
+ So next up I tried these ComfNext models and this one in here was particularly interesting,
+
+16:15.200 --> 16:22.400
+ it's kind of like super high accuracy, it's the, you know, if you watch 0.001 seconds
+
+16:22.400 --> 16:24.600
+ inference time it's the most accurate.
+
+16:24.600 --> 16:27.440
+ So I tried that, so how do we try that?
+
+16:27.440 --> 16:35.880
+ What we do is I can say, so the PyTorch image models is in the TIM module, so the very
+
+16:35.880 --> 16:44.840
+ start I imported that and we can say list models and pass in a glob, a match, and so
+
+16:44.840 --> 16:50.360
+ this is going to show all the ComfNext models and here I can find the ones that I just saw
+
+16:50.360 --> 16:55.520
+ and all I need to do is when I create the vision learner I just put the name of the model in
+
+16:55.520 --> 16:58.040
+ as a string, okay.
+
+16:58.040 --> 17:04.680
+ So you'll see earlier this one is not a string, that's because it's a model that FastAI
+
+17:04.680 --> 17:11.960
+ provides, the library, FastAI only provides a pretty small number, so if you install
+
+17:11.960 --> 17:17.440
+ Tim, so you need to pip install Tim or condor install Tim, you'll get hundreds more and
+
+17:17.440 --> 17:19.560
+ you put that in a string.
+
+17:19.560 --> 17:25.640
+ So if I now train that, the time for these epochs goes from 20 seconds to 27 seconds,
+
+17:25.640 --> 17:34.600
+ so it is a little bit slower, but the accuracy goes from 7.2% down to 5.5%.
+
+17:34.600 --> 17:45.480
+ So that's a pretty big relative difference, 7.2 divided by 5.5, yeah, so about a 30% improvement.
+
+17:45.480 --> 17:54.520
+ So that's pretty fantastic and it's been a few years, honestly, since we've seen anything
+
+17:54.520 --> 18:01.320
+ really big ResNet that's widely available and usable on regular GPUs, so this is a big
+
+18:01.320 --> 18:07.000
+ step and so this is a, you know, there's a few architectures nowadays that really are
+
+18:07.000 --> 18:11.440
+ probably better choices a lot of the time and these cons, so if you are not sure what
+
+18:11.440 --> 18:17.440
+ to use, try these cons next architectures, you might wonder what the names are about,
+
+18:17.440 --> 18:22.880
+ obviously, Chinese, more large, etc. is how big is the model, so that'll be how much memory
+
+18:22.880 --> 18:28.040
+ is it going to take up and how fast is it.
+
+18:28.040 --> 18:35.040
+ And then these ones here that say N22FT1K, these ones have been trained on more data.
+
+18:35.040 --> 18:39.760
+ So ImageNet, there's two different ImageNet data sets, there's one that's got 1000 categories
+
+18:39.760 --> 18:44.280
+ of pictures and there's another one that's got 22,000 categories of pictures.
+
+18:44.280 --> 18:50.160
+ So this is trained on the one with 22,000 categories of pictures.
+
+18:50.160 --> 18:58.480
+ So these are generally going to be more accurate on kind of standard photos of natural objects.
+
+18:58.480 --> 19:01.920
+ Okay, so from there I exported my model and that's the end.
+
+19:01.920 --> 19:05.160
+ Okay, so now I've trained my model and I'm all done.
+
+19:05.160 --> 19:10.400
+ You know, other things you can do, obviously, is add more epochs, for example, add image
+
+19:10.400 --> 19:14.160
+ augmentation, there's various things you can do, but you know, I've found this is actually
+
+19:14.160 --> 19:18.800
+ pretty hard to beat this by much.
+
+19:18.800 --> 19:22.600
+ If any of you find you can do better, I'd love to hear about it.
+
+19:22.600 --> 19:25.360
+ So then I'll turn that into an application.
+
+19:25.360 --> 19:33.680
+ I just did the same thing that we saw last week, which was to load the learner.
+
+19:33.680 --> 19:38.880
+ As is something I did want to show you, the learner, once we load it and call predict,
+
+19:38.880 --> 19:40.880
+ spits out a list of 37 numbers.
+
+19:40.880 --> 19:44.120
+ That's because there are 37 breeds of dark and cat.
+
+19:44.120 --> 19:46.800
+ So these are the probability of each of those breeds.
+
+19:46.800 --> 19:49.360
+ What order they are they in?
+
+19:49.360 --> 19:51.320
+ That's an important question.
+
+19:51.320 --> 19:56.160
+ The answer is that FastAI always stores this information about categories.
+
+19:56.160 --> 20:01.160
+ This is a category in this case of double or cat breed in something called the vocab object
+
+20:01.160 --> 20:03.280
+ and it's inside the data lovers.
+
+20:03.280 --> 20:06.600
+ So we can grab those categories and that's just a list of strings.
+
+20:06.600 --> 20:08.760
+ Just tells us the order.
+
+20:08.760 --> 20:14.960
+ So if we now zip together the categories and the probabilities, we'll get back a dictionary
+
+20:14.960 --> 20:18.560
+ that tells you, well, like so.
+
+20:18.560 --> 20:25.400
+ So here's that list of categories and here's the probability of each one.
+
+20:25.400 --> 20:31.240
+ And this was a Basset Hound so that you can see on the certainly Basset Hound.
+
+20:31.240 --> 20:36.840
+ So from there, just like last week, we can go and create our interface and then launch
+
+20:36.840 --> 20:39.800
+ it.
+
+20:39.800 --> 20:40.800
+ And there we go.
+
+20:40.800 --> 20:41.800
+ Okay.
+
+20:41.800 --> 20:44.220
+ So what did we just do really?
+
+20:44.220 --> 20:49.240
+ What is this magic model.pickle file?
+
+20:49.240 --> 20:53.440
+ So we can take a look at the model.pickle file.
+
+20:53.440 --> 20:59.320
+ It's an object type called a learner and a learner has two main things in it.
+
+20:59.320 --> 21:05.520
+ The first is the list of preprocessing steps that you did to turn your images into things
+
+21:05.520 --> 21:14.880
+ of the model and that's basically this information here.
+
+21:14.880 --> 21:18.800
+ So it's your data blocks or your image data loaders or whatever.
+
+21:18.800 --> 21:23.480
+ And then the second thing, most importantly, is the trained model.
+
+21:23.480 --> 21:27.760
+ And so you can actually grab the trained model by just grabbing the dot model attribute.
+
+21:27.760 --> 21:33.000
+ So I'm just going to call that m and then if I type m, I can look at the model.
+
+21:33.000 --> 21:36.880
+ And so here it is, lots of stuff.
+
+21:36.880 --> 21:37.880
+ So what is this stuff?
+
+21:37.880 --> 21:40.520
+ Well, we'll learn about it all over time.
+
+21:40.520 --> 21:46.720
+ But basically what you'll find is it contains lots of layers because this is a deep learning
+
+21:46.720 --> 21:48.220
+ model.
+
+21:48.220 --> 21:50.160
+ And you can see it's kind of like a tree.
+
+21:50.160 --> 21:54.400
+ That's because lots of the layers themselves consist of layers.
+
+21:54.400 --> 22:00.600
+ So there's a whole layer called the Kim body, which is most of it.
+
+22:00.600 --> 22:04.360
+ And then right at the end, there's a second layer called sequential.
+
+22:04.360 --> 22:08.560
+ And then the Tim body contains something called model.
+
+22:08.560 --> 22:12.280
+ And it contains something called stem and something called stages.
+
+22:12.280 --> 22:17.440
+ And then stages contain zero, one, two, et cetera.
+
+22:17.440 --> 22:19.320
+ So what is all this stuff?
+
+22:19.320 --> 22:22.160
+ Well, let's take a look at one of them.
+
+22:22.160 --> 22:28.320
+ So to take a look at one of them, there's a really convenient method in PyTorch called
+
+22:28.320 --> 22:35.440
+ getSubModule where we can pass in a dotted string navigating through this hierarchy.
+
+22:35.440 --> 22:41.320
+ So zero model stem one goes zero model stem one.
+
+22:41.320 --> 22:45.000
+ So this is going to return this layer non 2D thing.
+
+22:45.000 --> 22:46.920
+ So what is this layer non 2D thing?
+
+22:46.920 --> 22:53.160
+ Well, the key thing is it's got some code with the mathematical function that we talked
+
+22:53.160 --> 22:54.160
+ about.
+
+22:54.160 --> 22:58.320
+ And the other thing that we learned about is it has parameters.
+
+22:58.320 --> 23:00.160
+ So we can list this parameters and look at this.
+
+23:00.160 --> 23:03.520
+ It's just lots and lots and lots of numbers.
+
+23:03.520 --> 23:04.840
+ Let's grab another example.
+
+23:04.840 --> 23:08.840
+ We could have a look at zero dot model dot stages dot zero dot blocks dot one dot MLP
+
+23:08.840 --> 23:14.960
+ dot F C one and parameters and other big bunch of numbers.
+
+23:14.960 --> 23:17.240
+ So what's going on here?
+
+23:17.240 --> 23:23.160
+ What are these numbers and where it is that they come from and how come these numbers
+
+23:23.160 --> 23:28.600
+ can figure out whether something is a basset hound or not?
+
+23:28.600 --> 23:29.600
+ Okay.
+
+23:29.600 --> 23:43.960
+ So to answer that question, we're going to have a look at a Kaggle notebook.
+
+23:43.960 --> 23:46.760
+ How does a neural network really work?
+
+23:46.760 --> 23:51.400
+ I've got a local version of it here, which I'm going to take you through.
+
+23:51.400 --> 23:58.840
+ And the basic idea is machine learning models are things that fit functions to data.
+
+23:58.840 --> 24:02.880
+ So we start out with a very, very flexible, in fact, an infinitely flexible as we discussed
+
+24:02.880 --> 24:05.840
+ function, a neural network.
+
+24:05.840 --> 24:11.280
+ And we get it to do a particular thing, which is to recognize the patterns in the data examples
+
+24:11.280 --> 24:14.040
+ we give it.
+
+24:14.040 --> 24:19.560
+ So let's do a much simpler example than a neural network.
+
+24:19.560 --> 24:21.360
+ Let's do a quadratic.
+
+24:21.360 --> 24:27.960
+ So let's create a function F, which is 3x squared plus 2x plus 1.
+
+24:27.960 --> 24:28.960
+ Okay.
+
+24:28.960 --> 24:32.680
+ So it's a quadratic with coefficient 3, 2, and 1.
+
+24:32.680 --> 24:36.000
+ So we can plot that function F and give it a title.
+
+24:36.000 --> 24:39.800
+ If you haven't seen this before, things between dollar signs is what's called LaTeX.
+
+24:39.800 --> 24:44.120
+ It's basically how we can create kind of typeset mathematical equations.
+
+24:44.120 --> 24:46.040
+ Okay.
+
+24:46.040 --> 24:51.440
+ So let's run that.
+
+24:51.440 --> 24:52.760
+ And so here you can see the function.
+
+24:52.760 --> 24:54.280
+ Here you can see the title I passed it.
+
+24:54.280 --> 24:56.440
+ And here is our quadratic.
+
+24:56.440 --> 24:57.440
+ Okay.
+
+24:57.440 --> 25:02.800
+ So what we're going to do is we're going to imagine that we don't know that's the true
+
+25:02.800 --> 25:04.600
+ mathematical function we're trying to find.
+
+25:04.600 --> 25:09.760
+ It's obviously much simpler than the function that figures out whether an image is a Basset
+
+25:09.760 --> 25:12.160
+ Hound or not, that we're just going to start super simple.
+
+25:12.160 --> 25:19.280
+ So this is the real function and we're going to try to recreate it from some data.
+
+25:19.280 --> 25:26.680
+ Now it's going to be very helpful if we have an easier way of creating different quadratics.
+
+25:26.680 --> 25:31.560
+ So I have to find a kind of a general form of a quadratic here with coefficients a, b,
+
+25:31.560 --> 25:32.560
+ and c.
+
+25:32.560 --> 25:38.400
+ And at some particular point x is going to be ax squared plus bx plus c.
+
+25:38.400 --> 25:39.760
+ And so let's test that.
+
+25:39.760 --> 25:43.800
+ Okay, so that's for x equals 1.5.
+
+25:43.800 --> 25:52.320
+ That's 3x squared plus 2x plus 1, which is the quadratic we were getting before.
+
+25:52.320 --> 25:56.720
+ Now we're going to want to create lots of different quadratics to test them out and find which
+
+25:56.720 --> 25:59.280
+ one's best.
+
+25:59.280 --> 26:04.280
+ So this is a somewhat advanced but very, very helpful feature of Python that's worth learning
+
+26:04.280 --> 26:05.280
+ if you're not familiar with it.
+
+26:05.280 --> 26:07.000
+ And it's used in a lot of programming languages.
+
+26:07.000 --> 26:10.160
+ It's called a partial application of a function.
+
+26:10.160 --> 26:15.560
+ Basically I want this exact function, but I want to fix the values of a, b, and c to
+
+26:15.560 --> 26:18.040
+ pick a particular quadratic.
+
+26:18.040 --> 26:23.280
+ And the way you fix the values of the function is you call this thing in Python called partial
+
+26:23.280 --> 26:28.640
+ and you pass in the function and then you pass in the values that you want to fix.
+
+26:28.640 --> 26:36.320
+ So for example, if I now say make a quadratic 3, 2, 1, that's going to create a quadratic
+
+26:36.320 --> 26:43.440
+ equation with coefficients 3, 2, and 1.
+
+26:43.440 --> 26:46.440
+ And you can see if I then pass in, so that's now f.
+
+26:46.440 --> 26:51.200
+ If I pass in 1.5, I get the exact same value I did before.
+
+26:51.200 --> 26:58.000
+ Okay, so we've now got an ability to create any quadratic equation we want by passing
+
+26:58.000 --> 27:02.120
+ in the parameters of the, the coefficients of the quadratic.
+
+27:02.120 --> 27:06.200
+ And that gives us a function that we can then just call as just like any normal function.
+
+27:06.200 --> 27:10.200
+ So that only needs one thing now, which is a value of x, because the other three, a, b,
+
+27:10.200 --> 27:14.040
+ and c, are now fixed.
+
+27:14.040 --> 27:21.160
+ So if we plot that function, we'll get exactly the same shape, because it's the same coefficients.
+
+27:21.160 --> 27:30.720
+ Okay, so now I'm going to show an example of, of some data, some data that matches the
+
+27:30.720 --> 27:31.880
+ shape of this function.
+
+27:31.880 --> 27:38.120
+ But in real life, data is never exactly going to match the shape of a function.
+
+27:38.120 --> 27:39.840
+ It's going to have some noise.
+
+27:39.840 --> 27:45.320
+ So here's a couple of functions to add some noise.
+
+27:45.320 --> 27:52.400
+ So you can see, I've still got the basic functional form here, but this data is a bit
+
+27:52.400 --> 27:55.320
+ dotted around it.
+
+27:55.320 --> 27:59.520
+ The level to which you look at how I implemented these is entirely up to you.
+
+27:59.520 --> 28:04.360
+ It's not like super necessary, but it's all stuff which, you know, the kind of things
+
+28:04.360 --> 28:05.360
+ we use quite a lot.
+
+28:05.360 --> 28:10.880
+ So this is to create normally distributed random numbers.
+
+28:10.880 --> 28:12.160
+ This is how we set the seed.
+
+28:12.160 --> 28:16.840
+ So that each time I run this, I've got to get the same random numbers.
+
+28:16.840 --> 28:18.360
+ This one is actually particularly helpful.
+
+28:18.360 --> 28:20.960
+ This creates a, a tensor.
+
+28:20.960 --> 28:28.240
+ So in this case, a vector that goes from negative to, to two in equal steps, and there's 20
+
+28:28.240 --> 28:29.240
+ of them.
+
+28:29.240 --> 28:32.880
+ And there's 20 steps along here.
+
+28:32.880 --> 28:40.280
+ So then my y values is just f of x with this amount of noise added.
+
+28:40.280 --> 28:41.280
+ Okay.
+
+28:41.280 --> 28:44.080
+ So as I say, the details of that don't matter too much.
+
+28:44.080 --> 28:47.800
+ The main thing to know is we've got some random data now.
+
+28:47.800 --> 28:53.160
+ And so this is, the idea is now we're going to try to reconstruct the original quadratic
+
+28:53.160 --> 28:57.760
+ equation, find one which matches this data.
+
+28:57.760 --> 28:59.880
+ So how would we do that?
+
+28:59.880 --> 29:09.720
+ Well, what we can do is we can create a function called quadratic that first of all plots our
+
+29:09.720 --> 29:16.000
+ data as a scatter plot, and then it plots a function which is a quadratic, a quadratic
+
+29:16.000 --> 29:17.240
+ we pass in.
+
+29:17.240 --> 29:25.200
+ Now, there's a very helpful thing for experimenting in Jupiter notebooks, which is the at interact
+
+29:25.200 --> 29:27.160
+ function.
+
+29:27.160 --> 29:33.160
+ So if you add it on top of a function, then it gives you these nice little sliders.
+
+29:33.160 --> 29:42.280
+ So here's an example of a quadratic with coefficients 1.5, 1.5, 1.5.
+
+29:42.280 --> 29:44.400
+ And it doesn't fit particularly well.
+
+29:44.400 --> 29:47.160
+ So how would we try to make this fit better?
+
+29:47.160 --> 29:51.320
+ Well, I think what I'd do is I'd take the first slider, and I would try moving it to
+
+29:51.320 --> 29:55.280
+ the left and see if it looks better or worse.
+
+29:55.280 --> 29:57.800
+ It looks worse to me.
+
+29:57.800 --> 30:00.800
+ I think it needs to be more curvy.
+
+30:00.800 --> 30:01.800
+ So try the other way.
+
+30:01.800 --> 30:02.800
+ Yeah, that doesn't look bad.
+
+30:02.800 --> 30:03.800
+ Let's do the same thing for the next slider.
+
+30:03.800 --> 30:04.800
+ Have it this way.
+
+30:04.800 --> 30:05.800
+ No, I think that's worse.
+
+30:05.800 --> 30:08.800
+ Let's try the other way.
+
+30:08.800 --> 30:10.200
+ Okay, final slider.
+
+30:10.200 --> 30:11.200
+ Try this way.
+
+30:11.200 --> 30:14.080
+ No, it's worse this way.
+
+30:14.080 --> 30:18.920
+ So you can see what we can do.
+
+30:18.920 --> 30:21.040
+ We can basically pick each of the coefficients.
+
+30:21.040 --> 30:26.080
+ One at a time, try increasing a little bit, see if that improves it, try decreasing it
+
+30:26.080 --> 30:30.160
+ a little bit, see if that improves it, find the direction that improves it, and then slide
+
+30:30.160 --> 30:32.560
+ it in that direction a little bit.
+
+30:32.560 --> 30:37.160
+ And then when we're done, we can go back to the first one and see if we can make it any
+
+30:37.160 --> 30:38.160
+ better.
+
+30:38.160 --> 30:40.160
+ Now we've done that.
+
+30:40.160 --> 30:46.560
+ And actually, you can see that's not bad because I know the answer's meant to be 321.
+
+30:46.560 --> 30:48.760
+ So they're pretty close.
+
+30:48.760 --> 30:52.760
+ And I wasn't shooting, I promise.
+
+30:52.760 --> 30:55.400
+ That's basically what we're going to do.
+
+30:55.400 --> 30:58.320
+ That's basically how those parameters are created.
+
+30:58.320 --> 31:05.880
+ But we obviously don't have time because the big fancy models have often hundreds of
+
+31:05.880 --> 31:06.880
+ millions of parameters.
+
+31:06.880 --> 31:10.000
+ We don't have time to try 100 million sliders.
+
+31:10.000 --> 31:11.240
+ So we did something better.
+
+31:11.240 --> 31:17.000
+ Well, the first step is we need a better idea of like, when I move it, is it getting better
+
+31:17.000 --> 31:19.160
+ or is it getting worse?
+
+31:19.160 --> 31:26.240
+ So if you remember back to Arthur Samuel's description of machine learning that we learned
+
+31:26.240 --> 31:34.360
+ about chapter one of the book and in lesson one, we need something we can measure, which
+
+31:34.360 --> 31:37.320
+ is a number that tells us how good is our model.
+
+31:37.320 --> 31:40.880
+ And if we had that, then as we move these sliders, we could check to see whether it's
+
+31:40.880 --> 31:42.440
+ getting better or worse.
+
+31:42.440 --> 31:45.440
+ So this is called a loss function.
+
+31:45.440 --> 31:47.400
+ So there's lots of different loss functions you can pick.
+
+31:47.400 --> 31:53.480
+ But perhaps the most simple and common is mean squared error, which is going to be,
+
+31:53.480 --> 31:57.920
+ so it's going to get our predictions and it's got the actuals and we're going to go predictions
+
+31:57.920 --> 32:02.280
+ minus actuals squared and take the mean.
+
+32:02.280 --> 32:04.560
+ So that's mean squared error.
+
+32:04.560 --> 32:10.600
+ So if I now rerun the exact same thing I had before, but this time I'm going to calculate
+
+32:10.600 --> 32:17.920
+ the loss, the MSC between the values that we predict, f of x, remember where f is the
+
+32:17.920 --> 32:21.640
+ quadratic we created and the actuals, why?
+
+32:21.640 --> 32:28.320
+ And this time I'm going to add a title to our function, which is the loss.
+
+32:28.320 --> 32:32.040
+ So now let's do this more rigorously.
+
+32:32.040 --> 32:36.200
+ We're starting at a mean squared error of 11.46.
+
+32:36.200 --> 32:38.720
+ So let's try moving this to the left and see if it gets better.
+
+32:38.720 --> 32:39.720
+ No, what?
+
+32:39.720 --> 32:41.720
+ So we're moving to the right.
+
+32:41.720 --> 32:46.040
+ All right, so we're around there.
+
+32:46.040 --> 32:49.360
+ Okay, now let's try this one.
+
+32:49.360 --> 32:56.080
+ Okay, best when I go to the right.
+
+32:56.080 --> 32:58.280
+ Okay, what about C?
+
+32:58.280 --> 33:00.360
+ 3.91, it's getting worse.
+
+33:00.360 --> 33:02.680
+ So I keep going.
+
+33:02.680 --> 33:05.600
+ Sorry about that.
+
+33:05.600 --> 33:07.440
+ And so now we can repeat that process, right?
+
+33:07.440 --> 33:10.880
+ So we've added, A, B and C move a little bit.
+
+33:10.880 --> 33:13.960
+ Let's go back to A. Can I get any better than 3.28?
+
+33:13.960 --> 33:15.960
+ Let's try moving left.
+
+33:15.960 --> 33:17.800
+ Yeah, left was a bit better.
+
+33:17.800 --> 33:21.160
+ And for B, let's try moving left.
+
+33:21.160 --> 33:25.800
+ Worse, right was better.
+
+33:25.800 --> 33:29.040
+ And to finally see, move to the right.
+
+33:29.040 --> 33:32.160
+ Oh, definitely better.
+
+33:32.160 --> 33:35.560
+ There we go.
+
+33:35.560 --> 33:39.960
+ Okay, so that's a more rigorous approach.
+
+33:39.960 --> 33:44.800
+ It's still manual, but at least we can like, we don't have to rely on us to kind of recognize
+
+33:44.800 --> 33:47.520
+ which is a little better or a little worse.
+
+33:47.520 --> 33:51.680
+ So finally, we're going to automate this.
+
+33:51.680 --> 33:59.080
+ So the key thing we need to know is for each parameter, when we move it up, does the loss
+
+33:59.080 --> 34:00.080
+ get better?
+
+34:00.080 --> 34:05.240
+ Or when we move it down, does the loss get better?
+
+34:05.240 --> 34:07.480
+ Another approach would be to try it, right?
+
+34:07.480 --> 34:12.200
+ We could manually increase the parameter a bit and see if the loss improves and vice
+
+34:12.200 --> 34:13.200
+ versa.
+
+34:13.200 --> 34:16.120
+ But there's a much faster way.
+
+34:16.120 --> 34:19.760
+ And the much faster way is to calculate its derivative.
+
+34:19.760 --> 34:22.600
+ So if you've forgotten what a derivative is, no problem.
+
+34:22.600 --> 34:24.240
+ There's lots of tutorials out there.
+
+34:24.240 --> 34:26.080
+ You could go to Khan Academy or something like that.
+
+34:26.080 --> 34:29.120
+ But in short, the derivative is what I just said.
+
+34:29.120 --> 34:36.120
+ The derivative is a function that tells you if you increase the input, does the output
+
+34:36.120 --> 34:37.120
+ increase or decrease?
+
+34:37.120 --> 34:38.120
+ And by how much?
+
+34:38.120 --> 34:41.760
+ So that's called the slope or the gradient.
+
+34:41.760 --> 34:48.000
+ Now, the good news is PyTorch can automatically calculate that for you.
+
+34:48.000 --> 34:55.000
+ So if you went through horrifying months of learning derivative rules in year 11 and
+
+34:55.000 --> 34:59.480
+ you're worried you're going to have to remember them all again, don't worry, you don't.
+
+34:59.480 --> 35:01.440
+ You don't have to calculate any of this yourself.
+
+35:01.440 --> 35:02.800
+ It's all done for you.
+
+35:02.800 --> 35:03.800
+ Watch this.
+
+35:03.800 --> 35:10.160
+ So the first thing to do is we need a function that takes the coefficients of the quadratic
+
+35:10.160 --> 35:11.760
+ A, B, and C as inputs.
+
+35:11.760 --> 35:14.160
+ I've got to put them all on the list.
+
+35:14.160 --> 35:15.360
+ You'll see why in a moment.
+
+35:15.360 --> 35:18.480
+ I kind of call them parameters.
+
+35:18.480 --> 35:23.880
+ We create a quadratic passing in those parameters A, B, and C.
+
+35:23.880 --> 35:27.160
+ This star on the front is a very, very common thing in Python.
+
+35:27.160 --> 35:32.960
+ Basically, it takes these parameters and spreads them out to turn them into A, B, and C and
+
+35:32.960 --> 35:34.280
+ pass each of them to the function.
+
+35:34.280 --> 35:39.840
+ So we've now got a quadratic with those coefficients.
+
+35:39.840 --> 35:45.640
+ And then we return the means of red error of our predictions against our actions.
+
+35:45.640 --> 35:49.960
+ So this is a function that's going to take the coefficients of a quadratic and return
+
+35:49.960 --> 35:52.800
+ the loss.
+
+35:52.800 --> 35:54.560
+ So let's try it.
+
+35:54.560 --> 35:55.560
+ Okay.
+
+35:55.560 --> 36:04.840
+ So if we start with A, B, and C of 1.5, we get a mean squared error of 11.46.
+
+36:04.840 --> 36:05.840
+ It looks a bit weird.
+
+36:05.840 --> 36:07.680
+ It says it's a tensor.
+
+36:07.680 --> 36:10.600
+ So don't worry about that too much.
+
+36:10.600 --> 36:14.760
+ In short, in PyTorch, everything is a tensor.
+
+36:14.760 --> 36:18.800
+ A tensor just means that it doesn't just work with numbers.
+
+36:18.800 --> 36:21.600
+ It also works with lists or vectors of numbers.
+
+36:21.600 --> 36:26.480
+ It's got a 1D tensor, rectangles of numbers, so tables of numbers.
+
+36:26.480 --> 36:33.520
+ It's got a 2D tensor, layers of tables of numbers, that's got a 3D tensor, and so forth.
+
+36:33.520 --> 36:37.560
+ So in this case, this is a single number, but it's still a tensor.
+
+36:37.560 --> 36:42.640
+ That means it's just wrapped up in the PyTorch machinery that allows it to do things like
+
+36:42.640 --> 36:43.640
+ calculate derivatives.
+
+36:43.640 --> 36:47.240
+ But it's still just the number of 11.46.
+
+36:47.240 --> 36:53.760
+ All right, so what I'm going to do is I'm going to create my parameters, A, B, and C.
+
+36:53.760 --> 36:57.320
+ I'm not going to put them all in a single 1D tensor.
+
+36:57.320 --> 37:02.120
+ Now, 1D tensor is also known as a rank 1 tensor.
+
+37:02.120 --> 37:05.960
+ So this is a rank 1 tensor.
+
+37:05.960 --> 37:10.840
+ And it contains a list of numbers, 1.5, 1.5, 1.5.
+
+37:10.840 --> 37:18.600
+ And then I've got a tail PyTorch that I want you to calculate the gradient for these numbers
+
+37:18.600 --> 37:20.280
+ whenever we use them in a calculation.
+
+37:20.280 --> 37:25.000
+ And the way we do that is we just say requires credit.
+
+37:25.000 --> 37:27.280
+ So here is our tensor.
+
+37:27.280 --> 37:29.760
+ It contains 1.5 three times.
+
+37:29.760 --> 37:35.840
+ And it also tells us it's, we flagged it to say, please calculate gradients for this particular
+
+37:35.840 --> 37:40.040
+ tensor when we use it in calculations.
+
+37:40.040 --> 37:42.400
+ So let's now use it in the calculation.
+
+37:42.400 --> 37:44.600
+ We're going to pass it to that quad MSC.
+
+37:44.600 --> 37:49.160
+ That's the function we just created that gets the MSC, the mean spread error for a set
+
+37:49.160 --> 37:51.560
+ of coefficients.
+
+37:51.560 --> 37:55.120
+ And not surprisingly, it's the same number we saw before, 11.46.
+
+37:55.120 --> 37:56.120
+ Okay.
+
+37:56.120 --> 37:59.800
+ Not very exciting, but there is one thing that's very exciting.
+
+37:59.800 --> 38:04.040
+ It is an extra thing to the end called grad function.
+
+38:04.040 --> 38:09.400
+ And this is the thing that tells us that if we wanted to, PyTorch knows how to create
+
+38:09.400 --> 38:13.160
+ a calculator, calculate the gradients for our inputs.
+
+38:13.160 --> 38:17.680
+ And to tell PyTorch, just please go ahead and do that calculation.
+
+38:17.680 --> 38:22.480
+ You'll call backward on the result of your loss function.
+
+38:22.480 --> 38:26.840
+ Now when I run it, nothing happens or it doesn't look like nothing happens.
+
+38:26.840 --> 38:31.960
+ But what does happen is it's just added an attribute called grad, which is the gradient
+
+38:31.960 --> 38:33.360
+ to our inputs ABC.
+
+38:33.360 --> 38:42.680
+ So if I run this cell, this tells me that if I increase A, the loss will go down.
+
+38:42.680 --> 38:46.760
+ If I increase B, the loss will go down a bit less.
+
+38:46.760 --> 38:50.520
+ And if I increase C, the loss will go down.
+
+38:50.520 --> 38:52.440
+ Now we want the loss to go down.
+
+38:52.440 --> 38:53.440
+ Right?
+
+38:53.440 --> 38:57.240
+ So that means we should increase A, B and C.
+
+38:57.240 --> 38:58.720
+ Well how much by?
+
+38:58.720 --> 39:05.280
+ Well given that A says if you increase A even a little bit, the loss improves a lot.
+
+39:05.280 --> 39:07.560
+ That suggests we're a long way away from the right answer.
+
+39:07.560 --> 39:12.040
+ So we should probably increase this one a lot, this one the second most, and this one the
+
+39:12.040 --> 39:13.040
+ third most.
+
+39:13.040 --> 39:19.040
+ So this is saying when I increase this parameter, the loss decreases.
+
+39:19.040 --> 39:25.360
+ So in other words, we want to adjust our parameters A, B and C by the negative of these.
+
+39:25.360 --> 39:29.200
+ We want to increase, increase, increase.
+
+39:29.200 --> 39:37.400
+ So we can do that by saying, okay, let's take our ABC minus equals, so that means equals
+
+39:37.400 --> 39:42.200
+ ABC minus the gradient.
+
+39:42.200 --> 39:43.920
+ But we're just going to like decrease it a bit.
+
+39:43.920 --> 39:45.680
+ We don't want to jump too far.
+
+39:45.680 --> 39:48.200
+ So just we're just going to go a small distance.
+
+39:48.200 --> 39:53.200
+ So we're just going to somewhat arbitrarily pick point 01.
+
+39:53.200 --> 39:57.520
+ So that is now going to create a new set of parameters, which are going to be a little
+
+39:57.520 --> 40:02.000
+ bit bigger than before because we subtracted negative numbers.
+
+40:02.000 --> 40:05.000
+ And we can now calculate the loss again.
+
+40:05.000 --> 40:11.840
+ So remember before it was 11.46, so hopefully it's going to get better.
+
+40:11.840 --> 40:16.000
+ Yes it did, 10.11.
+
+40:16.000 --> 40:20.280
+ There's one extra line of code which we didn't mention, which is with torch.nograd.
+
+40:20.280 --> 40:26.640
+ Remember earlier on we said that the parameter ABC requires grad and that means PyTorch will
+
+40:26.640 --> 40:33.840
+ automatically calculate its derivative when it's used in a function.
+
+40:33.840 --> 40:37.200
+ Here it's being used in a function, but we don't want the derivative of this.
+
+40:37.200 --> 40:39.200
+ This is not our loss.
+
+40:39.200 --> 40:41.240
+ This is us updating the gradients.
+
+40:41.240 --> 40:48.880
+ So this is basically the standard inner part of a PyTorch loop and every neural net, deep
+
+40:48.880 --> 40:54.560
+ in pretty much every machine running model at least of this style that your build basically
+
+40:54.560 --> 40:56.640
+ looks like this.
+
+40:56.640 --> 41:00.160
+ If you look deep inside faster source code, you'll see something that basically looks
+
+41:00.160 --> 41:06.320
+ like this.
+
+41:06.320 --> 41:08.040
+ So we could automate that, right?
+
+41:08.040 --> 41:15.480
+ So let's just take those steps, which is we're going to calculate, let's go back to here,
+
+41:15.480 --> 41:22.640
+ we're going to calculate the mean squared error for our quadratic, call backward and
+
+41:22.640 --> 41:27.480
+ then subtract the gradient times a small number from the gradient.
+
+41:27.480 --> 41:30.920
+ So let's do it five times.
+
+41:30.920 --> 41:37.160
+ So far we're up to a loss of 10.1, so we're going to calculate our loss, call dot backward
+
+41:37.160 --> 41:44.000
+ to calculate the gradients and then with no grad, subtract the gradients times a small
+
+41:44.000 --> 41:49.320
+ number and print how we're going.
+
+41:49.320 --> 41:54.560
+ And there we go, the loss keeps improving.
+
+41:54.560 --> 42:13.440
+ So we now have some coefficients and there they are, 3.2, 1.9, 2.0.
+
+42:13.440 --> 42:20.760
+ So they're definitely heading in the right direction.
+
+42:20.760 --> 42:23.960
+ So that's basically how we do, it's called optimization.
+
+42:23.960 --> 42:27.960
+ Okay, so you'll hear a lot in deep learning about optimizers.
+
+42:27.960 --> 42:33.120
+ This is the most basic kind of optimizer, but they're all built on this principle with
+
+42:33.120 --> 42:35.200
+ called gradient descent.
+
+42:35.200 --> 42:37.720
+ And you can see why it's called gradient descent.
+
+42:37.720 --> 42:44.960
+ We calculate the gradients and then do a descent which is in, we're trying to decrease the
+
+42:44.960 --> 42:45.960
+ loss.
+
+42:45.960 --> 42:55.160
+ So believe it or not, that's the entire foundations of how we create those parameters.
+
+42:55.160 --> 42:59.320
+ So we need one more piece, which is what is the mathematical function that we're finding
+
+42:59.320 --> 43:01.760
+ parameters for?
+
+43:01.760 --> 43:03.840
+ We can't just use quadratics, right?
+
+43:03.840 --> 43:09.600
+ Because it's pretty unlikely that the relationship between parameters and whether a pixel is
+
+43:09.600 --> 43:11.960
+ part of a basset hound is quadratic.
+
+43:11.960 --> 43:14.960
+ It's going to be something much more complicated.
+
+43:14.960 --> 43:19.240
+ No problem.
+
+43:19.240 --> 43:27.840
+ It turns out that we can create an infinitely flexible function from this one tiny thing.
+
+43:27.840 --> 43:31.560
+ This is called a rectified linear unit.
+
+43:31.560 --> 43:36.120
+ The first piece I'm sure you will recognize, it's a linear function.
+
+43:36.120 --> 43:43.200
+ We've got our output y, our input x and coefficients m and b.
+
+43:43.200 --> 43:46.720
+ This is even simpler than our quadratic.
+
+43:46.720 --> 43:50.640
+ And this is a line.
+
+43:50.640 --> 43:56.000
+ And torch dot flip is a function that takes our output y and if it's greater than that
+
+43:56.000 --> 43:58.440
+ number, it turns it into that number.
+
+43:58.440 --> 44:03.720
+ In other words, this is going to take anything that's negative and make it zero.
+
+44:03.720 --> 44:06.840
+ So this function is going to do two things.
+
+44:06.840 --> 44:11.880
+ Calculate the output of a line and if it is bigger than a smaller than zero, it'll make
+
+44:11.880 --> 44:14.120
+ it zero.
+
+44:14.120 --> 44:16.720
+ So that's rectified linear.
+
+44:16.720 --> 44:22.120
+ So let's use partial to take that function and set the m and b to one and one.
+
+44:22.120 --> 44:29.680
+ So this is now going to be this function here where it will be y equals x plus one followed
+
+44:29.680 --> 44:33.360
+ by this torch dot flip.
+
+44:33.360 --> 44:34.360
+ And here's the shape.
+
+44:34.360 --> 44:43.360
+ As you would expect, it's a line until it gets under zero when it becomes a horizontal
+
+44:43.360 --> 44:46.440
+ line.
+
+44:46.440 --> 44:47.640
+ So we can now do the same thing.
+
+44:47.640 --> 44:53.720
+ We can take this plot function and make it interactive using interact.
+
+44:53.720 --> 44:57.720
+ And we can see what happens when we change this two parameters, m and b.
+
+44:57.720 --> 45:02.760
+ So we're now plotting the rectified linear and fixing m and b.
+
+45:02.760 --> 45:08.560
+ So m is the slope.
+
+45:08.560 --> 45:16.360
+ And b is the intercept with a shift up and down.
+
+45:16.360 --> 45:21.320
+ Okay, so that's how those work.
+
+45:21.320 --> 45:23.280
+ Now why is this interesting?
+
+45:23.280 --> 45:26.000
+ Well it's not interesting of itself.
+
+45:26.000 --> 45:32.360
+ But what we could do is we could take this rectified linear function and create a double
+
+45:32.360 --> 45:38.880
+ value which adds up two rectified linear functions together.
+
+45:38.880 --> 45:43.560
+ So there's some slope m one b one, some slope n two b two.
+
+45:43.560 --> 45:47.840
+ So we can calculate it at some point x.
+
+45:47.840 --> 45:54.160
+ And so let's take a look at what that function looks like if we plot it.
+
+45:54.160 --> 45:58.200
+ And you can see what happens is we get this downward slope and then a hook and then an
+
+45:58.200 --> 45:59.440
+ upward slope.
+
+45:59.440 --> 46:04.760
+ So if I change m one, it's going to change the slope of that first bit.
+
+46:04.760 --> 46:08.560
+ And b one's going to change its position.
+
+46:08.560 --> 46:10.040
+ Okay.
+
+46:10.040 --> 46:13.280
+ And I'm sure you won't be surprised to hear that m two changes the slope of the second
+
+46:13.280 --> 46:20.560
+ bit and b two changes that location.
+
+46:20.560 --> 46:23.280
+ Now this is interesting.
+
+46:23.280 --> 46:24.920
+ Why?
+
+46:24.920 --> 46:27.800
+ Because we don't just have to do a double value.
+
+46:27.800 --> 46:31.440
+ We could add as many values together as we want.
+
+46:31.440 --> 46:36.680
+ And if we add as many values together as we want, then we can have an arbitrarily squiggly
+
+46:36.680 --> 46:43.000
+ function and with enough values, we can match it as close as we want.
+
+46:43.000 --> 46:44.000
+ Right?
+
+46:44.000 --> 46:47.920
+ So you could imagine incredibly squiggly, like, I don't know, like an audio waveform
+
+46:47.920 --> 46:49.920
+ of me speaking.
+
+46:49.920 --> 46:56.040
+ And if I gave you a hundred million values to add together, you could almost exactly
+
+46:56.040 --> 46:59.080
+ match that.
+
+46:59.080 --> 47:05.560
+ Now we want functions that are not just that we've plotted in two D. We want things that
+
+47:05.560 --> 47:07.520
+ can have more than one input.
+
+47:07.520 --> 47:10.840
+ But you can add these together across as many dimensions as you like.
+
+47:10.840 --> 47:17.360
+ And so exactly the same thing will give you a a a value over surfaces or a value over
+
+47:17.360 --> 47:21.200
+ 3D, 4D, 5D and so forth.
+
+47:21.200 --> 47:23.160
+ And it's the same idea.
+
+47:23.160 --> 47:32.480
+ With this incredibly simple foundation, you can construct an arbitrarily accurate precise
+
+47:32.480 --> 47:39.520
+ model.
+
+47:39.520 --> 47:42.200
+ Problem is, you need some numbers for them.
+
+47:42.200 --> 47:43.200
+ You need parameters.
+
+47:43.200 --> 47:45.240
+ Oh, no problem.
+
+47:45.240 --> 47:46.800
+ We know how to get parameters.
+
+47:46.800 --> 47:50.280
+ We use gradient descent.
+
+47:50.280 --> 47:57.600
+ So believe it or not, we have just derived take money.
+
+47:57.600 --> 48:08.720
+ From now on is tweaks to make it faster and make it need less data.
+
+48:08.720 --> 48:12.680
+ You know, this is it.
+
+48:12.680 --> 48:16.320
+ Now I remember a few years ago when I said something like this in a class, somebody on
+
+48:16.320 --> 48:20.960
+ the forum was like, this reminds me of that thing about how to draw an L. Jeremy is basically
+
+48:20.960 --> 48:28.320
+ saying, okay, step one, draw two circles, step two, draw the rest of the L.
+
+48:28.320 --> 48:33.840
+ The thing I find I have a lot of trouble explaining to students is when it comes to deep learning,
+
+48:33.840 --> 48:35.560
+ there's nothing between these two steps.
+
+48:35.560 --> 48:40.120
+ When you have, where do you use getting added together?
+
+48:40.120 --> 48:43.360
+ And gradient descent to optimize the parameters.
+
+48:43.360 --> 48:46.880
+ And samples of inputs and outputs that you want.
+
+48:46.880 --> 48:48.640
+ The computer draws the L.
+
+48:48.640 --> 48:49.640
+ Right?
+
+48:49.640 --> 48:51.280
+ That's it.
+
+48:51.280 --> 48:56.440
+ So we're going to learn about all these other tweaks and they're all very important.
+
+48:56.440 --> 49:01.440
+ But when you come down to like try and understand something in deep learning, just try to keep
+
+49:01.440 --> 49:08.160
+ coming back to remind yourself of what it's doing, which it's using gradient descent to
+
+49:08.160 --> 49:13.080
+ set some parameters to make a wiggly function, which is basically the addition of lots of
+
+49:13.080 --> 49:16.880
+ rectified linear units or something very similar to that.
+
+49:16.880 --> 49:20.560
+ That's your data.
+
+49:20.560 --> 49:22.840
+ Okay.
+
+49:22.840 --> 49:26.160
+ So we've got some questions on the forum.
+
+49:26.160 --> 49:28.200
+ Okay.
+
+49:28.200 --> 49:32.120
+ So question from Zuck here with six upvotes.
+
+49:32.120 --> 49:37.400
+ So for those of you watching the video, what we do in the lesson is we want to make sure
+
+49:37.400 --> 49:42.480
+ that the questions that you hear answered are the ones that people really care about.
+
+49:42.480 --> 49:45.520
+ So we pick the ones which get the most upvotes.
+
+49:45.520 --> 49:51.640
+ The question is, is there perhaps a way to try out all the different models and automatically
+
+49:51.640 --> 49:54.680
+ find the best performing one?
+
+49:54.680 --> 49:59.880
+ Yes, absolutely you can do that.
+
+49:59.880 --> 50:09.640
+ So if we go back to our training script, remember there's this thing called list models and
+
+50:09.640 --> 50:11.280
+ it's a list of strings.
+
+50:11.280 --> 50:19.600
+ So you could easily add a for loop around this that basically goes for architecture in
+
+50:19.600 --> 50:25.480
+ chim.list models and you could do the whole lot, which would be like that.
+
+50:25.480 --> 50:30.920
+ And then you could do that and away you go.
+
+50:30.920 --> 50:36.360
+ It's going to take a long time for 500 and something models.
+
+50:36.360 --> 50:41.720
+ So generally speaking, I've never done anything like that myself.
+
+50:41.720 --> 50:46.200
+ I would rather look at a picture like this and say, okay, where am I in?
+
+50:46.200 --> 50:50.120
+ The vast majority of the time, this is something, this would be the biggest, I reckon, number
+
+50:50.120 --> 50:57.960
+ one mistake of beginners I see, is that they jump to these models from the start of a new
+
+50:57.960 --> 50:58.960
+ project.
+
+50:58.960 --> 51:04.960
+ At the start of a new project, I pretty much only use Resident 18 because I want to spend
+
+51:04.960 --> 51:08.720
+ all of my time trying things out and try different data augmentation.
+
+51:08.720 --> 51:12.560
+ I'm going to try different ways of cleaning the data.
+
+51:12.560 --> 51:20.920
+ I'm going to try, you know, different external data I can bring in.
+
+51:20.920 --> 51:25.360
+ So I want to be trying lots of things and I want to be able to try it as fast as possible.
+
+51:25.360 --> 51:33.880
+ So trying better architectures is the very last thing that I do.
+
+51:33.880 --> 51:37.560
+ And what I do is once I've spent all this time and I've got to the point where I've
+
+51:37.560 --> 51:41.320
+ got, okay, I've got my Resident 18 or maybe, you know, Resident 34 because it's nearly
+
+51:41.320 --> 51:45.400
+ as fast.
+
+51:45.400 --> 51:48.120
+ And I'm like, okay, well, how accurate is it?
+
+51:48.120 --> 51:50.200
+ How fast is it?
+
+51:50.200 --> 51:53.160
+ Do I need it more accurate for what I'm doing?
+
+51:53.160 --> 51:55.400
+ Do I need it faster for what I'm doing?
+
+51:55.400 --> 51:59.200
+ Could I accept some trade off to make it a bit slower, to make it more accurate?
+
+51:59.200 --> 52:01.880
+ And so then I'll have a look and I'll say, okay, well, I kind of need to be somewhere
+
+52:01.880 --> 52:07.080
+ around.001 seconds and so I'll try a few of these.
+
+52:07.080 --> 52:11.640
+ So that'd be how I would think about that.
+
+52:11.640 --> 52:19.440
+ Okay, next question from the forum is around, how do I know if I have enough data?
+
+52:19.440 --> 52:25.360
+ What are some signs that indicate my problem needs more data?
+
+52:25.360 --> 52:28.160
+ I think it's pretty similar to the architecture question.
+
+52:28.160 --> 52:30.760
+ So you've got some amount of data.
+
+52:30.760 --> 52:35.640
+ Presumably, you've started using all the data that you have access to.
+
+52:35.640 --> 52:39.920
+ You've built your model, you've done your best.
+
+52:39.920 --> 52:42.240
+ Is it good enough?
+
+52:42.240 --> 52:49.000
+ Do you have the accuracy that you need for whatever it is you're doing?
+
+52:49.000 --> 52:53.840
+ You can't know until you've trained the model, but as you've seen, it only takes a few minutes
+
+52:53.840 --> 52:56.320
+ to train a quick model.
+
+52:56.320 --> 53:04.200
+ So my very strong opinion is that the vast majority of projects I see in industry wait
+
+53:04.200 --> 53:07.080
+ far too long before they train their first model.
+
+53:07.080 --> 53:13.960
+ In my opinion, you want to train your first model one day one with whatever CSV files
+
+53:13.960 --> 53:15.880
+ or whatever that you can hack together.
+
+53:15.880 --> 53:21.280
+ And you might be surprised that none of the fancy stuff you're thinking of doing is necessary
+
+53:21.280 --> 53:24.280
+ because you already have a good enough accuracy for what you need.
+
+53:24.280 --> 53:26.640
+ Or you might find quite the opposite.
+
+53:26.640 --> 53:31.200
+ You might find that, oh my God, we're basically getting no accuracy at all.
+
+53:31.200 --> 53:33.360
+ Maybe it's impossible.
+
+53:33.360 --> 53:39.400
+ These are things you want to know at the start, not at the end.
+
+53:39.400 --> 53:43.720
+ We'll learn lots of techniques, both in this part of the course and in part two, about
+
+53:43.720 --> 53:47.720
+ ways to really get the most out of your data.
+
+53:47.720 --> 53:52.200
+ In particular, there's a reasonably recent technique called semi supervised learning,
+
+53:52.200 --> 53:54.880
+ which actually lets you get dramatically more out of your data.
+
+53:54.880 --> 53:59.600
+ And we've also started talking already about data augmentation, which is a classic technique
+
+53:59.600 --> 54:00.600
+ you can use.
+
+54:00.600 --> 54:04.440
+ So generally speaking, it depends how expensive it's going to be to get more data.
+
+54:04.440 --> 54:06.720
+ But also, what do you mean when you say get more data?
+
+54:06.720 --> 54:08.720
+ Do you mean more labeled data?
+
+54:08.720 --> 54:14.200
+ Often, it's easy to get lots of inputs and hard to get lots of outputs.
+
+54:14.200 --> 54:18.880
+ For example, in medical imaging, where I spent a lot of time, it's generally super easy
+
+54:18.880 --> 54:23.520
+ to jump into the radiology archive and grab more CT scans.
+
+54:23.520 --> 54:30.560
+ But it might be very difficult and expensive to draw segmentation masks and pixel boundaries
+
+54:30.560 --> 54:33.800
+ and so forth on them.
+
+54:33.800 --> 54:41.960
+ So often, you can get more, in this case, images or texts or whatever, and maybe it's
+
+54:41.960 --> 54:42.960
+ harder to get labels.
+
+54:42.960 --> 54:47.960
+ And again, there's a lot of stuff you can do using things like we'll discuss semi supervised
+
+54:47.960 --> 54:53.480
+ learning to actually take advantage of unlabeled data as well.
+
+54:53.480 --> 54:55.120
+ Okay.
+
+54:55.120 --> 54:58.520
+ Final question here.
+
+54:58.520 --> 55:03.960
+ In the quadratic example, where we calculated the initial derivatives for A, B, and C, we
+
+55:03.960 --> 55:07.280
+ got values of minus 10.8, minus 2.4, et cetera.
+
+55:07.280 --> 55:09.120
+ What unit are these expressed in?
+
+55:09.120 --> 55:11.360
+ Why don't we adjust our parameters by these values themselves?
+
+55:11.360 --> 55:16.160
+ So I guess the question here is why are we multiplying it by a small number, which in
+
+55:16.160 --> 55:18.960
+ this case is 0.01.
+
+55:18.960 --> 55:26.080
+ Okay, let's take those two parts of the question.
+
+55:26.080 --> 55:28.160
+ What's the unit here?
+
+55:28.160 --> 55:38.440
+ The unit is, for each increase in X of 1, how much does, sorry, for each increase in A of
+
+55:38.440 --> 55:44.640
+ 1, so if I increase A from, in this case, we have 1.5.
+
+55:44.640 --> 55:50.120
+ So if we increase from 1.5 to 2.5, what would happen to the loss?
+
+55:50.120 --> 55:52.440
+ And the answer is it would go down by 10.98.
+
+55:52.440 --> 56:02.320
+ Now that's not exactly right because it's kind of like, it's kind of like in an infinitely
+
+56:02.320 --> 56:05.280
+ small space, right, because actually it's going to be curved, right?
+
+56:05.280 --> 56:10.800
+ But if it stays at that slope, that's what would happen.
+
+56:10.800 --> 56:18.120
+ So if we increased B by 1, the loss would decrease if it stayed constant, you don't
+
+56:18.120 --> 56:24.280
+ see if the slopes stayed the same, the loss would decrease by minus 2.1 to 2.
+
+56:24.280 --> 56:31.640
+ Okay, so why would we not just change it directly by these numbers?
+
+56:31.640 --> 56:52.280
+ So the reason is that if we have some function that we're fitting.
+
+56:52.280 --> 56:57.160
+ And there's some kind of interesting theory that says that once you get close enough to
+
+56:57.160 --> 57:02.480
+ the optimal value, all functions look like quadratic anyway.
+
+57:02.480 --> 57:07.440
+ So we can kind of safely draw it in this kind of shape because this is what they end up
+
+57:07.440 --> 57:10.080
+ looking like if you get close enough.
+
+57:10.080 --> 57:14.920
+ And we're, like, let's say we're way out over here.
+
+57:14.920 --> 57:21.280
+ Okay, so we were measuring, I used my daughter's favorite pens and I sparkly ones, so we're
+
+57:21.280 --> 57:23.320
+ measuring the slope here.
+
+57:23.320 --> 57:28.000
+ There's a very steep slope, okay?
+
+57:28.000 --> 57:31.960
+ So that seems to suggest we should jump a really long way.
+
+57:31.960 --> 57:35.400
+ So we jump a really long way.
+
+57:35.400 --> 57:36.400
+ And what happened?
+
+57:36.400 --> 57:38.320
+ Well, we jumped way too far.
+
+57:38.320 --> 57:45.080
+ And the reason is that that slope decreased as we moved along.
+
+57:45.080 --> 57:47.760
+ And so that's generally what's going to happen, right?
+
+57:47.760 --> 57:52.240
+ Particularly as you approach the optimal, is generally the slope's going to decrease.
+
+57:52.240 --> 57:56.640
+ So that's why we multiply the gradient by a small number.
+
+57:56.640 --> 57:59.760
+ And that's more number, it's a very, very, very important number.
+
+57:59.760 --> 58:03.400
+ It has a special name.
+
+58:03.400 --> 58:06.720
+ It's called the learning rate.
+
+58:06.720 --> 58:13.640
+ And this is an example of a hyperparameter.
+
+58:13.640 --> 58:14.800
+ It's not a parameter.
+
+58:14.800 --> 58:19.160
+ It's not one of the actual coefficients of your function.
+
+58:19.160 --> 58:23.320
+ That's a parameter you use to calculate the parameters.
+
+58:23.320 --> 58:24.320
+ Pretty better, right?
+
+58:24.320 --> 58:25.760
+ It's a hyperparameter.
+
+58:25.760 --> 58:28.000
+ And so it's something you have to pick.
+
+58:28.000 --> 58:33.320
+ Now we haven't picked any yet in any of the stuff we've done, did I remember?
+
+58:33.320 --> 58:38.280
+ And that's because Basteri generally picks reasonable defaults for most things.
+
+58:38.280 --> 58:45.160
+ But later in the course, we will learn about how to try and find really good learning rates.
+
+58:45.160 --> 58:51.040
+ And you will find sometimes you need to actually spend some time finding a good learning rate.
+
+58:51.040 --> 58:52.880
+ You could probably understand the intuition here.
+
+58:52.880 --> 58:59.000
+ If you pick a learning rate that's too big, you'll jump too far.
+
+58:59.000 --> 59:02.480
+ And so you'll end up way over here.
+
+59:02.480 --> 59:08.160
+ And then you will try to then jump back again and you'll jump too far the other way and
+
+59:08.160 --> 59:10.640
+ you'll actually diverge.
+
+59:10.640 --> 59:15.120
+ And so if you ever see when your model's trading, it's getting worse and worse, probably means
+
+59:15.120 --> 59:18.040
+ your learning rate's too big.
+
+59:18.040 --> 59:23.440
+ What would happen on the other hand if you pick a learning rate that's too small, then
+
+59:23.440 --> 59:28.800
+ you're going to take tiny steps.
+
+59:28.800 --> 59:32.400
+ And of course the flatter it gets, the smaller the steps are going to get.
+
+59:32.400 --> 59:34.960
+ And so you're going to get very, very bored.
+
+59:34.960 --> 59:40.840
+ So finding the right learning rate is a compromise between the speed at which you find the answer
+
+59:40.840 --> 59:46.640
+ and the possibility that you're actually going to shoot past it and get worse and worse.
+
+59:46.640 --> 59:51.640
+ Okay, so one of the bits of feedback I got quite a lot in the survey is that people want
+
+59:51.640 --> 59:53.880
+ a break halfway through, which I think is a good idea.
+
+59:53.880 --> 59:56.200
+ So I think now is a good time to have a break.
+
+59:56.200 --> 1:00:05.920
+ So let's come back in 10 minutes at 25 past 7.
+
+1:00:05.920 --> 1:00:16.640
+ Okay, I hope you had a good rest.
+
+1:00:16.640 --> 1:00:19.360
+ Have a good break, I should say.
+
+1:00:19.360 --> 1:00:26.600
+ So I want to now show you a really, really important mathematical computational trick,
+
+1:00:26.600 --> 1:00:31.920
+ which is we want to do a whole bunch of values.
+
+1:00:31.920 --> 1:00:39.640
+ All right, so we're going to be wanting to do a whole lot of mx plus b's.
+
+1:00:39.640 --> 1:00:42.320
+ And we want to just want to do mx plus b.
+
+1:00:42.320 --> 1:00:46.640
+ We're going to want to have like lots of variables.
+
+1:00:46.640 --> 1:00:50.080
+ So for example, every single pixel of an image would be a separate variable.
+
+1:00:50.080 --> 1:00:54.920
+ So we're going to multiply every single one of those times some coefficient and then add
+
+1:00:54.920 --> 1:01:03.560
+ them all together and then do the crop, the value, and then we're going to do it a second
+
+1:01:03.560 --> 1:01:08.360
+ time with a second bunch of parameters and then a third time and a fourth time and a
+
+1:01:08.360 --> 1:01:09.360
+ fifth time.
+
+1:01:09.360 --> 1:01:13.560
+ It's going to be pretty inconvenient to write out 100 million values.
+
+1:01:13.560 --> 1:01:19.800
+ But so happens there's a mathematical, single mathematical operation that does all of those
+
+1:01:19.800 --> 1:01:24.080
+ things for us except for the final replace negatives with zeros.
+
+1:01:24.080 --> 1:01:26.560
+ That's called matrix modification.
+
+1:01:26.560 --> 1:01:30.600
+ I expect everybody at some point did matrix modification at high school.
+
+1:01:30.600 --> 1:01:34.560
+ I suspect also a lot of you have forgotten how it works.
+
+1:01:34.560 --> 1:01:41.440
+ When people talk about linear algebra in deep learning, they give the impression you need
+
+1:01:41.440 --> 1:01:46.400
+ years of graduate school study to learn all this linear algebra.
+
+1:01:46.400 --> 1:01:47.400
+ You don't.
+
+1:01:47.400 --> 1:01:52.400
+ Actually, all you need almost all the time is matrix multiplication and it couldn't
+
+1:01:52.400 --> 1:01:54.400
+ be simpler.
+
+1:01:54.400 --> 1:01:58.440
+ First is a really cool site called matrix modification.xyz.
+
+1:01:58.440 --> 1:02:00.520
+ You can put in any matrix you want.
+
+1:02:00.520 --> 1:02:08.080
+ I'm going to put in this one.
+
+1:02:08.080 --> 1:02:14.720
+ This matrix is saying I've got three rows of data with three variables.
+
+1:02:14.720 --> 1:02:21.160
+ Maybe they're tiny images with three pixels and the value of the first one is one, two,
+
+1:02:21.160 --> 1:02:26.280
+ one, and the second is 011 and the third is 231.
+
+1:02:26.280 --> 1:02:28.880
+ Those are our three rows of data.
+
+1:02:28.880 --> 1:02:31.120
+ These are our three sets of coefficients.
+
+1:02:31.120 --> 1:02:33.960
+ We've got A, B and C in our data.
+
+1:02:33.960 --> 1:02:36.800
+ So I guess we'd call it X1, X2 and X3.
+
+1:02:36.800 --> 1:02:42.880
+ Then here's our first set of coefficients, A, B and C, two, six and one.
+
+1:02:42.880 --> 1:02:46.120
+ Our second set is five, seven and eight.
+
+1:02:46.120 --> 1:02:48.760
+ Here's what happens when we do matrix multiplication.
+
+1:02:48.760 --> 1:03:00.120
+ That second, this matrix here of coefficients gets flipped around and we do, this is the
+
+1:03:00.120 --> 1:03:02.640
+ multiplications and additions that I mentioned.
+
+1:03:02.640 --> 1:03:05.920
+ So multiply, add, multiply, add, multiply, add.
+
+1:03:05.920 --> 1:03:14.240
+ That's going to give you the first number because that is the left hand column of the
+
+1:03:14.240 --> 1:03:16.800
+ second matrix times the first row.
+
+1:03:16.800 --> 1:03:21.680
+ That gives you the top left result.
+
+1:03:21.680 --> 1:03:24.480
+ So the next one is going to give us two results.
+
+1:03:24.480 --> 1:03:28.920
+ So we've got now the right hand one with the top row and the left hand one with the second
+
+1:03:28.920 --> 1:03:29.920
+ row.
+
+1:03:29.920 --> 1:03:37.760
+ Keep going down, keep going down and that's it.
+
+1:03:37.760 --> 1:03:39.160
+ That's what matrix multiplication is.
+
+1:03:39.160 --> 1:03:42.320
+ It's modifying things together and adding them up.
+
+1:03:42.320 --> 1:03:45.640
+ So there'd be one more step to do to make this a layer of a neural network which is
+
+1:03:45.640 --> 1:03:49.880
+ if this had any negatives, we'd place them with yours.
+
+1:03:49.880 --> 1:03:59.000
+ That's why matrix multiplication is the critical foundation or mathematical operation in basically
+
+1:03:59.000 --> 1:04:01.200
+ all of deep learning.
+
+1:04:01.200 --> 1:04:09.800
+ So the GPUs that we use, the thing that they are good at is this, matrix multiplication.
+
+1:04:09.800 --> 1:04:16.200
+ They have special cores called tensor cores which can basically only do one thing which
+
+1:04:16.200 --> 1:04:21.200
+ is to multiply together two 4 by 4 matrices and then they do that lots of times, so bigger
+
+1:04:21.200 --> 1:04:22.200
+ matrices.
+
+1:04:22.200 --> 1:04:26.320
+ So I'm going to show you an example of this.
+
+1:04:26.320 --> 1:04:33.340
+ We're actually going to build a complete machine learning model on real data in the
+
+1:04:33.340 --> 1:04:39.040
+ spreadsheet.
+
+1:04:39.040 --> 1:04:44.400
+ So fast AI has become kind of famous for a number of things and one of them is using
+
+1:04:44.400 --> 1:04:48.160
+ spreadsheets to create deep learning models.
+
+1:04:48.160 --> 1:04:51.800
+ We haven't done it for a couple of years so I'm pretty pumped to show this to you.
+
+1:04:51.800 --> 1:05:04.560
+ What I've done is I went over to Kaggle where there's a competition actually helped create
+
+1:05:04.560 --> 1:05:07.640
+ many years ago called Titanic.
+
+1:05:07.640 --> 1:05:09.840
+ And it's like an ongoing competition.
+
+1:05:09.840 --> 1:05:13.480
+ So 14,000 people have entered it so, well teams have entered it so far.
+
+1:05:13.480 --> 1:05:16.080
+ It's just a competition for a bit of fun.
+
+1:05:16.080 --> 1:05:18.440
+ There's no end date.
+
+1:05:18.440 --> 1:05:31.960
+ And the data for it is the data about who survived and who didn't from the real Titanic
+
+1:05:31.960 --> 1:05:33.240
+ disaster.
+
+1:05:33.240 --> 1:05:37.440
+ And so I clicked here on the down my button to grab it on my computer.
+
+1:05:37.440 --> 1:05:44.080
+ That gave me a CSV which I opened up in Excel.
+
+1:05:44.080 --> 1:05:48.280
+ The first thing I did then was I just removed a few columns that clearly were not going
+
+1:05:48.280 --> 1:05:49.280
+ to be important.
+
+1:05:49.280 --> 1:05:54.600
+ Things like the name of the passengers, the passenger ID, just to try to make it a bit
+
+1:05:54.600 --> 1:05:55.840
+ simpler.
+
+1:05:55.840 --> 1:06:00.520
+ And so I've ended up with each row of this is one passenger.
+
+1:06:00.520 --> 1:06:03.880
+ First column is the dependent variable, the dependent variable is the thing we're trying
+
+1:06:03.880 --> 1:06:05.380
+ to predict.
+
+1:06:05.380 --> 1:06:07.680
+ Did they survive?
+
+1:06:07.680 --> 1:06:12.480
+ And the remaining are some information such as what class of the boat, first, second,
+
+1:06:12.480 --> 1:06:17.440
+ or third class, this, X, the age, how many siblings in the family?
+
+1:06:17.440 --> 1:06:24.320
+ Pee arch, I think is parents or something?
+
+1:06:24.320 --> 1:06:27.320
+ So you should always look for a data dictionary to find out what's what?
+
+1:06:27.320 --> 1:06:31.200
+ A number of parents and children.
+
+1:06:31.200 --> 1:06:32.920
+ What was their fare?
+
+1:06:32.920 --> 1:06:35.280
+ And which of the three cities did they embark on?
+
+1:06:35.280 --> 1:06:37.400
+ Jerpa, Queenstown, South Africa.
+
+1:06:37.400 --> 1:06:38.400
+ Okay.
+
+1:06:38.400 --> 1:06:40.520
+ So there's that data.
+
+1:06:40.520 --> 1:06:48.200
+ Now when I first grabbed it, I noticed that there were some people with no age.
+
+1:06:48.200 --> 1:06:51.680
+ Now there's all kinds of things we could do for that.
+
+1:06:51.680 --> 1:06:57.800
+ Now for this purpose, I just decided to remove them.
+
+1:06:57.800 --> 1:06:59.440
+ And I found the same thing for embarked.
+
+1:06:59.440 --> 1:07:03.600
+ I removed the blanks as well.
+
+1:07:03.600 --> 1:07:05.800
+ But that left me with nearly all of the data.
+
+1:07:05.800 --> 1:07:06.800
+ Okay.
+
+1:07:06.800 --> 1:07:10.200
+ So then I've put that over here.
+
+1:07:10.200 --> 1:07:15.520
+ Here's our data with those rows removed.
+
+1:07:15.520 --> 1:07:26.560
+ And okay, that's the, so these are the columns that came directly from Kaggle.
+
+1:07:26.560 --> 1:07:32.080
+ So basically what we now want to do is we want to multiply each of these by coefficient.
+
+1:07:32.080 --> 1:07:36.920
+ How do you multiply the word male by coefficient?
+
+1:07:36.920 --> 1:07:39.080
+ And how do you multiply S?
+
+1:07:39.080 --> 1:07:40.080
+ coefficient?
+
+1:07:40.080 --> 1:07:42.680
+ You can't.
+
+1:07:42.680 --> 1:07:44.640
+ So I converted all of these to numbers.
+
+1:07:44.640 --> 1:07:46.600
+ Male and female are very easy.
+
+1:07:46.600 --> 1:07:49.880
+ I created a column called Is Male.
+
+1:07:49.880 --> 1:07:53.880
+ And as you can see, there's just an if statement that says if sex is male, that's one.
+
+1:07:53.880 --> 1:07:54.880
+ Otherwise it's zero.
+
+1:07:54.880 --> 1:07:58.200
+ And we can do something very similar for embarked.
+
+1:07:58.200 --> 1:08:00.920
+ We can have one column called did they embark in Southampton?
+
+1:08:00.920 --> 1:08:02.480
+ Same deal.
+
+1:08:02.480 --> 1:08:07.400
+ And another column for did they, what's it called?
+
+1:08:07.400 --> 1:08:08.400
+ Cherpa.
+
+1:08:08.400 --> 1:08:12.480
+ Did they embark in Cherpa?
+
+1:08:12.480 --> 1:08:16.680
+ And their peak loss is one, two or three, which is a number.
+
+1:08:16.680 --> 1:08:21.280
+ But it's not really a continuous measurement of something.
+
+1:08:21.280 --> 1:08:23.880
+ There isn't one or two or three things.
+
+1:08:23.880 --> 1:08:25.680
+ They're different levels.
+
+1:08:25.680 --> 1:08:29.080
+ So I decided to turn those into similar things into these binary.
+
+1:08:29.080 --> 1:08:32.360
+ These are called binary categorical variables.
+
+1:08:32.360 --> 1:08:37.360
+ So are they first class and are they second class?
+
+1:08:37.360 --> 1:08:38.640
+ Okay.
+
+1:08:38.640 --> 1:08:42.000
+ So that's all that.
+
+1:08:42.000 --> 1:08:45.840
+ The other thing that I was thinking, well, you know, then I kind of tried it and checked
+
+1:08:45.840 --> 1:08:46.840
+ out what happened.
+
+1:08:46.840 --> 1:08:53.160
+ And what happened was the people with, so I created some random numbers.
+
+1:08:53.160 --> 1:08:59.480
+ So to create the random numbers, I just went equals rand, right?
+
+1:08:59.480 --> 1:09:01.880
+ And I copied those to the right.
+
+1:09:01.880 --> 1:09:05.400
+ And then I just went copy and I went paste values.
+
+1:09:05.400 --> 1:09:07.040
+ So that gave me some random numbers.
+
+1:09:07.040 --> 1:09:11.120
+ And that's my like, so just because like I said, before I said, oh, A, B and C, let's
+
+1:09:11.120 --> 1:09:13.440
+ just start them at 1.5, 1.5, 1.5.
+
+1:09:13.440 --> 1:09:19.320
+ What we do in real life is we start our parameters at random numbers that are a bit more or a
+
+1:09:19.320 --> 1:09:21.400
+ bit less than zero.
+
+1:09:21.400 --> 1:09:23.440
+ So these are random numbers.
+
+1:09:23.440 --> 1:09:25.160
+ Actually, sorry, I slightly lied.
+
+1:09:25.160 --> 1:09:26.160
+ I didn't use rand.
+
+1:09:26.160 --> 1:09:28.160
+ I used rand minus 0.5.
+
+1:09:28.160 --> 1:09:36.320
+ And that way I've got small numbers that were on either side of zero.
+
+1:09:36.320 --> 1:09:45.600
+ So then when I took each of these and I multiplied them by our fairs and ages and so forth, what
+
+1:09:45.600 --> 1:09:55.080
+ happened was that these numbers here are way bigger than these numbers here.
+
+1:09:55.080 --> 1:09:58.480
+ And so in the end, all that mattered was what was their fair?
+
+1:09:58.480 --> 1:10:00.960
+ Because they were bigger than everything else.
+
+1:10:00.960 --> 1:10:04.440
+ So I wanted everything to basically go from zero to one.
+
+1:10:04.440 --> 1:10:05.920
+ These numbers were too big.
+
+1:10:05.920 --> 1:10:11.120
+ So what I did up here is I just grabbed the maximum of this column, the maximum of all
+
+1:10:11.120 --> 1:10:13.760
+ the fairs is 512.
+
+1:10:13.760 --> 1:10:17.480
+ And so then actually I do age first.
+
+1:10:17.480 --> 1:10:20.640
+ I did maximum of age because similar thing, right?
+
+1:10:20.640 --> 1:10:23.360
+ There's 80 year olds and there's two year olds.
+
+1:10:23.360 --> 1:10:30.000
+ And so then over here I just did, okay, well what's their age divided by the maximum?
+
+1:10:30.000 --> 1:10:36.520
+ And so that way all of these have a 20 year old one, just like all of these have a 20
+
+1:10:36.520 --> 1:10:37.520
+ year old one.
+
+1:10:37.520 --> 1:10:42.240
+ So that's how I fix this is called normalizing the data.
+
+1:10:42.240 --> 1:10:47.760
+ Now we haven't done any of these things when we've done stuff with FastAI.
+
+1:10:47.760 --> 1:10:52.480
+ That's because FastAI does all of these things for you.
+
+1:10:52.480 --> 1:10:55.880
+ And we'll learn about how, right?
+
+1:10:55.880 --> 1:11:01.400
+ And all these things are being done behind the scenes.
+
+1:11:01.400 --> 1:11:08.040
+ For fair, I did something a bit more, which is I noticed there's lots of very small fairs
+
+1:11:08.040 --> 1:11:14.400
+ and there's also some, a few very big fairs, so like $70 and then $7, $7.
+
+1:11:14.400 --> 1:11:19.480
+ Generally speaking when you have lots of really big numbers and a few small ones.
+
+1:11:19.480 --> 1:11:23.080
+ So generally speaking when you've got a few really big numbers and lots of really small
+
+1:11:23.080 --> 1:11:24.080
+ numbers.
+
+1:11:24.080 --> 1:11:30.080
+ And it's very common with money, you know, because money kind of follows this relationship
+
+1:11:30.080 --> 1:11:33.800
+ where a few people have lots of it and there's been huge amounts of it and most people don't
+
+1:11:33.800 --> 1:11:36.040
+ have heaps.
+
+1:11:36.040 --> 1:11:40.440
+ If you take the log of something that's like, that has that kind of extreme distribution,
+
+1:11:40.440 --> 1:11:43.400
+ you end up with something that's much more evenly distributed.
+
+1:11:43.400 --> 1:11:49.000
+ So I've added this here called log fair, as you can see.
+
+1:11:49.000 --> 1:11:50.560
+ And these are all around one which isn't bad.
+
+1:11:50.560 --> 1:11:54.320
+ I could have normalized that as well, but I was too lazy I didn't bother because it seemed
+
+1:11:54.320 --> 1:11:55.840
+ okay.
+
+1:11:55.840 --> 1:12:04.920
+ So at this point you can now see that if we start from here, all of these are all around
+
+1:12:04.920 --> 1:12:06.960
+ the same kind of level, right?
+
+1:12:06.960 --> 1:12:13.080
+ So none of these columns are going to saturate the others.
+
+1:12:13.080 --> 1:12:19.720
+ So now I've got my coefficients, which is, as I said, they're just random.
+
+1:12:19.720 --> 1:12:27.680
+ And so now I need to basically calculate AX1 plus BX2 plus CX3 plus blah, blah, blah,
+
+1:12:27.680 --> 1:12:28.680
+ blah, blah, blah.
+
+1:12:28.680 --> 1:12:29.680
+ Okay.
+
+1:12:29.680 --> 1:12:34.920
+ And so to do that, you can use some product in Excel.
+
+1:12:34.920 --> 1:12:36.480
+ I could have typed it out by hand.
+
+1:12:36.480 --> 1:12:43.040
+ It could be very boring, but some product is just going to multiply each of these.
+
+1:12:43.040 --> 1:12:47.320
+ This one will be multiplied by, there is it.
+
+1:12:47.320 --> 1:12:52.280
+ And set by this one, this one will be multiplied by this one, so forth, and then they get all
+
+1:12:52.280 --> 1:12:54.240
+ added together.
+
+1:12:54.240 --> 1:13:00.160
+ Now one thing, if you're eagle eyed, you might be wondering, is in a linear equation, we have
+
+1:13:00.160 --> 1:13:04.640
+ y equals MX plus B. At the end, there's this constant term.
+
+1:13:04.640 --> 1:13:06.480
+ And I do not have any constant term.
+
+1:13:06.480 --> 1:13:11.880
+ I've got something here called const, but I don't have any plus at the end.
+
+1:13:11.880 --> 1:13:13.440
+ How's that working?
+
+1:13:13.440 --> 1:13:18.080
+ Well, there's a nice trick that we pretty much always use in machine learning.
+
+1:13:18.080 --> 1:13:23.720
+ We're just to add a column of data, just containing the number one every time.
+
+1:13:23.720 --> 1:13:28.320
+ If you have a column of data containing the number one every time, then that parameter
+
+1:13:28.320 --> 1:13:30.200
+ becomes your constant term.
+
+1:13:30.200 --> 1:13:35.560
+ So you don't have to have a special constant term, and so it makes out.
+
+1:13:35.560 --> 1:13:37.720
+ It's a little bit simpler.
+
+1:13:37.720 --> 1:13:39.640
+ We need to do it that way.
+
+1:13:39.640 --> 1:13:41.920
+ It's just a trick, but everybody does it.
+
+1:13:41.920 --> 1:13:46.840
+ Okay, so this is now the result of our linear model.
+
+1:13:46.840 --> 1:13:48.800
+ So this is not even going to do value.
+
+1:13:48.800 --> 1:13:54.720
+ I'm just going to do the plane regression.
+
+1:13:54.720 --> 1:13:58.600
+ Now if you've done regression before, you might have learned about it as something you
+
+1:13:58.600 --> 1:14:01.480
+ kind of solve with various matrix things.
+
+1:14:01.480 --> 1:14:05.200
+ But in fact, you can solve a regression using gradient descent.
+
+1:14:05.200 --> 1:14:14.040
+ So I've just kind of had a loss for each row, and so the loss is going to be equal to our
+
+1:14:14.040 --> 1:14:19.960
+ prediction minus whether they survived squared.
+
+1:14:19.960 --> 1:14:22.560
+ So this is going to be our squared error.
+
+1:14:22.560 --> 1:14:25.720
+ There they all are, our squared errors.
+
+1:14:25.720 --> 1:14:28.560
+ And so here I've just summed them up.
+
+1:14:28.560 --> 1:14:29.560
+ I could have taken the mean.
+
+1:14:29.560 --> 1:14:33.400
+ I guess that would have been a bit easier to think about, but some is going to be given
+
+1:14:33.400 --> 1:14:34.400
+ the same result.
+
+1:14:34.400 --> 1:14:37.840
+ So here's our loss.
+
+1:14:37.840 --> 1:14:41.080
+ And so now we need to optimize that using gradient descent.
+
+1:14:41.080 --> 1:14:46.200
+ So Microsoft Excel has a gradient descent optimizer in it called solver.
+
+1:14:46.200 --> 1:14:50.720
+ So I click solver, and it will say, okay, what do you try not to optimize?
+
+1:14:50.720 --> 1:15:00.320
+ It's this one here, and I'm trying to do it by changing these cells here.
+
+1:15:00.320 --> 1:15:03.560
+ And I'm trying to minimize it.
+
+1:15:03.560 --> 1:15:06.800
+ And so we're starting a loss of 55.78.
+
+1:15:06.800 --> 1:15:11.880
+ Actually, let's change it to mean as well.
+
+1:15:11.880 --> 1:15:15.440
+ It would mean on average.
+
+1:15:15.440 --> 1:15:17.920
+ We average.
+
+1:15:17.920 --> 1:15:29.160
+ All right, so start at 1.03.
+
+1:15:29.160 --> 1:15:31.000
+ So optimize that.
+
+1:15:31.000 --> 1:15:33.680
+ And there we go.
+
+1:15:33.680 --> 1:15:36.560
+ So it's gone from 1.03 to 0.1.
+
+1:15:36.560 --> 1:15:38.960
+ And so we can check the predictions.
+
+1:15:38.960 --> 1:15:44.840
+ So the first one, they predicted exactly correctly.
+
+1:15:44.840 --> 1:15:48.520
+ It was, they didn't survive and we predicted wouldn't survive.
+
+1:15:48.520 --> 1:15:50.000
+ Did I for this one?
+
+1:15:50.000 --> 1:15:52.040
+ It's very close.
+
+1:15:52.040 --> 1:15:56.120
+ And you can start to see, so this one, you can start to see a few issues here, which
+
+1:15:56.120 --> 1:15:58.520
+ is like sometimes it's predicting less than one.
+
+1:15:58.520 --> 1:16:02.560
+ So it's less than 0, and sometimes it's predicting more than one.
+
+1:16:02.560 --> 1:16:08.960
+ Wouldn't it be cool if we had some way of constraining it to between 0 and 1?
+
+1:16:08.960 --> 1:16:11.720
+ And that's an example of some of the things we're going to learn about that make this
+
+1:16:11.720 --> 1:16:13.440
+ stuff work a little bit better.
+
+1:16:13.440 --> 1:16:15.320
+ But you can see it's doing an okay job.
+
+1:16:15.320 --> 1:16:16.320
+ So this is not deep learning.
+
+1:16:16.320 --> 1:16:17.760
+ This is not a neural net yet.
+
+1:16:17.760 --> 1:16:20.160
+ This is just a regression.
+
+1:16:20.160 --> 1:16:25.040
+ So to make it into a neural net, we need to do it multiple times.
+
+1:16:25.040 --> 1:16:26.840
+ So I'm just going to do it twice.
+
+1:16:26.840 --> 1:16:31.880
+ So now rather than one set of coefficients, I've got two cents.
+
+1:16:31.880 --> 1:16:36.640
+ And again, I just put in random numbers.
+
+1:16:36.640 --> 1:16:40.000
+ Other than that, all the data is the same.
+
+1:16:40.000 --> 1:16:45.240
+ And so now I'm going to have my sum product again.
+
+1:16:45.240 --> 1:16:50.080
+ So the first sum product is with my first set of coefficients.
+
+1:16:50.080 --> 1:16:53.840
+ And my second sum product is with my second set of coefficients.
+
+1:16:53.840 --> 1:16:57.080
+ So I'm just calling them linear one and linear two.
+
+1:16:57.080 --> 1:17:00.720
+ Now there's no point adding those up together because if you add up two linear functions
+
+1:17:00.720 --> 1:17:02.920
+ together, you get another linear function.
+
+1:17:02.920 --> 1:17:05.040
+ We want to get all those wiggles, right?
+
+1:17:05.040 --> 1:17:08.600
+ So that's why we have to do our round view.
+
+1:17:08.600 --> 1:17:11.520
+ So in Microsoft Excel, a round view looks like this.
+
+1:17:11.520 --> 1:17:16.000
+ If the number is less than 0, do 0, otherwise use the number.
+
+1:17:16.000 --> 1:17:21.680
+ So that's how we're going to replace the negatives with 0s.
+
+1:17:21.680 --> 1:17:27.320
+ And then finally, if you remember from our spreadsheet, we have to add them together.
+
+1:17:27.320 --> 1:17:30.840
+ So we add the values together.
+
+1:17:30.840 --> 1:17:32.760
+ So that's going to be our prediction.
+
+1:17:32.760 --> 1:17:34.680
+ And then our loss is the same as the other sheet.
+
+1:17:34.680 --> 1:17:38.880
+ It's just survived minus prediction squared.
+
+1:17:38.880 --> 1:17:46.760
+ And let's change that to main average.
+
+1:17:46.760 --> 1:17:49.680
+ Okay.
+
+1:17:49.680 --> 1:17:53.720
+ So let's try solving that.
+
+1:17:53.720 --> 1:17:56.400
+ Optimize, A H 1.
+
+1:17:56.400 --> 1:18:02.320
+ And this time we're changing all of those.
+
+1:18:02.320 --> 1:18:06.640
+ So this is using gradient descent.
+
+1:18:06.640 --> 1:18:09.760
+ Excel Solvers is not the fastest thing for it, but it gets the job done.
+
+1:18:09.760 --> 1:18:10.760
+ Okay.
+
+1:18:10.760 --> 1:18:11.760
+ Let's see how we went.
+
+1:18:11.760 --> 1:18:18.480
+ 0.08 for our deep learning model versus 0.1 for our regression.
+
+1:18:18.480 --> 1:18:19.960
+ So it's a bit better.
+
+1:18:19.960 --> 1:18:20.960
+ So there you go.
+
+1:18:20.960 --> 1:18:25.280
+ So we've now created our first deep learning neural network from scratch.
+
+1:18:25.280 --> 1:18:26.720
+ And we did it in Microsoft Excel.
+
+1:18:26.720 --> 1:18:32.200
+ Everybody's favorite artificial intelligence tool.
+
+1:18:32.200 --> 1:18:35.040
+ So that was a bit slow and painful.
+
+1:18:35.040 --> 1:18:39.480
+ Be a bit faster and easier if we used matrix modification.
+
+1:18:39.480 --> 1:18:40.680
+ So let's finally do that.
+
+1:18:40.680 --> 1:18:46.120
+ So this next one is going to be exactly the same as the last one, but with matrix modification.
+
+1:18:46.120 --> 1:18:48.800
+ So all our data looks the same.
+
+1:18:48.800 --> 1:18:53.400
+ You'll notice the key difference now is our parameters have been transposed.
+
+1:18:53.400 --> 1:19:02.560
+ So before I had the parameters matching the data in terms of being in columns.
+
+1:19:02.560 --> 1:19:07.680
+ For matrix modification, the expectation is that when matrix modification works, it
+
+1:19:07.680 --> 1:19:09.640
+ has to transpose.
+
+1:19:09.640 --> 1:19:16.640
+ This goes the x and y is kind of the opposite way around, the rows and columns of the opposite
+
+1:19:16.640 --> 1:19:17.640
+ way around.
+
+1:19:17.640 --> 1:19:18.640
+ Other than that, it's the same.
+
+1:19:18.640 --> 1:19:19.640
+ I've got the same.
+
+1:19:19.640 --> 1:19:20.640
+ I just copied and pasted the random numbers.
+
+1:19:20.640 --> 1:19:22.840
+ So we had exactly the same starting point.
+
+1:19:22.840 --> 1:19:32.680
+ And so now our entire, this entire thing here is a single function, which is matrix
+
+1:19:32.680 --> 1:19:39.040
+ multiply all of this by all of this.
+
+1:19:39.040 --> 1:19:45.880
+ And so when I run that, it fills in exactly the same numbers.
+
+1:19:45.880 --> 1:19:49.480
+ Make this average.
+
+1:19:49.480 --> 1:19:53.640
+ And so now we can optimize that.
+
+1:19:53.640 --> 1:20:04.360
+ Like that, a minimum, changing these.
+
+1:20:04.360 --> 1:20:06.160
+ Solve.
+
+1:20:06.160 --> 1:20:11.840
+ It should get the same number.
+
+1:20:11.840 --> 1:20:14.000
+ Point away, wasn't it?
+
+1:20:14.000 --> 1:20:16.600
+ Yep, and we do.
+
+1:20:16.600 --> 1:20:17.600
+ Okay.
+
+1:20:17.600 --> 1:20:19.240
+ So that's just another way of doing the same thing.
+
+1:20:19.240 --> 1:20:26.120
+ So you can see that matrix modification, it takes like a surprisingly long time, at least
+
+1:20:26.120 --> 1:20:34.440
+ for me, to get an intuitive feel for matrix modification is like a single mathematical
+
+1:20:34.440 --> 1:20:35.720
+ operation.
+
+1:20:35.720 --> 1:20:44.760
+ So I still find it helpful to kind of remind myself, it's just doing these sum products
+
+1:20:44.760 --> 1:20:46.760
+ and additions.
+
+1:20:46.760 --> 1:21:02.440
+ Okay, so that is a deep learning neural network in Microsoft Excel.
+
+1:21:02.440 --> 1:21:10.560
+ And the Titanic Kaggle competition, by the way, is a pretty fun learning competition.
+
+1:21:10.560 --> 1:21:14.840
+ If you haven't done much machine learning before, then it's certainly worth trying out
+
+1:21:14.840 --> 1:21:19.440
+ just to get the feel for these, how these all get put together.
+
+1:21:19.440 --> 1:21:29.440
+ So the chapter of the book that this lesson goes with is chapter four.
+
+1:21:29.440 --> 1:21:36.600
+ And chapter four of the book is the chapter where we lose the most people, because it's
+
+1:21:36.600 --> 1:21:40.400
+ to be honest, it's hard.
+
+1:21:40.400 --> 1:21:47.760
+ Now part of the reason it's hard is I couldn't put this into a book.
+
+1:21:47.760 --> 1:21:54.720
+ So we're teaching it a very different way in the course, to what's in the book.
+
+1:21:54.720 --> 1:22:00.080
+ And you can use the two together, but if you've tried to read the book and been a bit disheartened,
+
+1:22:00.080 --> 1:22:04.440
+ try following through this spreadsheet instead.
+
+1:22:04.440 --> 1:22:08.760
+ Maybe try, like if you use numbers or Google Sheets or something, you can try to create
+
+1:22:08.760 --> 1:22:15.000
+ your own kind of version of it, how much of a spreadsheet platform you prefer, or you
+
+1:22:15.000 --> 1:22:20.120
+ could try to do it yourself from scratch and Python, you know, if you want to really test
+
+1:22:20.120 --> 1:22:22.840
+ yourself.
+
+1:22:22.840 --> 1:22:27.960
+ So there's some suggestions.
+
+1:22:27.960 --> 1:22:30.040
+ Okay.
+
+1:22:30.040 --> 1:22:38.920
+ Question from Victor Guerra.
+
+1:22:38.920 --> 1:22:40.960
+ And the Excel exercise, when Jeremy is doing some feature engineering, he comes up with
+
+1:22:40.960 --> 1:22:44.880
+ two new columns, P class one and P class two.
+
+1:22:44.880 --> 1:22:46.080
+ That is true.
+
+1:22:46.080 --> 1:22:51.240
+ P class one and P class two.
+
+1:22:51.240 --> 1:22:55.360
+ Why is there no P class three column?
+
+1:22:55.360 --> 1:22:59.120
+ Is it because P class one, if P class one is zero and P class two is zero, then P class
+
+1:22:59.120 --> 1:23:00.400
+ three must be one.
+
+1:23:00.400 --> 1:23:04.000
+ So in a way, two columns are enough to encode the original column.
+
+1:23:04.000 --> 1:23:05.000
+ Yes.
+
+1:23:05.000 --> 1:23:06.600
+ That's exactly the reason.
+
+1:23:06.600 --> 1:23:14.600
+ So there's no need to tell the computer about things that can kind of figure out for itself.
+
+1:23:14.600 --> 1:23:16.760
+ So when you create, these are called dummy variables.
+
+1:23:16.760 --> 1:23:23.640
+ So when you create dummy variables for a categorical variable with three levels, that's this one,
+
+1:23:23.640 --> 1:23:25.880
+ you need two dummy variables.
+
+1:23:25.880 --> 1:23:31.320
+ So in general, categorical variable with n levels needs n minus one columns.
+
+1:23:31.320 --> 1:23:37.240
+ Thanks for the good question.
+
+1:23:37.240 --> 1:23:42.880
+ So what we're going to be doing in our next lesson is looking at natural language processing.
+
+1:23:42.880 --> 1:23:47.480
+ So so far, we've looked at some computer vision and just now we've looked at some what we
+
+1:23:47.480 --> 1:23:51.680
+ call tabular data, so kind of spreadsheet type data.
+
+1:23:51.680 --> 1:23:54.080
+ Next up, we're going to be looking at natural language processing.
+
+1:23:54.080 --> 1:23:58.120
+ So I'll give you a taste of it so you might want to open up the getting started with
+
+1:23:58.120 --> 1:24:06.960
+ the NLP for absolute beginners notebook.
+
+1:24:06.960 --> 1:24:10.680
+ So here's the getting started with the NLP for absolute beginners notebook.
+
+1:24:10.680 --> 1:24:17.040
+ I will say as a notebook author, I may sound a bit lame, but I always see when people have
+
+1:24:17.040 --> 1:24:19.160
+ voted it, it always makes me really happy.
+
+1:24:19.160 --> 1:24:21.560
+ So and it also helps other people find it.
+
+1:24:21.560 --> 1:24:26.120
+ So remember to upload these notebooks or any other notebooks you like.
+
+1:24:26.120 --> 1:24:27.680
+ I also always read all the comments.
+
+1:24:27.680 --> 1:24:37.640
+ So if you want to ask any questions or make any comments, I enjoy those as well.
+
+1:24:37.640 --> 1:24:44.520
+ So natural language processing is about rather than taking, for example, image data and making
+
+1:24:44.520 --> 1:24:47.760
+ predictions, we take text data.
+
+1:24:47.760 --> 1:24:54.960
+ Most of the time is in the form of prose, so plain English text.
+
+1:24:54.960 --> 1:25:01.360
+ So English is the most common language used for NLP, but there's NLP models in dozens
+
+1:25:01.360 --> 1:25:05.480
+ of different languages nowadays.
+
+1:25:05.480 --> 1:25:14.880
+ And if you're a non English speaker, you'll find that for many languages, there's less
+
+1:25:14.880 --> 1:25:21.280
+ resources in non English languages and there's a great opportunity to provide NLP resources
+
+1:25:21.280 --> 1:25:22.280
+ in your language.
+
+1:25:22.280 --> 1:25:25.160
+ This has actually been one of the things that the fast AI community has been fantastic
+
+1:25:25.160 --> 1:25:31.640
+ at in the global community is building NLP resources.
+
+1:25:31.640 --> 1:25:40.000
+ For example, the first Farsi NLP resource was created by a student from the very first
+
+1:25:40.000 --> 1:25:47.040
+ Farsi course, the Indic languages, some of the best resources have come out of Farsi
+
+1:25:47.040 --> 1:25:48.520
+ alumni and so forth.
+
+1:25:48.520 --> 1:25:51.400
+ So that's a particularly valuable thing you could look at.
+
+1:25:51.400 --> 1:25:58.600
+ So if your language is not well represented, that's an opportunity, not a problem.
+
+1:25:58.600 --> 1:26:04.240
+ So some examples of things you could use NLP for, well, perhaps the most common and practically
+
+1:26:04.240 --> 1:26:07.360
+ useful in my opinion is classification.
+
+1:26:07.360 --> 1:26:09.000
+ Classification means you take a document.
+
+1:26:09.000 --> 1:26:12.200
+ Now when I say a document, that could be one or two words.
+
+1:26:12.200 --> 1:26:15.960
+ It could be a book, it could be a Wikipedia page, so it could be any length.
+
+1:26:15.960 --> 1:26:20.120
+ With user word document, it sounds like that's a specific kind of length, but it can be
+
+1:26:20.120 --> 1:26:21.480
+ a very short thing, a very long thing.
+
+1:26:21.480 --> 1:26:25.840
+ We take a document and we try to figure out a category for it.
+
+1:26:25.840 --> 1:26:28.680
+ Now that can cover many, many different kinds of applications.
+
+1:26:28.680 --> 1:26:33.120
+ So one common one that we'll look at a bit is sentiment analysis.
+
+1:26:33.120 --> 1:26:38.080
+ So for example, is this movie review positive or negative sentiment analysis is very helpful
+
+1:26:38.080 --> 1:26:41.480
+ in things like marketing and product development.
+
+1:26:41.480 --> 1:26:46.360
+ In big companies, there's lots and lots of information coming in about your product.
+
+1:26:46.360 --> 1:26:51.520
+ It's very nice to be able to quickly sort it out and to track metrics from week to week.
+
+1:26:51.520 --> 1:26:56.440
+ Something like figuring out what author wrote the document would be an example of a classification
+
+1:26:56.440 --> 1:27:00.520
+ exercise because you're trying to put it a category in this case is which author.
+
+1:27:00.520 --> 1:27:03.480
+ Here's a lot of opportunity and legal discovery.
+
+1:27:03.480 --> 1:27:09.800
+ There's already some products in this area where in this case the category is this legal
+
+1:27:09.800 --> 1:27:14.560
+ document in scope or out of scope in the court case.
+
+1:27:14.560 --> 1:27:18.680
+ Just organizing documents, triaging inbound emails.
+
+1:27:18.680 --> 1:27:22.360
+ So which part of the organization should it be sent to?
+
+1:27:22.360 --> 1:27:24.080
+ Was it urgent or not?
+
+1:27:24.080 --> 1:27:25.560
+ How much stuff like that?
+
+1:27:25.560 --> 1:27:29.520
+ So these are examples of classification.
+
+1:27:29.520 --> 1:27:37.720
+ What you'll find is when we look at classification tasks in NLP, it's going to look very, very
+
+1:27:37.720 --> 1:27:41.600
+ similar to images.
+
+1:27:41.600 --> 1:27:44.920
+ But what we're going to do is we're going to use a different library.
+
+1:27:44.920 --> 1:27:48.680
+ The library we're going to use is called hugging first transformers rather than fast
+
+1:27:48.680 --> 1:27:49.680
+ DA.
+
+1:27:49.680 --> 1:27:52.040
+ And there's two reasons for that.
+
+1:27:52.040 --> 1:27:56.080
+ The main reason why is because I think it's really helpful to see how things are done in
+
+1:27:56.080 --> 1:27:57.800
+ more than one library.
+
+1:27:57.800 --> 1:28:04.200
+ And hugging first transformers, so first DA has a very layered architecture.
+
+1:28:04.200 --> 1:28:07.040
+ So you can do things at a very high level with very little code.
+
+1:28:07.040 --> 1:28:11.320
+ Or you can dig deeper and deeper and deeper getting more and more fine correct.
+
+1:28:11.320 --> 1:28:17.560
+ Hacking first transformers doesn't have the same high level API at all that fast DA has.
+
+1:28:17.560 --> 1:28:19.720
+ So you have to do more stuff manually.
+
+1:28:19.720 --> 1:28:24.160
+ And so at this point of the course, we're going to actually intentionally use a library
+
+1:28:24.160 --> 1:28:29.200
+ which is a little bit less user friendly in order to see kind of what extra steps you
+
+1:28:29.200 --> 1:28:32.320
+ have to go through to use other libraries.
+
+1:28:32.320 --> 1:28:39.600
+ Having said that, the reason I picked this particular library is it is particularly good.
+
+1:28:39.600 --> 1:28:41.760
+ It has really good models in it.
+
+1:28:41.760 --> 1:28:45.520
+ It has a lot of really good techniques in it.
+
+1:28:45.520 --> 1:28:49.240
+ Not at all surprising because they have hired lots and lots of fast AI alumni.
+
+1:28:49.240 --> 1:28:53.240
+ So they have very high quality people working on it.
+
+1:28:53.240 --> 1:29:02.480
+ So before the next lesson, yeah, if you've got time, take a look at this notebook and
+
+1:29:02.480 --> 1:29:04.200
+ take a look at the data.
+
+1:29:04.200 --> 1:29:08.720
+ The data we're going to be working with is quite interesting.
+
+1:29:08.720 --> 1:29:18.200
+ It's from a Kaggle competition which is trying to figure out in patterns whether two concepts
+
+1:29:18.200 --> 1:29:24.280
+ are referring to the same thing or not, whether those concepts are represented as English text.
+
+1:29:24.280 --> 1:29:31.040
+ And when you think about it, that is a classification task because the document is basically text
+
+1:29:31.040 --> 1:29:38.600
+ one, blah, text two, blah, and then the category is similar or not similar.
+
+1:29:38.600 --> 1:29:41.400
+ And in fact, in this case, they actually have scores.
+
+1:29:41.400 --> 1:29:47.040
+ It's either going to be basically 0, 0.25, 0.5, 0.751, or how similar is it?
+
+1:29:47.040 --> 1:29:52.560
+ But it's basically a classification task when you think of it that way.
+
+1:29:52.560 --> 1:29:55.320
+ So yeah, you can have a look at the data.
+
+1:29:55.320 --> 1:30:00.600
+ And next week, we're going to go through, step by step through this notebook.
+
+1:30:00.600 --> 1:30:03.720
+ And we're going to take advantage of that as an opportunity also to talk about the really
+
+1:30:03.720 --> 1:30:12.880
+ important topics of validation sets and metrics, which are two of the most important topics
+
+1:30:12.880 --> 1:30:17.720
+ in not just deep learning, but machine learning more generally.
+
+1:30:17.720 --> 1:30:18.720
+ All right, thanks everybody.
+
+1:30:18.720 --> 1:30:19.720
+ I'll see you next week.
+
+1:30:19.720 --> 1:30:46.160
+ Bye.
+

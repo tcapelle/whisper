@@ -1,0 +1,4511 @@
+WEBVTT
+
+00:00.000 --> 00:06.600
+ Welcome to practical deep learning for coders lesson one.
+
+00:06.600 --> 00:11.780
+ This is version five of this course.
+
+00:11.780 --> 00:14.520
+ And it's the first do one we've done in two years.
+
+00:14.520 --> 00:17.960
+ So we've got a lot of cool things to cover.
+
+00:17.960 --> 00:22.240
+ It's amazing how much has changed.
+
+00:22.240 --> 00:26.760
+ Here is a XKCD from the end of 2015.
+
+00:26.760 --> 00:31.200
+ Who here is saying XKCD comics before?
+
+00:31.200 --> 00:35.520
+ Pretty much everybody, not surprising.
+
+00:35.520 --> 00:40.560
+ So the basic joke here is I'll let you read it,
+
+00:40.560 --> 00:41.520
+ and then I'll come back to it.
+
+00:51.960 --> 00:55.880
+ So it can be hard to tell what's easy and what's nearly impossible.
+
+00:55.880 --> 00:58.000
+ And in 2015 or at the end of 2015,
+
+00:58.000 --> 01:01.000
+ the idea of checking whether something is a photo of a bird
+
+01:01.000 --> 01:02.560
+ was considered nearly impossible.
+
+01:02.560 --> 01:05.400
+ So impossible, it was the basic idea of a joke,
+
+01:05.400 --> 01:08.560
+ because everybody knows that that's nearly impossible.
+
+01:08.560 --> 01:11.920
+ We're now going to build exactly that system for free
+
+01:11.920 --> 01:15.440
+ in about two minutes.
+
+01:15.440 --> 01:17.160
+ So let's build an Is It a Bird system?
+
+01:19.600 --> 01:21.720
+ So we're going to use Python.
+
+01:21.720 --> 01:24.040
+ And so I'm going to run through this really quickly.
+
+01:24.040 --> 01:25.720
+ You're not expected to run through it with me,
+
+01:25.720 --> 01:27.920
+ because we're going to come back to it.
+
+01:27.920 --> 01:31.280
+ But let's go ahead and run that cell.
+
+01:34.840 --> 01:38.000
+ So what we're doing is we're searching DuckDuckGo
+
+01:38.000 --> 01:39.760
+ for images of bird photos.
+
+01:39.760 --> 01:43.120
+ And we're just going to grab one.
+
+01:43.120 --> 01:46.520
+ And so here is the URL of the bird that we grabbed.
+
+01:49.120 --> 01:50.280
+ OK, we're going to download it.
+
+01:53.120 --> 01:54.680
+ OK, so there it is.
+
+01:54.680 --> 01:55.880
+ So we've grabbed a bird.
+
+01:55.880 --> 01:57.680
+ And so OK, we've now got something
+
+01:57.680 --> 02:00.960
+ that can download pictures of birds.
+
+02:00.960 --> 02:03.320
+ Now, we're going to need to build a system that
+
+02:03.320 --> 02:06.720
+ can recognize things that are birds versus things
+
+02:06.720 --> 02:08.320
+ that aren't birds from photos.
+
+02:08.320 --> 02:13.520
+ Now, of course, computers need numbers to work with.
+
+02:13.520 --> 02:17.400
+ But luckily, images are made of numbers.
+
+02:17.400 --> 02:22.440
+ I actually found this really nice website
+
+02:22.440 --> 02:28.200
+ called Pics by where I can grab a bird.
+
+02:28.200 --> 02:33.320
+ And if I go over it, let's pick its beak.
+
+02:33.320 --> 02:39.240
+ You'll see here that that part of the beak was 251 brightness
+
+02:39.240 --> 02:42.520
+ of red, 48 of green, and 21 of blue.
+
+02:42.520 --> 02:47.560
+ So that's G, B. And so you can see as I wave around,
+
+02:47.560 --> 02:52.240
+ those colors are changing, those numbers.
+
+02:52.240 --> 02:57.800
+ And so this picture, the thing that we recognize as a picture,
+
+02:57.800 --> 03:07.080
+ is actually 256 by 171 by three numbers between 0 and 255,
+
+03:07.080 --> 03:11.120
+ representing the amount of red, green, and blue on each pixel.
+
+03:11.120 --> 03:14.640
+ So that's going to be an input to our program.
+
+03:14.640 --> 03:16.840
+ It's going to try and figure out whether this is a picture
+
+03:16.840 --> 03:24.320
+ of a bird or not.
+
+03:24.320 --> 03:25.080
+ OK.
+
+03:25.080 --> 03:29.760
+ So let's go ahead and run this cell, which is going to go through.
+
+03:29.760 --> 03:32.680
+ And I needed bird and nonbird, but you can't really
+
+03:32.680 --> 03:35.280
+ search Google images or dap, dap, dap,
+
+03:35.280 --> 03:37.640
+ go images for not a bird.
+
+03:37.640 --> 03:39.240
+ This doesn't work that way.
+
+03:39.240 --> 03:40.640
+ So I just decided to use forest.
+
+03:40.640 --> 03:43.680
+ I thought, OK, pictures of forest versus pictures of bird
+
+03:43.680 --> 03:45.960
+ sounds like a good starting point.
+
+03:45.960 --> 03:49.440
+ So I go through each of forest and bird,
+
+03:49.440 --> 03:53.840
+ and I search for forest photo and bird photo,
+
+03:53.840 --> 03:57.120
+ download images, and then resize them
+
+03:57.120 --> 04:00.560
+ to be no bigger than 400 pixels on a side,
+
+04:00.560 --> 04:02.720
+ just because we don't need particularly big ones.
+
+04:02.720 --> 04:04.520
+ It takes a surprisingly large amount of time
+
+04:04.520 --> 04:06.760
+ to just recompute it open an image.
+
+04:06.760 --> 04:11.040
+ OK, so we've now got 200 of each.
+
+04:11.040 --> 04:14.320
+ I find when I download images, I often get a few broken ones.
+
+04:14.320 --> 04:16.560
+ And if you try and train a model with broken images,
+
+04:16.560 --> 04:18.240
+ it will not work.
+
+04:18.240 --> 04:21.560
+ So here's something which just verifies each image and unlinks.
+
+04:21.560 --> 04:25.280
+ So it's the ones that don't work.
+
+04:25.280 --> 04:30.480
+ OK, so now we can create what's called a data block.
+
+04:30.480 --> 04:40.640
+ So after I run this cell, you'll see that basically,
+
+04:40.640 --> 04:42.480
+ I'll go through the details of this later.
+
+04:42.480 --> 04:46.120
+ But a data block gives fast AI, the library,
+
+04:46.120 --> 04:48.640
+ all the information it needs to create a computer vision
+
+04:48.640 --> 04:49.320
+ model.
+
+04:49.320 --> 04:50.640
+ And so in this case, we're basically
+
+04:50.640 --> 04:54.360
+ telling it, get all the image files that we just downloaded.
+
+04:54.360 --> 04:56.440
+ And then we say, show me a few, up to six.
+
+04:56.440 --> 04:57.120
+ And let's see.
+
+04:57.120 --> 05:00.200
+ So we've got some birds, forest, bird, bird, forest.
+
+05:00.200 --> 05:02.520
+ OK, so one of the nice things about doing computer vision
+
+05:02.520 --> 05:04.600
+ models is it's really easy to check your data,
+
+05:04.600 --> 05:06.320
+ because you can just look at it, which
+
+05:06.320 --> 05:10.200
+ is not the case for a lot of kinds of models.
+
+05:10.200 --> 05:11.360
+ OK.
+
+05:11.360 --> 05:13.960
+ So we've now downloaded 200 pictures of birds,
+
+05:13.960 --> 05:17.680
+ 200 pictures of forests.
+
+05:17.680 --> 05:20.800
+ So we're now press run.
+
+05:20.800 --> 05:24.400
+ And this model is actually running on my laptop.
+
+05:24.400 --> 05:26.800
+ So this is not using a vast data center.
+
+05:26.800 --> 05:29.360
+ It's running on my presentation laptop.
+
+05:29.360 --> 05:30.520
+ And it's doing it at the same time
+
+05:30.520 --> 05:34.040
+ as my laptop is streaming video, which is possibly
+
+05:34.040 --> 05:35.040
+ a bad idea.
+
+05:37.520 --> 05:39.280
+ And so what it's going to do is it's
+
+05:39.280 --> 05:44.680
+ going to run through every photo out of those 400.
+
+05:44.680 --> 05:47.440
+ And for the ones that are forest,
+
+05:47.440 --> 05:49.720
+ it's going to learn a bit more about what forest looks like.
+
+05:49.720 --> 05:50.800
+ And for the ones that are bird, it'll
+
+05:50.800 --> 05:53.480
+ learn a bit more about what bird looks like.
+
+05:53.480 --> 05:58.520
+ So overall, it took under 30 seconds.
+
+05:58.520 --> 06:00.800
+ And believe it or not, that's enough
+
+06:00.800 --> 06:07.000
+ to finish doing the thing, which was in that XKCD comic.
+
+06:07.000 --> 06:11.160
+ Let's check by passing in that bird that we downloaded
+
+06:11.160 --> 06:12.360
+ at the start.
+
+06:12.360 --> 06:14.400
+ This is a bird.
+
+06:14.400 --> 06:16.360
+ Probability is a bird.
+
+06:16.360 --> 06:18.000
+ One.
+
+06:18.000 --> 06:21.200
+ Rounded to the nearest four decimal places.
+
+06:21.200 --> 06:23.480
+ So something pretty extraordinary
+
+06:23.480 --> 06:29.320
+ has happened since late 2015, which is literally something
+
+06:29.320 --> 06:31.960
+ that has gone from so impossible, it's a joke,
+
+06:31.960 --> 06:36.960
+ to so easy that I can run it on my laptop computer
+
+06:36.960 --> 06:41.640
+ in I don't know how long it was, about two minutes.
+
+06:41.640 --> 06:43.880
+ And so hopefully that gives you a sense
+
+06:43.880 --> 06:52.240
+ that creating really interesting real working programs
+
+06:52.240 --> 06:55.560
+ with deep learning is something that it doesn't take a lot of code,
+
+06:55.560 --> 07:00.640
+ didn't take any math, didn't take more than my laptop computer.
+
+07:00.640 --> 07:03.720
+ It's pretty accessible, in fact.
+
+07:03.720 --> 07:07.240
+ So that's really what we're going to be learning about over
+
+07:07.240 --> 07:09.240
+ the next seven weeks.
+
+07:09.240 --> 07:12.200
+ So where have we got to now with deep learning?
+
+07:12.200 --> 07:18.960
+ Well, it moves so fast, but even in the last few weeks,
+
+07:18.960 --> 07:22.400
+ we've taken it up another notch as a community.
+
+07:22.400 --> 07:23.880
+ You might have seen that something called
+
+07:23.880 --> 07:27.640
+ Dali 2 has been released, which uses deep learning
+
+07:27.640 --> 07:29.920
+ to generate new pictures.
+
+07:29.920 --> 07:31.600
+ And I thought this was an amazing thing
+
+07:31.600 --> 07:35.040
+ that this guy, Nick, did, where he took his friends Twitter
+
+07:35.040 --> 07:39.920
+ bios and typed them into the Dali 2 input,
+
+07:39.920 --> 07:42.360
+ and it generated these pictures.
+
+07:42.360 --> 07:44.800
+ So this guy's, he typed in commitment, sympathetic,
+
+07:44.800 --> 07:48.960
+ psychedelic, philosophical, and it generated these pictures.
+
+07:48.960 --> 07:50.040
+ So I'll just show you a few of these.
+
+07:50.040 --> 07:51.160
+ I'll actually read them.
+
+07:51.160 --> 07:58.160
+ I love that.
+
+07:58.160 --> 08:08.160
+ That one's pretty amazing, I reckon, actually.
+
+08:08.160 --> 08:09.800
+ I love this.
+
+08:09.800 --> 08:21.120
+ Happy Sisyfus has actually got a happy rock to move around.
+
+08:21.120 --> 08:26.440
+ So this is like, yeah, I don't know.
+
+08:26.440 --> 08:28.640
+ When I look at these, I still get pretty blown away
+
+08:28.640 --> 08:32.680
+ that this is a computer algorithm using nothing
+
+08:32.680 --> 08:37.280
+ but this text input to generate these arbitrary pictures.
+
+08:37.280 --> 08:42.240
+ In this case, it's fairly complex and creative things.
+
+08:42.240 --> 08:43.680
+ So the guy who made those points out,
+
+08:43.680 --> 08:48.600
+ this is like he spends about two minutes or so creating
+
+08:48.600 --> 08:49.120
+ each of these.
+
+08:49.120 --> 08:50.680
+ Like he tries a few different prompts,
+
+08:50.680 --> 08:52.760
+ and he tries a few different pictures.
+
+08:52.760 --> 08:54.400
+ And so he's given an example here of what he
+
+08:54.400 --> 08:55.760
+ types something into the system.
+
+08:55.760 --> 08:59.960
+ Here's an example of 10 different things.
+
+08:59.960 --> 09:02.360
+ He gets back when he puts in expressive painting of a man
+
+09:02.360 --> 09:05.160
+ shining rays of justice and transparency on a blue bird
+
+09:05.160 --> 09:05.880
+ Twitter logo.
+
+09:09.440 --> 09:12.080
+ So it's not just Dali 2, to be clear.
+
+09:12.080 --> 09:15.200
+ There's a lot of different systems doing something like this
+
+09:15.200 --> 09:15.480
+ now.
+
+09:15.480 --> 09:17.480
+ There's something called mid journey,
+
+09:17.480 --> 09:21.280
+ which this Twitter account posted a female scientist
+
+09:21.280 --> 09:23.600
+ with a laptop writing code in a symbolic, meaningful,
+
+09:23.600 --> 09:26.120
+ and vibrant style.
+
+09:26.120 --> 09:31.400
+ This one here is an HD photo of a rare psychedelic pink elephant.
+
+09:31.400 --> 09:33.680
+ And this one, I think, is the second one here.
+
+09:33.680 --> 09:38.360
+ I never know how to actually pronounce this.
+
+09:38.360 --> 09:39.680
+ This one's pretty cool.
+
+09:39.680 --> 09:42.360
+ A blind bat with big sunglasses holding a walking stick
+
+09:42.360 --> 09:42.800
+ in its hand.
+
+09:42.800 --> 09:52.400
+ And so when actual artists, so for example, this guy said,
+
+09:52.400 --> 09:53.880
+ he knows nothing about art.
+
+09:53.880 --> 09:55.240
+ He's got no artistic talent.
+
+09:55.240 --> 09:57.640
+ It's just something he threw together.
+
+09:57.640 --> 10:00.680
+ This guy is an artist who actually writes his own software
+
+10:00.680 --> 10:05.880
+ based on deep learning and spends months on building stuff.
+
+10:05.880 --> 10:09.120
+ And as you can see, you can really take it to the next level.
+
+10:09.120 --> 10:10.360
+ It's been really great, actually,
+
+10:10.360 --> 10:15.120
+ to see how a lot of fast AI alumni with backgrounds,
+
+10:15.120 --> 10:18.080
+ as artists, have gone on to bring deep learning and art
+
+10:18.080 --> 10:18.600
+ together.
+
+10:18.600 --> 10:21.280
+ And it's a very exciting direction.
+
+10:21.280 --> 10:24.160
+ And it's not just images to be clear.
+
+10:24.160 --> 10:26.080
+ One of another interesting thing that's popped up
+
+10:26.080 --> 10:28.840
+ in the last couple of weeks is Google's Pathways Language
+
+10:28.840 --> 10:35.400
+ Model, which can take any arbitrary English as text question
+
+10:35.400 --> 10:39.680
+ and can create an answer, which not only answers the question,
+
+10:39.680 --> 10:43.880
+ but also explains its thinking, whatever it
+
+10:43.880 --> 10:47.760
+ means for a language model to be thinking.
+
+10:47.760 --> 10:49.120
+ One of the ones I found pretty amazing
+
+10:49.120 --> 10:51.560
+ was that it can explain a joke.
+
+10:51.560 --> 10:52.440
+ I'll let you read this.
+
+10:52.440 --> 11:12.280
+ So this is actually a joke that probably needs explanations.
+
+11:12.280 --> 11:14.400
+ Anybody who's not familiar with TPUs,
+
+11:14.400 --> 11:18.040
+ so this model just took the text as input
+
+11:18.040 --> 11:21.520
+ and created this text as output.
+
+11:21.520 --> 11:25.880
+ And so you can see, again, deep learning models,
+
+11:25.880 --> 11:29.400
+ doing things which I think very few, if any of us would
+
+11:29.400 --> 11:32.040
+ have believed, would be maybe possible to do
+
+11:32.040 --> 11:33.640
+ by computers even in our lifetime.
+
+11:37.560 --> 11:42.200
+ This means that there is a lot of practical and ethical
+
+11:42.200 --> 11:44.880
+ considerations.
+
+11:44.880 --> 11:47.520
+ We will touch on them during this course,
+
+11:47.520 --> 11:50.160
+ but can't possibly hope to do them justice.
+
+11:50.160 --> 11:52.600
+ So I would certainly encourage you to check out
+
+11:52.600 --> 11:57.880
+ ethics.fast.ai to see our whole data ethics course taught
+
+11:57.880 --> 12:02.640
+ by my cofounder, Dr. Rachel Thomas, which
+
+12:02.640 --> 12:05.480
+ goes into these issues in a lot more detail.
+
+12:08.560 --> 12:13.080
+ All right, so as well as being an AI researcher
+
+12:13.080 --> 12:15.240
+ at the University of Queensland and Fast.ai,
+
+12:15.240 --> 12:19.400
+ I am also a homeschooling primary school teacher.
+
+12:19.400 --> 12:23.200
+ And for that reason, I study education a lot.
+
+12:23.200 --> 12:26.640
+ And one of the people who are live in education
+
+12:26.640 --> 12:28.640
+ is a guy named Dylan Williams.
+
+12:28.640 --> 12:31.400
+ And he has this great approach in his classrooms
+
+12:31.400 --> 12:34.000
+ of figuring out how his students are getting along, which
+
+12:34.000 --> 12:38.160
+ is to put a colored cup on their desk, green,
+
+12:38.160 --> 12:42.840
+ to mean that they're doing fine, yellow cup to mean I'm not
+
+12:42.840 --> 12:47.040
+ quite sure in a red cup to mean I have no idea what's going on.
+
+12:47.040 --> 12:49.760
+ Now, since most of you are watching this remotely,
+
+12:49.760 --> 12:51.320
+ I can't look at your caps.
+
+12:51.320 --> 12:53.360
+ And I don't think anybody bought colored cups with them
+
+12:53.360 --> 12:54.080
+ today.
+
+12:54.080 --> 12:59.280
+ So instead, we have an online version of this.
+
+12:59.280 --> 13:05.640
+ So what I want you to do is go to cups.fast.ai
+
+13:05.640 --> 13:08.400
+ slash fast.
+
+13:08.400 --> 13:12.960
+ That's cups.fast.ai slash fast.
+
+13:12.960 --> 13:16.920
+ And don't do this if you're a fast AI expert
+
+13:16.920 --> 13:18.320
+ who's done the course five times.
+
+13:18.320 --> 13:19.400
+ Because if you're following along,
+
+13:19.400 --> 13:20.680
+ that doesn't really be much.
+
+13:20.680 --> 13:24.560
+ I would say this is really for people who are not already
+
+13:24.560 --> 13:25.520
+ fast AI experts.
+
+13:25.520 --> 13:28.000
+ And so click one of these colored buttons.
+
+13:30.560 --> 13:36.400
+ And what I will do is I will go to the teacher version
+
+13:36.400 --> 13:38.880
+ and see what buttons you're pressing.
+
+13:38.880 --> 13:39.560
+ All right.
+
+13:39.560 --> 13:42.480
+ So so far, people are feeling we're not going too fast on the whole.
+
+13:42.480 --> 13:43.200
+ We've got one.
+
+13:43.200 --> 13:43.960
+ Nope.
+
+13:43.960 --> 13:45.280
+ One brief read.
+
+13:45.280 --> 13:46.720
+ OK.
+
+13:46.720 --> 13:51.240
+ So hey, Nick, this URL is the same thing
+
+13:51.240 --> 13:52.720
+ with teacher on the end.
+
+13:52.720 --> 13:56.720
+ If you can you keep that open as well and let me know if it
+
+13:56.720 --> 14:00.120
+ suddenly gets covered in red.
+
+14:00.120 --> 14:06.760
+ If you ask somebody who's read, I'm not going to come to you
+
+14:06.760 --> 14:08.760
+ now because there's not enough of you to stop the class.
+
+14:08.760 --> 14:13.040
+ So it's up to you to ask on the forum or on the YouTube live
+
+14:13.040 --> 14:14.280
+ chat.
+
+14:14.280 --> 14:15.720
+ And there's a lot of folks, luckily,
+
+14:15.720 --> 14:18.840
+ who will be able to help you.
+
+14:18.840 --> 14:19.680
+ All right.
+
+14:23.640 --> 14:26.360
+ I wanted to do a big shout out to Radik.
+
+14:26.360 --> 14:29.440
+ Radik created cups.fast.ai for me.
+
+14:29.440 --> 14:31.360
+ I said to him last week, I'd eat away
+
+14:31.360 --> 14:33.600
+ of seeing colored cups on the internet.
+
+14:33.600 --> 14:39.160
+ And he wrote it in one evening.
+
+14:39.160 --> 14:42.560
+ And I also wanted to shout out that Radik just announced
+
+14:42.560 --> 14:44.640
+ today that he got a job at NVIDIA AI.
+
+14:44.640 --> 14:50.080
+ And I wanted to say that fast AI alumni around the world
+
+14:50.080 --> 14:52.480
+ very, very frequently, like every day or two,
+
+14:52.480 --> 14:56.840
+ they may want me to say that they've got their dream job.
+
+14:56.840 --> 14:59.840
+ And yeah, if you're looking for inspiration
+
+14:59.840 --> 15:05.360
+ of how to get into the field, I couldn't recommend nothing.
+
+15:05.360 --> 15:07.760
+ Nothing would be better than checking out Radik's work.
+
+15:07.760 --> 15:10.400
+ And he's actually written a book about his journey.
+
+15:10.400 --> 15:11.760
+ It's got a lot of tips in particular
+
+15:11.760 --> 15:14.400
+ about how to take advantage of fast AI,
+
+15:14.400 --> 15:16.040
+ make the most of these lessons.
+
+15:16.040 --> 15:18.880
+ And so I would certainly check that out as well.
+
+15:18.880 --> 15:21.080
+ And if you're here live, he's one of our TAs as well.
+
+15:21.080 --> 15:22.400
+ So you can say hello to him afterwards.
+
+15:22.400 --> 15:24.720
+ He looks exactly like this picture here.
+
+15:28.280 --> 15:31.680
+ So I mentioned I spent a lot of time studying education,
+
+15:31.680 --> 15:36.600
+ both for my homeschooling duties and also for my courses.
+
+15:36.600 --> 15:39.920
+ And you'll see that there's something a bit different,
+
+15:39.920 --> 15:42.000
+ very different about this course,
+
+15:42.000 --> 15:44.440
+ which is that we started by training a model.
+
+15:44.440 --> 15:47.240
+ We didn't start by doing a in depth review
+
+15:47.240 --> 15:50.160
+ of linear algebra and calculus.
+
+15:50.160 --> 15:54.640
+ That's because two of my favorite writers and researchers
+
+15:54.640 --> 15:57.720
+ on education, Paul Lockhart and David Perkins,
+
+15:57.720 --> 16:01.440
+ and many others talk about how much better people learn
+
+16:01.440 --> 16:05.520
+ when they learn with a context in place.
+
+16:05.520 --> 16:07.800
+ So the way we learn math at school,
+
+16:07.800 --> 16:10.800
+ where we do like counting and then adding
+
+16:10.800 --> 16:13.960
+ and then fractions and then decimals and then blah, blah, blah.
+
+16:13.960 --> 16:16.880
+ And 15 years later, we start doing
+
+16:16.880 --> 16:20.120
+ the really interesting stuff at grad school.
+
+16:20.120 --> 16:24.040
+ That is not the way most people learn effectively.
+
+16:24.040 --> 16:26.160
+ The way most people learn effectively
+
+16:26.160 --> 16:30.120
+ is from the way we teach sports, for example,
+
+16:30.120 --> 16:32.720
+ where we show you a whole game of sports,
+
+16:32.720 --> 16:34.480
+ we show you how much fun it is,
+
+16:34.480 --> 16:36.160
+ you go and start playing sports,
+
+16:36.160 --> 16:39.120
+ simple versions of them, you're not very good, right?
+
+16:39.120 --> 16:41.800
+ And then you gradually put more and more pieces together.
+
+16:41.800 --> 16:44.320
+ So that's how we do deep learning.
+
+16:44.320 --> 16:47.680
+ You will go into as much depth
+
+16:47.680 --> 16:52.680
+ as the most sophisticated, technically detailed classes
+
+16:53.760 --> 16:57.760
+ you'll find later, right?
+
+16:57.760 --> 17:01.400
+ But first, you'll learn to be very, very good
+
+17:01.400 --> 17:04.560
+ at actually building and deploying models.
+
+17:04.560 --> 17:09.640
+ And you will learn why and how things work
+
+17:09.640 --> 17:12.720
+ as you need to to get to the next level.
+
+17:12.720 --> 17:14.240
+ For those of you that have spent a lot of time
+
+17:14.240 --> 17:16.320
+ in technical education, like if you've done a PhD
+
+17:16.320 --> 17:19.400
+ or something, you'll find this deeply uncomfortable
+
+17:19.400 --> 17:20.880
+ because you'll be wanting to understand
+
+17:20.880 --> 17:23.360
+ why everything works from the start.
+
+17:23.360 --> 17:25.000
+ Just do your best to go along with it.
+
+17:25.000 --> 17:28.360
+ Those of you who haven't, we'll find this very natural.
+
+17:28.360 --> 17:30.360
+ Oh, and this is Dylan Williams, who I mentioned before,
+
+17:30.360 --> 17:34.680
+ the guy who came up with a really cool cup of sing.
+
+17:34.680 --> 17:39.360
+ There'll be a lot of tricks that have come out
+
+17:39.360 --> 17:41.320
+ of the educational research literature
+
+17:41.320 --> 17:42.640
+ scattered through this course.
+
+17:42.640 --> 17:44.520
+ On the whole, I won't call them out, they'll just be there.
+
+17:44.520 --> 17:47.920
+ But maybe from time to time, we'll talk about them.
+
+17:47.920 --> 17:50.040
+ All right, so before we start talking about how
+
+17:50.040 --> 17:52.120
+ we actually built that model and how it works,
+
+17:52.120 --> 17:56.040
+ I guess I should convince you that I'm worth listening to.
+
+17:56.040 --> 17:58.320
+ I'll try to do that reasonably quickly
+
+17:58.320 --> 18:01.040
+ because I don't like turning my own horn,
+
+18:01.040 --> 18:03.240
+ but I know it's important.
+
+18:03.240 --> 18:04.720
+ So the first thing I mentioned about me
+
+18:04.720 --> 18:06.840
+ is that me and my friend, Stolve,
+
+18:06.840 --> 18:09.800
+ wrote this extremely popular book, Deep Learning for Coders,
+
+18:09.800 --> 18:13.920
+ and that book is what this course is quite heavily based on.
+
+18:13.920 --> 18:16.360
+ We're not going to be using any material from the book
+
+18:16.360 --> 18:19.600
+ directly, and you might be surprised by that.
+
+18:19.600 --> 18:22.960
+ But the reason actually is that the educational research
+
+18:22.960 --> 18:25.640
+ literature shows that people learn things best
+
+18:25.640 --> 18:28.440
+ when they hear the same thing in multiple different ways.
+
+18:28.440 --> 18:32.240
+ So I want you to read the book, and you'll also
+
+18:32.240 --> 18:35.160
+ see the same information presented in a different way
+
+18:35.160 --> 18:36.840
+ in these videos.
+
+18:36.840 --> 18:39.680
+ So one of the bits of homework after each lesson
+
+18:39.680 --> 18:43.280
+ will be to read the chapter of the book.
+
+18:43.280 --> 18:45.920
+ A lot of people like the book.
+
+18:45.920 --> 18:47.440
+ Peter Norvig, Director of Research,
+
+18:47.440 --> 18:49.680
+ loves the book, in fact, who's one's here,
+
+18:49.680 --> 18:51.400
+ one of the best sources for a program
+
+18:51.400 --> 18:53.000
+ to become proficient in deep learning.
+
+18:53.000 --> 18:56.240
+ Eric Topol loves the book.
+
+18:56.240 --> 18:58.640
+ Hal Varian, Emeritus Professor at Berkeley,
+
+18:58.640 --> 19:00.720
+ Chief Columns at Google likes the book.
+
+19:00.720 --> 19:05.360
+ Jerome Pessente, who is the head of AI at Facebook likes the book.
+
+19:05.360 --> 19:06.560
+ A lot of people like the book.
+
+19:06.560 --> 19:12.560
+ So hopefully you'll find that you left this material as well.
+
+19:12.560 --> 19:15.560
+ I've spent about 30 years of my life working
+
+19:15.560 --> 19:18.280
+ in and around machine learning, including building
+
+19:18.280 --> 19:22.280
+ a number of companies that relied on it.
+
+19:22.280 --> 19:25.160
+ And became the highest ranked competitor in the world
+
+19:25.160 --> 19:29.600
+ on Kaggle in machine learning competitions.
+
+19:29.600 --> 19:31.320
+ My company in Liddick, which I founded,
+
+19:31.320 --> 19:34.320
+ was the first company to specialize in deep learning
+
+19:34.320 --> 19:35.480
+ for medicine.
+
+19:35.480 --> 19:38.960
+ And MIT voted at one of the 50 smartest companies in 2016,
+
+19:38.960 --> 19:40.480
+ just above Facebook and SpaceX.
+
+19:44.400 --> 19:47.800
+ I started Fast AI with Rachel Thomas.
+
+19:47.800 --> 19:50.600
+ And that was quite a few years ago now,
+
+19:50.600 --> 19:55.280
+ but it's had a big impact on the world already,
+
+19:55.280 --> 19:58.880
+ including work we've done with our students
+
+19:58.880 --> 20:01.720
+ has been globally recognized, such as our wind
+
+20:01.720 --> 20:04.560
+ in the Dawnbench competition, which
+
+20:04.560 --> 20:08.840
+ showed how we could train big neural networks faster
+
+20:08.840 --> 20:10.480
+ than anybody in the world, and cheaper
+
+20:10.480 --> 20:13.800
+ than anybody in the world.
+
+20:13.800 --> 20:19.240
+ And so that was a really big step in 2018, which actually
+
+20:19.240 --> 20:20.680
+ made a big difference.
+
+20:20.680 --> 20:25.960
+ Google started using our special approaches in their models.
+
+20:25.960 --> 20:31.200
+ Nvidia started optimizing their stuff using our approaches.
+
+20:31.200 --> 20:34.520
+ So it made quite a big difference there.
+
+20:34.520 --> 20:36.720
+ I'm the inventor of the ULM fit algorithm,
+
+20:36.720 --> 20:38.800
+ which according to the Transformers book,
+
+20:38.800 --> 20:44.840
+ was one of the two key foundations behind the modern NLP
+
+20:44.840 --> 20:46.800
+ revolution.
+
+20:46.800 --> 20:50.840
+ This is the paper here.
+
+20:50.840 --> 20:54.000
+ And actually, interesting point about that,
+
+20:54.000 --> 20:58.440
+ it was actually invented for a Fast AI course.
+
+20:58.440 --> 21:00.400
+ So the first time it appeared was not actually
+
+21:00.400 --> 21:05.840
+ in the journal.
+
+21:05.840 --> 21:08.960
+ It was actually in lesson four of the course.
+
+21:08.960 --> 21:15.040
+ I think the 2016 course, if I remember correctly.
+
+21:15.040 --> 21:17.320
+ And most importantly, of course, I've
+
+21:17.320 --> 21:21.360
+ been teaching this course since version one.
+
+21:21.360 --> 21:23.600
+ And this is actually the, I think this
+
+21:23.600 --> 21:26.320
+ is the very first version of it, which even back then
+
+21:26.320 --> 21:27.760
+ was getting HBR's attention.
+
+21:30.240 --> 21:31.840
+ A lot of people have been watching the course,
+
+21:31.840 --> 21:36.800
+ and it's been really widely used.
+
+21:36.800 --> 21:38.440
+ YouTube doesn't show likes anymore,
+
+21:38.440 --> 21:42.400
+ so I have to show you our likes for you.
+
+21:42.400 --> 21:50.200
+ It's been amazing to see how many alumni have gone from this
+
+21:50.200 --> 21:56.280
+ to really doing amazing things.
+
+21:56.280 --> 22:00.640
+ And so for example, Andre Kapathy told me that Tesla,
+
+22:00.640 --> 22:02.880
+ I think he said pretty much everybody who joins Tesla
+
+22:02.880 --> 22:05.600
+ and AI is meant to do this course.
+
+22:05.600 --> 22:08.480
+ I believe in open AI, they told me that all the residents
+
+22:08.480 --> 22:11.200
+ joining there first do this course.
+
+22:11.200 --> 22:15.320
+ So this course is really widely used in industry and research
+
+22:15.320 --> 22:18.960
+ for people, and they have a lot of success.
+
+22:18.960 --> 22:21.240
+ OK, so there's a bit of brief information
+
+22:21.240 --> 22:26.200
+ about why you should hopefully keep going with this.
+
+22:26.200 --> 22:28.880
+ All right, so let's get back to what's happened here.
+
+22:28.880 --> 22:36.360
+ Why are we able to create a bird recognizer in a minute or two?
+
+22:36.360 --> 22:39.040
+ And why couldn't we do it before?
+
+22:39.040 --> 22:41.360
+ So I'm going to go back to 2012.
+
+22:41.360 --> 22:46.280
+ And in 2012, this was how image recognition was done.
+
+22:46.280 --> 22:49.600
+ This is the computational pathologist.
+
+22:49.600 --> 22:53.080
+ It was a project done at Stanford.
+
+22:53.080 --> 22:55.280
+ Very successful, very famous project
+
+22:55.280 --> 22:58.440
+ that was looking at the five year survival
+
+22:58.440 --> 23:01.360
+ of breast cancer patients by looking
+
+23:01.360 --> 23:04.920
+ at their histopathology images slides.
+
+23:04.920 --> 23:08.360
+ Now, so this is what I would call a classic machine learning
+
+23:08.360 --> 23:09.600
+ approach.
+
+23:09.600 --> 23:13.040
+ And I spoke to the senior author of this, Daphne Collar.
+
+23:13.040 --> 23:15.080
+ And I asked her why they didn't use deep learning.
+
+23:15.080 --> 23:19.200
+ And she said, well, it wasn't really on the radar at that point.
+
+23:19.200 --> 23:22.880
+ So this is like a free deep learning approach.
+
+23:22.880 --> 23:25.200
+ And so the way they did this was they
+
+23:25.200 --> 23:28.160
+ got a big team of mathematicians and computer scientists
+
+23:28.160 --> 23:30.040
+ and pathologists and so forth to get together
+
+23:30.040 --> 23:32.080
+ and build these ideas for features,
+
+23:32.080 --> 23:36.280
+ like relationships between epithelial and nuclear neighbors.
+
+23:36.280 --> 23:38.560
+ Thousands and thousands, actually, they created a feature.
+
+23:38.560 --> 23:41.440
+ And each one required a lot of expertise
+
+23:41.440 --> 23:44.440
+ from a cross disciplinary group of experts at Stanford.
+
+23:44.440 --> 23:47.520
+ So this project took years and a lot of people
+
+23:47.520 --> 23:49.720
+ and a lot of code and a lot of math.
+
+23:49.720 --> 23:52.200
+ And then once they had all these features,
+
+23:52.200 --> 23:54.240
+ they then fed them into a machine learning model,
+
+23:54.240 --> 23:57.640
+ in this case, logistic progression to predict survival.
+
+23:57.640 --> 24:00.120
+ As I say, it's very successful.
+
+24:00.120 --> 24:03.160
+ But it's not something that I could create for you
+
+24:03.160 --> 24:07.120
+ in a minute at the start of a course.
+
+24:07.120 --> 24:08.720
+ The difference with neural networks
+
+24:08.720 --> 24:11.680
+ is neural networks don't require us to build these features.
+
+24:11.680 --> 24:14.240
+ They build them for us.
+
+24:14.240 --> 24:19.760
+ And so what actually happened was, in I think it was 2015,
+
+24:19.760 --> 24:24.440
+ Matt Zyla and Rob Fergus took a trained neural network
+
+24:24.440 --> 24:27.960
+ and they looked inside it to see what it had learned.
+
+24:27.960 --> 24:33.480
+ So we don't give it features, we ask it to learn features.
+
+24:33.480 --> 24:36.240
+ So when Zyla and Fergus looked inside a neural network,
+
+24:36.240 --> 24:42.440
+ they looked at the actual weights in the model
+
+24:42.440 --> 24:43.800
+ and they drew a picture of them.
+
+24:43.800 --> 24:47.240
+ And this was nine of the sets of weights they found.
+
+24:47.240 --> 24:48.960
+ And this set of weights, for example,
+
+24:48.960 --> 24:50.760
+ finds diagonal edges.
+
+24:50.760 --> 24:53.640
+ This set of weights finds yellow to blue gradients.
+
+24:53.640 --> 24:57.880
+ And this set of weights finds red to green gradients.
+
+24:57.880 --> 24:58.960
+ And so forth.
+
+24:58.960 --> 25:03.440
+ And then down here are examples of some bits of photos,
+
+25:03.440 --> 25:07.920
+ which closely matched, for example, this feature detector.
+
+25:07.920 --> 25:13.920
+ And deep learning is deep because we can then take these
+
+25:13.920 --> 25:18.880
+ features and combine them to create more advanced features.
+
+25:18.880 --> 25:20.920
+ So these are some layer two features.
+
+25:20.920 --> 25:24.120
+ So there's a feature, for example, that finds corners
+
+25:24.120 --> 25:26.520
+ and a feature that finds curves and a feature that finds
+
+25:26.520 --> 25:27.520
+ circles.
+
+25:27.520 --> 25:30.000
+ Now, here are some examples of bits of pictures
+
+25:30.000 --> 25:32.680
+ that the circle finder found.
+
+25:32.680 --> 25:35.840
+ And so remember, with a neural net, which
+
+25:35.840 --> 25:38.440
+ is the basic function used in deep learning,
+
+25:38.440 --> 25:41.080
+ we don't have to hand code any of these
+
+25:41.080 --> 25:43.680
+ or come up with any of these ideas.
+
+25:43.680 --> 25:47.520
+ You just start with actually a random neural network
+
+25:47.520 --> 25:51.080
+ and you feed it examples and you have a learn
+
+25:51.080 --> 25:53.160
+ to recognize things.
+
+25:53.160 --> 25:55.120
+ And it turns out that these are the things
+
+25:55.120 --> 25:58.560
+ that it creates for itself.
+
+25:58.560 --> 26:03.480
+ So you can then combine these features.
+
+26:03.480 --> 26:05.560
+ And when you combine these features,
+
+26:05.560 --> 26:07.440
+ it creates a feature detector, for example,
+
+26:07.440 --> 26:11.560
+ that finds kind of repeating geometric shapes.
+
+26:11.560 --> 26:14.160
+ And it creates a feature detector, for example,
+
+26:14.160 --> 26:17.880
+ that finds kind of really little things, which it looks like,
+
+26:17.880 --> 26:20.560
+ is finding the edges of flowers.
+
+26:20.560 --> 26:26.120
+ And this feature detector here seems to be finding words.
+
+26:26.120 --> 26:29.560
+ And so the deeper you get, the more sophisticated
+
+26:29.560 --> 26:31.000
+ the features it can find are.
+
+26:31.000 --> 26:33.080
+ And so you can imagine that trying to code these things
+
+26:33.080 --> 26:37.040
+ by hand would be insanely difficult
+
+26:37.040 --> 26:40.280
+ and you wouldn't know even what to encode by hand.
+
+26:40.280 --> 26:44.440
+ So what we're going to learn is how neural networks do this
+
+26:44.440 --> 26:45.480
+ automatically.
+
+26:45.480 --> 26:48.640
+ But this is the key difference of why we can now
+
+26:48.640 --> 26:51.360
+ do things that previously we just didn't even
+
+26:51.360 --> 26:52.920
+ conceive of as possible.
+
+26:52.920 --> 26:57.680
+ Because now we don't have to hand code the features we look for.
+
+26:57.680 --> 27:01.680
+ They can all be learned.
+
+27:01.680 --> 27:05.960
+ Now, in order to recognize, we're
+
+27:05.960 --> 27:09.480
+ going to be spending some time learning about building
+
+27:09.480 --> 27:12.000
+ image based algorithms.
+
+27:12.000 --> 27:15.640
+ And image based algorithms are not just for images.
+
+27:15.640 --> 27:17.520
+ And in fact, this is going to be a general theme.
+
+27:17.520 --> 27:21.360
+ We're going to show you some foundational techniques.
+
+27:21.360 --> 27:23.960
+ But with creativity, these foundational techniques
+
+27:23.960 --> 27:25.360
+ can be used very widely.
+
+27:25.360 --> 27:29.240
+ So for example, an image recognizer
+
+27:29.240 --> 27:36.120
+ can also be used to classify sounds.
+
+27:36.120 --> 27:39.600
+ So this was an example from one of our students
+
+27:39.600 --> 27:43.160
+ who posted on the forum and said for their project,
+
+27:43.160 --> 27:45.160
+ they would try classifying sounds.
+
+27:45.160 --> 27:48.600
+ And so they basically took sounds and created pictures
+
+27:48.600 --> 27:50.680
+ from their waveforms.
+
+27:50.680 --> 27:52.840
+ And then they used an image recognizer on that.
+
+27:52.840 --> 27:56.240
+ And they got a state of the art result, by the way.
+
+27:56.240 --> 27:57.960
+ Another of our students on the forum
+
+27:57.960 --> 28:01.760
+ said that they did something very similar to take time series
+
+28:01.760 --> 28:06.400
+ and turn them into pictures and then use image classifiers.
+
+28:06.400 --> 28:09.440
+ Another of our students created pictures
+
+28:09.440 --> 28:14.320
+ from mouse movements, from users of a computer system.
+
+28:14.320 --> 28:18.040
+ So the clicks became dots and the movements became lines.
+
+28:18.040 --> 28:20.680
+ And the speed of the movement became colors.
+
+28:20.680 --> 28:23.680
+ And then use that to create an image classifier.
+
+28:23.680 --> 28:28.760
+ So you can see with some creativity,
+
+28:28.760 --> 28:33.760
+ there's a lot of things you can do with images.
+
+28:33.760 --> 28:35.440
+ There's something else I wanted to point out,
+
+28:35.440 --> 28:42.680
+ which is that as you saw, when we trained a real working
+
+28:42.680 --> 28:46.280
+ bird recognizer image model, we didn't need lots of math.
+
+28:46.280 --> 28:47.960
+ There wasn't any.
+
+28:47.960 --> 28:49.200
+ We didn't need lots of data.
+
+28:49.200 --> 28:50.600
+ We had 200 pictures.
+
+28:50.600 --> 28:52.640
+ We didn't need lots of expensive computers.
+
+28:52.640 --> 28:55.040
+ We just used my laptop.
+
+28:55.040 --> 28:58.680
+ This is generally the case for the vast majority
+
+28:58.680 --> 29:03.080
+ of deep learning that you'll need in real life.
+
+29:05.840 --> 29:09.520
+ There will be some math that pops up during this course.
+
+29:09.520 --> 29:11.400
+ But we will teach it to you as needed
+
+29:11.400 --> 29:14.760
+ or we'll refer you to external resources as needed.
+
+29:14.760 --> 29:19.280
+ But it will just be the little bits that you actually need.
+
+29:19.280 --> 29:21.640
+ The myth that deep learning needs lots of data,
+
+29:21.640 --> 29:25.360
+ I think, has mainly passed along by big companies
+
+29:25.360 --> 29:28.880
+ that want to sell you computers to store lots of data
+
+29:28.880 --> 29:30.760
+ and to process it.
+
+29:30.760 --> 29:34.720
+ We find that most real world projects
+
+29:34.720 --> 29:39.120
+ don't need extraordinary amounts of data at all.
+
+29:39.120 --> 29:43.080
+ And as you'll see, there's actually a lot of fantastic places
+
+29:43.080 --> 29:45.560
+ you can do state of the artwork for free nowadays,
+
+29:45.560 --> 29:46.920
+ which is great news.
+
+29:50.960 --> 29:53.280
+ One of the key reasons for this is because of something
+
+29:53.280 --> 29:55.240
+ called transfer learning, which we'll
+
+29:55.240 --> 29:58.040
+ be learning about a lot during this course.
+
+29:58.040 --> 30:00.480
+ And it's something which very few people
+
+30:00.480 --> 30:04.040
+ are aware of, a pair of.
+
+30:04.040 --> 30:08.480
+ In this course, we'll be using PyTorch.
+
+30:08.480 --> 30:11.840
+ For those of you who are not particularly close
+
+30:11.840 --> 30:14.520
+ to the deep learning world, you might
+
+30:14.520 --> 30:17.960
+ have heard of TensorFlow and not of PyTorch.
+
+30:17.960 --> 30:22.960
+ You might be surprised to hear that TensorFlow has been
+
+30:22.960 --> 30:26.840
+ dying in popularity in recent years.
+
+30:26.840 --> 30:29.840
+ And PyTorch is actually growing rapidly.
+
+30:29.840 --> 30:40.640
+ And in research repositories amongst the top papers,
+
+30:40.640 --> 30:44.720
+ TensorFlow is a tiny minority now compared to PyTorch.
+
+30:44.720 --> 30:48.440
+ This is also great research that's come out from Ryan Ocona.
+
+30:48.440 --> 30:54.440
+ He also discovered that the majority of people
+
+30:54.440 --> 30:57.280
+ that were doing TensorFlow in 2018,
+
+30:57.280 --> 31:00.760
+ researchers, the majority have now shifted to PyTorch.
+
+31:00.760 --> 31:04.440
+ And I mentioned this because what people use in research
+
+31:04.440 --> 31:06.960
+ is a very strong leading indicator of what's
+
+31:06.960 --> 31:08.600
+ going to happen in industry, because this
+
+31:08.600 --> 31:11.360
+ is where all the new algorithms are going to come out.
+
+31:11.360 --> 31:14.200
+ This is where all the papers are going to be written about.
+
+31:14.200 --> 31:18.640
+ It's going to be increasingly difficult to use TensorFlow.
+
+31:18.640 --> 31:21.440
+ We've been using PyTorch since before it came out,
+
+31:21.440 --> 31:23.640
+ before the initial release, because we knew just
+
+31:23.640 --> 31:27.400
+ from technical fundamentals, it was far better.
+
+31:27.400 --> 31:30.680
+ So this course has been using PyTorch for a long time.
+
+31:30.680 --> 31:33.280
+ I will say, however, that PyTorch requires
+
+31:33.280 --> 31:36.920
+ a lot of hairy code for relatively simple things.
+
+31:36.920 --> 31:40.440
+ This is the code required to implement a particular optimizer,
+
+31:40.440 --> 31:43.520
+ called Adam W, in plain PyTorch.
+
+31:43.520 --> 31:47.480
+ I actually copied this code from the PyTorch repository.
+
+31:47.480 --> 31:51.240
+ So as you can see, there's a lot of it.
+
+31:51.240 --> 31:55.440
+ This gray bit here is the code required
+
+31:55.440 --> 31:57.960
+ to do the same thing with Fast.AI.
+
+31:57.960 --> 32:02.360
+ Fast.AI is a library we built on top of PyTorch.
+
+32:02.360 --> 32:06.200
+ This huge difference is not because PyTorch is bad.
+
+32:06.200 --> 32:09.960
+ It's because PyTorch is designed to be a strong foundation
+
+32:09.960 --> 32:13.520
+ to build things on top of, like Fast.AI.
+
+32:13.520 --> 32:18.520
+ So when you use Fast.AI, the library,
+
+32:18.520 --> 32:22.960
+ you get access to all the power of PyTorch as well.
+
+32:22.960 --> 32:26.200
+ But you shouldn't be writing all this code
+
+32:26.200 --> 32:28.560
+ if you only need to write this much code.
+
+32:28.560 --> 32:30.400
+ The problem of writing lots of code
+
+32:30.400 --> 32:32.760
+ is that that's lots of things to make mistakes with,
+
+32:32.760 --> 32:36.400
+ lots of things to not have best practices in,
+
+32:36.400 --> 32:38.000
+ lots of things to maintain.
+
+32:38.000 --> 32:40.720
+ In general, we found particularly with deep learning,
+
+32:40.720 --> 32:42.840
+ less code is better.
+
+32:42.840 --> 32:48.120
+ Particularly with Fast.AI, the code you don't write
+
+32:48.120 --> 32:52.400
+ is code that we've basically found best practices for you.
+
+32:52.400 --> 32:56.000
+ So when you use the code that we've provided for you,
+
+32:56.000 --> 32:59.200
+ you're generally fine to get better results.
+
+32:59.200 --> 33:04.960
+ So Fast.AI has been a really popular library,
+
+33:04.960 --> 33:08.360
+ and it's very widely used in industry, in academia,
+
+33:08.360 --> 33:10.400
+ and in teaching.
+
+33:10.400 --> 33:13.120
+ And as we go through this course,
+
+33:13.120 --> 33:15.840
+ we'll be seeing more and more pure PyTorch
+
+33:15.840 --> 33:18.440
+ as we get deeper and deeper underneath
+
+33:18.440 --> 33:22.320
+ to see exactly how things work.
+
+33:22.320 --> 33:25.920
+ The Fast.AI library just won the 2020 Best Paper Award,
+
+33:25.920 --> 33:28.520
+ or the paper about it, in information.
+
+33:28.520 --> 33:34.400
+ So again, you can see it's very well regarded library.
+
+33:34.400 --> 33:35.240
+ OK.
+
+33:35.240 --> 33:39.400
+ So OK, we're still green.
+
+33:39.400 --> 33:41.520
+ That's good.
+
+33:41.520 --> 33:44.960
+ So you may have noticed something interesting,
+
+33:44.960 --> 33:50.320
+ which is that I'm actually running code in these slides.
+
+33:50.320 --> 33:53.040
+ That's because these slides are not in PowerPoint.
+
+33:53.040 --> 33:54.080
+ These slides are in.
+
+33:57.880 --> 33:59.520
+ Jupyter Notebook.
+
+33:59.520 --> 34:02.720
+ Jupyter Notebook is the environment in which you
+
+34:02.720 --> 34:08.920
+ will be doing most of your computing.
+
+34:08.920 --> 34:16.920
+ It's a web based application, which is extremely popular
+
+34:16.920 --> 34:21.480
+ and widely used in industry, and in academia, and in teaching.
+
+34:21.480 --> 34:23.600
+ And it's a very, very, very powerful way
+
+34:23.600 --> 34:27.040
+ to experiment and explore and to build.
+
+34:30.800 --> 34:36.600
+ Nowadays, I would say most people, at least most students,
+
+34:36.600 --> 34:39.800
+ run Jupyter Notebooks not on their own computers,
+
+34:39.800 --> 34:44.400
+ particularly for data science, but on a cloud server, of which
+
+34:44.400 --> 34:46.240
+ there's quite a few.
+
+34:46.240 --> 34:51.440
+ And as I mentioned earlier, if you go to cost.fast.ai,
+
+34:51.440 --> 34:56.560
+ you can see how to use various different cloud servers.
+
+34:59.600 --> 35:05.320
+ One I'm going to show an example of is Kaggle.
+
+35:05.320 --> 35:07.200
+ So Kaggle doesn't just have competitions,
+
+35:07.200 --> 35:09.920
+ but it also has a cloud Notebooks server.
+
+35:09.920 --> 35:15.160
+ And I've got quite a few examples there.
+
+35:19.040 --> 35:20.840
+ So let me give you a quick example
+
+35:20.840 --> 35:26.240
+ of how we use Jupyter Notebooks to build stuff,
+
+35:26.240 --> 35:28.720
+ to experiment, to explore.
+
+35:28.720 --> 35:31.560
+ So on Kaggle, if you start with somebody else's Notebook,
+
+35:31.560 --> 35:35.640
+ so why don't you start with this one, Jupyter Notebook 101.
+
+35:35.640 --> 35:38.000
+ If it's your own Notebook, you'll see a button called edit.
+
+35:38.000 --> 35:42.480
+ If it's somebody else's, that button will say copy and edit.
+
+35:42.480 --> 35:44.920
+ If you use somebody's Notebook that you like,
+
+35:44.920 --> 35:46.560
+ make sure you click the upvote button
+
+35:46.560 --> 35:49.400
+ to encourage them and to help other people find it
+
+35:49.400 --> 35:52.040
+ before you go ahead and copy and edit.
+
+35:52.040 --> 35:59.160
+ And once we're in edit mode, we can now use this Notebook.
+
+35:59.160 --> 36:02.920
+ And to use it, we can type in any arbitrary expression
+
+36:02.920 --> 36:06.040
+ in Python and click run.
+
+36:06.040 --> 36:08.240
+ And the very first time we do that, it says session is
+
+36:08.240 --> 36:10.920
+ starting, it's basically launching a virtual computer
+
+36:10.920 --> 36:12.920
+ for us to run our code.
+
+36:12.920 --> 36:15.920
+ This is all free.
+
+36:15.920 --> 36:20.280
+ In a sense, it's like the world's most powerful calculator.
+
+36:20.280 --> 36:22.480
+ It's a calculator where you have all
+
+36:22.480 --> 36:25.880
+ of the capabilities of the world's, I think,
+
+36:25.880 --> 36:27.760
+ most popular programming language,
+
+36:27.760 --> 36:31.040
+ certainly in JavaScript would be the top two,
+
+36:31.040 --> 36:32.640
+ directly at your disposal.
+
+36:32.640 --> 36:35.200
+ So Python does know how to do one plus one.
+
+36:35.200 --> 36:38.080
+ And so you can see here it spits out the answer.
+
+36:38.080 --> 36:39.160
+ I hate clicking.
+
+36:39.160 --> 36:40.560
+ I always use keyboard shortcuts.
+
+36:40.560 --> 36:42.160
+ So instead of clicking this little arrow,
+
+36:42.160 --> 36:46.680
+ you just press shift enter to do the same thing.
+
+36:46.680 --> 36:49.360
+ But as you can see, there's not just calculations here.
+
+36:49.360 --> 36:52.160
+ There's also pros.
+
+36:52.160 --> 36:55.480
+ And so Jupyter Notebook's so great for explaining
+
+36:55.480 --> 36:58.800
+ to you the version of yourself in six months time,
+
+36:58.800 --> 37:01.200
+ what on earth you are doing or to your coworkers,
+
+37:01.200 --> 37:03.120
+ or to people in the open source community,
+
+37:03.120 --> 37:05.440
+ or to people you're blogging for, et cetera.
+
+37:05.440 --> 37:08.520
+ And so you just type pros.
+
+37:08.520 --> 37:10.440
+ And as you can see, when we create a new cell,
+
+37:10.440 --> 37:12.760
+ you can create a code cell, which
+
+37:12.760 --> 37:16.920
+ is a cell that lets you type calculations,
+
+37:16.920 --> 37:21.320
+ or a markdown cell, which is a cell that lets you create pros.
+
+37:21.320 --> 37:27.840
+ And the pros use this formatting in a little menu language
+
+37:27.840 --> 37:28.880
+ called markdown.
+
+37:28.880 --> 37:30.160
+ There's so many tutorials around.
+
+37:30.160 --> 37:31.960
+ I won't explain it to you.
+
+37:31.960 --> 37:36.320
+ But it lets you do things like links and so forth.
+
+37:40.320 --> 37:44.440
+ So I'll let you follow through the tutorial in your own time,
+
+37:44.440 --> 37:48.080
+ because it really explains to you what to do.
+
+37:48.080 --> 37:50.280
+ One thing to point out is that sometimes you'll
+
+37:50.280 --> 37:53.400
+ see me use cells with an exclamation mark at the start.
+
+37:53.400 --> 37:54.840
+ That's not Python.
+
+37:54.840 --> 37:57.800
+ That's a bash shell command.
+
+37:57.800 --> 37:59.720
+ So that's what the exclamation mark means.
+
+38:02.920 --> 38:05.800
+ As you can see, you can put images into notebooks.
+
+38:05.800 --> 38:07.960
+ And so the image I popped in here was the one showing
+
+38:07.960 --> 38:11.760
+ that Jupyter won the 2017 Software System Award, which
+
+38:11.760 --> 38:15.440
+ is pretty much the biggest award there is for this kind
+
+38:15.440 --> 38:17.360
+ of software.
+
+38:17.360 --> 38:20.880
+ So that's the basic idea of how we use notebooks.
+
+38:26.040 --> 38:30.480
+ So let's have a look at how we do our bird or not bird model.
+
+38:36.200 --> 38:38.560
+ One thing I always like to do when I'm using something
+
+38:38.560 --> 38:41.680
+ like Colab or Kaggle, Cloud Platforms
+
+38:41.680 --> 38:43.280
+ that I'm not controlling is make sure
+
+38:43.280 --> 38:46.520
+ that I'm using the most recent version of any software.
+
+38:46.520 --> 38:49.680
+ So my first cell here is exclamation mark
+
+38:49.680 --> 38:51.400
+ pip install minus u.
+
+38:51.400 --> 38:54.560
+ That means upgrade, queue for quiet, fast di.
+
+38:54.560 --> 38:57.440
+ So that makes sure that we have the latest version of fast di.
+
+38:57.440 --> 38:59.640
+ And if you always have that at the start of your notebooks,
+
+38:59.640 --> 39:02.440
+ you're never going to have those awkward foreign threads
+
+39:02.440 --> 39:03.840
+ where you say, why isn't this working?
+
+39:03.840 --> 39:05.000
+ And somebody says to you, oh, you're
+
+39:05.000 --> 39:06.480
+ using an old version of some software.
+
+39:09.800 --> 39:15.560
+ So you'll see here this notebook is the exact thing
+
+39:15.560 --> 39:17.280
+ that I was showing you at the start of this lesson.
+
+39:21.920 --> 39:28.800
+ So if you haven't done much Python,
+
+39:28.800 --> 39:34.560
+ you might be surprised about how little code there is here.
+
+39:34.560 --> 39:41.560
+ And so Python is a concise, but not too concise language.
+
+39:41.560 --> 39:43.600
+ You'll see that there's less boilerplate than some other
+
+39:43.600 --> 39:46.720
+ languages you might be familiar with.
+
+39:46.720 --> 39:49.520
+ And I'm also taking advantage of a lot of libraries.
+
+39:49.520 --> 39:52.280
+ So fast di provides a lot of convenient things for you.
+
+39:54.880 --> 39:56.560
+ So I got to import.
+
+40:01.040 --> 40:07.640
+ So to use an external library, we use import
+
+40:07.640 --> 40:11.280
+ to import a symbol from a library.
+
+40:11.280 --> 40:13.720
+ Fast di has a lot of libraries we provide.
+
+40:13.720 --> 40:15.600
+ They generally start with fast something.
+
+40:15.600 --> 40:18.480
+ So for example, to make it easy to download a URL,
+
+40:18.480 --> 40:22.000
+ fast download has download URL.
+
+40:22.000 --> 40:24.320
+ To make it easy to create a thumbnail,
+
+40:24.320 --> 40:30.320
+ we have image to thumb and so forth.
+
+40:30.320 --> 40:36.000
+ So I always like to view, as I'm building a model,
+
+40:36.000 --> 40:37.600
+ my data at every step.
+
+40:37.600 --> 40:40.680
+ So that's why I first of all grab one bird.
+
+40:40.680 --> 40:43.120
+ And then I grab one forest photo,
+
+40:43.120 --> 40:46.480
+ and I look at them to make sure they look reasonable.
+
+40:49.320 --> 40:57.840
+ And once I think, OK, they look OK, then I go ahead and download.
+
+40:57.840 --> 41:02.000
+ And so you can see, fast di has a download images
+
+41:02.000 --> 41:04.640
+ where you just provide a list of URLs.
+
+41:04.640 --> 41:05.960
+ So that's how easy it is.
+
+41:05.960 --> 41:07.880
+ And it does that in parallel.
+
+41:07.880 --> 41:12.920
+ So it does that surprisingly quickly.
+
+41:12.920 --> 41:17.520
+ One other fast thing I think I'm using here is resize images.
+
+41:17.520 --> 41:20.520
+ You generally will find that for computer vision algorithms,
+
+41:20.520 --> 41:23.240
+ you don't need particularly big images.
+
+41:23.240 --> 41:27.880
+ So I'm resizing these to a maximum size length of 400,
+
+41:27.880 --> 41:30.520
+ because it's actually much faster.
+
+41:30.520 --> 41:34.520
+ Because GPU is so quick, for big images,
+
+41:34.520 --> 41:37.520
+ most of the time can be taken up just opening it
+
+41:37.520 --> 41:40.640
+ the neural net itself often takes less time.
+
+41:40.640 --> 41:42.440
+ So that's another good reason to make them smaller.
+
+41:45.480 --> 41:49.440
+ OK, so the main thing I wanted to tell you about
+
+41:49.440 --> 41:51.400
+ was this data block command.
+
+41:51.400 --> 41:54.040
+ So the data block is the key thing
+
+41:54.040 --> 41:57.120
+ that you're going to want to get familiar with as deep learning
+
+41:57.120 --> 41:59.560
+ practitioners at the start of your journey.
+
+41:59.560 --> 42:04.440
+ Because the main thing you're going to be trying to figure out
+
+42:04.440 --> 42:08.560
+ is how do I get this data into my model?
+
+42:08.560 --> 42:09.840
+ Now that might surprise you.
+
+42:09.840 --> 42:12.120
+ You might be thinking we should be spending all of our time
+
+42:12.120 --> 42:14.600
+ talking about neural network architectures
+
+42:14.600 --> 42:18.720
+ and matrix modification and gradients and stuff like that.
+
+42:18.720 --> 42:24.840
+ The truth is very little of that comes up in practice.
+
+42:24.840 --> 42:28.120
+ And the reason is that at this point,
+
+42:28.120 --> 42:30.160
+ the deep learning as community has found
+
+42:30.160 --> 42:36.640
+ a reasonably small number of types of model that work
+
+42:36.640 --> 42:40.360
+ for nearly all the main applications you'll need.
+
+42:40.360 --> 42:44.720
+ And first, I will create the right type of model for you,
+
+42:44.720 --> 42:47.080
+ the vast majority of the time.
+
+42:47.080 --> 42:51.360
+ So all of that stuff about tweaking neural network
+
+42:51.360 --> 42:53.880
+ architectures and stuff, I mean, we'll
+
+42:53.880 --> 42:56.200
+ get to it eventually in this course.
+
+42:56.200 --> 42:58.040
+ But you might be surprised to discover
+
+42:58.040 --> 43:01.200
+ that it almost never comes up.
+
+43:01.200 --> 43:03.680
+ Kind of like if you ever did a computer science course
+
+43:03.680 --> 43:05.080
+ or something and they spent all this time
+
+43:05.080 --> 43:08.880
+ on the details of compilers and operating systems,
+
+43:08.880 --> 43:10.120
+ and then you get to the real world
+
+43:10.120 --> 43:12.080
+ and you never use it again.
+
+43:12.080 --> 43:14.440
+ So this course is called practical deep learning.
+
+43:14.440 --> 43:16.480
+ And so we're going to focus on the stuff
+
+43:16.480 --> 43:18.840
+ that is practically important.
+
+43:18.840 --> 43:22.240
+ OK, so our image is finished downloading.
+
+43:22.240 --> 43:27.240
+ And two of them were broken, so we just deleted them.
+
+43:30.000 --> 43:31.640
+ Another thing you'll note, by the way,
+
+43:31.640 --> 43:33.640
+ if you're a cane software engineer
+
+43:33.640 --> 43:39.760
+ is I tend to use a lot of functional style in my programs.
+
+43:39.760 --> 43:44.640
+ I find for the kind of work I do that a functional style
+
+43:44.640 --> 43:45.880
+ works very well.
+
+43:45.880 --> 43:49.120
+ If you're a lot of people in Python or less familiar with that,
+
+43:49.120 --> 43:51.760
+ it maybe comes more from other things.
+
+43:51.760 --> 43:54.080
+ So that's why you'll see me using stuff like math
+
+43:54.080 --> 43:56.400
+ and stuff quite a lot.
+
+43:56.400 --> 43:59.760
+ All right, so a data block is the key thing
+
+43:59.760 --> 44:01.880
+ you need to know about if you're going to know
+
+44:01.880 --> 44:04.600
+ how to use different kinds of data sets.
+
+44:04.600 --> 44:07.240
+ And so these are all of the things, basically,
+
+44:07.240 --> 44:08.680
+ that you'll be providing.
+
+44:08.680 --> 44:10.960
+ And so what we did when we designed the data block
+
+44:10.960 --> 44:15.960
+ was we actually looked and said, OK, over hundreds
+
+44:15.960 --> 44:19.400
+ of projects, what are all the things that
+
+44:19.400 --> 44:22.400
+ change from project to project to get the data
+
+44:22.400 --> 44:23.600
+ into the right shape?
+
+44:23.600 --> 44:25.040
+ And we realized we could basically
+
+44:25.040 --> 44:28.640
+ split it down into these five things.
+
+44:28.640 --> 44:31.320
+ So the first thing that we tell Fast.DI
+
+44:31.320 --> 44:34.160
+ is what kind of input do we have?
+
+44:34.160 --> 44:36.960
+ And so there are lots of blocks in Fast.DI
+
+44:36.960 --> 44:38.160
+ for different kinds of inputs.
+
+44:38.160 --> 44:41.120
+ So we said, oh, the input is an image.
+
+44:41.120 --> 44:42.400
+ What kind of output is there?
+
+44:42.400 --> 44:43.280
+ What kind of label?
+
+44:43.280 --> 44:44.640
+ The outputs are category.
+
+44:44.640 --> 44:49.360
+ So that means it's one of a number of possibilities.
+
+44:49.360 --> 44:52.960
+ So that's enough for Fast.DI to know what kind of model
+
+44:52.960 --> 44:55.640
+ to build for you.
+
+44:55.640 --> 44:57.160
+ So what are the items in this model?
+
+44:57.160 --> 45:00.800
+ What am I actually going to be looking at to train from?
+
+45:00.800 --> 45:02.200
+ This is a function.
+
+45:02.200 --> 45:03.800
+ In fact, you might have noticed, if you
+
+45:03.800 --> 45:08.200
+ were looking carefully, that we use this function here.
+
+45:08.200 --> 45:12.960
+ It's a function which returns a list of all of the image
+
+45:12.960 --> 45:16.600
+ files in a path based on extension.
+
+45:16.600 --> 45:18.200
+ So every time it's going to try and find out
+
+45:18.200 --> 45:20.880
+ what things to train from, it's going to use that function.
+
+45:20.880 --> 45:24.320
+ In this case, we'll get a list of image files.
+
+45:24.320 --> 45:26.640
+ Now, something we'll talk about shortly
+
+45:26.640 --> 45:30.400
+ is that it's critical that you put aside some data
+
+45:30.400 --> 45:32.480
+ for testing the accuracy of your model.
+
+45:32.480 --> 45:35.400
+ And that's called a validation set.
+
+45:35.400 --> 45:37.920
+ It's so critical that Fast.DI won't let
+
+45:37.920 --> 45:40.840
+ you train a model without one.
+
+45:40.840 --> 45:43.560
+ So you actually have to tell it how to create a validation set,
+
+45:43.560 --> 45:45.320
+ how to set aside some data.
+
+45:45.320 --> 45:50.920
+ And in this case, we say randomly set aside 20% of the data.
+
+45:53.400 --> 45:54.880
+ OK.
+
+45:54.880 --> 45:57.760
+ Next question, then you have to tell Fast.DI,
+
+45:57.760 --> 46:01.800
+ is how do we know the correct label of a photo?
+
+46:01.800 --> 46:05.680
+ How do we know if it's a bird photo or a forest photo?
+
+46:05.680 --> 46:08.800
+ And this is another function.
+
+46:08.800 --> 46:13.640
+ And this function simply returns the parent folder
+
+46:13.640 --> 46:16.360
+ of a path.
+
+46:16.360 --> 46:19.160
+ And so in this case, we saved our images
+
+46:19.160 --> 46:22.880
+ into either forest or bird.
+
+46:22.880 --> 46:26.920
+ So that's where the labels are going to come from.
+
+46:26.920 --> 46:33.200
+ And then finally, most computer vision architectures
+
+46:33.200 --> 46:37.360
+ need all of your inputs as you train to be the same size.
+
+46:37.360 --> 46:42.320
+ So item transforms are all of the bits of code
+
+46:42.320 --> 46:46.600
+ that are going to run on every item, on every image in this case.
+
+46:46.600 --> 46:50.960
+ And we're saying, OK, we want you to resize each of them
+
+46:50.960 --> 46:54.600
+ to being 192 by 192 pixels.
+
+46:54.600 --> 46:55.920
+ There's two ways you can resize.
+
+46:55.920 --> 46:58.720
+ You can either crop out a piece in the middle,
+
+46:58.720 --> 47:01.480
+ or you can squish it.
+
+47:01.480 --> 47:05.760
+ And so we're saying squish it.
+
+47:05.760 --> 47:06.760
+ So that's the data block.
+
+47:06.760 --> 47:08.240
+ That's all that you need.
+
+47:08.240 --> 47:11.800
+ And from there, we create an important class
+
+47:11.800 --> 47:13.080
+ called data loaders.
+
+47:13.080 --> 47:17.560
+ Data loaders are the things that actually PyTorch iterates
+
+47:17.560 --> 47:21.000
+ through to grab a bunch of your data at a time.
+
+47:21.000 --> 47:24.720
+ The way it can do it so fast is by using a GPU, which
+
+47:24.720 --> 47:28.040
+ is something that can do thousands of things at the same time.
+
+47:28.040 --> 47:30.160
+ And that means it needs thousands of things to do
+
+47:30.160 --> 47:31.880
+ at the same time.
+
+47:31.880 --> 47:35.720
+ So a data loader will feed the training algorithm
+
+47:35.720 --> 47:40.800
+ with a bunch of your images at once.
+
+47:40.800 --> 47:42.040
+ In fact, we don't call it a bunch.
+
+47:42.040 --> 47:46.680
+ We call it a batch or a mini batch.
+
+47:46.680 --> 47:52.760
+ And so when we say show batch, that's actually
+
+47:52.760 --> 47:53.920
+ a very specific word.
+
+47:53.920 --> 47:56.760
+ And deep learning, it's saying show me an example
+
+47:56.760 --> 48:00.720
+ of a batch of data that you would be passing into the model.
+
+48:00.720 --> 48:02.680
+ And so you can see show batch gives you
+
+48:02.680 --> 48:06.960
+ tells you two things, the input, which is the picture,
+
+48:06.960 --> 48:08.640
+ and the label.
+
+48:08.640 --> 48:14.240
+ And remember, the label came by calling that function.
+
+48:14.240 --> 48:18.920
+ So when you come to building your own models,
+
+48:18.920 --> 48:22.080
+ you'll be wanting to know what kind of splitters are there,
+
+48:22.080 --> 48:23.800
+ and what kinds of labeling functions are there,
+
+48:23.800 --> 48:24.600
+ and so forth.
+
+48:24.600 --> 48:25.640
+ What's wrong button?
+
+48:27.600 --> 48:30.120
+ You'll be wanting to know what kind of labeling functions
+
+48:30.120 --> 48:32.600
+ are there, and what kind of splitters are there, and so forth.
+
+48:32.600 --> 48:34.800
+ And so DocStopFast.ai is where you
+
+48:34.800 --> 48:37.520
+ go to get that information.
+
+48:37.520 --> 48:42.240
+ Often the best place to go is the tutorials.
+
+48:42.240 --> 48:46.320
+ So for example, here's a whole data block tutorial.
+
+48:46.320 --> 48:48.280
+ And there's lots and lots of examples.
+
+48:48.280 --> 48:50.520
+ So hopefully you can start out by finding something
+
+48:50.520 --> 48:53.960
+ that's similar to what you want to do
+
+48:53.960 --> 48:56.480
+ and see how we did it.
+
+48:56.480 --> 49:03.240
+ But then of course, there's also the underlying API information.
+
+49:03.240 --> 49:08.040
+ So here's data blocks.
+
+49:08.040 --> 49:09.520
+ OK.
+
+49:09.520 --> 49:11.920
+ How are we doing?
+
+49:11.920 --> 49:12.960
+ Still doing good.
+
+49:12.960 --> 49:13.320
+ All right.
+
+49:17.600 --> 49:20.280
+ So at the end of all this, we've got an object called dls,
+
+49:20.280 --> 49:21.880
+ it's down for data loaders.
+
+49:21.880 --> 49:28.280
+ And that contains iterators that PyTorch can run through
+
+49:28.280 --> 49:32.640
+ to grab batches of randomly split out,
+
+49:32.640 --> 49:35.360
+ training images to train the model with,
+
+49:35.360 --> 49:39.680
+ and validation images to test the model with.
+
+49:39.680 --> 49:42.680
+ So now we need a model.
+
+49:42.680 --> 49:46.400
+ The critical concept here in Fast.AI is called a learner.
+
+49:46.400 --> 49:50.160
+ A learner is something which combines a model,
+
+49:50.160 --> 49:52.440
+ which is that is the actual neural network function
+
+49:52.440 --> 49:56.360
+ we'll be training, and the data we use to train it with.
+
+49:56.360 --> 49:59.160
+ And that's why you have to pass in two things.
+
+49:59.160 --> 50:05.400
+ The data, which is the data loaders object, and a model.
+
+50:05.400 --> 50:11.080
+ And so the model is going to be the actual neural network
+
+50:11.080 --> 50:12.680
+ function that you want to pass in.
+
+50:12.680 --> 50:15.560
+ And as I said, there's a relatively small number
+
+50:15.560 --> 50:21.640
+ that basically work for the vast majority of things you do.
+
+50:21.640 --> 50:23.920
+ If you pass in just a bare symbol like this,
+
+50:23.920 --> 50:27.200
+ it's going to be one of Fast.AI's built in models.
+
+50:27.200 --> 50:29.960
+ But what's particularly interesting
+
+50:29.960 --> 50:33.360
+ is that we integrate a wonderful library
+
+50:33.360 --> 50:36.960
+ by Ross Weitman called Tim, the PyTorch image models, which
+
+50:36.960 --> 50:39.120
+ is the largest collection of computer vision models
+
+50:39.120 --> 50:40.400
+ in the world.
+
+50:40.400 --> 50:44.040
+ And at this point, Fast.AI is the first and only framework
+
+50:44.040 --> 50:45.040
+ to integrate this.
+
+50:45.040 --> 50:49.280
+ So you can use any one of the PyTorch image models.
+
+50:49.280 --> 50:51.200
+ And one of our students, Amana Mora,
+
+50:51.200 --> 50:56.120
+ was kind enough to create this fantastic documentation
+
+50:56.120 --> 50:59.800
+ where you can find out all about the different models.
+
+51:02.800 --> 51:06.360
+ And if we click on here, you can get lots and lots
+
+51:06.360 --> 51:08.880
+ of information about all the different models
+
+51:08.880 --> 51:12.920
+ that Ross has provided.
+
+51:12.920 --> 51:19.320
+ Having said that, the model family called ResNet
+
+51:19.320 --> 51:21.560
+ are probably going to be fine for nearly all the things
+
+51:21.560 --> 51:22.840
+ you want to do.
+
+51:22.840 --> 51:25.120
+ But it is fun to try different models out.
+
+51:25.120 --> 51:30.000
+ So you can type in any string here
+
+51:30.000 --> 51:32.440
+ to use any one of those other models.
+
+51:35.920 --> 51:40.080
+ OK, so if we run that, let's see what happens.
+
+51:40.080 --> 51:41.160
+ OK, so this is interesting.
+
+51:41.160 --> 51:44.160
+ So when I ran this, so remember on Kaggle,
+
+51:44.160 --> 51:47.560
+ it's creating a new virtual computer for us.
+
+51:47.560 --> 51:49.640
+ So it doesn't really have anything ready to go.
+
+51:49.640 --> 51:51.200
+ So when I ran this, the first thing it did
+
+51:51.200 --> 51:56.360
+ was it said downloading ResNet18.pth.
+
+51:56.360 --> 51:57.560
+ What's that?
+
+51:57.560 --> 52:01.040
+ Well, the reason we can do this so fast
+
+52:01.040 --> 52:06.320
+ is because somebody else has already trained this model
+
+52:06.320 --> 52:10.120
+ to recognize over 1 million images of over 1,000 different
+
+52:10.120 --> 52:14.160
+ types, something called the ImageNet Dataset.
+
+52:14.160 --> 52:18.760
+ And they then made those weights available,
+
+52:18.760 --> 52:20.720
+ those parameters available on the internet
+
+52:20.720 --> 52:22.760
+ for anybody to download.
+
+52:22.760 --> 52:27.760
+ By default, on FastAI, when you ask for a model,
+
+52:27.760 --> 52:30.440
+ we will download those weights for you
+
+52:30.440 --> 52:33.280
+ so that you don't start with a random network that
+
+52:33.280 --> 52:34.520
+ can't do anything.
+
+52:34.520 --> 52:38.240
+ You actually start with a network that can do an awful lot.
+
+52:38.240 --> 52:41.440
+ And so then something that FastAI has that's unique
+
+52:41.440 --> 52:45.000
+ is this fine tune method, which what it does
+
+52:45.000 --> 52:48.200
+ is it takes those pre trained weights we downloaded for you
+
+52:48.200 --> 52:52.680
+ and it adjusts them in a really carefully controlled way
+
+52:52.680 --> 52:58.960
+ to just teach the model the differences between your dataset
+
+52:58.960 --> 53:00.960
+ and what it was originally trained for.
+
+53:00.960 --> 53:03.200
+ That's called fine tuning.
+
+53:03.200 --> 53:05.240
+ Hence the name.
+
+53:05.240 --> 53:09.760
+ So that's why you'll see this downloading happen first.
+
+53:09.760 --> 53:12.240
+ And so as you can see, at the end of it,
+
+53:12.240 --> 53:13.680
+ this is the error rate here.
+
+53:13.680 --> 53:21.560
+ After a few seconds, it's 100% accurate.
+
+53:21.560 --> 53:23.880
+ So we now have a learner.
+
+53:23.880 --> 53:27.720
+ And this learner has started with a pre trained model.
+
+53:27.720 --> 53:29.640
+ It's been fine tuned for the purpose
+
+53:29.640 --> 53:35.600
+ of recognizing bird pictures from forest pictures.
+
+53:35.600 --> 53:39.760
+ So you can now call dot predict on it.
+
+53:39.760 --> 53:44.400
+ And dot predict, you pass in an image.
+
+53:44.400 --> 53:49.280
+ And so this is how you would then deploy your model.
+
+53:49.280 --> 53:53.720
+ So in the code you have whatever it needs to do.
+
+53:53.720 --> 53:57.600
+ So in this particular case, this person
+
+53:57.600 --> 54:01.240
+ had some reason that he needs the app to check
+
+54:01.240 --> 54:02.520
+ whether they're in a national park
+
+54:02.520 --> 54:03.880
+ and whether it's a photo of a bird.
+
+54:03.880 --> 54:06.240
+ So at the bit where they need to know if it's a photo of a bird,
+
+54:06.240 --> 54:11.960
+ it would just call this one line of code, learn dot predict.
+
+54:11.960 --> 54:16.240
+ And so that's going to return whether it's a bird or not
+
+54:16.240 --> 54:19.880
+ as a string, whether it's a bird or not as an integer,
+
+54:19.880 --> 54:23.480
+ and the probability that it's a nonbird or a bird.
+
+54:23.480 --> 54:27.720
+ And so that's why we can print these things out.
+
+54:27.720 --> 54:28.880
+ OK.
+
+54:28.880 --> 54:37.920
+ So that's how we can create a computer vision model.
+
+54:37.920 --> 54:39.880
+ What about other kinds of models?
+
+54:39.880 --> 54:43.160
+ There's a lot more in the world than just computer vision.
+
+54:43.160 --> 54:45.160
+ A lot more than just image recognition.
+
+54:45.160 --> 54:46.840
+ Well, even within computer vision,
+
+54:46.840 --> 54:51.000
+ there's a lot more than just image recognition.
+
+54:51.000 --> 54:58.640
+ For example, for example, there's
+
+54:58.640 --> 54:59.440
+ a segmentation.
+
+55:03.640 --> 55:06.040
+ So segmentation, maybe the best way to explain segmentation
+
+55:06.040 --> 55:09.200
+ is to show you the result of this model.
+
+55:09.200 --> 55:13.560
+ Segmentation is where we take photos, in this case
+
+55:13.560 --> 55:19.480
+ of road scenes, and we color in every pixel according
+
+55:19.480 --> 55:21.520
+ to what is it.
+
+55:21.520 --> 55:24.320
+ So in this case, we've got brown as cars,
+
+55:24.320 --> 55:30.440
+ blue as fences, I guess, red as buildings, or brown.
+
+55:30.440 --> 55:33.440
+ And so on the left here, some photos
+
+55:33.440 --> 55:36.200
+ that somebody has already gone through
+
+55:36.200 --> 55:39.440
+ and classified every pixel of every one of these images,
+
+55:39.440 --> 55:43.040
+ according to what that pixel is a pixel of.
+
+55:43.040 --> 55:49.440
+ And then on the right is what our model is guessing.
+
+55:49.440 --> 55:52.720
+ And as you can see, it's getting a lot of the pixels
+
+55:52.720 --> 55:57.800
+ correct, and some of them is getting wrong.
+
+55:57.800 --> 55:59.640
+ It's actually amazing how many is getting correct,
+
+55:59.640 --> 56:13.720
+ because this particular model I trained in about 20 seconds
+
+56:13.720 --> 56:16.440
+ using a tiny, tiny, tiny amount of data.
+
+56:16.440 --> 56:20.240
+ So again, you would think this would be a particularly
+
+56:20.240 --> 56:24.880
+ challenging problem to solve.
+
+56:24.880 --> 56:26.960
+ But it took about 20 seconds of training
+
+56:26.960 --> 56:30.120
+ to solve it not amazingly well, but pretty well.
+
+56:30.120 --> 56:33.040
+ If I had trained it for another two minutes,
+
+56:33.040 --> 56:35.680
+ it'd probably be close to perfect.
+
+56:35.680 --> 56:37.280
+ So this is called segmentation.
+
+56:37.280 --> 56:42.640
+ Now, you'll see that there's very, very little data required,
+
+56:42.640 --> 56:45.800
+ and sorry, very little code required.
+
+56:45.800 --> 56:49.280
+ And the steps are actually going to look quite familiar.
+
+56:49.280 --> 56:52.400
+ In fact, in this case, we're using an even simpler approach.
+
+56:52.400 --> 56:54.160
+ Earlier on, we used data blocks.
+
+56:54.160 --> 57:02.600
+ Data blocks are a intermediate level, very flexible approach
+
+57:02.600 --> 57:06.520
+ that you can take to handling almost any kind of data.
+
+57:06.520 --> 57:09.120
+ But for the kinds of data that occur a lot,
+
+57:09.120 --> 57:14.000
+ you can use these special data loaders classes, which
+
+57:14.000 --> 57:15.720
+ lets you use even less code.
+
+57:15.720 --> 57:20.120
+ So this case to create data loaders for segmentation,
+
+57:20.120 --> 57:21.720
+ you can just say, OK, I'm going to pass you
+
+57:21.720 --> 57:24.160
+ in a function for labeling.
+
+57:24.160 --> 57:27.440
+ And you can see here, it's got pretty similar things
+
+57:27.440 --> 57:31.320
+ that we pass in to what we passed in for data blocks before.
+
+57:31.320 --> 57:35.000
+ So our file names is get image files again.
+
+57:35.000 --> 57:38.720
+ And then our label function is something
+
+57:38.720 --> 57:42.920
+ that grabs this path and the codes.
+
+57:42.920 --> 57:48.120
+ So the labels for segmentation, sorry, the codes.
+
+57:48.120 --> 57:50.520
+ So what does each code mean?
+
+57:50.520 --> 57:52.720
+ It's going to be this text file.
+
+57:52.720 --> 57:56.080
+ But you can see the basic information we're providing
+
+57:56.080 --> 57:58.600
+ is very, very similar, regardless of whether we're
+
+57:58.600 --> 58:02.320
+ doing segmentation or object recognition.
+
+58:02.320 --> 58:04.120
+ And then the next steps are pretty much the same.
+
+58:04.120 --> 58:05.640
+ We create a learner.
+
+58:05.640 --> 58:07.960
+ The segmentation, we create something called a unit learner,
+
+58:07.960 --> 58:09.680
+ which we'll learn about later.
+
+58:09.680 --> 58:12.880
+ And then again, we call fine tune.
+
+58:12.880 --> 58:15.040
+ So that is it.
+
+58:15.040 --> 58:19.320
+ And that's how we create a segmentation model.
+
+58:19.320 --> 58:21.720
+ What about stepping away from computer vision?
+
+58:21.720 --> 58:26.520
+ So perhaps the most widely used kind of model used in industry
+
+58:26.520 --> 58:27.800
+ is tabular analysis.
+
+58:27.800 --> 58:30.440
+ So taking things like spreadsheets and database tables
+
+58:30.440 --> 58:31.800
+ and trying to predict columns of those.
+
+58:37.640 --> 58:41.080
+ So in tabular analysis, it really
+
+58:41.080 --> 58:45.040
+ looks very similar to what we've seen already.
+
+58:45.040 --> 58:46.360
+ We grab some data.
+
+58:46.360 --> 58:49.080
+ And you'll see when I call this untied data,
+
+58:49.080 --> 58:51.440
+ this is the thing in Fast.io that downloads some data
+
+58:51.440 --> 58:53.080
+ and decompresses it for you.
+
+58:53.080 --> 58:55.840
+ And there's a whole lot of URLs provided by Fast.AI
+
+58:55.840 --> 58:59.240
+ for all the kind of common data sets
+
+58:59.240 --> 59:02.360
+ that you might want to use, all the ones that are in the book,
+
+59:02.360 --> 59:04.360
+ or lots of data sets that are kind of widely used
+
+59:04.360 --> 59:06.480
+ in learning and research.
+
+59:06.480 --> 59:08.880
+ So that makes life nice and easy for you.
+
+59:08.880 --> 59:10.360
+ So again, we've got to create data loaders.
+
+59:10.360 --> 59:12.480
+ But this time is tabular data loaders.
+
+59:12.480 --> 59:14.960
+ But we provide pretty similar kind of information
+
+59:14.960 --> 59:16.840
+ to what we have before.
+
+59:16.840 --> 59:17.880
+ A couple of new things.
+
+59:17.880 --> 59:21.120
+ We have to tell it which of the columns are categorical.
+
+59:21.120 --> 59:23.600
+ So they can only take one of a few values
+
+59:23.600 --> 59:25.680
+ and which ones are continuous.
+
+59:25.680 --> 59:30.000
+ So they can take basically any real number.
+
+59:30.000 --> 59:34.160
+ And then again, we can use the exact same show batch
+
+59:34.160 --> 59:36.880
+ that we've seen before to see the data.
+
+59:36.880 --> 59:40.720
+ And so Fast.AI uses a lot of something
+
+59:40.720 --> 59:44.040
+ called typed dispatch, which is a system that's
+
+59:44.040 --> 59:47.240
+ particularly popular in language called Julia,
+
+59:47.240 --> 59:50.440
+ to basically automatically do the right thing
+
+59:50.440 --> 59:53.400
+ for your data regardless of what kind of data it is.
+
+59:53.400 --> 59:55.480
+ So if you call show batch on something,
+
+59:55.480 --> 59:57.240
+ you should get back something useful,
+
+59:57.240 --> 59:59.800
+ regardless of what kind of information you provided.
+
+59:59.800 --> 1:00:05.480
+ So for a table, it shows you the information in that table.
+
+1:00:05.480 --> 1:00:08.440
+ This particular data set is a data set
+
+1:00:08.440 --> 1:00:13.320
+ of whether people have less than $50,000 or more
+
+1:00:13.320 --> 1:00:18.000
+ than $50,000 in salary for different districts
+
+1:00:18.000 --> 1:00:20.240
+ based on demographic information in each district.
+
+1:00:23.720 --> 1:00:28.080
+ So to build a model for that data loaders,
+
+1:00:28.080 --> 1:00:32.160
+ we do as always something underscore learner.
+
+1:00:32.160 --> 1:00:35.280
+ In this case, it's a tabular learner.
+
+1:00:35.280 --> 1:00:37.600
+ Now, this time we don't say fine tune.
+
+1:00:37.600 --> 1:00:40.840
+ We say fit, specifically fit one cycle.
+
+1:00:40.840 --> 1:00:42.680
+ That's because for tabular models,
+
+1:00:42.680 --> 1:00:44.920
+ there's not generally going to be a pre trained model
+
+1:00:44.920 --> 1:00:47.200
+ that already does something like what you want,
+
+1:00:47.200 --> 1:00:50.960
+ because every table of data is very different.
+
+1:00:50.960 --> 1:00:53.960
+ Whereas pictures often have a similar theme.
+
+1:00:53.960 --> 1:00:55.040
+ You know, they're all pictures.
+
+1:00:55.040 --> 1:00:58.880
+ They all have the same kind of general idea of what pictures are.
+
+1:00:58.880 --> 1:01:02.240
+ So that's why it generally doesn't make too much sense
+
+1:01:02.240 --> 1:01:03.960
+ to fine tune a tabular model.
+
+1:01:03.960 --> 1:01:06.640
+ So instead, you just fit.
+
+1:01:06.640 --> 1:01:09.280
+ So there is one difference there.
+
+1:01:09.280 --> 1:01:12.600
+ I'll show another example.
+
+1:01:12.600 --> 1:01:13.960
+ OK.
+
+1:01:13.960 --> 1:01:15.120
+ So collaborative filtering.
+
+1:01:20.240 --> 1:01:23.440
+ Collaborative filtering is the basis of most recommendation
+
+1:01:23.440 --> 1:01:24.600
+ systems today.
+
+1:01:24.600 --> 1:01:26.800
+ It's a system where we basically take data
+
+1:01:26.800 --> 1:01:33.880
+ that says which users liked which products or which users
+
+1:01:33.880 --> 1:01:35.640
+ used which products.
+
+1:01:35.640 --> 1:01:39.840
+ And then we use that to guess what other products those users
+
+1:01:39.840 --> 1:01:42.640
+ might like based on finding similar users
+
+1:01:42.640 --> 1:01:44.960
+ and what those similar users liked.
+
+1:01:44.960 --> 1:01:46.800
+ The interesting thing about collaborative filtering
+
+1:01:46.800 --> 1:01:48.400
+ is that when we say similar users,
+
+1:01:48.400 --> 1:01:52.640
+ we're not referring to similar demographically,
+
+1:01:52.640 --> 1:01:58.080
+ but similar in the sense of people who liked the same kinds
+
+1:01:58.080 --> 1:02:00.400
+ of products.
+
+1:02:00.400 --> 1:02:03.920
+ So for example, if you use any of the music systems,
+
+1:02:03.920 --> 1:02:06.440
+ like Spotify or Apple Music or whatever,
+
+1:02:06.440 --> 1:02:12.200
+ it'll ask you first what's a few pieces of music you like
+
+1:02:12.200 --> 1:02:13.800
+ and you tell it.
+
+1:02:13.800 --> 1:02:16.640
+ And then it says, OK, well, maybe let's start playing
+
+1:02:16.640 --> 1:02:18.560
+ this music for you.
+
+1:02:18.560 --> 1:02:21.480
+ And that's how it works, a user's collaborative filtering.
+
+1:02:21.480 --> 1:02:26.960
+ So we can create a collaborative filtering data
+
+1:02:26.960 --> 1:02:29.880
+ loaders in exactly the same way that we're used to
+
+1:02:29.880 --> 1:02:33.640
+ by downloading and decompressing some data,
+
+1:02:33.640 --> 1:02:35.520
+ create our collab data loaders.
+
+1:02:35.520 --> 1:02:39.160
+ In this case, we can just say from CSV and passing a CSV.
+
+1:02:39.160 --> 1:02:41.520
+ And this is what collaborative filtering data looks like.
+
+1:02:41.520 --> 1:02:45.720
+ It's going to have generally speaking a user ID, some kind
+
+1:02:45.720 --> 1:02:46.720
+ of product ID.
+
+1:02:46.720 --> 1:02:51.680
+ In this case, a movie and a rating.
+
+1:02:51.680 --> 1:02:57.320
+ So in this case, this user gave this movie a rating of 3.5
+
+1:02:57.320 --> 1:02:58.640
+ out of 5.
+
+1:02:58.640 --> 1:03:00.400
+ And so again, you can see ShowBatch.
+
+1:03:00.400 --> 1:03:01.320
+ So use ShowBatch.
+
+1:03:01.320 --> 1:03:05.080
+ You should get back some useful visualization of your data
+
+1:03:05.080 --> 1:03:06.800
+ regardless of what kind of data it is.
+
+1:03:10.560 --> 1:03:14.480
+ And so again, we create a learner.
+
+1:03:14.480 --> 1:03:16.680
+ This time it's a collaborative filtering learner.
+
+1:03:16.680 --> 1:03:20.920
+ And you pass in your data.
+
+1:03:20.920 --> 1:03:23.480
+ In this case, we give it one extra piece of information,
+
+1:03:23.480 --> 1:03:26.360
+ which is because this is not predicting a category,
+
+1:03:26.360 --> 1:03:28.880
+ but it's predicting a real number,
+
+1:03:28.880 --> 1:03:31.680
+ we tell it what's the possible range.
+
+1:03:31.680 --> 1:03:34.400
+ The actual range is 1 to 5.
+
+1:03:34.400 --> 1:03:36.120
+ But for reasons you'll learn about later,
+
+1:03:36.120 --> 1:03:38.920
+ it's a good idea to actually go from a little bit lower
+
+1:03:38.920 --> 1:03:41.400
+ than the possible minimum to a little bit higher.
+
+1:03:41.400 --> 1:03:45.080
+ So that's why I say 0.5 to 5.5.
+
+1:03:45.080 --> 1:03:46.320
+ And then fine tune.
+
+1:03:46.320 --> 1:03:48.480
+ Now again, we don't really need to fine tune here
+
+1:03:48.480 --> 1:03:50.680
+ because there's not really such a thing as a pre trained
+
+1:03:50.680 --> 1:03:51.800
+ collaborative filtering model.
+
+1:03:51.800 --> 1:03:54.320
+ We could just say fit or fit one cycle,
+
+1:03:54.320 --> 1:03:57.600
+ but actually fine tune works fine as well.
+
+1:03:57.600 --> 1:04:02.400
+ So after we train it for a while, this here
+
+1:04:02.400 --> 1:04:04.520
+ is the mean squared error.
+
+1:04:04.520 --> 1:04:08.240
+ So it's basically about on average how far off are we
+
+1:04:08.240 --> 1:04:09.840
+ for the validation set.
+
+1:04:09.840 --> 1:04:13.040
+ And you can see as we train, and it's literally so fast,
+
+1:04:13.040 --> 1:04:16.000
+ it's less than a second, each epoch.
+
+1:04:16.000 --> 1:04:18.760
+ That error goes down and down.
+
+1:04:18.760 --> 1:04:22.160
+ And for any kind of fast AI model,
+
+1:04:22.160 --> 1:04:27.760
+ you can, and for any kind of fast AI model,
+
+1:04:27.760 --> 1:04:30.800
+ you can always call show results and get something sensible.
+
+1:04:30.800 --> 1:04:31.880
+ So in this case, it's going to show
+
+1:04:31.880 --> 1:04:34.600
+ a few examples of users and movies.
+
+1:04:34.600 --> 1:04:37.680
+ Here's the actual rating that user gave that movie.
+
+1:04:37.680 --> 1:04:42.160
+ And here's the rating that the model predicted.
+
+1:04:42.160 --> 1:04:44.360
+ OK, so apparently a lot of people on the forum
+
+1:04:44.360 --> 1:04:51.120
+ are asking how I'm turning this notebook into a presentation.
+
+1:04:51.120 --> 1:04:53.720
+ So I'll be delighted to show you because I'm very pleased
+
+1:04:53.720 --> 1:04:56.480
+ that these people made this thing for us to use.
+
+1:04:56.480 --> 1:04:59.320
+ It's called Rise.
+
+1:04:59.320 --> 1:05:04.560
+ And all I do is it's a notebook extension.
+
+1:05:04.560 --> 1:05:08.640
+ And in your notebook, it gives you an extra little thing
+
+1:05:08.640 --> 1:05:10.640
+ on the side where you say which things are slides
+
+1:05:10.640 --> 1:05:12.360
+ or which things are fragments.
+
+1:05:12.360 --> 1:05:15.080
+ And a fragment just being, so this is a slide that's a fragment.
+
+1:05:15.080 --> 1:05:20.280
+ So if I do that, you see it starts with a slide.
+
+1:05:20.280 --> 1:05:21.640
+ And then the fragment gets added in.
+
+1:05:25.120 --> 1:05:26.520
+ Yeah, that's about all theories too.
+
+1:05:26.520 --> 1:05:27.840
+ Actually, it's pretty great.
+
+1:05:27.840 --> 1:05:29.760
+ And it's very well documented.
+
+1:05:29.760 --> 1:05:34.000
+ I'll just mention what do I make with Jupyter Notebooks?
+
+1:05:40.120 --> 1:05:43.920
+ This entire book was written entirely in Jupyter Notebooks.
+
+1:05:47.280 --> 1:05:49.360
+ Here are the notebooks.
+
+1:05:49.360 --> 1:05:54.240
+ So if you go to the Fast.io Fastbook repo,
+
+1:05:54.240 --> 1:05:55.880
+ you can read the whole book.
+
+1:05:55.880 --> 1:06:00.360
+ And because it's all in notebooks, every time we say,
+
+1:06:00.360 --> 1:06:02.040
+ here's how you create this plot or here's
+
+1:06:02.040 --> 1:06:04.040
+ how you train this model, you can actually
+
+1:06:04.040 --> 1:06:06.400
+ create the plot or you can actually train the model
+
+1:06:06.400 --> 1:06:08.840
+ because it's all notebooks.
+
+1:06:14.880 --> 1:06:19.240
+ The entire Fast.io library is actually written in notebooks.
+
+1:06:19.240 --> 1:06:20.640
+ So you might be surprised to discover
+
+1:06:20.640 --> 1:06:25.840
+ that if you go to Fast.io slash Fast.io,
+
+1:06:25.840 --> 1:06:32.920
+ that the source code for the entire library is notebooks.
+
+1:06:38.760 --> 1:06:42.560
+ And so the nice thing about this is that the source code
+
+1:06:42.560 --> 1:06:45.200
+ for the Fast.io library has actual pictures
+
+1:06:45.200 --> 1:06:47.560
+ of the actual things that we're building, for example.
+
+1:06:51.280 --> 1:06:52.760
+ What else have we done with notebooks?
+
+1:06:52.760 --> 1:06:58.440
+ Oh, blogging.
+
+1:06:58.440 --> 1:07:00.800
+ I love blogging with notebooks because when
+
+1:07:00.800 --> 1:07:04.920
+ I want to explain something, I just write the code
+
+1:07:04.920 --> 1:07:06.880
+ and you can just see the outputs.
+
+1:07:06.880 --> 1:07:08.960
+ And it all just works.
+
+1:07:12.960 --> 1:07:15.680
+ Another thing you might be surprised by
+
+1:07:15.680 --> 1:07:17.960
+ is all of our tests and continuous integration
+
+1:07:17.960 --> 1:07:20.200
+ are also all in notebooks.
+
+1:07:20.200 --> 1:07:27.400
+ So every time we change one of our notebooks,
+
+1:07:27.400 --> 1:07:31.600
+ every time we change one of our notebooks,
+
+1:07:31.600 --> 1:07:37.080
+ hundreds of tests get run automatically in parallel.
+
+1:07:37.080 --> 1:07:40.800
+ And if there's any issues, we will find out about it.
+
+1:07:40.800 --> 1:07:42.080
+ So yeah, notebooks are great.
+
+1:07:42.080 --> 1:07:51.520
+ And RISE is a really nice way to do slides in notebooks.
+
+1:07:51.520 --> 1:07:51.960
+ All right.
+
+1:07:55.080 --> 1:08:00.640
+ So what can deep learning do at present?
+
+1:08:00.640 --> 1:08:02.880
+ We're still scratching the tip of the iceberg,
+
+1:08:02.880 --> 1:08:06.360
+ even though it's a pretty well hyped, heavily
+
+1:08:06.360 --> 1:08:08.120
+ marketed technology at this point.
+
+1:08:08.120 --> 1:08:15.520
+ When we started in 2014 or so, not many people
+
+1:08:15.520 --> 1:08:17.360
+ were talking about deep learning.
+
+1:08:17.360 --> 1:08:20.160
+ And really, there was no accessible way
+
+1:08:20.160 --> 1:08:21.200
+ to get started with it.
+
+1:08:21.200 --> 1:08:23.280
+ There were no pre trained models you could download.
+
+1:08:26.200 --> 1:08:29.120
+ There was just starting to appear
+
+1:08:29.120 --> 1:08:30.840
+ some of the first open source software
+
+1:08:30.840 --> 1:08:33.800
+ that would run on GPUs.
+
+1:08:33.800 --> 1:08:36.080
+ But yeah, I mean, despite the fact that today there's
+
+1:08:36.080 --> 1:08:37.520
+ a lot of people talking about deep learning,
+
+1:08:37.520 --> 1:08:39.560
+ we're just scratching the surface.
+
+1:08:39.560 --> 1:08:41.680
+ Every time, pretty much somebody says to me,
+
+1:08:41.680 --> 1:08:45.160
+ I work in domain X, and I thought I might try deep learning
+
+1:08:45.160 --> 1:08:47.080
+ out to see if it can help.
+
+1:08:47.080 --> 1:08:49.840
+ And I say them a few months later, and I say, how did it go?
+
+1:08:49.840 --> 1:08:51.840
+ They nearly always say, wow, we just broke the state
+
+1:08:51.840 --> 1:08:54.440
+ of the art results in our field.
+
+1:08:54.440 --> 1:08:56.680
+ So when I say these are things that it's currently
+
+1:08:56.680 --> 1:08:58.960
+ state of the art for, these are kind of the ones
+
+1:08:58.960 --> 1:09:00.320
+ that people have tried so far.
+
+1:09:00.320 --> 1:09:02.600
+ But still, most things haven't been tried.
+
+1:09:02.600 --> 1:09:06.440
+ So in NLP, deep learning is the state of the art method
+
+1:09:06.440 --> 1:09:11.720
+ in all these kinds of things, and a lot more.
+
+1:09:11.720 --> 1:09:21.240
+ Computer vision, medicine, biology,
+
+1:09:21.240 --> 1:09:25.320
+ recommendation systems, playing games, robotics.
+
+1:09:25.320 --> 1:09:29.480
+ I mean, I've tried elsewhere to make bigger lists,
+
+1:09:29.480 --> 1:09:31.880
+ and I just end up with pages and pages and pages.
+
+1:09:31.880 --> 1:09:38.560
+ So generally speaking, if it's something
+
+1:09:38.560 --> 1:09:44.840
+ that a human can do reasonably quickly,
+
+1:09:44.840 --> 1:09:47.520
+ like look at a go board and decide
+
+1:09:47.520 --> 1:09:49.400
+ if it looks like a good board or not,
+
+1:09:49.400 --> 1:09:53.600
+ even if it needs to be an expert human,
+
+1:09:53.600 --> 1:09:56.560
+ then that's probably something that deep learning will
+
+1:09:56.560 --> 1:09:58.480
+ be pretty good at.
+
+1:09:58.480 --> 1:10:02.320
+ If it's something that takes a lot of logical thought
+
+1:10:02.320 --> 1:10:05.080
+ processes over an extended period of time,
+
+1:10:05.080 --> 1:10:09.960
+ particularly if it's not based on much data, maybe not.
+
+1:10:09.960 --> 1:10:13.240
+ Like who's going to win the next election or something
+
+1:10:13.240 --> 1:10:14.320
+ like that?
+
+1:10:14.320 --> 1:10:16.560
+ That'd be kind of broadly how I would try to decide
+
+1:10:16.560 --> 1:10:21.880
+ is your thing useful for good for deep learning or not.
+
+1:10:21.880 --> 1:10:26.200
+ It's been a long time to get to this point.
+
+1:10:26.200 --> 1:10:30.200
+ Yes, deep learning is incredibly powerful now,
+
+1:10:30.200 --> 1:10:32.000
+ but it's taken decades of work.
+
+1:10:32.000 --> 1:10:33.440
+ This was the first neural network.
+
+1:10:33.440 --> 1:10:36.480
+ Remember neural networks are the basis of deep learning.
+
+1:10:36.480 --> 1:10:41.360
+ So this was back in 1957.
+
+1:10:41.360 --> 1:10:47.080
+ The basic ideas have not changed much at all.
+
+1:10:47.080 --> 1:10:52.280
+ But we do have things like GPUs now, and solid state
+
+1:10:52.280 --> 1:10:55.080
+ drives, and stuff like that.
+
+1:10:55.080 --> 1:10:58.640
+ And of course, much more data just is available now.
+
+1:10:58.640 --> 1:11:03.960
+ But this has been decades of really hard work
+
+1:11:03.960 --> 1:11:06.720
+ by a lot of people to get to this point.
+
+1:11:11.360 --> 1:11:15.240
+ So let's kind of take a step back and talk
+
+1:11:15.240 --> 1:11:21.440
+ about what's going on in these models.
+
+1:11:21.440 --> 1:11:27.120
+ And I'm going to describe the basic idea of machine learning
+
+1:11:27.120 --> 1:11:30.880
+ largely as it was described by Arthur Samuel in the late 50s
+
+1:11:30.880 --> 1:11:33.480
+ when it was invented.
+
+1:11:33.480 --> 1:11:39.560
+ And I'm going to kind of do it with these graphs, which,
+
+1:11:39.560 --> 1:11:42.120
+ by the way, you might find fun.
+
+1:11:42.120 --> 1:11:54.000
+ These graphs themselves created with Jupyter Notebooks.
+
+1:11:54.000 --> 1:11:56.280
+ So these are graph Fizz descriptions
+
+1:11:56.280 --> 1:11:58.080
+ that are going to get turned into these.
+
+1:11:58.080 --> 1:12:01.040
+ So there's a little sneak peek behind the scenes for you.
+
+1:12:04.040 --> 1:12:05.580
+ So let's start with kind of a graph of like,
+
+1:12:05.580 --> 1:12:07.880
+ well, what does a normal program look like?
+
+1:12:07.880 --> 1:12:11.080
+ So in the pre deep learning and machine learning days,
+
+1:12:11.080 --> 1:12:15.000
+ well, you still have inputs, and you still have results.
+
+1:12:15.000 --> 1:12:17.200
+ And then you code a program in the middle,
+
+1:12:17.200 --> 1:12:20.240
+ which is a bunch of conditionals and loops and setting
+
+1:12:20.240 --> 1:12:22.200
+ variables and blah, blah, blah.
+
+1:12:22.200 --> 1:12:24.400
+ OK.
+
+1:12:24.400 --> 1:12:27.640
+ A machine learning model doesn't look that different.
+
+1:12:30.560 --> 1:12:35.920
+ But the program has been replaced with something
+
+1:12:35.920 --> 1:12:37.600
+ called a model.
+
+1:12:37.600 --> 1:12:39.640
+ And we don't just have inputs now.
+
+1:12:39.640 --> 1:12:43.640
+ We now also have weights, which are also called parameters.
+
+1:12:43.640 --> 1:12:45.040
+ And the key thing is this.
+
+1:12:45.040 --> 1:12:49.400
+ The model is not any more a bunch of conditionals
+
+1:12:49.400 --> 1:12:51.000
+ and loops and things.
+
+1:12:51.000 --> 1:12:52.760
+ It's a mathematical function.
+
+1:12:52.760 --> 1:12:54.560
+ In the case of a neural network, it's
+
+1:12:54.560 --> 1:12:58.160
+ a mathematical function that takes the inputs,
+
+1:12:58.160 --> 1:13:01.920
+ multiplies them together by the weights, by one set of weights,
+
+1:13:01.920 --> 1:13:03.240
+ and adds them up.
+
+1:13:03.240 --> 1:13:05.240
+ And then it does that again for a second set of weights
+
+1:13:05.240 --> 1:13:05.920
+ and adds them up.
+
+1:13:05.920 --> 1:13:09.840
+ It does it again for a third set of weights and adds them up,
+
+1:13:09.840 --> 1:13:09.800
+ and so forth.
+
+1:13:09.800 --> 1:13:11.840
+ It then takes all the negative numbers
+
+1:13:11.840 --> 1:13:14.840
+ and replaces them with zeros.
+
+1:13:14.840 --> 1:13:18.160
+ And then it takes those as inputs to a next layer.
+
+1:13:18.160 --> 1:13:19.320
+ It does the same thing.
+
+1:13:19.320 --> 1:13:21.960
+ It multiplies them a bunch of times and adds them up.
+
+1:13:21.960 --> 1:13:23.960
+ And it does that a few times.
+
+1:13:23.960 --> 1:13:26.960
+ And that's called a neural network.
+
+1:13:26.960 --> 1:13:31.560
+ Now, the model, therefore, is not
+
+1:13:31.560 --> 1:13:32.680
+ going to do anything useful.
+
+1:13:32.680 --> 1:13:36.720
+ And this leads weights to very carefully, it shows it.
+
+1:13:36.720 --> 1:13:38.720
+ And so the way it works is that we actually
+
+1:13:38.720 --> 1:13:42.480
+ start out with these weights as being random.
+
+1:13:42.480 --> 1:13:47.600
+ So initially, this thing doesn't do anything useful at all.
+
+1:13:52.400 --> 1:13:56.080
+ So what we do, the way Arthur Samuel described it back
+
+1:13:56.080 --> 1:13:59.000
+ in the late 50s, the inventor of machine learning,
+
+1:13:59.000 --> 1:14:02.080
+ is he said, OK, let's take the inputs and the weights,
+
+1:14:02.080 --> 1:14:03.280
+ put them through our model.
+
+1:14:03.280 --> 1:14:05.240
+ He wasn't talking particularly about neural networks.
+
+1:14:05.240 --> 1:14:09.480
+ He's just like, whatever model you like.
+
+1:14:09.480 --> 1:14:11.960
+ Get the results.
+
+1:14:11.960 --> 1:14:15.080
+ And then let's decide how good they are.
+
+1:14:15.080 --> 1:14:18.080
+ So if, for example, we're trying to decide,
+
+1:14:18.080 --> 1:14:20.080
+ is this a picture of a bird?
+
+1:14:20.080 --> 1:14:22.800
+ And the model said, which initially is random,
+
+1:14:22.800 --> 1:14:24.160
+ says this isn't a bird.
+
+1:14:24.160 --> 1:14:25.680
+ And actually, it is a bird.
+
+1:14:25.680 --> 1:14:27.720
+ We would say, oh, you're wrong.
+
+1:14:27.720 --> 1:14:29.880
+ So we then calculate the loss.
+
+1:14:29.880 --> 1:14:33.200
+ So the loss is a number that says how good were the results.
+
+1:14:35.200 --> 1:14:36.720
+ So that's all pretty straightforward.
+
+1:14:36.720 --> 1:14:38.880
+ You know, we could, for example, say, oh, what's the accuracy?
+
+1:14:38.880 --> 1:14:40.800
+ We could look at 100 photos and say,
+
+1:14:40.800 --> 1:14:43.720
+ which percentage of them did it get right?
+
+1:14:43.720 --> 1:14:45.720
+ No worries.
+
+1:14:45.720 --> 1:14:49.200
+ Now the critical step is this error.
+
+1:14:49.200 --> 1:14:52.880
+ We need as a way of updating the weights that
+
+1:14:52.880 --> 1:14:55.120
+ is coming up with a new set of weights that
+
+1:14:55.120 --> 1:14:58.640
+ are a bit better than the previous set.
+
+1:14:58.640 --> 1:15:04.200
+ And by a bit better, we mean it should make the loss get
+
+1:15:04.200 --> 1:15:05.040
+ a little bit better.
+
+1:15:05.040 --> 1:15:09.360
+ So we've got this number that says how good is our model?
+
+1:15:09.360 --> 1:15:11.000
+ And initially, it's terrible, right?
+
+1:15:11.000 --> 1:15:12.400
+ It's random.
+
+1:15:12.400 --> 1:15:16.000
+ We need some mechanism if making a little bit better.
+
+1:15:16.000 --> 1:15:19.680
+ If we can just do that one thing, then we just
+
+1:15:19.680 --> 1:15:21.600
+ need to iterate this a few times.
+
+1:15:21.600 --> 1:15:24.200
+ Because each time we put in some more inputs
+
+1:15:24.200 --> 1:15:27.040
+ and put in our weights and get our loss
+
+1:15:27.040 --> 1:15:29.240
+ and use it to make it a little bit better,
+
+1:15:29.240 --> 1:15:32.000
+ then if we make it a little bit better enough times,
+
+1:15:32.000 --> 1:15:35.560
+ eventually it's going to get good, assuming
+
+1:15:35.560 --> 1:15:38.880
+ that our model is flexible enough to represent
+
+1:15:38.880 --> 1:15:40.960
+ the thing we want to do.
+
+1:15:40.960 --> 1:15:43.560
+ Now remember what I told you earlier about what a neural network
+
+1:15:43.560 --> 1:15:45.840
+ is, which is basically multiplying things together
+
+1:15:45.840 --> 1:15:49.360
+ and adding them up and replacing the negatives with zeros.
+
+1:15:49.360 --> 1:15:51.320
+ And you do that a few times.
+
+1:15:51.320 --> 1:15:55.880
+ That is, provably, an infinitely flexible function.
+
+1:15:55.880 --> 1:15:59.960
+ So it actually turns out that that incredibly simple sequence
+
+1:15:59.960 --> 1:16:03.600
+ of steps, if you're repeated a few times,
+
+1:16:03.600 --> 1:16:09.080
+ you do enough of them, can solve any computable function.
+
+1:16:09.080 --> 1:16:15.560
+ And something like generate an artwork based off
+
+1:16:15.560 --> 1:16:21.440
+ somebody's Twitter bio is an example of a computable function.
+
+1:16:21.440 --> 1:16:26.160
+ Or translate English to Chinese is an example
+
+1:16:26.160 --> 1:16:27.800
+ of a computable function.
+
+1:16:27.800 --> 1:16:31.080
+ So they're not the kinds of normal functions you
+
+1:16:31.080 --> 1:16:35.720
+ do in year eight math, but they are computable functions.
+
+1:16:35.720 --> 1:16:41.560
+ And so therefore, if we can just create this step,
+
+1:16:41.560 --> 1:16:45.520
+ then and use the neural network as a model,
+
+1:16:45.520 --> 1:16:47.120
+ then we're good to go.
+
+1:16:47.120 --> 1:16:51.400
+ In theory, we can solve anything given enough time
+
+1:16:51.400 --> 1:16:53.880
+ and enough data.
+
+1:16:53.880 --> 1:16:58.800
+ And so that's exactly what we do.
+
+1:16:58.800 --> 1:17:04.280
+ And so once we've finished that training procedure,
+
+1:17:04.280 --> 1:17:06.960
+ we don't need the loss anymore.
+
+1:17:06.960 --> 1:17:08.680
+ And even the weights themselves, we
+
+1:17:08.680 --> 1:17:10.960
+ can integrate them into the model.
+
+1:17:10.960 --> 1:17:13.240
+ We've finished changing them, so we can just say that's now
+
+1:17:13.240 --> 1:17:14.000
+ fixed.
+
+1:17:14.000 --> 1:17:16.280
+ And so once we've done that, we now
+
+1:17:16.280 --> 1:17:19.280
+ have something which puts them through a model
+
+1:17:19.280 --> 1:17:21.720
+ and gives us results.
+
+1:17:21.720 --> 1:17:27.160
+ It looks exactly like our original idea of a program.
+
+1:17:27.160 --> 1:17:30.880
+ And that's why we can do what I described earlier.
+
+1:17:30.880 --> 1:17:33.480
+ Once we've got that learned dot predict for our bird
+
+1:17:33.480 --> 1:17:38.000
+ recognizer, we can insert it into any piece of computer code.
+
+1:17:38.000 --> 1:17:42.520
+ Once we've got a trained model as just another piece of code,
+
+1:17:42.520 --> 1:17:47.320
+ we can call with some inputs and get some outputs.
+
+1:17:47.320 --> 1:17:51.880
+ Deploying machine learning models in practice
+
+1:17:51.880 --> 1:17:57.000
+ can come with a lot of little tricky details.
+
+1:17:57.000 --> 1:17:58.920
+ But the basic idea in your code is
+
+1:17:58.920 --> 1:18:01.560
+ that you're just going to have a line of code that says
+
+1:18:01.560 --> 1:18:02.480
+ learned dot predict.
+
+1:18:02.480 --> 1:18:04.160
+ And then you just fit it in with all the rest
+
+1:18:04.160 --> 1:18:05.640
+ of your code in the usual way.
+
+1:18:05.640 --> 1:18:08.600
+ And this is why, because a trained model is just
+
+1:18:08.600 --> 1:18:20.280
+ another thing that maps inputs to results.
+
+1:18:20.280 --> 1:18:25.840
+ All right, so as we come to wrap up this first lesson,
+
+1:18:25.840 --> 1:18:28.480
+ for those of you that are already familiar with notebooks
+
+1:18:28.480 --> 1:18:35.480
+ and Python, this is going to be pretty easy for you.
+
+1:18:35.480 --> 1:18:37.400
+ You're just going to be using some stuff that you're already
+
+1:18:37.400 --> 1:18:39.880
+ familiar with in some slightly new libraries.
+
+1:18:39.880 --> 1:18:44.760
+ For those of you who are not familiar with Python,
+
+1:18:44.760 --> 1:18:46.520
+ you're biting into a big thing here.
+
+1:18:46.520 --> 1:18:49.040
+ There's obviously a lot you're going to have to learn.
+
+1:18:49.040 --> 1:18:53.880
+ And to be clear, I'm not going to be teaching Python
+
+1:18:53.880 --> 1:18:55.000
+ in this course.
+
+1:18:55.000 --> 1:18:57.880
+ But we do have links to great Python resources
+
+1:18:57.880 --> 1:18:59.400
+ in the forum.
+
+1:18:59.400 --> 1:19:03.640
+ So check out that thread.
+
+1:19:03.640 --> 1:19:06.680
+ Regardless of where you're at, the most important thing
+
+1:19:06.680 --> 1:19:09.560
+ is to experiment.
+
+1:19:09.560 --> 1:19:15.880
+ And so experimenting could be as simple as just running
+
+1:19:15.880 --> 1:19:21.600
+ those cackle notebooks that I've shown you just to see them run.
+
+1:19:21.600 --> 1:19:23.240
+ You could try changing things a little bit.
+
+1:19:23.240 --> 1:19:27.440
+ I'd really love you to try doing the bird or forest exercise,
+
+1:19:27.440 --> 1:19:29.360
+ but come up with something else.
+
+1:19:29.360 --> 1:19:32.760
+ Maybe try to use three or four categories, rather than two.
+
+1:19:32.760 --> 1:19:34.360
+ Have a think about something that you think
+
+1:19:34.360 --> 1:19:38.800
+ would be fun to try.
+
+1:19:38.800 --> 1:19:42.920
+ Depending on where you're at, push yourself a little bit,
+
+1:19:42.920 --> 1:19:43.720
+ but not too much.
+
+1:19:43.720 --> 1:19:45.520
+ So make sure you get something finished
+
+1:19:45.520 --> 1:19:47.760
+ before the next lesson.
+
+1:19:47.760 --> 1:19:51.440
+ Most importantly, read chapter one of the book.
+
+1:19:51.440 --> 1:19:53.880
+ It's got much the same stuff that we've seen today
+
+1:19:53.880 --> 1:19:57.280
+ about presented in a slightly different way.
+
+1:19:57.280 --> 1:19:59.200
+ And then come back to the forums
+
+1:19:59.200 --> 1:20:04.240
+ and present what you've done in the share your work here thread.
+
+1:20:04.240 --> 1:20:10.160
+ After the first time we did this in the year one of the course,
+
+1:20:10.160 --> 1:20:12.480
+ we got over 1,000 replies.
+
+1:20:12.480 --> 1:20:15.800
+ And of those replies, it's amazing how many of them
+
+1:20:15.800 --> 1:20:21.840
+ have ended up turning into new startups, scientific papers,
+
+1:20:21.840 --> 1:20:23.160
+ job offers.
+
+1:20:23.160 --> 1:20:25.400
+ It's been really cool to watch people's journeys.
+
+1:20:25.400 --> 1:20:27.240
+ And some of them were just plain fun, you know?
+
+1:20:27.240 --> 1:20:30.920
+ So this person classified different types of Trinidad
+
+1:20:30.920 --> 1:20:32.040
+ and Tobago people.
+
+1:20:32.040 --> 1:20:34.760
+ So people do stuff based on where they live
+
+1:20:34.760 --> 1:20:36.000
+ and what their interests are.
+
+1:20:36.000 --> 1:20:37.760
+ I don't know if this person is particularly interested
+
+1:20:37.760 --> 1:20:39.480
+ in zucchini and cucumber, but they
+
+1:20:39.480 --> 1:20:41.480
+ meet as zucchini and cucumber classifier.
+
+1:20:41.480 --> 1:20:43.840
+ I thought this was a really interesting one's
+
+1:20:43.840 --> 1:20:47.040
+ classifying satellite imagery into what city it's probably
+
+1:20:47.040 --> 1:20:48.280
+ a picture of.
+
+1:20:48.280 --> 1:20:52.560
+ Amazingly accurate, actually, 85% with 110 classes.
+
+1:20:52.560 --> 1:20:58.400
+ Panama City bus classifier, Batic cloth classifier.
+
+1:20:58.400 --> 1:21:02.200
+ This one, very practically important,
+
+1:21:02.200 --> 1:21:04.120
+ recognizing the state of buildings.
+
+1:21:04.120 --> 1:21:05.720
+ We've had quite a few students actually
+
+1:21:05.720 --> 1:21:08.560
+ move into disaster resilience based on satellite imagery
+
+1:21:08.560 --> 1:21:11.840
+ using exactly this kind of work.
+
+1:21:11.840 --> 1:21:14.440
+ We've already actually seen this example, Ethan
+
+1:21:14.440 --> 1:21:16.560
+ Sooten, the sound classifier.
+
+1:21:16.560 --> 1:21:19.240
+ And I mentioned that with the state of the art,
+
+1:21:19.240 --> 1:21:21.800
+ he actually checked up the data sets website in front
+
+1:21:21.800 --> 1:21:25.280
+ of the beta state of the art for that.
+
+1:21:25.280 --> 1:21:28.080
+ Elena Harley did a German normal sequencing.
+
+1:21:28.080 --> 1:21:31.000
+ So she was at Human Longevity International.
+
+1:21:31.000 --> 1:21:33.720
+ So she actually did three different, really interesting
+
+1:21:33.720 --> 1:21:36.520
+ pieces of cancer work during that first course,
+
+1:21:36.520 --> 1:21:38.760
+ if I remember correctly.
+
+1:21:38.760 --> 1:21:40.480
+ And I showed you this picture before.
+
+1:21:40.480 --> 1:21:44.960
+ What I didn't mention is actually this student club
+
+1:21:44.960 --> 1:21:47.180
+ was a software developer at Splunk,
+
+1:21:47.180 --> 1:21:49.240
+ big nastak listed company.
+
+1:21:49.240 --> 1:21:51.920
+ And this student project, he did,
+
+1:21:51.920 --> 1:21:54.960
+ turned into a new patented product at Splunk
+
+1:21:54.960 --> 1:21:57.480
+ and a big blog post and the whole thing turned out
+
+1:21:57.480 --> 1:21:58.120
+ to be really cool.
+
+1:21:58.120 --> 1:22:03.040
+ It's basically something to identify fraudsters using
+
+1:22:03.040 --> 1:22:06.600
+ image recognition with these pictures we discussed.
+
+1:22:06.600 --> 1:22:08.720
+ One of our students built this startup called InVision.
+
+1:22:11.960 --> 1:22:14.560
+ Anyway, there's been lots and lots of examples.
+
+1:22:14.560 --> 1:22:22.100
+ So all of this is to say, have a go at starting something,
+
+1:22:22.100 --> 1:22:24.600
+ create something you think would be fun or interesting
+
+1:22:24.600 --> 1:22:26.320
+ and share it in the forum.
+
+1:22:26.320 --> 1:22:29.480
+ If you're a total beginner with Python,
+
+1:22:29.480 --> 1:22:31.200
+ then start with something simple.
+
+1:22:31.200 --> 1:22:33.120
+ But I think you'll find people very encouraging.
+
+1:22:33.120 --> 1:22:34.960
+ And if you've done this a few times before,
+
+1:22:34.960 --> 1:22:37.960
+ then try to push yourself a little bit further.
+
+1:22:37.960 --> 1:22:40.120
+ And don't forget to look at the quiz questions
+
+1:22:40.120 --> 1:22:42.760
+ at the end of the book and see if you can answer them
+
+1:22:42.760 --> 1:22:43.440
+ all correctly.
+
+1:22:48.040 --> 1:22:50.280
+ All right, thanks everybody so much for coming.
+
+1:22:50.280 --> 1:22:52.200
+ OK, thanks so much for coming, everybody.
+
+1:22:52.200 --> 1:22:55.200
+ Bye.
+
