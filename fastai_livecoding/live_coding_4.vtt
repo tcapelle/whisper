@@ -1,0 +1,1865 @@
+WEBVTT
+
+00:00.000 --> 00:11.120
+ Okay, so let's see how to do that paper space stuff that we did in the last session, but
+
+00:11.120 --> 00:16.280
+ from scratch, like step by step.
+
+00:16.280 --> 00:23.400
+ And one very reasonable comment on the forum after yesterday's session was like, this all
+
+00:23.400 --> 00:29.680
+ seems kind of complicated, and it is.
+
+00:29.680 --> 00:34.560
+ And like definitely one option is like, don't worry about it for now.
+
+00:34.560 --> 00:42.120
+ But I would say like trying to get this working is a pretty good exercise actually.
+
+00:42.120 --> 00:51.400
+ So you know, it's totally up to you, but I think it's probably worth trying to get working
+
+00:51.400 --> 00:57.480
+ and ask lots of questions about anything that you're not sure if it doesn't make sense or
+
+00:57.480 --> 01:00.240
+ it doesn't work for you or whatever.
+
+01:00.240 --> 01:08.080
+ Okay, so if I say share screen, here we go, share portion of screen.
+
+01:08.080 --> 01:11.080
+ I've never tried this before, and I think it would happen.
+
+01:11.080 --> 01:12.080
+ Share.
+
+01:12.080 --> 01:13.080
+ Move that.
+
+01:13.080 --> 01:24.080
+ There.
+
+01:24.080 --> 01:25.080
+ This is cool.
+
+01:25.080 --> 01:29.240
+ Okay, do you see my browser window?
+
+01:29.240 --> 01:30.240
+ Yes.
+
+01:30.240 --> 01:31.240
+ Yes.
+
+01:31.240 --> 01:32.240
+ All right.
+
+01:32.240 --> 01:38.520
+ Okay, I'm successfully sharing a portion of the screen.
+
+01:38.520 --> 01:41.520
+ Paper space.
+
+01:41.520 --> 01:46.480
+ So what I did this morning was I just went in and moved all of my paper space set up in
+
+01:46.480 --> 01:52.160
+ persistent storage out of the way so that when I create a notebook, it's going to be
+
+01:52.160 --> 01:57.600
+ totally empty.
+
+01:57.600 --> 02:02.680
+ So let's create a notebook.
+
+02:02.680 --> 02:12.680
+ How did you move it out of the way to everything?
+
+02:12.680 --> 02:13.680
+ The advanced options.
+
+02:13.680 --> 02:14.680
+ I know.
+
+02:14.680 --> 02:19.760
+ I mean, I just like I went into slash storage and moved the files, renamed them to give
+
+02:19.760 --> 02:21.760
+ them a light.bak extension or whatever.
+
+02:21.760 --> 02:25.560
+ So they wouldn't be run and moved everything into a different order.
+
+02:25.560 --> 02:26.560
+ That's all.
+
+02:26.560 --> 02:29.640
+ So I'm the setup that we would all see, right?
+
+02:29.640 --> 02:30.640
+ That's the idea.
+
+02:30.640 --> 02:31.640
+ Yeah, exactly.
+
+02:31.640 --> 02:33.160
+ It looked like you should all see.
+
+02:33.160 --> 02:35.200
+ So I'm going to delete the workspace URL.
+
+02:35.200 --> 02:42.040
+ So we have something totally empty, which I think's actually probably best.
+
+02:42.040 --> 02:44.680
+ Right.
+
+02:44.680 --> 02:51.120
+ And yeah, so follow along if you want.
+
+02:51.120 --> 02:57.120
+ And if anything doesn't work for you, let me know.
+
+02:57.120 --> 03:05.600
+ And then what I thought we would do is I like to learn as few things as possible because
+
+03:05.600 --> 03:06.840
+ I'm lazy.
+
+03:06.840 --> 03:11.360
+ And so the way to get away with being lazy and learning as few things as possible is
+
+03:11.360 --> 03:18.480
+ to learn things which are really versatile and powerful so that they can like do a lot
+
+03:18.480 --> 03:19.560
+ of things.
+
+03:19.560 --> 03:28.120
+ So in particular, I haven't really spent the time to learn bash scripting very well.
+
+03:28.120 --> 03:34.480
+ I know it a little bit because I have instead spent the time to learn to use Python as an
+
+03:34.480 --> 03:36.400
+ effective scripting language.
+
+03:36.400 --> 03:38.240
+ And I can also use Python for machine learning.
+
+03:38.240 --> 03:42.080
+ I can also use Python for creating web services.
+
+03:42.080 --> 03:47.880
+ I can also use Python for creating console applications.
+
+03:47.880 --> 03:52.360
+ I can use Python for creating continuous integration scripts, etc.
+
+03:52.360 --> 03:56.200
+ So that way I can be lazy and I like being lazy.
+
+03:56.200 --> 04:02.160
+ It's one of Larry Wall's three virtues of a great programmer is laziness along with impatience
+
+04:02.160 --> 04:03.160
+ and hubris.
+
+04:03.160 --> 04:06.200
+ And I would like to be a great programmer.
+
+04:06.200 --> 04:09.400
+ So I follow those principles.
+
+04:09.400 --> 04:15.040
+ So let's try to use Python to kind of automate the things we want to do.
+
+04:15.040 --> 04:22.880
+ So remember that we're going to avoid using the weird proprietary GUI because we're lazy.
+
+04:22.880 --> 04:25.320
+ We don't want to learn it and also because it's not that good.
+
+04:25.320 --> 04:33.520
+ So I'm just going to open up a second tab.
+
+04:33.520 --> 04:39.120
+ And so over here I'll click JupyterLab.
+
+04:39.120 --> 04:45.440
+ And so what we should find is that we're in a totally empty spot.
+
+04:45.440 --> 04:47.360
+ Here we go.
+
+04:47.360 --> 04:52.120
+ So this morning I did do some reading of documentation, which is also a great thing to do if you're
+
+04:52.120 --> 04:56.480
+ lazy because if you read documentation then you can find out straight away how things
+
+04:56.480 --> 04:59.040
+ work rather than spending ages trying to figure it out.
+
+04:59.040 --> 05:04.640
+ And so the documentation for paper space was actually very useful.
+
+05:04.640 --> 05:14.200
+ And it explained how their different folders work exactly.
+
+05:14.200 --> 05:21.720
+ So in the root directory, it's probably a bit bigger I think.
+
+05:21.720 --> 05:24.720
+ There we go.
+
+05:24.720 --> 05:30.200
+ Actually, I think if I go view presentation mode or something it makes it a bit bigger
+
+05:30.200 --> 05:31.200
+ anyway.
+
+05:31.200 --> 05:34.480
+ That didn't do anything at all.
+
+05:34.480 --> 05:35.480
+ Okay.
+
+05:35.480 --> 05:39.720
+ In the root directory there's a couple of particularly interesting folders.
+
+05:39.720 --> 05:43.440
+ Most of the folders you see here are the same that you would find in any Linux box.
+
+05:43.440 --> 05:47.080
+ But the notebooks and storage folders are interesting.
+
+05:47.080 --> 05:51.160
+ And one of the ways we know they're interesting is if I go df minus h, which you might remember
+
+05:51.160 --> 05:59.000
+ is disk free, it lists all the mounted disks in human form.
+
+05:59.000 --> 06:03.480
+ It's made it way too wide so we can't really read it.
+
+06:03.480 --> 06:10.400
+ Okay, I make it smaller just for the purpose of showing this.
+
+06:10.400 --> 06:19.480
+ So the slash notebooks is actually on a whole separate 500 gigabyte disk and slash storage
+
+06:19.480 --> 06:24.640
+ is on a whole separate 500 gigabyte disk.
+
+06:24.640 --> 06:31.600
+ So what paper space does is slash storage, anything I put in there is going to be seen
+
+06:31.600 --> 06:35.320
+ by every single notebook server I create.
+
+06:35.320 --> 06:38.480
+ And in fact, if you've got, I think if you've got that model, probably people in the organization,
+
+06:38.480 --> 06:40.800
+ they might see the same thing as well.
+
+06:40.800 --> 06:47.960
+ So that's going to be shared across, yeah, or any notebook server I create.
+
+06:47.960 --> 06:51.000
+ That's going to be handy because anything I want to use on every one of my servers, if
+
+06:51.000 --> 06:56.000
+ I put it in there, then I don't have, you know, I don't have to worry about recreating at each
+
+06:56.000 --> 06:57.200
+ time.
+
+06:57.200 --> 07:02.080
+ Something we didn't mention last time is slash notebooks is interesting.
+
+07:02.080 --> 07:09.360
+ That's also persistent storage, but it's persistent storage just for this one server.
+
+07:09.360 --> 07:14.360
+ So stuff that's in there, we will see every time we start up this server.
+
+07:14.360 --> 07:16.080
+ If we delete this server, it's gone.
+
+07:16.080 --> 07:18.960
+ I'll just be back it up.
+
+07:18.960 --> 07:23.280
+ So that's where we would put things that we don't want on every server, but just on this
+
+07:23.280 --> 07:26.280
+ one.
+
+07:26.280 --> 07:32.920
+ You pay for storage and you pay, I think it's like 30 cents a gigabyte or something like
+
+07:32.920 --> 07:35.480
+ that per month.
+
+07:35.480 --> 07:39.760
+ And they don't limit you, you know, except for the 500 gig limit.
+
+07:39.760 --> 07:42.440
+ So it's up to you to be careful of that.
+
+07:42.440 --> 07:47.840
+ You will find in your account, there's a section called billing that shows you how much storage
+
+07:47.840 --> 07:50.720
+ you're using.
+
+07:50.720 --> 07:55.440
+ So they will add up stuff in slash storage that just appears once.
+
+07:55.440 --> 08:00.880
+ And every single one of your notebook servers slash notebooks that will all be added together.
+
+08:00.880 --> 08:03.560
+ Okay.
+
+08:03.560 --> 08:14.800
+ So the first thing we did last time was we tried installing something extra from pip.
+
+08:14.800 --> 08:20.400
+ So one conversation that we had on the forum since then is like, are you sure that's not
+
+08:20.400 --> 08:28.160
+ going to mess me up because, you know, paper spaces installed stuff, I believe, using
+
+08:28.160 --> 08:38.880
+ Conda and pip and Conda are different things for installing Python libraries.
+
+08:38.880 --> 08:45.200
+ So you know, if that got to mess things up and the official answer is yes, it will don't
+
+08:45.200 --> 08:46.400
+ do it.
+
+08:46.400 --> 08:51.640
+ But the unofficial answer is, you know, we've got tens of thousands of people on our forums
+
+08:51.640 --> 08:56.520
+ and I've never heard of anybody in practice actually having any problem with using both
+
+08:56.520 --> 09:00.120
+ pip and Conda slash member.
+
+09:00.120 --> 09:05.120
+ So I'm just going to say don't worry about it.
+
+09:05.120 --> 09:10.400
+ As we said yesterday, I think the only place you really need to use Conda or member is
+
+09:10.400 --> 09:16.920
+ for stuff that uses the GPU and particularly for PyTorch or if heaven forbid you have
+
+09:16.920 --> 09:19.040
+ to use TensorFlow.
+
+09:19.040 --> 09:20.040
+ Yeah.
+
+09:20.040 --> 09:24.720
+ So I'm going to say don't worry about it.
+
+09:24.720 --> 09:30.800
+ And the reason we actually want to use pip in this particular case is we want to be able
+
+09:30.800 --> 09:38.240
+ to install the packages into our home directory into a different place.
+
+09:38.240 --> 09:47.680
+ I mean, the reason we want to use Mambore or Conda for stuff that requires the GPU is
+
+09:47.680 --> 09:53.440
+ that they have a way of installing the pandemic.
+
+09:53.440 --> 09:57.960
+ They have a way of installing the CUDA toolkit requirements.
+
+09:57.960 --> 10:01.440
+ So we don't have to install the CUDA SDK.
+
+10:01.440 --> 10:03.200
+ It's basically the reason.
+
+10:03.200 --> 10:11.280
+ And it's not just one less thing to install, but more importantly, it's one less thing
+
+10:11.280 --> 10:12.880
+ to maintain.
+
+10:12.880 --> 10:18.680
+ Like your CUDA version and your PyTorch version have to mesh correctly, otherwise it will
+
+10:18.680 --> 10:19.680
+ break.
+
+10:19.680 --> 10:22.320
+ And if you just use Conda, that happens automatically.
+
+10:22.320 --> 10:27.960
+ But if you use pip, then it's up to you to make sure you're installing the correct meshing
+
+10:27.960 --> 10:30.040
+ versions of each things.
+
+10:30.040 --> 10:35.760
+ It's also more challenging in something like paper space because installing things like
+
+10:35.760 --> 10:42.240
+ the CUDA SDK into your home directory is, I don't even know how you would do it without
+
+10:42.240 --> 10:44.040
+ using Conda, frankly.
+
+10:44.040 --> 10:45.040
+ Yep.
+
+10:45.040 --> 10:47.040
+ Does that answer your question, Rhett?
+
+10:47.040 --> 10:50.040
+ Yes, thank you very much.
+
+10:50.040 --> 10:51.040
+ Okay.
+
+10:51.040 --> 10:53.800
+ Great.
+
+10:53.800 --> 11:01.800
+ So somebody's got a loud plicky keyboard, they should probably meet themselves.
+
+11:01.800 --> 11:02.800
+ Yes.
+
+11:02.800 --> 11:03.800
+ Hi.
+
+11:03.800 --> 11:04.800
+ Hi.
+
+11:04.800 --> 11:22.800
+ If the pip installation do something wrong, can I uninstall or get to a previous state?
+
+11:22.800 --> 11:23.800
+ Yeah.
+
+11:23.800 --> 11:33.520
+ I mean, kind of, you can always just type pip uninstall or just delete your member forge
+
+11:33.520 --> 11:37.400
+ directory and start again.
+
+11:37.400 --> 11:44.600
+ But people always, I mean, or you can just install a Conda package over the top of it.
+
+11:44.600 --> 11:49.200
+ It shouldn't really be an issue, generally speaking.
+
+11:49.200 --> 11:53.760
+ The issue tends to be more if you accidentally install something into your system Python.
+
+11:53.760 --> 11:54.760
+ Yeah.
+
+11:54.760 --> 12:01.360
+ But the idea is that you want to feel like you can blow away your member forge or mini
+
+12:01.360 --> 12:04.960
+ Conda or whatever directory anytime and recreate it.
+
+12:04.960 --> 12:05.960
+ Yeah.
+
+12:05.960 --> 12:12.200
+ Because you don't want to be in a situation where things work, but you don't know why
+
+12:12.200 --> 12:15.200
+ they work and you don't know if you can get them back to a working state.
+
+12:15.200 --> 12:17.200
+ Again, that's really unsustainable.
+
+12:17.200 --> 12:24.480
+ But yeah, the short answer is you can just type pip uninstall to remove a module.
+
+12:24.480 --> 12:26.680
+ Thank you.
+
+12:26.680 --> 12:35.760
+ What about when it says that some packages are going to be downgraded?
+
+12:35.760 --> 12:36.760
+ That's okay.
+
+12:36.760 --> 12:37.760
+ Yeah.
+
+12:37.760 --> 12:38.760
+ That's okay.
+
+12:38.760 --> 12:42.240
+ If it's going to downgrade packages, I mean, I'd kind of check how much it's been downgraded,
+
+12:42.240 --> 12:51.720
+ but sometimes it'll be like one or two, you know, 0.02, 0.02 difference in version or
+
+12:51.720 --> 12:52.720
+ something.
+
+12:52.720 --> 12:53.720
+ It's not going to matter.
+
+12:53.720 --> 12:58.160
+ I mean, if it's downloading it or downgrading it by a lot, that might mean that something
+
+12:58.160 --> 13:00.120
+ wrong is happening.
+
+13:00.120 --> 13:05.400
+ But yeah, that's not necessarily a problem.
+
+13:05.400 --> 13:06.640
+ Okay.
+
+13:06.640 --> 13:14.400
+ Okay, so, and I think like pip almost never downgrades things.
+
+13:14.400 --> 13:19.080
+ Conda does sometimes.
+
+13:19.080 --> 13:21.120
+ So let's try.
+
+13:21.120 --> 13:26.040
+ So the thing we learned yesterday is we can go pip install and if you want to upgrade
+
+13:26.040 --> 13:27.440
+ something, it's minus u.
+
+13:27.440 --> 13:32.960
+ And there was this one extra thing we typed, which was minus minus user.
+
+13:32.960 --> 13:41.520
+ And so, so the key thing that does is it puts it into our home directory.
+
+13:41.520 --> 13:55.760
+ And so in our home directory, the place it put it is the dot local folder.
+
+13:55.760 --> 13:59.560
+ So what the, so the thing we wanted to do was to make sure that the next time we start
+
+13:59.560 --> 14:11.280
+ up our computer, we want that, that dot local to be there.
+
+14:11.280 --> 14:14.560
+ So that means we have to move it to persistent storage.
+
+14:14.560 --> 14:17.200
+ So that's easy enough to do by using move.
+
+14:17.200 --> 14:24.480
+ So we can move it into our persistent storage.
+
+14:24.480 --> 14:30.480
+ And you know what I would be inclined to do actually is to create a folder in there just
+
+14:30.480 --> 14:34.840
+ for the stuff that we're, where you, the things in storage that we're using specifically for
+
+14:34.840 --> 14:36.480
+ like configuration like this.
+
+14:36.480 --> 14:40.160
+ So I was just about to delete this line when I realized I haven't taught you folks how
+
+14:40.160 --> 14:41.560
+ to delete lines yet.
+
+14:41.560 --> 14:46.400
+ So to delete the everything left of the cursor, it's control u.
+
+14:46.400 --> 14:52.800
+ And to delete everything right of the cursor, it's control K. So I hit control u.
+
+14:52.800 --> 14:54.960
+ And so let's create a directory for this.
+
+14:54.960 --> 15:03.480
+ So we'll go make a directory in slash storage, which we'll call like, I don't know, CFG for
+
+15:03.480 --> 15:05.160
+ our configuration stuff.
+
+15:05.160 --> 15:06.160
+ Okay.
+
+15:06.160 --> 15:11.360
+ And so then we'll make a sim link from, oh, so then we're going to move.
+
+15:11.360 --> 15:12.360
+ Okay.
+
+15:12.360 --> 15:14.640
+ So we're going to move our dot local folder into there.
+
+15:14.640 --> 15:28.680
+ Now do you remember the way to say the last thing I typed on the last line is.
+
+15:28.680 --> 15:30.440
+ Is exclamation mark dollar.
+
+15:30.440 --> 15:37.240
+ So I can say move dot local to slash George slash config by doing move dot local and then
+
+15:37.240 --> 15:38.560
+ exclamation mark dollar.
+
+15:38.560 --> 15:41.600
+ And you can see it's filtered out here to show me.
+
+15:41.600 --> 15:43.680
+ So let's say.
+
+15:43.680 --> 15:44.960
+ Click shortcut.
+
+15:44.960 --> 15:51.560
+ And then so I want to sim link that back again into this directory.
+
+15:51.560 --> 16:01.140
+ So create a sim link from slash storage config dot local to here.
+
+16:01.140 --> 16:02.240
+ And here is the default.
+
+16:02.240 --> 16:03.240
+ Right.
+
+16:03.240 --> 16:06.200
+ So I don't have to say to hear.
+
+16:06.200 --> 16:10.480
+ And so you can see we've now got something called dot local.
+
+16:10.480 --> 16:15.720
+ And it's not a real normal folder, it's just a pointer to this other place, but it acts
+
+16:15.720 --> 16:18.440
+ like a normal folder.
+
+16:18.440 --> 16:21.760
+ As you can see.
+
+16:21.760 --> 16:36.920
+ And so that should mean that I can import fast core and get fast core.
+
+16:36.920 --> 16:44.520
+ That version should be one four three.
+
+16:44.520 --> 16:46.520
+ Control D twice text.
+
+16:46.520 --> 16:47.520
+ Okay.
+
+16:47.520 --> 16:50.200
+ Everybody happy with that so far?
+
+16:50.200 --> 16:52.360
+ Jimmy, I had a doubt.
+
+16:52.360 --> 16:59.600
+ So which part was the dot local actually there like in which folder was dot local is in my
+
+16:59.600 --> 17:01.440
+ home directory.
+
+17:01.440 --> 17:04.400
+ And so see how here I typed CD.
+
+17:04.400 --> 17:08.680
+ So CD takes you back to your home directory and you can tell where I am because it's the
+
+17:08.680 --> 17:13.160
+ bit before the pound sign and till it means in my home directory.
+
+17:13.160 --> 17:18.720
+ And basically everything it creates for like kind of your configuration will be somewhere
+
+17:18.720 --> 17:21.120
+ in your home directory.
+
+17:21.120 --> 17:22.120
+ Stop on that.
+
+17:22.120 --> 17:23.880
+ We're talking about a Jeremy.
+
+17:23.880 --> 17:28.720
+ I noticed that when doing CD backslash, what city space backslash?
+
+17:28.720 --> 17:31.760
+ Probably you mean CD space forward slash.
+
+17:31.760 --> 17:32.760
+ Forward slash.
+
+17:32.760 --> 17:35.760
+ Yeah, that one.
+
+17:35.760 --> 17:41.640
+ That went to a different place to the home where you've got CD space tilde.
+
+17:41.640 --> 17:46.520
+ Yeah, so CD space slash takes you to the root directory.
+
+17:46.520 --> 17:47.520
+ Okay.
+
+17:47.520 --> 17:53.800
+ So that's the top level where I'll CD enter or CD tilde same thing takes you to your home
+
+17:53.800 --> 17:55.080
+ directory.
+
+17:55.080 --> 18:01.400
+ So if I go to CD slash and I type print working directory, it says, Oh, you're in slash.
+
+18:01.400 --> 18:06.720
+ And if I just type CD and say print working directory, it says, Oh, you're in your home.
+
+18:06.720 --> 18:09.560
+ And since we're root, that's our home.
+
+18:09.560 --> 18:13.960
+ Normally the home directory is slash home slash username roots a special case.
+
+18:13.960 --> 18:16.760
+ That answer that question.
+
+18:16.760 --> 18:17.760
+ Yeah.
+
+18:17.760 --> 18:18.760
+ Thank you.
+
+18:18.760 --> 18:23.920
+ Just a quick question, Jeremy, like in terms of starting your, the instance that you just
+
+18:23.920 --> 18:27.880
+ started, is that without an image, right?
+
+18:27.880 --> 18:35.480
+ I used the fast AI image, but I used the trick that we learned yesterday, which is to go
+
+18:35.480 --> 18:38.920
+ to advanced and then delete the contents of the Git workspace.
+
+18:38.920 --> 18:39.920
+ Oh, okay.
+
+18:39.920 --> 18:42.640
+ So I clicked on create.
+
+18:42.640 --> 18:44.720
+ I clicked on fast AI.
+
+18:44.720 --> 18:48.480
+ Make sure you do choose the fast AI image because it's got all the stuff we need to make
+
+18:48.480 --> 18:52.400
+ this stuff work, but I then clicked advanced options and deleted that.
+
+18:52.400 --> 18:56.320
+ And the only impact of that is it just, it doesn't put the contents of this Git repo
+
+18:56.320 --> 18:59.120
+ into your notebooks directory.
+
+18:59.120 --> 19:01.560
+ That's the only thing that's okay.
+
+19:01.560 --> 19:05.880
+ So I could try all these things that you're doing right now without, because I do have
+
+19:05.880 --> 19:08.680
+ a notebook already created, but it's with the fast book.
+
+19:08.680 --> 19:09.680
+ Yeah.
+
+19:09.680 --> 19:17.960
+ So you could like just to let them, you know, just I'm start on IPINB or just ignore them
+
+19:17.960 --> 19:19.880
+ or yeah, absolutely.
+
+19:19.880 --> 19:20.880
+ Okay.
+
+19:20.880 --> 19:21.880
+ Thank you.
+
+19:21.880 --> 19:22.880
+ No worries.
+
+19:22.880 --> 19:26.760
+ Jeremy, one more question.
+
+19:26.760 --> 19:28.240
+ Anytime.
+
+19:28.240 --> 19:33.040
+ So now you've, you've the dot local that you've created.
+
+19:33.040 --> 19:36.400
+ Now let's say you, so it's on your storage.
+
+19:36.400 --> 19:38.080
+ So it's persistent.
+
+19:38.080 --> 19:43.800
+ Now you reboot the system and you don't download another, you pip install something else and
+
+19:43.800 --> 19:46.440
+ you move that new dot local that it's going to create.
+
+19:46.440 --> 19:48.160
+ Isn't that going to overwrite what's in your storage?
+
+19:48.160 --> 19:49.160
+ Yeah.
+
+19:49.160 --> 19:50.160
+ So we haven't got to that bit yet.
+
+19:50.160 --> 19:54.080
+ At this point, we've got something that's working just for this instance, but it's not
+
+19:54.080 --> 19:55.920
+ going to work for a future one.
+
+19:55.920 --> 20:01.760
+ So we need to, we need to, what we're going to do, Mark is we're going to create a little
+
+20:01.760 --> 20:09.520
+ Python script that, that is before it starts the server, the before it starts Jupiter in
+
+20:09.520 --> 20:13.760
+ the server, it's sim links, it creates this sim link.
+
+20:13.760 --> 20:18.480
+ And then in the future, if I type pip install minus minus user, it'll store it in dot local
+
+20:18.480 --> 20:23.400
+ slash blah, that's dot local will already be pointing at slash storage.
+
+20:23.400 --> 20:25.200
+ So it'll actually stick it in slash storage.
+
+20:25.200 --> 20:27.000
+ And that's, that's the secret trick.
+
+20:27.000 --> 20:29.160
+ I thought, okay, thank you.
+
+20:29.160 --> 20:30.160
+ Cool.
+
+20:30.160 --> 20:34.040
+ And Mark, I think you were the one who said on the forum about like, are we sure this
+
+20:34.040 --> 20:35.040
+ is a good idea?
+
+20:35.040 --> 20:36.040
+ Was that, was that you?
+
+20:36.040 --> 20:37.040
+ Yeah, that's me.
+
+20:37.040 --> 20:40.440
+ I don't want to, I don't want to make it all about me, but I've had so many, I've, I've
+
+20:40.440 --> 20:45.120
+ started making about you because like you, you're at my target demographic here is people
+
+20:45.120 --> 20:47.480
+ who aren't particularly confident at the show.
+
+20:47.480 --> 20:48.480
+ So it's not a denominator.
+
+20:48.480 --> 20:53.920
+ No, no, no, no, no, it's just, you're the one person who was brave enough to join in,
+
+20:53.920 --> 20:57.280
+ I think despite having less experience at the terminal.
+
+20:57.280 --> 21:00.520
+ So I actually want you to be particularly happy to interrupt anytime.
+
+21:00.520 --> 21:01.520
+ Something's not clear.
+
+21:01.520 --> 21:02.520
+ Yeah.
+
+21:02.520 --> 21:07.160
+ No, I've, I've started this course a few times and every time the problem is always the thing
+
+21:07.160 --> 21:10.240
+ that always makes me stop is this stuff.
+
+21:10.240 --> 21:11.240
+ Yeah.
+
+21:11.240 --> 21:13.960
+ And I end up like getting conflicts and I remember there was an old version of, I think
+
+21:13.960 --> 21:14.960
+ it was paper space.
+
+21:14.960 --> 21:18.400
+ I remember that you were recommending and it kept crashing and it kept losing work.
+
+21:18.400 --> 21:23.280
+ And so I guess I'm a little paranoid about creating things that are going to create problems.
+
+21:23.280 --> 21:24.280
+ Yeah.
+
+21:24.280 --> 21:31.440
+ So to be clear, Mike, I don't feel like we've had a great solution for running fast AI cheaply
+
+21:31.440 --> 21:33.800
+ and easily until now.
+
+21:33.800 --> 21:39.760
+ So the reason you've had problems before is that like there wasn't a great solution before.
+
+21:39.760 --> 21:43.800
+ So, so this is the first time I'm actually saying to you, I really do think this is going
+
+21:43.800 --> 21:44.800
+ to work.
+
+21:44.800 --> 21:49.840
+ So anytime something goes wrong, like feel free to like share your screen or anything
+
+21:49.840 --> 21:53.920
+ because that debugging process will also be useful.
+
+21:53.920 --> 21:58.640
+ So I'd say for now, you know, suspend disbelief, give it a go.
+
+21:58.640 --> 22:03.800
+ And you know, if it all falls apart, blame me and I will happily fix it.
+
+22:03.800 --> 22:06.600
+ And so it goes for anybody.
+
+22:06.600 --> 22:10.800
+ As long as you're roughly following along with these steps, if you do something totally
+
+22:10.800 --> 22:16.000
+ different, maybe I won't be so patient.
+
+22:16.000 --> 22:17.000
+ Okay.
+
+22:17.000 --> 22:19.680
+ So, so look at what we did here.
+
+22:19.680 --> 22:21.040
+ We did two things.
+
+22:21.040 --> 22:25.720
+ We first of all moved our dot local to slash storage and then we sim linked it back.
+
+22:25.720 --> 22:29.840
+ Now we're not going to have to do that move ever again, right?
+
+22:29.840 --> 22:34.160
+ That was just enough to kind of create a dot local slash slash storage slash config dot
+
+22:34.160 --> 22:35.160
+ local.
+
+22:35.160 --> 22:44.720
+ All we need to do next time we, next time we create an instance is to create the sim
+
+22:44.720 --> 22:48.040
+ link.
+
+22:48.040 --> 22:50.000
+ Like so.
+
+22:50.000 --> 22:56.360
+ So let's do it like, if it's something so simple, because I said, I'm going to show
+
+22:56.360 --> 23:04.360
+ you how I would do things, something so simple, I would actually create a bash script for this.
+
+23:04.360 --> 23:10.800
+ And this is where things are going to get particularly interesting.
+
+23:10.800 --> 23:19.720
+ Because, well, okay, I'm going to show you the proper way to do this and I'm also going
+
+23:19.720 --> 23:22.040
+ to show you the slightly improper way to do this.
+
+23:22.040 --> 23:26.400
+ I'm going to show you how to use BIM, which is actually a highly recommended editor that
+
+23:26.400 --> 23:27.920
+ works in your terminal.
+
+23:27.920 --> 23:32.880
+ But I'm also going to show you a trick for how you can use the Jupyter text editor.
+
+23:32.880 --> 23:39.720
+ So Jupyter has an in browser text editor, which currently we can't really use because
+
+23:39.720 --> 23:43.840
+ it's pointing at slash notebooks.
+
+23:43.840 --> 23:45.240
+ So how would we change stuff?
+
+23:45.240 --> 23:49.840
+ How would we edit stuff that's in slash storage?
+
+23:49.840 --> 23:56.320
+ But what we could do is if we see data slash notebooks, and then we create a sim link.
+
+23:56.320 --> 24:07.600
+ Just letting you know on my screen at least, your cursor is just cut off from the bottom
+
+24:07.600 --> 24:08.600
+ of the screen.
+
+24:08.600 --> 24:16.320
+ So I'd need to make the browser a little bit smaller.
+
+24:16.320 --> 24:20.960
+ Sounds like Jupyter is not quite showing this properly.
+
+24:20.960 --> 24:22.760
+ So you can see it now.
+
+24:22.760 --> 24:23.760
+ Cool.
+
+24:23.760 --> 24:24.760
+ Thank you.
+
+24:24.760 --> 24:37.120
+ So if I sim link slash storage into slash notebooks, then what should happen?
+
+24:37.120 --> 24:38.120
+ There we go.
+
+24:38.120 --> 24:40.000
+ Is it appears here?
+
+24:40.000 --> 24:43.400
+ Because this is showing me the contents of slash notebooks.
+
+24:43.400 --> 24:54.480
+ So that would be one simple way to create a script here would be I could click plus.
+
+24:54.480 --> 24:59.040
+ And I could click text file.
+
+24:59.040 --> 25:00.440
+ And we've got a text file.
+
+25:00.440 --> 25:20.840
+ And so now we could copy and paste our sim link.
+
+25:20.840 --> 25:25.040
+ So maybe copy, let's see, copy.
+
+25:25.040 --> 25:29.400
+ Oh, that's annoying.
+
+25:29.400 --> 25:36.400
+ That's very annoying.
+
+25:36.400 --> 25:37.840
+ Copy stuff from the terminal.
+
+25:37.840 --> 25:42.200
+ Oh, you're running Scoundrel.
+
+25:42.200 --> 25:44.880
+ I just did it with control C and control B.
+
+25:44.880 --> 25:45.880
+ Yeah.
+
+25:45.880 --> 25:52.920
+ Oh, it's because I'm on a Mac now I have to press command not control.
+
+25:52.920 --> 25:53.920
+ Ha ha ha.
+
+25:53.920 --> 25:54.920
+ Right.
+
+25:54.920 --> 25:55.920
+ Thank you.
+
+25:55.920 --> 25:56.920
+ Okay.
+
+25:56.920 --> 26:02.440
+ And you need to make sure you're in your home directory for this to work.
+
+26:02.440 --> 26:03.440
+ So CD.
+
+26:03.440 --> 26:04.440
+ Okay.
+
+26:04.440 --> 26:10.600
+ And to run this as a script, you have to tell it.
+
+26:10.600 --> 26:12.440
+ It's a script.
+
+26:12.440 --> 26:18.160
+ And the reason why it doesn't matter too much, but the official, the kind of correct way to
+
+26:18.160 --> 26:22.360
+ do that is to your first of all, say, hash bang.
+
+26:22.360 --> 26:29.800
+ That means the first line of a file in Linux and Mac tells it what program to run it with.
+
+26:29.800 --> 26:31.840
+ And we want to run it with bash.
+
+26:31.840 --> 26:37.640
+ And you're meant to do it like this for slightly obscure reasons.
+
+26:37.640 --> 26:45.640
+ So, slash user slash bin slash n bash that will run this script with bash.
+
+26:45.640 --> 26:47.560
+ Okay.
+
+26:47.560 --> 26:54.840
+ File save.
+
+26:54.840 --> 26:59.760
+ The slightly less correct way to do it is you could just say which bash to find out where
+
+26:59.760 --> 27:10.160
+ bash is and it's actually slash bin slash bash and you know, you can also type this.
+
+27:10.160 --> 27:13.400
+ That would also work.
+
+27:13.400 --> 27:19.120
+ So that says when to Linux or Mac when you run this file, run it using this program.
+
+27:19.120 --> 27:21.880
+ Sorry, run it using this program.
+
+27:21.880 --> 27:22.880
+ Okay.
+
+27:22.880 --> 27:24.640
+ So file save.
+
+27:24.640 --> 27:26.600
+ All right.
+
+27:26.600 --> 27:31.040
+ So let's rename that and so in.
+
+27:31.040 --> 27:41.960
+ Paper space, the special file called pre run dot sh is run when it starts a new instance.
+
+27:41.960 --> 27:49.040
+ Now you might remember that, you know, in fact, let's, let's, it's good to, before you
+
+27:49.040 --> 27:52.320
+ just go ahead and start an instance, let's try to like run it and see if it works.
+
+27:52.320 --> 28:01.320
+ So if I type dot slash pre run dot sh and press enter, it doesn't work.
+
+28:01.320 --> 28:07.880
+ And so the reason why it doesn't work, hopefully you're starting to remember now is that we
+
+28:07.880 --> 28:12.720
+ need, we need permissions to be set correctly.
+
+28:12.720 --> 28:20.200
+ And in particular, we're missing the X here, the execute permission.
+
+28:20.200 --> 28:26.160
+ And so in the past lessons I've shown you, you can type ch mod u plus X to add the execute
+
+28:26.160 --> 28:28.640
+ permission to a file.
+
+28:28.640 --> 28:33.640
+ Like so.
+
+28:33.640 --> 28:36.000
+ But I also actually kind of lied.
+
+28:36.000 --> 28:39.560
+ I don't normally use that way of setting permissions.
+
+28:39.560 --> 28:43.680
+ Normally I set all the permissions at once.
+
+28:43.680 --> 28:45.200
+ I would actually normally type this.
+
+28:45.200 --> 28:50.240
+ I would 755.3 run dot sh.
+
+28:50.240 --> 28:53.080
+ Let me explain why 755.
+
+28:53.080 --> 28:57.080
+ And the reason I did it the other way before is it required less explanation.
+
+28:57.080 --> 29:01.520
+ 755 is not the number 755.
+
+29:01.520 --> 29:04.560
+ It's actually three separate numbers, the number seven, the number five and the number
+
+29:04.560 --> 29:05.640
+ five.
+
+29:05.640 --> 29:08.200
+ It says these are permissions for the user.
+
+29:08.200 --> 29:09.880
+ These are permissions for the group.
+
+29:09.880 --> 29:12.360
+ These are permissions for everybody.
+
+29:12.360 --> 29:17.160
+ And then the permissions.
+
+29:17.160 --> 29:19.160
+ I'll just imagine.
+
+29:19.160 --> 29:27.560
+ I'm going to take you to the chest.
+
+29:27.560 --> 29:52.040
+ So actually it's not quite 555.
+
+29:52.040 --> 29:54.360
+ But that's okay.
+
+29:54.360 --> 29:58.680
+ So basically for each one it's going to add up three numbers, a one, a two and a five,
+
+29:58.680 --> 30:05.840
+ a one if it's executable, a two if it's writable, and a four if it's readable.
+
+30:05.840 --> 30:11.480
+ So seven means readable and writable and executable for the user.
+
+30:11.480 --> 30:13.840
+ Four means readable for the group.
+
+30:13.840 --> 30:20.440
+ And then this four means readable for everybody.
+
+30:20.440 --> 30:29.080
+ So if I check this now, you can see it's got, okay, so this rwx is four plus two plus one
+
+30:29.080 --> 30:30.080
+ equals seven.
+
+30:30.080 --> 30:33.280
+ R dash dash, that's four plus zero plus zero.
+
+30:33.280 --> 30:35.160
+ R dash dash four plus zero plus zero.
+
+30:35.160 --> 30:39.840
+ So these permissions are seven four four.
+
+30:39.840 --> 30:43.000
+ So that's yeah, slightly weird.
+
+30:43.000 --> 30:47.880
+ If you've done stuff with bit flags in your programming before, it'll look pretty familiar.
+
+30:47.880 --> 30:50.800
+ If you haven't, it might look weird.
+
+30:50.800 --> 30:54.320
+ This kind of thing does come up quite a lot actually in programming as a pricing amount.
+
+30:54.320 --> 31:00.760
+ So it's probably worth getting familiar with the idea of bit flags.
+
+31:00.760 --> 31:06.840
+ So that now should be able to be runnable.
+
+31:06.840 --> 31:08.800
+ And it is now runnable.
+
+31:08.800 --> 31:13.400
+ And so it's good we ran it because it tells us that, oh, you can't create a symbolic link
+
+31:13.400 --> 31:15.440
+ because it already exists.
+
+31:15.440 --> 31:26.160
+ Now I'm not sure before Jupiter starts if this directory will be here or not.
+
+31:26.160 --> 31:30.560
+ So it would probably be a good idea to assume it does.
+
+31:30.560 --> 31:41.880
+ So to avoid that, we could first of all go remove recursively and forcefully.
+
+31:41.880 --> 31:52.680
+ The any dot local directory or file that exists.
+
+31:52.680 --> 32:00.080
+ And so if I now save that and try to run it again.
+
+32:00.080 --> 32:03.160
+ Okay, it's worked.
+
+32:03.160 --> 32:04.520
+ So that's good.
+
+32:04.520 --> 32:24.040
+ So we should now be able to create a new notebook.
+
+32:24.040 --> 32:29.960
+ And I will, I'm not really doing anything with the GPU at the moment.
+
+32:29.960 --> 32:34.960
+ So I'm not going to spend their money unnecessarily.
+
+32:34.960 --> 32:38.440
+ So let's just create.
+
+32:38.440 --> 32:45.400
+ Any tiny little instance here.
+
+32:45.400 --> 32:49.600
+ X base start.
+
+32:49.600 --> 32:53.120
+ There we go.
+
+32:53.120 --> 32:59.080
+ Okay, so that's going to go ahead and start.
+
+32:59.080 --> 33:03.760
+ So that's done that bit from scratch.
+
+33:03.760 --> 33:13.400
+ So let's now do our keys from scratch as well.
+
+33:13.400 --> 33:17.640
+ So and you know, I would probably not do that SSH key gen thing in real life.
+
+33:17.640 --> 33:19.200
+ So let's do it all the way.
+
+33:19.200 --> 33:20.200
+ I would do it.
+
+33:20.200 --> 33:21.200
+ So I would just say make dot SSH.
+
+33:21.200 --> 33:23.400
+ That's where our keys are going to go.
+
+33:23.400 --> 33:25.440
+ Okay.
+
+33:25.440 --> 33:30.080
+ And then upload my keys.
+
+33:30.080 --> 33:32.440
+ Oops.
+
+33:32.440 --> 33:46.080
+ Okay, there they are.
+
+33:46.080 --> 33:51.800
+ And so then that's cd to dot SSH and move.
+
+33:51.800 --> 33:53.360
+ I put them in storage.
+
+33:53.360 --> 33:57.200
+ ID RSA star.
+
+33:57.200 --> 33:58.440
+ Into here.
+
+33:58.440 --> 33:59.440
+ Oops.
+
+33:59.440 --> 34:00.440
+ Oh crap.
+
+34:00.440 --> 34:01.760
+ I just messed it up.
+
+34:01.760 --> 34:07.640
+ Now I'd have to upload them again.
+
+34:07.640 --> 34:10.000
+ Sorry.
+
+34:10.000 --> 34:19.440
+ Move them into here.
+
+34:19.440 --> 34:25.360
+ Okay, so there they are.
+
+34:25.360 --> 34:30.160
+ In fact, let's do LA because that tells us dot, which is the permissions on this directory.
+
+34:30.160 --> 34:35.360
+ Okay, so the dot SSH directory, nobody else should be able to access it.
+
+34:35.360 --> 34:42.840
+ So if I go CH mod 700, 700, that means four plus two plus one.
+
+34:42.840 --> 34:48.800
+ So all permissions for me, the user and no permissions for anybody else on the directory.
+
+34:48.800 --> 34:53.760
+ Okay, and then actually.
+
+34:53.760 --> 35:02.720
+ Well, and then for the ID RSA, it's just readable and writable say 600 for my private
+
+35:02.720 --> 35:06.360
+ key.
+
+35:06.360 --> 35:13.360
+ And then for the public key, it's readable and writable by me, but only readable by everybody
+
+35:13.360 --> 35:21.680
+ else.
+
+35:21.680 --> 35:22.680
+ So there we've got it.
+
+35:22.680 --> 35:27.000
+ Okay, so this is what 700 permissions look like.
+
+35:27.000 --> 35:29.040
+ This is what 600 permissions look like.
+
+35:29.040 --> 35:32.280
+ And this is what 644 permissions look like.
+
+35:32.280 --> 35:37.520
+ And after a while, actually, you start getting used to the idea of like, Oh, 644.
+
+35:37.520 --> 35:42.240
+ Anything that you can read and write and other people can read, you know, 700, any directory
+
+35:42.240 --> 35:45.960
+ that you can fully access 600 anything that only you can read and write.
+
+35:45.960 --> 35:51.960
+ They kind of become like standard little concepts in your head.
+
+35:51.960 --> 35:55.160
+ So at that point, we should be able to test this now.
+
+35:55.160 --> 36:07.720
+ By SSHing to the username, get at github.com.
+
+36:07.720 --> 36:09.400
+ And I've successfully authenticated.
+
+36:09.400 --> 36:13.640
+ Now if that doesn't work for you, it's almost always because of permissions, but you can
+
+36:13.640 --> 36:20.720
+ get a lot more information by running SSH verbosely by typing minus V. And it's quite
+
+36:20.720 --> 36:21.720
+ cute.
+
+36:21.720 --> 36:24.120
+ The more V's you type, the more verbose it is.
+
+36:24.120 --> 36:27.120
+ So very, very, very verbose.
+
+36:27.120 --> 36:28.120
+ Okay.
+
+36:28.120 --> 36:34.440
+ And it'll tell you all the stuff it's doing.
+
+36:34.440 --> 36:38.440
+ And so now we've done that.
+
+36:38.440 --> 36:43.360
+ Maybe it won't be too surprised to hear that we want to do exactly the same thing with
+
+36:43.360 --> 36:48.120
+ our dot SSH folder, which is we want to move it into our persistent storage and then link
+
+36:48.120 --> 36:50.080
+ it back again.
+
+36:50.080 --> 36:59.920
+ So move dot SSH into slash storage config.
+
+36:59.920 --> 37:01.760
+ And then sim link it back again.
+
+37:01.760 --> 37:08.680
+ Now rather than manually doing that, we could just go into our script and copy and paste
+
+37:08.680 --> 37:14.000
+ these two lines.
+
+37:14.000 --> 37:16.480
+ Okay.
+
+37:16.480 --> 37:24.480
+ And do it for our SSH folder as well.
+
+37:24.480 --> 37:28.320
+ So save that.
+
+37:28.320 --> 37:42.800
+ And so if I run that script now, you can see my SSH is now sim linked.
+
+37:42.800 --> 37:51.880
+ And if I test it, so I pressed control our git gets me back the last thing I tied with
+
+37:51.880 --> 37:52.880
+ git in it.
+
+37:52.880 --> 37:55.280
+ Yep, it still works.
+
+37:55.280 --> 37:56.800
+ Okay.
+
+37:56.800 --> 37:59.640
+ And this notebook is hopefully finished starting.
+
+37:59.640 --> 38:04.160
+ Yes, it has.
+
+38:04.160 --> 38:09.240
+ And I'm just going to quickly use the paper space ID, just because I'm testing and we
+
+38:09.240 --> 38:10.240
+ can test.
+
+38:10.240 --> 38:11.880
+ Yep.
+
+38:11.880 --> 38:16.360
+ So this is a brand new instance I started in another tab and my dot local has successfully
+
+38:16.360 --> 38:17.680
+ appeared there.
+
+38:17.680 --> 38:27.480
+ So we can see that our pre launch thing is working.
+
+38:27.480 --> 38:29.120
+ Okay.
+
+38:29.120 --> 38:33.280
+ I think that's everything that I wanted to show today.
+
+38:33.280 --> 38:37.920
+ Does anybody have any questions before I go?
+
+38:37.920 --> 38:40.720
+ Sorry about the slow start.
+
+38:40.720 --> 38:52.280
+ One quick question, Jeremy, you can see a file structure there on the left hand side.
+
+38:52.280 --> 38:54.640
+ I see just nothing.
+
+38:54.640 --> 38:56.760
+ Yeah, so this is my old.
+
+38:56.760 --> 39:00.680
+ Yeah, so my persistent storage already had stuff in it.
+
+39:00.680 --> 39:05.120
+ So I've just been deleting stuff.
+
+39:05.120 --> 39:10.760
+ And the reason we see storage is because of that sim link I created earlier.
+
+39:10.760 --> 39:14.200
+ So if I type history, correct.
+
+39:14.200 --> 39:24.280
+ When you start the instance, when you're on the left hand top, you will be looking at
+
+39:24.280 --> 39:26.160
+ your notebook directory.
+
+39:26.160 --> 39:27.160
+ Exactly.
+
+39:27.160 --> 39:29.400
+ That is your notebooks directory.
+
+39:29.400 --> 39:36.680
+ And so you might have missed it, but earlier on what I did was I sim linked my slash storage
+
+39:36.680 --> 39:42.600
+ directory into my notebooks directory so that I could edit.
+
+39:42.600 --> 39:48.600
+ And so if you missed that bit, just watch the video and you'll see it happen.
+
+39:48.600 --> 39:54.520
+ But yeah, it was this is this line here, ln minus s slash storage and I put it into notebooks.
+
+39:54.520 --> 39:55.520
+ Great.
+
+39:55.520 --> 39:59.400
+ I was otherwise going to have to show you how to use VM, but I'm not sure how to use them
+
+39:59.400 --> 40:02.320
+ next time, but this way we can use our editor.
+
+40:02.320 --> 40:03.320
+ Great.
+
+40:03.320 --> 40:11.080
+ And the thing that makes it work across new servers is that the pre run file is in the
+
+40:11.080 --> 40:12.560
+ storage.
+
+40:12.560 --> 40:17.040
+ The pre run file is special.
+
+40:17.040 --> 40:23.000
+ So you might have noticed that when you go to the advanced options, when you start the
+
+40:23.000 --> 40:26.960
+ instance, it says what program should it run when it starts and it's a default.
+
+40:26.960 --> 40:29.640
+ It runs a program called run.sh.
+
+40:29.640 --> 40:35.840
+ And if you look at that run.sh, it says here, run the pre run.sh.
+
+40:35.840 --> 40:39.040
+ So it has to be that exact place and that exact name.
+
+40:39.040 --> 40:41.800
+ It's a special file.
+
+40:41.800 --> 40:43.600
+ This is a paper space specific thing.
+
+40:43.600 --> 40:44.600
+ Okay.
+
+40:44.600 --> 40:51.480
+ So as long as pre run is in storage with that exact format, it will be across servers.
+
+40:51.480 --> 40:52.480
+ Exactly right.
+
+40:52.480 --> 40:57.440
+ So it's just servers because it's in slash storage and it will be run because the run.sh
+
+40:57.440 --> 41:04.360
+ file runs it as, you know, yeah, exactly.
+
+41:04.360 --> 41:07.520
+ So Jeremy, just a quick question about pre run.
+
+41:07.520 --> 41:10.160
+ Did you created that, right?
+
+41:10.160 --> 41:12.200
+ I created the pre run.sh file.
+
+41:12.200 --> 41:13.360
+ It was not there.
+
+41:13.360 --> 41:21.760
+ So in bash this if here actually says if minus F is this file exists, then run it.
+
+41:21.760 --> 41:22.840
+ That's what that bash means.
+
+41:22.840 --> 41:27.520
+ And so paper space at, you know, I said to paper space, could you please add that to
+
+41:27.520 --> 41:29.800
+ our, to our image?
+
+41:29.800 --> 41:35.800
+ And so everybody who uses the, the, the fast AI image will, will have this.
+
+41:35.800 --> 41:41.760
+ And so if you create a pre run.sh in here, then it's going to run it.
+
+41:41.760 --> 41:42.760
+ Right.
+
+41:42.760 --> 41:43.840
+ So we would be creating that.
+
+41:43.840 --> 41:45.320
+ It will be pre correct.
+
+41:45.320 --> 41:46.480
+ The way I created it.
+
+41:46.480 --> 41:48.040
+ And again, go back and watch the video.
+
+41:48.040 --> 41:52.320
+ If you, if you missed this and you want to see it again, I double clicked on storage.
+
+41:52.320 --> 41:56.720
+ And then I clicked on plus and I clicked on text file.
+
+41:56.720 --> 42:01.440
+ And then that created a text file called on title.text, which I then right clicked on.
+
+42:01.440 --> 42:04.200
+ And I said rename and I renamed it to pre run.sh.
+
+42:04.200 --> 42:05.200
+ Right.
+
+42:05.200 --> 42:09.360
+ There was one before, like I saw the dot back.
+
+42:09.360 --> 42:10.360
+ So I just got back one.
+
+42:10.360 --> 42:11.360
+ Yeah, don't worry.
+
+42:11.360 --> 42:13.240
+ That's, that's the one I moved out of the way.
+
+42:13.240 --> 42:15.280
+ That's my actual one that I want to.
+
+42:15.280 --> 42:18.880
+ As I found out already and I was like, okay, did it, did the system created for you?
+
+42:18.880 --> 42:19.880
+ Yeah.
+
+42:19.880 --> 42:20.880
+ Yeah.
+
+42:20.880 --> 42:26.960
+ That was just trying to get mine out of the way so it didn't make me cheap.
+
+42:26.960 --> 42:27.960
+ All right.
+
+42:27.960 --> 42:34.440
+ So then the last step, of course, we have to do is to stop our server.
+
+42:34.440 --> 42:39.200
+ There'll be one quick question.
+
+42:39.200 --> 42:40.200
+ Yeah.
+
+42:40.200 --> 42:44.280
+ How do we ensure that we are not disturbing system by time?
+
+42:44.280 --> 42:46.680
+ Sometimes I have and I'm installing in my system.
+
+42:46.680 --> 42:50.800
+ I somehow I mess up things.
+
+42:50.800 --> 42:53.720
+ Have you watched the previous three three walkthroughs?
+
+42:53.720 --> 42:56.640
+ Last one, I missed.
+
+42:56.640 --> 42:57.640
+ Okay.
+
+42:57.640 --> 43:02.400
+ So watch that where we basically answer that question, I believe.
+
+43:02.400 --> 43:08.120
+ But if you have any, if that doesn't answer your question, then please ask next time.
+
+43:08.120 --> 43:09.120
+ Thank you.
+
+43:09.120 --> 43:10.120
+ Thank you.
+
+43:10.120 --> 43:11.120
+ No worries.
+
+43:11.120 --> 43:12.120
+ All right.
+
+43:12.120 --> 43:13.120
+ Thanks all.
+
+43:13.120 --> 43:14.120
+ Bye.
+
+43:14.120 --> 43:15.120
+ All right.
+
+43:15.120 --> 43:16.120
+ Thanks.
+
+43:16.120 --> 43:41.120
+ All right.
+

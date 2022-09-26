@@ -1,0 +1,2303 @@
+WEBVTT
+
+00:00.000 --> 00:04.000
+ Okay, yeah, you've got a question.
+
+00:04.000 --> 00:12.000
+ Yeah, okay so I've got my paper space open, and I can see.
+
+00:12.000 --> 00:18.000
+ Yeah, my machine is not actually starting, which is great. So I can see.
+
+00:18.000 --> 00:31.000
+ I missed off the directly, it's like, it's clean image tools, but I don't want to go to the 20, the course to the current course.
+
+00:31.000 --> 00:40.000
+ Of course, 20, 30. So you would get cloned it. So you would open, so you would open up Jupyter lab.
+
+00:40.000 --> 00:56.000
+ Go into a terminal, and you would CD to slash docs, sorry, say to slash notebooks, and then get cloned and copy and post the get URL from GitHub.
+
+00:56.000 --> 00:59.000
+ Okay, let's see what happens.
+
+00:59.000 --> 01:00.000
+ Okay.
+
+01:00.000 --> 01:01.000
+ Thank you.
+
+01:01.000 --> 01:16.000
+ Any other questions anybody having any trouble getting things working smoothly.
+
+01:16.000 --> 01:18.000
+ I am ready.
+
+01:18.000 --> 01:20.000
+ Oops.
+
+01:20.000 --> 01:24.000
+ You got enough. Please go on.
+
+01:24.000 --> 01:40.000
+ So, I have a question. I tried to look at my history, my bash history. I tried the same link. I can see it there. Yeah, in my home, but I don't seem to be able to history from my previous session.
+
+01:40.000 --> 01:48.000
+ Yeah, so the bash underscore history file dot bash is only created when you close the terminal.
+
+01:48.000 --> 02:01.000
+ You can't send link it to it to exist. And so to make it exist, there's two things you could do. The first is you could open a terminal, run a command like LS, and then close the terminal, and open a terminal again.
+
+02:01.000 --> 02:06.000
+ And now the bash history file will be there because you've done something and you can send link to it.
+
+02:06.000 --> 02:18.000
+ Or you can just create it and to create an empty file in Unix, you just type touch space and then the file name. So dot, I should just go history.
+
+02:18.000 --> 02:23.000
+ Okay.
+
+02:23.000 --> 02:27.000
+ And somebody else had a question or comment. Yes.
+
+02:27.000 --> 02:34.000
+ So my question is about with Kegel part from last lesson.
+
+02:34.000 --> 02:39.000
+ So what I understand from from the lesson.
+
+02:39.000 --> 02:56.000
+ You need to either do everything in the Kegel website, the training and the inference, let's say, or it's possible to train your model in local machine or gradient let's say.
+
+02:56.000 --> 03:04.000
+ Then somehow transfer it to the Kegel somehow. Right. So which we're going to do today.
+
+03:04.000 --> 03:05.000
+ Yeah.
+
+03:05.000 --> 03:26.000
+ Great. What is the proper way that was my question? Yeah, yeah, yeah, great. Perfect. I love it when people ask the question that I want to solve today because that's a sign that it's a question worth asking answering, I should say.
+
+03:26.000 --> 03:27.000
+ Okay.
+
+03:27.000 --> 03:32.000
+ Well, neither of my gradient machines are starting.
+
+03:32.000 --> 03:43.000
+ Setting up instance.
+
+03:43.000 --> 03:53.000
+ That's not good. All right. I guess we're going to use the terminal.
+
+03:53.000 --> 04:03.000
+ Now, the bad news is that I'm on my Mac, or I don't think I've got anything set up.
+
+04:03.000 --> 04:06.000
+ You can use your fancy set up.
+
+04:06.000 --> 04:14.000
+ Things script. Yeah, I mean, I mean, yeah, it's, it's slightly set up. I don't have the Kegel stuff downloaded.
+
+04:14.000 --> 04:24.000
+ So, all right. Well, it's always good to revise anyways.
+
+04:24.000 --> 04:27.000
+ Share screen.
+
+04:27.000 --> 04:47.000
+ Right. Okay, you guys can see that hopefully.
+
+04:47.000 --> 04:52.000
+ I wonder if we should maybe make this a little bigger as well.
+
+04:52.000 --> 04:53.000
+ Okay.
+
+04:53.000 --> 04:57.000
+ I can't see that.
+
+04:57.000 --> 04:58.000
+ Okay.
+
+04:58.000 --> 05:05.000
+ Is that reasonably visible.
+
+05:05.000 --> 05:08.000
+ Yes, it is. Great. Yes, this.
+
+05:08.000 --> 05:11.000
+ All right.
+
+05:11.000 --> 05:18.000
+ So, so this is T marks, obviously running in a terminal.
+
+05:18.000 --> 05:25.000
+ And because I'm sharing my screen, I'm using a slightly low resolution kind of area that usual.
+
+05:25.000 --> 05:29.000
+ So, particularly good idea to zoom into one of these panes.
+
+05:29.000 --> 05:35.000
+ So, I just get control BZ to zoom into the pain.
+
+05:35.000 --> 05:40.000
+ And let's see if on this machine, I already. Okay.
+
+05:40.000 --> 05:42.000
+ So, this machine does not currently have a Kaggle directory.
+
+05:42.000 --> 05:46.000
+ So, if you can store.
+
+05:46.000 --> 05:53.000
+ Kaggle.
+
+05:53.000 --> 05:55.000
+ Great.
+
+05:55.000 --> 06:05.000
+ And if I try to run that, it's not going to work.
+
+06:05.000 --> 06:18.000
+ So, I have SSH config set up.
+
+06:18.000 --> 06:19.000
+ Oh, yeah, that's right.
+
+06:19.000 --> 06:24.000
+ I think Max got some really old version of SCP that doesn't know how to do much.
+
+06:24.000 --> 06:29.000
+ So, I might have to normally with a current version of open SSH,
+
+06:29.000 --> 06:35.000
+ SCP, you could tap complete even to get remote files, which is quite great.
+
+06:35.000 --> 06:41.000
+ And I think I noticed that Mac tends to ship really old versions of a lot of the unique software, which is a shame.
+
+06:41.000 --> 06:51.000
+ So, we have to do it the slow way. So, we're going to copy.caggle slash Kaggle dot JSON to here.
+
+06:51.000 --> 06:59.000
+ So, I'm putting in this is H move Kaggle dot JSON into Kaggle.
+
+06:59.000 --> 07:01.000
+ And that should now work.
+
+07:01.000 --> 07:20.000
+ Great. So, let's download the data.
+
+07:20.000 --> 07:45.000
+ All right.
+
+07:45.000 --> 07:56.000
+ And we're going to go competitions, Patty and data and copy.
+
+07:56.000 --> 08:07.000
+ And paste.
+
+08:07.000 --> 08:13.000
+ Okay. All right. And then we're going to see if you've got Jupyter running.
+
+08:13.000 --> 08:16.000
+ We do. All right.
+
+08:16.000 --> 08:19.000
+ Well, it's going to be crazy over there.
+
+08:19.000 --> 08:23.000
+ So, let's open up Jupyter.
+
+08:23.000 --> 08:29.000
+ And if anybody keeps an eye on paper space, let me know if paper space seems to start working.
+
+08:29.000 --> 08:32.000
+ All right. Here's Patty.
+
+08:32.000 --> 08:34.000
+ You.
+
+08:34.000 --> 08:37.000
+ And all.
+
+08:37.000 --> 08:45.000
+ Okay.
+
+08:45.000 --> 08:50.000
+ From fast AI dot vision dot all import star.
+
+08:50.000 --> 08:55.000
+ So, like this is finished. So, we can now unzip minus Q.
+
+08:55.000 --> 08:59.000
+ Not that unzip minus Q.
+
+08:59.000 --> 09:02.000
+ Patty disease classification.
+
+09:02.000 --> 09:06.000
+ There we go.
+
+09:06.000 --> 09:09.000
+ Oh, you know what we could do.
+
+09:09.000 --> 09:16.000
+ We could run this on my GPU server because of course, running this on the max.
+
+09:16.000 --> 09:18.000
+ You have a dumb idea anyway.
+
+09:18.000 --> 09:22.000
+ So, I don't think we've talked about how to do that before.
+
+09:22.000 --> 09:29.000
+ So, this might be slightly obscure.
+
+09:29.000 --> 09:34.000
+ That's okay.
+
+09:34.000 --> 09:39.000
+ So, I'm going to run something in the process.
+
+09:39.000 --> 09:42.000
+ So, all right.
+
+09:42.000 --> 09:44.000
+ I'm switching over now.
+
+09:44.000 --> 09:46.000
+ Actually, let's jump out of T mux.
+
+09:46.000 --> 09:50.000
+ Because running T mux in T mux is always a little bit weird.
+
+09:50.000 --> 09:54.000
+ So, this is my GPU server.
+
+09:54.000 --> 09:56.000
+ Okay.
+
+09:56.000 --> 09:59.000
+ And it is running Jupyter.
+
+09:59.000 --> 10:02.000
+ And it says, oh, you can go to local host 888 to use this.
+
+10:02.000 --> 10:09.000
+ But I can't because that's not local host refers to the machine I'm currently on.
+
+10:09.000 --> 10:10.000
+ And I'm not on this machine.
+
+10:10.000 --> 10:15.000
+ I'm SSHing into a remote machine.
+
+10:15.000 --> 10:17.000
+ But what I've done.
+
+10:17.000 --> 10:22.000
+ And as I say, this is like something that not everybody needs to know about for sure.
+
+10:22.000 --> 10:29.000
+ But for those who are interested, what I've done is when I SSH to this particular machine
+
+10:29.000 --> 10:39.000
+ called local, it forwards anything that I use on my local machines port 888 to the remote machine machines.
+
+10:39.000 --> 10:54.000
+ 888, which means that I can use local host 888 and it will actually forward those packets to the remote machine and forward remote machine packets back to here.
+
+10:54.000 --> 10:58.000
+ So, this is called SSH forwarding.
+
+10:58.000 --> 11:01.000
+ You know, if I.
+
+11:01.000 --> 11:09.000
+ So, if I.
+
+11:09.000 --> 11:14.000
+ Go here.
+
+11:14.000 --> 11:22.000
+ Oh, and the other thing we should probably do is make sure that Jupyter is not running on the local machine.
+
+11:22.000 --> 11:25.000
+ Cancel that.
+
+11:25.000 --> 11:32.000
+ And so to exit out of this, I could create another window or another tab or whatever, but I can just hit control B.D. to detach from T.
+
+11:32.000 --> 11:36.000
+ So that stuff's all running still in the background.
+
+11:36.000 --> 11:41.000
+ And then I can SSH to my machine.
+
+11:41.000 --> 11:44.000
+ And let's see if that's all.
+
+11:44.000 --> 11:48.000
+ Working. There we go. Okay.
+
+11:48.000 --> 11:50.000
+ So.
+
+11:50.000 --> 11:51.000
+ That's great.
+
+11:51.000 --> 12:00.000
+ And so here we actually have that going so we can create a new notebook.
+
+12:00.000 --> 12:19.000
+ And it's easy enough, by the way, if you do like by a machine with a GPU, which it's not a terrible idea, especially if eventually GPU prices start to come back down to reasonable levels at some point.
+
+12:19.000 --> 12:28.000
+ You know, it doesn't need to be a notebook or anything. You can check it anywhere in the house, just like I've done. And as you can see, log into it from your computer.
+
+12:28.000 --> 12:37.000
+ Now, I can only log into mine. Right. You know, by default, I'd only be able to log in from home.
+
+12:37.000 --> 12:48.000
+ If you want to be able to log in when you're not at home, you would have to go into your router's settings and say forward port 22, which is the SSH port.
+
+12:48.000 --> 12:59.000
+ To your GPU server. And you'd also have to know the IP address that your house's Wi Fi is on, and that tends to change.
+
+12:59.000 --> 13:09.000
+ So you can use something called dynamic DNS. There's lots of different providers of dynamic DNS. I use something called din.com just because they've been around forever.
+
+13:09.000 --> 13:18.000
+ And so, yeah, so I can log into my machine from from anywhere, which is, which is very nice.
+
+13:18.000 --> 13:28.000
+ Okay, so let's try this again from fast AI.vision.org imports.
+
+13:28.000 --> 13:39.000
+ All right. And so path equals.
+
+13:39.000 --> 13:42.000
+ So we can do LS in bash like so. Here we go.
+
+13:42.000 --> 13:48.000
+ Great. So you can just use the current path.
+
+13:48.000 --> 13:51.000
+ Is where our data is.
+
+13:51.000 --> 13:54.000
+ And so our trading path.
+
+13:54.000 --> 14:02.000
+ Oh, and we're also. That's fine.
+
+14:02.000 --> 14:07.000
+ And then our training path.
+
+14:07.000 --> 14:10.000
+ Is.
+
+14:10.000 --> 14:27.000
+ So, I'm not sure we've really talked much about pathlib before us. So this.
+
+14:27.000 --> 14:32.000
+ This path object comes from a Python class called pathlib.
+
+14:32.000 --> 14:37.000
+ And it's imported by default with pretty much any fast core or fast AI thing you use.
+
+14:37.000 --> 14:50.000
+ So basically, yeah, it lets you create a part. This is your path and your current working directory, or you can do something here to go to a relative directory, or you can go to a.
+
+14:50.000 --> 14:59.000
+ Absolute directory. And then you can, you know, it's kind of got this somewhat neat.
+
+14:59.000 --> 15:07.000
+ Use of the slash operator to mean, you know, go to a subdirectory.ls doesn't come with it by default.
+
+15:07.000 --> 15:14.000
+ Fast core adds that to list things, as you see.
+
+15:14.000 --> 15:20.000
+ Yeah, so that's pretty cool. And so the other thing we did yesterday was we looked at the files.
+
+15:20.000 --> 15:23.000
+ Get image files.
+
+15:23.000 --> 15:26.000
+ Inside.
+
+15:26.000 --> 15:31.000
+ Let's have a look at the ones inside the training path.
+
+15:31.000 --> 15:43.000
+ And so we could create an image.
+
+15:43.000 --> 15:47.000
+ You can look at it.
+
+15:47.000 --> 15:57.000
+ And then we could create a size.
+
+15:57.000 --> 16:02.000
+ Okay, so there's a few things we can do that kind of gets us back to where we were yesterday.
+
+16:02.000 --> 16:11.000
+ So a question I saw in the forum was how would I forget like the sizes of all of the files.
+
+16:11.000 --> 16:22.000
+ Okay, which is, let's do it the slightly slow way in time how long it takes sizes equals.
+
+16:22.000 --> 16:31.000
+ Let's just copy that paste that here.
+
+16:31.000 --> 16:42.000
+ So size for in files.
+
+16:42.000 --> 16:45.000
+ Yes.
+
+16:45.000 --> 16:52.000
+ Is there a question coming.
+
+16:52.000 --> 16:57.000
+ So to do this in parallel, which would obviously be faster.
+
+16:57.000 --> 17:05.000
+ I mean, it would depend if the most of the time is spent reading this from the disk, then doing this in parallel won't be any faster.
+
+17:05.000 --> 17:10.000
+ If most of the time is being spent decoding the JPEG, then doing this in parallel will be faster.
+
+17:10.000 --> 17:17.000
+ And which of those is true will depend on whether we're using an SSD or not.
+
+17:17.000 --> 17:25.000
+ So anyway, I'll show you how to do it. So if you import a fast quarter parallel,
+
+17:25.000 --> 17:30.000
+ which is a module, that module contains a function.
+
+17:30.000 --> 17:38.000
+ Or parallel, which applies this function to these items.
+
+17:38.000 --> 17:47.000
+ So the function we want to apply is.
+
+17:47.000 --> 17:52.000
+ Let's look at the doc for it.
+
+17:52.000 --> 18:02.000
+ So here's an example of parallel.
+
+18:02.000 --> 18:05.000
+ Oh, that should be.
+
+18:05.000 --> 18:15.000
+ What a bit of a mind. So here's something that takes two things, x and a and adds something to each one.
+
+18:15.000 --> 18:24.000
+ And so here's how we use parallel. The docs for faster libraries are a bit different to some in the tests and the docs are all one thing.
+
+18:24.000 --> 18:33.000
+ So to read this, this is saying if you call parallel passing at this function, which is just.
+
+18:33.000 --> 18:37.000
+ X plus a where a defaults to one.
+
+18:37.000 --> 18:48.000
+ And you do it on this input, which is range 50. Then you would expect to get this output, which is the range from one to 51.
+
+18:48.000 --> 18:57.000
+ So this kind of is showing you lots of examples of using the function and telling you what to expect to get for each one.
+
+18:57.000 --> 19:07.000
+ So if we want a function, which is going to take some file and it's going to return.
+
+19:07.000 --> 19:11.000
+ This.
+
+19:11.000 --> 19:14.000
+ So.
+
+19:14.000 --> 19:18.000
+ And so if we want to run that in parallel.
+
+19:18.000 --> 19:21.000
+ Then we can say.
+
+19:21.000 --> 19:31.000
+ And the function we want to run is this function and the files we want to run on his files and there's lots of other things we could pass in.
+
+19:31.000 --> 19:39.000
+ So, like, let's say we want to do it on four parallel workers. See if that ends up any faster.
+
+19:39.000 --> 19:46.000
+ So as you can see running stuff in parallel when he is fast core is actually pretty fast and easy.
+
+19:46.000 --> 19:54.000
+ But as I said, it doesn't necessarily result in a speed up. If the main thing that's taking time is.
+
+19:54.000 --> 19:56.000
+ Getting stuff off the disk.
+
+19:56.000 --> 20:01.000
+ Then it won't be faster. Okay, so in this case it was a bit faster.
+
+20:01.000 --> 20:10.000
+ I think that I think they use really slow disks on. Actually, this is my disc. This is a good disc. So ought to be fast.
+
+20:10.000 --> 20:19.000
+ So we could see if increasing it further is faster still. I guess it's we've probably.
+
+20:19.000 --> 20:21.000
+ See.
+
+20:21.000 --> 20:24.000
+ Jeremy quick question about this. Yeah.
+
+20:24.000 --> 20:32.000
+ Does this use CPU cores or is it using the view or running it in parallel CPU.
+
+20:32.000 --> 20:36.000
+ So the GPU is only used for.
+
+20:36.000 --> 20:42.000
+ For models, basically pretty much everything else is going to be done on CPU.
+
+20:42.000 --> 20:44.000
+ Okay.
+
+20:44.000 --> 20:48.000
+ Okay.
+
+20:48.000 --> 20:56.000
+ So that's definitely worth the speed up. Now, I don't normally create.
+
+20:56.000 --> 20:58.000
+ A function.
+
+20:58.000 --> 21:01.000
+ To do one thing like this.
+
+21:01.000 --> 21:07.000
+ What I would normally do instead is to use a lambda expression.
+
+21:07.000 --> 21:10.000
+ And so to use a lambda expression.
+
+21:10.000 --> 21:14.000
+ It's just basically it's a function you define in line. You just type lambda.
+
+21:14.000 --> 21:18.000
+ And you say the argument and you don't have to say return.
+
+21:18.000 --> 21:23.000
+ And so then we can get rid of the definition.
+
+21:23.000 --> 21:30.000
+ And run.
+
+21:30.000 --> 21:35.000
+ Okay. So that's interesting. So we can't use a lambda with parallel.
+
+21:35.000 --> 21:38.000
+ I guess I didn't know that now I think about it.
+
+21:38.000 --> 21:43.000
+ All right. That's fine. We won't use it then.
+
+21:43.000 --> 21:50.000
+ Parallel processing on Python is notoriously crappy.
+
+21:50.000 --> 21:52.000
+ So.
+
+21:52.000 --> 21:53.000
+ Yeah.
+
+21:53.000 --> 22:01.000
+ It's it's it has a lot of limitations, including now I think about it not being able to use lambdas.
+
+22:01.000 --> 22:07.000
+ Okay.
+
+22:07.000 --> 22:13.000
+ So then we created our data loaders.
+
+22:13.000 --> 22:18.000
+ Image data from path.
+
+22:18.000 --> 22:25.000
+ And we passed in the training path.
+
+22:25.000 --> 22:29.000
+ And.
+
+22:29.000 --> 22:32.000
+ And.
+
+22:32.000 --> 22:39.000
+ And I think we want some resource transform as well. Right.
+
+22:39.000 --> 22:53.000
+ Cool.
+
+22:53.000 --> 22:56.000
+ So.
+
+22:56.000 --> 22:58.000
+ And so then we created a model.
+
+22:58.000 --> 23:08.000
+ So last time we used ResNet 34.
+
+23:08.000 --> 23:12.000
+ But what I'd be inclined to do.
+
+23:12.000 --> 23:18.000
+ Is to head over to Kaggle and look at the.
+
+23:18.000 --> 23:23.000
+ Which image models are best.
+
+23:23.000 --> 23:31.000
+ And see if there's something we might want to use. It's better than ResNet 34.
+
+23:31.000 --> 23:38.000
+ So this is showing speed in a log scale. And this is showing accuracy on image net.
+
+23:38.000 --> 23:42.000
+ And the different colors of various different kind of families.
+
+23:42.000 --> 23:45.000
+ So.
+
+23:45.000 --> 23:48.000
+ ResNet is.
+
+23:48.000 --> 23:52.000
+ This family here.
+
+23:52.000 --> 23:54.000
+ And things like.
+
+23:54.000 --> 24:06.000
+ ResNet 34 and not particularly great, as you can see.
+
+24:06.000 --> 24:16.000
+ So let's try using con next base in 22 blah blah blah instead.
+
+24:16.000 --> 24:20.000
+ Okay. So vision learner we just passed in the data loaders.
+
+24:20.000 --> 24:27.000
+ And so these image models here from.
+
+24:27.000 --> 24:30.000
+ A library called Tim.
+
+24:30.000 --> 24:35.000
+ Which to use it you need it installed.
+
+24:35.000 --> 24:40.000
+ Which I probably have installed but just to check.
+
+24:40.000 --> 24:44.000
+ Yep, it's already installed.
+
+24:44.000 --> 24:52.000
+ And you can check out things on Tim such as so if you import it.
+
+24:52.000 --> 24:56.000
+ Then you can say Tim dot.
+
+24:56.000 --> 25:01.000
+ List models and you can pass in basically a glob so I want to look at com.
+
+25:01.000 --> 25:04.000
+ Next models.
+
+25:04.000 --> 25:08.000
+ See what options there are mainly because I just want to.
+
+25:08.000 --> 25:13.000
+ Copy and post. And so okay so there's base this mall as well.
+
+25:13.000 --> 25:14.000
+ Small.
+
+25:14.000 --> 25:19.000
+ Now why small.
+
+25:19.000 --> 25:23.000
+ Con next.
+
+25:23.000 --> 25:29.000
+ If you double click you'll get this is base large.
+
+25:29.000 --> 25:30.000
+ Extra large.
+
+25:30.000 --> 25:32.000
+ That's weird.
+
+25:32.000 --> 25:34.000
+ For some reason.
+
+25:34.000 --> 25:41.000
+ The small ones not appearing.
+
+25:41.000 --> 25:54.000
+ I think they are the small and the tiny one in the last version of team that is not in the people so.
+
+25:54.000 --> 25:57.000
+ Right. Okay, so.
+
+25:57.000 --> 25:58.000
+ Oh yeah.
+
+25:58.000 --> 26:03.000
+ We need to install the dev version of it.
+
+26:03.000 --> 26:08.000
+ Correct. Yes, thank you.
+
+26:08.000 --> 26:14.000
+ So Ross who runs who creates Tim.
+
+26:14.000 --> 26:19.000
+ Created a pre release version point six to.
+
+26:19.000 --> 26:23.000
+ And so to install that we would need to.
+
+26:23.000 --> 26:29.000
+ Call minus you upgrade.
+
+26:29.000 --> 26:34.000
+ Oh, just one moment please.
+
+26:34.000 --> 26:52.000
+ I don't have any computer problems.
+
+26:52.000 --> 26:54.000
+ All right.
+
+26:54.000 --> 26:56.000
+ Tim.
+
+26:56.000 --> 26:58.000
+ Greater than.
+
+26:58.000 --> 27:02.000
+ 0.6.
+
+27:02.000 --> 27:04.000
+ 0.6.
+
+27:04.000 --> 27:06.000
+ 0.6.
+
+27:06.000 --> 27:08.000
+ 0.6.
+
+27:08.000 --> 27:10.000
+ I think something like this.
+
+27:10.000 --> 27:18.000
+ I'm not quite sure.
+
+27:18.000 --> 27:26.000
+ Oh, it says I've already got 0.6.2 dev installed.
+
+27:26.000 --> 27:33.000
+ Oh, I see so I've got it on my machine but it wasn't on the Kaggle machine because I didn't install the that version on Kaggle.
+
+27:33.000 --> 27:34.000
+ Okay.
+
+27:34.000 --> 27:35.000
+ Cool.
+
+27:35.000 --> 27:40.000
+ Well, we might as well fix it on Kaggle just so you see how these things work as well.
+
+27:40.000 --> 27:45.000
+ Because there's actually something quite nifty here.
+
+27:45.000 --> 27:49.000
+ I will click edit on Kaggle.
+
+27:49.000 --> 27:53.000
+ And we'll.
+
+27:53.000 --> 28:03.000
+ Not here somehow but it's okay.
+
+28:03.000 --> 28:11.000
+ Oh, all right.
+
+28:11.000 --> 28:14.000
+ It's he doesn't have it in his data.
+
+28:14.000 --> 28:15.000
+ I guess.
+
+28:15.000 --> 28:16.000
+ All right.
+
+28:16.000 --> 28:18.000
+ So not much we can do about that.
+
+28:18.000 --> 28:19.000
+ All right.
+
+28:19.000 --> 28:22.000
+ Well, I think we should just go ahead and try one of the smaller ones.
+
+28:22.000 --> 28:31.000
+ So come let's try small.
+
+28:31.000 --> 28:35.000
+ That has to be a string when you use Tim.
+
+28:35.000 --> 28:37.000
+ Okay.
+
+28:37.000 --> 28:39.000
+ See what happens.
+
+28:39.000 --> 28:44.000
+ So when you use a pre trained model.
+
+28:44.000 --> 28:45.000
+ It needs the weights.
+
+28:45.000 --> 28:51.000
+ And so the first time you use it, it downloads the weights.
+
+28:51.000 --> 28:55.000
+ Depending on how much space if you're using paper space,
+
+28:55.000 --> 28:59.000
+ depending on how much space you have and how long this takes on paper space,
+
+28:59.000 --> 29:02.000
+ you may want to consider.
+
+29:02.000 --> 29:08.000
+ Sim linking your home directories dot cash slash torch.
+
+29:08.000 --> 29:12.000
+ Into slash storage.
+
+29:12.000 --> 29:16.000
+ And that way you won't have to download these, not that it seems to take too long.
+
+29:16.000 --> 29:19.000
+ I don't know if you care or not.
+
+29:19.000 --> 29:24.000
+ You know, one thing we might want to do.
+
+29:24.000 --> 29:28.000
+ Well, let's, let's just try to find tune it, shall we?
+
+29:28.000 --> 29:32.000
+ Yeah.
+
+29:32.000 --> 29:39.000
+ It's good.
+
+29:39.000 --> 29:48.000
+ Seems to be working.
+
+29:48.000 --> 30:01.000
+ So, you know, if anybody's got any questions or thoughts along the way.
+
+30:01.000 --> 30:03.000
+ So when it fine tunes.
+
+30:03.000 --> 30:14.000
+ Oh, okay. So the other thing we want to do is tell it that we want to keep track of the error rate.
+
+30:14.000 --> 30:19.000
+ Okay.
+
+30:19.000 --> 30:24.000
+ So, yeah, so when we fine tune.
+
+30:24.000 --> 30:29.000
+ Just create another copy.
+
+30:29.000 --> 30:57.000
+ Okay.
+
+30:57.000 --> 31:02.000
+ So we can look at the source code to see exactly what it's doing.
+
+31:02.000 --> 31:05.000
+ When we call fine tune.
+
+31:05.000 --> 31:08.000
+ So what it's actually doing.
+
+31:08.000 --> 31:13.000
+ Is it's calling freeze? What that does is it.
+
+31:13.000 --> 31:18.000
+ Says all of the weights except for the very last layer.
+
+31:18.000 --> 31:21.000
+ You're the optimizer is not allowed to change.
+
+31:21.000 --> 31:30.000
+ So if you think back to that, Siler and Fergus paper we saw with the different layers and the different like, you know, the later layers were more and more specific.
+
+31:30.000 --> 31:39.000
+ So initially we just want to fit the last layer. So it calls fit on the last layer only.
+
+31:39.000 --> 31:43.000
+ And then it decreases the learning rate and then unfreezes.
+
+31:43.000 --> 31:51.000
+ So then it says, okay, you can train the whole thing and then it trains the whole model for however many epochs we asked for.
+
+31:51.000 --> 31:59.000
+ So we can see. So generally speaking, first I methods or I mean pretty much any methods I write tend to be very small.
+
+31:59.000 --> 32:05.000
+ So they're designed to be reasonably easy to read the source code and see what's going on.
+
+32:05.000 --> 32:11.000
+ At least if you're reasonably comfortable with Python.
+
+32:11.000 --> 32:15.000
+ Oh, and I just sort of something else we should do.
+
+32:15.000 --> 32:19.000
+ Which is if you are using a.
+
+32:19.000 --> 32:24.000
+ GPU released in the last, I don't know, four years or so.
+
+32:24.000 --> 32:30.000
+ It's very likely that it'll be much faster using.
+
+32:30.000 --> 32:37.000
+ What's called half precision floating point, which is basically like less less precise numbers.
+
+32:37.000 --> 32:42.000
+ It'll be way way way faster.
+
+32:42.000 --> 32:47.000
+ Most of the time on co lab and Kaggle you're not going to get.
+
+32:47.000 --> 32:56.000
+ One of those more up to date GPUs, but having said that there's really never any harm in using half precision floating point.
+
+32:56.000 --> 33:01.000
+ And even if you use an older GPU, it's still going to save memory.
+
+33:01.000 --> 33:05.000
+ So actually to ask.
+
+33:05.000 --> 33:11.000
+ I had to do that for you. You can add to floating point 16 as in 16 bit.
+
+33:11.000 --> 33:15.000
+ At the end of your learner command.
+
+33:15.000 --> 33:24.000
+ So, yeah, so when this finishes, we might try to re running it.
+
+33:24.000 --> 33:28.000
+ With this instead.
+
+33:28.000 --> 33:32.000
+ I'm just following along on purpose place.
+
+33:32.000 --> 33:44.000
+ And if I don't want to bother with importing Tim just to keep up what instead of using con next, what would, what would be a good default to use.
+
+33:44.000 --> 33:48.000
+ I mean, why not use come next what's your.
+
+33:48.000 --> 33:53.000
+ I guess because I would.
+
+33:53.000 --> 33:58.000
+ I think I missed that.
+
+33:58.000 --> 33:59.000
+ So, yeah.
+
+33:59.000 --> 34:03.000
+ Or if you want to get the more recent.
+
+34:03.000 --> 34:07.000
+ Models, such as the one we're using then.
+
+34:07.000 --> 34:14.000
+ Pip install.
+
+34:14.000 --> 34:16.000
+ Let me copy this for you.
+
+34:16.000 --> 34:30.000
+ So that's the command there.
+
+34:30.000 --> 34:34.000
+ And Jeremy, just while we're.
+
+34:34.000 --> 34:38.000
+ While we're talking about, you know, fine tuning and as that's going on.
+
+34:38.000 --> 34:45.000
+ I don't know if anyone else would find it helpful, but I mean, obviously, like conceptually understand what's happening with fine tuning but.
+
+34:45.000 --> 34:53.000
+ I don't know if anyone else kind of feels like trying to understand better what's actually going under the hood with fine tuning like what's actually being altered.
+
+34:53.000 --> 35:01.000
+ With within the model like more than just like a kind of at a high level. I'm just trying to get a bit of a better grip on.
+
+35:01.000 --> 35:08.000
+ Yeah, like what exactly where fine tuning and how it's going about fine tuning it. I guess just under that, that first surface level.
+
+35:08.000 --> 35:10.000
+ Just want to make sure I understand it better.
+
+35:10.000 --> 35:18.000
+ So, so we just looked at the source code for it. So what, what, what, yeah, what did you want to go.
+
+35:18.000 --> 35:20.000
+ Which bit of this.
+
+35:20.000 --> 35:23.000
+ Do you want a little deeper out or like what did you.
+
+35:23.000 --> 35:26.000
+ Yeah, tell me, tell me more what you want to know.
+
+35:26.000 --> 35:37.000
+ Yeah, I guess so, you know, like stepping through it so like we, we, you've got it frozen at a particular point, right, and then this fit one cycle so just go into the definition of fit one cycle again.
+
+35:37.000 --> 35:41.000
+ Oh, so we haven't done that yet in the course I don't think.
+
+35:41.000 --> 35:45.000
+ So yeah, so we can certainly talk about that.
+
+35:45.000 --> 35:54.000
+ I don't want to hijack things if other people want to kind of move on that's fine. I can follow it up later but I just, I just kind of wanted to get a bit of an overview of what's actually going on there.
+
+35:54.000 --> 36:03.000
+ Let's take a look at one cycle. So,
+
+36:03.000 --> 36:08.000
+ look at the docs.
+
+36:08.000 --> 36:14.000
+ So what does fit one cycle do.
+
+36:14.000 --> 36:19.000
+ So actually, there's a paper you can read if you want to know exactly what it does.
+
+36:19.000 --> 36:35.000
+ But there's a picture here, which tells you what it does. And what this picture is, is so fit one cycle is something called a scheduler and a scheduler is something which actually changes the learning rate during the training.
+
+36:35.000 --> 36:44.000
+ So remember the learning rate is the thing we multiply the gradients by before we subtract them from the parameters.
+
+36:44.000 --> 36:53.000
+ When you have a randomly initialized model or even a pre trained model we actually randomly initialized the last layer of weights.
+
+36:53.000 --> 37:02.000
+ So at first, even a pre trained model that we're fine tuning can't do anything. It's right. It's still giving random answers.
+
+37:02.000 --> 37:07.000
+ And so that means we want to use a really small learning rate because
+
+37:07.000 --> 37:18.000
+ it's very difficult to get to a point where it's starting to learn something slightly useful. And so when we start training the first year batches use a tiny learning rate.
+
+37:18.000 --> 37:28.000
+ And then as it gets better and better at like doing something useful, you can increase the learning rate because it's got to a point where it's like,
+
+37:28.000 --> 37:35.000
+ yeah, it's kind of nose vaguely what it's doing. And so as it trains the learning rate goes up and up and up and up.
+
+37:35.000 --> 37:43.000
+ And then as you start to get close to the answer, you need to decrease the learning rate again.
+
+37:43.000 --> 37:54.000
+ And the reason for that is that you're really fine going to small little steps you're really, really close now. So when you.
+
+37:54.000 --> 38:07.000
+ So you say, so you say, as you get closer to the answer, like are we saying that that's in comparison to the validation set so that we're, so that we're moving away from overfit that where those might, yeah, I guess whether
+
+38:07.000 --> 38:19.000
+ training or anything. This is just so this is just a plot of the curve of batch number against learning rate.
+
+38:19.000 --> 38:28.000
+ So this is this is the exact shape that is used. There's nothing clever going on it just it just follows this exact curve.
+
+38:28.000 --> 38:38.000
+ Okay, so there's no there's that's not interacting with anything else to derive those numbers it's just doing that. Okay. All right. So in fact,
+
+38:38.000 --> 38:51.000
+ I was code for it. What it does is it calls them in called combined cause.
+
+38:51.000 --> 39:01.000
+ Which is something that uses two cosine schedules. And so a cosine schedule is one that.
+
+39:01.000 --> 39:08.000
+ So it's also known as an annealer it's called learning rate and yelling is something that literally uses cosine.
+
+39:08.000 --> 39:18.000
+ Got it. Yep. Okay. That's helpful. So I get now kind of where that's mapping to that, that idea.
+
+39:18.000 --> 39:32.000
+ And, you know, for people who are interested in going deeper in understanding like what is fast, I do and why and what what actually makes what's important in deep learning and stuff.
+
+39:32.000 --> 39:47.000
+ This is how exploring the documentation and source code of fast, I, when you add a point where you feel this is what you're ready to do can be super useful because the documentation can tell you what paper is being implemented and why and shows you pictures
+
+39:47.000 --> 39:55.000
+ and stuff that you're doing and the source code is something that you can copy and paste into your notebook and try it yourself and so forth.
+
+39:55.000 --> 39:56.000
+ Yes.
+
+39:56.000 --> 39:59.000
+ To try any other questions about this.
+
+39:59.000 --> 40:03.000
+ No, that's that's fine for me. I don't know if anyone else does.
+
+40:03.000 --> 40:04.000
+ All right.
+
+40:04.000 --> 40:11.000
+ I just wanted to comment that Sylvain had a very good blog post explaining those with one cycle.
+
+40:11.000 --> 40:12.000
+ Policy.
+
+40:12.000 --> 40:13.000
+ Yes, he does.
+
+40:13.000 --> 40:18.000
+ Okay.
+
+40:18.000 --> 40:21.000
+ Perfect.
+
+40:21.000 --> 40:27.000
+ And so there's other policies you can use like the triangular version.
+
+40:27.000 --> 40:33.000
+ So this is actually what we originally did I think for one cycle as you can see it ends up being pretty similar.
+
+40:33.000 --> 40:44.000
+ And what would be, I guess, the criteria for where you would change that policy like it.
+
+40:44.000 --> 40:49.000
+ Like what would I guess what's the basis for the decision you make about changing that policy.
+
+40:49.000 --> 40:54.000
+ I mean, you don't basically it works fine and you just do it. Yeah. Okay.
+
+40:54.000 --> 41:01.000
+ All right. So it's pretty arbitrary. Yeah. I mean, it's, it's, no, it's not arbitrary. It's something that lots of experimentation has found that this works well.
+
+41:01.000 --> 41:11.000
+ And the things that need changing. We generally tell people all about them, but this is generally something that doesn't need changing too much.
+
+41:11.000 --> 41:13.000
+ Okay.
+
+41:13.000 --> 41:18.000
+ So is this related to learning trade finder.
+
+41:18.000 --> 41:20.000
+ Okay. So let's talk about learning.
+
+41:20.000 --> 41:29.000
+ Because I'm finding it quite confusing, which actually which, which number is correct with learning trade finder.
+
+41:29.000 --> 41:39.000
+ So I'm just before we do that, I'll just point out so the, the mix precision version on my RTX card, which is a consumer GPU.
+
+41:39.000 --> 41:48.000
+ The speed's gone from a minute 41 to 28 seconds. So you can see it really does make a huge difference to use.
+
+41:48.000 --> 41:58.000
+ So this question about something called the learning rate finder.
+
+41:58.000 --> 42:12.000
+ So the learning rate finder does something very similar to one cycle, the one cycle scheduler or one cycle in yelling, which is it gradually increases the learning rate while it trains.
+
+42:12.000 --> 42:22.000
+ But it actually only does up to 100 batches. So generally speaking far less than even an epoch.
+
+42:22.000 --> 42:31.000
+ And it doesn't increase the learning rate and then decrease it again. It just keeps increasing the learning rate until the whole thing falls apart.
+
+42:31.000 --> 42:43.000
+ And so this is a graph of the learning rate. And remember it increases it logarithmically increasing every batch. So this is also kind of a graph of time of batch number.
+
+42:43.000 --> 42:48.000
+ And then it shows you what loss it got. So for batch, the first year batches, it got a loss of about four.
+
+42:48.000 --> 42:58.000
+ And until it got up to a learning rate of about 10 to the negative four, nothing really improved. So clearly learning rates of less than 10 to the negative four aren't very useful.
+
+42:58.000 --> 43:05.000
+ And then as it increased the learning rate, you can see the slope started to get steeper and steeper.
+
+43:05.000 --> 43:20.000
+ And so this area here is where it's learning the most quickly. And then it gets to a point up here where it's too high. And when it gets too high, initially it just doesn't really improve it all.
+
+43:20.000 --> 43:26.000
+ And then it gets really too high. It jumps past the answer, right, and starts getting much worse.
+
+43:26.000 --> 43:39.000
+ So the, yeah, so I generally just pick somewhere visually around the middle. Or you can, you know, see, it says something around.
+
+43:39.000 --> 43:53.000
+ So is the magnitude of that thing, or why we wouldn't choose the minimum here. I mean, I, okay, sorry, that's what I thought like.
+
+43:53.000 --> 43:58.000
+ Yeah, this would be a really bad spot right because at this point it's not learning.
+
+43:58.000 --> 44:04.000
+ So what you want to look at is the is the gradient you want to look at the slope of this line because the slope is how quickly is it improving.
+
+44:04.000 --> 44:09.000
+ So at this point here that this learning rate, it doesn't improve at all. So if we use this learning rate.
+
+44:09.000 --> 44:12.000
+ So what did that make sense to use gradient actually for this.
+
+44:12.000 --> 44:14.000
+ Yeah, to see what's the minimum.
+
+44:14.000 --> 44:17.000
+ I mean, rather than doing that visually.
+
+44:17.000 --> 44:22.000
+ Well, not necessarily because you see here there's a really steep gradient but that's definitely a bad spot.
+
+44:22.000 --> 44:37.000
+ True. Okay, sorry. So, I mean, Debbie, sorry, it's a great question. Like, it's surprisingly difficult to come up algorithmically with the thing that our eyes do when we say like, oh, we're about somewhere around here.
+
+44:37.000 --> 44:40.000
+ Wouldn't that be local mini minimum.
+
+44:40.000 --> 44:41.000
+ No, sorry.
+
+44:41.000 --> 44:53.000
+ No, because the minimums down here, which is definitely not what we want and the minimum gradient would be here, which is definitely not what we want.
+
+44:53.000 --> 45:01.000
+ I'm not saying it's possible. It's totally possible. But the learning rate finder.
+
+45:01.000 --> 45:15.000
+ So, Zach Mueller actually spent a lot of time trying different things and read a whole blog post for his company and came up with four different approaches, all of which actually don't work too bad.
+
+45:15.000 --> 45:21.000
+ And you can actually look at all of them by saying what suggestion functions do you want to use.
+
+45:21.000 --> 45:28.000
+ Oh.
+
+45:28.000 --> 45:42.000
+ And I wonder if there's
+
+45:42.000 --> 45:48.000
+ We probably should have a link to sex post in the docs because that would be quite helpful.
+
+45:48.000 --> 46:03.000
+ I don't know. Maybe I'll second about that. Okay. So,
+
+46:03.000 --> 46:12.000
+ Yeah, so you can see minimum. It's actually one of the suggestion functions, but I don't actually know why it's even there because you never use it.
+
+46:12.000 --> 46:24.000
+ And so minimum will report the plot will be at the minimum, but the suggestion value is still like it's like 10, like divided by 10.
+
+46:24.000 --> 46:26.000
+ Oh, is that what happens.
+
+46:26.000 --> 46:31.000
+ Yeah, so it finds the minimum divided by 10. Oh, got it.
+
+46:31.000 --> 46:37.000
+ So we should probably plot that then on the minimum rather than what's effectively 10 times that.
+
+46:37.000 --> 46:40.000
+ Okay, thanks for explaining.
+
+46:40.000 --> 46:48.000
+ So I can see all these numbers are all in the same order of magnitude.
+
+46:48.000 --> 47:01.000
+ And the default is point.
+
+47:01.000 --> 47:12.000
+ So, so something that fast AI use these is underneath the hood, or I mean, like what's the benefit of changing this learning rate manually, or trying to find it.
+
+47:12.000 --> 47:23.000
+ So, so most of the time, our default works perfectly fine, which is why I don't talk about this as much as I used to actually.
+
+47:23.000 --> 47:32.000
+ Sometimes some data more particularly like for a tabular data set, the learning rate can be almost anything.
+
+47:32.000 --> 47:39.000
+ It really depends on the model. I find most.
+
+47:39.000 --> 47:45.000
+ I have to all computer vision models seem to have pretty similar learning rates that are useful so the defaults generally work pretty well.
+
+47:45.000 --> 47:58.000
+ So if you try something and it doesn't seem to be training quickly well, just try running the you know the first thing I try would be running a lot of fines just in case the default learning rates nowhere near the recommended values.
+
+47:58.000 --> 48:04.000
+ And then you could try. Yeah, you could just try some different number.
+
+48:04.000 --> 48:07.000
+ But yeah, these are all very close to route throughout default anyway.
+
+48:07.000 --> 48:16.000
+ I wouldn't bother in this particular case.
+
+48:16.000 --> 48:17.000
+ Thank you.
+
+48:17.000 --> 48:22.000
+ Yeah, no worries. These are questions.
+
+48:22.000 --> 48:32.000
+ Okay, we've got a model. I'm actually going to have to train it again because I just created a new learner for the purpose of that.
+
+48:32.000 --> 48:39.000
+ And so the next thing we're going to have to do is to apply it to our.
+
+48:39.000 --> 48:46.000
+ Training set sorry to our to our test set in order to submit to Kaggle.
+
+48:46.000 --> 48:54.000
+ So the test set is always good to have two windows to tabs going on because that way we can start working on the next thing while this is training.
+
+48:54.000 --> 49:00.000
+ Right. And you can see it's still training because a little hourglass icon is there in the fav icon.
+
+49:00.000 --> 49:06.000
+ So there's something called test underscore.
+
+49:06.000 --> 49:13.000
+ DL, which for some reason is not appearing. It must be from some different part of the library.
+
+49:13.000 --> 49:16.000
+ Test you.
+
+49:16.000 --> 49:21.000
+ Data core.
+
+49:21.000 --> 49:32.000
+ First, I data dot or import star.
+
+49:32.000 --> 49:39.000
+ Something.
+
+49:39.000 --> 49:41.000
+ Oh, it's a method. Okay.
+
+49:41.000 --> 49:43.000
+ My bad.
+
+49:43.000 --> 49:46.000
+ The old start test deal.
+
+49:46.000 --> 49:48.000
+ Okay.
+
+49:48.000 --> 49:53.000
+ So, I'm going to go to the top.
+
+49:53.000 --> 49:58.000
+ No doc.
+
+49:58.000 --> 50:09.000
+ All right. So this creates a test data loader. So test data loader is a data loader used for inference of a bunch of things at once, basically.
+
+50:09.000 --> 50:16.000
+ So there should be an example down here. Okay. So test deal is something that we pass some items to.
+
+50:16.000 --> 50:29.000
+ So I don't know, like, rad act niche, anybody else, you know, I'm thinking I'm just going to call get image files on the test set and pass it to test deal. Is that what you guys would do or you have a better.
+
+50:29.000 --> 50:36.000
+ Better way to do this.
+
+50:36.000 --> 50:39.000
+ Yeah, I think that should work.
+
+50:39.000 --> 50:40.000
+ Okay.
+
+50:40.000 --> 50:48.000
+ I don't know, like what people, you know, I don't do nearly as much inference stuff as most people. So I never quite know what the.
+
+50:48.000 --> 50:53.000
+ Fast AI communities preferred idiomatic approaches.
+
+50:53.000 --> 50:59.000
+ Test images.
+
+50:59.000 --> 51:03.000
+ Test files.
+
+51:03.000 --> 51:07.000
+ Okay. So we've got 3,469 files to apply this to.
+
+51:07.000 --> 51:15.000
+ So, um, so we could create a test data loader.
+
+51:15.000 --> 51:19.000
+ And that's going to be deals.test deal.
+
+51:19.000 --> 51:23.000
+ With those files, I guess.
+
+51:23.000 --> 51:30.000
+ And we should be able to go test dl.show back. So I do always like to see what I'm doing.
+
+51:30.000 --> 51:41.000
+ You know, so it looks like four. And so a test data loader that the key difference is that it doesn't have labels.
+
+51:41.000 --> 51:46.000
+ So there's no dependent variable.
+
+51:46.000 --> 51:51.000
+ All right, so then I guess we would go.
+
+51:51.000 --> 51:56.000
+ Is it get threads or predict I never quite remember.
+
+51:56.000 --> 52:00.000
+ I guess it's get threads. We need better names for these.
+
+52:00.000 --> 52:04.000
+ Okay.
+
+52:04.000 --> 52:11.000
+ And then dl data loader equals the test data loader.
+
+52:11.000 --> 52:17.000
+ Oh, and I should have signed that to something obviously that was a bit silly of me.
+
+52:17.000 --> 52:22.000
+ And also we should look at the documentation for it.
+
+52:22.000 --> 52:26.000
+ So, I guess do not used to that keyboard shortcuts.
+
+52:26.000 --> 52:27.000
+ Doc.
+
+52:27.000 --> 52:29.000
+ Paste.
+
+52:29.000 --> 52:37.000
+ Get the predictions with some particular data loader.
+
+52:37.000 --> 52:46.000
+ It can optionally return the import. You can option return the loss. We don't need any of that.
+
+52:46.000 --> 52:57.000
+ Okay. So what I think we should do is we should look at Kaggle at this point. And actually, we don't even need to look at Kaggle. What Kaggle normally does is they provide us with a sample submission.
+
+52:57.000 --> 53:01.000
+ Here's one here. Right. So let's look at the submission.
+
+53:01.000 --> 53:04.000
+ Sample submission equals PD dot read CSV.
+
+53:04.000 --> 53:15.000
+ And notice in Jupiter, if you start quotes and you press tab, it will tab complete file names, which is nice.
+
+53:15.000 --> 53:17.000
+ Okay.
+
+53:17.000 --> 53:21.000
+ Not a very useful sample submission.
+
+53:21.000 --> 53:24.000
+ Unless there's something wrong with Python.
+
+53:24.000 --> 53:30.000
+ This is not a great sample submission, but they just want the name of the class or the tourist.
+
+53:30.000 --> 53:36.000
+ I see. What a terrible sample submission, particularly for a training one, you would think they would people are helpful.
+
+53:36.000 --> 53:39.000
+ So they just want the text of the name of the class. Do they?
+
+53:39.000 --> 53:49.000
+ I mean, obviously we could actually look it up and find out rather than guessing when you don't have Reddit on the line to show you the answer.
+
+53:49.000 --> 53:53.000
+ Or maybe you can just call Reddit and ask him.
+
+53:53.000 --> 53:57.000
+ Oh, data evaluation. Yes.
+
+53:57.000 --> 54:00.000
+ See, they've actually got a sample here.
+
+54:00.000 --> 54:08.000
+ Yeah. All right.
+
+54:08.000 --> 54:11.000
+ So let's try that.
+
+54:11.000 --> 54:14.000
+ So, preds equals.
+
+54:14.000 --> 54:23.000
+ And so by default, it's got to return the probability of every class, which we can certainly turn into what we want.
+
+54:23.000 --> 54:27.000
+ But I think if we call with decoded.
+
+54:27.000 --> 54:34.000
+ That will do it for us. Does that sound right?
+
+54:34.000 --> 54:39.000
+ So I had a practice with this. Okay, it's pretty close, right? It's given us.
+
+54:39.000 --> 54:43.000
+ The indexes of each one.
+
+54:43.000 --> 54:47.000
+ So this is actually going to be a really good exercise.
+
+54:47.000 --> 54:50.000
+ So in terms of like what's in there, there's three things.
+
+54:50.000 --> 54:52.000
+ There's the probabilities.
+
+54:52.000 --> 54:54.000
+ There's something that I don't care about.
+
+54:54.000 --> 55:00.000
+ And there's the indexes.
+
+55:00.000 --> 55:07.000
+ So these are the indexes. So what are these indexes of the indexes into the vocab?
+
+55:07.000 --> 55:13.000
+ So if you remember, the vocab is the tells you what's what.
+
+55:13.000 --> 55:15.000
+ Right.
+
+55:15.000 --> 55:26.000
+ So we need to convert these predictions into these pieces of these strings.
+
+55:26.000 --> 55:32.000
+ So the first had probably been inclined to.
+
+55:32.000 --> 55:38.000
+ Just to maybe turn that into a pandas series.
+
+55:38.000 --> 55:47.000
+ And so.
+
+55:47.000 --> 55:51.000
+ I guess we should.
+
+55:51.000 --> 55:58.000
+ To give it a name as well.
+
+55:58.000 --> 56:04.000
+ There's okay. So let's call these indexes.
+
+56:04.000 --> 56:06.000
+ Oops.
+
+56:06.000 --> 56:11.000
+ Oh, and it's called.
+
+56:11.000 --> 56:16.000
+ It's called name.
+
+56:16.000 --> 56:24.000
+ Okay. So there's a pandas series and.
+
+56:24.000 --> 56:26.000
+ I always find pandas.
+
+56:26.000 --> 56:28.000
+ The pandas API.
+
+56:28.000 --> 56:31.000
+ Difficult to remember it's I don't find it particularly.
+
+56:31.000 --> 56:37.000
+ Consistent or intuitive, but there is.
+
+56:37.000 --> 56:41.000
+ A map.
+
+56:41.000 --> 56:46.000
+ Function.
+
+56:46.000 --> 56:51.000
+ Which I think we can look up.
+
+56:51.000 --> 56:56.000
+ In.
+
+56:56.000 --> 57:00.000
+ To.
+
+57:00.000 --> 57:03.000
+ Category.
+
+57:03.000 --> 57:05.000
+ Is.
+
+57:05.000 --> 57:08.000
+ Although it looked like a list.
+
+57:08.000 --> 57:12.000
+ I guess it's not one, but we might be able to turn it into a list.
+
+57:12.000 --> 57:14.000
+ Normally you can turn things into lists like so.
+
+57:14.000 --> 57:16.000
+ Yes, we can.
+
+57:16.000 --> 57:23.000
+ Let's see if that works.
+
+57:23.000 --> 57:24.000
+ Oh, okay.
+
+57:24.000 --> 57:28.000
+ That's annoying.
+
+57:28.000 --> 57:35.000
+ So I'm pretty sure that you can pass a dictionary.
+
+57:35.000 --> 57:36.000
+ Yes, you can.
+
+57:36.000 --> 57:41.000
+ And I thought a list would count as a dictionary, but apparently it doesn't, which is.
+
+57:41.000 --> 57:43.000
+ I mean, a mapping.
+
+57:43.000 --> 57:47.000
+ So a mapping just basically refers to something that behaves like a dictionary.
+
+57:47.000 --> 57:54.000
+ So we actually have to create a dictionary which maps from the index to the name, which is.
+
+57:54.000 --> 57:59.000
+ A bit of a pointless thing to do in a sense, but that's okay.
+
+57:59.000 --> 58:08.000
+ So for K comma V in.
+
+58:08.000 --> 58:16.000
+ So if we enumerate through that.
+
+58:16.000 --> 58:17.000
+ Okay, so that's a map.
+
+58:17.000 --> 58:20.000
+ That's what a mapping looks like.
+
+58:20.000 --> 58:23.000
+ So I could say mapping equals.
+
+58:23.000 --> 58:27.000
+ And then here we'll say mapping.
+
+58:27.000 --> 58:31.000
+ There we go. So that's what we want. So.
+
+58:31.000 --> 58:35.000
+ This is basically our results, right?
+
+58:35.000 --> 58:41.000
+ So I was thinking like an alternative way, like mapping also map function also takes functions. Correct.
+
+58:41.000 --> 58:46.000
+ Correct. And I was avoiding that because that, I mean, I know it doesn't matter here, but it's really slow.
+
+58:46.000 --> 58:50.000
+ So we could also pass in a function.
+
+58:50.000 --> 58:56.000
+ But I was just thinking like you could just have a function that just indexes into the, into the list or something like that.
+
+58:56.000 --> 58:58.000
+ Correct. Like a lambda function or something like that.
+
+58:58.000 --> 59:02.000
+ Exactly. Let's go ahead and do that to see what it looks like.
+
+59:02.000 --> 59:08.000
+ But almost nobody knows that you can use a dictionary or a mapping.
+
+59:08.000 --> 59:18.000
+ So almost everybody on cackle uses a function and often it can take a very, very, very long time to run at, you know, on big data sets.
+
+59:18.000 --> 59:23.000
+ So yeah, you could also have a lambda. And so that's going to be passed in each index.
+
+59:23.000 --> 59:30.000
+ And you would just want to return the dls.gov.
+
+59:30.000 --> 59:32.000
+ At I.
+
+59:32.000 --> 59:43.000
+ So that does the same thing. Now obviously this is tiny. So it doesn't actually matter. But I've tried to show the neat trick, which almost nobody knows about, which is the mapping.
+
+59:43.000 --> 59:44.000
+ Okay.
+
+59:44.000 --> 59:58.000
+ So we basically want to use that as our labels.
+
+59:58.000 --> 1:00:02.000
+ So I think we can go SS.
+
+1:00:02.000 --> 1:00:15.000
+ So we can go to the label equals dots.
+
+1:00:15.000 --> 1:00:16.000
+ There we go.
+
+1:00:16.000 --> 1:00:18.000
+ Okay.
+
+1:00:18.000 --> 1:00:31.000
+ So, you know, normally at this point, I would like visually check some results. And the easiest way to visually check some results is to go learn dot show results.
+
+1:00:31.000 --> 1:00:38.000
+ And this is showing me the actual and the predicted and the accuracy is very high. So he's all correct. The problem is I don't know which of these are right.
+
+1:00:38.000 --> 1:00:49.000
+ Which are wrong. So I have no idea what to look for. So I don't have that ability to do my normal checking.
+
+1:00:49.000 --> 1:00:52.000
+ Okay, so we can say this is a CSV.
+
+1:00:52.000 --> 1:00:57.000
+ To push in.
+
+1:00:57.000 --> 1:01:02.000
+ There we go. Okay.
+
+1:01:02.000 --> 1:01:15.000
+ So there's a few things we could do here. I guess probably the easiest one would be to use the Kaggle CLI.
+
+1:01:15.000 --> 1:01:29.000
+ I was going to note something for the submission for the two CSV. I think you might have to do index equals false because I think right.
+
+1:01:29.000 --> 1:01:37.000
+ I was going to say normally what I always do after that except this time, which I forgot is to do exclamation mark head to show me the first few lines. And yeah, so now we would see as to niche says we've got this extra column out the front,
+
+1:01:37.000 --> 1:01:41.000
+ which is because the default is that it shows kind of the row number.
+
+1:01:41.000 --> 1:01:44.000
+ Thanks to niche.
+
+1:01:44.000 --> 1:01:46.000
+ And so that will fix it.
+
+1:01:46.000 --> 1:01:57.000
+ And if we compare that to their sample.
+
+1:01:57.000 --> 1:02:04.000
+ Yeah, it looks nice and similar. So that's good.
+
+1:02:04.000 --> 1:02:14.000
+ So these are all kind of steps in the same thing. So I pop these all together and then we might.
+
+1:02:14.000 --> 1:02:35.000
+ And.
+
+1:02:35.000 --> 1:02:38.000
+ Oh, and there's no Kaggle installed on this machine.
+
+1:02:38.000 --> 1:02:44.000
+ That's surprising.
+
+1:02:44.000 --> 1:02:53.000
+ Okay. So generally minus help or minus minus sorry minus H or minus minus help normally gives you a quick version of help.
+
+1:02:53.000 --> 1:02:56.000
+ And so.
+
+1:02:56.000 --> 1:03:02.000
+ I want to do something with competitions competitions.
+
+1:03:02.000 --> 1:03:07.000
+ Okay, there we go. And so we're going to do a submission.
+
+1:03:07.000 --> 1:03:12.000
+ All right, we need a file for upload.
+
+1:03:12.000 --> 1:03:16.000
+ And we're going to need the competition.
+
+1:03:16.000 --> 1:03:22.000
+ And so I could go Kaggle competitions list pipe grip.
+
+1:03:22.000 --> 1:03:23.000
+ Patty.
+
+1:03:23.000 --> 1:03:25.000
+ That way I don't even have to.
+
+1:03:25.000 --> 1:03:31.000
+ That's not what I expected to happen.
+
+1:03:31.000 --> 1:03:38.000
+ Oh, I bet that pages it.
+
+1:03:38.000 --> 1:03:46.000
+ Okay, so rather than grab, we should use minus S.
+
+1:03:46.000 --> 1:03:49.000
+ And it's going to use a regular expression or something.
+
+1:03:49.000 --> 1:04:02.000
+ I have a little bit of a few examples.
+
+1:04:02.000 --> 1:04:09.000
+ Okay, so there's definitely something called space ship.
+
+1:04:09.000 --> 1:04:19.000
+ All right.
+
+1:04:19.000 --> 1:04:22.000
+ I will get a crew over here after all.
+
+1:04:22.000 --> 1:04:24.000
+ And this is what it's called.
+
+1:04:24.000 --> 1:04:26.000
+ So I don't know.
+
+1:04:26.000 --> 1:04:28.000
+ Is it not active?
+
+1:04:28.000 --> 1:04:32.000
+ Probably that's why it's active.
+
+1:04:32.000 --> 1:04:33.000
+ Yeah.
+
+1:04:33.000 --> 1:04:38.000
+ And I don't think it ought to matter.
+
+1:04:38.000 --> 1:04:40.000
+ We need to go to the next table.
+
+1:04:40.000 --> 1:04:41.000
+ Yeah.
+
+1:04:41.000 --> 1:04:44.000
+ Or we need a capital letter.
+
+1:04:44.000 --> 1:04:46.000
+ I agree.
+
+1:04:46.000 --> 1:04:47.000
+ It's fine.
+
+1:04:47.000 --> 1:04:49.000
+ But maybe it's group.
+
+1:04:49.000 --> 1:04:52.000
+ Maybe this is considered in class.
+
+1:04:52.000 --> 1:04:53.000
+ Yeah.
+
+1:04:53.000 --> 1:04:59.000
+ Anyhow, so we were going to do a submission.
+
+1:04:59.000 --> 1:05:02.000
+ And so we need to provide the file name.
+
+1:05:02.000 --> 1:05:06.000
+ Minus F.
+
+1:05:06.000 --> 1:05:11.000
+ Add a slash.
+
+1:05:11.000 --> 1:05:15.000
+ Okay.
+
+1:05:15.000 --> 1:05:18.000
+ And a message.
+
+1:05:18.000 --> 1:05:20.000
+ Minus M.
+
+1:05:20.000 --> 1:05:22.000
+ Initial con.
+
+1:05:22.000 --> 1:05:23.000
+ Next.
+
+1:05:23.000 --> 1:05:25.000
+ Next.
+
+1:05:25.000 --> 1:05:26.000
+ Small.
+
+1:05:26.000 --> 1:05:28.000
+ To epoch.
+
+1:05:28.000 --> 1:05:30.000
+ Okay.
+
+1:05:30.000 --> 1:05:33.000
+ And then the competition.
+
+1:05:33.000 --> 1:05:48.000
+ And go.
+
+1:05:48.000 --> 1:05:50.000
+ Took a while for a 70 K file.
+
+1:05:50.000 --> 1:05:51.000
+ But so be it.
+
+1:05:51.000 --> 1:05:52.000
+ Okay.
+
+1:05:52.000 --> 1:05:56.000
+ So let's see if it's there.
+
+1:05:56.000 --> 1:05:57.000
+ It is.
+
+1:05:57.000 --> 1:06:00.000
+ How did we do?
+
+1:06:00.000 --> 1:06:05.000
+ Oh, I see.
+
+1:06:05.000 --> 1:06:07.000
+ Oh, I jumped to your leader position.
+
+1:06:07.000 --> 1:06:17.000
+ 157.
+
+1:06:17.000 --> 1:06:19.000
+ Out of.
+
+1:06:19.000 --> 1:06:22.000
+ 167. So I'm guessing that there's a problem.
+
+1:06:22.000 --> 1:06:23.000
+ With our submission, because it's.
+
+1:06:23.000 --> 1:06:26.000
+ I think maybe what happened was the.
+
+1:06:26.000 --> 1:06:29.000
+ Test files were not like.
+
+1:06:29.000 --> 1:06:33.000
+ They got shuffled somehow.
+
+1:06:33.000 --> 1:06:36.000
+ Like maybe when you did get.
+
+1:06:36.000 --> 1:06:39.000
+ Image files, it got shuffled or something like that.
+
+1:06:39.000 --> 1:06:41.000
+ I think sometimes that might happen.
+
+1:06:41.000 --> 1:06:42.000
+ Yeah, that's a good question.
+
+1:06:42.000 --> 1:06:43.000
+ Oh, yeah. Yeah.
+
+1:06:43.000 --> 1:06:46.000
+ Yeah, that looks like that seems very likely.
+
+1:06:46.000 --> 1:06:50.000
+ So we didn't do a much job of checking as we went.
+
+1:06:50.000 --> 1:06:51.000
+ Yes.
+
+1:06:51.000 --> 1:06:56.000
+ So they were expecting that 2001 would be first and we have 2000,
+
+1:06:56.000 --> 1:06:59.000
+ 200,019 first.
+
+1:06:59.000 --> 1:07:01.000
+ So that is not.
+
+1:07:01.000 --> 1:07:02.000
+ Ideal.
+
+1:07:02.000 --> 1:07:06.000
+ Yeah, this has happened to me sometimes too.
+
+1:07:06.000 --> 1:07:11.000
+ It would be nice if get image files by default.
+
+1:07:11.000 --> 1:07:15.000
+ Return things in a more sensible order.
+
+1:07:15.000 --> 1:07:23.000
+ Anyway, it's good to see these problems.
+
+1:07:23.000 --> 1:07:32.000
+ You know, we could just sort it, right?
+
+1:07:32.000 --> 1:07:36.000
+ But.
+
+1:07:36.000 --> 1:07:42.000
+ It looks like it works.
+
+1:07:42.000 --> 1:07:48.000
+ It probably does work as long as they've got exactly the same number as long as they're all 123456 digits.
+
+1:07:48.000 --> 1:07:53.000
+ If some of them are different numbers of digits, we can't sort it because this is sorting in string order.
+
+1:07:53.000 --> 1:08:02.000
+ But yeah, maybe that's okay.
+
+1:08:02.000 --> 1:08:06.000
+ Says that tail.
+
+1:08:06.000 --> 1:08:08.000
+ Yes.
+
+1:08:08.000 --> 1:08:10.000
+ 203469.
+
+1:08:10.000 --> 1:08:12.000
+ 203469.
+
+1:08:12.000 --> 1:08:13.000
+ Yeah, okay.
+
+1:08:13.000 --> 1:08:15.000
+ Maybe we're fine then.
+
+1:08:15.000 --> 1:08:18.000
+ So sorted.
+
+1:08:18.000 --> 1:08:26.000
+ Obviously Daisy sorted returns the sorted version or a sort sorts in place.
+
+1:08:26.000 --> 1:08:27.000
+ Okay.
+
+1:08:27.000 --> 1:08:36.000
+ So.
+
+1:08:36.000 --> 1:08:45.000
+ And those.
+
+1:08:45.000 --> 1:08:52.000
+ Those.
+
+1:08:52.000 --> 1:08:57.000
+ Okay.
+
+1:08:57.000 --> 1:09:03.000
+ And so it's very nice to have things set up.
+
+1:09:03.000 --> 1:09:13.000
+ You know, that you're doing things from the command line and notebooks and stuff so that when you screw up, which, you know, if you're anything like me, you always screw up.
+
+1:09:13.000 --> 1:09:17.000
+ You can pretty quickly repeat the process.
+
+1:09:17.000 --> 1:09:22.000
+ So I just hit up arrow.
+
+1:09:22.000 --> 1:09:25.000
+ And just add sorted to our message.
+
+1:09:25.000 --> 1:09:29.000
+ Literally and figuratively, hopefully.
+
+1:09:29.000 --> 1:09:41.000
+ Welcome to the leaderboard.
+
+1:09:41.000 --> 1:09:45.000
+ Not a very successful welcome.
+
+1:09:45.000 --> 1:09:51.000
+ Okay.
+
+1:09:51.000 --> 1:09:52.000
+ Oh, it's a bit better.
+
+1:09:52.000 --> 1:10:02.000
+ It's not quite nine one.
+
+1:10:02.000 --> 1:10:05.000
+ There we go.
+
+1:10:05.000 --> 1:10:10.000
+ Good start.
+
+1:10:10.000 --> 1:10:13.000
+ About in the middle.
+
+1:10:13.000 --> 1:10:15.000
+ All right.
+
+1:10:15.000 --> 1:10:19.000
+ So, does anybody have questions about.
+
+1:10:19.000 --> 1:10:27.000
+ I see my question on the chat and I had the same problem.
+
+1:10:27.000 --> 1:10:30.000
+ When we've been stalling Tim.
+
+1:10:30.000 --> 1:10:33.000
+ We, this is in paper space.
+
+1:10:33.000 --> 1:10:36.000
+ I assume Mike was the same.
+
+1:10:36.000 --> 1:10:43.000
+ We can see the list of models, but it doesn't actually create the learner.
+
+1:10:43.000 --> 1:10:47.000
+ It says name Tim is not defined.
+
+1:10:47.000 --> 1:10:51.000
+ So you're going to, so.
+
+1:10:51.000 --> 1:10:55.000
+ So actually, I was able to do that.
+
+1:10:55.000 --> 1:10:58.000
+ Matt, I just restarted my kernel.
+
+1:10:58.000 --> 1:11:03.000
+ Yeah. So just to explain when you see in Python, something is not defined.
+
+1:11:03.000 --> 1:11:06.000
+ It means what it says. It means that that symbol.
+
+1:11:06.000 --> 1:11:08.000
+ Python doesn't know what it is.
+
+1:11:08.000 --> 1:11:11.000
+ And so there are.
+
+1:11:11.000 --> 1:11:19.000
+ Two ways basically to define a symbol to create a symbol one is to say something like a equals one that defines the symbol called a.
+
+1:11:19.000 --> 1:11:20.000
+ Right.
+
+1:11:20.000 --> 1:11:24.000
+ Or another is to do something like to death.
+
+1:11:24.000 --> 1:11:27.000
+ And that defines the symbol called f.
+
+1:11:27.000 --> 1:11:28.000
+ Right.
+
+1:11:28.000 --> 1:11:42.000
+ Or the other way to define symbols is to import them. So in this case, Tim is not defined means you have not imported Tim.
+
+1:11:42.000 --> 1:11:44.000
+ Does that make sense.
+
+1:11:44.000 --> 1:11:47.000
+ Yes, it does, but I.
+
+1:11:47.000 --> 1:11:48.000
+ Yeah.
+
+1:11:48.000 --> 1:11:53.000
+ It sort of I was importing Tim and running that command.
+
+1:11:53.000 --> 1:11:56.000
+ I don't think it was working still.
+
+1:11:56.000 --> 1:12:04.000
+ It will definitely work if you say import Tim, this will definitely work. So I'd say you might have reset your kernel or something and hadn't really run that cell.
+
+1:12:04.000 --> 1:12:07.000
+ Yeah, if you say if you restart the kernel, it works.
+
+1:12:07.000 --> 1:12:11.000
+ Yeah, if you say import module. Yeah.
+
+1:12:11.000 --> 1:12:19.000
+ Oh, yeah, I mean, the other possibility is that you might have got a different message, which is something like this much or not found.
+
+1:12:19.000 --> 1:12:31.000
+ And much or not found means, yeah, either you haven't been stored it, or if you have to have installed it, you might need to restart your kernel by clicking kernel restart.
+
+1:12:31.000 --> 1:12:36.000
+ So it can like recheck what modules you have, since you just installed it.
+
+1:12:36.000 --> 1:12:39.000
+ That's what I had got it.
+
+1:12:39.000 --> 1:12:44.000
+ Great.
+
+1:12:44.000 --> 1:12:46.000
+ Thank you.
+
+1:12:46.000 --> 1:12:52.000
+ All right, well that was pretty successful, even if paper space wasn't.
+
+1:12:52.000 --> 1:12:54.000
+ Thanks guys.
+
+1:12:54.000 --> 1:13:00.000
+ And see you. Yeah, see you tomorrow. Thanks, joining.
+
+1:13:00.000 --> 1:13:02.000
+ Thanks, Jeremy. Thank you.
+
+1:13:02.000 --> 1:13:22.000
+ Thank you.
+

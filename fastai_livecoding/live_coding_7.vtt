@@ -1,0 +1,1295 @@
+WEBVTT
+
+00:00.000 --> 00:16.760
+ Okay. So let's, yeah, let's look at how we can automate a process like the one that
+
+00:16.760 --> 00:32.000
+ we packed together yesterday. And actually what we might do is have a look at something
+
+00:32.000 --> 00:39.800
+ that Radik put on the forums because I kind of want to have all the stuff we want to include
+
+00:39.800 --> 00:48.880
+ there and then we can automate the whole thing. Yeah, here's Radik's thing. Okay, so Radik,
+
+00:48.880 --> 00:55.840
+ do you want to tell us about what this thing is? What your project goal or what is, yeah,
+
+00:55.840 --> 01:02.760
+ what's this forum post about? This is yet another of Radik's crazy interventions. But
+
+01:02.760 --> 01:11.600
+ essentially this is how I learned. So if I, this is the first AI way of learning at least,
+
+01:11.600 --> 01:16.040
+ I think of this as the first AI learned way of learning. So what does it say? Can it
+
+01:16.040 --> 01:22.400
+ also have Radik yet? You just take us through what it's, what, what it is? Oh, yeah, absolutely.
+
+01:22.400 --> 01:28.520
+ So yesterday in the work through we covered some material and I wanted to find them a
+
+01:28.520 --> 01:34.320
+ fun way to practice it. So I went to Kaggle, I looked for competitions and there was a
+
+01:34.320 --> 01:40.760
+ competition that seemed like participating in it could allow me to practice what we learned
+
+01:40.760 --> 01:46.920
+ about the work through. So I created this as a resource for others. You know, I've been
+
+01:46.920 --> 01:52.880
+ creating such things for a couple of years now. And maybe it requires also a little bit
+
+01:52.880 --> 01:59.200
+ of understanding of Kaggle, which somebody who has not played around with Kaggle yet,
+
+01:59.200 --> 02:03.800
+ they might not have it. So I thought, hey, let me put this together, share it with others.
+
+02:03.800 --> 02:15.400
+ So this is a getting started part with a community competition. It features images of plants.
+
+02:15.400 --> 02:26.080
+ If you're supposed to detect one of nine or one of 10 classes of plant diseases that
+
+02:26.080 --> 02:32.240
+ they can be affected with, I haven't looked too much at the data. Essentially, I relied
+
+02:32.240 --> 02:41.920
+ on fast AI functionality, where if I present the image data loaders and then while they
+
+02:41.920 --> 02:49.040
+ took any of my present the learner with data that seems to be appropriately formatted,
+
+02:49.040 --> 02:55.040
+ then the learner will do the rest. So I tried to do this as quickly as I could just to put
+
+02:55.040 --> 03:01.800
+ it together and to practice on my own as well while doing this. And hopefully this can
+
+03:01.800 --> 03:03.520
+ be useful to others.
+
+03:03.520 --> 03:11.880
+ Great. Should we try going through together? Somebody's got a fast AI one here already?
+
+03:11.880 --> 03:27.880
+ Sounds fun. Let's try it. So that's great. And I like the fact that you're looking to
+
+03:27.880 --> 03:37.640
+ run it on paper space rather than on Kaggle. I think that's good practice. So let's do
+
+03:37.640 --> 03:50.520
+ the same thing that Radik did. So in Kaggle, you can see all the competitions that are
+
+03:50.520 --> 04:00.080
+ running active competitions. So there are various different types. There's the normal
+
+04:00.080 --> 04:10.320
+ ones that have money involved. And as well as having money involved, they also have ranking
+
+04:10.320 --> 04:18.240
+ points. So that gives you the opportunity to try to become a master or grandmaster or
+
+04:18.240 --> 04:22.440
+ whatever by getting ranking points.
+
+04:22.440 --> 04:31.480
+ Then there are some which are just for kudos. So there's no money involved and no ranking
+
+04:31.480 --> 04:43.920
+ points. And you can kind of use the little buttons at the top to find getting started
+
+04:43.920 --> 04:55.760
+ competitions. So those are just knowledge. Some have prizes. I wonder what prizes they
+
+04:55.760 --> 05:08.480
+ have. A TPU start, 20 extra hours of TPU time for four weeks. There you go.
+
+05:08.480 --> 05:15.480
+ That sounds like a drug. You use TPUs to win and then be more to keep going.
+
+05:15.480 --> 05:23.960
+ I love it. And then there's also playground competitions, which they kind of repeat each
+
+05:23.960 --> 05:32.880
+ month. All right. So it looks like Radik's picked out a kudos competition. So we're not
+
+05:32.880 --> 05:38.440
+ going to get any money or ranking points. We're just doing it for the enjoyment and the learning
+
+05:38.440 --> 05:44.440
+ training. So we have to click. Before you can download the data, you have to click join
+
+05:44.440 --> 05:50.200
+ competition. And this is a really common mistake people make is they try to download the data
+
+05:50.200 --> 05:57.120
+ without doing that. You'll get an error. So as it says, you can download the data by
+
+05:57.120 --> 06:04.600
+ running this command here. Now, that's not going to be installed yet. So we need to
+
+06:04.600 --> 06:19.120
+ install it. So we can install it with pip install minus minus user, etc. I feel like
+
+06:19.120 --> 06:24.360
+ given how much we're typing pip install minus minus user, whatever, it might be worth creating
+
+06:24.360 --> 06:49.600
+ an earliest for. This is taking a long time. Do you like paper space so far generally?
+
+06:49.600 --> 07:00.480
+ Very much. Yeah. Yeah. It's the first platform I found, which I feel like I can use this,
+
+07:00.480 --> 07:12.520
+ you know? Yeah. So I have to give another try then. Not opening my cheaper 11. Yeah, make
+
+07:12.520 --> 07:18.200
+ sure you do all the previous walkthroughs because it really does take you through like
+
+07:18.200 --> 07:23.240
+ how to take advantage of this and it's, yeah, otherwise it's not particularly exciting.
+
+07:23.240 --> 07:29.320
+ All right. I'm having some trouble with Jupyter Labs. So I'm just going to go to and use their
+
+07:29.320 --> 07:37.040
+ rather unappealing GUI. Hopefully that'll work. Don't even that's not working.
+
+07:37.040 --> 07:42.760
+ Do they have the ability to SSH into these machines, you know? They do not. But because
+
+07:42.760 --> 07:47.000
+ you've got Jupyter lab installed, you get a full terminal. So it doesn't really make
+
+07:47.000 --> 07:58.120
+ any difference. And you can also connect VS code to them. Anyway, for some reason, this
+
+07:58.120 --> 08:09.080
+ is the first time this has happened. It's not liking me. I can't open a Jupyter lab notebook
+
+08:09.080 --> 08:22.800
+ either. It's timing out. I'll see if I can fire it up in VS code. It's unusually sluggish
+
+08:22.800 --> 08:33.240
+ today. This is my experience. I've never tried it before. Maybe it's just in here. So the
+
+08:33.240 --> 08:40.240
+ first game with me is to happen to me all the time. And they seem to have really improved.
+
+08:40.240 --> 09:08.240
+ I'm going to try. I've never had motion for try a paid one. That helps.
+
+09:08.240 --> 09:26.240
+ I have a green dot. It's promising.
+
+09:26.240 --> 09:39.560
+ I've got two tabs. The green dot is the free one. I can't connect through VS code either.
+
+09:39.560 --> 09:46.880
+ Not even wanting to start. It should be a red dot. It's not working.
+
+09:46.880 --> 10:02.440
+ No worries. Change of plans. We'll do things locally. We'll yell at paper space. Let me
+
+10:02.440 --> 10:27.840
+ just switch to my other user. Okay. Let's see if Kaggle's installed. There's no Kaggle.
+
+10:27.840 --> 10:38.800
+ I would generally start by creating a Tmux session. I would like to be able to run a
+
+10:38.800 --> 10:50.480
+ few things at the same time. I would run pip install minus user Kaggle.
+
+10:50.480 --> 11:08.120
+ Now, Kaggle is not just a Python library, but it also has a command line tool. Because
+
+11:08.120 --> 11:18.480
+ I did minus user, I installed the command line tool into my home directory.
+
+11:18.480 --> 11:24.480
+ The binaries, things you can execute are generally put in bin.
+
+11:24.480 --> 11:33.360
+ The local slash bin in my home directory isn't in my path. Therefore, I can't type Kaggle.
+
+11:33.360 --> 11:39.360
+ As we know, to fix that, if you're on paper space, you would modify slash storage slash
+
+11:39.360 --> 11:49.360
+ dot local. Here in my machine, I would just modify my home directory dot bash.
+
+11:49.360 --> 11:56.920
+ On paper space, if you do this, you can modify a desktop local. It will not run before Jupyter
+
+11:56.920 --> 12:03.440
+ notebook runs. Correct. Which is fine. Okay.
+
+12:03.440 --> 12:10.520
+ Because Jupyter notebook doesn't need access to this. Unless you want to do exclamation
+
+12:10.520 --> 12:14.880
+ mark Kaggle, if you want to put exclamation mark Kaggle in Jupyter, you would need to
+
+12:14.880 --> 12:20.720
+ put it in pre dash run dot s h. Is that your point there?
+
+12:20.720 --> 12:24.720
+ Yes. Cool. Great. Yeah.
+
+12:24.720 --> 12:33.040
+ One question dot bash dot local only will execute in a new terminal. Sorry. Go ahead.
+
+12:33.040 --> 12:39.720
+ So I suppose like in some operating systems, I think the local bin directory is on the
+
+12:39.720 --> 12:45.000
+ path by default. So maybe you think that it's just I've never seen that.
+
+12:45.000 --> 12:48.560
+ That's possible. There's no distributions around.
+
+12:48.560 --> 12:55.640
+ It could be confusing with like user local bin or whatever. There's some of them on Mac
+
+12:55.640 --> 12:59.520
+ that are. Yeah. Slash recently on Mac slash user slash local slash. It is not in your
+
+12:59.520 --> 13:03.360
+ home directory. And that is always part of your path. But this is something in your home
+
+13:03.360 --> 13:06.280
+ directory. Oh, yeah. Okay.
+
+13:06.280 --> 13:15.600
+ All right. Okay. So.
+
+13:15.600 --> 13:20.280
+ By default, you've bunch of stuff in your bash. I see, by the way. So I'm just going
+
+13:20.280 --> 13:24.680
+ to go to the bottom. So to go to the bottom in VIM, it's shift G to go to the bottom.
+
+13:24.680 --> 13:34.360
+ And then O to open up a new line underneath this one. So in certain. And so we will export
+
+13:34.360 --> 13:45.760
+ path equals to order slash dot local slash bin. And then colon and then everything that's
+
+13:45.760 --> 13:49.800
+ already in your path. So that prepends it to our path.
+
+13:49.800 --> 13:57.520
+ So I could close and reopen my bash. I see or I can re execute it. And and any exported
+
+13:57.520 --> 14:01.880
+ variables I want to go into my shell. So to execute stuff and put variables into your
+
+14:01.880 --> 14:07.320
+ current shell, you can type source. So source dot bash. I see is going to safely having to
+
+14:07.320 --> 14:12.600
+ close and reopen my terminal. And dot bash. I see is the last thing on the last line.
+
+14:12.600 --> 14:23.280
+ So I can just do that. And so now we can caggle. Okay. So the next thing we need is somewhere
+
+14:23.280 --> 14:38.560
+ to authenticate and caggle uses something called caggle dot JSON to do that. So if I
+
+14:38.560 --> 15:05.040
+ go to caggle, you can grab it. There we are. You can grab it by clicking create your API
+
+15:05.040 --> 15:31.200
+ button. And what that will do is it will download a file called caggle dot JSON to your computer.
+
+15:31.200 --> 15:36.800
+ And so once it's downloaded, depending on where you are on Mac, it might be in your
+
+15:36.800 --> 15:42.640
+ tool to slash downloads directory. And on windows, it'll be in slash mount slash c is
+
+15:42.640 --> 15:54.480
+ your like windows c drive. And it'll be in your users username downloads directory.
+
+15:54.480 --> 16:01.480
+ So they say it needs to be in a directory called dot caggle. So I'm going to make to
+
+16:01.480 --> 16:09.720
+ dot caggle. I think it's probably just created that for us when we try to run it. That's
+
+16:09.720 --> 16:22.240
+ good. So now I can copy it. And in this case, I think what I'm going to do is just copy
+
+16:22.240 --> 16:35.880
+ it from my other account. Copy dot caggle slash. There's my JSON. And I'll copy it into my
+
+16:35.880 --> 16:42.480
+ by the way, so I want to get the JPH00 home directory. So tilde JPH00 refers to the home
+
+16:42.480 --> 16:48.320
+ directory belonging to JPH00. Tilde on its own means the current uses home directory.
+
+16:48.320 --> 16:57.800
+ So I'm going to copy it over to cat.caggle. There we go. And change its ownership so it's
+
+16:57.800 --> 17:05.240
+ owned by JPH00. So you won't have to do this because you'll be downloading it and copying
+
+17:05.240 --> 17:14.080
+ it from your downloads. I'm just doing this because I'm copying it from a different user.
+
+17:14.080 --> 17:31.360
+ All right. So yep, that now belongs to JPH00. So now I should be able to go back into that
+
+17:31.360 --> 17:40.960
+ username and type caggle. Okay. Okay. So I've got caggle installed. And we'll do a check
+
+17:40.960 --> 18:01.960
+ from time to time to see whether anything is working. Not really. Okay. So the caggle
+
+18:01.960 --> 18:17.000
+ competition said we can download it with this command. So I'll copy that. And that's
+
+18:17.000 --> 18:37.600
+ created directory for the competition. And run that command. Nice. Gigabyte of data.
+
+18:37.600 --> 18:45.320
+ All right. Did anybody have any questions or anything about this? We wait for that to
+
+18:45.320 --> 18:56.000
+ go back. So Jeremy, we can use mamba install here since you're doing it on local, right?
+
+18:56.000 --> 19:06.840
+ It's just that you're demonstrating paper space. If it's on, yes, it is on. It is on
+
+19:06.840 --> 19:16.720
+ the page. So yeah, mamba install caggle should be fine. Although, to be honest, the simple
+
+19:16.720 --> 19:26.760
+ pure Python stuff like this, I often just use pip anyway, because things like this, like
+
+19:26.760 --> 19:35.280
+ pretty much most tools are pip, Python libraries, like pip is the main thing people are kind
+
+19:35.280 --> 19:40.040
+ of targeting. So you can be sure that that's going to be the most recent version, unless
+
+19:40.040 --> 19:44.760
+ the documentation explicitly says like we provide kind of packages as well. There's
+
+19:44.760 --> 19:51.960
+ often a good chance that the kind of packages will be behind. So if I was going to do a
+
+19:51.960 --> 19:58.920
+ mamba install, I would be inclined to like double check that this is actually the most
+
+19:58.920 --> 20:10.800
+ recent version. But yeah, I mean, as you say, I just use pip anyway, I suspect for something
+
+20:10.800 --> 20:11.800
+ like this.
+
+20:11.800 --> 20:19.440
+ This is used to be the case that you, I remember something about like cookies, and there's
+
+20:19.440 --> 20:24.160
+ a browser extension and maybe you had your own tool for this, or am I just hallucinating?
+
+20:24.160 --> 20:31.240
+ Just, did you use to be this way? From like an older past there? Okay.
+
+20:31.240 --> 20:39.960
+ Okay, so there are always zips things, so we can unzip it. Okay, so I hate it when that
+
+20:39.960 --> 20:52.320
+ happens, because it actually takes ages, so minus Q for quietly unzip it. Right. Okay,
+
+20:52.320 --> 21:02.800
+ so that's going to give us our data. I guess one thing is for getting it our Kaggle.json
+
+21:02.800 --> 21:08.840
+ on the paper space, the easiest way is to click the file upload button in JupyterLab.
+
+21:08.840 --> 21:17.080
+ So there's just a little upward pointing arrow button. If you click that, it'll upload it.
+
+21:17.080 --> 21:32.920
+ And then, and then yes, copy it to tilde slash.caggle. And it does have to have the correct permissions,
+
+21:32.920 --> 21:38.680
+ which is hopefully you might be to recognize this. So that's four plus two is six, and then
+
+21:38.680 --> 21:51.560
+ zero, zero, so CH mod 600 on that file will give you the correct permissions. Okay. So,
+
+21:51.560 --> 21:58.920
+ now the only problem is that this is my desktop, which does not have a GPU, so that was actually
+
+21:58.920 --> 22:09.240
+ a stupid place to put this. So I'm going to copy this to my GPU server. So to copy files
+
+22:09.240 --> 22:17.440
+ from one Linux or Mac thing to another, very easy way to do it is scp, secure copy, and
+
+22:17.440 --> 22:29.600
+ type the name of the file, and then type where you want to send it to. Oh, except I don't
+
+22:29.600 --> 22:37.480
+ have that set up here. All right. So I'm just going to go back to my normal user. So you
+
+22:37.480 --> 22:48.440
+ do copy tilde, JPH 00, git, paddy, paddy disease classification. I'm going to copy that here.
+
+22:48.440 --> 23:05.120
+ It does CH own j howard. That. Okay. So you can use scp to copy a file to another machine.
+
+23:05.120 --> 23:19.880
+ And off that goes. So how does it know what local colon is? So there's a very underutilized
+
+23:19.880 --> 23:31.360
+ handy file called SSH slash config where you can type things like host local. And when
+
+23:31.360 --> 23:38.720
+ I SSH to that, it will actually SSH to this host name, and it will actually use this username.
+
+23:38.720 --> 23:41.720
+ And it will set up, we haven't talked about SSH forwarding, but if you know about that,
+
+23:41.720 --> 23:47.240
+ it'll set up SSH forwarding. So this is just a little trick for people who do use SSH that
+
+23:47.240 --> 23:54.760
+ using the SSH config file is great. And it's not just for SSH. It's also for anything that
+
+23:54.760 --> 24:02.960
+ is SSH, including scp. scp is a secure copy over SSH. All right. So now that's done. I
+
+24:02.960 --> 24:13.120
+ can log in to that machine. And now we're on a CPU, a GPU machine. So to check your GPUs,
+
+24:13.120 --> 24:22.760
+ you can type in video dash, and so this has got three GPUs. And I can move that file. I've
+
+24:22.760 --> 24:30.720
+ just copied into here, into here. So should we use scp or our sync?
+
+24:30.720 --> 24:39.600
+ It's fine. Yeah. I use scp just because I don't have to type any flags to it. Strictly
+
+24:39.600 --> 24:48.920
+ speaking, scp is kind of considered deprecated nowadays, but it actually works fine. Unzip
+
+24:48.920 --> 25:05.680
+ that. Cool. Okay. Making good progress. Let's see what we've got. Okay. So there's a sample
+
+25:05.680 --> 25:14.120
+ submission dot CSV. There's a train dot CSV, train images, test images. So LS train images,
+
+25:14.120 --> 25:19.880
+ if this has got like 10,000 things in it, that's going to be annoying. So if you pipe
+
+25:19.880 --> 25:26.120
+ to head, so remember this vertical bar is called pipe means take the input of this output of
+
+25:26.120 --> 25:31.240
+ this program and pass it in as the input to this program. And this program shows you the
+
+25:31.240 --> 25:38.680
+ first 10 lines of its input. Okay. So actually it turns out that's got folders for each category.
+
+25:38.680 --> 25:43.200
+ So I don't really need to pop it to head. Okay. And so then we could do the same thing
+
+25:43.200 --> 25:50.920
+ with one of these, bacterial leaf blight and pipe that to head. There we go. So now we
+
+25:50.920 --> 25:54.880
+ might want to know like, Oh, how many of those are there? So instead of piping to head, we
+
+25:54.880 --> 26:00.840
+ can pipe it to word count, which is WC. But despite the name, it doesn't only count words.
+
+26:00.840 --> 26:08.200
+ If you pass in L for line, it'll do a line count. So that's how many bacterial leaf blight
+
+26:08.200 --> 26:15.360
+ images there are. So it's really useful to, yeah, you know, play around with these things
+
+26:15.360 --> 26:23.960
+ you can pipe into. So head WC, another useful one is tail, which is the last 10 lines. And
+
+26:23.960 --> 26:28.640
+ then one we've seen before is grep. So not particularly useful, but show me all the
+
+26:28.640 --> 26:39.000
+ ones with the number 33. Okay. And you can use head and dead also on files. So head is
+
+26:39.000 --> 26:44.840
+ very useful for CSV files. If you're in your Jupyter notebook and it's streaming the view
+
+26:44.840 --> 26:50.400
+ that it cannot read a CSV file, it cannot parse a CSV file, and just jump into console
+
+26:50.400 --> 26:55.520
+ or even from Jupyter notebook, just do head. Yeah, well, let's try it, right? Because so
+
+26:55.520 --> 27:09.120
+ we, I think we know that if you type cat and a file name, it will send it to the output,
+
+27:09.120 --> 27:16.560
+ which by default prints it to the screen. So we could pipe that to head, right? Now, real
+
+27:16.560 --> 27:21.160
+ Unix gurus will say that was silly because actually if you look up the band page for
+
+27:21.160 --> 27:25.760
+ head, if you pass it a file name, it does the same thing. But to me, I prefer to learn
+
+27:25.760 --> 27:34.880
+ a small, small number of composable things. So piping stuff to head is not a bad idea.
+
+27:34.880 --> 27:42.960
+ And we could even, and you know, another nice thing about cat is I can pipe it into grep
+
+27:42.960 --> 27:51.240
+ and search for everything with, I don't know, how many of these ADT45s are there? Let's grep
+
+27:51.240 --> 28:02.640
+ ADT45 and then pipe that into word count, but count lines. ADT. Yeah. So you're going
+
+28:02.640 --> 28:12.280
+ to quickly get some information at the console, which, yeah, I think can be quite useful.
+
+28:12.280 --> 28:29.040
+ All right. So next thing to do, I reckon, is to fire up a Jupyter. So let's see the
+
+28:29.040 --> 28:43.880
+ get Jupyter notebook. Excuse me, Jeremy, if you were interested, my paper space Jupyter
+
+28:43.880 --> 28:52.720
+ instances started up now. All right. So I don't know if yours would have to look at
+
+28:52.720 --> 29:07.560
+ that. Fantastic. All right. So it's probably worth just quickly going through the exact
+
+29:07.560 --> 29:17.920
+ same process one more time, I guess, isn't it? So we'll open up the terminal, pip install,
+
+29:17.920 --> 29:30.480
+ tag all minus minus user. Ah, that's interesting. So this is because I installed stuff to that
+
+29:30.480 --> 29:36.480
+ Condor directory the other day. And so if I go which pip, it's actually finding that one,
+
+29:36.480 --> 29:49.480
+ and I don't want there to be a pip there. So we'll remove it. Condor. Oh, in my home directory.
+
+29:49.480 --> 30:02.040
+ Okay. Let's try that again. I have to reopen this terminal. How confused is it? Which
+
+30:02.040 --> 30:09.800
+ pip? There we go. Okay. Now it's happy. Control R, install, define the last thing I typed,
+
+30:09.800 --> 30:29.480
+ saying install. Okay. We've got the path issue again. So Vim slash, I think I prefer Radix
+
+30:29.480 --> 30:35.560
+ approach, but again, pre run. So that way we have the ability to use this if we wish
+
+30:35.560 --> 30:51.880
+ in Jupyter, not echo. So export path equals local in, and then the current path. One of
+
+30:51.880 --> 30:59.080
+ the confusing things I find about bash, and it could be a couple of times. If you are
+
+30:59.080 --> 31:06.680
+ then export something a variable name, you need to have the equality sign straight after
+
+31:06.680 --> 31:13.960
+ the variable name. Oh, yeah. And you know, it's just one of these little quirks where
+
+31:13.960 --> 31:20.840
+ things are different. Yeah. Yeah. Yeah. You know, bash is a very old program. And it has
+
+31:20.840 --> 31:26.640
+ these weird old quirks about white space sensitivity. So that's a really important point to mention.
+
+31:26.640 --> 31:39.760
+ Thank you. And I'll run it here as well, rather than restarting. And so now Kaggle should
+
+31:39.760 --> 32:00.520
+ exist. That does it runs. That's good. All right. And so let's copy this into my downloads
+
+32:00.520 --> 32:14.160
+ directory. Or else I guess what I could do. Yeah, let's just do that. Copy to a slash
+
+32:14.160 --> 32:35.320
+ Kaggle slash mount slash the users J downloads. And so we should be able to now upload it from
+
+32:35.320 --> 32:49.360
+ my downloads directory. There it is. Okay. And so it's created a dot Kaggle directory
+
+32:49.360 --> 32:59.520
+ for us. Oh, wait. Oh, sorry. This is my wrong. Sorry. Let's do that again. CD tilde slash
+
+32:59.520 --> 33:04.800
+ dot Kaggle. Yeah, it's created a Kaggle directory for us. And so we should be able to move the
+
+33:04.800 --> 33:16.120
+ thing that we just uploaded to slash notebooks into here. And the permissions will be wrong.
+
+33:16.120 --> 33:38.740
+ So we can fix them. Okay. And so let's see if it works here as well. It does. And paper
+
+33:38.740 --> 33:47.920
+ spaces network is faster than my connection in Australia, not surprisingly. Well, though,
+
+33:47.920 --> 34:02.320
+ you know, mine wasn't bad, actually. Okay. So, um, oh, that was a dumb place to put it,
+
+34:02.320 --> 34:08.920
+ obviously. I don't want to put it in paddy disease classification. You know, we're only
+
+34:08.920 --> 34:22.160
+ going to use this for this notebook, I guess. So maybe move that to slash notebooks. And
+
+34:22.160 --> 34:38.840
+ so let's create a paddy folder. Pop it in there and unzip it. So that means, okay, that's
+
+34:38.840 --> 34:53.520
+ interesting. There's no one zip that we know how to deal with that. Wasn't control are
+
+34:53.520 --> 35:01.280
+ working for me. Oh, because control does a refresh. Oh, that's annoying, isn't it? So
+
+35:01.280 --> 35:16.640
+ how do we search our history in these terminals? Oh, well, that's fine. I will just type it
+
+35:16.640 --> 35:24.120
+ in manually and we will figure out how to make control are working at some of the point.
+
+35:24.120 --> 35:40.400
+ So, um, Mike, remember minus C, Condor, Forge, minus prefix, Torda slash Condor, install.
+
+35:40.400 --> 35:51.480
+ Probably need the install first. Yeah, a lot of the keyboard shortcuts don't work in the
+
+35:51.480 --> 35:59.640
+ browser based terminal, which is actually pretty annoying. They work a bit better on
+
+35:59.640 --> 36:06.000
+ Mac than on Windows, because the Windows, the control key is both used for the Linux
+
+36:06.000 --> 36:10.040
+ terminal commands and it's also used for like the normal browser commands. We're also
+
+36:10.040 --> 36:15.400
+ on Mac, they use command for the browser commands. And so the control key doesn't get overwritten.
+
+36:15.400 --> 36:23.160
+ So this will probably be a better experience on Mac actually than Windows. Okay, so we're
+
+36:23.160 --> 36:39.120
+ going to install unzip. And hopefully by the time people watch this video, if it's like
+
+36:39.120 --> 36:49.040
+ July or later, things like Mamba and unzip will already be installed. Okay, let's check.
+
+36:49.040 --> 37:02.000
+ Okay, we have an unzip. That's good. Okay, so that is on its way. So that's going to
+
+37:02.000 --> 37:14.160
+ use up a gigabyte of space in my persistent storage, which you might not want to do that.
+
+37:14.160 --> 37:20.560
+ Right? And if you don't want to do that, then instead you said unzip it into your home directory.
+
+37:20.560 --> 37:23.800
+ If you unzip it into your home directory, it won't be there if you close it down and reopen
+
+37:23.800 --> 37:28.320
+ it. Right? So you might want to create a little script for yourself that does the Kaggle download
+
+37:28.320 --> 37:34.720
+ and the unzip on your notebook and then you can run that each time you start it up. So
+
+37:34.720 --> 37:42.720
+ these are the issues. I mean, having said that, the overage cost on paper space for storage,
+
+37:42.720 --> 37:49.520
+ I believe is 29 cents per gigabyte per month. So the convenience of putting it in storage
+
+37:49.520 --> 37:54.320
+ is probably worth 29 cents for the one month. You probably want to want it there. So maybe
+
+37:54.320 --> 38:02.080
+ that's just a better plan. I do know, though, that the... Well, maybe this is a problem,
+
+38:02.080 --> 38:09.440
+ actually, because I do know the paper space slash notebooks and slash storage are very,
+
+38:09.440 --> 38:16.480
+ very, very, very slow. And we can actually see that when we're unzipping this. So maybe this
+
+38:16.480 --> 38:25.440
+ is a bad idea. Maybe we shouldn't put data, at least when there's lots of files. Because
+
+38:25.440 --> 38:36.160
+ this is painful. I'm going to cancel it and see how far it got. du minus sh train images.
+
+38:36.160 --> 38:43.760
+ 426. And how about test images?
+
+38:47.360 --> 38:54.800
+ Yeah, wouldn't you know it? It was nearly finished. But yeah, I think this is actually
+
+38:54.800 --> 39:08.800
+ slower. So I'm going to remove that.
+
+39:08.800 --> 39:11.120
+ Oops.
+
+39:15.440 --> 39:20.960
+ And I have a strong feeling if we move it back to our home directory, it's going to be
+
+39:20.960 --> 39:27.440
+ faster. I sure hope so. And the reason I care is not so much for the unzipping speed, but when
+
+39:27.440 --> 39:32.720
+ it comes to training a model, we don't want it to be taking ages to open up each of those
+
+39:34.400 --> 39:38.720
+ files. Well, you see, even iRn minus iRf takes a long time. So,
+
+39:38.720 --> 39:57.120
+ while that's running, let's move patty slash zip file, pop it into our home directory.
+
+39:58.720 --> 40:02.240
+ There we go. And then cd to our home directory.
+
+40:02.240 --> 40:09.280
+ Okay, that's now finished.
+
+40:15.600 --> 40:21.520
+ So in terms of the steps we're going to do, it would be first we would make a directory for it.
+
+40:25.120 --> 40:27.200
+ We would then do the caggle download.
+
+40:27.200 --> 40:35.200
+ So, we would actually, we can just copy easily enough from caggle.
+
+40:35.200 --> 40:39.360
+ And then we would unzip. Let's see how long it takes.
+
+40:39.360 --> 40:46.320
+ So the time Unix command runs whatever command you put after it and tells you how long it took.
+
+40:46.320 --> 40:52.560
+ Did I not move it there?
+
+40:54.320 --> 41:04.000
+ Oh, dot dot slash patty. I didn't move it there. Yeah. Time unzip quietly patty.
+
+41:04.000 --> 41:21.440
+ So, yeah, so I think what I would do, now I think about it, is I would have a patty directory in my
+
+41:21.440 --> 41:27.840
+ notebooks. I wouldn't store anything big here. I just have my notebooks here. And I would put a
+
+41:27.840 --> 41:44.000
+ script here called get data say. And it'll just have each of the steps I need. So the steps would
+
+41:44.000 --> 41:58.640
+ be seated to my home directory. Make the patty folder. Do the wget.
+
+41:58.640 --> 42:14.640
+ Or not wget. Caggle competitions download. I should say unzip it.
+
+42:14.640 --> 42:32.160
+ And I think that's it. So we can make that executable with ch mod u plus x to add the
+
+42:32.160 --> 42:43.520
+ executable permission to it. And so, yeah. So then all I have to do is run that thing each time I
+
+42:43.520 --> 42:50.000
+ start up paper space. And it's only going to take eight seconds to unzip and it took about five
+
+42:50.000 --> 42:56.880
+ seconds to download. So that's not going to be really any trouble at all, is it? Cool.
+
+43:03.440 --> 43:08.160
+ And that's, you know, slash notebooks remember is persistent on this machine. So that's all good.
+
+43:08.160 --> 43:22.240
+ So now we can create a notebook for it. And so my first step is always just to import computer
+
+43:22.240 --> 43:29.760
+ vision functionality in general. Which is the same thing we used yesterday. And now you know
+
+43:29.760 --> 43:37.360
+ exactly what that does. And then my second step is to look at the data. So it's easiest to look
+
+43:37.360 --> 43:47.920
+ at the data if we set a path to it. So it's going to be in our home directory.
+
+43:53.840 --> 43:58.880
+ And it's going to be called patty slash.
+
+43:58.880 --> 44:06.480
+ Well, that's okay. It's just slash patty, right?
+
+44:06.480 --> 44:12.240
+ You can go past that home. Wow. I didn't know that's quite quite neat.
+
+44:12.240 --> 44:20.640
+ And I slash the end. Yeah, it is quite neat. So that's that. Okay. So we can path.ls
+
+44:20.640 --> 44:30.720
+ and tells me what's in there. And if you remember my trick from yesterday, I also like to set that
+
+44:30.720 --> 44:39.760
+ to be the path dot base path. Just so that my Ls is look a bit easier to read.
+
+44:39.760 --> 44:56.560
+ There we go. So at this point, we could create a data frame by reading in the CSV of path slash
+
+44:57.760 --> 44:58.720
+ train dot csv.
+
+44:58.720 --> 45:08.000
+ Okay. So we've got 10,000 rows. Each one is a JPEG. Each one's got a label.
+
+45:08.000 --> 45:28.560
+ And so let's take a look at one of the images, shall we?
+
+45:28.560 --> 45:43.600
+ Oh, yeah. Pio image path slash train slash.
+
+45:45.600 --> 45:50.000
+ Actually, you know, let's make life a little bit easier for ourselves by creating a train path.
+
+45:50.000 --> 45:57.280
+ Because, you know, it's just so good to be lazy.
+
+45:57.280 --> 46:24.400
+ slash 1 0 3 3 0 dot j pig. Oh, no, because then they're inside the label directory.
+
+46:24.400 --> 46:34.400
+ Yes. So what we actually probably should have done would be to say trim path dot ls.
+
+46:39.440 --> 46:41.040
+ Great. Patty train. Is that not right?
+
+46:43.760 --> 46:48.640
+ Train underscore images. And that's another good reason to put it in a variable. So you have to
+
+46:48.640 --> 46:55.520
+ change it in one place. And so there we have that. And so let's create, I don't know, let's
+
+46:55.520 --> 47:05.840
+ call it the bacterial leaf light, path equals train path slash
+
+47:10.640 --> 47:12.000
+ bacterial leaf light.
+
+47:12.000 --> 47:22.960
+ Great. So now we should be able to go BLP and look at that image.
+
+47:25.360 --> 47:30.160
+ Oh, there we go. There we have an image. Yay.
+
+47:30.160 --> 47:46.640
+ Okay. All right. So it might be nice to find out a bit about this.
+
+47:48.720 --> 47:49.840
+ Maybe look at the size.
+
+47:49.840 --> 47:56.400
+ So it's a 480 by 640 image.
+
+48:03.840 --> 48:10.720
+ Great. You know, another way we can take a look at an image you might remember from yesterday.
+
+48:10.720 --> 48:21.040
+ You can go files equals get image files and pass in a path.
+
+48:26.240 --> 48:29.120
+ And this will be recursive. So I can do this.
+
+48:32.560 --> 48:36.800
+ As you can see, this has got the 10,000. Okay. And that number there matches that number there.
+
+48:36.800 --> 48:42.800
+ So that's a good sign. And so another way to do that would have been to go
+
+48:45.520 --> 48:49.840
+ image equals PIL dot create files zero.
+
+48:54.000 --> 49:02.320
+ Okay. And we can even take a look at a few, right? So if we wanted to check that the image size
+
+49:02.320 --> 49:10.960
+ seems reasonably consistent, we could go O dot size for O in, well, actually, PIL image
+
+49:14.320 --> 49:24.320
+ dot create O dot size for O in files 10, for example.
+
+49:24.320 --> 49:33.120
+ So, you know, this is not particularly rigorous, but it looks like they're generally 480 by 640
+
+49:34.320 --> 49:34.800
+ files.
+
+49:41.200 --> 49:47.120
+ They're all the same size, which is Andy. That's interesting.
+
+49:47.120 --> 49:54.960
+ And they're probably bigger than we normally need. You know, we normally use both images
+
+49:54.960 --> 50:03.840
+ that are about 224 or so. Having said that, I don't know if like, I presumably, this is some
+
+50:03.840 --> 50:19.520
+ disease thing, Patty disease competition. So it's rice. Classify the images according to their disease.
+
+50:24.080 --> 50:26.240
+ So I can't even tell that this thing has a disease.
+
+50:26.240 --> 50:36.320
+ So I don't know how big it needs to be to see the disease. So it is possible it'll turn out that we
+
+50:36.320 --> 50:44.480
+ actually need full sized images. So like I would start by using smaller images and kind of see how
+
+50:44.480 --> 51:03.200
+ we go. Anyway, 640 by 480 is not giant, so we should be fine. The CSV file
+
+51:06.080 --> 51:08.640
+ has got one extra bit of information, which is the variety.
+
+51:08.640 --> 51:13.760
+ Radik, did you find out what this variety thing is about?
+
+51:15.280 --> 51:19.280
+ About from the dark. I didn't even know that this is before I existed.
+
+51:20.400 --> 51:29.600
+ But it's fine because we can build a model model model on the data.
+
+51:29.600 --> 51:40.800
+ I see it's the type of rice as opposed to the type of disease. Yeah, so maybe, you know,
+
+51:41.760 --> 51:46.320
+ the different diseases might look different depending on what type of rice it's on.
+
+51:47.920 --> 51:52.960
+ My guess is that we wouldn't need to use that information because given how many images there are,
+
+51:52.960 --> 52:01.360
+ I would guess that it's going to do a perfectly good job of recognizing the varieties by itself
+
+52:01.360 --> 52:06.560
+ without us telling it. Unless there's a whole lot of different types of varieties, which we can
+
+52:06.560 --> 52:14.160
+ check easily enough, right, by checking the data frame, grabbing the variety,
+
+52:14.160 --> 52:25.680
+ and doing a value counts. And we can see how many there are of each. Okay, so there's not,
+
+52:26.880 --> 52:32.400
+ okay, so look, I mean, there's a couple of tiny varieties, but on the whole, most of it is ADT45,
+
+52:32.400 --> 52:40.960
+ and quite a bit of kah nah kah pon nii. Does that seem like a bit of a rice session today, doesn't it?
+
+52:40.960 --> 52:49.040
+ Lots of rice going on. Yeah, so I think it's very unlikely that this variety
+
+52:49.840 --> 52:57.040
+ field is going to help because there's so many examples of the main one anyway that it's going
+
+52:57.040 --> 53:06.960
+ to be able to recognize it. I mean, at some point we can try it, but I would be making that a pretty
+
+53:06.960 --> 53:14.480
+ low priority for this competition. And so yeah, I mean, given we're doing a practice walkthrough,
+
+53:17.040 --> 53:25.520
+ I'd be inclined to fire up fast walk and the intro and see if we can just basically do the
+
+53:25.520 --> 53:34.240
+ same thing that we did last time. So I'm going to merge these back together again. We've already
+
+53:34.240 --> 53:44.480
+ got those two, we've got those. Well, there's not much there, is there?
+
+53:52.240 --> 53:57.360
+ Oh, I'm in APL mode. I wonder why things aren't working. I don't know how that happened.
+
+53:57.360 --> 54:10.000
+ I've used APL today. Copy paste. Okay, so this is how we did cats. So we needed a labeling function.
+
+54:10.000 --> 54:16.960
+ Now in our case, the labels are very easy. Each image is inside the directory, which is its label.
+
+54:16.960 --> 54:21.920
+ So the parent folder name is the label. And so we already have a function to
+
+54:21.920 --> 54:32.640
+ label from folders. So we can actually just do image to edit loaders from folders, because
+
+54:33.200 --> 54:39.600
+ that's all we need. So we're still going to need the path. Train and valid are actually have
+
+54:39.600 --> 54:43.040
+ different names. So let's fill all of those in. So we're going to have path.
+
+54:43.040 --> 55:00.560
+ Train equals train underscore. What was it images images? Yep. And test images. Train underscore images.
+
+55:00.560 --> 55:14.720
+ Valid percent. So it gets fine. We'll do that the same as last time. Okay.
+
+55:22.800 --> 55:28.880
+ It's expecting to have train and valid subfolders, or valid percent. So hopefully that'll work. Let's
+
+55:28.880 --> 55:44.080
+ try it. And we'll use the same resize as last time. Okay.
+
+55:44.080 --> 56:00.800
+ All right. Oh, no. Did that work? No, it didn't work. Because we've got
+
+56:02.480 --> 56:08.160
+ that's interesting. Test images. So my guess is it's got confused by the fact.
+
+56:08.160 --> 56:21.440
+ Yes. Okay. So possibly what we should instead do is use train path here.
+
+56:25.680 --> 56:29.360
+ And use valid percent instead. I wonder if that'll fix that problem.
+
+56:29.360 --> 56:35.680
+ There we go. That's fix that problem. Okay.
+
+56:39.280 --> 56:43.040
+ Great. So we should then be able to create a learner.
+
+56:47.760 --> 56:52.640
+ And learn dot fine tune.
+
+56:52.640 --> 56:59.200
+ Let's just do one epoch to start with.
+
+57:05.760 --> 57:08.720
+ There it goes. So it can be useful to kind of make sure it's
+
+57:11.440 --> 57:18.080
+ being reasonably productive as it's training. And we can do that within video smi.
+
+57:18.080 --> 57:30.080
+ In video smi minus help. Oh, so much help.
+
+57:33.760 --> 57:36.640
+ So there's, let's take a look here.
+
+57:36.640 --> 57:46.720
+ We've only got one GPU, so that's fine.
+
+57:46.720 --> 58:02.800
+ Okay. We're not modifying anything.
+
+58:02.800 --> 58:12.800
+ Demon. I think that's the one we want.
+
+58:13.360 --> 58:20.400
+ In video smi. Demon.
+
+58:26.320 --> 58:30.000
+ Okay, that's just finished. So while it was running.
+
+58:30.000 --> 58:38.240
+ So this is something people often say to use watch and video smi to like have it refresh.
+
+58:38.960 --> 58:43.280
+ But actually I don't think most people know that there's a demon subcommand where you can use
+
+58:43.280 --> 58:47.680
+ that just as you can see it shows you every second how it's going. And it's showing me the
+
+58:47.680 --> 58:53.360
+ most important thing is this column sm. SM stands for symmetric multi processor. That's kind of
+
+58:53.360 --> 59:00.880
+ what they call it instead of a CPU for their GPUs. And it's showing me that it's being used 70 to 90
+
+59:00.880 --> 59:08.960
+ percent kind of effectively if you like. And that's a good sign. That's fine. So if this was like
+
+59:08.960 --> 59:15.920
+ under 50, then that would be a problem. But it looks like it's using my GPU reasonably effectively.
+
+59:15.920 --> 59:25.200
+ Yeah, and it's got the error rate down to 13%. So we are successfully training a model. So that
+
+59:25.200 --> 59:31.680
+ sounds good. So Jeremy, just a quick question. When you're saying that like if it's under 50%,
+
+59:31.680 --> 59:37.600
+ then that can be a problem. Is that because you've oversized the GPU like when you selected it or
+
+59:37.600 --> 59:42.400
+ like just just what you know what you know what that would mean? Yeah, thanks. It's a good question.
+
+59:42.400 --> 59:55.120
+ So let's rename this. It would probably mean that we're not able to read and process the images fast
+
+59:55.120 --> 1:00:02.240
+ enough. And so in particular, my guess is that if they're in slash storage or slash notebooks,
+
+1:00:02.240 --> 1:00:06.560
+ you would see the sm percent be really low because I think it would be taking a really long time to
+
+1:00:06.560 --> 1:00:13.200
+ open each image because it's coming from a network storage. And so generally, yeah, a low sm means
+
+1:00:13.200 --> 1:00:19.440
+ that your your IO, your input output, your reading or processing time is too high. And so the ways
+
+1:00:19.440 --> 1:00:24.640
+ to fix that would be if you one would be to move the images onto the local machine. So they're not
+
+1:00:24.640 --> 1:00:31.680
+ on a network drive. A second would be to resize the images ahead of time to make them a more reasonable
+
+1:00:31.680 --> 1:00:38.560
+ size. And a third would be to decrease the amount of kind of augmentation that you're doing, or
+
+1:00:38.560 --> 1:00:44.640
+ another would be to pick a different instance type with more CPUs. So those are basically the things.
+
+1:00:45.360 --> 1:00:47.280
+ Perfect. Okay.
+
+1:00:47.920 --> 1:00:53.840
+ Just the NPA, this is my command. It also has a lot of visual information like your
+
+1:00:53.840 --> 1:01:01.920
+ code out there again and stuff like that. So, you know, it's also a useful command even without email to
+
+1:01:01.920 --> 1:01:10.560
+ know that it's an exists. Yep. Yeah. A lot of details here. So if you're looking for the
+
+1:01:11.280 --> 1:01:18.480
+ IDX of your GPU, the multi GPUs, and some of the variables here are a little bit more descriptive.
+
+1:01:18.480 --> 1:01:24.480
+ So it might be easier to get started with that command or to at least use it every now and then.
+
+1:01:24.480 --> 1:01:29.360
+ And if you'd like to have this one running in a loop, which is what I generally do,
+
+1:01:29.360 --> 1:01:36.960
+ just to add the other SMI minus. Yeah. Yeah. I mean, I, I, I agree, this is useful,
+
+1:01:36.960 --> 1:01:41.840
+ but I would suggest an alert to use the Dmon because there's only two columns you care about.
+
+1:01:41.840 --> 1:01:48.000
+ It's the end and this one does not show you SM, right? So if you want to actually see it's being
+
+1:01:48.000 --> 1:01:53.520
+ utilized, you need to use Dmon and you can also see the percentage memory utilization. So just
+
+1:01:53.520 --> 1:02:02.400
+ look at these two columns. The other ones you can actually ignore. Yeah. Okay. I think that's a
+
+1:02:02.400 --> 1:02:10.480
+ pretty good place to stop. I'm glad you put us on to this competition. Radik. It looks fun.
+
+1:02:10.480 --> 1:02:16.320
+ And I feel like we've got a reasonable start. So yeah, maybe next time we can try
+
+1:02:20.480 --> 1:02:29.040
+ doing a submission. And we could also try creating a Kaggle notebook for other people to see.
+
+1:02:29.040 --> 1:02:29.760
+ How does that sound?
+
+1:02:29.760 --> 1:02:42.880
+ Sounds excellent. One thing I also like about this is that coming up across problems as we go and
+
+1:02:44.000 --> 1:02:52.000
+ yeah, jumping through those hoops and there's the beginner sorts of roadblocks that we'll have
+
+1:02:52.000 --> 1:02:56.720
+ to face, I guess. Exactly. Exactly. It's super valuable. If you guys, you know,
+
+1:02:56.720 --> 1:03:03.680
+ well, repeat these steps or do it on another data set or whatever and hit some roadblocks,
+
+1:03:03.680 --> 1:03:08.800
+ then it's really helpful. If you've solved them, you know, come back tomorrow and tell us what
+
+1:03:08.800 --> 1:03:13.840
+ happened and how you solved it. And if you didn't, come back tomorrow and tell us to fix it for you.
+
+1:03:13.840 --> 1:03:19.680
+ I think they're both useful things to do. So things like Radik's example of like doing a
+
+1:03:19.680 --> 1:03:23.440
+ bash environment variable and having a space next to the equal sign, you know, that kind of stuff.
+
+1:03:23.440 --> 1:03:27.680
+ I forget even to mention it, but really useful information.
+
+1:03:29.120 --> 1:03:34.880
+ You know, this competition is nice because it's relatively small, like 10,000 images and
+
+1:03:34.880 --> 1:03:39.120
+ it's a light with what you're doing in the course. But if you'd like to try something out on a
+
+1:03:39.120 --> 1:03:45.120
+ competition that is not active right now, you can still do this. Raskagil allows you to do
+
+1:03:45.120 --> 1:03:54.480
+ this light submission thing. And this opens up many competitions to play around with.
+
+1:03:55.200 --> 1:04:01.680
+ The current competitions that are how do you call it Rask competitions, they urge you
+
+1:04:01.680 --> 1:04:10.000
+ points and their prices. They are not on images. So we explore something on your own to try the
+
+1:04:10.000 --> 1:04:16.160
+ methods on their competition on a image that might be something quite useful.
+
+1:04:16.160 --> 1:04:20.000
+ So to find those, you're going to scroll to the bottom and click explore all competitions.
+
+1:04:22.240 --> 1:04:22.880
+ And
+
+1:04:28.480 --> 1:04:29.440
+ yeah, this will
+
+1:04:32.080 --> 1:04:34.880
+ let you see closed competitions as well.
+
+1:04:34.880 --> 1:04:45.360
+ And you can even see, I guess, here you go, you can find out which ones were the most popular
+
+1:04:45.360 --> 1:04:50.880
+ of all time. That can be interesting. Crypto forecasting. Well, of course it would be.
+
+1:04:54.160 --> 1:05:00.000
+ That's a bit sad, but there you go. That's interesting. This patent phrase one is super popular.
+
+1:05:00.000 --> 1:05:07.840
+ That's good to see. Instant gratification. All right, thanks all. See you next time. Bye.
+

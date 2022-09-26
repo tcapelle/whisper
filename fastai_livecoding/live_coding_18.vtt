@@ -1,0 +1,3611 @@
+WEBVTT
+
+00:00.000 --> 00:11.680
+ I don't know if you saw, but somebody on the forum, not just somebody, somebody extremely
+
+00:11.680 --> 00:26.640
+ helpful and kind being Daniel on the forum, he does these summaries of the walkthroughs.
+
+00:26.640 --> 00:33.680
+ I saw that, Jamie.
+
+00:33.680 --> 00:38.600
+ I tried to do a little bit, but I think I didn't have time to finish it off.
+
+00:38.600 --> 00:39.600
+ Oh, yeah.
+
+00:39.600 --> 00:40.600
+ Okay.
+
+00:40.600 --> 00:44.320
+ So did you want to maybe share your screen and get us up to speed with like what the
+
+00:44.320 --> 00:49.040
+ problem is with solving and where the data is for it and stuff like that?
+
+00:49.040 --> 00:52.400
+ You're muted, by the way.
+
+00:52.400 --> 00:53.400
+ Sorry.
+
+00:53.400 --> 00:54.400
+ Yeah.
+
+00:54.400 --> 01:00.720
+ Actually, it's just what was in, I think it was the 7th, 13th, like coding.
+
+01:00.720 --> 01:01.720
+ Live coding, which one?
+
+01:01.720 --> 01:02.720
+ Live coding.
+
+01:02.720 --> 01:04.720
+ Live coding 13.
+
+01:04.720 --> 01:05.720
+ Live coding 13.
+
+01:05.720 --> 01:06.720
+ Okay.
+
+01:06.720 --> 01:07.720
+ Yeah.
+
+01:07.720 --> 01:08.720
+ Yeah.
+
+01:08.720 --> 01:12.920
+ So I basically, I kind of had a really janky solution.
+
+01:12.920 --> 01:16.920
+ It's not, it probably doesn't work, but what I was thinking of doing was like putting
+
+01:16.920 --> 01:21.600
+ them in some kind of like a file side by side and then sort of indexing it, but I actually
+
+01:21.600 --> 01:26.560
+ didn't do anything, but I did is basically this at the end.
+
+01:26.560 --> 01:27.560
+ Uh huh.
+
+01:27.560 --> 01:28.560
+ Okay.
+
+01:28.560 --> 01:31.360
+ So, so I'm not quite sure how to take it any further.
+
+01:31.360 --> 01:32.360
+ Yeah.
+
+01:32.360 --> 01:33.360
+ I don't even know what it is yet.
+
+01:33.360 --> 01:34.360
+ So let me just, okay.
+
+01:34.360 --> 01:38.040
+ So I've got my screen sharing here.
+
+01:38.040 --> 01:42.840
+ And so, can you guys see that?
+
+01:42.840 --> 01:44.040
+ Okay.
+
+01:44.040 --> 01:45.040
+ So where do I start?
+
+01:45.040 --> 01:46.040
+ So he.
+
+01:46.040 --> 01:54.040
+ I didn't quite understand, like, um, the animation on the forum.
+
+01:54.040 --> 01:55.040
+ Yeah.
+
+01:55.040 --> 01:56.040
+ Okay.
+
+01:56.040 --> 02:02.760
+ So that's basically like, if you get that note at the end, he's got all the images.
+
+02:02.760 --> 02:03.760
+ Yep.
+
+02:03.760 --> 02:04.760
+ Right.
+
+02:04.760 --> 02:10.520
+ So these are kind of like the, at the end, he's got the actual images in, in, in that
+
+02:10.520 --> 02:12.320
+ dropdown.
+
+02:12.320 --> 02:17.840
+ And what I did was I actually went in there and I looked at the code or what the HTML
+
+02:17.840 --> 02:18.840
+ are.
+
+02:18.840 --> 02:20.080
+ And are these meant to be in the same order as.
+
+02:20.080 --> 02:25.280
+ Like, do they have names or I just, I don't think so.
+
+02:25.280 --> 02:26.280
+ I don't know.
+
+02:26.280 --> 02:27.280
+ The same order.
+
+02:27.280 --> 02:28.280
+ Let's see.
+
+02:28.280 --> 02:31.320
+ So this is, this is called ad to actually hang on.
+
+02:31.320 --> 02:35.480
+ What we could do is if we click edit, right?
+
+02:35.480 --> 02:37.480
+ That's right.
+
+02:37.480 --> 02:38.480
+ Yeah.
+
+02:38.480 --> 02:45.720
+ Oh, I see this is like, got off the edge of the screen.
+
+02:45.720 --> 02:46.720
+ And so let's see.
+
+02:46.720 --> 02:49.360
+ So these have, ah, okay.
+
+02:49.360 --> 02:51.360
+ These have names.
+
+02:51.360 --> 02:52.360
+ Okay.
+
+02:52.360 --> 02:53.360
+ Cool.
+
+02:53.360 --> 02:56.360
+ Like add to class.
+
+02:56.360 --> 02:59.960
+ And then presumably there's an add to class somewhere here.
+
+02:59.960 --> 03:04.080
+ Um, let's try searching for that.
+
+03:04.080 --> 03:06.640
+ Add to class.
+
+03:06.640 --> 03:07.640
+ Yes.
+
+03:07.640 --> 03:11.560
+ Oh, that's cool.
+
+03:11.560 --> 03:13.400
+ And then the sizes are different a little bit.
+
+03:13.400 --> 03:15.600
+ And this is in double brackets at the end.
+
+03:15.600 --> 03:19.080
+ So I wasn't sure what kind of, um, regex would do that.
+
+03:19.080 --> 03:24.880
+ But I think the one that I got, it kind of, it just kind of captures.
+
+03:24.880 --> 03:29.200
+ So what I did was what I actually did was I went to the bottom, I took all of the ones
+
+03:29.200 --> 03:35.760
+ from the bottom and then I got rid of the, um, I just extracted that.
+
+03:35.760 --> 03:37.400
+ And that's about how far I.
+
+03:37.400 --> 03:38.400
+ Okay.
+
+03:38.400 --> 03:39.400
+ No worries.
+
+03:39.400 --> 03:41.400
+ All right.
+
+03:41.400 --> 03:53.320
+ Um, let me just start up to you put it then.
+
+03:53.320 --> 03:56.320
+ Okay.
+
+03:56.320 --> 04:06.360
+ All right.
+
+04:06.360 --> 04:14.320
+ So this is our.
+
+04:14.320 --> 04:29.320
+ This is our kind of source images.
+
+04:29.320 --> 04:30.320
+ Okay.
+
+04:30.320 --> 04:40.320
+ So you guys know if you put things in triple quotes, then it, uh, creates a multi line
+
+04:40.320 --> 04:45.320
+ string.
+
+04:45.320 --> 04:46.320
+ Okay.
+
+04:46.320 --> 04:58.320
+ And so then we've got our destination.
+
+04:58.320 --> 05:03.320
+ Okay.
+
+05:03.320 --> 05:13.320
+ I guess which is everything else, right?
+
+05:13.320 --> 05:15.320
+ Destination.
+
+05:15.320 --> 05:16.320
+ Okay.
+
+05:16.320 --> 05:17.320
+ So there's a good start.
+
+05:17.320 --> 05:19.320
+ We've got our data.
+
+05:19.320 --> 05:25.320
+ So like, I guess like, um, the reason I thought this might be interesting to do.
+
+05:25.320 --> 05:29.320
+ Um, here is basically.
+
+05:29.320 --> 05:34.320
+ Um, yeah, people often ask like.
+
+05:34.320 --> 05:38.320
+ How do you go about actually solving a problem or doing coding or whatever?
+
+05:38.320 --> 05:41.320
+ So I thought I guess if we do it together, then.
+
+05:41.320 --> 05:45.320
+ We can go through the process.
+
+05:45.320 --> 05:48.320
+ Uh, which will work a lot better if you.
+
+05:48.320 --> 05:49.320
+ Yeah.
+
+05:49.320 --> 05:53.320
+ Ask questions or add comments, you know, as we go, obviously.
+
+05:53.320 --> 05:57.320
+ Um, one thing that does occur to me is in this notebook, actually, this is,
+
+05:57.320 --> 06:01.320
+ I find quite this is quite awkward to have so much data here.
+
+06:01.320 --> 06:09.320
+ Um, so what I might do actually is instead put them into, into, um, text files.
+
+06:09.320 --> 06:14.320
+ Um, so this one is the source, right?
+
+06:14.320 --> 06:19.320
+ So in bash, um, if you type.
+
+06:19.320 --> 06:21.320
+ Cat.
+
+06:21.320 --> 06:25.320
+ And read, and then this means redirect to a file, right?
+
+06:25.320 --> 06:29.320
+ So we could create a file called source.text.
+
+06:29.320 --> 06:32.320
+ Um, it's now reading from standard in.
+
+06:32.320 --> 06:34.320
+ It's reading from the input, right?
+
+06:34.320 --> 06:36.320
+ So I can paste.
+
+06:36.320 --> 06:37.320
+ Like so.
+
+06:37.320 --> 06:45.320
+ And then to tell, um, basically in Unix to say, I finished this file, you hit control D.
+
+06:45.320 --> 06:46.320
+ Okay.
+
+06:46.320 --> 06:52.320
+ And so if I was to now, Vim, that, you can see it's there.
+
+06:52.320 --> 06:53.320
+ Okay.
+
+06:53.320 --> 07:00.320
+ So that's how you can quickly and easily, there's lots of quick and easy ways to create text files and, um,
+
+07:00.320 --> 07:01.320
+ way, way Jeremy.
+
+07:01.320 --> 07:08.320
+ So I got completely the problem because there was this gift thing and I thought, wow, get the, you know, and
+
+07:08.320 --> 07:11.320
+ it's just a name of the directory.
+
+07:11.320 --> 07:12.320
+ I mean, yes, yes, yes.
+
+07:12.320 --> 07:16.320
+ I figured it out to post.
+
+07:16.320 --> 07:18.320
+ All right.
+
+07:18.320 --> 07:25.320
+ So it's just right, just, it was just this less than sign which pipes it's the greater than sign. Yeah. Yeah.
+
+07:25.320 --> 07:26.320
+ Great.
+
+07:26.320 --> 07:27.320
+ Yeah.
+
+07:27.320 --> 07:28.320
+ Yeah.
+
+07:28.320 --> 07:31.320
+ So the main thing, I guess the main, like just to put this together, if I just type cat.
+
+07:31.320 --> 07:32.320
+ Right.
+
+07:32.320 --> 07:34.320
+ And then I type text.
+
+07:34.320 --> 07:36.320
+ It just.
+
+07:36.320 --> 07:38.320
+ Prids out whatever I type it.
+
+07:38.320 --> 07:40.320
+ Okay.
+
+07:40.320 --> 07:42.320
+ So that's what cat does.
+
+07:42.320 --> 07:49.320
+ The reason it's called cat is actually concatenates things if you feed it multiple things, it adds them together.
+
+07:49.320 --> 08:00.320
+ If I, uh, I can redirect from a file, which means instead of me typing things in, it'll, it'll get its input from a file.
+
+08:00.320 --> 08:03.320
+ So that would cause it to print it out.
+
+08:03.320 --> 08:06.320
+ Or if I redirect.
+
+08:06.320 --> 08:11.320
+ It's output, then whatever I type in will go to the file.
+
+08:11.320 --> 08:16.320
+ So one way to copy things, for example, would be to read things into cat.
+
+08:16.320 --> 08:19.320
+ And then output things into something else.
+
+08:19.320 --> 08:24.320
+ Oh, I can really dumb way to copy, but that gets, you know, does the job.
+
+08:24.320 --> 08:25.320
+ Right.
+
+08:25.320 --> 08:30.320
+ So yeah, cat just to anything cat bring gets into standard in.
+
+08:30.320 --> 08:32.320
+ Goes to standard out.
+
+08:32.320 --> 08:38.320
+ Standard in being the input to a Unix command and instead of out being the output for a Unix command.
+
+08:38.320 --> 08:43.320
+ So if you do cat greater than.
+
+08:43.320 --> 08:47.320
+ Finally, it will still let you type in stuff.
+
+08:47.320 --> 08:50.320
+ Right. So that's what I did before. Right. Is I.
+
+08:50.320 --> 08:52.320
+ Pasted.
+
+08:52.320 --> 08:54.320
+ And then at the end, I hit control D.
+
+08:54.320 --> 08:58.320
+ Right. So now if I cat and take it from that.
+
+08:58.320 --> 09:00.320
+ Oh, yes, dear.
+
+09:00.320 --> 09:02.320
+ There's, but I just typed.
+
+09:02.320 --> 09:03.320
+ Okay.
+
+09:03.320 --> 09:08.320
+ Control D at the end. Control D means end of file in Unix.
+
+09:08.320 --> 09:13.320
+ Yeah. So if I, so let me move you over here.
+
+09:13.320 --> 09:18.320
+ Yeah. So if I hit control D at the end, that's that, then it says, oh, you're all done.
+
+09:18.320 --> 09:22.320
+ You might have seen something similar.
+
+09:22.320 --> 09:29.320
+ Like.
+
+09:29.320 --> 09:32.320
+ I think it's like this.
+
+09:32.320 --> 09:35.320
+ Yeah.
+
+09:35.320 --> 09:36.320
+ That thing I know.
+
+09:36.320 --> 09:39.320
+ Okay. And at the end, you type whatever you typed.
+
+09:39.320 --> 09:44.320
+ So like, but there's no reason to do that. You can just, because you could just use control D.
+
+09:44.320 --> 09:45.320
+ Cool.
+
+09:45.320 --> 09:47.320
+ If you use this double.
+
+09:47.320 --> 09:52.320
+ Less than side, it means keep reading until you see that string.
+
+09:52.320 --> 09:55.320
+ That's quite a here.
+
+09:55.320 --> 09:58.320
+ This is the mystify.
+
+09:58.320 --> 09:59.320
+ Yes.
+
+09:59.320 --> 10:00.320
+ Yes.
+
+10:00.320 --> 10:03.320
+ All right. So let me show you that again. So I'm going to do it again for my destination.
+
+10:03.320 --> 10:06.320
+ Right. So let's grab all that.
+
+10:06.320 --> 10:18.320
+ And by the way, knowing how to do things like select to the end of line and select to the end of file and stuff like, you know, using command and control and shift and end and home, that stuff's really important to know.
+
+10:18.320 --> 10:21.320
+ Get varies between Mac and PC.
+
+10:21.320 --> 10:26.320
+ So if you don't know how I just selected all that, then it's definitely worth.
+
+10:26.320 --> 10:28.320
+ Googling that.
+
+10:28.320 --> 10:37.320
+ Okay. So I've just copied that. So I just want to put that into cat redirect the output to destination.text.
+
+10:37.320 --> 10:38.320
+ Right.
+
+10:38.320 --> 10:39.320
+ Paste.
+
+10:39.320 --> 10:43.320
+ Control D.
+
+10:43.320 --> 10:44.320
+ Control D.
+
+10:44.320 --> 10:51.320
+ Don't know why I had to press it twice there. That was strange. Maybe I had to hit.
+
+10:51.320 --> 10:53.320
+ Anyway, did the job.
+
+10:53.320 --> 10:55.320
+ Okay.
+
+10:55.320 --> 10:59.320
+ So actually.
+
+10:59.320 --> 11:04.320
+ So I guess like my starting point normally is just kind of like input, import my like.
+
+11:04.320 --> 11:11.320
+ Standard set of things that I wish Python had, which is called fast port.utils.
+
+11:11.320 --> 11:14.320
+ Oops, import.
+
+11:14.320 --> 11:21.320
+ So as some folks have pointed out before some languages have things called a prelude, which is like the.
+
+11:21.320 --> 11:26.320
+ The kind of stuff that.
+
+11:26.320 --> 11:29.320
+ People like to always have available. This is kind of my version of it with a prelude.
+
+11:29.320 --> 11:31.320
+ And.
+
+11:31.320 --> 11:34.320
+ One of the things it does is it imports some things from the standard library.
+
+11:34.320 --> 11:40.320
+ Python standard library that I always use. And it also imports some things that fast core adds to the standard library.
+
+11:40.320 --> 11:44.320
+ So one of the things that adds is.
+
+11:44.320 --> 11:50.320
+ Path lip.path.
+
+11:50.320 --> 11:53.320
+ So.
+
+11:53.320 --> 11:58.320
+ Okay, like so.
+
+11:58.320 --> 12:01.320
+ And so path lip.path has a.
+
+12:01.320 --> 12:04.320
+ Retext.
+
+12:04.320 --> 12:07.320
+ Okay, so that's better.
+
+12:07.320 --> 12:14.320
+ One thing that's I don't particularly like is that the standard representation of strings and she put a users backslash and.
+
+12:14.320 --> 12:19.320
+ If you want to replace it with actual.
+
+12:19.320 --> 12:23.320
+ You can say print.
+
+12:23.320 --> 12:34.320
+ Or you know, like you can just.
+
+12:34.320 --> 12:36.320
+ Do this.
+
+12:36.320 --> 12:43.320
+ And so just remember curly brackets. So this means do this is a bash command.
+
+12:43.320 --> 12:56.320
+ And curly brackets means read this Python variable and put it into the bash command.
+
+12:56.320 --> 13:12.320
+ All right, so then we can do something similar for destination.
+
+13:12.320 --> 13:17.320
+ One thing that people complain about with.
+
+13:17.320 --> 13:23.320
+ With my code quite often is my use of abbreviations like.
+
+13:23.320 --> 13:28.320
+ You might reasonably ask for one at least but they're either and it's just totally fine. You could put the either but just to explain.
+
+13:28.320 --> 13:30.320
+ I quite like to have.
+
+13:30.320 --> 13:39.320
+ Similar things be similar lengths because it makes it really easy for me to then like have lines next to each other that operate on those two things.
+
+13:39.320 --> 13:48.320
+ And L the bits will be in the same place and so my eyes can immediately see if there's some unexpected difference or something. So it's not just me being.
+
+13:48.320 --> 13:54.320
+ Trying to be difficult. It's, you know, there's actually a reason that I quite like doing that.
+
+13:54.320 --> 14:03.320
+ Just not to say everybody has to do that. I just, that's why I quite like to do that.
+
+14:03.320 --> 14:07.320
+ And there's also something to be said for like.
+
+14:07.320 --> 14:10.320
+ Having a standard way of coding.
+
+14:10.320 --> 14:18.320
+ That then you just don't think too much about how you code. You know, so like I just have stem standard way I tend to name things and then I don't spend time thinking about.
+
+14:18.320 --> 14:26.320
+ Naming things too much. That's cognitive load. I can focus in on solving the problem.
+
+14:26.320 --> 14:31.320
+ All right, so.
+
+14:31.320 --> 14:39.320
+ I guess the first thing we might want to do then is we basically.
+
+14:39.320 --> 14:51.320
+ We probably want a dictionary that goes from the name of the thing to the.
+
+14:51.320 --> 14:56.320
+ To the location of the image right.
+
+14:56.320 --> 15:08.320
+ And so then basically then we'll just go through each type, each one of these here and replace the name with the value of that when we look it up as a key.
+
+15:08.320 --> 15:13.320
+ So.
+
+15:13.320 --> 15:17.320
+ There's a thing called find all.
+
+15:17.320 --> 15:25.320
+ Which you give it a red jacks and it finds all the places of that red jacks.
+
+15:25.320 --> 15:32.320
+ Do you guys tend to use red jacks is there anybody here who doesn't really use red jacks is or.
+
+15:32.320 --> 15:35.320
+ Not too much.
+
+15:35.320 --> 15:39.320
+ So yeah, so red jacks is so.
+
+15:39.320 --> 15:43.320
+ What we call it a DSL domain specific language.
+
+15:43.320 --> 15:45.320
+ They are.
+
+15:45.320 --> 15:47.320
+ Yeah, they're not Python really.
+
+15:47.320 --> 15:53.320
+ Python happens to have support for them, but they very much don't look like Python.
+
+15:53.320 --> 16:00.320
+ I actually tend to think of them as a notation and notations one of my favorite topics and notation is.
+
+16:00.320 --> 16:05.320
+ A way of representing some potentially complex.
+
+16:05.320 --> 16:07.320
+ Domain.
+
+16:07.320 --> 16:11.320
+ In a concise expressive and flexible way.
+
+16:11.320 --> 16:16.320
+ So for example, a notation that you've definitely used before.
+
+16:16.320 --> 16:18.320
+ Is this one.
+
+16:18.320 --> 16:21.320
+ Right, which is called math notation.
+
+16:21.320 --> 16:29.320
+ If you play music in the Western tradition, then you will have seen the staff based music notation.
+
+16:29.320 --> 16:31.320
+ If you juggle.
+
+16:31.320 --> 16:35.320
+ You might have come across the juggling notation.
+
+16:35.320 --> 16:41.320
+ If you've done quantum stuff, you might have come across the fine man diagram notation.
+
+16:41.320 --> 16:44.320
+ So notations are.
+
+16:44.320 --> 16:52.320
+ Yeah, they're expressive ways to represent things and red jacks is a rotation for.
+
+16:52.320 --> 16:57.320
+ Yeah, for finding stuff in text.
+
+16:57.320 --> 17:00.320
+ You know, not many.
+
+17:00.320 --> 17:05.320
+ Honestly, things in computing have got to the point that they're so.
+
+17:05.320 --> 17:08.320
+ Well understood and studied that we've.
+
+17:08.320 --> 17:11.320
+ Got them to the point that they are a notation.
+
+17:11.320 --> 17:29.320
+ But red jacks is one and my view is often, you know, quite most of the time, perhaps when when something has got to that point, we should learn that notation because it's like a way of like composing things together very concisely that can solve a wide class problems.
+
+17:29.320 --> 17:32.320
+ Jeremy, would you recommend.
+
+17:32.320 --> 17:36.320
+ Would you recommend learning things like all can said also long term.
+
+17:36.320 --> 17:43.320
+ I wouldn't recommend all can said I would recommend pill because pill is a super set of all can said.
+
+17:43.320 --> 17:52.320
+ And as such, it's more expressive than either because you can combine everything from all and said and find and.
+
+17:52.320 --> 17:55.320
+ And pretty much everything from Python as well.
+
+17:55.320 --> 17:57.320
+ So yeah.
+
+17:57.320 --> 18:03.320
+ At some point in your life, it's well worth googling for pill one liners.
+
+18:03.320 --> 18:07.320
+ And diving into that rabbit hole.
+
+18:07.320 --> 18:18.320
+ So another nice thing about red jacks is because pills red jacks is for so good, they were built by a linguist, you know, Larry walls is not surprising perhaps that they used almost everywhere.
+
+18:18.320 --> 18:21.320
+ So JavaScript, Python.
+
+18:21.320 --> 18:36.320
+ So they're all used by the PC re library, they all use the same red jacks is.
+
+18:36.320 --> 18:52.320
+ So, I have a very good code which is almost identical to Python and pill which is called the very magic mode.
+
+18:52.320 --> 19:08.320
+ So, I'm not sure if I'm going to ask you a question about like 20 minutes into this. I was near last time. So, what are we trying to do? Yeah, this is not a from last time. This is what we're trying to do is something new.
+
+19:08.320 --> 19:17.320
+ So, so what we're trying to do. Thanks is Daniel creates these, these nice descriptions of everything in these sessions.
+
+19:17.320 --> 19:33.320
+ So, I thought it would be nice if we could, for him, make a script or something that would allow him to put the correct images in here.
+
+19:33.320 --> 19:47.320
+ I don't know why it comes out this way but that's fine he's got a process he's happy with. And in this process the images, and up, you know he's he can easily paste them all at the end.
+
+19:47.320 --> 19:50.320
+ Right. So he's images.
+
+19:50.320 --> 20:03.320
+ Okay, so the images.
+
+20:03.320 --> 20:25.320
+ So they have names. Right. And then in the, in the, in the forum post they appear like this. So we have to replace this basically with, with this, but with probably with this size would be my guess.
+
+20:25.320 --> 20:35.320
+ In fact, let's just check that. So, yeah, that's what he wants, I guess fixed test error.
+
+20:35.320 --> 20:46.320
+ I wonder which size he wants.
+
+20:46.320 --> 20:55.320
+ Okay, so, script for fixed test in source path.
+
+20:55.320 --> 21:00.320
+ 690 by 184.
+
+21:00.320 --> 21:11.320
+ And where was that fixed test error? Okay, that's at the end.
+
+21:11.320 --> 21:21.320
+ This donation path.
+
+21:21.320 --> 21:28.320
+ I wonder if these are the actual sizes. Did he, that's several of these say.
+
+21:28.320 --> 21:36.320
+ I think these are the actual sizes I'm not sure why it has the 900 standard size or something. It seems to have like.
+
+21:36.320 --> 21:46.320
+ Presumably that's what he wants. That's presumably the size he wants. I guess.
+
+21:46.320 --> 21:54.320
+ Let's have a look. So if I copy that.
+
+21:54.320 --> 22:02.320
+ This post is to test image stuff or Daniel.
+
+22:02.320 --> 22:10.320
+ Okay, so that's the size that appears there.
+
+22:10.320 --> 22:22.320
+ And then what if it says 900.
+
+22:22.320 --> 22:27.320
+ Oh, doesn't really make any difference.
+
+22:27.320 --> 22:32.320
+ Yeah, without this well.
+
+22:32.320 --> 22:37.320
+ If you were to try it without the tools to work without.
+
+22:37.320 --> 22:46.320
+ Oh yeah, I would work. I just think like he's, I assume that some of the images he's intentionally trying to resize.
+
+22:46.320 --> 22:49.320
+ Something.
+
+22:49.320 --> 22:52.320
+ No, maybe this is for his notes up.
+
+22:52.320 --> 22:57.320
+ Oh yeah, I mean he's got two different sizes. One of them is for his notes up, I assume.
+
+22:57.320 --> 23:01.320
+ And one of them. I'm not going to assume this is the size he actually wants.
+
+23:01.320 --> 23:07.320
+ Maybe it's already as big as it can show. Yeah, I guess I think so.
+
+23:07.320 --> 23:11.320
+ If you right click and open it in a new tab, would that.
+
+23:11.320 --> 23:17.320
+ Or would that just show the original image. Let's have a look at some more.
+
+23:17.320 --> 23:20.320
+ Oh wait, does it always say 900? Oh, some of 1200.
+
+23:20.320 --> 23:27.320
+ I see. I think all of the x by y is the one when he drops them into the interface and it just takes whatever the site.
+
+23:27.320 --> 23:33.320
+ I would say so. So I think this is probably, let's assume this is actually what he wants.
+
+23:33.320 --> 23:36.320
+ I think that's a reasonable guess.
+
+23:36.320 --> 23:37.320
+ Okay.
+
+23:37.320 --> 23:42.320
+ So I can say sometimes I just judge, you know, grab bash commands.
+
+23:42.320 --> 23:47.320
+ But I'm fiddling around just because yeah, sometimes I don't know. It's just like.
+
+23:47.320 --> 23:51.320
+ That easy way for me to quickly check things.
+
+23:51.320 --> 23:53.320
+ So grip.
+
+23:53.320 --> 23:59.320
+ So actually, grip doesn't take normal red jacks is, but you can.
+
+23:59.320 --> 24:07.320
+ And I need to get into a habit of doing this.
+
+24:07.320 --> 24:10.320
+ Yeah, you can use minus capital P.
+
+24:10.320 --> 24:13.320
+ To use Pell compatible regular expressions.
+
+24:13.320 --> 24:19.320
+ So when you're looking for like, can I use normal regular expressions specifically, the thing you generally want to search for is PCI rate.
+
+24:19.320 --> 24:21.320
+ They're called Pell compatible.
+
+24:21.320 --> 24:28.320
+ So apparently we can do this. Not that it'll make any difference in this case, but no, this one. Okay. What about the grip?
+
+24:28.320 --> 24:42.320
+ Nope. Okay. So that maybe it's in some more recent.
+
+24:42.320 --> 24:51.320
+ Oh, you know, maybe the best thing is not to use a grip instead to use RG, which is a grip grip.
+
+24:51.320 --> 24:59.320
+ Which I guess I have to install.
+
+24:59.320 --> 25:04.320
+ I noticed that is that a different version of grip that you use.
+
+25:04.320 --> 25:15.320
+ So RG is like, so basically like for pretty much all the classic Unix tools, somebody's rewritten it in in Rust and made it better.
+
+25:15.320 --> 25:21.320
+ Or C++ or go, you know, increasingly it's Rust.
+
+25:21.320 --> 25:31.320
+ I don't know what grip grip was written in, but like it's basically like in this kind of general category of like better versions of classic Unix tools and I try to like.
+
+25:31.320 --> 25:37.320
+ Get into the habit of using the newer better versions, even though it takes some retraining.
+
+25:37.320 --> 25:41.320
+ So yeah, RG is.
+
+25:41.320 --> 25:49.320
+ I'm into a book right yesterday because I noticed you were using that and I thought maybe it's for recursive grip or something. Oh, yeah. Yeah.
+
+25:49.320 --> 25:58.320
+ Yeah, it's, yeah, it's actually a program, which amongst other things seems to be highlighting the thing I'm searching for, which is cute.
+
+25:58.320 --> 26:01.320
+ And showing the right line number.
+
+26:01.320 --> 26:08.320
+ Jeremy, you find that brew install doesn't mess with your number for installation and those are phenomenal. Pretty much in their functions.
+
+26:08.320 --> 26:17.320
+ No, it should be fine. Yeah. I mean, I'm not in paper space here. Right. So like I wouldn't use I tried filling with brew in paper space, because there is a Linux.
+
+26:17.320 --> 26:28.320
+ I mean nowadays, that's okay, but it uses up a lot of space. So I thought just using man better install binaries like ripgrap in paper space is probably the best option.
+
+26:28.320 --> 26:32.320
+ You know, because it doesn't use any more space than necessary.
+
+26:32.320 --> 26:35.320
+ But you know the two shouldn't get in the way.
+
+26:35.320 --> 26:42.320
+ Like they'll both add themselves to the path right so opt home brew bin.
+
+26:42.320 --> 26:48.320
+ And before it's been so they're just both in the path.
+
+26:48.320 --> 26:52.320
+ Yeah, I can't see why they get the way of each other.
+
+26:52.320 --> 26:54.320
+ Okay.
+
+26:54.320 --> 26:57.320
+ All right, so find all.
+
+26:57.320 --> 27:09.320
+ Docs for a patent in a string, right. So, so, you know, I tend to like to like to create like a really simple version of something just to make sure I understand the command before I.
+
+27:09.320 --> 27:14.320
+ Dive into it. So I reckon we should be able to find the word fix.
+
+27:14.320 --> 27:19.320
+ In our source. Right. And there it is. Okay. It's appeared more than once.
+
+27:19.320 --> 27:25.320
+ Okay, there it is. Right. And so then.
+
+27:25.320 --> 27:29.320
+ If we.
+
+27:29.320 --> 27:36.320
+ Generally with red jacks as we use backslashes quite a lot to mean certain things.
+
+27:36.320 --> 27:42.320
+ But Python uses a backslash to mean something else, which is that the next character is a control character.
+
+27:42.320 --> 27:48.320
+ So to tell Python that treat backslashes as backslashes, you put an hour before the string.
+
+27:48.320 --> 27:58.320
+ So this looks for the, you know, backslash F fix test in fact, you know, if I just show you here.
+
+27:58.320 --> 28:01.320
+ Backslash N is normally a new line.
+
+28:01.320 --> 28:06.320
+ But if I put an hour there, it's not a new line.
+
+28:06.320 --> 28:11.320
+ Actually, this would be easier for say print.
+
+28:11.320 --> 28:14.320
+ So that prints new line fix test.
+
+28:14.320 --> 28:21.320
+ And that prints backslash N fix test.
+
+28:21.320 --> 28:28.320
+ Okay, so we're going to look for stuff of.
+
+28:28.320 --> 28:32.320
+ This for that's our source. Right.
+
+28:32.320 --> 28:36.320
+ So I would be inclined just to paste it in here.
+
+28:36.320 --> 28:38.320
+ Okay.
+
+28:38.320 --> 28:41.320
+ So square brackets have a special meaning in red jacks.
+
+28:41.320 --> 28:45.320
+ So we can use a backslash to say don't use a special meaning.
+
+28:45.320 --> 28:48.320
+ Did I with pipe.
+
+28:48.320 --> 28:53.320
+ Did I with parentheses.
+
+28:53.320 --> 28:55.320
+ Let's get rid of all those.
+
+28:55.320 --> 28:56.320
+ Okay.
+
+28:56.320 --> 29:07.320
+ And so, so this is going to be the name of something.
+
+29:07.320 --> 29:13.320
+ And so if we want to remember some block of text, we can put it in parentheses.
+
+29:13.320 --> 29:21.320
+ Right. So, so the thing we're going to try to find here is basically, I think probably anything that's not white space will be fine.
+
+29:21.320 --> 29:31.320
+ And then this is actually something we do want to keep, which is the actual file name we're going to end up with.
+
+29:31.320 --> 29:40.320
+ So I'll create parentheses for that and put my backslash S plus there as well.
+
+29:40.320 --> 29:53.320
+ Okay.
+
+29:53.320 --> 30:01.320
+ So that's looking pretty hopeful. So what it's done here is.
+
+30:01.320 --> 30:05.320
+ Found equals.
+
+30:05.320 --> 30:13.320
+ Found 29 things.
+
+30:13.320 --> 30:24.320
+ Which looks something like this.
+
+30:24.320 --> 30:31.320
+ Oh, I put parentheses twice here, which is why it's appearing twice.
+
+30:31.320 --> 30:33.320
+ That's better.
+
+30:33.320 --> 30:43.320
+ Does that make sense so it's basically showing us each of the parenthesized expressions.
+
+30:43.320 --> 30:51.320
+ And so actually we don't need this bit to be parenthesized because I don't think we care about the original size.
+
+30:51.320 --> 30:55.320
+ Okay.
+
+30:55.320 --> 31:02.320
+ And so we should be able to create a dictionary from that.
+
+31:02.320 --> 31:08.320
+ Because we've now got a list of tuples.
+
+31:08.320 --> 31:20.320
+ I never quite remember how this works, but yeah, there you go. So the list of tuples, if you pass it to dict, it'll create a dictionary.
+
+31:20.320 --> 31:31.320
+ And I think like there's something to be said for programming in a interactive environment, you know, that allows us to like gradually build up a thing that works.
+
+31:31.320 --> 31:45.320
+ And then, you know, assign it to a variable or stick it in a function or whatever. So now we should be able to search for found add to class.
+
+31:45.320 --> 31:54.320
+ And we do. So we've got the dictionary we want to set makes sense so far.
+
+31:54.320 --> 32:03.320
+ I just have a question about that you got rid of the size. So if you don't put the parentheses does that mean it will just ignore that.
+
+32:03.320 --> 32:12.320
+ Yeah, it has to be there. Right. So if, if we said, oh look for a a.
+
+32:12.320 --> 32:18.320
+ Well, that's not there. Right. So it won't find anything.
+
+32:18.320 --> 32:23.320
+ So it's still searching for it. It's just not storing it.
+
+32:23.320 --> 32:28.320
+ So it's finding an exclamation mark open square bracket.
+
+32:28.320 --> 32:41.320
+ Finding and remembering a bunch of non what space characters followed by a pipe sign followed by a bunch of non what space characters which it doesn't remember followed by a closing square bracket followed by an opening parenthesis.
+
+32:41.320 --> 32:46.320
+ So putting parentheses makes it remember essentially correct.
+
+32:46.320 --> 33:05.320
+ Correct. Correct. It does two things. It also groups things, which is a bit confusing that it does two things. But yeah, in this case, the thing we're using for is the fact that it remembers things and will end up in the output of
+
+33:05.320 --> 33:18.320
+ the file. Among many other things, if you just do ari.match or ari.search, it'll also remember them. It just returns slightly different things.
+
+33:18.320 --> 33:25.320
+ I read find all is one of the easiest things to use those, though. So I think it's good.
+
+33:25.320 --> 33:32.320
+ Okay. So now we need to basically search and replace in destination.
+
+33:32.320 --> 33:35.320
+ Looking for stuff like this.
+
+33:35.320 --> 33:47.320
+ Okay. So.
+
+33:47.320 --> 33:56.320
+ So this is our destination.
+
+33:56.320 --> 34:09.320
+ Okay.
+
+34:09.320 --> 34:19.320
+ Here's two things we want to change. Right. So I'm just going to like use the last few characters just so I can see what's going on. So just going to put that in a variable for now.
+
+34:19.320 --> 34:22.320
+ Okay.
+
+34:22.320 --> 34:31.320
+ So there's a thing called ari.sub for substitute.
+
+34:31.320 --> 34:39.320
+ It's funny. A lot of Python programmers complain about me using three letter abbreviations, but Python apparently is allowed to use three little variations.
+
+34:39.320 --> 34:41.320
+ Ari.substitute.
+
+34:41.320 --> 34:45.320
+ So we're going to find a pattern and replace it with something else.
+
+34:45.320 --> 34:48.320
+ And we're just going to search in sunscreen.
+
+34:48.320 --> 34:58.320
+ So for example, if we replace space with star in D.
+
+34:58.320 --> 35:01.320
+ Okay. That's basically how it works.
+
+35:01.320 --> 35:04.320
+ Or you can search for regular expression.
+
+35:04.320 --> 35:14.320
+ So let's search for that.
+
+35:14.320 --> 35:19.320
+ Okay. And again, we're going to use our because we're going to use backslashes.
+
+35:19.320 --> 35:22.320
+ We're going to search for a literal square bracket.
+
+35:22.320 --> 35:26.320
+ We're going to search for a little pipe literal vertical bar.
+
+35:26.320 --> 35:28.320
+ Okay.
+
+35:28.320 --> 35:34.320
+ And you can see that's been replaced with a star.
+
+35:34.320 --> 35:39.320
+ And so this thing here.
+
+35:39.320 --> 35:41.320
+ Is the file name.
+
+35:41.320 --> 35:46.320
+ And the bit before the dot is what we're going to look up.
+
+35:46.320 --> 35:51.320
+ So I'm going to.
+
+35:51.320 --> 35:56.320
+ So we're going to capture this. And the thing we're going to look for is everything except for a dot.
+
+35:56.320 --> 36:01.320
+ Okay. So to say everything except for a dot, you've been square brackets, you put the things to look for.
+
+36:01.320 --> 36:06.320
+ And carrot means things you don't want to look for. So this is everything except a dot.
+
+36:06.320 --> 36:12.320
+ And this says to capture it. So remembering, I got it remembering is actually called capturing.
+
+36:12.320 --> 36:19.320
+ Dot has a special meaning normally, which is anything at all. So that's a literal dot.
+
+36:19.320 --> 36:25.320
+ Let's not assume it's all not. Maybe it's not always PNG.
+
+36:25.320 --> 36:31.320
+ So I'm just going to see any three characters.
+
+36:31.320 --> 36:37.320
+ In fact, regardless of whether it's JPEG or P and oh, here we are. It could. Oh, it's also sometimes it's JPEG could be four characters.
+
+36:37.320 --> 36:46.320
+ Okay, no worries.
+
+36:46.320 --> 36:53.320
+ Okay, well, anything could do. Oh, I know we can just do some letters.
+
+36:53.320 --> 37:04.320
+ So backslash w is a word symbol. So basically letters and numbers and stuff. So we'll have a bunch of those.
+
+37:04.320 --> 37:11.320
+ Okay, now interestingly, in this case, this has got a pipe 900.
+
+37:11.320 --> 37:19.320
+ This has got a closed square bracket.
+
+37:19.320 --> 37:24.320
+ Okay, so there's a few ways we can do this. I'm going to show you.
+
+37:24.320 --> 37:28.320
+ Okay, I got to show you the more interesting way.
+
+37:28.320 --> 37:31.320
+ Which is that.
+
+37:31.320 --> 37:40.320
+ No, let's do the simple way. Okay, so the simple way is rather than looking for any word symbol looks just look for anything that's not a closed square bracket.
+
+37:40.320 --> 37:46.320
+ So this is going to be slightly confusing, but basically.
+
+37:46.320 --> 37:51.320
+ This is a red jacks that searches for any A's or B's or C's.
+
+37:51.320 --> 37:58.320
+ This is a red jacks that search for anything that's not an A or a B or a C.
+
+37:58.320 --> 38:06.320
+ This is a red jacks that searches for anything that's not an open square bracket.
+
+38:06.320 --> 38:17.320
+ So we want to find.
+
+38:17.320 --> 38:22.320
+ A bunch of things that are not a square bracket.
+
+38:22.320 --> 38:25.320
+ Plus means one or more.
+
+38:25.320 --> 38:30.320
+ And then there's going to be two closed square brackets.
+
+38:30.320 --> 38:36.320
+ Okay, so that didn't work, which is good because now I can show you how I go about debugging these things.
+
+38:36.320 --> 38:45.320
+ So to debug these things is I would just gradually make this simpler and simpler until it starts working and that way we'll be able to figure out why it's not working.
+
+38:45.320 --> 38:49.320
+ So I'm going to delete all of this.
+
+38:49.320 --> 38:52.320
+ Okay, so that didn't work.
+
+38:52.320 --> 38:56.320
+ So let's keep deleting.
+
+38:56.320 --> 39:06.320
+ Okay, so that one did delete.
+
+39:06.320 --> 39:08.320
+ Oh, okay, I see the problem.
+
+39:08.320 --> 39:13.320
+ So you can see here it's just replaced the first letter, which wasn't what I wanted.
+
+39:13.320 --> 39:14.320
+ Right.
+
+39:14.320 --> 39:16.320
+ I wanted to grab a bunch of these.
+
+39:16.320 --> 39:21.320
+ So this here says, oh, this here says anything that's not a dot.
+
+39:21.320 --> 39:22.320
+ Right.
+
+39:22.320 --> 39:26.320
+ But we actually want one or more things that under dot.
+
+39:26.320 --> 39:28.320
+ That's better.
+
+39:28.320 --> 39:32.320
+ Okay, so one or more things that under dot.
+
+39:32.320 --> 39:38.320
+ So we can go back and now replace that up here with one or more things that under dot.
+
+39:38.320 --> 39:39.320
+ There we go.
+
+39:39.320 --> 39:43.320
+ So that's now successfully replaced.
+
+39:43.320 --> 39:46.320
+ All that with a star.
+
+39:46.320 --> 39:50.320
+ So that tells us that we've got our search working correctly.
+
+39:50.320 --> 39:55.320
+ What confused me is the current in the square brackets.
+
+39:55.320 --> 39:59.320
+ Because I know that the current is a simple for start of line.
+
+39:59.320 --> 40:00.320
+ Oh, yeah.
+
+40:00.320 --> 40:01.320
+ That's true.
+
+40:01.320 --> 40:04.320
+ So I had to Google it and it turns out that.
+
+40:04.320 --> 40:06.320
+ Inside the square brackets.
+
+40:06.320 --> 40:07.320
+ It means not.
+
+40:07.320 --> 40:11.320
+ But if it's outside, it means start of line.
+
+40:11.320 --> 40:12.320
+ Yeah.
+
+40:12.320 --> 40:13.320
+ Yeah.
+
+40:13.320 --> 40:16.320
+ No one's going to claim that necessarily this notation is spelled the best.
+
+40:16.320 --> 40:17.320
+ I guess.
+
+40:17.320 --> 40:20.320
+ It was made pre Unicode.
+
+40:20.320 --> 40:23.320
+ You know, so it had to rely only on ASCII signs.
+
+40:23.320 --> 40:25.320
+ And so I don't think there's enough ASCII symbols.
+
+40:25.320 --> 40:30.320
+ So it ends up having to reuse ASCII symbols in ways that are entirely incompatible with each other.
+
+40:30.320 --> 40:34.320
+ Yeah, that's correct. So if it's not inside square brackets, it means that offline.
+
+40:34.320 --> 40:40.320
+ If it is inside said brackets, it means the complement of the set, the opposite of the set.
+
+40:40.320 --> 40:41.320
+ The dot.
+
+40:41.320 --> 40:46.320
+ The dot which is inside bracket.
+
+40:46.320 --> 40:49.320
+ Don't mean any character.
+
+40:49.320 --> 40:50.320
+ No special character.
+
+40:50.320 --> 40:51.320
+ Yeah, that just means a dot.
+
+40:51.320 --> 40:55.320
+ And I think in square brackets, except for except for characters literal.
+
+40:55.320 --> 40:56.320
+ Yeah.
+
+40:56.320 --> 40:58.320
+ So you could do this to make it extra clear.
+
+40:58.320 --> 41:02.320
+ Yeah.
+
+41:02.320 --> 41:07.320
+ In the chart, I shared links to bite.org.
+
+41:07.320 --> 41:11.320
+ Which is, which is nice because it has a cheat sheet.
+
+41:11.320 --> 41:17.320
+ So whenever I'm working on a rejects myself, I never remember.
+
+41:17.320 --> 41:22.320
+ This is based on Robillard that was very famous in the Ruby world.
+
+41:22.320 --> 41:26.320
+ It's nice for testing your rejection.
+
+41:26.320 --> 41:31.320
+ But also if we expand the cheat sheet, which is.
+
+41:31.320 --> 41:34.320
+ Yeah, then now you put a string in your test string.
+
+41:34.320 --> 41:37.320
+ It will, and you can put a couple of strings there.
+
+41:37.320 --> 41:42.320
+ It will, you know, show you what it's doing.
+
+41:42.320 --> 41:46.320
+ That's how I figured out the.
+
+41:46.320 --> 41:47.320
+ The red text.
+
+41:47.320 --> 41:49.320
+ I went to one of these sites.
+
+41:49.320 --> 41:54.320
+ And then most crucial bit here is the regular regular expression cheat sheet.
+
+41:54.320 --> 41:56.320
+ When you click on it, it expands.
+
+41:56.320 --> 42:00.320
+ And you have all these things that you can use.
+
+42:00.320 --> 42:03.320
+ Yeah, I think Rick checks.
+
+42:03.320 --> 42:10.320
+ One I wanted someone I've tried before.
+
+42:10.320 --> 42:19.320
+ Which I think has a bit more of an explanation.
+
+42:19.320 --> 42:22.320
+ You can remember correctly.
+
+42:22.320 --> 42:29.320
+ So I like this that.
+
+42:29.320 --> 42:33.320
+ So you've got the quick reference.
+
+42:33.320 --> 42:40.320
+ But you've also got this like explanation matches this character matches the character.
+
+42:40.320 --> 42:41.320
+ So a capturing group.
+
+42:41.320 --> 42:44.320
+ That's something that remembers is a capturing group.
+
+42:44.320 --> 42:49.320
+ A single character that is not one of these.
+
+42:49.320 --> 42:50.320
+ Oh, yeah.
+
+42:50.320 --> 42:53.320
+ Yeah, so the first like.
+
+42:53.320 --> 42:58.320
+ Learning a notation is hard, you know, and so like.
+
+42:58.320 --> 43:06.320
+ Almost almost any notation people don't as a matter of course learn at school.
+
+43:06.320 --> 43:10.320
+ It generally gets categorized into the.
+
+43:10.320 --> 43:16.320
+ Weird complicated annoying thing category, you know.
+
+43:16.320 --> 43:18.320
+ But there's nothing like.
+
+43:18.320 --> 43:23.320
+ More or less weird or annoying about red jacks than.
+
+43:23.320 --> 43:29.320
+ Basic arithmetic notation. It's just isn't something we're going to school, you know, and it's.
+
+43:29.320 --> 43:32.320
+ Yeah, you know, arithmetic takes us.
+
+43:32.320 --> 43:35.320
+ Some years to learn red jacks.
+
+43:35.320 --> 43:41.320
+ Has anybody learned red jacks recently? You got a sense of how long it takes to learn like days, months, weeks.
+
+43:41.320 --> 43:44.320
+ First time I started using it, I think it was actually last year's a fast.
+
+43:44.320 --> 43:46.320
+ Of course, where you introduced it.
+
+43:46.320 --> 43:47.320
+ Yeah.
+
+43:47.320 --> 43:53.320
+ And yeah, I always saw it before and I thought it was kind of like, you know, these weird simple that never understand.
+
+43:53.320 --> 43:57.320
+ And then basically I like got a basic understanding of it.
+
+43:57.320 --> 44:02.320
+ Really useful tool and then base every few months when I have to come back and use it for something.
+
+44:02.320 --> 44:08.320
+ I just use one of those like online red jacks tools to kind of like give myself a jump start to get back.
+
+44:08.320 --> 44:09.320
+ Yeah.
+
+44:09.320 --> 44:10.320
+ Yeah.
+
+44:10.320 --> 44:11.320
+ I mean, it comes up so much.
+
+44:11.320 --> 44:15.320
+ It's like, I would say it's notation worth mastering.
+
+44:15.320 --> 44:21.320
+ You know, which I wouldn't say about that many things and mastery requires.
+
+44:21.320 --> 44:25.320
+ Probably some fairly intentional practice over a period of time.
+
+44:25.320 --> 44:27.320
+ Yeah.
+
+44:27.320 --> 44:29.320
+ But yeah, certainly the kind of like.
+
+44:29.320 --> 44:34.320
+ Use it from time to time and learn a little bit more each time also also works.
+
+44:34.320 --> 44:41.320
+ So I got to show you something which I would guess most Python programmers don't know, but which is amazing,
+
+44:41.320 --> 44:48.320
+ which is that this thing here, the thing we're replacing it with star doesn't have to be a string.
+
+44:48.320 --> 44:54.320
+ It can be a function.
+
+44:54.320 --> 45:03.320
+ So here's a function that returns star.
+
+45:03.320 --> 45:06.320
+ And that does the same thing.
+
+45:06.320 --> 45:13.320
+ Right, or return, we got to be at past the thing that's being replaced.
+
+45:13.320 --> 45:22.320
+ So, you know, just, I mean, one thing we could just do is just print that out.
+
+45:22.320 --> 45:23.320
+ Okay.
+
+45:23.320 --> 45:28.320
+ So we're getting past an re.match object.
+
+45:28.320 --> 45:41.320
+ And so,
+
+45:41.320 --> 45:44.320
+ and I read that match object.
+
+45:44.320 --> 45:48.320
+ We can also get.
+
+45:48.320 --> 45:51.320
+ I think, or is it only me?
+
+45:51.320 --> 45:54.320
+ Can you guys hear me?
+
+45:54.320 --> 45:59.320
+ I'm not sure anyone.
+
+45:59.320 --> 46:04.320
+ Oh, sorry. My computer did something on its own. It's a bit weird with audio.
+
+46:04.320 --> 46:07.320
+ Sorry about that.
+
+46:07.320 --> 46:08.320
+ Okay.
+
+46:08.320 --> 46:20.320
+ So I think to play with a match object, we should probably try and create one.
+
+46:20.320 --> 46:25.320
+ I think if we go re.search, we'll get a match object.
+
+46:25.320 --> 46:39.320
+ So let's search for that pattern in that string.
+
+46:39.320 --> 46:43.320
+ There we go. So there's a match object.
+
+46:43.320 --> 46:54.320
+ So hitting dot and pressing tab isn't a bad idea just to see what kind of stuff we can do.
+
+46:54.320 --> 46:56.320
+ That looks nice.
+
+46:56.320 --> 47:05.320
+ Groups.
+
+47:05.320 --> 47:15.320
+ Oh, I didn't do anything.
+
+47:15.320 --> 47:22.320
+ So there's groups and group. So group is something where you give an index or name.
+
+47:22.320 --> 47:29.320
+ And so zero gives you everything that was matched and one gives you the first thing that was captured.
+
+47:29.320 --> 47:31.320
+ So that's actually what we want, right?
+
+47:31.320 --> 47:35.320
+ So if we.
+
+47:35.320 --> 47:37.320
+ Yeah, did.
+
+47:37.320 --> 47:41.320
+ Return.
+
+47:41.320 --> 47:45.320
+ Star.
+
+47:45.320 --> 47:47.320
+ X dot group one.
+
+47:47.320 --> 47:52.320
+ Star.
+
+47:52.320 --> 47:53.320
+ Okay.
+
+47:53.320 --> 47:57.320
+ You see what's happened there?
+
+47:57.320 --> 48:03.320
+ So again, I'm doing a lot of exploring and explore, you know, as I go.
+
+48:03.320 --> 48:10.320
+ And so like I don't like I find using this approach.
+
+48:10.320 --> 48:16.320
+ I if I'm working with my code, I basically almost know I basically never get stuck.
+
+48:16.320 --> 48:22.320
+ Because every step I'm doing is so small and it's from a known place.
+
+48:22.320 --> 48:26.320
+ You know, and it's a small increment.
+
+48:26.320 --> 48:29.320
+ And I'm kind of keeping most of the steps along the way.
+
+48:29.320 --> 48:32.320
+ So it's really, yeah, it's very hard to ever get.
+
+48:32.320 --> 48:37.320
+ Lost or stuck.
+
+48:37.320 --> 48:40.320
+ So, yeah, so now what we have to do is look up.
+
+48:40.320 --> 48:45.320
+ The thing in found, right? So.
+
+48:45.320 --> 48:55.320
+ Found.
+
+48:55.320 --> 48:57.320
+ There we go.
+
+48:57.320 --> 49:08.320
+ Okay, so now we've got to put it in the right format.
+
+49:08.320 --> 49:11.320
+ So actually.
+
+49:11.320 --> 49:17.320
+ Yeah, we basically.
+
+49:17.320 --> 49:19.320
+ Yeah, this is interesting.
+
+49:19.320 --> 49:21.320
+ We actually want to keep this bit, right?
+
+49:21.320 --> 49:24.320
+ If it exists.
+
+49:24.320 --> 49:28.320
+ So.
+
+49:28.320 --> 49:38.320
+ So what we can do.
+
+49:38.320 --> 49:44.320
+ Yes, we want to keep that bit if it exists. So this thing here where we're searching for.
+
+49:44.320 --> 49:49.320
+ Anything that's not a square bracket isn't quite what we want.
+
+49:49.320 --> 49:54.320
+ I think we actually need to specifically find the extension.
+
+49:54.320 --> 49:56.320
+ Right, so we're looking for.
+
+49:56.320 --> 49:59.320
+ We're looking for a full stop and then an extension.
+
+49:59.320 --> 50:02.320
+ Okay, so an extension.
+
+50:02.320 --> 50:04.320
+ Is.
+
+50:04.320 --> 50:07.320
+ A bunch of letters.
+
+50:07.320 --> 50:08.320
+ Right.
+
+50:08.320 --> 50:11.320
+ Is a bunch of letters so backslash w plus.
+
+50:11.320 --> 50:16.320
+ Strictly speaking, it should be three or four letters most of the time, but that's okay.
+
+50:16.320 --> 50:21.320
+ What I said backslash w plus right and then next up to that is either going to be a closed
+
+50:21.320 --> 50:26.320
+ square bracket or there's going to be pipe followed by a bunch of digits.
+
+50:26.320 --> 50:31.320
+ So in other words, there's going to be optionally pipe followed by a bunch of digits.
+
+50:31.320 --> 50:36.320
+ And I want to keep that because we want to put it in there if it exists.
+
+50:36.320 --> 50:39.320
+ So we're going to look for.
+
+50:39.320 --> 50:45.320
+ Pipe followed by a bunch of digits backslash D is a digit.
+
+50:45.320 --> 50:50.320
+ Okay, so we got to look for all this right now to say that that is optional.
+
+50:50.320 --> 50:58.320
+ Use question mark.
+
+50:58.320 --> 51:09.320
+ And so I'm just going to change this to zero just so we can print out the whole thing to make sure it's working.
+
+51:09.320 --> 51:15.320
+ And we don't want to do that anymore.
+
+51:15.320 --> 51:16.320
+ Let's see.
+
+51:16.320 --> 51:21.320
+ Okay, so it seems to have worked right.
+
+51:21.320 --> 51:25.320
+ And in fact, what we could even do is just say.
+
+51:25.320 --> 51:28.320
+ Print out the groups.
+
+51:28.320 --> 51:29.320
+ And that way we'll see.
+
+51:29.320 --> 51:32.320
+ Okay, it's got fixed test error pipe 900.
+
+51:32.320 --> 51:33.320
+ And fix issues none.
+
+51:33.320 --> 51:38.320
+ So you see how the optional thing is coming through as none here, right.
+
+51:38.320 --> 51:44.320
+ So what we want to do is then look up group one, right, which is this.
+
+51:44.320 --> 51:52.320
+ And then if it exists, we then want to put in the pipe 900.
+
+51:52.320 --> 51:56.320
+ Okay, so which is x dot group.
+
+51:56.320 --> 52:02.320
+ Two.
+
+52:02.320 --> 52:10.320
+ See, there's a non inside square brackets.
+
+52:10.320 --> 52:12.320
+ Found x dot group one.
+
+52:12.320 --> 52:17.320
+ Oh, and that's, oh, that's the end of curly brackets there.
+
+52:17.320 --> 52:23.320
+ And start curly brackets there.
+
+52:23.320 --> 52:25.320
+ There we go.
+
+52:25.320 --> 52:30.320
+ Upload, blah, blah, blah, up here and g 900.
+
+52:30.320 --> 52:44.320
+ Cool. And so then this string is going to start with exactly the same thing we had before.
+
+52:44.320 --> 52:45.320
+ Which is that.
+
+52:45.320 --> 52:57.320
+ And it's going to end with two square brackets.
+
+52:57.320 --> 53:00.320
+ Okay.
+
+53:00.320 --> 53:06.320
+ So we get rid of our stars.
+
+53:06.320 --> 53:14.320
+ How does that look?
+
+53:14.320 --> 53:19.320
+ We have extra non at the end.
+
+53:19.320 --> 53:22.320
+ Okay, we do.
+
+53:22.320 --> 53:32.320
+ Slightly annoying.
+
+53:32.320 --> 53:37.320
+ So, or is a Boolean operator.
+
+53:37.320 --> 53:41.320
+ Which returns the thing on the left if it's true.
+
+53:41.320 --> 53:44.320
+ And the thing on the right otherwise.
+
+53:44.320 --> 53:48.320
+ And so because none stringifies is the name, the string none.
+
+53:48.320 --> 53:52.320
+ But it also is also considered falsey.
+
+53:52.320 --> 54:02.320
+ So this will turn none into an empty string.
+
+54:02.320 --> 54:05.320
+ Okay, well, let's try that on the whole thing.
+
+54:05.320 --> 54:10.320
+ So one easy way to, you know, when you're doing something on a subset,
+
+54:10.320 --> 54:13.320
+ change it to the whole set is you just go delete.
+
+54:13.320 --> 54:17.320
+ Like so.
+
+54:17.320 --> 54:23.320
+ All right. So we've got a key error, which is understandable.
+
+54:23.320 --> 54:26.320
+ So we're missing good mix.
+
+54:26.320 --> 54:29.320
+ So let's see if that's actually missing or not.
+
+54:29.320 --> 54:34.320
+ So let's have a look in the source and search for good.
+
+54:34.320 --> 54:37.320
+ Okay, there is not a good mix.
+
+54:37.320 --> 54:45.320
+ So what I'd been trying to do then is change square brackets to get because
+
+54:45.320 --> 54:51.320
+ get let's us provide a default.
+
+54:51.320 --> 54:55.320
+ So let's use that as a default.
+
+54:55.320 --> 55:13.320
+ All right.
+
+55:13.320 --> 55:21.320
+ So let's see.
+
+55:21.320 --> 55:24.320
+ Okay.
+
+55:24.320 --> 55:27.320
+ So let's see.
+
+55:27.320 --> 55:30.320
+ So let's see.
+
+55:30.320 --> 55:33.320
+ Okay.
+
+55:33.320 --> 55:36.320
+ So let's see.
+
+55:36.320 --> 55:38.320
+ Okay.
+
+55:38.320 --> 55:55.320
+ Okay.
+
+55:55.320 --> 55:59.320
+ And say if we found it.
+
+55:59.320 --> 56:17.320
+ And do that.
+
+56:17.320 --> 56:43.320
+ That way we'll actually be able to see it.
+
+56:43.320 --> 56:53.320
+ Oops.
+
+56:53.320 --> 57:05.320
+ Oh.
+
+57:05.320 --> 57:13.320
+ Okay.
+
+57:13.320 --> 57:21.320
+ So let's test it.
+
+57:21.320 --> 57:43.320
+ Okay.
+
+57:43.320 --> 57:53.320
+ Okay.
+
+57:53.320 --> 57:58.320
+ Okay.
+
+57:58.320 --> 58:00.320
+ Okay.
+
+58:00.320 --> 58:03.320
+ Okay.
+
+58:03.320 --> 58:06.320
+ Okay.
+
+58:06.320 --> 58:07.320
+ Okay.
+
+58:07.320 --> 58:20.320
+ So that's not correct.
+
+58:20.320 --> 58:23.320
+ It's exclamation mark.
+
+58:23.320 --> 58:34.320
+ Square bracket.
+
+58:34.320 --> 58:44.320
+ I don't really know what the name is, but I guess.
+
+58:44.320 --> 58:48.320
+ And then.
+
+58:48.320 --> 58:53.320
+ Oh, and then the.
+
+58:53.320 --> 59:10.320
+ And then the size, if there is one.
+
+59:10.320 --> 59:22.320
+ Interesting.
+
+59:22.320 --> 59:31.320
+ Size, if there is one.
+
+59:31.320 --> 59:42.320
+ And then close credit and then a parenthesis and then the file name.
+
+59:42.320 --> 59:43.320
+ Okay.
+
+59:43.320 --> 59:45.320
+ Is that right?
+
+59:45.320 --> 59:48.320
+ Oh, I've got an irie dot match object.
+
+59:48.320 --> 59:52.320
+ Oh, it's.
+
+59:52.320 --> 59:56.320
+ Oh, yeah.
+
+59:56.320 --> 1:00:15.320
+ That looks better, doesn't it?
+
+1:00:15.320 --> 1:00:29.320
+ Okay.
+
+1:00:29.320 --> 1:00:32.320
+ Paste.
+
+1:00:32.320 --> 1:00:38.320
+ That looks helpful.
+
+1:00:38.320 --> 1:00:51.320
+ Okay.
+
+1:00:51.320 --> 1:00:54.320
+ How about that?
+
+1:00:54.320 --> 1:00:55.320
+ How about that?
+
+1:00:55.320 --> 1:00:56.320
+ Yeah.
+
+1:00:56.320 --> 1:00:58.320
+ Some of these are too big, but Daniel can easily change.
+
+1:00:58.320 --> 1:01:02.320
+ I mean, let's test it actually. So for 3333.
+
+1:01:02.320 --> 1:01:06.320
+ Let's see if we can change the size.
+
+1:01:06.320 --> 1:01:13.320
+ Is that work?
+
+1:01:13.320 --> 1:01:29.320
+ This course.
+
+1:01:29.320 --> 1:01:32.320
+ Image size.
+
+1:01:32.320 --> 1:02:00.320
+ Oh, comma.
+
+1:02:00.320 --> 1:02:02.320
+ I don't know.
+
+1:02:02.320 --> 1:02:10.320
+ Was that a bracket in the comment?
+
+1:02:10.320 --> 1:02:12.320
+ A bracket in the comment. Sorry.
+
+1:02:12.320 --> 1:02:15.320
+ Yeah, I think it was.
+
+1:02:15.320 --> 1:02:18.320
+ Because the next comment they say just by adding.
+
+1:02:18.320 --> 1:02:19.320
+ Adding, 20%.
+
+1:02:19.320 --> 1:02:21.320
+ You're still right there.
+
+1:02:21.320 --> 1:02:22.320
+ The pipe in there.
+
+1:02:22.320 --> 1:02:23.320
+ You think so?
+
+1:02:23.320 --> 1:02:26.320
+ Yeah, the end, but he's like a quick, just.
+
+1:02:26.320 --> 1:02:27.320
+ Yeah.
+
+1:02:27.320 --> 1:02:30.320
+ Yeah, the last sentence there.
+
+1:02:30.320 --> 1:02:31.320
+ Yeah.
+
+1:02:31.320 --> 1:02:34.320
+ So that might be, you could just do just.
+
+1:02:34.320 --> 1:02:36.320
+ The comma 50%.
+
+1:02:36.320 --> 1:02:38.320
+ I assume after a bracket, maybe that would work.
+
+1:02:38.320 --> 1:02:41.320
+ Well, and here it's got before the bracket.
+
+1:02:41.320 --> 1:02:45.320
+ Oh, not the, um, the bar thing.
+
+1:02:45.320 --> 1:02:48.320
+ Oh, the pipe.
+
+1:02:48.320 --> 1:02:50.320
+ Yeah.
+
+1:02:50.320 --> 1:02:53.320
+ Let's try.
+
+1:02:53.320 --> 1:02:56.320
+ Yes. Okay.
+
+1:02:56.320 --> 1:02:58.320
+ Maybe take the dimensions out.
+
+1:02:58.320 --> 1:03:02.320
+ No.
+
+1:03:02.320 --> 1:03:09.320
+ Ah.
+
+1:03:09.320 --> 1:03:21.320
+ So.
+
+1:03:21.320 --> 1:03:23.320
+ Oh, here we are.
+
+1:03:23.320 --> 1:03:46.320
+ Oh, I think we probably shouldn't be putting in his sizes because they actually want to keep the sizes.
+
+1:03:46.320 --> 1:03:56.320
+ So let's change it.
+
+1:03:56.320 --> 1:04:04.320
+ So.
+
+1:04:04.320 --> 1:04:26.320
+ If you press O, by the way, it opens and closes the output of a cell, which is quite handy.
+
+1:04:26.320 --> 1:04:33.320
+ All right.
+
+1:04:33.320 --> 1:04:47.320
+ So.
+
+1:04:47.320 --> 1:04:54.320
+ I guess we've going to have two things. We're going to have the size and the file name.
+
+1:04:54.320 --> 1:05:00.320
+ So that's fine. So, um, all we need to do then is to capture this.
+
+1:05:00.320 --> 1:05:08.320
+ So, um,
+
+1:05:08.320 --> 1:05:25.320
+ so it's not a dictionary anymore.
+
+1:05:25.320 --> 1:05:30.320
+ And so then we could say found and we could do a dictionary comprehension.
+
+1:05:30.320 --> 1:05:33.320
+ So for.
+
+1:05:33.320 --> 1:05:37.320
+ Name, comma, size, comma, file.
+
+1:05:37.320 --> 1:05:45.320
+ In that we're going to go from a name to a tuple.
+
+1:05:45.320 --> 1:05:54.320
+ Of the size and file name.
+
+1:05:54.320 --> 1:06:01.320
+ Okay.
+
+1:06:01.320 --> 1:06:08.320
+ So.
+
+1:06:08.320 --> 1:06:12.320
+ We're now going to go.
+
+1:06:12.320 --> 1:06:15.320
+ X dot group.
+
+1:06:15.320 --> 1:06:23.320
+ Okay.
+
+1:06:23.320 --> 1:06:29.320
+ And so that means we don't need this pipe 900 bit anymore.
+
+1:06:29.320 --> 1:06:35.320
+ So we don't have to remember that.
+
+1:06:35.320 --> 1:06:36.320
+ Okay.
+
+1:06:36.320 --> 1:06:39.320
+ And instead.
+
+1:06:39.320 --> 1:06:42.320
+ We've now got.
+
+1:06:42.320 --> 1:06:48.320
+ The name and the size, the size and the name.
+
+1:06:48.320 --> 1:06:56.320
+ And so we're going to go pipe.
+
+1:06:56.320 --> 1:07:01.320
+ Followed by the size.
+
+1:07:01.320 --> 1:07:07.320
+ And then.
+
+1:07:07.320 --> 1:07:14.320
+ And then.
+
+1:07:14.320 --> 1:07:18.320
+ And then we're going to go.
+
+1:07:18.320 --> 1:07:21.320
+ And then we're going to go pipe.
+
+1:07:21.320 --> 1:07:24.320
+ And then we're going to go pipe.
+
+1:07:24.320 --> 1:07:33.320
+ And then we're going to go pipe.
+
+1:07:33.320 --> 1:07:36.320
+ Okay.
+
+1:07:36.320 --> 1:07:43.320
+ Why did this one not work?
+
+1:07:43.320 --> 1:07:47.320
+ Okay.
+
+1:07:47.320 --> 1:07:50.320
+ Fix issues.
+
+1:07:50.320 --> 1:08:01.320
+ Should have worked.
+
+1:08:01.320 --> 1:08:02.320
+ Oh.
+
+1:08:02.320 --> 1:08:03.320
+ Okay.
+
+1:08:03.320 --> 1:08:06.320
+ So remember how I told you earlier that parentheses do two things.
+
+1:08:06.320 --> 1:08:09.320
+ They both group and capture.
+
+1:08:09.320 --> 1:08:13.320
+ So when I remove the parentheses, it stopped grouping.
+
+1:08:13.320 --> 1:08:17.320
+ Which meant the question mark now referred only to the backslash D plus.
+
+1:08:17.320 --> 1:08:20.320
+ So actually I need the parentheses there.
+
+1:08:20.320 --> 1:08:21.320
+ Okay.
+
+1:08:21.320 --> 1:08:23.320
+ That fixed that.
+
+1:08:23.320 --> 1:08:35.320
+ All right.
+
+1:08:35.320 --> 1:08:39.320
+ Okay. And so.
+
+1:08:39.320 --> 1:08:40.320
+ Sometimes that's missing.
+
+1:08:40.320 --> 1:08:43.320
+ So we'll call that res after all.
+
+1:08:43.320 --> 1:08:49.320
+ We'll call that res here.
+
+1:08:49.320 --> 1:08:54.320
+ Okay.
+
+1:08:54.320 --> 1:09:00.320
+ Let's see how that looks.
+
+1:09:00.320 --> 1:09:08.320
+ Okay.
+
+1:09:08.320 --> 1:09:12.320
+ Nice.
+
+1:09:12.320 --> 1:09:20.320
+ Oh, cool.
+
+1:09:20.320 --> 1:09:22.320
+ So look at that.
+
+1:09:22.320 --> 1:09:25.320
+ They've got names.
+
+1:09:25.320 --> 1:09:29.320
+ And you can change their sizes.
+
+1:09:29.320 --> 1:09:39.320
+ So that's a good question.
+
+1:09:39.320 --> 1:09:47.320
+ I think we're done.
+
+1:09:47.320 --> 1:09:52.320
+ Are we done?
+
+1:09:52.320 --> 1:09:55.320
+ Yeah.
+
+1:09:55.320 --> 1:10:00.320
+ Okay.
+
+1:10:00.320 --> 1:10:10.320
+ Let's fix them now.
+
+1:10:10.320 --> 1:10:24.320
+ Yeah.
+
+1:10:24.320 --> 1:10:29.320
+ Okay.
+
+1:10:29.320 --> 1:10:32.320
+ All right.
+
+1:10:32.320 --> 1:10:48.320
+ So let's change is.
+
+1:10:48.320 --> 1:10:49.320
+ All right.
+
+1:10:49.320 --> 1:10:55.320
+ So, um,
+
+1:10:55.320 --> 1:10:57.320
+ Next step.
+
+1:10:57.320 --> 1:11:13.320
+ Is to turn this into an app.
+
+1:11:13.320 --> 1:11:21.320
+ Okay.
+
+1:11:21.320 --> 1:11:22.320
+ Okay.
+
+1:11:22.320 --> 1:11:24.320
+ So which bits do we need?
+
+1:11:24.320 --> 1:11:28.320
+ So we don't need this head.
+
+1:11:28.320 --> 1:11:31.320
+ That tail.
+
+1:11:31.320 --> 1:11:36.320
+ Don't need the RGs.
+
+1:11:36.320 --> 1:11:45.320
+ Check this inside here.
+
+1:11:45.320 --> 1:12:05.320
+ Don't need that.
+
+1:12:05.320 --> 1:12:10.320
+ Okay.
+
+1:12:10.320 --> 1:12:13.320
+ Okay.
+
+1:12:13.320 --> 1:12:18.320
+ So that was.
+
+1:12:18.320 --> 1:12:20.320
+ Cool.
+
+1:12:20.320 --> 1:12:24.320
+ All right.
+
+1:12:24.320 --> 1:12:29.320
+ So function.
+
+1:12:29.320 --> 1:12:36.320
+ All right. So this is basically.
+
+1:12:36.320 --> 1:12:41.320
+ Replace.
+
+1:12:41.320 --> 1:12:44.320
+ Place image.
+
+1:12:44.320 --> 1:12:46.320
+ Yeah.
+
+1:12:46.320 --> 1:12:47.320
+ What that does.
+
+1:12:47.320 --> 1:12:52.320
+ This seven cell seven applies the function to the DST.
+
+1:12:52.320 --> 1:13:00.320
+ So that's a good question.
+
+1:13:00.320 --> 1:13:02.320
+ It goes to the search.
+
+1:13:02.320 --> 1:13:03.320
+ Yeah.
+
+1:13:03.320 --> 1:13:06.320
+ It's going to look for this regular expression.
+
+1:13:06.320 --> 1:13:09.320
+ And then each time it finds that regular expression will call this
+
+1:13:09.320 --> 1:13:12.320
+ function passing in the match object that the regular expression.
+
+1:13:12.320 --> 1:13:13.320
+ Gets.
+
+1:13:13.320 --> 1:13:15.320
+ Thank you.
+
+1:13:15.320 --> 1:13:17.320
+ All right.
+
+1:13:17.320 --> 1:13:20.320
+ So this is like a very.
+
+1:13:20.320 --> 1:13:24.320
+ You know, doing just about anything you can think of with text really.
+
+1:13:24.320 --> 1:13:33.320
+ Search a regular expression and replace it with a function.
+
+1:13:33.320 --> 1:13:38.320
+ Okay. So.
+
+1:13:38.320 --> 1:13:40.320
+ If we have.
+
+1:13:40.320 --> 1:13:41.320
+ Okay.
+
+1:13:41.320 --> 1:13:44.320
+ So let's create our function, which is going to be.
+
+1:13:44.320 --> 1:13:47.320
+ Fix images.
+
+1:13:47.320 --> 1:14:02.320
+ Okay. We're going to be passed in a source and a destination.
+
+1:14:02.320 --> 1:14:04.320
+ Okay. And this.
+
+1:14:04.320 --> 1:14:07.320
+ If you haven't done this before, you might be surprised to discover you can
+
+1:14:07.320 --> 1:14:10.320
+ define a function inside a function.
+
+1:14:10.320 --> 1:14:14.320
+ And the reason I'm doing that is that the first thing we're going to do.
+
+1:14:14.320 --> 1:14:18.320
+ Is we're going to search for.
+
+1:14:18.320 --> 1:14:22.320
+ Do you see.
+
+1:14:22.320 --> 1:14:23.320
+ We're going to search.
+
+1:14:23.320 --> 1:14:25.320
+ We're going to create this dictionary, right?
+
+1:14:25.320 --> 1:14:28.320
+ Things to look for.
+
+1:14:28.320 --> 1:14:32.320
+ And then this function here refers to that dictionary.
+
+1:14:32.320 --> 1:14:36.320
+ So this is a function that kind of only makes sense inside.
+
+1:14:36.320 --> 1:14:38.320
+ Inside here.
+
+1:14:38.320 --> 1:14:42.320
+ And then we're going to return this, right?
+
+1:14:42.320 --> 1:14:52.320
+ So we should now be able to print.
+
+1:14:52.320 --> 1:14:56.320
+ Pics images.
+
+1:14:56.320 --> 1:15:01.320
+ Passing in our source and destination.
+
+1:15:01.320 --> 1:15:05.320
+ There we go.
+
+1:15:05.320 --> 1:15:10.320
+ Great.
+
+1:15:10.320 --> 1:15:13.320
+ So let's.
+
+1:15:13.320 --> 1:15:21.320
+ Install Gradio.
+
+1:15:21.320 --> 1:15:26.320
+ Actually, we've got the latest version by using minus you upgrade.
+
+1:15:26.320 --> 1:15:31.320
+ And I haven't used gradio much at all, except when we did that.
+
+1:15:31.320 --> 1:15:38.320
+ Lesson. So I've forgotten everything.
+
+1:15:38.320 --> 1:15:43.320
+ So I might need some help with this.
+
+1:15:43.320 --> 1:15:46.320
+ Yeah.
+
+1:15:46.320 --> 1:15:50.320
+ Okay.
+
+1:15:50.320 --> 1:15:59.320
+ So import gradio.
+
+1:15:59.320 --> 1:16:09.320
+ And I create interface.
+
+1:16:09.320 --> 1:16:17.320
+ And the function is fix images.
+
+1:16:17.320 --> 1:16:20.320
+ Oh, okay.
+
+1:16:20.320 --> 1:16:21.320
+ Okay.
+
+1:16:21.320 --> 1:16:28.320
+ Now what's this input thing.
+
+1:16:28.320 --> 1:16:30.320
+ Inputs is sketch pad.
+
+1:16:30.320 --> 1:16:33.320
+ Outputs is. Oh, I see. We can just say label.
+
+1:16:33.320 --> 1:16:36.320
+ Docs.
+
+1:16:36.320 --> 1:16:39.320
+ Is there a different kind of label for like a.
+
+1:16:39.320 --> 1:16:45.320
+ Large bit of text.
+
+1:16:45.320 --> 1:16:48.320
+ It should be like a text box or something like that. Maybe.
+
+1:16:48.320 --> 1:16:50.320
+ Yeah. Something area.
+
+1:16:50.320 --> 1:16:52.320
+ Text box.
+
+1:16:52.320 --> 1:17:02.320
+ Yeah.
+
+1:17:02.320 --> 1:17:05.320
+ Okay.
+
+1:17:05.320 --> 1:17:08.320
+ Inputs.
+
+1:17:08.320 --> 1:17:11.320
+ Wait, and then do we.
+
+1:17:11.320 --> 1:17:14.320
+ Okay. So if we pass a string, it's going to construct it.
+
+1:17:14.320 --> 1:17:18.320
+ And not like otherwise we construct it manually. Is that how this works?
+
+1:17:18.320 --> 1:17:23.320
+ It said that there's a shortcut if you put just text, it would work. I think if you go to the.
+
+1:17:23.320 --> 1:17:26.320
+ I think I saw it when you were scrolling.
+
+1:17:26.320 --> 1:17:27.320
+ I string short.
+
+1:17:27.320 --> 1:17:31.320
+ Oh, text area would have seven lines.
+
+1:17:31.320 --> 1:17:39.320
+ I see. I see. I see, which isn't that many. So let's just try to get there away.
+
+1:17:39.320 --> 1:17:45.320
+ So import is.
+
+1:17:45.320 --> 1:17:50.320
+ That.
+
+1:17:50.320 --> 1:18:01.320
+ And output is that.
+
+1:18:01.320 --> 1:18:09.320
+ Okay.
+
+1:18:09.320 --> 1:18:19.320
+ And they've got that new like.
+
+1:18:19.320 --> 1:18:27.320
+ Grid flex boxy thing we might be able to use to like get one under the other because we don't really want them side by side.
+
+1:18:27.320 --> 1:18:31.320
+ Do we.
+
+1:18:31.320 --> 1:18:40.320
+ Okay, so.
+
+1:18:40.320 --> 1:18:42.320
+ So where to.
+
+1:18:42.320 --> 1:18:49.320
+ I play to file.
+
+1:18:49.320 --> 1:18:56.320
+ Image there is.
+
+1:18:56.320 --> 1:19:02.320
+ Here's something called file.
+
+1:19:02.320 --> 1:19:15.320
+ File for uploading a generic file.
+
+1:19:15.320 --> 1:19:28.320
+ I guess he's probably going to copy and paste it from.
+
+1:19:28.320 --> 1:19:34.320
+ Yeah, let's just do it here.
+
+1:19:34.320 --> 1:19:36.320
+ Can we still run stuff?
+
+1:19:36.320 --> 1:19:37.320
+ We can.
+
+1:19:37.320 --> 1:19:38.320
+ It's nice.
+
+1:19:38.320 --> 1:19:47.320
+ That's not right.
+
+1:19:47.320 --> 1:19:58.320
+ We need two things to pass to fix images.
+
+1:19:58.320 --> 1:20:07.320
+ So does that mean we put square bracket here or something or a dictionary.
+
+1:20:07.320 --> 1:20:10.320
+ Inputs string component.
+
+1:20:10.320 --> 1:20:15.320
+ We're still strings.
+
+1:20:15.320 --> 1:20:19.320
+ That's the number of parameters.
+
+1:20:19.320 --> 1:20:38.320
+ All right.
+
+1:20:38.320 --> 1:20:43.320
+ Okay, so that's our source.
+
+1:20:43.320 --> 1:20:56.320
+ That's cool.
+
+1:20:56.320 --> 1:20:59.320
+ That's nice.
+
+1:20:59.320 --> 1:21:14.320
+ That's your destination.
+
+1:21:14.320 --> 1:21:19.320
+ Cool.
+
+1:21:19.320 --> 1:21:21.320
+ All right.
+
+1:21:21.320 --> 1:21:42.320
+ That's nice.
+
+1:21:42.320 --> 1:21:52.320
+ So for.
+
+1:21:52.320 --> 1:21:57.320
+ All right, so Gradio needs a script.
+
+1:21:57.320 --> 1:22:11.320
+ And so I guess we got a space is first right hugging face faces.
+
+1:22:11.320 --> 1:22:15.320
+ And we create a space.
+
+1:22:15.320 --> 1:22:16.320
+ Okay.
+
+1:22:16.320 --> 1:22:21.320
+ And we call it a.
+
+1:22:21.320 --> 1:22:27.320
+ Daniel image fix.
+
+1:22:27.320 --> 1:22:28.320
+ Right.
+
+1:22:28.320 --> 1:22:33.320
+ It's a Gradio space.
+
+1:22:33.320 --> 1:22:51.320
+ You can just create the app file right there if you wanted to.
+
+1:22:51.320 --> 1:22:53.320
+ Create the app file.
+
+1:22:53.320 --> 1:22:54.320
+ In the UI.
+
+1:22:54.320 --> 1:22:56.320
+ I don't know if that might be easier.
+
+1:22:56.320 --> 1:22:58.320
+ Okay.
+
+1:22:58.320 --> 1:23:05.320
+ How do you say something is there hint create the app.py file right in your browser.
+
+1:23:05.320 --> 1:23:11.320
+ Oh, I didn't know that exists.
+
+1:23:11.320 --> 1:23:12.320
+ Cool.
+
+1:23:12.320 --> 1:23:14.320
+ Yeah, I guess it's kind of like GitHub only.
+
+1:23:14.320 --> 1:23:18.320
+ So just yeah, yeah, yeah, absolutely.
+
+1:23:18.320 --> 1:23:19.320
+ Okay.
+
+1:23:19.320 --> 1:23:22.320
+ So we don't need that stuff.
+
+1:23:22.320 --> 1:23:26.320
+ We're going to need that.
+
+1:23:26.320 --> 1:23:34.320
+ We're going to need like a requirements.text or something, don't we?
+
+1:23:34.320 --> 1:23:36.320
+ Okay.
+
+1:23:36.320 --> 1:23:42.320
+ So we commit this does that look right?
+
+1:23:42.320 --> 1:23:45.320
+ What is it? Is it a requirements.text we need? What is the thing to get?
+
+1:23:45.320 --> 1:23:50.320
+ Yeah, I think so. Yeah, requirements that text. And I think you just need to put fast score.
+
+1:23:50.320 --> 1:23:51.320
+ Yes. Okay.
+
+1:23:51.320 --> 1:23:56.320
+ It automatically have radio name it.
+
+1:23:56.320 --> 1:24:03.320
+ Requi requirements.text containing fast core.
+
+1:24:03.320 --> 1:24:08.320
+ I love doing this stuff just through the web GUI.
+
+1:24:08.320 --> 1:24:12.320
+ It's just so wonderfully lazy.
+
+1:24:12.320 --> 1:24:13.320
+ Okay.
+
+1:24:13.320 --> 1:24:15.320
+ Yeah, right.
+
+1:24:15.320 --> 1:24:16.320
+ Yeah, I think so.
+
+1:24:16.320 --> 1:24:21.320
+ I think so. Just, yeah, it has to build the app.
+
+1:24:21.320 --> 1:24:22.320
+ Okay.
+
+1:24:22.320 --> 1:24:23.320
+ It says it's done.
+
+1:24:23.320 --> 1:24:26.320
+ So refresh.
+
+1:24:26.320 --> 1:24:28.320
+ It says building.
+
+1:24:28.320 --> 1:24:33.320
+ Here it says, because I think it builds for each commits, then you probably built when you committed the.
+
+1:24:33.320 --> 1:24:36.320
+ App.py and then it's building again when you committed.
+
+1:24:36.320 --> 1:24:41.320
+ I want to say that I want to say the latest logs, you know.
+
+1:24:41.320 --> 1:24:46.320
+ It's got secrets.
+
+1:24:46.320 --> 1:24:47.320
+ Yeah.
+
+1:24:47.320 --> 1:24:54.320
+ I like the way this stuff's all getting kind of standardized now around this idea of just like some key values to our secrets that you can check in there.
+
+1:24:54.320 --> 1:25:03.320
+ Everything looks pretty similar, doesn't it?
+
+1:25:03.320 --> 1:25:08.320
+ This is annoying.
+
+1:25:08.320 --> 1:25:16.320
+ Okay.
+
+1:25:16.320 --> 1:25:17.320
+ Okay.
+
+1:25:17.320 --> 1:25:20.320
+ So hopefully that means we've got new logs.
+
+1:25:20.320 --> 1:25:27.320
+ We can see else based on already.
+
+1:25:27.320 --> 1:25:34.320
+ Oh, that's not very helpful logs is now empty.
+
+1:25:34.320 --> 1:25:39.320
+ Great.
+
+1:25:39.320 --> 1:25:42.320
+ Can you try rerunning the building process?
+
+1:25:42.320 --> 1:25:52.320
+ So like, as you start the space, it says, okay.
+
+1:25:52.320 --> 1:25:56.320
+ Or I guess the, I don't know the difference between the factory reboot or the restart.
+
+1:25:56.320 --> 1:25:59.320
+ You think your space could use a GPU. What does that mean?
+
+1:25:59.320 --> 1:26:02.320
+ Is that a thing?
+
+1:26:02.320 --> 1:26:06.320
+ I don't know. Like, I think they provided if you like.
+
+1:26:06.320 --> 1:26:10.320
+ Email them or something like that. It's a custom kind of thing.
+
+1:26:10.320 --> 1:26:12.320
+ Oh, all right.
+
+1:26:12.320 --> 1:26:14.320
+ I don't like emailing people.
+
+1:26:14.320 --> 1:26:22.320
+ Case by case basis.
+
+1:26:22.320 --> 1:26:28.320
+ Makes me feel like I'm being judged.
+
+1:26:28.320 --> 1:26:29.320
+ Okay.
+
+1:26:29.320 --> 1:26:36.320
+ So, I think it's a little slow, I guess.
+
+1:26:36.320 --> 1:26:40.320
+ Yeah.
+
+1:26:40.320 --> 1:26:53.320
+ So I want to ask, how long do you plan to keep this life coding running? Is it just indefinitely?
+
+1:26:53.320 --> 1:26:57.320
+ Yeah, I, I've got a plan, actually.
+
+1:26:57.320 --> 1:26:59.320
+ Okay.
+
+1:26:59.320 --> 1:27:03.320
+ I hope you guys don't think it's too crazy, but.
+
+1:27:03.320 --> 1:27:30.320
+ Oh, just one moment.
+
+1:27:30.320 --> 1:27:36.320
+ Okay.
+
+1:27:36.320 --> 1:27:41.320
+ So, why is it still building?
+
+1:27:41.320 --> 1:27:46.320
+ Yes.
+
+1:27:46.320 --> 1:27:54.320
+ So, I, hopefully, you know, get the course out in a couple of weeks.
+
+1:27:54.320 --> 1:28:04.320
+ So, at that point, I'm thinking of like resetting this as a walkthrough in which, you know, things are actually better organized.
+
+1:28:04.320 --> 1:28:19.320
+ And so, I hope you guys can still join. I mean, it will be stuff you're already familiar with at this point, but certainly be helpful to have a nice to me to have familiar faces and people who can help.
+
+1:28:19.320 --> 1:28:25.320
+ Maybe that'll be a lot more people because it'll be open to everybody.
+
+1:28:25.320 --> 1:28:32.320
+ And over a period of a few weeks, you know, we'll catch up to where we are now as a group.
+
+1:28:32.320 --> 1:28:42.320
+ But for the couple of weeks before that, I'm planning to do a complete change, which is to do two weeks of APL.
+
+1:28:42.320 --> 1:28:54.320
+ I don't know if you guys are aware of APL, but APL is just about the world's oldest programming language that's still widely used.
+
+1:28:54.320 --> 1:29:00.320
+ And it's actually, we talked about notation earlier. It's actually a notation.
+
+1:29:00.320 --> 1:29:09.320
+ So, APL was originally developed as a notation, not as a programming language.
+
+1:29:09.320 --> 1:29:23.320
+ And at one, Iverson won the Turing Award, which is kind of like the Nobel Prize of Computer Science for it for this paper about it, which has written about 20 years after he created the notation.
+
+1:29:23.320 --> 1:29:29.320
+ APL is a show.
+
+1:29:29.320 --> 1:29:40.320
+ So the most common, why is this not working? Oh, because they're not using Windows. I have to press that.
+
+1:29:40.320 --> 1:29:48.320
+ So the most widely used APL implementation, there's a lot of them, but the most widely used one is called dialogue.
+
+1:29:48.320 --> 1:29:55.320
+ And, yeah, it's basically, it's basically meth.
+
+1:29:55.320 --> 1:30:00.320
+ Right.
+
+1:30:00.320 --> 1:30:11.320
+ Okay.
+
+1:30:11.320 --> 1:30:16.320
+ Okay, looks like math.
+
+1:30:16.320 --> 1:30:26.320
+ But imagine if you started with math, which itself has been developed over hundreds of years by various people.
+
+1:30:26.320 --> 1:30:41.320
+ And then one of the smartest people in the world being Ken Iverson, then took everything from that and combined it with tensor analysis ideas from physics, which have been developed by mainly Albert Einstein and many other people.
+
+1:30:41.320 --> 1:30:50.320
+ And then combined that with ideas from computer science.
+
+1:30:50.320 --> 1:30:58.320
+ And then have a large group of people continuously work on that from 1963 to 2022.
+
+1:30:58.320 --> 1:31:01.320
+ So it's got a 60 years of continuous development.
+
+1:31:01.320 --> 1:31:04.320
+ And that gives you APL.
+
+1:31:04.320 --> 1:31:12.320
+ And so just to give you a taste, in math, to add up a series, we use capital sigma.
+
+1:31:12.320 --> 1:31:18.320
+ Right. And capital sigma means only one thing. It means add up a series.
+
+1:31:18.320 --> 1:31:26.320
+ If you want to multiply together a series, you have to use something completely different, which is capital pie.
+
+1:31:26.320 --> 1:31:40.320
+ So APL instead has this idea that says you can take a function like plus, and you can modify it, using something that they call an operator.
+
+1:31:40.320 --> 1:31:46.320
+ So plus is a function slash is an operator doesn't mean divide divided by means doing.
+
+1:31:46.320 --> 1:31:48.320
+ And this operator.
+
+1:31:48.320 --> 1:31:51.320
+ What it does is it takes a list.
+
+1:31:51.320 --> 1:31:52.320
+ That's a list.
+
+1:31:52.320 --> 1:31:58.320
+ Right. And it inserts this between every pair of things in the list.
+
+1:31:58.320 --> 1:32:01.320
+ Which is the same as sigma.
+
+1:32:01.320 --> 1:32:03.320
+ Right in math.
+
+1:32:03.320 --> 1:32:11.320
+ And so here's how to do the same thing as capital pie.
+
+1:32:11.320 --> 1:32:15.320
+ Right.
+
+1:32:15.320 --> 1:32:22.320
+ So for example, here's so then there's a bunch of other symbols.
+
+1:32:22.320 --> 1:32:25.320
+ Right. So for example, a symbol which actually finds a way.
+
+1:32:25.320 --> 1:32:30.320
+ So lots and lots of ideas from APL have found their way into other programming languages.
+
+1:32:30.320 --> 1:32:42.320
+ One of them is a lot of programming languages have something called aota, which means the same thing as range in Python.
+
+1:32:42.320 --> 1:32:49.320
+ So Iota six, it means almost the same thing as range. It's a range plus one, if you like, rather than zero to five is one to six.
+
+1:32:49.320 --> 1:32:55.320
+ And this is the this is how sequences and series are defined in math. We in math, we start at one.
+
+1:32:55.320 --> 1:33:05.320
+ So if I want to do factorial, right, I could do apply.
+
+1:33:05.320 --> 1:33:12.320
+ Times slash, sorry, apply. Times slash to Iota six.
+
+1:33:12.320 --> 1:33:24.320
+ So that's going to take one to. So you actually read right to left in APL. So that takes this series here and sticks times between every pair of things in it.
+
+1:33:24.320 --> 1:33:30.320
+ So one times two times three times what I'm sorry, ten six.
+
+1:33:30.320 --> 1:33:37.320
+ So I'll give you an example of another operator. Backslash is the same as slash.
+
+1:33:37.320 --> 1:33:41.320
+ Accept it basically it's cumulative. It shows me the results as I go.
+
+1:33:41.320 --> 1:33:53.320
+ So this is one, one times two, one times two times three, one times two times three times four, one times two times two times four times five, one times two times four times five times six.
+
+1:33:53.320 --> 1:33:58.320
+ So it's basically, yeah, it's a it's a notation.
+
+1:33:58.320 --> 1:34:08.320
+ It's it's, you know, built on mathematical notation.
+
+1:34:08.320 --> 1:34:17.320
+ Can you handle compass number as well? Yes, absolutely. Yeah, absolutely. So complex numbers.
+
+1:34:17.320 --> 1:34:30.320
+ I written with J complex number and so one of the interesting things about.
+
+1:34:30.320 --> 1:34:32.320
+ APL is every function, nearly every function. Maybe every function has both monadic and dyadic forms.
+
+1:34:32.320 --> 1:34:35.320
+ The dyadic form means it takes two arguments, one on the left and one on the right.
+
+1:34:35.320 --> 1:34:41.320
+ So here are the dyadic versions of plus minus divide in times.
+
+1:34:41.320 --> 1:34:48.320
+ But there's also monadic versions. And so for example, so if I wave my mouse over here, these tells me.
+
+1:34:48.320 --> 1:34:59.320
+ So the dyadic version of plus is plus obviously the monadic version is conjugate, which is a.
+
+1:34:59.320 --> 1:35:05.320
+ Complex number thing. So the conjugate of real number two is two.
+
+1:35:05.320 --> 1:35:13.320
+ The conjugate of the real number two, why plus three.
+
+1:35:13.320 --> 1:35:17.320
+ Is two minus three.
+
+1:35:17.320 --> 1:35:22.320
+ So, yeah, it's, it's, yeah, handles it.
+
+1:35:22.320 --> 1:35:29.320
+ It's kind of in some ways a superset of mathematical notation.
+
+1:35:29.320 --> 1:35:37.320
+ And so, yeah, it's not just plus minus times divide, but see all these different things at the top.
+
+1:35:37.320 --> 1:35:41.320
+ It's all of these as well. Some of which you're recognized like,
+
+1:35:41.320 --> 1:35:47.320
+ epsilon, which as you'd expect means membership.
+
+1:35:47.320 --> 1:35:55.320
+ As dyadic, but also has a monadic form. That's why, you know, so there's a, it does a lot more things than normal math notation.
+
+1:35:55.320 --> 1:36:08.320
+ And so some of them like a really quite interesting. So for example, there's something called up style, which is looks like this.
+
+1:36:08.320 --> 1:36:13.320
+ And it returns the maximum of those two things.
+
+1:36:13.320 --> 1:36:21.320
+ Now, where that gets interesting is what if we do maximum slash.
+
+1:36:21.320 --> 1:36:26.320
+ So, what does that do? Well, that did the maximum of four and three.
+
+1:36:26.320 --> 1:36:29.320
+ That's right, maximum of five and four.
+
+1:36:29.320 --> 1:36:35.320
+ And then it was the maximum of that and six, and then the maximum of that and four, and then the maximum of that and three.
+
+1:36:35.320 --> 1:36:43.320
+ So in other words, it's five up style four up style six up style four up style three, which when you think about it as the maximum of the list.
+
+1:36:43.320 --> 1:36:46.320
+ Right. So,
+
+1:36:46.320 --> 1:36:54.320
+ I think it's one of things that in normal math notation we have to like invent something in the paper as we go or whatever in a PL.
+
+1:36:54.320 --> 1:36:58.320
+ It's this, this kind of like natural extension.
+
+1:36:58.320 --> 1:37:08.320
+ So, yeah, so I just, I thought it'd be fun to have a couple of weeks of exploring this.
+
+1:37:08.320 --> 1:37:22.320
+ And it's actually very helpful for pie torch, TensorFlow and array and NumPy programmers, because those ideas were in any ways stolen from a PL.
+
+1:37:22.320 --> 1:37:28.320
+ So, for example, just like you can do an a PL, a number plus a list.
+
+1:37:28.320 --> 1:37:32.320
+ You can do that in a PL, but a PL invented it.
+
+1:37:32.320 --> 1:37:43.320
+ Right. And does it in kind of like, often more interesting ways.
+
+1:37:43.320 --> 1:37:50.320
+ One of the fun things about a PL is defining functions.
+
+1:37:50.320 --> 1:37:53.320
+ Things tend to be a bit more consistent than a lot of other languages.
+
+1:37:53.320 --> 1:38:01.320
+ So, in Python, for example, you define a function with like kind of a unique, you know, syntax.
+
+1:38:01.320 --> 1:38:05.320
+ In a PL to define a variable.
+
+1:38:05.320 --> 1:38:07.320
+ You use arrow.
+
+1:38:07.320 --> 1:38:12.320
+ And to find a function, you use a variable as well.
+
+1:38:12.320 --> 1:38:14.320
+ It's just that the function goes in curly brackets.
+
+1:38:14.320 --> 1:38:19.320
+ And you can pass one thing to the function in which case it'll be called omega,
+
+1:38:19.320 --> 1:38:23.320
+ or you can pass two things to a function which is called omega and alpha.
+
+1:38:23.320 --> 1:38:30.320
+ So if I wanted to find plus, I would go alpha plus omega.
+
+1:38:30.320 --> 1:38:30.320
+ And I would go to the
+
+1:38:32.320 --> 1:38:34.320
+ code and say, now,
+
+1:38:34.320 --> 1:38:36.320
+ create my own operator.
+
+1:38:36.320 --> 1:38:40.320
+ And you can use any Unicode symbol so you can actually build up your own
+
+1:38:40.320 --> 1:38:43.320
+ notation.
+
+1:38:43.320 --> 1:38:47.320
+ And so it gets kind of pretty interesting because a lot of, like, for example,
+
+1:38:47.320 --> 1:38:56.320
+ there's an operator called power, which repeats a function n times.
+
+1:38:56.320 --> 1:39:07.320
+ So, for example, you can define exponent literally as repeat power n times.
+
+1:39:07.320 --> 1:39:13.320
+ And so then you can, like, come up with your own versions of repeating things a bunch of times in ways which
+
+1:39:13.320 --> 1:39:17.320
+ aren't necessarily in math that might be quite helpful.
+
+1:39:17.320 --> 1:39:19.320
+ Anyway, so that's my point.
+
+1:39:19.320 --> 1:39:24.320
+ People use a PL for nowadays.
+
+1:39:24.320 --> 1:39:28.320
+ So, obviously, there's two main areas.
+
+1:39:28.320 --> 1:39:32.320
+ So, APL is one of a class of what's called array languages, of which there's three main ones in use,
+
+1:39:32.320 --> 1:39:36.320
+ APL, K and J.
+
+1:39:36.320 --> 1:39:43.320
+ The array languages are most commonly used in hedge fund trading,
+
+1:39:43.320 --> 1:39:45.320
+ which is partly a historical thing.
+
+1:39:45.320 --> 1:39:47.320
+ You know, that's where the money is, I guess.
+
+1:39:47.320 --> 1:39:53.320
+ And so, you know, that's a group of people who don't care about trends as long as they can make money.
+
+1:39:53.320 --> 1:39:57.320
+ And so, you know, I kind of realize this is a really good way of expressing mathematical ideas.
+
+1:39:57.320 --> 1:40:02.320
+ They kind of really dived into it.
+
+1:40:02.320 --> 1:40:07.320
+ And in particular, Arthur Whitney, who helped create APL and went on to create K.
+
+1:40:07.320 --> 1:40:15.320
+ He developed a kind of a extended version of APL called a plus at Morgan Stanley.
+
+1:40:15.320 --> 1:40:21.320
+ So, Morgan Stanley did a lot of stuff in a plus.
+
+1:40:21.320 --> 1:40:25.320
+ So, nowadays, K, actually, there's a whole database built on K called KDB,
+
+1:40:25.320 --> 1:40:31.320
+ which is considered perhaps the fastest database in the world for a lot of things.
+
+1:40:31.320 --> 1:40:39.320
+ The whole K implementation is so concise that it fits in the cache on a CPU, which is pretty amazing.
+
+1:40:39.320 --> 1:40:43.320
+ Because, as you can imagine, with this kind of expressiveness, you can often write
+
+1:40:43.320 --> 1:40:50.320
+ pretty sophisticated programs in one or two lines of code.
+
+1:40:50.320 --> 1:40:58.320
+ Yeah, it's also used in kind of like legacy big business stuff because it's been around a long time.
+
+1:40:58.320 --> 1:41:02.320
+ You know, but I don't think that's a very interesting use of it.
+
+1:41:02.320 --> 1:41:11.320
+ But then, like, it's starting to get popular, I mean, popular, niche popular again, just as like people interested in math and notation.
+
+1:41:11.320 --> 1:41:15.320
+ You know, so some of the ideas have made their way into mainstream math.
+
+1:41:15.320 --> 1:41:25.320
+ So, for example, something that, you know, pretty much any working mathematician will be familiar with is Iverson brackets.
+
+1:41:25.320 --> 1:41:30.320
+ This is a type in Iverson. It says Iverson bracket, right?
+
+1:41:30.320 --> 1:41:35.320
+ Which is basically the idea that you can put a Boolean expression and make it one or zero.
+
+1:41:35.320 --> 1:41:41.320
+ And once you make ballons, ones and zeros, you can manipulate them in mathematical ways, you know.
+
+1:41:41.320 --> 1:41:45.320
+ And so that idea comes from APL.
+
+1:41:45.320 --> 1:42:07.320
+ And so, for example, which of these things is greater than the corresponding thing in probably all that's very good.
+
+1:42:07.320 --> 1:42:13.320
+ In Iota six, Iota five rather.
+
+1:42:13.320 --> 1:42:21.320
+ At least on my end, I cannot. Okay, because you're at the bottom. So the skin is getting a little bit covered by the in zoom.
+
+1:42:21.320 --> 1:42:22.320
+ Okay.
+
+1:42:22.320 --> 1:42:34.320
+ Yeah. Okay. I see that line. Yeah. Cool. Yeah. So, you know, once you know, once you recognize that you can do things like this, and if you return ones and zeros is the truth values, you could be like, Oh, like how many times was that true.
+
+1:42:34.320 --> 1:42:40.320
+ Stuff like that. You know.
+
+1:42:40.320 --> 1:42:55.320
+ Yeah. So anyway, so like some of the ideas of made their way into math and coding and stuff like that. So maybe that's kind of main thing it's used for in some ways, but my interest is kind of to look for ideas and things like that.
+
+1:42:55.320 --> 1:43:16.320
+ I guess it's kind of useful thing. Yeah, a lot of people, including me who have spent time with the rate programming feel like it's the most mind opening thing they've done in computer science, because it's like going to this alien world where they've spent 60 years going in a different direction.
+
+1:43:16.320 --> 1:43:31.320
+ And suddenly realizing like, and a lot of the smartest people who have worked in computer science were on that path, not our path. And it's like, wow, what are they doing doing so like, I actually find it very enjoyable because you end up reading interesting papers from the 60s and 70s and stuff.
+
+1:43:31.320 --> 1:43:43.320
+ And it's just like, Oh my God, you know, and so, for example, I don't know if you saw, but Mathematica came out with a new version of Mathematica today.
+
+1:43:43.320 --> 1:44:03.320
+ Which is not very helpful.
+
+1:44:03.320 --> 1:44:32.320
+ So the latest version of Mathematica, which came out yesterday or the day before, basically says, Oh, we've admitted to this new thing called threaded.
+
+1:44:32.320 --> 1:44:43.320
+ Anyway, it actually turns out if you read it, that it's the same thing as what's called the rank conjunction in a PL and J, which has been around for decades.
+
+1:44:43.320 --> 1:44:57.320
+ So it's like one of these things where it's like, Oh, you know, ideas of decades old are sometimes only just finding their way into modern languages.
+
+1:44:57.320 --> 1:45:01.320
+ Yeah, like Mathematica.
+
+1:45:01.320 --> 1:45:16.320
+ So, really, it's a really great way to learn math or part, big parts of math.
+
+1:45:16.320 --> 1:45:24.320
+ Yeah, because as you go through it, those six awful lots are out of questions and have complex numbers. So as you go through it, my plan is to kind of go through each glyph.
+
+1:45:24.320 --> 1:45:34.320
+ So some of those glyphs are going to be like, Okay, well, this is the conjugate of complex numbers. What on earth does that mean? So, like, you know, really gives you a chance to explore that.
+
+1:45:34.320 --> 1:45:48.320
+ And then in particular, the language called J, which was developed by the developer as a PL is a kind of a getting all the best ideas to make PL over the decades and making them better.
+
+1:45:48.320 --> 1:46:03.320
+ And then it comes with a whole bunch of, they call them labs, which basically take you through really interesting mathematical ideas like polynomials, you know, all this stuff like using J is the notation.
+
+1:46:03.320 --> 1:46:14.320
+ And I prefer that to normal math notation because I already always do exactly what it means, you know, that it has a totally consistent meaning.
+
+1:46:14.320 --> 1:46:22.320
+ Yeah, so, yeah, so that's my plan for the next week.
+
+1:46:22.320 --> 1:46:36.320
+ And actually I come across PDB before. Oh, yeah, my old boss is working for Morgan Stanley and I think they still have that fee version, maybe I need to take around with the memories less than four gig.
+
+1:46:36.320 --> 1:46:53.320
+ And actually have three versions and he, last time we tried to do some IoT application so contact all the different sensor for machinery, and they come by and actually better and performance faster than Panda as well.
+
+1:46:53.320 --> 1:47:07.320
+ And then I do all the configuration in KDP and then give me the file and then I start doing the visualization. So, yeah, but he used to told me, pick six months to actually train a person to actually can read it.
+
+1:47:07.320 --> 1:47:22.320
+ So you can get this, get us up and one thing cover with them. Yeah, yeah, we'll just get up and running. So I've actually, I, so like, I don't know much a PL at all, to be clear. So this is not like teaching you this is a shared exploration.
+
+1:47:22.320 --> 1:47:36.320
+ I've done a little bit of like a little bit of J before, and then two or three weeks ago, reach the point in teaching my daughter and so I teach my daughter and her best friend, math, I tutor them.
+
+1:47:36.320 --> 1:47:43.320
+ And we reached the point a few weeks ago where we were up to doing sequences and series, you know, like signal notation.
+
+1:47:43.320 --> 1:47:58.320
+ And I started trying to teach them and they had no idea what I was talking about. And I was like, I thought of signal notation is actually extremely easy because like, if you explain it to me, it you just be like, Oh, well, it's like this list comprehension with some on the front, you know, it's like it's a very
+
+1:47:58.320 --> 1:48:18.320
+ simple. It's just like, that's exactly what it is. But of course they didn't have any of that kind of idea of indexing or anything so you know, you know, just kind of trying to say like, T n equals T n minus one plus one is a arithmetic sequence, you know, or whatever, you know, or like
+
+1:48:18.320 --> 1:48:30.320
+ I equals one to six of I. So just like, what's T n? What's I like what's going on? So then we stopped trying, you know, there's like one failed lesson.
+
+1:48:30.320 --> 1:48:42.320
+ And it's like, okay, forget all that. I'm going to teach you a PL and NumPy instead. And so we did like three lessons of a PL and NumPy and then I said, okay.
+
+1:48:42.320 --> 1:48:50.320
+ So I was like, oh, that's that thing, Sigma, you know, I equals one to five of I.
+
+1:48:50.320 --> 1:48:55.320
+ That's this. That's plus slash Iota five.
+
+1:48:55.320 --> 1:48:59.320
+ And they're like, oh, that's all.
+
+1:48:59.320 --> 1:49:00.320
+ Okay.
+
+1:49:00.320 --> 1:49:11.320
+ You know, or, you know, in NumPy NP, we didn't use NP doc because I use World Card Import. So some a range five plus one.
+
+1:49:11.320 --> 1:49:19.320
+ So yeah, so that's why I've been like re engaging or engaging more deeply with a PL.
+
+1:49:19.320 --> 1:49:23.320
+ But I think it's beautiful, you know, I think it's just a beautiful.
+
+1:49:23.320 --> 1:49:26.320
+ A beautiful notation.
+
+1:49:26.320 --> 1:49:34.320
+ And it reminds me in some ways of flex learning Chinese like once I started learning Chinese is like, Oh my god, there's this whole culture of thousands of years.
+
+1:49:34.320 --> 1:49:42.320
+ But I'm, you know, I feel like that, but this is so culture of 60 years, you know, there's this whole.
+
+1:49:42.320 --> 1:49:50.320
+ And recently I tried to convert things on mathematical formula into Python actually quite info.
+
+1:49:50.320 --> 1:49:52.320
+ Yeah.
+
+1:49:52.320 --> 1:49:53.320
+ Yeah.
+
+1:49:53.320 --> 1:49:55.320
+ Doing some signal processing.
+
+1:49:55.320 --> 1:49:56.320
+ Cool.
+
+1:49:56.320 --> 1:50:00.320
+ How did our thing. Oh, look, there's a thing here.
+
+1:50:00.320 --> 1:50:08.320
+ Please try it and tell me if you find anything broken up within the chat.
+
+1:50:08.320 --> 1:50:13.320
+ Oh, why is there an M there?
+
+1:50:13.320 --> 1:50:17.320
+ All right. Thanks all.
+
+1:50:17.320 --> 1:50:18.320
+ Bye.
+
+1:50:18.320 --> 1:50:20.320
+ You're looking forward to.
+
+1:50:20.320 --> 1:50:23.320
+ Oh, hey, awesome.
+
+1:50:23.320 --> 1:50:24.320
+ Bye.
+

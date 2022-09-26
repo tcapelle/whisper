@@ -1,0 +1,2792 @@
+WEBVTT
+
+00:00.000 --> 00:07.280
+ follow you up to the lesson nine and I can get to number 10 is never so close to you before.
+
+00:07.280 --> 00:14.400
+ So amazing. Thank you. Okay. Yes, I saw you on the leaderboard, Surrata, you were 10th in the
+
+00:14.400 --> 00:22.000
+ Paddy competition. That's very cool. So to catch people up, the most recent news on the Paddy
+
+00:22.000 --> 00:38.240
+ competition is I did two more entries. And I don't remember. I think I might have shown you
+
+00:40.560 --> 00:46.560
+ I can't remember if I showed you one or both. But yeah, so I unzombled the
+
+00:46.560 --> 00:55.200
+ bottles that we had. And that improved the submission from 987.6 to 988.
+
+00:56.560 --> 01:02.480
+ And then the other thing I did was I, you know, since the VIT models are actually
+
+01:02.480 --> 01:07.760
+ definitely better than the rest, I kind of doubled their weights. And that got it from 988.
+
+01:07.760 --> 01:18.400
+ See one to 988. And let's see, Surrata, Surrata, you're down to 11th. You're going to have to put
+
+01:18.400 --> 01:27.440
+ in another effort to. Yeah, my friend. Yeah. Anybody else here on this
+
+01:28.400 --> 01:35.520
+ leaderboard somewhere? Yeah, I'm down at, I don't know, was it 37 last my check?
+
+01:35.520 --> 01:45.200
+ 37, that's not bad. What's your username? I think this is not you. Matt. Matt. Matt.
+
+01:51.280 --> 01:55.200
+ Ah, Matt Resinski 45. Oh, yeah, it's looking better.
+
+01:55.760 --> 02:00.240
+ Oh, yeah. You just, you can't stop for a moment with these things or somebody
+
+02:00.240 --> 02:07.840
+ or jumping ahead. I tried to do the 60s. Yeah, 60s is pretty good.
+
+02:09.280 --> 02:16.960
+ I've had promises that paper space so I can train again. Oh, no. I know. I've been successful.
+
+02:17.840 --> 02:24.160
+ Like still just not being able to log in. Just error. And I subscribed to the Bade
+
+02:24.160 --> 02:33.440
+ immersion still. I'm not sure maybe the restructuring something. An error. Oh, well, feel free to
+
+02:34.480 --> 02:37.520
+ share it on the forum if it's an error that we might be able to help you with.
+
+02:37.520 --> 02:42.160
+ I think it's just a generic when you try to set up a machine and just says error.
+
+02:42.160 --> 02:50.320
+ Oh, paper space error. Yeah. Oh, yeah. That's annoying. The quite receptive if you use the support
+
+02:50.320 --> 02:56.160
+ email and now I had any share and I got right back to me.
+
+02:57.680 --> 03:06.080
+ Another thing is if the error is your fault, i.e. if you put something in pre run.sh that breaks
+
+03:06.080 --> 03:14.240
+ things, then just fire up a pytorch instance rather than a fast AI instance because that doesn't
+
+03:14.240 --> 03:20.720
+ run pre run.sh and so then you can fix it. I'll give you the traffic.
+
+03:25.600 --> 03:31.920
+ And I had to say thank you for writing to set up the competition to help us get started.
+
+03:31.920 --> 03:45.120
+ What a graduate there. He also shared in the forum to set up the local for us.
+
+03:46.320 --> 03:53.280
+ Oh, yeah. Yeah. So I think thank you for him to get me back on the Kaku.
+
+03:53.280 --> 04:03.200
+ Yes. Awesome. So now Radik's next job will be to become a Kaggle notebook's grandmaster.
+
+04:03.200 --> 04:07.200
+ That's what I'm going to be watching out for. I think he's got what it takes personally.
+
+04:11.680 --> 04:17.840
+ Nice, right. Radik, a gold medal. You've had a gold on Kaggle for notebooks.
+
+04:17.840 --> 04:26.080
+ No, it looks not. I'm not sure what I have for notebooks. Just I haven't done that many notebooks
+
+04:26.080 --> 04:33.200
+ ever. I think I have. What's your username on Kaggle? Let's find you. Radik one. Radik one with a
+
+04:34.560 --> 04:41.280
+ number, not written, not word. Yeah, that's me. Two silvers. Okay.
+
+04:41.280 --> 04:48.480
+ So this one actually is on the way to being a gold. It's got so close.
+
+04:49.120 --> 04:52.560
+ You need 50 votes from
+
+04:52.560 --> 04:55.360
+ regulars, I guess. I don't know what counts as a regular.
+
+04:59.840 --> 05:03.040
+ Well, this how it works. So it's not in the relative terms.
+
+05:03.040 --> 05:10.880
+ No, it's just 50 votes full stop. So I definitely noticed like
+
+05:14.480 --> 05:16.400
+ it makes a big difference to
+
+05:19.120 --> 05:23.760
+ yeah. So therefore it makes a big difference to put notebooks in popular competitions because
+
+05:23.760 --> 05:30.400
+ that's where people are looking. So like this one got 400 votes, right? And I'm not sure it's
+
+05:30.400 --> 05:39.440
+ necessarily my best notebook, but it was part of the patent competition, which had a lot of people
+
+05:40.720 --> 05:46.080
+ working on it. So that's one trick. Yeah, so things which are not actually attached to any
+
+05:46.080 --> 05:53.280
+ competition, it's much harder to get votes for. Yeah, I'm getting pretty close to
+
+05:54.000 --> 05:58.000
+ notebooks, Grandmaster actually. So pretty excited about that. What's your
+
+05:58.000 --> 06:02.800
+ or something to do with loving science? I'm guessing what's your it's actually? Well, yeah, my the
+
+06:03.680 --> 06:07.280
+ link is slightly different actually. It's T A N
+
+06:08.720 --> 06:13.760
+ T A M L N L I K E S
+
+06:15.760 --> 06:20.160
+ M A T H. Oh, math not science. Okay.
+
+06:20.160 --> 06:28.320
+ Okay, let's take a look. Oh, look at you 74. Very nice. And you need two more golds. Now's
+
+06:28.320 --> 06:33.200
+ these nine silvers. Well, that's I'm gonna go up both this stuff right now. Let's see.
+
+06:34.800 --> 06:39.440
+ Huh, I'm gonna go up. Oh, there we go. Yeah, that's that's
+
+06:39.440 --> 06:46.240
+ some channel or enthusiasm to getting to niche, into notebooks, Grandmaster.
+
+06:46.240 --> 06:58.640
+ That would be cool. Yeah, so just have to get those silver ones over the line.
+
+07:00.480 --> 07:04.320
+ All right, so I've
+
+07:04.320 --> 07:13.920
+ I've somebody asked about where the
+
+07:19.040 --> 07:22.800
+ the gist uploading thing is. So let me dig that up.
+
+07:26.960 --> 07:30.080
+ Oh, and actually when I do what I might do here is I'm going to
+
+07:30.080 --> 07:37.120
+ I'm going to connect to my server.
+
+07:41.120 --> 07:44.240
+ Someone asked about the with the gist uploading that are questioned
+
+07:44.240 --> 07:48.640
+ asked in the forum somewhere. Yeah, yeah, yeah, on the forum, exactly.
+
+07:48.640 --> 07:58.640
+ And we'll see when I connect to this computer, it's busy doing stuff.
+
+08:01.680 --> 08:07.920
+ And specifically, this is what it looks like when you're busy training a model
+
+08:09.920 --> 08:13.520
+ using weights and biases. So you can see I've got three windows here.
+
+08:13.520 --> 08:18.320
+ I think you've written the dots. I always don't know.
+
+08:18.320 --> 08:23.120
+ Oh, that just means that I've got another T. Max session running on a different
+
+08:23.120 --> 08:25.440
+ computer, which has a smaller screen than this one.
+
+08:27.280 --> 08:32.240
+ And there is worth some way to get rid of it by disconnecting other sessions.
+
+08:32.240 --> 08:34.960
+ Let's connect other clients.
+
+08:34.960 --> 08:44.960
+ Perfect D gives you connected clients, whichever you select is disconnected.
+
+08:46.960 --> 08:48.240
+ Let's try that.
+
+08:50.960 --> 08:53.680
+ No, that's not right. Oh, they probably mean shift D.
+
+08:55.680 --> 08:56.480
+ There we go.
+
+08:56.480 --> 09:04.320
+ All right, this is the one I just created. So if I hit this, there we go.
+
+09:04.320 --> 09:06.720
+ So shift D and then select the one to disconnect.
+
+09:07.920 --> 09:09.600
+ Oh, nice. Okay. Learn something new.
+
+09:11.520 --> 09:15.120
+ Oh, we've got another new face today. Hello, Sophie. I don't think you've joined us before.
+
+09:15.120 --> 09:15.680
+ Is that right?
+
+09:16.960 --> 09:20.000
+ I've been here just quietly in the background sometimes.
+
+09:20.000 --> 09:22.560
+ Okay. Thank you for joining. We're about to you visiting us from.
+
+09:22.560 --> 09:30.480
+ In Brisbane. Oh, good on you. And what do you work with AI stuff where you're just getting
+
+09:30.480 --> 09:30.960
+ started?
+
+09:30.960 --> 09:35.760
+ No, not at all background in psychology, doing a postdoc in psych and sort of, yeah,
+
+09:35.760 --> 09:37.760
+ trying to move over into data science.
+
+09:37.760 --> 09:42.160
+ Okay, cool. Have you done a lot of the statistical side of psychology?
+
+09:42.720 --> 09:46.880
+ Yeah, yeah, quite a bit. And quite a bit of coding in art, but I'm pretty new to Python.
+
+09:46.880 --> 09:48.240
+ Okay, great.
+
+09:48.240 --> 09:49.280
+ Big learning curves.
+
+09:49.280 --> 09:54.560
+ Well, you know what, you're our target marker, right? So if you have any questions along the way,
+
+09:54.560 --> 09:57.600
+ please jump in. Even things that you feel like everybody else must know.
+
+09:58.240 --> 10:00.080
+ I guarantee not everybody else knows them.
+
+10:00.080 --> 10:03.200
+ Yeah, definitely. These have been really helpful and really great.
+
+10:03.200 --> 10:03.520
+ Awesome.
+
+10:03.520 --> 10:03.920
+ So we're running.
+
+10:04.480 --> 10:05.680
+ Awesome. Thanks for joining.
+
+10:07.520 --> 10:07.760
+ Okay.
+
+10:08.480 --> 10:09.280
+ So...
+
+10:09.280 --> 10:11.760
+ You're training three models parallel right now?
+
+10:11.760 --> 10:14.080
+ Yeah. So I've got three GPUs in this machine.
+
+10:14.080 --> 10:17.680
+ And so...
+
+10:19.280 --> 10:22.640
+ Yeah, one nice thing with weights and biases is you...
+
+10:24.000 --> 10:25.840
+ Basically, let me show you.
+
+10:31.840 --> 10:33.600
+ Okay, so here's weights and biases.
+
+10:33.600 --> 10:41.840
+ And see, I don't use my Mac very much because nothing's locked in.
+
+10:49.440 --> 10:53.120
+ All right. And so you can see it's running this thing called a sweep, right?
+
+10:54.320 --> 10:56.960
+ There's going to be 477 runs.
+
+10:56.960 --> 11:04.560
+ So I don't know why it says create 31 seconds ago because that's certainly not true.
+
+11:07.280 --> 11:08.320
+ It's currently running.
+
+11:11.360 --> 11:14.800
+ And so it's coming from this git repo.
+
+11:18.160 --> 11:19.280
+ I feel like there's a...
+
+11:19.280 --> 11:19.680
+ There's a...
+
+11:19.680 --> 11:23.680
+ There's a sweep view because this is a particular run.
+
+11:23.680 --> 11:27.520
+ This is a particular run.
+
+11:27.520 --> 11:28.080
+ That's right.
+
+11:29.920 --> 11:32.560
+ I'm terrible with it, to be honest.
+
+11:33.120 --> 11:35.440
+ Okay. So let's go to the project.
+
+11:37.280 --> 11:37.760
+ There we go.
+
+11:37.760 --> 11:40.320
+ And the project has sweeps.
+
+11:41.360 --> 11:41.760
+ And then...
+
+11:43.760 --> 11:46.080
+ Okay. This one here I can kill because...
+
+11:46.080 --> 11:48.080
+ Okay.
+
+11:49.200 --> 11:49.520
+ Okay.
+
+11:51.440 --> 11:58.800
+ So basically, you kind of say on the Linux side, WNB, sweet, create, or something like that.
+
+11:59.680 --> 12:00.240
+ And then...
+
+12:02.240 --> 12:04.000
+ Interesting. It's all grouped under this thing.
+
+12:04.000 --> 12:04.480
+ Oh, okay.
+
+12:04.480 --> 12:05.040
+ All right.
+
+12:05.040 --> 12:05.600
+ So then...
+
+12:06.160 --> 12:07.920
+ Yeah. So then basically it runs...
+
+12:07.920 --> 12:14.400
+ There's lots of copies of your program feeding at different configurations.
+
+12:18.880 --> 12:21.760
+ And yeah, you can run the client as many times as you like.
+
+12:21.760 --> 12:22.960
+ So I've run it three times.
+
+12:23.840 --> 12:27.440
+ At each time I've set it to a different computer device.
+
+12:27.440 --> 12:32.800
+ Oh, you can turn your models into Python scripts and to able to do this or...
+
+12:32.800 --> 12:33.440
+ Yes.
+
+12:33.440 --> 12:34.080
+ Exactly.
+
+12:34.080 --> 12:34.720
+ So...
+
+12:37.360 --> 12:40.320
+ So this is finetune.py.
+
+12:40.320 --> 12:41.440
+ So it's just calling...
+
+12:42.080 --> 12:43.760
+ So it calls as parse arcs.
+
+12:43.760 --> 12:46.480
+ So that's going to just go through and check what batch size,
+
+12:46.480 --> 12:48.400
+ etc, etc, etc, you asked for, right?
+
+12:49.840 --> 12:51.200
+ Sticks them all into...
+
+12:53.200 --> 12:54.240
+ This parser thing.
+
+12:55.200 --> 12:59.120
+ And then it calls train passing in those arguments.
+
+12:59.120 --> 13:05.840
+ And so then train is going to initialize weights and biases
+
+13:05.840 --> 13:10.480
+ for this particular project for this particular entity,
+
+13:10.480 --> 13:13.840
+ which is FastAI, using the configuration that you requested.
+
+13:16.320 --> 13:18.320
+ And so then you can say, for example,
+
+13:18.320 --> 13:20.800
+ okay, there's got some particular data set, some particular batch size,
+
+13:20.800 --> 13:22.160
+ some image size, etc.
+
+13:23.280 --> 13:26.080
+ And then it creates a learner for some particular model name,
+
+13:26.080 --> 13:28.160
+ some particular pooling type.
+
+13:28.160 --> 13:29.360
+ Finetunes it.
+
+13:29.360 --> 13:34.480
+ And then at the end, it logs how much GPU memory it used,
+
+13:34.480 --> 13:36.400
+ what model it was, how long it took.
+
+13:36.400 --> 13:40.320
+ And you don't have to log much because the FastAI
+
+13:41.520 --> 13:45.920
+ weights and biases integration automatically tracks everything in the learner.
+
+13:45.920 --> 13:48.720
+ So you can see here, there's all this like...
+
+13:52.320 --> 13:55.600
+ learner.architecture, learner.loss function,
+
+13:55.600 --> 13:58.720
+ etc. etc.
+
+14:01.120 --> 14:06.560
+ So the curiosity, was this process of refactoring into a script painful?
+
+14:09.440 --> 14:11.680
+ So actually, you can probably actually tell I didn't do this.
+
+14:12.320 --> 14:13.600
+ Thomas Capel did this.
+
+14:13.600 --> 14:21.600
+ If I had done it, I would have used FastCore.script instead of this stuff, I guess.
+
+14:21.600 --> 14:24.320
+ Thomas Capel did this.
+
+14:24.320 --> 14:25.920
+ But no, I wouldn't have been painful.
+
+14:25.920 --> 14:29.920
+ I would have just chucked an MB Dev export on the cell that I had in my notebook.
+
+14:29.920 --> 14:32.960
+ And that would have become my script.
+
+14:32.960 --> 14:34.720
+ So...
+
+14:34.720 --> 14:36.720
+ Hi Jeremy.
+
+14:36.720 --> 14:37.760
+ Painful. Hi.
+
+14:37.760 --> 14:40.880
+ I have a question.
+
+14:40.880 --> 14:46.480
+ Wouldn't it need to be interesting to track power consumption, for example?
+
+14:46.480 --> 14:50.240
+ I mean, to some people it might be, not for me.
+
+14:52.000 --> 14:54.560
+ As to how you would track power consumption, I have no idea.
+
+14:54.560 --> 14:58.960
+ You'd have to have some kind of sense connected to your power supply, I guess.
+
+15:00.080 --> 15:02.640
+ They track a lot of system metrics in the runs.
+
+15:02.640 --> 15:08.320
+ So like, if you look on a run, they will track like GPU memory, CPU memory,
+
+15:08.320 --> 15:09.040
+ yeah.
+
+15:11.680 --> 15:14.880
+ Like, yeah, if you click on the thing on the left,
+
+15:14.880 --> 15:18.080
+ that it looks like a CPU chip, that thing, yeah.
+
+15:18.080 --> 15:18.720
+ There's a lot of...
+
+15:19.760 --> 15:21.360
+ So maybe there's power in here.
+
+15:21.360 --> 15:22.720
+ I don't see how it can be, right?
+
+15:22.720 --> 15:25.680
+ Because like, well, unless the NVIDIA...
+
+15:25.680 --> 15:27.120
+ Do you power your usage app?
+
+15:27.120 --> 15:28.640
+ Yeah, it does.
+
+15:28.640 --> 15:29.520
+ Here you go.
+
+15:29.520 --> 15:30.400
+ GPU power.
+
+15:30.400 --> 15:33.120
+ So NVIDIA tells you the GPU power usage apparently.
+
+15:36.160 --> 15:38.560
+ Although that won't tell you about your CPU, etc. power.
+
+15:40.720 --> 15:43.120
+ The thing that's useful about this, I think, is the memory
+
+15:43.120 --> 15:44.720
+ screen, the graph.
+
+15:45.760 --> 15:48.080
+ Yeah, well, I mean, the key thing is the maximum memory use.
+
+15:48.080 --> 15:53.200
+ So we actually track that here in the script.
+
+15:53.200 --> 15:55.360
+ Yeah, we put it into GPU memory.
+
+15:57.360 --> 15:58.720
+ Oh, good GPU, man.
+
+15:58.720 --> 15:59.040
+ Okay.
+
+16:00.320 --> 16:01.840
+ Isn't that so fast?
+
+16:01.840 --> 16:03.040
+ Got to get GPU memory.
+
+16:03.040 --> 16:03.600
+ Oh, okay.
+
+16:03.600 --> 16:04.400
+ Watch.cou.
+
+16:08.880 --> 16:10.960
+ So Thomas did that as well.
+
+16:10.960 --> 16:13.840
+ I don't know why it's...
+
+16:13.840 --> 16:15.840
+ To the power of negative three.
+
+16:16.960 --> 16:18.080
+ What's that?
+
+16:18.080 --> 16:19.040
+ What is that about?
+
+16:19.680 --> 16:20.560
+ It's seeing.
+
+16:20.560 --> 16:21.040
+ Curious.
+
+16:23.040 --> 16:24.640
+ I'll have to ask him what that's...
+
+16:28.320 --> 16:29.200
+ That's doing.
+
+16:31.280 --> 16:33.040
+ Thomas works at way devices, right?
+
+16:33.040 --> 16:34.640
+ Correct, correct, correct.
+
+16:34.640 --> 16:35.440
+ Yeah, so he...
+
+16:36.800 --> 16:38.320
+ I'd never used it before.
+
+16:38.320 --> 16:38.640
+ So...
+
+16:38.640 --> 16:39.120
+ So...
+
+16:42.560 --> 16:45.360
+ Yeah, so probably most people have never heard of this,
+
+16:45.360 --> 16:48.000
+ but first day I actually has a thing called fast GPU,
+
+16:48.960 --> 16:52.800
+ which is what I've previously used for doing this kind of thing.
+
+16:52.800 --> 16:55.360
+ So in general, when you've got all the one GPU,
+
+16:55.360 --> 16:58.320
+ or just even if you got any one GPU and you got a bunch of things,
+
+16:58.320 --> 16:59.280
+ you want to run,
+
+16:59.280 --> 17:01.040
+ it's helpful to have some way to say like,
+
+17:01.040 --> 17:02.640
+ okay, here's the things to run,
+
+17:02.640 --> 17:05.840
+ and then set a script off to go and run them all and check the results.
+
+17:05.840 --> 17:09.760
+ So fast GPU is the thing I built to do that.
+
+17:10.400 --> 17:15.920
+ And the way fast GPU works is that you have a whole list of the whole directory of scripts
+
+17:15.920 --> 17:16.640
+ in a folder,
+
+17:17.440 --> 17:20.160
+ and it runs each script run at a time and puts them in...
+
+17:20.160 --> 17:24.320
+ Then it runs and it puts them into a separate directory,
+
+17:25.680 --> 17:27.840
+ you know, to say this is completed,
+
+17:27.840 --> 17:29.600
+ and it tracks the results,
+
+17:29.600 --> 17:33.280
+ and you can do it on like as many or few GPUs as you like,
+
+17:33.280 --> 17:35.840
+ and it'll just go ahead and run it.
+
+17:35.840 --> 17:39.440
+ And this is fine, but it's very basic.
+
+17:40.880 --> 17:45.440
+ And I've kind of been planning to make it a bit more sophisticated.
+
+17:45.440 --> 17:51.200
+ And yeah, weights and biases takes a lot further, you know, by...
+
+17:52.160 --> 17:56.400
+ And I kind of want to redo or add something on top of fast GPU,
+
+17:56.400 --> 18:00.240
+ so it is fairly compatible with weights and biases,
+
+18:00.240 --> 18:01.440
+ but you could do everything locally.
+
+18:01.440 --> 18:03.040
+ So the key thing...
+
+18:04.000 --> 18:08.560
+ So the thing it's actually using for that config file
+
+18:08.560 --> 18:12.080
+ is it goes through basically the Cartesian product
+
+18:12.080 --> 18:14.000
+ of all the values in this YAML.
+
+18:14.000 --> 18:17.200
+ So it's going to do each of these two datasets, planets and bets,
+
+18:18.160 --> 18:19.200
+ for this one running rate,
+
+18:19.200 --> 18:21.680
+ for every one of these models,
+
+18:23.680 --> 18:25.120
+ for every one of these poolings,
+
+18:27.840 --> 18:28.160
+ for...
+
+18:28.160 --> 18:30.560
+ Okay, this is just the one resize method,
+
+18:30.560 --> 18:32.480
+ and for every one of these experiment numbers.
+
+18:34.320 --> 18:35.200
+ So yeah.
+
+18:37.440 --> 18:39.440
+ So that's sort of a project I'd have to do at some point.
+
+18:40.240 --> 18:43.280
+ The sweep allows you to run arbitrary programs,
+
+18:43.280 --> 18:44.320
+ it doesn't have to be a script.
+
+18:45.120 --> 18:48.160
+ So potentially you could just stay in the notebook
+
+18:48.960 --> 18:51.920
+ and use tiny kernel or sorry,
+
+18:51.920 --> 18:52.720
+ like nb
+
+18:54.240 --> 18:55.760
+ client thing or whatever it's called.
+
+18:55.760 --> 18:56.960
+ Yeah, X can be.
+
+18:56.960 --> 18:57.280
+ Yeah.
+
+18:57.280 --> 19:00.400
+ Yeah, yeah, it'd be fun to work on this
+
+19:00.400 --> 19:03.920
+ to make the whole thing run with notebooks
+
+19:03.920 --> 19:04.160
+ and
+
+19:06.720 --> 19:08.960
+ stick stuff in a local SQL Live database.
+
+19:08.960 --> 19:10.400
+ And because all this stuff,
+
+19:10.400 --> 19:12.000
+ all this web GUI stuff,
+
+19:12.000 --> 19:13.280
+ honestly, I don't like it at all.
+
+19:13.840 --> 19:15.680
+ But the nice thing is it actually doesn't matter
+
+19:15.680 --> 19:16.960
+ because I don't have to use it
+
+19:16.960 --> 19:19.360
+ because they provide an API.
+
+19:19.360 --> 19:21.840
+ So before I realized they have a nice API,
+
+19:22.800 --> 19:25.200
+ I kept on sending Thomas's messages saying,
+
+19:25.200 --> 19:26.000
+ how do I do this?
+
+19:26.000 --> 19:26.640
+ How do I do that?
+
+19:26.640 --> 19:27.520
+ Why isn't this working?
+
+19:27.520 --> 19:29.040
+ When you'd have to like send me these like
+
+19:30.000 --> 19:31.360
+ pages of screenshots,
+
+19:31.360 --> 19:33.120
+ like click here, click there,
+
+19:33.120 --> 19:34.080
+ turn this off,
+
+19:34.080 --> 19:36.240
+ then you have to redo this three times and just like,
+
+19:36.240 --> 19:38.400
+ oh, I hate this.
+
+19:40.160 --> 19:41.040
+ Yeah, and then I found that,
+
+19:41.040 --> 19:42.560
+ then here's like, we do have an API.
+
+19:42.560 --> 19:43.920
+ And I was like, I looked at the API,
+
+19:43.920 --> 19:45.600
+ it is so well documented.
+
+19:45.600 --> 19:46.880
+ It's got examples.
+
+19:48.240 --> 19:50.640
+ Yeah, it's really nice.
+
+19:50.640 --> 19:57.840
+ Yes. So I've put all the stuff I'm working on
+
+19:58.880 --> 20:00.320
+ into this Git repo.
+
+20:00.320 --> 20:01.680
+ And so here's a tip, by the way,
+
+20:01.680 --> 20:04.240
+ the information about if you're in a Git repo,
+
+20:05.200 --> 20:06.960
+ the or in a Git directory,
+
+20:06.960 --> 20:08.000
+ your clone directory,
+
+20:08.000 --> 20:09.760
+ the information about your Git repo
+
+20:09.760 --> 20:14.160
+ all lives in a file called.git.config.
+
+20:15.600 --> 20:16.800
+ So you can see here,
+
+20:16.800 --> 20:19.200
+ this is the Git repo.
+
+20:24.240 --> 20:25.680
+ So if we now go to GitHub.
+
+20:28.240 --> 20:29.920
+ One cool thing is that runs,
+
+20:29.920 --> 20:31.760
+ is it tracks your Git commit?
+
+20:32.640 --> 20:33.280
+ Like the run,
+
+20:33.280 --> 20:35.280
+ you can get back to what code version.
+
+20:35.280 --> 20:36.960
+ Yeah, that is very cool, isn't it?
+
+20:36.960 --> 20:37.200
+ Yeah.
+
+20:38.880 --> 20:39.520
+ Yeah, I mean,
+
+20:39.520 --> 20:41.440
+ I do think we could pretty easily create a
+
+20:42.560 --> 20:46.000
+ a local only version of this without all the fancy GUI,
+
+20:46.000 --> 20:48.400
+ you know, which would also have benefits.
+
+20:48.400 --> 20:50.160
+ And then people who want the fancy GUI
+
+20:50.160 --> 20:52.320
+ and run stuff from multiple sites,
+
+20:52.320 --> 20:54.320
+ stuff like that would use weights and biases,
+
+20:54.320 --> 20:59.760
+ but you know, you could also do stuff without weights and biases.
+
+20:59.760 --> 21:03.040
+ Anyway, here's our repo.
+
+21:03.680 --> 21:07.200
+ And this analysis.ipinb is the thing that I showed you
+
+21:07.200 --> 21:09.520
+ yesterday, if you want to check it out.
+
+21:09.520 --> 21:14.480
+ And I'll put that in the chat.
+
+21:18.960 --> 21:20.720
+ Best. There you go.
+
+21:21.360 --> 21:22.400
+ Oh, by the way,
+
+21:22.400 --> 21:24.400
+ you know, I think something else which would be good
+
+21:24.960 --> 21:29.760
+ is we should start keeping a really good list
+
+21:29.760 --> 21:33.920
+ for every walkthrough of like all the like key resources,
+
+21:33.920 --> 21:35.920
+ key like, you know, links,
+
+21:35.920 --> 21:37.120
+ key commands,
+
+21:37.120 --> 21:38.880
+ examples we wrote and stuff like that.
+
+21:40.240 --> 21:41.520
+ So I think to do that,
+
+21:41.520 --> 21:43.920
+ what we should do is we should
+
+21:46.080 --> 21:49.600
+ turn all of the walkthrough top topics into wikis.
+
+21:50.400 --> 21:53.600
+ I don't know if you folks have used wiki topics before,
+
+21:53.600 --> 21:55.600
+ but basically a wiki topic simply means
+
+21:55.600 --> 21:57.600
+ that everybody will end up with an edit button.
+
+21:59.760 --> 22:01.200
+ So if I just click.
+
+22:03.840 --> 22:05.440
+ Okay, this one already is a wiki.
+
+22:05.440 --> 22:08.800
+ So everybody should find on walkthrough one
+
+22:09.600 --> 22:11.280
+ that you can click edit, right?
+
+22:15.680 --> 22:17.440
+ One thing we'd put in an edit, for example,
+
+22:17.440 --> 22:20.080
+ would be probably like often Daniel has these really nice
+
+22:20.640 --> 22:22.560
+ pull walkthrough listings,
+
+22:22.560 --> 22:26.000
+ which would have like a link to his reply,
+
+22:27.120 --> 22:29.120
+ which you can get by the way by,
+
+22:30.080 --> 22:32.320
+ I think you click on this little date here.
+
+22:32.320 --> 22:35.760
+ Yeah, yes, and that gives you a link directly to the post,
+
+22:36.480 --> 22:37.200
+ which is handy.
+
+22:40.080 --> 22:40.960
+ What about this one?
+
+22:42.960 --> 22:44.000
+ Okay, make that a wiki.
+
+22:45.520 --> 22:47.360
+ Sorry, this is going to be a little bit boring for you guys
+
+22:47.360 --> 22:49.200
+ to watch, but I might as well do it while I'm here.
+
+22:52.640 --> 22:54.960
+ And if anybody else has any questions or comments,
+
+22:54.960 --> 22:55.760
+ well, I do that.
+
+22:56.320 --> 23:00.800
+ Yeah, Jeremy, you did the first GPU is possible to extend
+
+23:00.800 --> 23:05.120
+ to high performance computing to do it on the note.
+
+23:07.040 --> 23:08.400
+ Sorry, to do what?
+
+23:09.600 --> 23:11.840
+ Appai in high performance computing.
+
+23:11.840 --> 23:17.200
+ So in the digital environment, is it possible to track it as well?
+
+23:18.720 --> 23:19.760
+ I mean, I don't know.
+
+23:19.760 --> 23:22.560
+ I mean, yeah, I mean, anything that's running
+
+23:22.560 --> 23:32.640
+ on in Python on a Linux computer should be fine.
+
+23:35.600 --> 23:41.040
+ I think some HPC things are like use their own weird job
+
+23:41.040 --> 23:42.480
+ scheduling systems and stuff.
+
+23:43.840 --> 23:46.160
+ But yeah, as long as it's running a normal
+
+23:46.160 --> 23:51.840
+ in video, it doesn't even have to be in video, honestly.
+
+23:52.400 --> 23:55.760
+ But yeah, as long as it's running a normal Linux environment,
+
+23:55.760 --> 23:56.560
+ which should be fine.
+
+23:59.360 --> 24:02.160
+ It's pretty generic, you know, pretty general.
+
+24:02.160 --> 24:03.600
+ Okay, so they are now all
+
+24:06.240 --> 24:06.720
+ wikis.
+
+24:06.720 --> 24:08.480
+ And so something I did the other day, for example,
+
+24:08.480 --> 24:12.320
+ was in walkthrough for I added something saying like,
+
+24:12.320 --> 24:14.320
+ oh, this is the one where we actually had a bug
+
+24:14.320 --> 24:16.080
+ and you need to add CD at the end, you know,
+
+24:16.080 --> 24:18.240
+ and I tried to recruit a little list of what was covered.
+
+24:18.800 --> 24:25.040
+ So for example, maybe Matt's fantastic timestamps.
+
+24:25.040 --> 24:30.000
+ We could copy and paste this items into here, for instance.
+
+24:33.920 --> 24:38.080
+ Some of Radix examples, maybe, or even just a link to it.
+
+24:38.080 --> 24:43.840
+ But yeah, so for this walkthrough,
+
+24:43.840 --> 24:46.800
+ we should certainly include this link to the analysis.ipineb.
+
+24:46.800 --> 24:50.160
+ Anyway, so you could see, yeah, with the API,
+
+24:50.160 --> 24:53.680
+ it was just so easy just to go API.sweep.runs.
+
+24:54.960 --> 24:56.240
+ Comes in as a dictionary,
+
+24:57.600 --> 25:00.560
+ which we can then check a list of dictionaries into a data frame.
+
+25:00.560 --> 25:11.440
+ Okay, I'm rerunning the whole lot, by the way, because it turns out I
+
+25:13.600 --> 25:14.800
+ made a mistake at some point.
+
+25:14.800 --> 25:19.760
+ I thought that Thomas had told me that Squish was always better than Crop
+
+25:19.760 --> 25:22.000
+ for resizing and he told me I was exactly wrong.
+
+25:22.000 --> 25:24.720
+ And it's actually that Crop's always better than Squish for resizing.
+
+25:24.720 --> 25:27.120
+ So I'm rerunning the whole lot.
+
+25:27.120 --> 25:30.240
+ It's annoying, but shouldn't take too long.
+
+25:34.640 --> 25:41.200
+ Did you find that analyzing the sweep results like this was useful
+
+25:41.200 --> 25:45.360
+ and relative to what you can see in the UI?
+
+25:45.360 --> 25:48.000
+ Oh god, it was so much better, Hamil.
+
+25:48.000 --> 25:49.840
+ Yes, so much.
+
+25:52.560 --> 25:54.320
+ I mean, they've done a good job with that.
+
+25:54.320 --> 25:59.600
+ With that UI, it's very sophisticated and clever and stuff,
+
+25:59.600 --> 26:03.280
+ but I just never got to be friends with it.
+
+26:03.280 --> 26:05.200
+ And as soon as I turned it into a data frame,
+
+26:05.200 --> 26:08.720
+ I was just like, okay, now I can get exactly what I want straight away.
+
+26:08.720 --> 26:11.040
+ It was absolutely breath of fresh air, frankly.
+
+26:12.160 --> 26:14.400
+ I really like their parallel coordinates chart.
+
+26:15.200 --> 26:21.120
+ And I find it very difficult to reproduce that in any visualization library.
+
+26:21.120 --> 26:21.440
+ Do you?
+
+26:21.440 --> 26:24.720
+ Like in a pathway.
+
+26:24.720 --> 26:29.200
+ It's chart, but yeah, I mean, there must be parallel coordinates chart.
+
+26:31.200 --> 26:31.760
+ No, there is.
+
+26:31.760 --> 26:33.840
+ There's like a plotly one, but it's not that nice.
+
+26:33.840 --> 26:35.760
+ Okay, because I don't like parallel.
+
+26:35.760 --> 26:36.720
+ Because I don't like parallel.
+
+26:36.720 --> 26:41.200
+ So like, cover over it and stuff and see, you know, what is.
+
+26:41.200 --> 26:42.480
+ Did they write their own?
+
+26:43.440 --> 26:44.000
+ I think so.
+
+26:44.000 --> 26:48.240
+ Yeah, that's impressive.
+
+26:48.240 --> 26:51.520
+ And they kind of wrote their own data frame kind of language,
+
+26:51.520 --> 26:54.400
+ their own visualization library in like in a sense.
+
+26:55.040 --> 26:57.360
+ Because like those weights and biases reports,
+
+26:57.360 --> 26:58.480
+ you know, they have their own syntax.
+
+26:58.480 --> 27:15.360
+ Okay.
+
+27:15.600 --> 27:17.280
+ There isn't one in plotly or something.
+
+27:18.880 --> 27:20.880
+ Yeah, there's one in plotly for sure.
+
+27:20.880 --> 27:22.720
+ Plotly things are normally interactive.
+
+27:22.720 --> 27:24.480
+ So have you tried that one?
+
+27:24.480 --> 27:24.960
+ Yeah.
+
+27:24.960 --> 27:25.600
+ Do you know if it's?
+
+27:25.600 --> 27:27.360
+ Yeah, it works.
+
+27:29.600 --> 27:32.320
+ It's just it's not as nice, but yeah, it works.
+
+27:32.320 --> 27:36.400
+ Like when you hover over, like there's a there is at least a version.
+
+27:36.400 --> 27:37.040
+ This one doesn't.
+
+27:37.760 --> 27:38.400
+ Yeah, that one.
+
+27:39.200 --> 27:41.360
+ It's like it's very fiddly.
+
+27:41.360 --> 27:43.040
+ You might have to draw a box around it.
+
+27:44.640 --> 27:46.880
+ To to to highlight it.
+
+27:49.600 --> 27:51.760
+ Oh, there you go.
+
+27:51.760 --> 27:53.200
+ Okay, so you just drag over it.
+
+27:53.200 --> 27:54.000
+ That's not terrible.
+
+27:54.000 --> 27:55.760
+ Yeah, I mean, it's okay.
+
+27:55.760 --> 28:00.640
+ It's not the best UI, but you know.
+
+28:02.880 --> 28:03.680
+ Oh, okay.
+
+28:03.680 --> 28:05.360
+ This is thanks for telling me about this.
+
+28:05.360 --> 28:05.840
+ It's cool.
+
+28:06.880 --> 28:08.960
+ But you don't think you don't you don't like this that much.
+
+28:08.960 --> 28:10.720
+ It's not that useful for you.
+
+28:10.720 --> 28:13.840
+ I haven't managed to I mean, I know other people like it.
+
+28:13.840 --> 28:15.840
+ So I don't doubt that it's useful for something.
+
+28:15.840 --> 28:20.400
+ It's just apparently not useful for the things I've tried to use it for yet somehow.
+
+28:21.040 --> 28:21.760
+ Cool.
+
+28:21.760 --> 28:24.560
+ Cool. I mean, how do you kind of like drag over the
+
+28:25.600 --> 28:28.000
+ the end bit to see where they come from or something?
+
+28:28.000 --> 28:32.320
+ Yeah, I mean, it might be useful if you want to look at the way some biases one.
+
+28:32.320 --> 28:35.600
+ Because I think it renders one by default for you for the runs.
+
+28:35.600 --> 28:37.200
+ Yeah, yeah, it does.
+
+28:37.760 --> 28:39.440
+ And it's easier to like.
+
+28:39.440 --> 28:40.480
+ Let's check it out.
+
+28:40.480 --> 28:41.200
+ Operate that.
+
+28:41.200 --> 28:41.440
+ Yeah.
+
+28:42.880 --> 28:44.560
+ W and B.
+
+28:44.560 --> 28:49.040
+ W and B.
+
+28:49.040 --> 28:49.840
+ Flash.
+
+28:58.560 --> 28:59.040
+ All right.
+
+29:01.120 --> 29:03.280
+ I think it could be in the sweeps thing.
+
+29:06.000 --> 29:06.720
+ Most likely.
+
+29:07.280 --> 29:07.680
+ Okay.
+
+29:07.680 --> 29:13.120
+ Okay.
+
+29:13.120 --> 29:14.640
+ And then yeah, pick a sweep.
+
+29:14.640 --> 29:16.720
+ That one has zero runs, but.
+
+29:16.720 --> 29:18.000
+ I think maybe that one.
+
+29:18.000 --> 29:18.320
+ Okay.
+
+29:18.320 --> 29:18.720
+ And then.
+
+29:20.320 --> 29:20.640
+ Yeah.
+
+29:20.640 --> 29:20.960
+ Okay.
+
+29:20.960 --> 29:21.600
+ So here we go.
+
+29:21.600 --> 29:21.920
+ Okay.
+
+29:21.920 --> 29:21.920
+ Let.
+
+29:21.920 --> 29:25.920
+ And then when you just hover over a section.
+
+29:26.720 --> 29:29.440
+ See, I mean, I don't see how this is helping me.
+
+29:30.720 --> 29:31.920
+ Well, I guess like.
+
+29:31.920 --> 29:32.480
+ I'm saying so.
+
+29:32.480 --> 29:36.960
+ No, no, I mean, so there's not that much variance in the well, I guess like what is
+
+29:36.960 --> 29:39.120
+ the metric we're trying to optimize?
+
+29:39.120 --> 29:41.520
+ It doesn't really seem like it's even on this chart.
+
+29:42.480 --> 29:43.920
+ Like, you know what I mean?
+
+29:43.920 --> 29:47.040
+ Oh, you know what you probably have to tell it what your metric is.
+
+29:47.040 --> 29:48.400
+ And we probably didn't.
+
+29:48.400 --> 29:50.000
+ So the far right hand thing is.
+
+29:50.640 --> 29:52.160
+ Resize method rather than.
+
+29:53.440 --> 29:54.160
+ So that's.
+
+29:55.520 --> 29:57.680
+ Is there some way to tell it that we care about.
+
+29:57.680 --> 29:59.520
+ Yeah, there's an edit.
+
+29:59.520 --> 30:00.880
+ There's like a little pencil.
+
+30:00.880 --> 30:01.280
+ Let's see.
+
+30:02.800 --> 30:03.200
+ Okay.
+
+30:03.200 --> 30:04.480
+ Add column for.
+
+30:04.480 --> 30:06.480
+ We add.
+
+30:09.760 --> 30:10.720
+ Loss or something.
+
+30:10.720 --> 30:12.800
+ Yeah, let's do error.
+
+30:14.080 --> 30:16.240
+ Wait, this is no, let's do accuracy.
+
+30:16.240 --> 30:16.800
+ Multi.
+
+30:17.840 --> 30:18.160
+ Okay.
+
+30:21.200 --> 30:22.480
+ Okay, now we're talking.
+
+30:22.480 --> 30:22.880
+ All right.
+
+30:24.080 --> 30:26.720
+ You probably want to get rid of pool and resize methods
+
+30:26.720 --> 30:28.080
+ since they don't have any variance.
+
+30:28.080 --> 30:35.040
+ And they're not adding any information.
+
+30:41.200 --> 30:41.680
+ All right.
+
+30:42.640 --> 30:43.120
+ There we go.
+
+30:43.120 --> 30:44.640
+ Now you can like cover over.
+
+30:44.640 --> 30:46.240
+ I actually want to do the thing.
+
+30:46.240 --> 30:46.640
+ Oh, here we go.
+
+30:46.640 --> 30:47.600
+ Can I do this drag?
+
+30:48.160 --> 30:48.640
+ There we are.
+
+30:51.680 --> 30:52.800
+ Yeah, that does.
+
+30:52.800 --> 30:55.680
+ I mean, this is definitely not going to tell me more than.
+
+30:55.680 --> 30:58.720
+ And the number of experiments is not.
+
+31:01.680 --> 31:02.480
+ No, that's true.
+
+31:02.480 --> 31:02.880
+ Because there.
+
+31:04.080 --> 31:05.280
+ This is some auditory thing.
+
+31:05.280 --> 31:06.800
+ Anyway, there's a thing.
+
+31:12.080 --> 31:12.640
+ Yeah, I'm a.
+
+31:12.640 --> 31:12.960
+ Yeah.
+
+31:13.440 --> 31:14.640
+ Sometimes I learn something.
+
+31:14.640 --> 31:16.720
+ Sometimes I don't find that visualization, you know,
+
+31:17.360 --> 31:18.480
+ it's not always.
+
+31:22.400 --> 31:22.800
+ Okay.
+
+31:22.800 --> 31:24.560
+ So.
+
+31:27.040 --> 31:31.040
+ It's control P D to attach.
+
+31:34.400 --> 31:40.000
+ Do you generally like to do the grid search thing or the Bayesian exploration?
+
+31:40.800 --> 31:41.040
+ I.
+
+31:42.160 --> 31:44.560
+ So like I'm all very new to all this, right?
+
+31:44.560 --> 31:51.600
+ So but like in general, I don't do hyperparameter Bayesian hyperparameter stuff ever.
+
+31:51.600 --> 31:56.160
+ And that's kind of funny because I was actually the one that taught
+
+31:56.960 --> 32:00.560
+ weights and biases about the method they use for hyperparameter optimization,
+
+32:02.160 --> 32:03.920
+ which actually tells you this is not quite true.
+
+32:03.920 --> 32:10.080
+ I've used it once and I used it specifically for finding a good set of dropouts for
+
+32:11.200 --> 32:14.320
+ a W D LSTM because there's like five of them.
+
+32:14.320 --> 32:20.320
+ And I told Lucas about how I had like created a random forest that actually tries to,
+
+32:20.320 --> 32:25.840
+ you know, predict how accurate something's going to be and then use that random forest to actually
+
+32:25.840 --> 32:27.760
+ target better sets of hyperparameters.
+
+32:28.480 --> 32:32.880
+ And then yeah, that's what they ended up using for weights and biases, which is really cool.
+
+32:33.760 --> 32:35.040
+ But I kind of like to really.
+
+32:37.600 --> 32:42.560
+ Use a much more human driven approach from like, well, what's the hypothesis I'm trying to test?
+
+32:42.560 --> 32:44.720
+ How can I test that as fast as possible?
+
+32:44.720 --> 32:51.200
+ Like most hyperparameters are independent of most other hyperparameters. So, you know,
+
+32:51.200 --> 32:54.320
+ like you don't have to do a huge grid search, whatever, and you can figure out.
+
+32:54.320 --> 32:59.600
+ So for example, in this case, it's like, okay, well, learning rate of.008 was basically always the best.
+
+33:00.160 --> 33:05.760
+ So let's not try every learning rate for every model for every resize type, etc.
+
+33:05.760 --> 33:07.440
+ That's just use that learning rate.
+
+33:08.480 --> 33:10.080
+ Same thing for resize method.
+
+33:10.080 --> 33:13.680
+ You know, crop was always better for the few things we tried it on.
+
+33:13.680 --> 33:15.280
+ So we don't have to try every combination.
+
+33:16.640 --> 33:21.280
+ And also, like I feel like I learn a lot more about deep learning when I.
+
+33:23.280 --> 33:25.920
+ You know, ask like, well, what do I want to know about this thing?
+
+33:25.920 --> 33:27.840
+ Well, is that thing independent of that other thing?
+
+33:27.840 --> 33:30.080
+ Or is it or are they connected or not?
+
+33:32.480 --> 33:35.440
+ And so in the end, I kind of come away feeling like, okay, well, I now know that.
+
+33:36.160 --> 33:39.760
+ But you know, every model we tried the optimal learning rate is basically the same.
+
+33:39.760 --> 33:44.560
+ Every model we've tried the optimal resize methods, basically the same.
+
+33:44.560 --> 33:45.280
+ And like so I'm.
+
+33:46.640 --> 33:50.960
+ Come away knowing that I don't have to try all these different things every time.
+
+33:51.760 --> 33:52.400
+ And so now.
+
+33:53.760 --> 33:59.040
+ Next time I do another project, I can leverage my knowledge of what I've learned.
+
+33:59.680 --> 34:03.200
+ Rather than do yet another huge hyperparameter sweep.
+
+34:03.200 --> 34:04.000
+ If that makes sense.
+
+34:04.000 --> 34:06.720
+ I see you are the Bayesian optimisation.
+
+34:06.720 --> 34:11.280
+ Yeah, my brain is the thing that's learning exactly.
+
+34:11.280 --> 34:16.560
+ And I find like people with big companies that spend all their time doing these big,
+
+34:16.560 --> 34:18.800
+ you know, hyperparameter optimisations like.
+
+34:19.760 --> 34:23.760
+ I always feel in talking to them that they don't seem to know much about the practice of deep learning.
+
+34:23.760 --> 34:25.120
+ Like they don't seem to know like.
+
+34:26.000 --> 34:28.960
+ What generally works and what generally doesn't work because they never.
+
+34:30.000 --> 34:32.240
+ bother trying to figure out the answers to those questions.
+
+34:32.240 --> 34:35.920
+ But instead they just chuck in a huge.
+
+34:36.880 --> 34:39.120
+ Hyperparameter optimisation thing into.
+
+34:40.560 --> 34:42.160
+ You know, a thousand TPUs.
+
+34:43.680 --> 34:46.000
+ Yeah, that's kind of something I've observed.
+
+34:46.000 --> 34:47.840
+ That's really interesting.
+
+34:47.840 --> 34:48.960
+ I mean, like.
+
+34:49.920 --> 34:51.840
+ Do you does it do you feel like these like.
+
+34:52.320 --> 34:56.400
+ Hyperparamers generalised across different architectures, different models.
+
+34:56.400 --> 34:57.520
+ Oh, totally.
+
+34:58.160 --> 34:59.280
+ Yeah, totally.
+
+34:59.280 --> 35:01.280
+ In fact, yeah, that was a piece of analysis we did.
+
+35:01.280 --> 35:07.280
+ Gosh, I don't know, four or five years ago, along with a fellowship today, I folks in the platform today.
+
+35:07.280 --> 35:13.280
+ I folks were just trying lots of different sets of hyperparameters across this different sets of data sets as possible.
+
+35:13.280 --> 35:19.280
+ And the same sets of hyperparameters were the best or close enough to the best for everything we tried.
+
+35:19.280 --> 35:21.280
+ Oh, that's very.
+
+35:21.280 --> 35:23.280
+ That's very.
+
+35:23.280 --> 35:25.280
+ That's very.
+
+35:25.280 --> 35:29.280
+ Yeah, it is.
+
+35:29.280 --> 35:31.280
+ Yeah.
+
+35:31.280 --> 35:33.280
+ Yeah, it is.
+
+35:33.280 --> 35:41.280
+ With different architectures, like I can someone imagine that data set may be this not that super important, but between transformers and the CNS.
+
+35:41.280 --> 35:47.280
+ I mean, I'm not to the question in this because I don't have any experience to say that this is not correct.
+
+35:47.280 --> 35:49.280
+ I think this is wonderful and it is.
+
+35:49.280 --> 35:49.280
+ It is.
+
+35:49.280 --> 35:49.280
+ It is.
+
+35:49.280 --> 35:49.280
+ It is.
+
+35:49.280 --> 35:49.280
+ It's amazing.
+
+35:49.280 --> 35:53.280
+ So yeah, the fact that.
+
+35:53.280 --> 35:59.280
+ Across 90 different models that we're testing that couldn't be more different.
+
+35:59.280 --> 36:01.280
+ They all had basically the same best learning rate or close enough.
+
+36:01.280 --> 36:03.280
+ You know.
+
+36:03.280 --> 36:07.280
+ The very interesting aspect here is.
+
+36:07.280 --> 36:17.280
+ Doing the learning rate is something that you dump a lot of time into usually when you start working on a project or in a cognitive competition.
+
+36:17.280 --> 36:31.280
+ You would be naturally inclined to, hey, you know, I'm using a different architecture. Let me try to find the experiment with learning rates, but it's nice that you can.
+
+36:31.280 --> 36:33.280
+ Okay.
+
+36:33.280 --> 36:41.280
+ Well, I should mention, this is true of computer vision.
+
+36:41.280 --> 36:47.280
+ But not necessarily for tabular.
+
+36:47.280 --> 36:55.280
+ I suspect like all computer vision problems do look pretty similar, you know, the data for them looks pretty similar.
+
+36:55.280 --> 36:59.280
+ As suspect is also true, like.
+
+36:59.280 --> 37:02.280
+ Specifically of object recognition.
+
+37:02.280 --> 37:03.280
+ So like.
+
+37:03.280 --> 37:05.280
+ Yeah, for.
+
+37:05.280 --> 37:07.280
+ I don't know.
+
+37:07.280 --> 37:23.280
+ I mean, these are things like nobody seems to bother testing like which I find to be crazy, but we should do similar tests for segmentation and, you know, bounding boxes and so forth.
+
+37:23.280 --> 37:25.280
+ But I'm pretty sure we're fine.
+
+37:25.280 --> 37:26.280
+ The same thing.
+
+37:26.280 --> 37:28.280
+ You have the learning rate.
+
+37:28.280 --> 37:34.280
+ So we suggest maybe some different learning rates are good in different places.
+
+37:34.280 --> 37:40.280
+ So the learning rate finder I built before I had done any of his research right.
+
+37:40.280 --> 37:42.280
+ Okay.
+
+37:42.280 --> 37:47.280
+ Like you might have noticed that I hardly ever use it nowadays in the course.
+
+37:47.280 --> 37:52.280
+ We, I don't even know if we've mentioned it yet in this course. Maybe we have the last lesson.
+
+37:52.280 --> 37:53.280
+ I remember.
+
+37:53.280 --> 37:57.280
+ Does anybody remember, do we done the learning rate finally yet in course 22.
+
+37:57.280 --> 37:58.280
+ Yeah.
+
+37:58.280 --> 37:59.280
+ You think we did.
+
+37:59.280 --> 38:02.280
+ Yeah.
+
+38:02.280 --> 38:13.280
+ Can I just add that one of the really you can sit there and play with grammar and it's all the like and skidgy wheels and get nowhere.
+
+38:13.280 --> 38:24.280
+ And that's one of the things I'm really taking away from the course is the fact that you're talking about strategy and which goes back to.
+
+38:24.280 --> 38:32.280
+ Copie and his 2002 paper. He had a term called strategy of analysis and that's something that really stuck with me.
+
+38:32.280 --> 38:41.280
+ And so that sort of cred sends that idea of just mucking around with parameters.
+
+38:41.280 --> 38:42.280
+ Yeah.
+
+38:42.280 --> 38:47.280
+ Exactly.
+
+38:47.280 --> 38:53.280
+ I suppose the magic parameters. These are the defaults and fast AI.
+
+38:53.280 --> 38:59.280
+ Yeah, pretty much, although with learning rate.
+
+38:59.280 --> 39:08.280
+ That's weird with learning rate.
+
+39:08.280 --> 39:13.280
+ The.
+
+39:13.280 --> 39:17.280
+ The defaults a bit lower than the optimal.
+
+39:17.280 --> 39:27.280
+ Just because I didn't want to like push it. You know, I'd rather it always worked pretty well, rather than be pretty much the best, you know.
+
+39:27.280 --> 39:29.280
+ Yeah, yeah.
+
+39:29.280 --> 39:31.280
+ Okay.
+
+39:31.280 --> 39:33.280
+ I'm just going to go and.
+
+39:33.280 --> 39:41.280
+ Disconnect my other computer because it's connected to port 888, which is going to mess things up.
+
+39:41.280 --> 39:48.280
+ We'll be back in one tick.
+
+40:26.280 --> 40:34.280
+ Okay.
+
+40:34.280 --> 40:53.080
+ Actually, now I think about it.
+
+40:53.080 --> 40:57.840
+ I don't quite know why this is connecting on port 889.
+
+40:57.840 --> 41:03.360
+ But part of this is to learn how to debug problems, right?
+
+41:03.360 --> 41:09.960
+ Normally, the Jupyter server uses port 888.
+
+41:09.960 --> 41:13.880
+ And I've only got my SSH connected to forward port 888.
+
+41:13.880 --> 41:16.280
+ So it's currently not working.
+
+41:16.280 --> 41:20.480
+ So the fact that it's using a different port suggests it's already running somewhere.
+
+41:20.480 --> 41:24.840
+ So to find out where it's running, you can use PS, which lists all the processes running
+
+41:24.840 --> 41:27.720
+ on your computer.
+
+41:27.720 --> 41:33.560
+ And generally speaking, I find I get used to some standard set of options that I nearly
+
+41:33.560 --> 41:34.560
+ always want.
+
+41:34.560 --> 41:35.560
+ And then I forget what they mean.
+
+41:35.560 --> 41:38.400
+ So I have no idea what WAU or X means.
+
+41:38.400 --> 41:42.040
+ I just know that there are a set of options that I always use.
+
+41:42.040 --> 41:47.480
+ So that basically lists all your processes, which obviously is a bit too many.
+
+41:47.480 --> 41:52.520
+ So we want to now filter out the ones that contain Jupyter or Notebook.
+
+41:52.520 --> 41:54.640
+ So pipe is how you do that in Linux.
+
+41:54.640 --> 41:59.720
+ So that's going to send the output of this into the input of another program and a program
+
+41:59.720 --> 42:05.040
+ that just prints out a list of matching lines is called grep.
+
+42:05.040 --> 42:08.560
+ So we can grep for Jupyter.
+
+42:08.560 --> 42:10.160
+ OK, there it is.
+
+42:10.160 --> 42:17.920
+ So I'm kind of wondering where that how that's running.
+
+42:17.920 --> 42:22.720
+ I wonder if we've got like multiple sessions of Tmux running.
+
+42:22.720 --> 42:25.040
+ No, we don't.
+
+42:25.040 --> 42:28.560
+ So TboxLS lists all your Tmux sessions.
+
+42:28.560 --> 42:34.200
+ Oh, I've got a stopped version in the background.
+
+42:34.200 --> 42:35.200
+ OK, that's why.
+
+42:35.200 --> 42:36.880
+ So I just have to foreground it.
+
+42:36.880 --> 42:37.880
+ There we go.
+
+42:37.880 --> 42:41.200
+ That was a bit weird.
+
+42:41.200 --> 42:45.880
+ OK, so now that should work.
+
+42:45.880 --> 42:47.720
+ Can I do foreground?
+
+42:47.720 --> 42:48.720
+ No.
+
+42:48.720 --> 42:49.720
+ Fg.
+
+42:49.720 --> 42:52.680
+ I'm going to control z to put it in the background.
+
+42:52.680 --> 42:54.680
+ And where do you control z?
+
+42:54.680 --> 42:56.680
+ Somebody, it actually stops it.
+
+42:56.680 --> 42:57.680
+ Right?
+
+42:57.680 --> 43:03.680
+ You can put it in the background and have it keep running by actually I'll show you.
+
+43:03.680 --> 43:07.680
+ So if I press control z and type jobs, that's stopped.
+
+43:07.680 --> 43:08.680
+ Right?
+
+43:08.680 --> 43:11.680
+ So find out, try to refresh this window.
+
+43:11.680 --> 43:16.680
+ It's going to sit there waiting forever and never going to finish.
+
+43:16.680 --> 43:19.680
+ OK, because it's backgrounds back.
+
+43:19.680 --> 43:22.680
+ It's stopped in the background.
+
+43:22.680 --> 43:27.680
+ If you type bg optionally followed by a job number, which would be number one, and it defaults
+
+43:27.680 --> 43:32.680
+ to the last thing that you put that you put in the background, it will start running it
+
+43:32.680 --> 43:34.680
+ in the background.
+
+43:34.680 --> 43:36.680
+ Even after you stopped.
+
+43:36.680 --> 43:38.680
+ Yeah, so it's now running in the background.
+
+43:38.680 --> 43:43.680
+ So for that type jobs, it's now running.
+
+43:43.680 --> 43:44.680
+ OK.
+
+43:44.680 --> 43:50.680
+ I'd still detach to this console, so if I open up this, you'll see it's still printing out
+
+43:50.680 --> 43:51.680
+ things, right?
+
+43:51.680 --> 43:54.680
+ But I can also do other things.
+
+43:54.680 --> 43:59.680
+ And I don't do this very much because normally if I want something running at the same time,
+
+43:59.680 --> 44:01.680
+ I would just chuck it in another team.
+
+44:01.680 --> 44:02.680
+ I explain.
+
+44:02.680 --> 44:03.680
+ I don't know.
+
+44:03.680 --> 44:06.680
+ It's kind of nice to know this exists.
+
+44:06.680 --> 44:12.680
+ Something else to point out is once I said bg, it had this ampersand after the job.
+
+44:12.680 --> 44:17.680
+ That's because if you run something with an ampersand at the end, it always runs it in
+
+44:17.680 --> 44:18.680
+ the background.
+
+44:18.680 --> 44:24.680
+ So if you want to like fire off six processes to run in parallel, just put an ampersand
+
+44:24.680 --> 44:30.680
+ at the end of each one and it'll run in the background.
+
+44:30.680 --> 44:48.680
+ So for example, there's a script that runs LS six times.
+
+44:48.680 --> 44:59.680
+ And so if I run it, you can see they're all interspersed with each other because it ran
+
+44:59.680 --> 45:01.680
+ all six times at the same time.
+
+45:01.680 --> 45:02.680
+ I see.
+
+45:02.680 --> 45:08.680
+ And let's say like you create a process like this in the background without T mux and you
+
+45:08.680 --> 45:11.680
+ want to kill it and use the thing to.
+
+45:11.680 --> 45:19.680
+ You could type Fg to foreground it and then press control C.
+
+45:19.680 --> 45:28.680
+ Yeah, something like that would be fine or you can, you can kill a single job.
+
+45:28.680 --> 45:37.680
+ So in general, like you probably would want to search for bash job control to learn how
+
+45:37.680 --> 45:38.680
+ to do these things.
+
+45:38.680 --> 45:46.680
+ And as I said, one of the key things to know is that a job number has a percent of the
+
+45:46.680 --> 45:47.680
+ start.
+
+45:47.680 --> 45:55.680
+ So this is actually percent one would be how you go to this.
+
+45:55.680 --> 45:59.680
+ Knowing what the Google is definitely yes.
+
+45:59.680 --> 46:01.680
+ The key is the key thing.
+
+46:01.680 --> 46:04.680
+ Although often you could just put in a few examples.
+
+46:04.680 --> 46:11.680
+ So you could I'm guessing like if I take troll C B G F G jobs, which are the things we just
+
+46:11.680 --> 46:12.680
+ learned about.
+
+46:12.680 --> 46:13.680
+ There we go.
+
+46:13.680 --> 46:15.680
+ It kind of gets us pretty close.
+
+46:15.680 --> 46:17.680
+ Now we know they've got drop control commands.
+
+46:17.680 --> 46:27.680
+ All right.
+
+46:27.680 --> 46:29.680
+ Now.
+
+46:29.680 --> 46:39.680
+ So when I kind of iterate through notebooks, what I tend to do is like once I've got something
+
+46:39.680 --> 46:44.680
+ vaguely working, I generally duplicate it and then I try to get something else vaguely
+
+46:44.680 --> 46:49.680
+ working and once that starts vaguely working, I then rename it to the thing that it is what
+
+46:49.680 --> 46:50.680
+ I want.
+
+46:50.680 --> 46:57.680
+ So then from time to time, then I just clean up the duplicated versions that I didn't end
+
+46:57.680 --> 47:01.680
+ up using and I can tell which they are because I haven't renamed them yet.
+
+47:01.680 --> 47:05.680
+ And so this is kind of how you can make it like you make a car.
+
+47:05.680 --> 47:07.680
+ It looks like you're making copies of it.
+
+47:07.680 --> 47:08.680
+ Yeah.
+
+47:08.680 --> 47:11.680
+ So you can just click file, make a copy.
+
+47:11.680 --> 47:12.680
+ Yep.
+
+47:12.680 --> 47:15.680
+ And then you can click it and click duplicate.
+
+47:15.680 --> 47:20.680
+ And so you like, what do you do after you duplicate it?
+
+47:20.680 --> 47:24.680
+ You try to get it all open up that I'll open up that duplicate and I'll try something else,
+
+47:24.680 --> 47:28.680
+ some different hyper parameter and different method or whatever.
+
+47:28.680 --> 47:35.680
+ So in this case, I started out here in Patty.
+
+47:35.680 --> 47:37.680
+ And kind of just experimented.
+
+47:37.680 --> 47:43.680
+ And show batch and L.R. find and try to get something running.
+
+47:43.680 --> 47:49.680
+ And then, you know, after that, I was like, okay, I've got something working.
+
+47:49.680 --> 47:51.680
+ How do I make it better?
+
+47:51.680 --> 47:58.680
+ And so I created Patty small, but literally it was made a copy, made a copy and it would
+
+47:58.680 --> 48:01.680
+ be called patty copy.ipi and be.
+
+48:01.680 --> 48:06.680
+ And I was like, oh, I wonder about different architectures.
+
+48:06.680 --> 48:11.680
+ So I created this like, okay, well, basically, I want to try different item transforms,
+
+48:11.680 --> 48:14.680
+ different batch transforms and different architectures.
+
+48:14.680 --> 48:17.680
+ So create a train, which takes those three things.
+
+48:17.680 --> 48:22.680
+ And so it creates a set of image loaders with those item transforms and those batch
+
+48:22.680 --> 48:23.680
+ transforms.
+
+48:23.680 --> 48:26.680
+ Use a fixed C to get the same validation set each time.
+
+48:26.680 --> 48:31.680
+ Train it with that architecture.
+
+48:31.680 --> 48:34.680
+ And then return the TTA error.
+
+48:34.680 --> 48:39.680
+ So then, this is kind of like your weights and biases, like,
+
+48:39.680 --> 48:42.680
+ how you keep your different experiments, ideas.
+
+48:42.680 --> 48:43.680
+ Yeah.
+
+48:43.680 --> 48:48.680
+ So, yeah.
+
+48:48.680 --> 48:53.680
+ So now you can see I've kind of gone through and tried a few different sets of item and
+
+48:53.680 --> 48:56.680
+ match transforms for this architecture.
+
+48:56.680 --> 48:59.680
+ And this is like, so I had some just small architectures.
+
+48:59.680 --> 49:04.680
+ So they'll run reasonably quickly. So these ran in about six minutes or so.
+
+49:04.680 --> 49:07.680
+ And this is very handy, right?
+
+49:07.680 --> 49:14.680
+ If you go sell all output toggle, you can quickly get an overview of what you're doing.
+
+49:14.680 --> 49:19.680
+ And so from that, I kind of got a sense of which things seem to work pretty well for
+
+49:19.680 --> 49:24.680
+ this one. And then I replicated that for a different architecture and found those
+
+49:24.680 --> 49:27.680
+ things, which, you know, these are very, very different ones.
+
+49:27.680 --> 49:30.680
+ Transform is based, one's confident based.
+
+49:30.680 --> 49:33.680
+ You know, find the things which work pretty well consistently across very different
+
+49:33.680 --> 49:38.680
+ architectures. And for those, then try those on other ones,
+
+49:38.680 --> 49:43.680
+ swing V2 and swing.
+
+49:43.680 --> 49:51.680
+ And yeah, then find, you know, so then let's toggle the results back on.
+
+49:51.680 --> 49:53.680
+ So I'm kind of looking at two things.
+
+49:53.680 --> 49:58.680
+ The first is what's the error rate at the end of training. The other is what's the TTA error rate.
+
+49:58.680 --> 50:02.680
+ So my squish worked pretty well for both.
+
+50:02.680 --> 50:08.680
+ Crop worked pretty well for both. This is all for cons next.
+
+50:08.680 --> 50:15.680
+ This 640 by 480 to 88 by 224 didn't work so well.
+
+50:15.680 --> 50:18.680
+ I mean, it's not terrible, but it's definitely worse.
+
+50:18.680 --> 50:23.680
+ And 320 by 240 instead.
+
+50:23.680 --> 50:28.680
+ You know, you talk a little bit about what you're looking for in the TTA versus.
+
+50:28.680 --> 50:35.680
+ No, I just want to see like, I mean, the bad thing I care about is TTA because that's what I'm going to end up using.
+
+50:35.680 --> 50:39.680
+ Yeah, that's the main one, but.
+
+50:39.680 --> 50:43.680
+ Like, let's see. In this case.
+
+50:43.680 --> 50:49.680
+ This one's not really any better or worse than our best cons next, but the TTA is way better.
+
+50:49.680 --> 50:57.680
+ So that gets very encouraging, which is interesting. So this is now for the OT, right?
+
+50:57.680 --> 51:03.680
+ Now, V it, we can't do the rectangular ones because V it has a fixed input size.
+
+51:03.680 --> 51:06.680
+ So their final transformation has to be 220, 420, 224.
+
+51:06.680 --> 51:11.680
+ So if you pass an end instead of a tuple, it's going to create square.
+
+51:11.680 --> 51:14.680
+ Final images.
+
+51:14.680 --> 51:19.680
+ And you know, on the other hand, this one looks crappy.
+
+51:19.680 --> 51:25.680
+ Right, so definitely want to use squish for the IT.
+
+51:25.680 --> 51:29.680
+ And then this one looked pretty good.
+
+51:29.680 --> 51:33.680
+ You know, so this was using padding.
+
+51:33.680 --> 51:40.680
+ So like for the IT, I probably wouldn't use crop.
+
+51:40.680 --> 51:48.680
+ Last time I looked, TTA was not really a thing in other modeling frameworks that is given to you.
+
+51:48.680 --> 51:49.680
+ Is that still the case?
+
+51:49.680 --> 51:51.680
+ As far as I know, that's true.
+
+51:51.680 --> 51:54.680
+ Yeah.
+
+51:54.680 --> 51:57.680
+ You know, so there are a lot of people.
+
+51:57.680 --> 52:02.680
+ Well, one group in particular has been copying without credit, everything they can.
+
+52:02.680 --> 52:04.680
+ They might have done it.
+
+52:04.680 --> 52:08.680
+ I won't mention their name, but yeah.
+
+52:08.680 --> 52:11.680
+ So, swin V2.
+
+52:11.680 --> 52:17.680
+ Apparently, Tanish told me is what all the cool kids on Kaggle use nowadays.
+
+52:17.680 --> 52:20.680
+ That's a fixed resolution.
+
+52:20.680 --> 52:26.680
+ And I found that there and for the larger sizes, there was no 224.
+
+52:26.680 --> 52:29.680
+ You had the choice of 192 or 256.
+
+52:29.680 --> 52:32.680
+ 256 got so slow, I couldn't bear it.
+
+52:32.680 --> 52:37.680
+ But interestingly, even going down to 192, swins TTA is actually nearly as good as it is.
+
+52:37.680 --> 52:39.680
+ Nearly as good as the best VIT.
+
+52:39.680 --> 52:46.680
+ So that's, I thought that was pretty encouraging.
+
+52:46.680 --> 52:52.680
+ This one, interestingly, like VIT didn't do nearly as well for the crop.
+
+52:52.680 --> 52:57.680
+ And again, like VIT, it did pretty well on the pad.
+
+52:57.680 --> 53:02.680
+ And then this is swin V1, which does have a 224.
+
+53:02.680 --> 53:08.680
+ And so here, this TTA is okay, but the final results, not great.
+
+53:08.680 --> 53:13.680
+ And so to me, I'm like, no, that's not fantastic.
+
+53:13.680 --> 53:22.680
+ This one's again, you know, it's interesting, the crop, none of them are going well, except for con next.
+
+53:22.680 --> 53:25.680
+ This one's not great either, right?
+
+53:25.680 --> 53:31.680
+ So swin V1, little unimpressive.
+
+53:31.680 --> 53:33.680
+ So basically, that's what I did next.
+
+53:33.680 --> 53:36.680
+ And then I was like, okay, let's pick the ones that look good.
+
+53:36.680 --> 53:41.680
+ And I made a duplicate of patty small.
+
+53:41.680 --> 53:44.680
+ And I just did a search and replace of small with large.
+
+53:44.680 --> 53:47.680
+ So we've now got con next large.
+
+53:47.680 --> 53:51.680
+ And the other things I did differently was I got rid of the fixed random seed.
+
+53:51.680 --> 53:54.680
+ So there's no seed equals 42 here.
+
+53:54.680 --> 53:57.680
+ And so that means we're going to have a different training set each time.
+
+53:57.680 --> 54:00.680
+ And so these are now not comparable, which is fine.
+
+54:00.680 --> 54:03.680
+ And I have a few of one of them's like totally crap, right?
+
+54:03.680 --> 54:04.680
+ But they're not totally comparable.
+
+54:04.680 --> 54:15.680
+ But the point is now once I train each of these, they're training on a different architecture, a different resizing method.
+
+54:15.680 --> 54:17.680
+ And I append to a list.
+
+54:17.680 --> 54:26.680
+ So I start off with a empty list and I append the TTA predictions.
+
+54:26.680 --> 54:34.680
+ And so, and I deleted the cells from the duplicate that weren't very good in patty small.
+
+54:34.680 --> 54:37.680
+ So you'll see there's no crop anymore.
+
+54:37.680 --> 54:41.680
+ Just squish and pad for VIT.
+
+54:41.680 --> 54:46.680
+ And for SWINV2.
+
+54:46.680 --> 54:49.680
+ Probably shouldn't have kept both of the SWINV ones.
+
+54:49.680 --> 54:53.680
+ Actually, they weren't so good.
+
+54:53.680 --> 55:05.680
+ And then what I did in the very last Kaggle entry was I took the two VIT ones because they were the clear best.
+
+55:05.680 --> 55:09.680
+ And I appended them to the list.
+
+55:09.680 --> 55:10.680
+ So they were there twice.
+
+55:10.680 --> 55:13.680
+ So it's just a slightly clunky way of doing a weighted average.
+
+55:13.680 --> 55:16.680
+ If you like.
+
+55:16.680 --> 55:18.680
+ Yes, take them all together.
+
+55:18.680 --> 55:21.680
+ Take the mean of their predictions.
+
+55:21.680 --> 55:30.680
+ Find the argmax across the mean of their predictions to get the predictions and then submit in the same way as before.
+
+55:30.680 --> 55:32.680
+ So that was basically my process.
+
+55:32.680 --> 55:38.680
+ It's like it's very like, yeah, not particularly thoughtful.
+
+55:38.680 --> 55:41.680
+ You know, it's pretty mechanical, which is what I like about it.
+
+55:41.680 --> 55:44.680
+ In fact, you could probably automate this whole thing.
+
+55:44.680 --> 55:46.680
+ So somebody is going to say something.
+
+55:46.680 --> 55:54.680
+ No, I was going to say how critical is like this model stacking in Kaggle.
+
+55:54.680 --> 55:57.680
+ Like, just curious how you think about that.
+
+55:57.680 --> 56:03.680
+ I mean, it's like, I mean, you can kind of, I mean, we should try, right?
+
+56:03.680 --> 56:05.680
+ We should probably submit.
+
+56:05.680 --> 56:08.680
+ In fact, let's, well, we're kind of out of time.
+
+56:08.680 --> 56:09.680
+ How about next time?
+
+56:09.680 --> 56:12.680
+ Let's submit just the VIT, the best VIT.
+
+56:12.680 --> 56:16.680
+ And we'll see how it goes.
+
+56:16.680 --> 56:20.680
+ And that will give us, yeah, that will give us a sense of how much the.
+
+56:20.680 --> 56:23.680
+ Ensembling matters.
+
+56:23.680 --> 56:28.680
+ We kind of know ahead of time, it's not going to matter.
+
+56:28.680 --> 56:31.680
+ Hugely.
+
+56:31.680 --> 56:37.680
+ I mean, you specifically said on Kaggle on Kaggle, it definitely matters because in Kaggle, you want to win.
+
+56:37.680 --> 56:50.680
+ But in real life, my small conf next got 97, well, rounded up.
+
+56:50.680 --> 56:53.680
+ That's 98%.
+
+56:53.680 --> 56:59.680
+ And my ensemble got 98.8%.
+
+56:59.680 --> 57:01.680
+ Now that's in terms of error rate.
+
+57:01.680 --> 57:02.680
+ That's nearly halving the error.
+
+57:02.680 --> 57:06.680
+ So I guess that's actually pretty good.
+
+57:06.680 --> 57:08.680
+ Really important question.
+
+57:08.680 --> 57:12.680
+ How do you keep track of what submissions are tied to which notebook?
+
+57:12.680 --> 57:19.680
+ Oh, I just put a description to remind me, but you know, a better approach would actually be to write the notebook name there.
+
+57:19.680 --> 57:24.680
+ Which is what I normally do, but in this case, I wasn't taking it particularly seriously, I guess.
+
+57:24.680 --> 57:28.680
+ So I was only planning to do these ones and that was it.
+
+57:28.680 --> 57:32.680
+ So it's basically like, okay, do one with a single small model,
+
+57:32.680 --> 57:36.680
+ then do one with an ensemble of small models and then do one with an ensemble of big models.
+
+57:36.680 --> 57:40.680
+ And then it's after I submitted that that I thought, oh, I should probably wait.
+
+57:40.680 --> 57:43.680
+ The VIT is a bit higher. So I ended up with the fourth one.
+
+57:43.680 --> 57:47.680
+ So it's pretty easy for me. They only did for significant submissions.
+
+57:47.680 --> 57:50.680
+ So easy to track.
+
+57:50.680 --> 57:54.680
+ But yeah, I think.
+
+57:54.680 --> 57:58.680
+ Now that I know actually that I'm doing a little bit more, because I actually did want to try one more thing.
+
+57:58.680 --> 58:04.680
+ I think what I'll probably do is I'll go back and I'm going to, you can edit these and go go and put in the notebook name.
+
+58:04.680 --> 58:07.680
+ And each one. And then.
+
+58:07.680 --> 58:13.680
+ And then I wouldn't go back and change those notebooks later, unless there was likes, but I probably never.
+
+58:13.680 --> 58:20.680
+ I would, I would just duplicate them and make changes in the duplicate and rename them to something sensible.
+
+58:20.680 --> 58:24.680
+ And then of course this all ends up back in GitHub.
+
+58:24.680 --> 58:29.680
+ So I always see. Yeah, see what's going on.
+
+58:29.680 --> 58:31.680
+ So this is like,
+
+58:31.680 --> 58:35.680
+ Ebel up, Samuel, without.
+
+58:35.680 --> 58:36.680
+ It's good.
+
+58:36.680 --> 58:43.680
+ It's like, you have a, you'd like every, like quote run is a notebook, like in a certain, like the way to advise.
+
+58:43.680 --> 58:45.680
+ Kind of keep track.
+
+58:45.680 --> 58:46.680
+ Yeah.
+
+58:46.680 --> 58:47.680
+ Yeah.
+
+58:47.680 --> 58:48.680
+ Exactly.
+
+58:48.680 --> 58:52.680
+ But I mean, the only reason I can kind of do this is because I had already done.
+
+58:52.680 --> 58:55.680
+ Like lots of runs of models.
+
+58:55.680 --> 59:00.680
+ To find out which ones I can focus on. Right. So I didn't have to try a hundred architectures.
+
+59:00.680 --> 59:04.680
+ I mean, in the way, it forces you to really look at it closely.
+
+59:04.680 --> 59:05.680
+ Yeah.
+
+59:05.680 --> 59:07.680
+ And I like have this dashboard.
+
+59:07.680 --> 59:08.680
+ Right.
+
+59:08.680 --> 59:10.680
+ Kind of like these, like,
+
+59:10.680 --> 59:11.680
+ this role.
+
+59:11.680 --> 59:16.680
+ My view is that this approach, you will actually become a better deep learning practitioner.
+
+59:16.680 --> 59:27.680
+ And I also believe almost nobody does this approach and I almost feel like there are very few people I come across who are actually good deep learning practitioners, like not many people seem to know.
+
+59:27.680 --> 59:31.680
+ What works and what doesn't.
+
+59:31.680 --> 59:34.680
+ So, yeah.
+
+59:34.680 --> 59:35.680
+ All right.
+
+59:35.680 --> 59:38.680
+ Well, that's it. I think.
+
+59:38.680 --> 59:41.680
+ Thanks for joining again and.
+
+59:41.680 --> 59:42.680
+ Yeah.
+
+59:42.680 --> 59:44.680
+ See you all next time.
+
+59:44.680 --> 59:47.680
+ Bye.
+
+59:47.680 --> 59:48.680
+ Thank you.
+
+59:48.680 --> 59:49.680
+ Thank you.
+
+59:49.680 --> 59:50.680
+ Everybody.
+

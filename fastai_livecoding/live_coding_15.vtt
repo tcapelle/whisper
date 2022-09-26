@@ -1,0 +1,2921 @@
+WEBVTT
+
+00:00.000 --> 00:08.400
+ So you've got a new patty submission. Let's take a look. Kaggle competition.
+
+00:08.400 --> 00:13.920
+ By the way, it's really beautiful to see over the last link or two all these fast AI people
+
+00:13.920 --> 00:21.280
+ just pop up at the top of that leaderboard. It's so cool. Okay, fast AI fast AI fast AI fast
+
+00:21.280 --> 00:31.200
+ AI. Who's this person? Is this fast AI? At least the top five. Yeah, like most of the top five or top
+
+00:31.200 --> 00:38.640
+ tenor are following you in these walkthroughs. You've all got the same score though. Somebody's
+
+00:38.640 --> 00:48.080
+ got to like, you know, Koreans got something secret source. Well, I've got a few ideas I can
+
+00:48.080 --> 00:55.040
+ show you guys today if you want to try and take it a bit further, which I bet you do.
+
+00:57.760 --> 01:04.960
+ Anybody have any comments or questions in the meantime?
+
+01:04.960 --> 01:22.880
+ All right. Chair screen.
+
+01:22.880 --> 01:33.120
+ And that's the right screen. And I'll move you guys under the other screen. And now I can see.
+
+01:35.360 --> 01:38.640
+ Yeah. All right. So
+
+01:38.640 --> 01:50.080
+ So, Addy, leaderboard. There we are.
+
+01:57.760 --> 02:02.160
+ Where's Radik? Not here. Sarata? I see.
+
+02:02.160 --> 02:13.280
+ I'm one thing that I guess it would be nice if it wasn't so sort of, I don't know, a little bit
+
+02:13.280 --> 02:21.120
+ in this because I set this up in in paper space and then started running it and then I went to bed
+
+02:21.120 --> 02:33.280
+ because it was taking so long. And I just have a fear that if my browser
+
+02:34.720 --> 02:42.800
+ sleeps or goes to sleep that it'll just basically stop the session. Even though there's more hours
+
+02:42.800 --> 02:55.600
+ and processor in the workstation is running, I wasn't sure. I mean, it shouldn't. But what happens is
+
+02:55.600 --> 03:03.680
+ a queue's up for when your browser comes back. But the problem is there is some limit to how much it
+
+03:03.680 --> 03:13.840
+ or queue. So although it'll run, if you've hit that limit, you won't see all the outputs, which is
+
+03:13.840 --> 03:27.040
+ nearly just as bad. So, you know, there's a few things you can do. The most obvious one would be
+
+03:27.040 --> 03:35.440
+ to use NVDev to export the notebook to a script and then run the script in Tmux.
+
+03:36.480 --> 03:42.000
+ Because then you can close it down, come back, reattach Tmux and there it is.
+
+03:42.000 --> 03:44.400
+ Okay. That would be interesting.
+
+03:44.400 --> 03:48.400
+ Now something, yeah, so maybe we'll look at that sometime.
+
+03:48.400 --> 03:57.360
+ Yeah, something I don't... Well, does paper space gradient let you have...
+
+03:58.960 --> 04:06.960
+ doesn't let your SSH in with a suitable IP? I'm not sure. If you've got your own GPU at home,
+
+04:06.960 --> 04:17.520
+ you know, or on AWS or GCP or whatever, then what I do is I run XRDP on it,
+
+04:17.520 --> 04:30.000
+ which is a remote desktop server, and then I can connect to it like so and run Firefox.
+
+04:32.880 --> 04:42.000
+ And so this is my... Yeah, this is my server's screen, you know, remote desktoping in.
+
+04:42.000 --> 04:48.880
+ So if I now go in and run something...
+
+05:00.960 --> 05:02.640
+ Hattie, I remember from last time.
+
+05:02.640 --> 05:14.640
+ Okay, so I can set this running and then I can close it down,
+
+05:17.040 --> 05:21.200
+ go to sleep, come back the next day, reconnect to that screen,
+
+05:24.320 --> 05:29.840
+ and it's still been running. So like that's the preferred way to do it.
+
+05:29.840 --> 05:34.160
+ But I... Yeah, as I say, I don't know if it's possible on
+
+05:36.160 --> 05:37.440
+ paper space gradient.
+
+05:43.120 --> 05:45.120
+ You can do it. Sorry, I got on.
+
+05:45.120 --> 05:50.720
+ Machines seem to have a limit of six hours. Do I have seen so far?
+
+05:50.720 --> 06:04.800
+ If you subscribe to their pro or whatever, you can bump it up or get rid of it altogether.
+
+06:04.800 --> 06:10.800
+ So...
+
+06:15.920 --> 06:20.400
+ It's this tab here, machine tab, you can change the auto shutdown.
+
+06:21.440 --> 06:24.800
+ Okay, looks like a week's a maximum. Oh, no, there's a no limit there as well.
+
+06:24.800 --> 06:28.800
+ So...
+
+06:32.560 --> 06:37.440
+ When you're paying, but I mean, you know, it's...
+
+06:39.520 --> 06:43.280
+ I think it's like eight bucks a month. Yeah, eight bucks a month. You may as well.
+
+06:44.800 --> 06:50.080
+ Yeah, I've got the pride that I don't have on the... when you pick a free machine.
+
+06:50.080 --> 06:51.200
+ Oh, yeah.
+
+06:51.200 --> 06:53.440
+ Yeah, right.
+
+06:55.920 --> 06:57.280
+ Free P5000.
+
+07:02.240 --> 07:02.560
+ Point.
+
+07:07.280 --> 07:08.720
+ Maximum six hours. Yep.
+
+07:10.880 --> 07:17.920
+ So, Jeremy, sorry, interrupt. Paper space in their support channels,
+
+07:17.920 --> 07:22.160
+ they talk about you can assign a public IP to a machine and then SSH to it.
+
+07:23.040 --> 07:27.600
+ So you could SSH and then T marks to a gradient machine though.
+
+07:28.240 --> 07:30.560
+ Well, good question. I don't know about that.
+
+07:30.560 --> 07:32.320
+ Look, I'm not sure that it would be.
+
+07:34.800 --> 07:36.640
+ So...
+
+07:36.640 --> 07:37.440
+ Bandstupptions.
+
+07:41.760 --> 07:42.960
+ No, it's not.
+
+07:42.960 --> 07:48.480
+ And... So they also have this thing called Core, right?
+
+07:48.480 --> 07:58.720
+ Which are more like AWS or Google servers, which absolutely lets you do a static IP.
+
+07:59.360 --> 08:03.120
+ And you don't even need... I don't even know if you need a static IP necessarily,
+
+08:03.120 --> 08:05.760
+ but you could use a dynamic IP.
+
+08:05.760 --> 08:13.040
+ We'll work just as well. Bit cheaper. The thing is though, I reckon they're pretty expensive.
+
+08:14.560 --> 08:15.680
+ Yeah, Core.
+
+08:15.680 --> 08:16.080
+ Product.
+
+08:19.680 --> 08:25.600
+ So that... These are very basic GPUs. So that's not bad.
+
+08:25.600 --> 08:26.720
+ 45 cents an hour.
+
+08:29.040 --> 08:30.560
+ I guess they're not too terrible.
+
+08:30.560 --> 08:34.400
+ Or if you want to Tx.
+
+08:34.400 --> 08:36.800
+ Oh no, I guess they're the same price really. 56 cents.
+
+08:36.800 --> 08:37.840
+ All right, I'll take that back.
+
+08:38.480 --> 08:43.920
+ I guess the thing I found expensive was this CPU pricing for running it all the time.
+
+08:49.600 --> 08:55.440
+ So, Jeremy, with this RDP solution that you showed, how does that work?
+
+08:56.080 --> 08:56.880
+ Do you have any...
+
+08:56.880 --> 09:06.240
+ Oh, just a moment, Reddit, close here.
+
+09:47.040 --> 09:49.840
+ Okay, so how does it work?
+
+09:49.840 --> 09:59.040
+ I didn't get to what computer you're RDP into.
+
+09:59.040 --> 10:01.840
+ I'm RDP into my own GPU machine.
+
+10:02.720 --> 10:06.320
+ But it could just as well be a AWS machine or GCP machine.
+
+10:06.880 --> 10:10.400
+ This is basically the same as VNC, if you've come across VNC before.
+
+10:12.160 --> 10:16.320
+ RDP is the kind of Microsoft version of that.
+
+10:16.320 --> 10:21.840
+ I like it generally quite a lot better. And much to my surprise,
+
+10:23.360 --> 10:28.240
+ the Mac client RDP is better than the Windows client RDP.
+
+10:28.240 --> 10:32.000
+ Even shows you a little mini screenshot, you know, with the screen.
+
+10:34.560 --> 10:36.160
+ So yeah, this is now finished training.
+
+10:36.800 --> 10:38.400
+ No, not nearly finished.
+
+10:38.400 --> 10:39.680
+ Halfway through training, whatever.
+
+10:41.040 --> 10:42.880
+ What's this tricky to set up?
+
+10:42.880 --> 10:45.520
+ Because you're running in X server.
+
+10:45.520 --> 10:48.800
+ No, not even slightly tricky to set up.
+
+10:50.400 --> 10:52.240
+ So yeah, you just...
+
+10:57.280 --> 11:00.320
+ It's called XRDP, since it's RDP for X Windows.
+
+11:01.600 --> 11:03.200
+ And you just go App to install.
+
+11:03.840 --> 11:05.840
+ Yeah, I hate installing this kind of thing.
+
+11:05.840 --> 11:07.440
+ It drives me crazy, but this is it.
+
+11:07.440 --> 11:08.960
+ You just pseudo App to install.
+
+11:08.960 --> 11:12.960
+ So you just go to the console,
+
+11:12.960 --> 11:16.400
+ pseudo Ad user, pseudo system CTO restart.
+
+11:17.280 --> 11:22.240
+ And then you might also want to run pseudo system CTO enable,
+
+11:22.240 --> 11:26.080
+ which will cause it to automatically start when you start your computer.
+
+11:28.640 --> 11:30.160
+ And I don't think I...
+
+11:31.760 --> 11:34.320
+ Oh, you know, if you've got a firewall, you'll have to let it in.
+
+11:35.120 --> 11:36.560
+ So it's port 3389.
+
+11:36.560 --> 11:39.680
+ Basically, this line of code.
+
+11:39.680 --> 11:40.880
+ And I think I did have a firewall.
+
+11:40.880 --> 11:41.920
+ So I also ran this.
+
+11:44.640 --> 11:45.600
+ Yeah, that was it.
+
+11:46.640 --> 11:51.840
+ It just used my username and password that I had on the machine.
+
+11:54.560 --> 11:54.960
+ It's crazy.
+
+11:55.600 --> 11:56.240
+ Yeah, so...
+
+11:57.040 --> 12:01.840
+ Come, very surprisingly, not annoying.
+
+12:03.520 --> 12:05.200
+ And then I think I just installed Microsoft
+
+12:05.200 --> 12:06.960
+ remote desktop from the Mac App Store.
+
+12:07.600 --> 12:09.520
+ Or on Windows, I think it comes with Windows.
+
+12:13.920 --> 12:15.040
+ So that was easy.
+
+12:15.040 --> 12:16.240
+ Yeah, nobody seems to talk about it.
+
+12:16.240 --> 12:19.680
+ My article, I'm going to talk about the NC, which is also fine, but
+
+12:22.080 --> 12:26.320
+ tends to... I find it a bit slower and a little bit more awkward.
+
+12:26.320 --> 12:26.800
+ All right.
+
+12:28.480 --> 12:30.880
+ I mean, one weird thing, I guess, is...
+
+12:30.880 --> 12:38.160
+ I guess my machine, and this is pretty common,
+
+12:40.800 --> 12:45.680
+ I haven't set up really to be a graphical workstation.
+
+12:45.680 --> 12:47.440
+ I always use it from the console.
+
+12:48.000 --> 12:52.160
+ So I actually don't really have much of a window manager here.
+
+12:52.160 --> 12:52.880
+ I can't even like...
+
+12:54.000 --> 12:55.200
+ Oh, no, I can do a little bit.
+
+12:55.200 --> 13:02.480
+ I don't know what the hell window manager is even using, but often you'll find like
+
+13:02.480 --> 13:04.640
+ there is no window manager or whatever running.
+
+13:05.440 --> 13:08.480
+ But you know, a bit of Googling will show you how to
+
+13:08.480 --> 13:12.880
+ have to install whatever...
+
+13:12.880 --> 13:15.440
+ KDA your stuff.
+
+13:22.880 --> 13:23.200
+ Okay.
+
+13:23.200 --> 13:26.560
+ Since we're on the installation topic, could I ask a question?
+
+13:28.960 --> 13:34.640
+ So I think I kind of brought it up a little bit, but I can't launch
+
+13:35.440 --> 13:36.320
+ Fast AI.
+
+13:36.320 --> 13:38.160
+ A machine that runs Fast AI.
+
+13:38.160 --> 13:39.520
+ And PyTorch.
+
+13:39.520 --> 13:42.800
+ A PyTorch one would work.
+
+13:42.800 --> 13:45.040
+ So what suggestions would you have about...
+
+13:45.040 --> 13:48.000
+ So that means that your prerun.sh file has got a problem.
+
+13:48.960 --> 13:52.560
+ So maybe commented out from my PyTorch just started out.
+
+13:52.560 --> 13:55.600
+ Yeah, open up your PyTorch machine,
+
+13:56.160 --> 13:59.680
+ moosh prerun.sh to prerun.back or something.
+
+14:01.680 --> 14:03.360
+ Or just open it and see, you're like,
+
+14:03.360 --> 14:04.560
+ it might be obvious what's wrong with it.
+
+14:05.600 --> 14:06.880
+ Yeah, I couldn't see anything.
+
+14:06.880 --> 14:07.760
+ Yeah.
+
+14:07.760 --> 14:09.760
+ Yeah, I'll try to...
+
+14:10.960 --> 14:11.600
+ What is that?
+
+14:11.600 --> 14:12.320
+ It's not working.
+
+14:12.320 --> 14:14.560
+ What's like, what's not working?
+
+14:14.560 --> 14:17.120
+ It says error when I try to start it up.
+
+14:17.120 --> 14:18.080
+ It just says error.
+
+14:18.080 --> 14:21.440
+ And I tried to reach out to the paper space.
+
+14:21.440 --> 14:22.320
+ Support a couple of times.
+
+14:23.520 --> 14:25.680
+ Maybe it's a two abstract questions.
+
+14:27.440 --> 14:28.480
+ The new response.
+
+14:28.480 --> 14:28.720
+ Yeah.
+
+14:30.320 --> 14:31.040
+ I'll try that.
+
+14:31.040 --> 14:33.040
+ Thank you.
+
+14:36.640 --> 14:38.480
+ Oh, people are putting stuff in the text chat.
+
+14:39.760 --> 14:41.360
+ Please try to say things,
+
+14:41.360 --> 14:42.720
+ variable chat, if you can,
+
+14:42.720 --> 14:44.480
+ because it's way nicer for me.
+
+14:44.480 --> 14:46.320
+ And I don't have to check
+
+14:46.320 --> 14:47.200
+ not for Windows.
+
+14:49.200 --> 14:51.120
+ I know it's not possible for everybody.
+
+14:51.120 --> 14:51.360
+ But...
+
+14:59.040 --> 14:59.840
+ Okay.
+
+14:59.840 --> 15:01.520
+ So, sorry, Jeremy.
+
+15:01.520 --> 15:03.680
+ There is a way to SSH into a gradient machine,
+
+15:04.320 --> 15:05.440
+ but you have to trigger the
+
+15:06.640 --> 15:08.640
+ virtual machine to be built from command line.
+
+15:09.200 --> 15:10.720
+ So you have to initiate the job.
+
+15:10.720 --> 15:13.200
+ And there's a paper space type of GitHub repo.
+
+15:14.560 --> 15:16.240
+ And is there any reason to do that?
+
+15:16.240 --> 15:17.440
+ Like, that sounds complicated.
+
+15:17.440 --> 15:18.400
+ Like, would you just run a...
+
+15:18.400 --> 15:21.280
+ It's way more effort than it's worth from what I'd say.
+
+15:21.280 --> 15:22.160
+ Just run a call,
+
+15:22.160 --> 15:23.760
+ just run a paper space core machine,
+
+15:23.760 --> 15:24.800
+ if you want to, I guess.
+
+15:24.800 --> 15:25.840
+ Yeah, exactly.
+
+15:25.840 --> 15:26.480
+ So you can do it.
+
+15:26.480 --> 15:27.840
+ It's just, why would you?
+
+15:27.840 --> 15:32.160
+ I mean, so for paper space,
+
+15:32.160 --> 15:34.800
+ the issue around the notebook closing,
+
+15:34.800 --> 15:37.360
+ I would like start running something,
+
+15:38.320 --> 15:39.280
+ close the notebook,
+
+15:40.400 --> 15:41.360
+ and then reopen it,
+
+15:42.000 --> 15:42.960
+ just to see what happens.
+
+15:44.000 --> 15:44.400
+ You know.
+
+15:46.560 --> 15:46.960
+ And...
+
+15:49.200 --> 15:50.880
+ You know, let's try it here, right?
+
+15:50.880 --> 15:57.600
+ So...
+
+16:03.680 --> 16:05.360
+ Now, what was that thing we learned the other day?
+
+16:05.360 --> 16:06.960
+ It was a shift T.
+
+16:08.560 --> 16:09.440
+ And go to the other one.
+
+16:14.000 --> 16:15.360
+ Oh, that was my one.
+
+16:15.920 --> 16:17.280
+ Okay, I gotta learn how to...
+
+16:17.840 --> 16:18.960
+ Hey, Jeremy.
+
+16:18.960 --> 16:19.200
+ Yeah.
+
+16:19.200 --> 16:20.240
+ Yeah.
+
+16:20.240 --> 16:20.960
+ Can you...
+
+16:20.960 --> 16:22.240
+ Using iterm too,
+
+16:22.240 --> 16:24.960
+ because you can do Tmux minus CC,
+
+16:24.960 --> 16:26.880
+ and you'll get native windows in Tmux
+
+16:26.880 --> 16:29.280
+ instead of the little sort of terminal ones.
+
+16:29.280 --> 16:30.240
+ Sounds interesting.
+
+16:30.240 --> 16:30.960
+ Let me try that.
+
+16:30.960 --> 16:32.480
+ Yeah, I'm addicted to the vats also.
+
+16:35.920 --> 16:37.360
+ Minus capital capital...
+
+16:37.360 --> 16:38.480
+ Minus capital CC.
+
+16:42.560 --> 16:44.160
+ Unknown option C,
+
+16:44.880 --> 16:46.560
+ preserved before the A.
+
+16:46.560 --> 16:48.800
+ Yeah, so it'll be Tmux minus capital capital.
+
+16:48.800 --> 16:49.440
+ Yeah, here you go.
+
+16:49.440 --> 16:50.160
+ Oh.
+
+16:50.880 --> 16:51.120
+ Okay.
+
+16:53.680 --> 16:57.280
+ And what are the benefits of this approach?
+
+16:57.280 --> 16:58.560
+ They're native windows.
+
+16:58.560 --> 17:00.640
+ You can click and drag them and move them around,
+
+17:00.640 --> 17:01.600
+ pop them out.
+
+17:01.600 --> 17:02.560
+ Yeah, all that stuff.
+
+17:02.560 --> 17:03.120
+ Same thing.
+
+17:03.120 --> 17:06.960
+ How many you can click and drag Tmux windows as well?
+
+17:08.960 --> 17:09.200
+ See.
+
+17:15.920 --> 17:17.200
+ Okay, this is all the same as...
+
+17:17.200 --> 17:21.440
+ Like, you've got to have mouse mode on for them to work.
+
+17:24.560 --> 17:25.520
+ So like the shortcuts...
+
+17:25.520 --> 17:27.760
+ You use like command shift D will split pains.
+
+17:27.760 --> 17:28.960
+ You don't have to go into,
+
+17:28.960 --> 17:32.160
+ I think, is it colon or something and command something?
+
+17:32.160 --> 17:33.280
+ It's just like less than me.
+
+17:33.280 --> 17:34.240
+ No, you just use control B.
+
+17:36.160 --> 17:37.280
+ Maybe it's exactly the same.
+
+17:38.160 --> 17:38.480
+ Yeah.
+
+17:39.760 --> 17:40.720
+ I mean, you have the same...
+
+17:40.720 --> 17:42.000
+ No, control B doesn't work anymore.
+
+17:42.000 --> 17:43.440
+ So what about Tmux shortcuts?
+
+17:43.440 --> 17:44.480
+ I'm not going to work anymore.
+
+17:45.200 --> 17:45.680
+ How do I do...
+
+17:45.680 --> 17:46.640
+ Yeah, I think they're different.
+
+17:46.640 --> 17:47.280
+ They're different.
+
+17:48.240 --> 17:49.440
+ Escape, I think.
+
+17:52.160 --> 17:54.800
+ If you go back to the original window that launched it,
+
+17:54.800 --> 17:55.120
+ it'll have a...
+
+18:04.080 --> 18:04.560
+ Okay.
+
+18:06.720 --> 18:06.960
+ Okay.
+
+18:08.400 --> 18:11.120
+ Yeah, I'm not convinced it's going to help my workflow,
+
+18:11.120 --> 18:18.720
+ but I think, yeah, for people who are more familiar with Tmux shortcuts,
+
+18:18.720 --> 18:19.680
+ that could be cool.
+
+18:22.160 --> 18:22.800
+ Thanks for the tip.
+
+18:25.120 --> 18:26.160
+ It's going on down here.
+
+18:26.160 --> 18:27.040
+ It's a bit good.
+
+18:32.080 --> 18:32.320
+ The...
+
+18:38.560 --> 18:40.480
+ The trick to get mouse support working,
+
+18:40.480 --> 18:43.440
+ so for example, my scroll wheel, as you can see, works nicely
+
+18:43.440 --> 18:45.520
+ in this normal Tmux window,
+
+18:46.560 --> 18:57.760
+ is to have a.tmux.conf file that contains
+
+18:58.800 --> 19:00.480
+ set option minus g mouse on.
+
+19:02.080 --> 19:04.080
+ And then you can also increase your history limit.
+
+19:05.040 --> 19:08.400
+ And yeah, that's how come I can scroll.
+
+19:08.400 --> 19:14.000
+ I think the thing like, you know, or our thing I like about Tmux is
+
+19:16.480 --> 19:20.480
+ it's very integrated with my kind of the normal way of doing things in
+
+19:22.880 --> 19:24.480
+ in Unix, you know.
+
+19:24.480 --> 19:29.120
+ So for example, if I want to search through my previous session,
+
+19:29.760 --> 19:32.640
+ I could just hit question mark to search up,
+
+19:32.640 --> 19:34.160
+ and I could search for make file.
+
+19:34.160 --> 19:38.240
+ For example, and I hit N just like I would in VM.
+
+19:39.920 --> 19:42.000
+ Hit slash to look forwards.
+
+19:42.640 --> 19:48.000
+ You know, it's like my terminal works the same way as VM or whatever,
+
+19:48.000 --> 19:51.120
+ which I, yeah, which I really like.
+
+19:53.760 --> 19:55.840
+ And I think, yeah, that way I don't have to know like,
+
+19:55.840 --> 19:58.880
+ oh, the items that a shortcut sends some other set of shortcuts.
+
+19:58.880 --> 20:02.160
+ It's just this kind of like general,
+
+20:02.160 --> 20:04.160
+ unique, see way of doing things, I guess.
+
+20:05.840 --> 20:13.120
+ And of course, they'll also all work on the purpose based terminal as well.
+
+20:15.680 --> 20:18.240
+ Yeah, so let's try this.
+
+20:22.560 --> 20:24.560
+ So if we start running this.
+
+20:24.560 --> 20:26.560
+ Yes.
+
+20:30.640 --> 20:33.200
+ Okay, close that.
+
+20:38.000 --> 20:39.360
+ Leave it for a few seconds.
+
+20:41.840 --> 20:49.200
+ And you can see here it says in my console, starting buffering.
+
+20:49.200 --> 20:54.320
+ So it's remembering things that were sent to me.
+
+20:54.320 --> 20:57.760
+ So if I click now back here, there we go.
+
+20:58.480 --> 21:00.480
+ It's, let's see.
+
+21:08.400 --> 21:09.200
+ Hmm.
+
+21:12.160 --> 21:13.040
+ That didn't seem to work.
+
+21:13.040 --> 21:14.080
+ You know, that's interesting.
+
+21:15.040 --> 21:17.040
+ Okay, so let's try something different.
+
+21:17.040 --> 21:19.120
+ So I don't think you can just close it and reopen it.
+
+21:22.640 --> 21:23.760
+ All right, let's try something else.
+
+21:31.280 --> 21:35.440
+ What if we fake a network disconnection by closing SSH?
+
+21:38.880 --> 21:41.600
+ Okay, so now, all right, connections failed.
+
+21:42.240 --> 21:43.520
+ So I'll leave that window open.
+
+21:43.520 --> 21:45.920
+ And then we reconnect.
+
+21:47.920 --> 21:49.920
+ And
+
+21:53.360 --> 21:54.960
+ Oh, okay, so that worked.
+
+21:55.920 --> 21:57.920
+ So there's some of our answer.
+
+21:57.920 --> 22:00.960
+ But yeah, I think there's something though, if you leave it long enough,
+
+22:00.960 --> 22:04.800
+ it says I've stopped listening for events because there's been too many
+
+22:04.800 --> 22:08.560
+ until see there's some configuration option you can change to make it bigger.
+
+22:08.560 --> 22:11.040
+ Should probably be a useful thing to know about.
+
+22:11.040 --> 22:18.480
+ Let me just go and turn this alarm off.
+
+22:41.040 --> 23:09.760
+ Yeah.
+
+23:56.080 --> 23:56.640
+ Sorry for that.
+
+23:56.640 --> 24:03.600
+ I
+
+24:08.720 --> 24:10.960
+ I daughter likes to be permanently entertained.
+
+24:10.960 --> 24:14.160
+ So any gaps in her home schooling schedule.
+
+24:17.520 --> 24:20.400
+ She wants to be amused.
+
+24:20.400 --> 24:28.160
+ She doesn't like the fact that I'm doing this and Rachel's a crossfit.
+
+24:29.920 --> 24:39.200
+ Okay, so we had a look the other day at Progressive Resizing.
+
+24:42.800 --> 24:45.440
+ And so this is where I got to.
+
+24:45.440 --> 24:50.000
+ I think like Progressive Resizing, one interesting thing you can do is
+
+24:50.000 --> 24:52.400
+ like you can go crazy, like you can go extra lunch.
+
+24:55.600 --> 24:58.960
+ And you know, we start out with some
+
+25:00.560 --> 25:08.880
+ teeny tiny images and train for a while.
+
+25:10.720 --> 25:14.160
+ And then combine that with
+
+25:14.160 --> 25:19.520
+ with gradient accumulation
+
+25:24.480 --> 25:29.840
+ to then go up to big images, but don't have to train so long.
+
+25:31.680 --> 25:35.440
+ So this I think this is a good trick for probably particularly for code
+
+25:35.440 --> 25:38.400
+ competitions on Kaggle where you've got serious resource constraints,
+
+25:38.400 --> 25:44.320
+ you know, or just wanting to do more with less time.
+
+25:50.480 --> 25:56.480
+ So I think on Kaggle, you would have needed accumulation level of four
+
+25:56.480 --> 26:00.160
+ rather than two to make this fit because they've got 16 gig cards.
+
+26:00.160 --> 26:01.600
+ We also got a 24 gig card.
+
+26:01.600 --> 26:06.880
+ So then something else that
+
+26:10.000 --> 26:14.160
+ then we started talking about was weighted models.
+
+26:19.760 --> 26:21.680
+ That's weird. What happened to my weighted model?
+
+26:21.680 --> 26:30.880
+ Did I move it to course 22?
+
+26:35.040 --> 26:36.800
+ Well, that's fine.
+
+26:42.640 --> 26:45.280
+ So the question I think we had just today
+
+26:45.280 --> 26:55.920
+ was about unbalanced data sets and would it be a good idea to balance our data set.
+
+26:58.240 --> 26:58.560
+ So
+
+26:58.560 --> 27:12.640
+ let's start with a nice small model.
+
+27:18.640 --> 27:21.920
+ If you use as a base case, something we've done before.
+
+27:21.920 --> 27:30.800
+ So let's use this one.
+
+27:37.680 --> 27:40.240
+ So actually there's no point copying progressive, I guess.
+
+27:40.240 --> 27:40.880
+ Let's copy
+
+27:40.880 --> 27:47.040
+ small models.
+
+27:59.040 --> 27:59.360
+ Okay.
+
+27:59.360 --> 28:07.840
+ Rename and so this is going to be for weighted.
+
+28:20.240 --> 28:23.840
+ I might as well do the resizing.
+
+28:23.840 --> 28:28.640
+ I don't know if I needed it on my machine, but since we'll be putting it on Kaggle,
+
+28:28.640 --> 28:36.720
+ I might as well.
+
+28:42.800 --> 28:50.480
+ Okay, so that's going to be our base case.
+
+28:50.480 --> 28:55.200
+ So for weighting,
+
+29:04.480 --> 29:05.040
+ we can
+
+29:07.840 --> 29:12.640
+ df.label.value counts.
+
+29:12.640 --> 29:20.800
+ So there's our level of unbalancedness.
+
+29:20.800 --> 29:23.520
+ So it's not too bad.
+
+29:23.520 --> 29:29.040
+ There's a lot of normals, a lot of blasts, not many of these bacterial thingies.
+
+29:33.760 --> 29:35.200
+ Nick, I don't know if you're around.
+
+29:35.200 --> 29:37.040
+ I mean, I can see you are around.
+
+29:37.040 --> 29:40.160
+ I don't know if you're able to talk, but if you are, you might be able to tell us about what you found,
+
+29:40.160 --> 29:44.320
+ because I know you've been looking at these, which of these are hard to kind of visually see the
+
+29:44.320 --> 29:49.200
+ difference between? Yeah, yeah, for sure. I'm sorry, I dropped out earlier because we had a power
+
+29:49.200 --> 29:53.200
+ cut here, but I'm back now. So are you intentionally video lists or is that?
+
+29:53.200 --> 29:56.960
+ I am not intentionally video lists, but that's the break at the moment.
+
+29:56.960 --> 30:06.160
+ Sorry about that. But yeah, like one thing that I did, just to, I guess get a better handle on the
+
+30:06.160 --> 30:10.400
+ dataset was going through them and having a different type. So I found it really hard to
+
+30:10.400 --> 30:16.800
+ pick even what the difference was between a normal image and say like downy mildew or whatever.
+
+30:16.800 --> 30:20.560
+ It could be quite hard to pick out. And so one thing I thought it would be fun to do was to
+
+30:21.680 --> 30:26.160
+ almost like segment or mask the images, playing with the color channels to see if they would
+
+30:26.160 --> 30:29.440
+ come out a bit better. And then when I did that, I was able to take kind of, I guess,
+
+30:29.440 --> 30:35.360
+ the yellow, dead bits or disease parts, and I could see them better when they were like in bright red.
+
+30:35.360 --> 30:41.120
+ And the thing is that so many of these, like when I found like when I've trained them,
+
+30:42.480 --> 30:51.280
+ I find that there is a handful of images, really like 20 to 25 images that are very difficult to
+
+30:51.280 --> 30:59.680
+ classify. And it tends to be these actually from these imbalanced classes, where it tends to
+
+30:59.680 --> 31:02.400
+ categorize them as blast when it's not. And I think.
+
+31:02.400 --> 31:08.560
+ These are bacterial ones. Yeah, in fact, let me just pull up in one of my own notebooks.
+
+31:08.560 --> 31:12.160
+ You want to maybe share your screen? Yeah, let me see if I like.
+
+31:12.160 --> 31:14.880
+ Where do you look at this? Are you able to see?
+
+31:17.600 --> 31:22.640
+ But it helped to make these bigger. Are you able to see the disease in these? Because I don't know
+
+31:22.640 --> 31:33.760
+ what I'm looking for.
+
+31:33.760 --> 31:49.440
+ How do we make this bigger?
+
+31:53.680 --> 31:58.880
+ Probably there's like a figure size in that plot, there is that map plot
+
+31:58.880 --> 32:15.760
+ lib. Is it like a fix size? Big size? Yes. Big size equals, I don't know, which way around is it?
+
+32:15.760 --> 32:30.640
+ That way around. 9, 15. We can't hear you, by the way, Nick, I don't know if you lost you.
+
+32:30.640 --> 32:48.160
+ I also tried to look into the image. Do you think the confusion matrix and the most lost to
+
+32:48.160 --> 32:51.680
+ port the L, but it's just too hard. It's beyond my domain.
+
+32:53.520 --> 32:56.720
+ I was planning to do that today, actually. So that's, yeah.
+
+32:56.720 --> 33:01.280
+ I don't know what happened to Nick. Maybe he's having some internet problems again.
+
+33:02.480 --> 33:06.080
+ I wonder if it's just like red spots or something.
+
+33:09.680 --> 33:15.680
+ So, yeah. I mean, it's interesting that Nick said he found these ones difficult. So, yeah,
+
+33:15.680 --> 33:22.800
+ there's basically two reasons to wait different rows differently. One is that some of them are
+
+33:22.800 --> 33:28.640
+ harder and that you want them to be shown more often to give the computer more of a chance to
+
+33:28.640 --> 33:40.320
+ learn them. And the other is some are less common and same thing. So, one possible waiting
+
+33:41.040 --> 33:49.920
+ for these would be to take their reciprocal. And so then normal is going to be shown less often
+
+33:49.920 --> 33:53.840
+ if we wait all the normal ones by this amount and all the bacterial, panicle, blight ones,
+
+33:53.840 --> 33:58.720
+ this amount, you're going to get more of these. So that's like one approach we could use.
+
+33:59.760 --> 34:07.040
+ I feel like that might be overkill. So I'd be inclined to kind of like not do it quite that
+
+34:07.040 --> 34:13.280
+ much. So like another approach would be to take the square root maybe, one over the square root,
+
+34:13.280 --> 34:19.360
+ kind of like that. So then these are going to be shown about twice as often as these.
+
+34:22.640 --> 34:25.520
+ So maybe like let's start with trying this as a set of waiting.
+
+34:29.360 --> 34:31.920
+ So, Jeremy, if I could ask a question at this point.
+
+34:35.360 --> 34:38.880
+ So the waiting and when you talk about waiting such that
+
+34:38.880 --> 34:42.160
+ images are shown more or less often.
+
+34:45.040 --> 34:53.360
+ Although in cases where it's very imbalanced, whether that could lead to some classes being
+
+34:54.160 --> 35:01.840
+ overfitted to because the model learns about the images themselves. I came across in looking
+
+35:01.840 --> 35:11.200
+ at classification. And whether there was a way to, I read about how to deal with imbalances
+
+35:12.480 --> 35:20.960
+ and I've seen some recommendations to try to wait when calculating the losses rather than
+
+35:22.080 --> 35:25.200
+ resampling the input. So I just wondered whether it was possible.
+
+35:25.200 --> 35:32.240
+ I mean they're different, right? So in the end you want it to be able to recognize the
+
+35:32.240 --> 35:37.440
+ features of the images you care about. And there's no substitute for like having them see the images
+
+35:37.440 --> 35:44.960
+ enough times to recognize them. However, when it does that, it is then going to, because it sees
+
+35:44.960 --> 35:53.120
+ the rare cases more often, it's going to think that those rare cases are more probable than they
+
+35:53.120 --> 36:03.520
+ actually are. So you have to reverse that then when you make predictions. So that's something to
+
+36:03.520 --> 36:09.680
+ be careful of. So I mean, I think it probably just helped to try to take a look at it to see
+
+36:09.680 --> 36:19.840
+ what that looks like. So here's our weights, right? I would be inclined to probably,
+
+36:19.840 --> 36:29.520
+ can we merge things directly? Let's take a look. So if I go df.merge, which is kind of like a
+
+36:29.520 --> 36:37.040
+ way of doing a join in pandas. And the right hand side, yeah, the right hand side can be a series.
+
+36:37.040 --> 36:51.680
+ Cool. So merge on weights. What does that look like? Nope. Why not? And then, okay.
+
+36:51.680 --> 37:09.920
+ Okay. Left, I see. So left, okay. So on left, left on, left on equals label. And right, I think
+
+37:09.920 --> 37:19.840
+ that's called the index. I'm not pandas expert. I don't know if anybody is. There we go. Okay.
+
+37:19.840 --> 37:32.080
+ So that's added these weights here. Given the slightly weird name, but that's okay.
+
+37:32.080 --> 37:57.440
+ Okay. So if we call that weighted df. And so then we could get, take out a little function and
+
+37:57.440 --> 38:06.400
+ move them over here. And I think what we want to do is use data blocks at this point.
+
+38:08.640 --> 38:09.680
+ Often a good idea.
+
+38:17.280 --> 38:19.120
+ And we have a data blocks version.
+
+38:19.120 --> 38:23.760
+ Certainly make one otherwise.
+
+38:28.400 --> 38:29.920
+ Okay. Here's a data block.
+
+38:35.840 --> 38:38.800
+ So let's get a data block.
+
+38:38.800 --> 38:48.880
+ Got an image block and a category block.
+
+38:51.280 --> 39:00.400
+ Get y is parent label. Okay. Item transforms is
+
+39:00.400 --> 39:05.040
+ this.
+
+39:05.840 --> 39:07.360
+ Item transforms is this.
+
+39:08.080 --> 39:11.840
+ Jeremy, I think you're in the wrong book. You should be in weighted.
+
+39:12.720 --> 39:13.120
+ Thank you.
+
+39:15.520 --> 39:21.360
+ Thank you. Thank you. Oh, yes. I had these here, but thank you. Okay.
+
+39:21.360 --> 39:24.800
+ Okay.
+
+39:34.640 --> 39:37.440
+ Okay. And batch transforms.
+
+39:39.440 --> 39:43.520
+ Now we should just use the same ones we had here to make it fair.
+
+39:46.240 --> 39:46.640
+ Okay.
+
+39:46.640 --> 39:50.560
+ Okay. So there's our data block.
+
+39:54.480 --> 39:56.320
+ Oh, we actually use this resizing.
+
+40:00.560 --> 40:13.040
+ So this approach is we're going to use the data block to even the numbers of what's being
+
+40:13.040 --> 40:20.320
+ sampled so that we can more augmentations of the same images for the low representative samples or
+
+40:21.520 --> 40:25.920
+ kind of. So it's nothing to do with the data block. We're going to use things called weighted
+
+40:25.920 --> 40:34.480
+ data loaders and the weighted data loader is going to use these numbers here to as basically
+
+40:34.480 --> 40:41.920
+ like probabilities of how likely it is to pick that row when it grabs a row in a batch.
+
+40:41.920 --> 40:48.160
+ Yeah. I was going to add them all up and and and to each of these divided by the sum. So they'll add
+
+40:48.160 --> 40:55.760
+ to one. The reason I needed data blocks is because the the weighted data loaders method is a method of
+
+40:56.400 --> 41:03.440
+ data block. It's not something we get in the, you know, quick and dirty image data loaders thing.
+
+41:03.440 --> 41:07.760
+ That doesn't have as much flexibility. So now that we've got a data block, we can type
+
+41:07.760 --> 41:16.160
+ that data block dot. Oh, and we'll have to import it import fastai dot callback dot.
+
+41:20.960 --> 41:26.960
+ What was it in again? I don't remember. Fastai weighted data loader.
+
+41:26.960 --> 41:37.440
+ It's a data callback.
+
+41:44.400 --> 41:53.760
+ Oh, okay. So that's it's a it's actually a method of data sets. So we can get a data sets object
+
+41:53.760 --> 42:07.600
+ from a data block like so. And we pass in source. So that would be our list of image files.
+
+42:11.680 --> 42:16.720
+ So we can files equals get image files.
+
+42:16.720 --> 42:29.760
+ In our training set, we pass those in and there's our training set and there's our validation set.
+
+42:29.760 --> 42:35.760
+ So they're data sets. So these are the things that remember we can index into and get a single
+
+42:35.760 --> 42:44.160
+ xy pair. And so weighted data loaders is then something we can pass data sets to and give it weights
+
+42:44.160 --> 42:56.240
+ and a batch size. Okay. And the weights are for the training set. Okay, we're going to have to be
+
+42:56.240 --> 43:10.480
+ bit careful about this. So we should be to go dss dot weighted data loaders. And so the source code
+
+43:10.480 --> 43:22.240
+ is equals weighted to dl, which is here.
+
+43:22.240 --> 43:34.240
+ Okay. White's call and weights.
+
+43:34.240 --> 43:47.120
+ All right. I'm not 100% sure how this is going to work, but let's try it.
+
+43:47.120 --> 44:03.520
+ So our weighted data frame. So this is the weight for each row.
+
+44:03.520 --> 44:18.960
+ Right. And then we've got our files. Yeah, we've got to be a bit careful here, right, because they're in
+
+44:18.960 --> 44:39.840
+ different orders. So we actually need a way to get a list of weights where the two
+
+44:39.840 --> 44:49.280
+ orders are going to match each other. Yeah, we could do it by key lookup. I'm actually thinking of
+
+44:49.280 --> 45:04.880
+ something a little lazy, which is just to sort them both. Okay, so although
+
+45:04.880 --> 45:11.760
+ this seems to only have a what's going on here.
+
+45:17.600 --> 45:22.160
+ Doesn't have them all.
+
+45:26.320 --> 45:27.440
+ Are they not contiguous?
+
+45:27.440 --> 45:29.440
+ Yes.
+
+45:34.240 --> 45:37.520
+ Sort values by image ID.
+
+45:40.160 --> 45:45.680
+ Oh, they are contiguous. So where is image 1001?
+
+45:48.240 --> 45:50.640
+ The sorting must be by folder first, though.
+
+45:50.640 --> 45:57.440
+ Okay. Yes, of course. That's exactly what it is. Thank you.
+
+45:58.960 --> 46:00.320
+ Okay.
+
+46:02.800 --> 46:04.240
+ So we could use a key.
+
+46:08.080 --> 46:14.080
+ That looks hopeful. It says here if the key is a string, use attribute getter. So I think I can just pass in the key name.
+
+46:14.080 --> 46:22.640
+ Ah, that is magic. That is the magic of first call right there.
+
+46:25.840 --> 46:28.560
+ There we go. So that's sorting by name.
+
+46:29.680 --> 46:33.120
+ And we can do the same thing for this one.
+
+46:37.280 --> 46:38.480
+ Like so.
+
+46:38.480 --> 46:44.480
+ And so now this order by the same thing. So that's a good step.
+
+46:54.320 --> 47:02.480
+ So the weights are basically wdf.labely.
+
+47:02.480 --> 47:08.560
+ So that's a pandas series.
+
+47:18.000 --> 47:20.480
+ Yes, to NumPy, we turn it into an array.
+
+47:24.960 --> 47:28.480
+ So I'm just not quite sure whether this has to be just for the training set or is for both.
+
+47:28.480 --> 47:34.240
+ We'll find out in a moment. If I run that, it doesn't like it.
+
+47:39.520 --> 47:40.480
+ Oh, that's interesting.
+
+47:47.520 --> 47:51.360
+ Ah, of course. So the batch transforms actually
+
+47:51.360 --> 48:00.800
+ we didn't end up getting applied because we use.datasets, which doesn't apply batch
+
+48:00.800 --> 48:06.640
+ transforms. So we would need to now apply them here. So that's quite confusing.
+
+48:09.840 --> 48:17.760
+ So presumably, I don't see it here, but I would expect to be able to go batch transforms at this point.
+
+48:17.760 --> 48:21.920
+ Oh, dl quarks.
+
+48:24.320 --> 48:25.760
+ This is all quite awkward, isn't it?
+
+48:28.720 --> 48:39.920
+ So data loader keyword arguments equals batch.
+
+48:39.920 --> 48:46.800
+ So if we were creating a data loader, a weighted data loader,
+
+48:46.800 --> 48:52.800
+ you know what would be a good idea would probably be to look at the data block
+
+48:52.800 --> 48:57.520
+ data loader's source code to see how that does it.
+
+48:57.520 --> 49:07.280
+ Data sets.dataloters. Here we go. After underscore batch is what it is.
+
+49:11.360 --> 49:20.880
+ After underscore batch.
+
+49:20.880 --> 49:25.120
+ Nope.
+
+49:28.480 --> 49:29.760
+ Okay, that's not it.
+
+49:32.320 --> 49:40.960
+ Ah, let's see.
+
+49:40.960 --> 49:55.680
+ Okay, it's calling.dataloters passing in the keyword arguments and
+
+49:59.280 --> 50:01.840
+ okay,.dataloters does not call it after batch.
+
+50:01.840 --> 50:06.720
+ Pretty Kalch.
+
+50:07.360 --> 50:13.840
+ prophet data loaders.
+
+50:08.560 --> 50:19.600
+ It's
+
+50:21.280 --> 50:26.480
+Snapout data
+
+50:26.480 --> 50:33.480
+ So it's.datasets.
+
+50:33.480 --> 50:42.480
+ Yeah, so, okay, so datasets.dataloders is this thing here.
+
+50:42.480 --> 50:45.480
+ And that doesn't be called after underscore batch.
+
+50:45.480 --> 50:52.480
+ So...
+
+50:52.480 --> 50:56.480
+ And I think I know why.
+
+50:56.480 --> 51:05.480
+ I think that's because when we looked the other day at data block.
+
+51:05.480 --> 51:11.480
+ We noticed that it like ads.
+
+51:11.480 --> 51:20.480
+ Oh, yes, yes, yes, the image block.
+
+51:20.480 --> 51:29.480
+ It adds int to float tensor as a batch transform.
+
+51:29.480 --> 51:46.480
+ So we wanted to add that as well.
+
+51:46.480 --> 51:51.480
+ So it's getting PIO images.
+
+51:51.480 --> 52:13.480
+ So the fact is getting PIO images means it's never being converted to a tensor.
+
+52:13.480 --> 52:22.480
+ So data block, I don't think there's something that calls to tensor or something at some point.
+
+52:22.480 --> 52:23.480
+ Oh, there is here.
+
+52:23.480 --> 52:26.480
+ Item transforms.
+
+52:26.480 --> 52:30.480
+ So why isn't that getting called?
+
+52:30.480 --> 52:35.480
+ Because...
+
+52:35.480 --> 52:43.480
+ So item transforms, I think, are also done at the data loaders stage.
+
+52:43.480 --> 52:45.480
+ Item transforms.
+
+52:45.480 --> 52:50.480
+ Let's see.
+
+52:50.480 --> 52:54.480
+ Item transforms.
+
+52:54.480 --> 52:57.480
+ Yes, that's also done.
+
+52:57.480 --> 52:58.480
+ Okay.
+
+52:58.480 --> 53:04.480
+ So basically, using datasets instead of data loaders is quite awkward.
+
+53:04.480 --> 53:13.480
+ I think we need to fix this in fast AI because yes, it's not being done for us.
+
+53:13.480 --> 53:29.480
+ But you know what we could do, actually, is what we could do is the same thing that data block does,
+
+53:29.480 --> 53:35.480
+ which is just to use these self.item transforms and self.batch transforms.
+
+53:35.480 --> 53:41.480
+ So if we have a look at our data block,
+
+53:41.480 --> 53:46.480
+ oops, daisy.
+
+53:46.480 --> 53:51.480
+ Okay, I think this is all going to become clear in a moment, hopefully.
+
+53:51.480 --> 53:56.480
+ It's got these item transforms in it.
+
+53:56.480 --> 54:01.480
+ And it's got these batch transforms in it.
+
+54:01.480 --> 54:13.480
+ And so what we actually want to do when we create our data loaders is say that after batch is whatever the data block says the batch transforms are.
+
+54:13.480 --> 54:25.480
+ And after item is whatever the data block says the item transforms are.
+
+54:25.480 --> 54:28.480
+ Okay, that's ugly.
+
+54:28.480 --> 54:31.480
+ So that's something I think we should try to make easier.
+
+54:31.480 --> 54:39.480
+ So hopefully by the time people see this video, this will all be easier.
+
+54:39.480 --> 54:49.480
+ So there's some data loaders.
+
+54:49.480 --> 54:56.480
+ Okay.
+
+54:56.480 --> 55:03.480
+ So my guess is that here is we've given the wrong number of weights.
+
+55:03.480 --> 55:06.480
+ I'm guessing this needs to be weights just for the training set.
+
+55:06.480 --> 55:13.480
+ So the way I would check this is I would type percent debug and that puts us into the Python debugger.
+
+55:13.480 --> 55:16.480
+ And the Python debugger is a very, very cool thing.
+
+55:16.480 --> 55:20.480
+ It's called PDB.
+
+55:20.480 --> 55:23.480
+ And definitely want to know how to use it.
+
+55:23.480 --> 55:27.480
+ H gives you the help.
+
+55:27.480 --> 55:37.480
+ And W shows you where in the stack you are.
+
+55:37.480 --> 55:40.480
+ So you can see this is the line of code I'm about to run.
+
+55:40.480 --> 55:45.480
+ And so I can print out with P self.n.
+
+55:45.480 --> 55:51.480
+ And I can print out with P self.weights.
+
+55:51.480 --> 55:58.480
+ And you don't actually normally need to even say P it just assumes that so I can just say self.weight.shape.
+
+55:58.480 --> 56:00.480
+ And so there's the problem.
+
+56:00.480 --> 56:08.480
+ So it's expecting 8,326 weights, not 10,407 weights.
+
+56:08.480 --> 56:14.480
+ And so that's because, and you know, to be fair, the documentation warned us about this.
+
+56:14.480 --> 56:19.480
+ It's expecting weights just for the training set.
+
+56:19.480 --> 56:27.480
+ Not for both training and validation sets.
+
+56:27.480 --> 56:37.480
+ Okay, no problem.
+
+56:37.480 --> 56:45.480
+ Could you pre determine you split by adding another column in the same dataset there to put the weights in?
+
+56:45.480 --> 56:48.480
+ Yeah, I could do that.
+
+56:48.480 --> 56:52.480
+ But actually, and somebody actually asked about this the other day.
+
+56:52.480 --> 56:55.480
+ This is our training set.
+
+56:55.480 --> 57:01.480
+ And items tells you the file names actually.
+
+57:01.480 --> 57:06.480
+ So we just need to look at each of these up.
+
+57:06.480 --> 57:14.480
+ In the data frame.
+
+57:14.480 --> 57:20.480
+ So what we could do is we could say weights equals.
+
+57:20.480 --> 57:25.480
+ And so we could go through each of those.
+
+57:25.480 --> 57:28.480
+ So that's going to be all of our files.
+
+57:28.480 --> 57:37.480
+ And then we need to look up the image ID.
+
+57:37.480 --> 57:46.480
+ And you know, I think something you could possibly do here is.
+
+57:46.480 --> 57:50.480
+ Set the index.
+
+57:50.480 --> 57:55.480
+ To image ID.
+
+57:55.480 --> 57:59.480
+ Right, which is this kind of pandas idea.
+
+57:59.480 --> 58:04.480
+ And then.
+
+58:04.480 --> 58:09.480
+ We say.
+
+58:09.480 --> 58:14.480
+ Dot location of one.
+
+58:14.480 --> 58:17.480
+ Jpeg.
+
+58:17.480 --> 58:25.480
+ Oh, there it is.
+
+58:25.480 --> 58:28.480
+ And for.
+
+58:28.480 --> 58:31.480
+ Label why.
+
+58:31.480 --> 58:34.480
+ There it is.
+
+58:34.480 --> 58:36.480
+ So.
+
+58:36.480 --> 58:40.480
+ If we copy that over to here.
+
+58:40.480 --> 58:45.480
+ And replace that with O.
+
+58:45.480 --> 58:50.480
+ Oh, oh, dot name.
+
+58:50.480 --> 58:53.480
+ Look at that.
+
+58:53.480 --> 58:54.480
+ Okay.
+
+58:54.480 --> 59:02.480
+ So.
+
+59:02.480 --> 59:04.480
+ Okay, so we don't want to sort values.
+
+59:04.480 --> 59:05.480
+ We want to set index.
+
+59:05.480 --> 59:09.480
+ I should probably take more use make more use of indices in pandas.
+
+59:09.480 --> 59:14.480
+ I guess I still don't have a great sense in my head of quite how they work.
+
+59:14.480 --> 59:16.480
+ So I tend to under use them.
+
+59:16.480 --> 59:19.480
+ Okay, so weights should now be the right length.
+
+59:19.480 --> 59:22.480
+ The training set.
+
+59:22.480 --> 59:31.480
+ Okay, so now.
+
+59:31.480 --> 59:45.480
+ So here.
+
+59:45.480 --> 59:50.480
+ Cool.
+
+59:50.480 --> 59:54.480
+ And then what I've been trying to do is to do a few more.
+
+59:54.480 --> 1:00:07.480
+ And what I find encouraging here is that we've got a lot of materials.
+
+1:00:07.480 --> 1:00:18.480
+ Ground spot. Yeah, you know, this seems like a good mix, right?
+
+1:00:18.480 --> 1:00:25.480
+ So then.
+
+1:00:25.480 --> 1:00:34.480
+ We should just be able to.
+
+1:00:34.480 --> 1:00:39.480
+ Pass those to our learner.
+
+1:00:39.480 --> 1:00:43.480
+ Fine tune for five.
+
+1:00:43.480 --> 1:00:52.480
+ All right, sorry, that was a bit more awkward than I would have liked and definitely used a whole bunch of concepts which we haven't.
+
+1:00:52.480 --> 1:00:54.480
+ Covered before.
+
+1:00:54.480 --> 1:00:59.480
+ So don't worry if you're feeling lost about the implementation here.
+
+1:00:59.480 --> 1:01:06.480
+ Basically, yeah, just about the sampling works.
+
+1:01:06.480 --> 1:01:14.480
+ We've got weights and that's creating.
+
+1:01:14.480 --> 1:01:17.480
+ How is that actually sampled from the training set?
+
+1:01:17.480 --> 1:01:23.480
+ Is it do we have a X number of rows or number of images that we're trying to create a sample.
+
+1:01:23.480 --> 1:01:26.480
+ Yeah, so what happens is it creates it creates batches.
+
+1:01:26.480 --> 1:01:29.480
+ So each batch will have 64 things in.
+
+1:01:29.480 --> 1:01:34.480
+ And so it's going to grab at random 64 images.
+
+1:01:34.480 --> 1:01:42.480
+ And so we're going to get a weighted random sample where each row is weighted by this.
+
+1:01:42.480 --> 1:01:44.480
+ This weight.
+
+1:01:44.480 --> 1:01:49.480
+ And so an epochs not exactly an epoch anymore.
+
+1:01:49.480 --> 1:02:00.480
+ In that it won't necessarily see every image once an epochs an epochs just equal to the total number of rows in the data set is how many rows I've seen.
+
+1:02:00.480 --> 1:02:04.480
+ A lot of the less common ones multiple times.
+
+1:02:04.480 --> 1:02:10.480
+ And so there's a definite danger of overfitting.
+
+1:02:10.480 --> 1:02:15.480
+ The weighted sampling is not done for the validation set.
+
+1:02:15.480 --> 1:02:18.480
+ So we should be able to compare these.
+
+1:02:18.480 --> 1:02:19.480
+ Let's take a look.
+
+1:02:19.480 --> 1:02:22.480
+ So 5.6.
+
+1:02:22.480 --> 1:02:24.480
+ Versus 4.6.
+
+1:02:24.480 --> 1:02:27.480
+ Now, you know, this is expected.
+
+1:02:27.480 --> 1:02:31.480
+ But where this might be interesting would be like.
+
+1:02:31.480 --> 1:02:33.480
+ Do all of our training.
+
+1:02:33.480 --> 1:02:37.480
+ And then maybe at the very end.
+
+1:02:37.480 --> 1:02:40.480
+ Do a few epochs with weighted training.
+
+1:02:40.480 --> 1:02:45.480
+ You know, at the point that it's already really good just to show it a few more examples of the.
+
+1:02:45.480 --> 1:02:48.480
+ Mass common ones.
+
+1:02:48.480 --> 1:02:52.480
+ Or just train it for longer with more data augmentation.
+
+1:02:52.480 --> 1:02:59.480
+ But yeah, I mean, you know, you would expect the error rate at this point to be worse, I think, because.
+
+1:02:59.480 --> 1:03:01.480
+ The most common.
+
+1:03:01.480 --> 1:03:05.480
+ Types, which it's.
+
+1:03:05.480 --> 1:03:12.480
+ Particularly what to care about because they're the ones that's going to have mainly in the training set. It hasn't seen very much.
+
+1:03:12.480 --> 1:03:15.480
+ So the overall error has gone down.
+
+1:03:15.480 --> 1:03:21.480
+ But yeah, I think you like it might be there may well be ways to.
+
+1:03:21.480 --> 1:03:23.480
+ To use this.
+
+1:03:23.480 --> 1:03:24.480
+ Jerry.
+
+1:03:24.480 --> 1:03:30.480
+ Yeah, possibly you could quickly explain where the deficiency was in this.
+
+1:03:30.480 --> 1:03:35.480
+ Random weighted API how you would prefer that to look like you said you.
+
+1:03:35.480 --> 1:03:36.480
+ Oh, yeah, sure.
+
+1:03:36.480 --> 1:03:43.480
+ Fix it up later, but I mean, I think I think the way this ought to look would be that I can say.
+
+1:03:43.480 --> 1:03:46.480
+ DLS equals D block.
+
+1:03:46.480 --> 1:03:50.480
+ Weighted data loader.
+
+1:03:50.480 --> 1:03:53.480
+ Like that.
+
+1:03:53.480 --> 1:03:56.480
+ In fact, we could fix it up now.
+
+1:03:56.480 --> 1:04:01.480
+ Reusing the existing after batch and after items already and there.
+
+1:04:01.480 --> 1:04:02.480
+ Yeah, we could we can.
+
+1:04:02.480 --> 1:04:03.480
+ If you're interested.
+
+1:04:03.480 --> 1:04:05.480
+ Yeah, I'd love to see how to.
+
+1:04:05.480 --> 1:04:06.480
+ Okay.
+
+1:04:06.480 --> 1:04:15.480
+ So, you know, the first thing I do before I change the first library is make sure I've got the latest version of it.
+
+1:04:15.480 --> 1:04:17.480
+ By doing a get for.
+
+1:04:17.480 --> 1:04:20.480
+ Because nobody likes conflicts.
+
+1:04:20.480 --> 1:04:23.480
+ All right, it's up to date.
+
+1:04:23.480 --> 1:04:28.480
+ So then I would go into the notebooks and.
+
+1:04:28.480 --> 1:04:32.480
+ It was in the data callbacks.
+
+1:04:32.480 --> 1:04:35.480
+ So call back data.
+
+1:04:35.480 --> 1:04:46.480
+ And so here's weighted data loaders.
+
+1:04:46.480 --> 1:04:55.480
+ Jeremy, is this a bit of a silly question, but is it a call back or is it just kind of like a transform within the actual data block?
+
+1:04:55.480 --> 1:04:56.480
+ Should it be.
+
+1:04:56.480 --> 1:05:01.480
+ If you send weights to a data block, then it just does it.
+
+1:05:01.480 --> 1:05:09.480
+ Is it a call back?
+
+1:05:09.480 --> 1:05:13.480
+ No, it's not a call back.
+
+1:05:13.480 --> 1:05:17.480
+ So it's in a strange place.
+
+1:05:17.480 --> 1:05:20.480
+ It's not a call back.
+
+1:05:20.480 --> 1:05:24.480
+ What it is, it's a data loader actually.
+
+1:05:24.480 --> 1:05:32.480
+ And a patch to data sets.
+
+1:05:32.480 --> 1:05:35.480
+ So there's a.
+
+1:05:35.480 --> 1:05:42.480
+ You know, something I like very much in the first core called patch, which is allows us to add.
+
+1:05:42.480 --> 1:05:46.480
+ A method with this name to this class.
+
+1:05:46.480 --> 1:05:52.480
+ And I want to add something to the data block class.
+
+1:05:52.480 --> 1:06:12.480
+ Like so.
+
+1:06:12.480 --> 1:06:18.480
+ And but yeah, I think that the the the doc string is correct.
+
+1:06:18.480 --> 1:06:25.480
+ And I would then be inclined to just grab this.
+
+1:06:25.480 --> 1:06:27.480
+ Here copy.
+
+1:06:27.480 --> 1:06:31.480
+ And paste it.
+
+1:06:31.480 --> 1:06:35.480
+ In here.
+
+1:06:35.480 --> 1:06:37.480
+ Paste.
+
+1:06:37.480 --> 1:06:43.480
+ Okay. And so this would be calling.
+
+1:06:43.480 --> 1:06:54.480
+ Yeah, so we're calling the data blocks.
+
+1:06:54.480 --> 1:06:57.480
+ So I guess we're going to do the two steps.
+
+1:06:57.480 --> 1:06:59.480
+ And a manually, aren't we?
+
+1:06:59.480 --> 1:07:05.480
+ So we're just going to go.
+
+1:07:05.480 --> 1:07:15.480
+ Create the data sets.
+
+1:07:15.480 --> 1:07:17.480
+ Data sets.
+
+1:07:17.480 --> 1:07:27.480
+ And so that means we need to be passed in.
+
+1:07:27.480 --> 1:07:37.480
+ And then we're going to do the items.
+
+1:07:37.480 --> 1:07:42.480
+ And I've been trying to like grab all that.
+
+1:07:42.480 --> 1:07:46.480
+ Okay. So this.
+
+1:07:46.480 --> 1:07:51.480
+ This thing in data block.
+
+1:07:51.480 --> 1:08:00.480
+ It's going to be the weights.
+
+1:08:00.480 --> 1:08:03.480
+ It's going to need a batch size.
+
+1:08:03.480 --> 1:08:05.480
+ Apparently there's something called verbose.
+
+1:08:05.480 --> 1:08:08.480
+ I don't know what that means, but that's fine.
+
+1:08:08.480 --> 1:08:16.480
+ The so the data sets is self.data sets passing in the source.
+
+1:08:16.480 --> 1:08:20.480
+ And verbose equals verbose.
+
+1:08:20.480 --> 1:08:26.480
+ And then we called DSS.data Lotus.
+
+1:08:26.480 --> 1:08:30.480
+ And when we did that.
+
+1:08:30.480 --> 1:08:34.480
+ Okay. So now we're going to be passing doing DSS.weighted data
+
+1:08:34.480 --> 1:08:39.480
+ Lotus.
+
+1:08:39.480 --> 1:08:49.480
+ Weighted data Lotus.
+
+1:08:49.480 --> 1:08:53.480
+ And that.
+
+1:08:53.480 --> 1:08:57.480
+ That's basically.
+
+1:08:57.480 --> 1:09:00.480
+ Oops.
+
+1:09:00.480 --> 1:09:09.480
+ And then we pass in the weights.
+
+1:09:09.480 --> 1:09:19.480
+ Weighted data Lotus gets the weights.
+
+1:09:19.480 --> 1:09:21.480
+ And then the batch size.
+
+1:09:21.480 --> 1:09:24.480
+ And then the things we added.
+
+1:09:24.480 --> 1:09:29.480
+ Any additional keyword arguments.
+
+1:09:29.480 --> 1:09:38.480
+ And this will delegate down to.
+
+1:09:38.480 --> 1:09:44.480
+ And then the loaders is where the key word arguments get passed to.
+
+1:09:44.480 --> 1:09:46.480
+ Okay.
+
+1:09:46.480 --> 1:09:52.480
+ So as far as I can tell these same tests.
+
+1:09:52.480 --> 1:09:55.480
+ Should all work.
+
+1:09:55.480 --> 1:09:57.480
+ We don't need these labels anymore.
+
+1:09:57.480 --> 1:10:00.480
+ We've already got a data block.
+
+1:10:00.480 --> 1:10:06.480
+ So previously we called data set and item transforms and weights manually.
+
+1:10:06.480 --> 1:10:12.480
+ So that is our source.
+
+1:10:12.480 --> 1:10:16.480
+ So we could get rid of all this.
+
+1:10:16.480 --> 1:10:22.480
+ And we're now going to go data block.weighted data Lotus.
+
+1:10:22.480 --> 1:10:26.480
+ And we got to pass in our source.
+
+1:10:26.480 --> 1:10:29.480
+ Okay. And we got to pass in our weights.
+
+1:10:29.480 --> 1:10:39.480
+ We're called weights.
+
+1:10:39.480 --> 1:10:48.480
+ And we don't need that anymore.
+
+1:10:48.480 --> 1:10:49.480
+ Okay.
+
+1:10:49.480 --> 1:10:52.480
+ Why did I get zero?
+
+1:10:52.480 --> 1:10:57.480
+ That's slightly surprising to me.
+
+1:10:57.480 --> 1:10:59.480
+ I don't know zero.
+
+1:10:59.480 --> 1:11:00.480
+ Yeah.
+
+1:11:00.480 --> 1:11:12.480
+ That's fine.
+
+1:11:12.480 --> 1:11:14.480
+ Yeah, it gets zero or one.
+
+1:11:14.480 --> 1:11:22.480
+ Yeah, because it depends how it.
+
+1:11:22.480 --> 1:11:24.480
+ Why is it slightly random?
+
+1:11:24.480 --> 1:11:25.480
+ I'm not sure.
+
+1:11:25.480 --> 1:11:27.480
+ Something slightly random.
+
+1:11:27.480 --> 1:11:29.480
+ But anyway, it's working.
+
+1:11:29.480 --> 1:11:31.480
+ So then.
+
+1:11:31.480 --> 1:11:32.480
+ Okay.
+
+1:11:32.480 --> 1:11:36.480
+ And again, for this one, we shouldn't need to do data sets dot.
+
+1:11:36.480 --> 1:11:38.480
+ We should be able to go data block.
+
+1:11:38.480 --> 1:11:41.480
+ We're not weighted data Lotus.
+
+1:11:41.480 --> 1:11:43.480
+ And we should be able to pass in.
+
+1:11:43.480 --> 1:11:47.480
+ Our items.
+
+1:11:47.480 --> 1:11:51.480
+ And our weights.
+
+1:11:51.480 --> 1:12:11.480
+ And
+
+1:12:11.480 --> 1:12:21.480
+ we're going to go to data block.
+
+1:12:21.480 --> 1:12:22.480
+ Okay.
+
+1:12:22.480 --> 1:12:26.480
+ Let's see.
+
+1:12:26.480 --> 1:12:30.480
+ And our source.
+
+1:12:30.480 --> 1:12:37.480
+ And our weights.
+
+1:12:37.480 --> 1:12:47.480
+ Okay.
+
+1:12:47.480 --> 1:12:54.480
+ So let's see how it's different to what this one said.
+
+1:12:54.480 --> 1:13:01.480
+ Data sets.
+
+1:13:01.480 --> 1:13:02.480
+ Okay.
+
+1:13:02.480 --> 1:13:04.480
+ This doesn't use a data block.
+
+1:13:04.480 --> 1:13:09.480
+ Okay.
+
+1:13:09.480 --> 1:13:12.480
+ Okay.
+
+1:13:12.480 --> 1:13:19.480
+ So that's our test.
+
+1:13:19.480 --> 1:13:20.480
+ There we go.
+
+1:13:20.480 --> 1:13:22.480
+ So what I would then do.
+
+1:13:22.480 --> 1:13:25.480
+ Is I would export it.
+
+1:13:25.480 --> 1:13:29.480
+ And if.
+
+1:13:29.480 --> 1:13:34.480
+ So that that I don't have to like rebuild or reinstall or anything like that.
+
+1:13:34.480 --> 1:13:36.480
+ My fast AI library.
+
+1:13:36.480 --> 1:13:40.480
+ That's because I have it installed using something called an editable install.
+
+1:13:40.480 --> 1:13:44.480
+ So if you haven't seen that before, basically, or maybe you have any one way.
+
+1:13:44.480 --> 1:13:50.480
+ When you go pip install minus E dot in a git repo.
+
+1:13:50.480 --> 1:13:55.480
+ Basically, that creates like a sim link from your Python library.
+
+1:13:55.480 --> 1:14:00.480
+ To this folder.
+
+1:14:00.480 --> 1:14:06.480
+ And so fast AI when I import fast AI, it's actually going to import it from this folder.
+
+1:14:06.480 --> 1:14:12.480
+ And so now back over here in my weighted thingy.
+
+1:14:12.480 --> 1:14:21.480
+ If I do all this.
+
+1:14:21.480 --> 1:14:27.480
+ Data block.
+
+1:14:27.480 --> 1:14:31.480
+ We should find that there's now a D block dot.
+
+1:14:31.480 --> 1:14:34.480
+ Data data loaders.
+
+1:14:34.480 --> 1:14:39.480
+ Which I can pass source and weights.
+
+1:14:39.480 --> 1:14:41.480
+ And my source is files.
+
+1:14:41.480 --> 1:14:46.480
+ And my weights is.
+
+1:14:46.480 --> 1:14:53.480
+ Okay, so that's interesting.
+
+1:14:53.480 --> 1:15:00.480
+ I wait.
+
+1:15:00.480 --> 1:15:09.480
+ Yes, we don't have data sets yet.
+
+1:15:09.480 --> 1:15:15.480
+ So that's a very interesting point.
+
+1:15:15.480 --> 1:15:18.480
+ So how do we know what our weights are?
+
+1:15:18.480 --> 1:15:21.480
+ We don't because they haven't been split.
+
+1:15:21.480 --> 1:15:27.480
+ So the.
+
+1:15:27.480 --> 1:15:37.480
+ Could you not send them through as one of the blocks in the as a column get from and then use that because then it would be linked quite intimately with the actual row.
+
+1:15:37.480 --> 1:15:43.480
+ Well, we don't need to. I think what we need to do is pass in weights.
+
+1:15:43.480 --> 1:15:46.480
+ I think we should pass in all the weights.
+
+1:15:46.480 --> 1:15:58.480
+ And then this thing here should then be responsible for grabbing the subset for the training set.
+
+1:15:58.480 --> 1:16:01.480
+ And that would actually be much more convenient.
+
+1:16:01.480 --> 1:16:03.480
+ Which is after all is what we want.
+
+1:16:03.480 --> 1:16:11.480
+ So, yes, you should determine the weights based on the distribution across the classes rather than.
+
+1:16:11.480 --> 1:16:15.480
+ So we should split the weights based on the splitter.
+
+1:16:15.480 --> 1:16:17.480
+ In a training and test set.
+
+1:16:17.480 --> 1:16:19.480
+ So then we don't need any of this.
+
+1:16:19.480 --> 1:16:23.480
+ So then weights.
+
+1:16:23.480 --> 1:16:34.480
+ Actually, we'll simply be.
+
+1:16:34.480 --> 1:16:37.480
+ There's our weighted data frame.
+
+1:16:37.480 --> 1:16:45.480
+ So basically what I would do here is this will actually will go back to saying this is sort values.
+
+1:16:45.480 --> 1:16:50.480
+ And then our weights will be.
+
+1:16:50.480 --> 1:16:56.480
+ WTF dot label y.
+
+1:16:56.480 --> 1:17:00.480
+ That's actually our weights.
+
+1:17:00.480 --> 1:17:02.480
+ As a number.
+
+1:17:02.480 --> 1:17:15.480
+ So, silly question, could you not just see the function for weights to the standard data block. And if it doesn't get one, then it does nothing.
+
+1:17:15.480 --> 1:17:22.480
+ Potentially, we could.
+
+1:17:22.480 --> 1:17:33.480
+ It's.
+
+1:17:33.480 --> 1:17:39.480
+ I kind of like this though, because like, yeah, I don't know. It's like.
+
+1:17:39.480 --> 1:17:41.480
+ It's we're all one.
+
+1:17:41.480 --> 1:17:43.480
+ As a default, then.
+
+1:17:43.480 --> 1:17:45.480
+ Could use the one solution for.
+
+1:17:45.480 --> 1:17:46.480
+ Yeah, yeah.
+
+1:17:46.480 --> 1:17:51.480
+ I just, I don't, I find it's a little bit too coupled for me. I don't love it, but it's, it's, it would be doable.
+
+1:17:51.480 --> 1:17:59.480
+ Nicely decoupled. This is so I think this is what I want it to look like.
+
+1:17:59.480 --> 1:18:10.480
+ So.
+
+1:18:10.480 --> 1:18:15.480
+ So I would look at how the splitters work.
+
+1:18:15.480 --> 1:18:21.480
+ So the splitter.
+
+1:18:21.480 --> 1:18:30.480
+ Okay, so the splits gets created here in data sets.
+
+1:18:30.480 --> 1:18:36.480
+ Cool. And then.
+
+1:18:36.480 --> 1:18:38.480
+ I wonder if data sets.
+
+1:18:38.480 --> 1:18:44.480
+ Remember's what those splits are.
+
+1:18:44.480 --> 1:18:54.480
+ I don't have tags here.
+
+1:18:54.480 --> 1:19:23.480
+ Wait, what do you mean, no tags file?
+
+1:19:23.480 --> 1:19:25.480
+ Okay, there we go.
+
+1:19:25.480 --> 1:19:27.480
+ Data sets.
+
+1:19:27.480 --> 1:19:38.480
+ So that's control right square bracket to remind you to jump to a symbol in VIM.
+
+1:19:38.480 --> 1:19:43.480
+ I see. And that's actually mainly happening in this inheritance.
+
+1:19:43.480 --> 1:19:47.480
+ The superclass is where.
+
+1:19:47.480 --> 1:19:55.480
+ This is split stuff here. Yes, splits. I see though. There is a splits.
+
+1:19:55.480 --> 1:20:00.480
+ So dss. splits.
+
+1:20:00.480 --> 1:20:06.480
+ Oh, okay.
+
+1:20:06.480 --> 1:20:10.480
+ Dss. splits.
+
+1:20:10.480 --> 1:20:13.480
+ Yeah, so there's the indices of the training and test sets.
+
+1:20:13.480 --> 1:20:18.480
+ And so that's the indices of the training set.
+
+1:20:18.480 --> 1:20:24.480
+ So the actual weights we want to those ones.
+
+1:20:24.480 --> 1:20:31.480
+ So over here.
+
+1:20:31.480 --> 1:20:44.480
+ I can say training weights.
+
+1:20:44.480 --> 1:20:49.480
+ So we'll change this to data set from training set.
+
+1:20:49.480 --> 1:20:53.480
+ And so this will be the weights.
+
+1:20:53.480 --> 1:20:54.480
+ At those indices.
+
+1:20:54.480 --> 1:20:59.480
+ And that's what we'd use.
+
+1:20:59.480 --> 1:21:01.480
+ No, dss. splits.
+
+1:21:01.480 --> 1:21:03.480
+ Self is a data block.
+
+1:21:03.480 --> 1:21:05.480
+ And it's actually the dss that has the splits.
+
+1:21:05.480 --> 1:21:08.480
+ The data block has a function that knows how to split.
+
+1:21:08.480 --> 1:21:11.480
+ But the split doesn't happen until you create it.
+
+1:21:11.480 --> 1:21:17.480
+ That way you can get different random splits each time if you want them.
+
+1:21:17.480 --> 1:21:19.480
+ Thank you for checking though.
+
+1:21:19.480 --> 1:21:22.480
+ Okay, so I'll export that.
+
+1:21:22.480 --> 1:21:28.480
+ And probably good to have auto load going, but we don't.
+
+1:21:28.480 --> 1:21:30.480
+ Okay.
+
+1:21:30.480 --> 1:21:32.480
+ Okay.
+
+1:21:32.480 --> 1:21:52.480
+ Oh, no, that we did miss itself, but it's not the one you've bought off.
+
+1:21:52.480 --> 1:21:59.480
+ This one here.
+
+1:21:59.480 --> 1:22:13.480
+ Yeah.
+
+1:22:13.480 --> 1:22:17.480
+ Okay.
+
+1:22:17.480 --> 1:22:24.480
+ Oh, no.
+
+1:22:24.480 --> 1:22:36.480
+ Oh, no.
+
+1:22:36.480 --> 1:22:46.480
+ I guess actually if I just comment this out, then we can just run all above without worrying.
+
+1:22:46.480 --> 1:22:56.480
+ Okay.
+
+1:22:56.480 --> 1:22:57.480
+ Okay.
+
+1:22:57.480 --> 1:22:59.480
+ Things are happening.
+
+1:22:59.480 --> 1:23:15.480
+ So dls equals that.
+
+1:23:15.480 --> 1:23:16.480
+ Okay.
+
+1:23:16.480 --> 1:23:17.480
+ That looks pretty good.
+
+1:23:17.480 --> 1:23:18.480
+ Okay.
+
+1:23:18.480 --> 1:23:24.480
+ So I think we've created our feature.
+
+1:23:24.480 --> 1:23:37.480
+ So then the next thing I would do is to be very, very weird if any tests broke, but I would go ahead and run the tests.
+
+1:23:37.480 --> 1:23:51.480
+ I would then create an issue for my feature. And so I've got a bunch of tiny little aliases and functions.
+
+1:23:51.480 --> 1:23:55.480
+ One's called enhancement, which creates an issue with the enhancement label.
+
+1:23:55.480 --> 1:23:57.480
+ So I'll go enhancement.
+
+1:23:57.480 --> 1:24:02.480
+ Add data block.
+
+1:24:02.480 --> 1:24:09.480
+ We've got weighted data motors.
+
+1:24:09.480 --> 1:24:16.480
+ That creates the issue as 3706.
+
+1:24:16.480 --> 1:24:22.480
+ So if you were interested, you could take a look at that issue.
+
+1:24:22.480 --> 1:24:29.480
+ Not the world's most interesting issue, but there it is.
+
+1:24:29.480 --> 1:24:36.480
+ All right. Looks like the tests are basically, oh, no, we've got an issue. There we go. So we've got a test that's failed.
+
+1:24:36.480 --> 1:24:43.480
+ Range in this must be introduced or slices.
+
+1:24:43.480 --> 1:24:45.480
+ Yes.
+
+1:24:45.480 --> 1:24:56.480
+ Right. So I'm glad we checked.
+
+1:24:56.480 --> 1:25:16.480
+ So the problem here is that I sliced into my weights on the assumption that this is something I can slice into, which would only be true if it was a tensor or an array.
+
+1:25:16.480 --> 1:25:25.480
+ But in this case, actually my weights are not either of those things.
+
+1:25:25.480 --> 1:25:31.480
+ So what I do to fix that.
+
+1:25:31.480 --> 1:25:34.480
+ There's a question here. Yeah.
+
+1:25:34.480 --> 1:25:48.480
+ When you split, you only keep you back the index of the training and validation data set. And how can you know this is the weights because you haven't actually do the calculation and do the inverse or one square.
+
+1:25:48.480 --> 1:25:57.480
+ The weights are being passed in as a parameter. And so we calculated the weights up here.
+
+1:25:57.480 --> 1:25:58.480
+ Yep.
+
+1:25:58.480 --> 1:26:00.480
+ And then we passed them in.
+
+1:26:00.480 --> 1:26:04.480
+ Yeah.
+
+1:26:04.480 --> 1:26:07.480
+ What's the incorrect type that's coming through in the test.
+
+1:26:07.480 --> 1:26:10.480
+ It's not that it's an incorrect type. It's that.
+
+1:26:10.480 --> 1:26:17.480
+ See how here I'm indexing into the weights using my splits.
+
+1:26:17.480 --> 1:26:24.480
+ This here is a list or an array. You can't index into a Python list with a list.
+
+1:26:24.480 --> 1:26:28.480
+ You can only do that with tensors or some play rate.
+
+1:26:28.480 --> 1:26:31.480
+ I guess so.
+
+1:26:31.480 --> 1:26:41.480
+ Yeah. I mean, what we actually want to do is check whether it's, it's an array type.
+
+1:26:41.480 --> 1:26:47.480
+ Is there is a list or something that function. There is, but that's not quite.
+
+1:26:47.480 --> 1:26:56.480
+ I think what the opposite, which is, is this the kind of thing that one could expect to be able to do NumPy style indexing on.
+
+1:26:56.480 --> 1:27:10.480
+ And I believe the correct way to do that might be to look for this thing.
+
+1:27:10.480 --> 1:27:21.480
+ So I would be inclined to say.
+
+1:27:21.480 --> 1:27:25.480
+ And they may, they may well already be something in first day.
+
+1:27:25.480 --> 1:27:32.480
+ I that knows how to check for this to be honest.
+
+1:27:32.480 --> 1:27:42.480
+ Okay.
+
+1:27:42.480 --> 1:27:52.480
+ So this, what's this thing?
+
+1:27:52.480 --> 1:27:54.480
+ Oh, that's something that's coming to doubt.
+
+1:27:54.480 --> 1:28:06.480
+ All right. So I guess I don't have anything which checks for that. So we'll just do it manually. So if weights has the done array attribute.
+
+1:28:06.480 --> 1:28:12.480
+ Because I'm pretty sure that tensors have that as well.
+
+1:28:12.480 --> 1:28:21.480
+ Yeah, it does. So if it has that attribute, then I think we're good to go.
+
+1:28:21.480 --> 1:28:27.480
+ Otherwise, we can use a list comprehension.
+
+1:28:27.480 --> 1:28:31.480
+ Oh, you know what we could do.
+
+1:28:31.480 --> 1:28:40.480
+ Yeah. Okay. What we'll do is we'll just say if it doesn't have that.
+
+1:28:40.480 --> 1:28:44.480
+ I don't know if this is too.
+
+1:28:44.480 --> 1:28:51.480
+ To rude to change their.
+
+1:28:51.480 --> 1:28:55.480
+ It waits. But I think this is fine.
+
+1:28:55.480 --> 1:28:59.480
+ It's making a race. Not a non pi type array.
+
+1:28:59.480 --> 1:29:02.480
+ It's going to bounce it from being converted to one anyway.
+
+1:29:02.480 --> 1:29:07.480
+ Yeah. I mean, I don't, I mean, I don't see it downside.
+
+1:29:07.480 --> 1:29:15.480
+ Passes our test. Passes all of our tests.
+
+1:29:15.480 --> 1:29:18.480
+ Okay. So.
+
+1:29:18.480 --> 1:29:27.480
+ And that was our only test that failed, which is now passing.
+
+1:29:27.480 --> 1:29:34.480
+ So I would now say we've fixed issue 3706.
+
+1:29:34.480 --> 1:29:43.480
+ I've got a fixes little function that does that 3706.
+
+1:29:43.480 --> 1:29:51.480
+ Okay. And so now if we look at that issue,
+
+1:29:51.480 --> 1:29:59.480
+ you'll see that it's been resolved using this commit.
+
+1:29:59.480 --> 1:30:06.480
+ Yeah.
+
+1:30:06.480 --> 1:30:09.480
+ Before, but what do you commit from the notebook?
+
+1:30:09.480 --> 1:30:15.480
+ Do you sort of have it like reset with empty cells or do you run the cells?
+
+1:30:15.480 --> 1:30:24.480
+ I can get them basically, however they are, but with unnecessary metadata removed.
+
+1:30:24.480 --> 1:30:29.480
+ So there's a hook that automatically runs.
+
+1:30:29.480 --> 1:30:39.480
+ This function, which is the thing that removes stuff like the execution count.
+
+1:30:39.480 --> 1:30:42.480
+ Unnecessary notebook metadata stuff like that.
+
+1:30:42.480 --> 1:30:47.480
+ So the idea is that the notebooks.
+
+1:30:47.480 --> 1:30:51.480
+ Want to have all the outputs in place because they get turned into documentation.
+
+1:30:51.480 --> 1:31:03.480
+ And we wouldn't want to run them all in continuous integration to create documentation because they can like involve like spending 10 hours training an NLP model, for example.
+
+1:31:03.480 --> 1:31:07.480
+ So we don't remove the outputs for that reason.
+
+1:31:07.480 --> 1:31:12.480
+ And also because I want people to be able to look at the notebooks in GitHub and see.
+
+1:31:12.480 --> 1:31:18.480
+ You know, all the pictures and stuff.
+
+1:31:18.480 --> 1:31:25.480
+ All right, I better stop there. Oh, that's interesting. Did I?
+
+1:31:25.480 --> 1:31:28.480
+ Okay, I guess I don't have my hook installed.
+
+1:31:28.480 --> 1:31:31.480
+ So I'm glad I ran that manually. So you can see exactly what it does, right?
+
+1:31:31.480 --> 1:31:36.480
+ Empties out the execution counts and removes the metadata.
+
+1:31:36.480 --> 1:31:40.480
+ So.
+
+1:31:40.480 --> 1:31:42.480
+ Sorry for another question. I'm just trying to find it.
+
+1:31:42.480 --> 1:31:46.480
+ Is that get hook available in the repo or do you do?
+
+1:31:46.480 --> 1:31:52.480
+ Yeah, so it's if you go MB dev install.
+
+1:31:52.480 --> 1:31:58.480
+ Get hooks, it installs the hook and specifically it's going to.
+
+1:31:58.480 --> 1:32:03.480
+ Is that under MBS folder?
+
+1:32:03.480 --> 1:32:05.480
+ No, this is part of Nb dev.
+
+1:32:05.480 --> 1:32:09.480
+ Oh, okay. Right. So once that package is installed, it's a built in command.
+
+1:32:09.480 --> 1:32:13.480
+ And so that then installs a filter here.
+
+1:32:13.480 --> 1:32:16.480
+ I'll read more about it. Thanks.
+
+1:32:16.480 --> 1:32:20.480
+ And it also.
+
+1:32:20.480 --> 1:32:25.480
+ Installs a get hook.
+
+1:32:25.480 --> 1:32:29.480
+ To trust the notebooks, which calls Nb dev trust MBs.
+
+1:32:29.480 --> 1:32:35.480
+ Anyway, yeah, that's all in the Nb dev docs.
+
+1:32:35.480 --> 1:32:44.480
+ And then what's going to happen now on the first day ice on the GitHub side.
+
+1:32:44.480 --> 1:33:00.480
+ Is it's now busily running all the tests again.
+
+1:33:00.480 --> 1:33:11.480
+ And one of the things that checks is to make sure that the notebooks are clean and that the exports been run and then it checks or the notebooks somewhat in parallel.
+
+1:33:11.480 --> 1:33:14.480
+ All right, I better go. See you all.
+
+1:33:14.480 --> 1:33:36.480
+ Thanks.
+

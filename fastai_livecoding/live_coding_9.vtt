@@ -1,0 +1,1607 @@
+WEBVTT
+
+00:00.000 --> 00:06.060
+ Okay, we're recording. So I know there was some questions on the forum, Matt, I think it was you, right?
+
+00:06.720 --> 00:08.720
+ A couple of questions.
+
+00:10.720 --> 00:17.440
+ Yep, that's correct. I can read them out for you if you like. Oh, yeah, or you can express them in your own terms, whatever.
+
+00:17.440 --> 00:18.440
+ Yeah, tell me.
+
+00:18.440 --> 00:20.440
+ So I guess
+
+00:21.960 --> 00:27.800
+ there weren't so much, first of all, there weren't a couple of, there weren't questions, they were just sort of differences
+
+00:27.800 --> 00:32.280
+ when working on paper space, you're working on your local GPU.
+
+00:33.280 --> 00:34.280
+ And I found
+
+00:36.840 --> 00:40.520
+ Simlinking the Kaggle folder into storage
+
+00:41.680 --> 00:46.520
+ with my API keys, something that I did to make it a little bit easier to restart.
+
+00:47.360 --> 00:50.600
+ Just wanting to verify that that's sort of a good thing to do.
+
+00:53.320 --> 00:55.320
+ And
+
+00:55.320 --> 01:05.080
+ but the one thing that I would be really keen to know about is the, when I did the pip install of Tim, it was
+
+01:06.760 --> 01:12.800
+ it was fine, it was installed, but I had to restart the kernel and I'm wondering
+
+01:13.680 --> 01:17.640
+ that might be a bit of a pain going forward. I'd prefer to have it persistently
+
+01:18.720 --> 01:20.720
+ just there, ready to go.
+
+01:20.720 --> 01:20.720
+ Yep.
+
+01:20.720 --> 01:25.560
+ But it's not a con, not a conda package, so I wasn't sure how to.
+
+01:25.560 --> 01:26.560
+ Yeah.
+
+01:26.560 --> 01:31.600
+ So it's actually, it's actually pip packages are the only ones we've actually got the persistence working for.
+
+01:31.600 --> 01:38.480
+ So let's do that one first. So the key thing when you install Tim, let's see, do I already have it installed?
+
+01:41.480 --> 01:43.480
+ What Tim?
+
+01:43.960 --> 01:46.120
+ Okay, great. I don't. So let's do it.
+
+01:46.120 --> 01:56.040
+ So the key to think, remember, is when you install Tim is to do it with dash, dash user. Now,
+
+01:58.520 --> 02:03.600
+ in order to make that easier, I think what I would be inclined to do would be to
+
+02:05.560 --> 02:12.800
+ edit our slash storage slash dot bash dot local and add to it
+
+02:12.800 --> 02:23.800
+ alias. Let's do PI for pip install equals pip install.
+
+02:25.080 --> 02:31.120
+ Let's do minus you upgrade. That should work even if it's not installed already.
+
+02:32.000 --> 02:33.360
+ Minus minus user.
+
+02:33.360 --> 02:43.960
+ Okay. Now, if I, so I could close and reopen my terminal or I could just type source and then the name of the script,
+
+02:43.960 --> 02:46.240
+ which of course, in this case is exclamation mark dollar.
+
+02:46.240 --> 02:51.160
+ Oopsie dozy exclamation mark theme will rerun this.
+
+02:51.160 --> 02:56.960
+ This whole thing needs to be in quotes because it's a single thing.
+
+02:56.960 --> 02:58.160
+ It's my alias.
+
+02:59.440 --> 03:00.960
+ Okay, I'll pair it twice.
+
+03:00.960 --> 03:03.960
+ Okay, so now I can just type PI.
+
+03:04.960 --> 03:18.960
+ And by the way, if you want to know what something is, if you type which PI, it won't tell you anything useful because it's an alias, not a binary.
+
+03:18.960 --> 03:23.960
+ But if you type type PI, it will tell you exactly what it is in this case.
+
+03:23.960 --> 03:25.960
+ Oh, it's something that's an alias.
+
+03:25.960 --> 03:28.960
+ So I can type PI Tim.
+
+03:28.960 --> 03:36.960
+ And the key thing about minus minus user is that's going to put it in my dash dash local directory.
+
+03:36.960 --> 03:38.960
+ Sorry, my dot local directory.
+
+03:38.960 --> 03:39.960
+ So.
+
+03:45.960 --> 03:47.960
+ There it is, Tim.
+
+03:47.960 --> 03:50.960
+ So then all you need to make sure is that.
+
+03:50.960 --> 03:55.960
+ Your local directory is sim linked.
+
+03:55.960 --> 03:58.960
+ Two dot slash storage config local.
+
+03:58.960 --> 04:00.960
+ Oh, no, that's interesting.
+
+04:00.960 --> 04:04.960
+ Our, this is here is telling us we've got a broken sim link.
+
+04:04.960 --> 04:06.960
+ So that's what that means.
+
+04:06.960 --> 04:11.960
+ Yeah, dot get config is sim linked to slash storage.
+
+04:11.960 --> 04:20.960
+ But there is no dot get config there.
+
+04:20.960 --> 04:26.960
+ So I might have maybe forgot to move that or something.
+
+04:30.960 --> 04:37.960
+ So, okay, next time we try to commit it'll tell us and we'll know to fix that then.
+
+04:37.960 --> 04:45.960
+ To create a file that's empty, you just use touch.
+
+04:45.960 --> 04:48.960
+ So I'm just going to go ahead and create an empty file.
+
+04:48.960 --> 04:49.960
+ So at least it exists.
+
+04:49.960 --> 04:53.960
+ And then things won't get horribly confused.
+
+05:00.960 --> 05:02.960
+ Did I not touch it correctly?
+
+05:02.960 --> 05:11.960
+ Oh, there's a slash at the end.
+
+05:11.960 --> 05:15.960
+ Oh, that's why that's why it's confused.
+
+05:15.960 --> 05:19.960
+ So that would be a directory, but this is not a directory.
+
+05:24.960 --> 05:29.960
+ So my guess is that there's a bug in our pre run script for dot to config.
+
+05:29.960 --> 05:32.960
+ Yes, I've got a slash at the end.
+
+05:32.960 --> 05:35.960
+ So that's why that didn't work.
+
+05:35.960 --> 05:39.960
+ So if I.
+
+05:46.960 --> 05:48.960
+ Source that.
+
+05:52.960 --> 05:54.960
+ Now it's happy.
+
+05:54.960 --> 05:59.960
+ Great.
+
+05:59.960 --> 06:07.960
+ So now, yeah, so now since it's been installed into something that's similar back to slash storage, Tim will be available.
+
+06:07.960 --> 06:11.960
+ And if I run I Python, we can further did install.
+
+06:11.960 --> 06:12.960
+ That should be all good.
+
+06:12.960 --> 06:14.960
+ Does that answer that part of the question?
+
+06:14.960 --> 06:16.960
+ Yes, thank you.
+
+06:16.960 --> 06:22.960
+ So then the second one, yeah, it was not a question, but a comment, which is about Kaggle.
+
+06:22.960 --> 06:29.960
+ So yeah, when I get back to using Kaggle on this machine, we will do that for sure.
+
+06:29.960 --> 06:31.960
+ Which will probably be next time.
+
+06:31.960 --> 06:37.960
+ And you also had a question about jumping around to.
+
+06:37.960 --> 06:43.960
+ You know, the end of a string, for example.
+
+06:43.960 --> 06:51.960
+ Which.
+
+06:51.960 --> 06:54.960
+ Let's grab.
+
+06:54.960 --> 07:23.960
+ Last day, I was repo, for example.
+
+07:32.960 --> 07:35.960
+ Oh, and you also had a question about loading and serving models.
+
+07:35.960 --> 08:03.960
+ Great.
+
+08:03.960 --> 08:09.960
+ So, I mean, one thing obviously is it'd be nice to have tags file.
+
+08:09.960 --> 08:17.960
+ At some point we could even talk about how to set up Vim to automatically create that forest from time to time.
+
+08:17.960 --> 08:27.960
+ But let's have a look at, I don't know, layers, for example.
+
+08:27.960 --> 08:36.960
+ So a few things to mention, the first is something which sounds very obscure but actually isn't, is, is,
+
+08:36.960 --> 08:38.960
+ f in Vim.
+
+08:38.960 --> 08:40.960
+ f in Vim is like slash.
+
+08:40.960 --> 08:42.960
+ Now slash searches.
+
+08:42.960 --> 08:44.960
+ So we've seen it before, slash in it.
+
+08:44.960 --> 08:46.960
+ Well, search for the next thing called in it.
+
+08:46.960 --> 08:47.960
+ Okay.
+
+08:47.960 --> 08:54.960
+ Oh, maybe something we haven't discussed is to go back to where we were, regardless of whether it was a tag or a search or anything.
+
+08:54.960 --> 08:57.960
+ It's control O.
+
+08:57.960 --> 09:02.960
+ And right next to control O is the letter I, which goes forward again.
+
+09:02.960 --> 09:03.960
+ Okay.
+
+09:03.960 --> 09:08.960
+ So control O and control I go kind of like pressing the back button and the forward button on your browser.
+
+09:08.960 --> 09:13.960
+ There's something a lot like slash, but with just finds a single letter, which is f.
+
+09:13.960 --> 09:16.960
+ If I type f, it's got a, and it's under your search on the current line.
+
+09:16.960 --> 09:18.960
+ It'll search on this line for the next thing I type.
+
+09:18.960 --> 09:24.960
+ So if I type f double quote, actually, maybe more interesting would be f full stop.
+
+09:24.960 --> 09:28.960
+ So if I type f full stop, it's going to jump to the full stop f dot.
+
+09:28.960 --> 09:30.960
+ So you see it jumps to the full stop.
+
+09:30.960 --> 09:31.960
+ Right.
+
+09:31.960 --> 09:34.960
+ And so your question was, well, what about jumping to the end of a string?
+
+09:34.960 --> 09:38.960
+ Now, in this case, the end of a string is the last character of the line.
+
+09:38.960 --> 09:42.960
+ So there's a better answer, which is to start inserting at the end of the line.
+
+09:42.960 --> 09:45.960
+ It's shift A.
+
+09:45.960 --> 10:01.960
+ Just one moment.
+
+10:01.960 --> 10:20.960
+ My daughter's got kicked off her zoom call.
+
+10:20.960 --> 10:22.960
+ Always technical problems.
+
+10:22.960 --> 10:23.960
+ Okay.
+
+10:23.960 --> 10:25.960
+ So I can undo that.
+
+10:25.960 --> 10:30.960
+ Control O to go back to where I was.
+
+10:30.960 --> 10:36.960
+ But yeah, so let's say there was some stuff at the end hash some comment.
+
+10:36.960 --> 10:37.960
+ Right.
+
+10:37.960 --> 10:42.960
+ And we wanted to go to the next double quote.
+
+10:42.960 --> 10:44.960
+ I can just type f double quote.
+
+10:44.960 --> 10:46.960
+ And it takes me there.
+
+10:46.960 --> 10:51.960
+ And then shift f does the opposite, such as backwards.
+
+10:51.960 --> 10:56.960
+ And the reason it's interesting mainly is that that's emotion, and therefore I can combine things with it.
+
+10:56.960 --> 11:03.960
+ So for example, if I wanted to delete everything up to the next quote, I can press D, f double quote.
+
+11:03.960 --> 11:04.960
+ Right.
+
+11:04.960 --> 11:08.960
+ And then I could press slash double quote to search the next one and press dot.
+
+11:08.960 --> 11:10.960
+ And it'll do the same thing again.
+
+11:10.960 --> 11:11.960
+ Right.
+
+11:11.960 --> 11:18.960
+ Or maybe delete everything up to the next comment would be df hash.
+
+11:18.960 --> 11:23.960
+ So, yeah, those are a couple of useful things.
+
+11:23.960 --> 11:27.960
+ Another really useful one is percent.
+
+11:27.960 --> 11:37.960
+ Percent jumps to between the start and the end of a set of paired parentheses or braces or brackets.
+
+11:37.960 --> 11:40.960
+ So if I press percent here, it goes to the start.
+
+11:40.960 --> 11:43.960
+ It goes to the start of the end of the next parentheses and then press it again.
+
+11:43.960 --> 11:45.960
+ You can see it jumps between the two.
+
+11:45.960 --> 11:46.960
+ Right.
+
+11:46.960 --> 11:52.960
+ And so if I do it from here, you can see it jumps to the end of this one.
+
+11:52.960 --> 11:53.960
+ Right.
+
+11:53.960 --> 11:58.960
+ Or if I do it at the very end, you can jump to this one.
+
+11:58.960 --> 12:04.960
+ So if I want to delete from here to the end of the parenthesis, parenthetical expression,
+
+12:04.960 --> 12:10.960
+ let's say to delete this bit, I could press df.
+
+12:10.960 --> 12:14.960
+ Sorry, df percent.
+
+12:14.960 --> 12:16.960
+ Sorry, not df percent, just d percent.
+
+12:16.960 --> 12:18.960
+ There you go, d percent.
+
+12:18.960 --> 12:20.960
+ You see?
+
+12:20.960 --> 12:25.960
+ Although there's actually something even better for that, which is i.
+
+12:25.960 --> 12:35.960
+ And i refers to an area, the whole area that is surrounded by some kind of parentheses.
+
+12:35.960 --> 12:44.960
+ So even when I'm in the middle of these parentheses, the enclosing parentheses would go from here to here.
+
+12:44.960 --> 12:46.960
+ And so i stands for inside.
+
+12:46.960 --> 12:59.960
+ So if I want to delete everything inside those parentheses, I can type di, open round parenthesis, and it deletes the contents, which is really nice.
+
+12:59.960 --> 13:06.960
+ So let's say I wanted to replace all my parameters with something else, like a comma b.
+
+13:06.960 --> 13:10.960
+ Then I would use c for change inside parentheses.
+
+13:10.960 --> 13:21.960
+ So type my change, like a comma b, right? And then I can come down here and type dot, and it'll do the same thing.
+
+13:21.960 --> 13:32.960
+ So yeah, it's like, maybe you'll work, you can kind of really crush with these tricks.
+
+13:32.960 --> 13:33.960
+ Great.
+
+13:33.960 --> 13:34.960
+ Fantastic.
+
+13:34.960 --> 13:35.960
+ Yeah, it's cool.
+
+13:35.960 --> 13:37.960
+ There's a lot of them, and you don't have to know them all.
+
+13:37.960 --> 13:41.960
+ You know, it's like you can learn one thing each day or something.
+
+13:41.960 --> 13:45.960
+ Yeah, I'm not using any plugins or anything.
+
+13:45.960 --> 13:55.960
+ Okay, so we're going to save a model in a moment.
+
+13:55.960 --> 14:01.960
+ Any other questions or comments before I go back to our book.
+
+14:01.960 --> 14:10.960
+ I want to make one comment about the Tim installation. I don't know if maybe you discussed this yesterday because I came a little late. But with the Tim installation.
+
+14:10.960 --> 14:18.960
+ Sometimes it might be better to install from master because there are some changes that Ross has made that you might not receive.
+
+14:18.960 --> 14:21.960
+ Yeah, I did mention that yesterday.
+
+14:21.960 --> 14:31.960
+ Especially I think the conclusion we came to was to install the latest prerelease because that's like something that's.
+
+14:31.960 --> 14:39.960
+ Or stable than installing from master, but.
+
+14:39.960 --> 14:45.960
+ But you know, better than his sometimes like here he went six months without updating.
+
+14:45.960 --> 14:51.960
+ So yeah, I agree. In fact, so let's do that. So this is 0.6.2 dev.
+
+14:51.960 --> 14:57.960
+ So I think we decided that would go and let's use on UPI thing.
+
+14:57.960 --> 15:08.960
+ Tim is greater than or equal to 0.6.2 dev.
+
+15:08.960 --> 15:16.960
+ Great. Yeah, thanks for the reminder.
+
+15:16.960 --> 15:21.960
+ All right, great.
+
+15:21.960 --> 15:25.960
+ It's kind of this thing in.
+
+15:25.960 --> 15:28.960
+ Python modules and quite a lot of other things if there's like.
+
+15:28.960 --> 15:33.960
+ An extra dot dev at the end. That means it's a prerelease, basically.
+
+15:33.960 --> 15:37.960
+ And so PIP has this.
+
+15:37.960 --> 15:52.960
+ Convention that if you say I want to install something that is at least as recent as 0.6.2 dev, then that's a way of signaling to pip that you're happy to include prerelease options.
+
+15:52.960 --> 16:04.960
+ Is there any reason that when you do the installation of team and then you try to use the learner.
+
+16:04.960 --> 16:08.960
+ It doesn't it says that team doesn't exist when you try to load the model.
+
+16:08.960 --> 16:15.960
+ Right. That's because you have to restart the kernel after installing it.
+
+16:15.960 --> 16:30.960
+ And so now that it's installed in local every time I start a machine, it's going to be there anyway, so you wouldn't have to worry about that again.
+
+16:30.960 --> 16:32.960
+ Okay.
+
+16:32.960 --> 16:39.960
+ So this was our.
+
+16:39.960 --> 16:45.960
+ Notebook from yesterday.
+
+16:45.960 --> 16:50.960
+ And I wanted to try to improve the model.
+
+16:50.960 --> 17:04.960
+ And one of the reasons I wanted to try to improve the model is because
+
+17:04.960 --> 17:16.960
+ we are, you know, our our result was, you know, worse than the top 50%. There you go. Top 50% I didn't know that was a tip. That's handy.
+
+17:16.960 --> 17:24.960
+ And so we should, you know, I want to aim to at least be as good as this helpful.
+
+17:24.960 --> 17:35.960
+ Fast AI out of the box person. So they got 0.97385.
+
+17:35.960 --> 17:39.960
+ How far are we? You know, which is better than ours. Right.
+
+17:39.960 --> 17:41.960
+ That was me. That was my number.
+
+17:41.960 --> 17:49.960
+ Fantastic. I like it. It's a good notebook. So we're going to try to beat you. I hope you don't mind. But then you'll know how to beat us because we at least you know how to match us.
+
+17:49.960 --> 17:52.960
+ So my own.
+
+17:52.960 --> 18:03.960
+ So yeah, I saw that what you did here was you trained for longer, which makes sense.
+
+18:03.960 --> 18:10.960
+ And you also used some data augmentation, which makes sense. So let's talk about.
+
+18:10.960 --> 18:16.960
+ About this. So if we're going to train.
+
+18:16.960 --> 18:20.960
+ For, so what's your name, Gerardo? Is it.
+
+18:20.960 --> 18:23.960
+ Is it your auto or Gerardo?
+
+18:23.960 --> 18:27.960
+ Either way, that's fine. Which is right. I want to be accurate.
+
+18:27.960 --> 18:30.960
+ Well, my name is Gerardo.
+
+18:30.960 --> 18:33.960
+ I see. So both of them. There is. Thank you.
+
+18:33.960 --> 18:39.960
+ Gerardo. Okay. So if we're going to train as long as far out of it, then.
+
+18:39.960 --> 18:53.960
+ You know, if you train more than about five epochs, you're in danger of overfitting and certainly tan. I feel like you're in subsequent danger of overfitting because your model is going to have seen every image, you know, 10 times.
+
+18:53.960 --> 19:01.960
+ So in order to avoid overfitting to the specific images it's seeing, we should make it so that it sees a slightly different image each time.
+
+19:01.960 --> 19:09.960
+ And this is discussed in the book.
+
+19:09.960 --> 19:12.960
+ In some detail.
+
+19:12.960 --> 19:14.960
+ But basically.
+
+19:14.960 --> 19:24.960
+ If you pass in batch transforms, these are things that are going to be applied to each mini batch. So to each bunch of however many 32 or 64 or whatever images.
+
+19:24.960 --> 19:28.960
+ And there, this is basically a bunch of functions that are going to be applied.
+
+19:28.960 --> 19:34.960
+ So what does this function do or transform? So this is transforms for data augmentation.
+
+19:34.960 --> 19:41.960
+ So we know that the best way to find out what something's going to do is to check its help.
+
+19:41.960 --> 19:44.960
+ So let's start there.
+
+19:44.960 --> 19:49.960
+ Not help doc.
+
+19:49.960 --> 20:00.960
+ Okay, so it's going to do things like flip our images, rotate them, zoom them, change their brightness, their warp.
+
+20:00.960 --> 20:06.960
+ See, show and docs.
+
+20:06.960 --> 20:12.960
+ Okay, and here's some examples of a very cute puppy that's all they're found. I think it's all they're founded.
+
+20:12.960 --> 20:24.960
+ So this is all the same puppy. It's all the same picture. And as you can see each time the model sees it, it sees a somewhat skewed or rotated or brightened or darkened or whatever version of that picture.
+
+20:24.960 --> 20:31.960
+ And so this is called data augmentation.
+
+20:31.960 --> 20:37.960
+ So.
+
+20:37.960 --> 20:43.960
+ Let's try then running that.
+
+20:43.960 --> 20:47.960
+ And so all transforms actually returns a list.
+
+20:47.960 --> 20:57.960
+ Right. It returns a list of transformations. So here's the flip transformation with the probability of 0.5 it all flip.
+
+20:57.960 --> 21:05.960
+ It's got a brightness transformation with a probability of one, it will change the lighting by up to 0.2.
+
+21:05.960 --> 21:17.960
+ And then random resized crop is perhaps the most interesting one, which is it will zoom in such that it has at least 75% of the height and width.
+
+21:17.960 --> 21:25.960
+ And it will, yeah, it will basically pick a smaller zoomed in section randomly chosen each time.
+
+21:25.960 --> 21:33.960
+ So what we can do is when we say show batch, if you say unique equals true, it'll show the same picture each time.
+
+21:33.960 --> 21:40.960
+ And so here you can see four versions of the same picture. You can see sometimes it's flipped. Sometimes it's moved a little bit up and down.
+
+21:40.960 --> 21:46.960
+ Sometimes it's a little bit darker or less dark and it's also a little bit rotated.
+
+21:46.960 --> 21:52.960
+ So that's what data augmentation is. And that really helps us if we want to train a few more epochs.
+
+21:52.960 --> 22:03.960
+ Then the second thing I figured we should do is, you know, resnets actually great, but there are things which are greater.
+
+22:03.960 --> 22:10.960
+ And as we talked about, Tim has a bunch of them and in particular, com of next, pretty good.
+
+22:10.960 --> 22:29.960
+ And the other thing we could do is think about learning rates. The default learning rate used by FastAI is one where I would say I picked it on the conservative side, which means it's a little bit lower than you probably need, because I wanted things to always be able to train.
+
+22:29.960 --> 22:49.960
+ But there's actually a downside to using a couple of downsides to using a lower learning rate than you need. The first is that given fixed resources, fixed amount of time, you're going to have less epochs, not less epochs, sorry, less distance that the weights can move.
+
+22:49.960 --> 23:03.960
+ The second is, it turns out, a high learning rate helps the optimizer to explore the space of options by jumping further to see if there's better places to go.
+
+23:03.960 --> 23:22.960
+ So the learning rate finder is suggesting things around about.002, which is indeed the default. But you can see that all the way up to like 10 to the negative two, it still looks like a pretty nice slope.
+
+23:22.960 --> 23:33.960
+ And the other thing to remember is, as we saw after answering next question yesterday, we're using one cycle training schedule, which means we're gradually increasing the learning rate.
+
+23:33.960 --> 23:43.960
+ And my claim was that by doing that, we can reach higher learning rates. So I would also say that even these recommendations are going to be a bit more conservative side.
+
+23:43.960 --> 23:59.960
+ So what I did just before I started this call was I tried training at a learning rate of.01, which is five times higher than the default. And so that's up here.
+
+23:59.960 --> 24:12.960
+ And I did find actually that that did give us a better result with a 2% error. So let's see, I mean, obviously you've got different training sets, but this is hopeful.
+
+24:12.960 --> 24:21.960
+ Right, that we're going to get a better result than our target. It's nice to have a target aim for.
+
+24:21.960 --> 24:31.960
+ Okay, so that's that was the next thing. So then it's since this took, you know, six minutes to train, it's probably a good idea to save it.
+
+24:31.960 --> 24:41.960
+ So there's a couple of different things we can save with. One is.save and the other is.export.
+
+24:41.960 --> 24:48.960
+ So learner.export.
+
+24:48.960 --> 24:54.960
+ Saves the contents.
+
+24:54.960 --> 24:56.960
+ That's not very well written self.
+
+24:56.960 --> 24:59.960
+ So the learner self means that this learner.
+
+24:59.960 --> 25:07.960
+ And it saves it to self.path slash F names or learner.path slash F using pickle.
+
+25:07.960 --> 25:21.960
+ So basically, what that means is if you call this, learn.export, it's going to save it into learner.path.
+
+25:21.960 --> 25:24.960
+ So let's find out. Learn.path is what?
+
+25:24.960 --> 25:33.960
+ Train images. And so this is actually whatever we passed in here.
+
+25:33.960 --> 25:43.960
+ So if we want to save things somewhere else, there's, we've got a couple of options. One is to change learner.path by setting it equal to some other path.
+
+25:43.960 --> 25:50.960
+ Or we can just use an absolute path. So an absolute path is something that starts with slash.
+
+25:50.960 --> 25:59.960
+ And so if I want to save it somewhere in storage, for example, then I can type slash storage slash whatever.
+
+25:59.960 --> 26:05.960
+ Or maybe I want to put it in slash notebooks somewhere.
+
+26:05.960 --> 26:21.960
+ So these are some ways you can change where it's going to save.
+
+26:21.960 --> 26:30.960
+ I might even just put it into the current directory. I think that seems fine to me.
+
+26:30.960 --> 26:44.960
+ Well, actually, where are we? Current directory. Yeah, put it in git patty. That sounds fine. Or maybe to be a bit more sure just in case the directory ever changes.
+
+26:44.960 --> 26:56.960
+ It must be specific. So then the other option is learn.save.
+
+26:56.960 --> 27:03.960
+ So learn.save doesn't save the whole learner. It just saves the model and the optimizer state.
+
+27:03.960 --> 27:21.960
+ The difference is that remember a learner doesn't just contain the model, but it also contains the information about the data loaders, and specifically what transformations are applied.
+
+27:21.960 --> 27:36.960
+ So I don't really often, if ever, use dot save. The only reason I would use dot save is if I was writing something to like, we already have stuff in FastA8.
+
+27:36.960 --> 27:43.960
+ We'll take an example. In FastA8, we have something that's a callback that can save the model at the end of each epoch.
+
+27:43.960 --> 27:55.960
+ Each time it gets a better result than its previous best, whatever. In those cases, we might use dot save. So then you recreate a learner and you can dot load into the learner.
+
+27:55.960 --> 28:04.960
+ But yeah, for exporting something, I want to be able to just load that exact thing with all the same details next time dot export the way to go.
+
+28:04.960 --> 28:16.960
+ So I'm going to call dot export. I'm going to use, it's a conf next. It's small, and I did 12 epochs.
+
+28:16.960 --> 28:19.960
+ Oh, and this needs to be an actual path.
+
+28:19.960 --> 28:27.960
+ Normally we actually try to make these things do that for you, but this is less friendly than I would like. Sorry about that.
+
+28:27.960 --> 28:30.960
+ There we go. Okay.
+
+28:30.960 --> 28:34.960
+ So we should now be able to see it.
+
+28:34.960 --> 28:43.960
+ There it is. Okay. And it looks like we need to give it a dot pickle or whatever.
+
+28:43.960 --> 28:56.960
+ By default, it all with with all transforms, which uses random resource, but it'll randomly pick a subset of the crop of the image of this up to this of this size or bigger.
+
+28:56.960 --> 29:02.960
+ And the validation set, it will pick out the center.
+
+29:02.960 --> 29:08.960
+ It'll, you know, is all the width that can or all the height it can without changing the aspect ratio.
+
+29:08.960 --> 29:18.960
+ If you say squish instead, it will grab the whole thing and change the aspect ratio to squish it into a square.
+
+29:18.960 --> 29:23.960
+ You don't have to raise your hand. Just talk to me, mate. What's up.
+
+29:23.960 --> 29:27.960
+ Can you hear me? I can't hear you. Does that mean you can't hear me?
+
+29:27.960 --> 29:34.960
+ I can hear you. But you can't hear anybody.
+
+29:34.960 --> 29:40.960
+ They do need to raise your hand. Why can't you hear?
+
+29:40.960 --> 29:42.960
+ But you guys can hear me.
+
+29:42.960 --> 29:44.960
+ Okay. Yes.
+
+29:44.960 --> 29:46.960
+ Yes, we can hear you, Jim.
+
+29:46.960 --> 29:49.960
+ We can hear you.
+
+29:49.960 --> 29:57.960
+ I see why.
+
+29:57.960 --> 29:59.960
+ Okay. Say something.
+
+29:59.960 --> 30:02.960
+ Can you hear me now? Yeah, yeah, I can.
+
+30:02.960 --> 30:03.960
+ All right.
+
+30:03.960 --> 30:09.960
+ Okay.
+
+30:09.960 --> 30:15.960
+ All right. Did you guys, were you guys saying anything I was meant to be hearing? Did I miss anything?
+
+30:15.960 --> 30:20.960
+ Yeah. Why did you choose 12 feet parks?
+
+30:20.960 --> 30:28.960
+ Oh, no particular reason. I just saw that this one was using 14 and I thought.
+
+30:28.960 --> 30:31.960
+ Oh, I'm for something around there, but maybe just do a little bit less.
+
+30:31.960 --> 30:35.960
+ I guess I often do around well, wish epochs. Like.
+
+30:35.960 --> 30:39.960
+ It seems to like for.
+
+30:39.960 --> 30:45.960
+ I don't know.
+
+30:45.960 --> 30:47.960
+ I'm fine.
+
+30:47.960 --> 30:55.960
+ I'm fine.
+
+30:55.960 --> 31:01.960
+ I'm fine.
+
+31:01.960 --> 31:02.960
+ I'm fine.
+
+31:02.960 --> 31:09.960
+ I'm fine.
+
+31:09.960 --> 31:15.960
+ My assumptions were that the number for 60 is because of the size of this.
+
+31:15.960 --> 31:17.960
+ The images were for 60.
+
+31:17.960 --> 31:23.960
+ And then another assumption was to 24 because when you show the team.
+
+31:23.960 --> 31:26.960
+ With the different, the, the convex and.
+
+31:26.960 --> 31:31.960
+ The image size was to 24. That's the reason that I selected that. Is that okay? Is that a, is that a correct?
+
+31:31.960 --> 31:38.960
+ It's a look it up in the book. It's under the section called pre sizing and I think this is around what we always pre sized to.
+
+31:38.960 --> 31:46.960
+ So actually maybe for 80 would have been better because then it wouldn't have had to change one of the dimensions because there was 640 by 480.
+
+31:46.960 --> 31:52.960
+ And then your size you picked actually changed it. So I don't picked.
+
+31:52.960 --> 31:57.960
+ 230, but actually most of these models are the trained on image net.
+
+31:57.960 --> 32:03.960
+ I generally trained on 224. So I wanted them to be the same size as what they trained on.
+
+32:03.960 --> 32:06.960
+ So that's why I picked 224.
+
+32:06.960 --> 32:10.960
+ Yeah, so then squish I've talked about.
+
+32:10.960 --> 32:17.960
+ Oh, and then the other thing is the model I picked is one with a suffix in 22 K.
+
+32:17.960 --> 32:30.960
+ I N here refers to image net and the 22 K refers to the version of image net with 22,000 categories as opposed to the version that's normally used which only has 1000 categories.
+
+32:30.960 --> 32:37.960
+ So this is a conf next, which is small, but is trained on image net with a 22,000 category version.
+
+32:37.960 --> 32:42.960
+ The 22,000 category version, it just has a lot more images covering a lot more different things.
+
+32:42.960 --> 32:47.960
+ So there's a much higher chance that it's going to have seen something like.
+
+32:47.960 --> 32:57.960
+ Rice patty illness than the one with 1000 images and it's just seen a lot more different picks, you know.
+
+32:57.960 --> 33:03.960
+ So yeah, I would recommend always using the in 22 K pre trained models.
+
+33:03.960 --> 33:11.960
+ So those are, I think, the key differences at the training stage.
+
+33:11.960 --> 33:25.960
+ Yeah, I think when you had put the, the export and then the error came, that's when it cut off. So I don't think you explained what you did to we didn't catch the part where you explained the fix.
+
+33:25.960 --> 33:27.960
+ The fix.
+
+33:27.960 --> 33:33.960
+ Well, because because the export had an error, right. And then I guess you've not added.
+
+33:33.960 --> 33:42.960
+ I don't think it had an error, but I just, oh, I see. Yes. Yes. Yes. Okay. Yeah. The export had an error because this was a string and it actually has to be a path.
+
+33:42.960 --> 33:51.960
+ Which I'd say is an oversight on my part. I try to make it so that everything can accept a path or a string. So I would consider that a bug that ought to be fixed.
+
+33:51.960 --> 33:58.960
+ So hopefully by the time people watch this video, that might have been fixed. But yes, at the moment, I had to change this to a path.
+
+33:58.960 --> 34:01.960
+ Thank you.
+
+34:01.960 --> 34:06.960
+ All right. So.
+
+34:06.960 --> 34:14.960
+ There's a few things we could do here, right, but one key issue is that the.
+
+34:14.960 --> 34:21.960
+ Is that particularly if you don't have methodical squish, when we do validation, it's only selecting the center of the image.
+
+34:21.960 --> 34:23.960
+ And that's a problem.
+
+34:23.960 --> 34:24.960
+ Right.
+
+34:24.960 --> 34:28.960
+ We would like it to see all the image.
+
+34:28.960 --> 34:39.960
+ And then another thing is that we've been training it with various different augmentations, but the validation set. We don't use any of those augmentations.
+
+34:39.960 --> 34:49.960
+ So there's a trick you can use, which you should particularly use if you don't use squish and it's effectively cropping into the center, which is something called test time augmentation.
+
+34:49.960 --> 35:02.960
+ And in test time augmentation, we basically get multiple versions of each image.
+
+35:02.960 --> 35:08.960
+ We actually by default get four different randomly augmented versions of each image.
+
+35:08.960 --> 35:15.960
+ And plus the un augmented version, we get the prediction on every one, and then we take their average.
+
+35:15.960 --> 35:18.960
+ And that's called test time augmentation.
+
+35:18.960 --> 35:29.960
+ And as I said, it's going to work particularly well without the squish, but it ought to work well, even with the squish. So to get those predictions.
+
+35:29.960 --> 35:43.960
+ Let's first of all make sure we can replicate this error rate manually. Right. So if we go.
+
+35:43.960 --> 35:51.960
+ And then we pass in the validation set.
+
+35:51.960 --> 36:01.960
+ And then we should find that if we ask now for the error rate.
+
+36:01.960 --> 36:04.960
+ Shift tab.
+
+36:04.960 --> 36:09.960
+ So the inputs of the probabilities and the targets of the targets.
+
+36:09.960 --> 36:16.960
+ There we go. Okay. So that's our 2.02% error rate. So we've we've replicated that.
+
+36:16.960 --> 36:24.960
+ Okay. So now we've got that 2.02. I would then try out TTA.
+
+36:24.960 --> 36:33.960
+ And of course, before we use a new function, we would always read its documentation.
+
+36:33.960 --> 36:40.960
+ Here we are.TTA. So return the predictions on some data set or some data loader.
+
+36:40.960 --> 36:48.960
+ We get the predictions n times by default for using the training set transformations.
+
+36:48.960 --> 36:56.960
+ Great. Oh, and instead of getting the average of predictions, we could also get the max of predictions.
+
+36:56.960 --> 37:06.960
+ And, you know, the other thing which I definitely encourage you to do is, you know, it's always good to look at the source code.
+
+37:06.960 --> 37:11.960
+ Because my claim is that fast AI functions are generally not very big.
+
+37:11.960 --> 37:14.960
+ And like also quite a bit of its stuff, you can kind of skip over it.
+
+37:14.960 --> 37:18.960
+ This kind of like, oh, what if it's none? What if it's none? Like, it's just setting default.
+
+37:18.960 --> 37:24.960
+ So you can kind of skip it. Try finallys you can skip because it's just error handling.
+
+37:24.960 --> 37:30.960
+ With this, you can pretty much split progress bars. You can pretty much skip.
+
+37:30.960 --> 37:35.960
+ So the actual work starts happening here.
+
+37:35.960 --> 37:43.960
+ We're going to call self.getPreads, passes in the data loader, and then it catenates that all together.
+
+37:43.960 --> 37:50.960
+ And then it takes either the maximum or the mean, depending on whether you asked for the max or not.
+
+37:50.960 --> 38:04.960
+ And it also grabs it for the validation set data loader.
+
+38:04.960 --> 38:09.960
+ Yeah, so you kind of get the idea.
+
+38:09.960 --> 38:18.960
+ So let's run it. See if we can beat 2.02%.
+
+38:18.960 --> 38:27.960
+ So you can see here it's running at four times, each of the four augmented versions.
+
+38:27.960 --> 38:34.960
+ And then it will run at one time for the non augmented version.
+
+38:34.960 --> 38:37.960
+ Okay, and it beat it, but just by a little bit.
+
+38:37.960 --> 38:45.960
+ And then, you know, another thing is, well, what if we did the non maximum?
+
+38:45.960 --> 38:53.960
+ Use max equals false.
+
+38:53.960 --> 38:57.960
+ Use max equals true. Use the maximum instead of the average.
+
+38:57.960 --> 39:17.960
+ Yeah, I kind of wish I didn't have the squish in now, but I don't want you guys to have to wait 10 minutes for it to retrain because then it's much more clearly see the benefit of using TTA.
+
+39:17.960 --> 39:31.960
+ That's interesting. That one's worse. So I generally find that when not using squish, that using TTA and use max equals true is best.
+
+39:31.960 --> 39:40.960
+ Okay, so now we've done all that. We can try and submit this one to Kaggle.
+
+39:40.960 --> 39:48.960
+ So we can just repeat basically what we had yesterday, but instead of get spreads.
+
+39:48.960 --> 39:56.960
+ We'll do TTA.
+
+39:56.960 --> 40:23.960
+ Now, there's no with decoded. I don't think for TTA. So we're going to have to do a bit of extra work here. So this is going to give us the probabilities and the targets.
+
+40:23.960 --> 40:45.960
+ And so the probabilities each row is going to contain a probability for each element of the vocab.
+
+40:45.960 --> 40:53.960
+ So we can take a look. And so it's a.
+
+40:53.960 --> 41:10.960
+ So for each of the 3,469 things in the test set, there are 10 probabilities, which presumably means the length of the vocab is 10, which it is.
+
+41:10.960 --> 41:19.960
+ So to find, so what we want to do is find out, well, what's it actually predicting? And the thing it's predicting is whatever thing has the highest probability.
+
+41:19.960 --> 41:28.960
+ So I'm going to go through each row and find the index of the thing with the highest probability. So in in math and pie torch NumPy, that's called argmax.
+
+41:28.960 --> 41:32.960
+ So argmax is the index of the thing with the highest value.
+
+41:32.960 --> 41:40.960
+ So, mobs.
+
+41:40.960 --> 41:46.960
+ And so what do we want to take the maximum over which dimension.
+
+41:46.960 --> 42:02.960
+ So we want to do it over rows, which I think we say dimension equals one.
+
+42:02.960 --> 42:06.960
+ There we go. So that's the correct shape.
+
+42:06.960 --> 42:14.960
+ So now we should be able to do the same thing we did yesterday, which is to convert that into a series.
+
+42:14.960 --> 42:21.960
+ And now we should be able to run.
+
+42:21.960 --> 42:22.960
+ This mapping.
+
+42:22.960 --> 42:43.960
+ Now I realize actually this thing we did yesterday where we went K colon V for K comma V in enumerate is actually a really long way of just saying create a dictionary from those from those tuples.
+
+42:43.960 --> 42:53.960
+ So when you create a dictionary, you can do it like this.
+
+42:53.960 --> 42:57.960
+ Right.
+
+42:57.960 --> 43:10.960
+ Or you could do this.
+
+43:10.960 --> 43:18.960
+ Here's a here's a tuple of tuples.
+
+43:18.960 --> 43:25.960
+ Okay, sorry, here's a tuple of tuples.
+
+43:25.960 --> 43:35.960
+ And ideally what we'd like is to call dict and pass in each pair of these as an argument to it.
+
+43:35.960 --> 43:56.960
+ And so Python actually has syntax to do exactly that for any function, not just dict, which is the function star star and star star means take a mapping and pass it in as as pairs.
+
+43:56.960 --> 43:57.960
+ So that's what this does.
+
+43:57.960 --> 44:00.960
+ Right.
+
+44:00.960 --> 44:06.960
+ And that's going to be a mapping which enumerate already is.
+
+44:06.960 --> 44:11.960
+ So that's what's star.
+
+44:11.960 --> 44:14.960
+ Just pop this here.
+
+44:14.960 --> 44:15.960
+ This is not working.
+
+44:15.960 --> 44:19.960
+ I expect this to work.
+
+44:19.960 --> 44:24.960
+ How annoying.
+
+44:24.960 --> 44:36.960
+ Well, so much for that discussion.
+
+44:36.960 --> 44:38.960
+ Annoying.
+
+44:38.960 --> 44:41.960
+ All right, I'm going to have to try to think of a better way to make this work.
+
+44:41.960 --> 44:45.960
+ So far.
+
+44:45.960 --> 44:53.960
+ Similar problem to what we had yesterday.
+
+44:53.960 --> 44:58.960
+ I think you don't need the star star in that case.
+
+44:58.960 --> 45:02.960
+ Wow, that's nice. Isn't it even better.
+
+45:02.960 --> 45:03.960
+ Thanks for the trick.
+
+45:03.960 --> 45:04.960
+ Okay.
+
+45:04.960 --> 45:07.960
+ I didn't quite get to show you about how call star star is.
+
+45:07.960 --> 45:11.960
+ Never mind.
+
+45:11.960 --> 45:14.960
+ Okay.
+
+45:14.960 --> 45:29.960
+ So what I'm going to do is I'm going to make a copy of the last time we did ahead of the submission. And one reason I like to do that for my new submission is to confirm that our new one looks somewhat similar. So previously we went, Hispa normal downy blast blast.
+
+45:29.960 --> 45:41.960
+ Now we go Hispa normal blast blast blast. And so this makes me feel comfortable that, okay, we haven't totally broken things. It's still giving largely the same results as before with a few changes.
+
+45:41.960 --> 45:48.960
+ And so that's just something I like to do. Okay.
+
+45:48.960 --> 46:00.960
+ And then another thing I like to do is kind of kick track of stuff I've done before. I try not to delete things I've used before. So just pop it into a different notebook or comment. So down here, I'm just going to have non TTA version.
+
+46:00.960 --> 46:04.960
+ Just in case I want that again later.
+
+46:04.960 --> 46:10.960
+ All right, so we should be able to submit that now.
+
+46:10.960 --> 46:24.960
+ Okay.
+
+46:24.960 --> 46:29.960
+ So I use controller and then to start a typing competitions.
+
+46:29.960 --> 46:42.960
+ Okay, so this is now a squish.
+
+46:42.960 --> 47:01.960
+ Mind tune.
+
+47:01.960 --> 47:16.400
+ What on earth did it do to my window?
+
+47:16.400 --> 47:22.040
+ How do I get back?
+
+47:22.040 --> 47:25.520
+ Oh, it...
+
+47:25.520 --> 47:27.520
+ Oh, I see.
+
+47:27.520 --> 47:28.520
+ I've got to...
+
+47:28.520 --> 47:29.520
+ How does it happen?
+
+47:29.520 --> 47:30.520
+ I've got to...
+
+47:30.520 --> 47:31.520
+ I guess Tom's going.
+
+47:31.520 --> 47:33.520
+ I didn't notice that.
+
+47:33.520 --> 47:37.520
+ All right, let's go and check out Kaggle.
+
+47:37.520 --> 47:45.520
+ Nice submissions.
+
+47:45.520 --> 47:52.520
+ Oh, look at that.
+
+47:52.520 --> 47:56.520
+ How about us still beating us, I think, but at least we've beaten our previous one.
+
+47:56.520 --> 47:58.640
+ That's amazing.
+
+47:58.640 --> 47:59.640
+ That's great.
+
+47:59.640 --> 48:09.640
+ Jumped to our leadable position, we're going to have a good battle on 34.
+
+48:09.640 --> 48:14.640
+ No, I think you beat me up.
+
+48:14.640 --> 48:18.640
+ Wait, I thought yours was better than that.
+
+48:18.640 --> 48:22.640
+ I think I'm a little bit lower.
+
+48:22.640 --> 48:23.640
+ Code.
+
+48:23.640 --> 48:27.640
+ Oh, you were 9.7.
+
+48:27.640 --> 48:33.640
+ Oh, I'm getting a good shot.
+
+48:33.640 --> 48:36.640
+ Okay, 9.7.9.
+
+48:36.640 --> 48:38.640
+ That's not bad.
+
+48:38.640 --> 48:40.640
+ It's just a fun competition.
+
+48:40.640 --> 48:47.640
+ Nobody's trying too hard, but still, it's nice to feel like you're in the mix.
+
+48:47.640 --> 48:51.640
+ How far are we?
+
+48:51.640 --> 48:53.640
+ This person's still way ahead.
+
+48:53.640 --> 49:04.640
+ They've got an error of 1.3%, and we've got an error of 2.1%.
+
+49:04.640 --> 49:15.640
+ You know, something else that would be fun would be, you know, you could, like, you can kind of super easily create an ensemble.
+
+49:15.640 --> 49:19.640
+ So maybe I'll show you how I would go about creating an ensemble.
+
+49:19.640 --> 49:37.640
+ To create an ensemble, I would be inclined to maybe, we could create an ensemble with an unsquished version, for instance.
+
+49:37.640 --> 49:44.640
+ So what I would do is I'd kind of like copy all the stuff that we used to get our predictions.
+
+49:44.640 --> 49:50.640
+ Right, and then I would kind of paste them down here.
+
+49:50.640 --> 49:56.640
+ Go through and remove the stuff that isn't quite needed.
+
+49:56.640 --> 50:05.640
+ Like so.
+
+50:05.640 --> 50:15.640
+ This one's going to be no squish.
+
+50:15.640 --> 50:18.640
+ And go to max is max.
+
+50:18.640 --> 50:23.640
+ It calls true.
+
+50:23.640 --> 50:33.640
+ And so then to merge cells, it's shift M, M for merge.
+
+50:33.640 --> 50:45.640
+ And to make the error rate anymore.
+
+50:45.640 --> 50:52.640
+ And so this is going to be a second set of probabilities and a second set of targets.
+
+50:52.640 --> 51:02.640
+ Yeah, so we could just run that and take the average of these two models out, remove squish here.
+
+51:02.640 --> 51:05.640
+ Okay, so that might be our third model.
+
+51:05.640 --> 51:13.640
+ And then another model I would be inclined to try is one that doesn't use square.
+
+51:13.640 --> 51:21.640
+ So we've got 640 by 480 images, right?
+
+51:21.640 --> 51:26.640
+ So the aspect ratio is four to three.
+
+51:26.640 --> 51:34.640
+ So I would be inclined to say, take that and multiply that by the smaller side we want.
+
+51:34.640 --> 51:44.640
+ Okay, that gives us 298.66.
+
+51:44.640 --> 51:49.640
+ Nice to find something that works a bit more evenly, wouldn't it?
+
+51:49.640 --> 51:55.640
+ What if we did it the other way around?
+
+51:55.640 --> 52:11.640
+ So we could create 168 by 224 images, for instance, or
+
+52:11.640 --> 52:31.640
+ 256, maybe 336 by 252 images.
+
+52:31.640 --> 52:34.640
+ Yeah, let's do that.
+
+52:34.640 --> 52:45.640
+ So 336 by 252 images.
+
+52:45.640 --> 52:53.640
+ And so the reason I'm doing rectangular images is that all of our input images are the same aspect ratio.
+
+52:53.640 --> 52:56.640
+ So there's no particular reason to make them square.
+
+52:56.640 --> 53:09.640
+ And some of your images are wider than tall and some are taller than wide, then it makes perfect sense to use square as your thing that everything gets changed to.
+
+53:09.640 --> 53:19.640
+ But when everything's wider than they are tall, especially when they're all the same aspect ratio, it makes more sense to keep them at that same aspect ratio.
+
+53:19.640 --> 53:37.640
+ And another thing I guess we should consider doing for 640 by 380 is to, you know, you can change their resolution more gracefully without weird interpolating fuzziness by doing it by, you know, a factor of two.
+
+53:37.640 --> 53:42.640
+ So we could do 320 instead of 640.
+
+53:42.640 --> 53:45.640
+ And by 240.
+
+53:45.640 --> 53:57.640
+ So that would be another one I'd be inclined to try. Yeah, in fact, let's just do that. Let's make that the aspect ratio.
+
+53:57.640 --> 53:59.640
+ There we go.
+
+53:59.640 --> 54:11.640
+ And so obviously we should check it and we know how to check it, which is to go show that.
+
+54:11.640 --> 54:21.640
+ Okay, so you can see I've got it the wrong way around.
+
+54:21.640 --> 54:33.640
+ There we go. That's better.
+
+54:33.640 --> 54:40.640
+ Cool.
+
+54:40.640 --> 54:52.640
+ And like given that we're going to have such nice clear images, I would probably do the, the affine transforms are the ones where we're zooming and rotating and stuff.
+
+54:52.640 --> 55:00.640
+ So to say, don't do those so often, we can change the probability of affine transforms from 0.75 to 0.5.
+
+55:00.640 --> 55:28.640
+ So in theory, I feel like this one feels the most correct, given that the data that we have is a fixed input size of that type. So I would be inclined to, well, you know, we'll take a look afterwards.
+
+55:28.640 --> 55:41.640
+ But
+
+55:41.640 --> 56:04.640
+ I just do copy, we'll save a different set. And so we can easily then check the accuracy of each of them. And this one's going to be rectangular.
+
+56:04.640 --> 56:11.640
+ There we go.
+
+56:11.640 --> 56:21.640
+ Now that we're saving a few, I guess I'm a little worried that paper space might disappear.
+
+56:21.640 --> 56:37.640
+ And so I'm actually inclined to save these into my notebooks directory, just to be a bit paranoid.
+
+56:37.640 --> 56:52.640
+ And I'm going to copy paste. And so let's move.
+
+56:52.640 --> 57:15.640
+ Oh, that's right. I'm not using paper space. So I don't have to. I forgot.
+
+57:15.640 --> 57:29.640
+ All right, I'm going to not have you guys watch that run for 20 minutes. So I'm going to go. Any questions or comments before we wrap up.
+
+57:29.640 --> 57:47.640
+ You're like focusing a lot on like the data, transformations and augmentations, when would you focus on that versus, you know, playing around with different models and things like that instead.
+
+57:47.640 --> 57:56.640
+ Given that this is a image classification task for natural link for natural photos.
+
+57:56.640 --> 58:01.640
+ It will almost certainly have exactly the same characteristics as.
+
+58:01.640 --> 58:07.640
+ Image net in terms of accuracy, or at least by any fine tuning on image net.
+
+58:07.640 --> 58:17.640
+ So I would I'm just working on the assumption, which I could read off. We can test later, but I'm pretty sure it's going to be true that the things that are in that.
+
+58:17.640 --> 58:24.640
+ That notebook showing which which Tim models are better than others will apply to this data set.
+
+58:24.640 --> 58:30.640
+ So I would once everything else is working really well.
+
+58:30.640 --> 58:40.640
+ You know, I would then try it on a couple of models or at least run it on a bigger one like base or large or whatever I can get away with.
+
+58:40.640 --> 58:42.640
+ If it was like a.
+
+58:42.640 --> 58:59.640
+ Segmentation problem or an object detection problem or a medical imaging data set, which has the kind of pictures that aren't in image net, you know, for all of these things I would try more different architectures, but then for those cases, I would.
+
+58:59.640 --> 59:21.640
+ Plant says a segmentation problem, which is about recognizing what each pixel is, it always is is a pixel of even there. I would not try to replicate the research of others. Instead, I would go and look at something like papers with code.com to find out which techniques have the best results on segmentation and better still,
+
+59:21.640 --> 59:30.640
+ I would go and find two or three previous Kaggle competitions that have a similar problem type and see who won and see what they did.
+
+59:30.640 --> 59:36.640
+ Now, when you look at who won, they always say, Oh, we made an ensemble, which is fine.
+
+59:36.640 --> 59:43.640
+ The but the important thing isn't that they didn't ensemble. It'll be there'll always say pretty much the best model in our ensemble was X.
+
+59:43.640 --> 59:49.640
+ And so I would just use X and I would use as kind of like smallest version of X I can get away with.
+
+59:49.640 --> 1:00:07.640
+ And yeah, generally fiddling with architectures tends not to be very useful nowadays for any kind of problem that like people have fairly regularly studied, which almost any computer vision problem is of that type.
+
+1:00:07.640 --> 1:00:25.640
+ I guess the only interesting question for this one would be, there is something saying what kind of rice is in this patty, which is like a category. But I'm fairly sure that using that information is not going to be helpful in this case, because the model can perfectly
+
+1:00:25.640 --> 1:00:32.640
+ well see what kind of rice it is. So I very much doubt we have to tell it because it's got pictures.
+
+1:00:32.640 --> 1:00:42.640
+ Jeremy, yeah, it's going to take me a while to work through all of the videos. Yeah, are they going to be virtually available. Yes.
+
+1:00:42.640 --> 1:01:00.640
+ Cool. And don't feel like you can only join if you've watched all the previous videos and don't feel like you can only ask a question if you've watched all the previous videos, like, it's totally fine to ask a question about a video we did
+
+1:01:00.640 --> 1:01:11.640
+ a week ago, or about something that we just covered yesterday or whatever. If the answer to your question is, oh, we covered this in this video. Here's where you go. I will tell you that. And that's totally fine.
+
+1:01:11.640 --> 1:01:18.640
+ And if it's like, okay, you said this thing in this other video, but I don't get it. Say it again. That's totally fine too.
+
+1:01:18.640 --> 1:01:37.640
+ Like, we're moving at quite a fast pace because people can go back and rewatch the videos and because people can come back later and ask questions about things that aren't clear. So yeah, it definitely does rely on people turning up and saying, I'm not clear on this or whatever.
+
+1:01:37.640 --> 1:01:48.640
+ Yeah, well, I sort of started from around zero in this whole environment, but it is starting to make sense now on starting to be a little bit more comfy with it. Nice.
+
+1:01:48.640 --> 1:01:56.640
+ And I just want to take the time to work through my way through and absorb that's all what you've been talking about.
+
+1:01:56.640 --> 1:02:14.640
+ So Daniel, I will say like, there's a couple more lesson lessons to come. Like, what is it next week or the week after I suspect during those two weeks I'll probably stop the walkthroughs. So there'll be a couple of weeks there to catch up. But yeah, like feel free to
+
+1:02:14.640 --> 1:02:27.640
+ share join in any time or not join in any time and ask questions about any video or even about things it's not covered in a video but you feel like would be something useful to know in order to understand.
+
+1:02:27.640 --> 1:02:32.640
+ I'm really looking forward to the tabular data actually. Oh, cool.
+
+1:02:32.640 --> 1:02:39.640
+ Okay, thank you. Thanks all. See you next time.
+
+1:02:39.640 --> 1:02:43.640
+ Okay.
+

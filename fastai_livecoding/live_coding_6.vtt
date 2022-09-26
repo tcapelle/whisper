@@ -1,0 +1,2567 @@
+WEBVTT
+
+00:20.680 --> 00:21.500
+ Okay.
+
+00:23.700 --> 00:25.080
+ Did uh,
+
+00:25.680 --> 00:26.840
+ anybody have any
+
+00:26.840 --> 00:37.840
+ questions or anything from last time or comments or anything else. How's your VM going?
+
+00:37.840 --> 00:55.840
+ I'm only I said one Jeremy I wasn't really sure what happened when I logged so I did the thing and see tags thing in paper space and as per the as per the session and then when I shut down the machine.
+
+00:55.840 --> 01:10.840
+ I'm not sure if you want to go into that. Okay, let's have a look. See if we can.
+
+01:10.840 --> 01:17.840
+ Yeah what might have happened.
+
+01:17.840 --> 01:27.840
+ What happened when you try to use it.
+
+01:27.840 --> 01:38.840
+ I muted myself. So what happened was the member and I had to reinstall member.
+
+01:38.840 --> 01:52.840
+ And, and what else was this and see tags again.
+
+01:52.840 --> 02:04.840
+ And the C tags file had changed, actually didn't have anything in it.
+
+02:04.840 --> 02:09.840
+ Compared to how it was when it was originally created.
+
+02:09.840 --> 02:13.840
+ So, I don't know what happened.
+
+02:13.840 --> 02:23.840
+ But
+
+02:23.840 --> 02:34.840
+ and then when I tried to re index or recreate index and that didn't seem to work either.
+
+02:34.840 --> 02:47.840
+ I mean, one obvious thing we should probably try to get going is being able to see the same.
+
+02:47.840 --> 02:55.840
+ You know, binaries and stuff we install having to reinstall C tags every time is certainly not ideal. Is it? So,
+
+02:55.840 --> 03:05.840
+ let's try and figure out how to do that.
+
+03:05.840 --> 03:33.840
+ All right. Can you see that okay.
+
+03:33.840 --> 03:40.840
+ All right. Let's start this one. This is the one we created the other day.
+
+03:40.840 --> 03:44.840
+ So the only things that.
+
+03:44.840 --> 03:49.840
+ I'm going to still be there next time we come back.
+
+03:49.840 --> 03:53.840
+ Things that are in slash storage.
+
+03:53.840 --> 04:02.840
+ Or things that are in slash notebooks on the exact machine that we just started.
+
+04:02.840 --> 04:09.840
+ And to remind you, there are, you know, we can make this more flexible by taking advantage of the.
+
+04:09.840 --> 04:14.840
+ It's called pre run.sh and the dot BASS RC dot local.
+
+04:14.840 --> 04:17.840
+ Scripts that we can put in slash storage.
+
+04:17.840 --> 04:26.840
+ And we can use those to copy link or move stuff out of those persistent places in into our home directory.
+
+04:26.840 --> 04:28.840
+ If we want to.
+
+04:28.840 --> 04:32.840
+ So that's kind of how we've been.
+
+04:32.840 --> 04:34.840
+ Organizing things.
+
+04:34.840 --> 04:42.840
+ And so when we do pip install with a dash dash local flag, it installs things into our home directory into a sub protocol.
+
+04:42.840 --> 04:52.840
+ Local. And so that we have moved into slash storage and then similar link to back again in our script back to home.
+
+04:52.840 --> 05:02.840
+ So anything that we install with pip install minus minus user will be persistent across all of our sessions.
+
+05:02.840 --> 05:04.840
+ Yeah, can I ask a question about that.
+
+05:04.840 --> 05:12.840
+ So does that mean that if you give you the pass adjusted that you can wipe your mamba directory and use it to reinstall.
+
+05:12.840 --> 05:23.840
+ So the fact that you have the similar to local on the storage drive.
+
+05:23.840 --> 05:31.840
+ Yes, although that thing about wiping was not for paper space because remember on paper space, the mamba stuff is installed into the route directory to the.
+
+05:31.840 --> 05:47.840
+ It'll slash up to whatever it's not in our home to like usual. So you can't really wipe con on on on paper space on on paper space.
+
+05:47.840 --> 06:04.840
+ But yeah, I mean, I don't know why you would, but you could do the same thing on your own machine, you could pip install minus minus user and have a local directory that yeah would be separate from your mamba environments and stuff.
+
+06:04.840 --> 06:07.840
+ Okay, I guess it's smooth. Yeah, I had no.
+
+06:07.840 --> 06:08.840
+ Okay, thanks.
+
+06:08.840 --> 06:11.840
+ That's fine.
+
+06:11.840 --> 06:24.840
+ So I'm just having a look. So, I think the way we, yeah, the way we want to install.
+
+06:24.840 --> 06:30.840
+ Stuff like CTAGs, which is not a Python thing is using.
+
+06:30.840 --> 06:46.840
+ And so we can install with mamba as we've done before. Now, by default, that's going to install it into the, you know, slash up slash etc, which we will lose.
+
+06:46.840 --> 06:50.840
+ But what we can do is.
+
+06:50.840 --> 07:03.840
+ Remember comes with a flag we can use, which is a minus P for prefix.
+
+07:03.840 --> 07:10.840
+ And if we use the minus P flag, it will install stuff into a different directory.
+
+07:10.840 --> 07:16.840
+ And so we should be able to use that to install stuff in a way that we can.
+
+07:16.840 --> 07:20.840
+ That we can reuse it.
+
+07:20.840 --> 07:25.840
+ And I think this is going to be a good exercise in understanding.
+
+07:25.840 --> 07:31.840
+ Paves and aliases and as we're similar, I should say, and all that kind of thing.
+
+07:31.840 --> 07:36.840
+ So I think, yeah, I think this will be an exercise worth doing.
+
+07:36.840 --> 07:40.840
+ So, so I'm just loading up.
+
+07:40.840 --> 07:45.840
+ G put a lab.
+
+07:45.840 --> 07:49.840
+ And so this is the same.
+
+07:49.840 --> 07:59.840
+ Server notebook server that I use last time and since slash notebooks is persistent, that fast AI folder that I that I similarly, that is I didn't seem to get cloned is still there.
+
+07:59.840 --> 08:12.840
+ So if we get a terminal up.
+
+08:12.840 --> 08:18.840
+ And we could probably take a bit of advantage of our space.
+
+08:18.840 --> 08:20.840
+ So.
+
+08:20.840 --> 08:21.840
+ All right.
+
+08:21.840 --> 08:28.840
+ And then apple B or control P be a shows and hides that sidebar, which is quite useful.
+
+08:28.840 --> 08:37.840
+ So what we could do is we could create a so I just type CD, right, which is moving me into my home directory.
+
+08:37.840 --> 08:41.840
+ And so we could create something to put other kind of stuff in here.
+
+08:41.840 --> 08:45.840
+ We'll call it condo.
+
+08:45.840 --> 08:50.840
+ And I believe we could go Mamba.
+
+08:50.840 --> 08:51.840
+ And then say a prefix.
+
+08:51.840 --> 08:56.840
+ So a prefix is going to be our home directories, kind of directory that we just created.
+
+08:56.840 --> 09:02.840
+ Install universal dash syntax.
+
+09:02.840 --> 09:12.840
+ So, okay, so, all right, so we also don't have member installed, which is a good point. So we'd like that to also be permanently available.
+
+09:12.840 --> 09:16.840
+ So let's start by saying.
+
+09:16.840 --> 09:20.840
+ Condor install minus P.
+
+09:20.840 --> 09:23.840
+ Condor minus P install.
+
+09:23.840 --> 09:29.840
+ Mamba.
+
+09:29.840 --> 09:34.840
+ Okay, that's probably going to be after the install command is my guess.
+
+09:34.840 --> 09:37.840
+ Or minus P.
+
+09:37.840 --> 09:39.840
+ Up minus P.
+
+09:39.840 --> 09:42.840
+ Tilda slash Condor.
+
+09:42.840 --> 09:48.840
+ Okay.
+
+09:48.840 --> 09:52.840
+ So while that's going on.
+
+09:52.840 --> 09:59.840
+ Okay, and then because they're not using Mamba forge, that means that the.
+
+09:59.840 --> 10:03.840
+ Condor forge channel is not available by default either.
+
+10:03.840 --> 10:11.840
+ So if you use member forge, then it kind of assumes that you're always going to say that you're always saying minus C condor forge.
+
+10:11.840 --> 10:12.840
+ But since when.
+
+10:12.840 --> 10:17.840
+ And I think the plan is a paper space is going to hopefully switch to using member forge soon.
+
+10:17.840 --> 10:24.840
+ But for now, we'll have to say minus C condor forge.
+
+10:24.840 --> 10:26.840
+ All right.
+
+10:26.840 --> 10:34.840
+ So while that's going on.
+
+10:34.840 --> 10:44.840
+ Let's also get our fast book here.
+
+10:44.840 --> 10:53.840
+ It makes me think about something I just tried to reuse a command that should have been in my history and it wasn't there.
+
+10:53.840 --> 11:00.840
+ And I think the reason it wasn't there is that we are here.
+
+11:00.840 --> 11:03.840
+ Yes, over here.
+
+11:03.840 --> 11:07.840
+ But why is installing Python even.
+
+11:07.840 --> 11:14.840
+ Okay, that's annoying.
+
+11:14.840 --> 11:18.840
+ So, Mamba.
+
+11:18.840 --> 11:26.840
+ Okay, it's say, okay, so it's trying to install it into the tilda slash Condor directory and it's saying, oh, that directory doesn't even have Python in it.
+
+11:26.840 --> 11:31.840
+ So I want to install Python and everything into there.
+
+11:31.840 --> 11:36.840
+ That's annoying.
+
+11:36.840 --> 11:43.840
+ I don't know.
+
+11:43.840 --> 11:48.840
+ Okay, I do have another plan up my sleeve.
+
+11:48.840 --> 11:51.840
+ Which is.
+
+11:51.840 --> 11:56.840
+ There is a version of Mamba that is fully self contained.
+
+11:56.840 --> 11:59.840
+ Everything statically compiled into it.
+
+11:59.840 --> 12:07.840
+ Called micro member, which so we're just experimenting, but here once we get this working, we will.
+
+12:07.840 --> 12:09.840
+ We will make this all easier.
+
+12:09.840 --> 12:13.840
+ So if instead of using member, we say.
+
+12:13.840 --> 12:18.840
+ Slash storage, so we can put this.
+
+12:18.840 --> 12:20.840
+ And where else in a moment.
+
+12:20.840 --> 12:24.840
+ So let's see if that would work.
+
+12:24.840 --> 12:34.840
+ Okay, that's also not working.
+
+12:34.840 --> 12:52.840
+ This is quite tricky, isn't it?
+
+12:52.840 --> 13:02.840
+ So maybe we need to figure out what a minimum environment is because we don't want to use up lots of our storage directory with junk that we don't really need.
+
+13:02.840 --> 13:17.840
+ So what I'm going to do is I'm going to install all this junk and then I'm going to see what that actually installs.
+
+13:17.840 --> 13:23.840
+ And then we'll try to get rid of as much of that junk as possible.
+
+13:23.840 --> 13:28.840
+ That's my plan.
+
+13:28.840 --> 13:50.840
+ I'm not sure if anyone is trying to stop.
+
+13:50.840 --> 13:52.840
+ Yeah, that's roughly what I was getting as well.
+
+13:52.840 --> 14:01.840
+ So, okay, no channels specified. I think I might be getting closer though on this.
+
+14:01.840 --> 14:11.840
+ Condor forge.
+
+14:11.840 --> 14:17.840
+ Okay, that seems to be doing something.
+
+14:17.840 --> 14:24.840
+ So we might be on the way to finding a solution.
+
+14:24.840 --> 14:27.840
+ Okay, let's see what this kind of directory.
+
+14:27.840 --> 14:30.840
+ Wow, it's got a lot of stuff in it.
+
+14:30.840 --> 14:36.840
+ So I want to find I don't want to like have stuff that takes up storage base and I don't need.
+
+14:36.840 --> 14:39.840
+ So the first thing to find out is how much storage base does things take up.
+
+14:39.840 --> 14:41.840
+ So do you use dance for disk usage?
+
+14:41.840 --> 14:44.840
+ It shows you how much storage base things up.
+
+14:44.840 --> 14:49.840
+ So minus S just gives you a summary per directory and H is as usual humanize.
+
+14:49.840 --> 14:52.840
+ So like show me megabytes and stuff like that.
+
+14:52.840 --> 14:53.840
+ So it's easy to read.
+
+14:53.840 --> 14:57.840
+ So this is going to show me the size of every directory.
+
+14:57.840 --> 14:59.840
+ And if I want it for the whole directory.
+
+14:59.840 --> 15:03.840
+ Okay, so I've got 276 meg, which isn't terrible.
+
+15:03.840 --> 15:06.840
+ But let's see, BN is 38 meg.
+
+15:06.840 --> 15:08.840
+ Lib is 203 meg.
+
+15:08.840 --> 15:10.840
+ So it's mainly in lib, right?
+
+15:10.840 --> 15:15.840
+ So what I put to then is go lib slash to see which ones.
+
+15:15.840 --> 15:16.840
+ Now that's quite hard to read.
+
+15:16.840 --> 15:20.840
+ So when things are kind of hard to read like that, I want to find everything that's like
+
+15:20.840 --> 15:22.840
+ over a megabyte or more.
+
+15:22.840 --> 15:27.840
+ So in the terminal, one of the really nice things you can do is you can use the vertical
+
+15:27.840 --> 15:28.840
+ bar called pipe.
+
+15:28.840 --> 15:33.840
+ And what pipe does is it takes the output of the previous command and sends it to another
+
+15:33.840 --> 15:34.840
+ command.
+
+15:34.840 --> 15:37.840
+ And so the thing that you're most likely to pipe to is grep.
+
+15:37.840 --> 15:42.840
+ And grep searches and only prints things that match a pattern.
+
+15:42.840 --> 15:45.840
+ I just want to find those things that are a megabyte or more.
+
+15:45.840 --> 15:47.840
+ So there's a capital M for megabyte.
+
+15:47.840 --> 15:49.840
+ And then there's going to be a space after it.
+
+15:49.840 --> 15:52.840
+ So I just search for an M followed by a space.
+
+15:52.840 --> 15:56.840
+ No, that didn't work.
+
+15:56.840 --> 15:59.840
+ Maybe that's not a space and it's actually a tab.
+
+15:59.840 --> 16:00.840
+ Yes.
+
+16:00.840 --> 16:01.840
+ Okay.
+
+16:01.840 --> 16:06.840
+ So here's all the stuff that's over a megabyte.
+
+16:06.840 --> 16:20.840
+ And we can do the same thing for the directories inside Conda.
+
+16:20.840 --> 16:24.840
+ There they are.
+
+16:24.840 --> 16:30.840
+ So of that 203 meg, it's mainly Python, which I'm sure we're not going to need.
+
+16:30.840 --> 16:35.840
+ So we could.
+
+16:35.840 --> 16:40.840
+ R M minus RF.
+
+16:40.840 --> 16:45.840
+ Python.
+
+16:45.840 --> 16:49.840
+ And.
+
+16:49.840 --> 16:53.840
+ See what else we got here.
+
+16:53.840 --> 17:14.840
+ So we've now got 161 meg, still quite a bit.
+
+17:14.840 --> 17:40.840
+ Still mainly in lib.
+
+17:40.840 --> 17:45.840
+ So let's see if it's a different type of data.
+
+17:45.840 --> 17:55.840
+ So what we could do is just move it out of the way.
+
+17:55.840 --> 17:59.840
+ So that's 71.
+
+17:59.840 --> 18:03.840
+ And maybe just move it out of the way.
+
+18:03.840 --> 18:06.840
+ And then let's see if.
+
+18:06.840 --> 18:11.840
+ Oh, so member. Okay.
+
+18:11.840 --> 18:14.840
+ So we've installed.
+
+18:14.840 --> 18:19.840
+ Sea tags and member, but I can't run them.
+
+18:19.840 --> 18:24.840
+ And all this interesting, I can run the sea tags.
+
+18:24.840 --> 18:27.840
+ Why is that?
+
+18:27.840 --> 18:29.840
+ Oh, okay. So.
+
+18:29.840 --> 18:39.840
+ It looks like.
+
+18:39.840 --> 18:42.840
+ Paper space comes with an old copy of C tags.
+
+18:42.840 --> 18:45.840
+ And this might be the issue.
+
+18:45.840 --> 18:47.840
+ That.
+
+18:47.840 --> 18:51.840
+ You were having with not being able to use it.
+
+18:51.840 --> 18:56.840
+ So normally dash dash version should tell you the version of things.
+
+18:56.840 --> 19:00.840
+ Okay. So my guess is it's not going to work the same way as what we're used to.
+
+19:00.840 --> 19:03.840
+ And that's probably why some people were having problems.
+
+19:03.840 --> 19:07.840
+ So this is not finding the one we just installed and we're not finding member at all.
+
+19:07.840 --> 19:10.840
+ And so to remind you, the reason for this is that the way that we,
+
+19:10.840 --> 19:15.840
+ that the computer finds things to run is it searches in our path.
+
+19:15.840 --> 19:20.840
+ And the stuff that we installed is in the tilde slash,
+
+19:20.840 --> 19:27.840
+ kind of slash bin directory is member.
+
+19:27.840 --> 19:31.840
+ And here's our newer version of sea tags.
+
+19:31.840 --> 19:37.840
+ So we could run things manually by typing bin slash sea tags minus minus version.
+
+19:37.840 --> 19:42.840
+ Okay. So it doesn't need that. Let's move that back in.
+
+19:42.840 --> 19:44.840
+ I see you data.
+
+19:44.840 --> 19:46.840
+ So that needs to go into.
+
+19:46.840 --> 19:50.840
+ Yeah. So here's a current version.
+
+19:50.840 --> 19:54.840
+ Five point nine compiled well two days ago.
+
+19:54.840 --> 20:00.840
+ So, to make it so that we'll be able to see stuff that's in our kind of directory.
+
+20:00.840 --> 20:03.840
+ We need to ensure that it's in the path.
+
+20:03.840 --> 20:08.840
+ So to make sure that things are in the path when we run a bash terminal,
+
+20:08.840 --> 20:14.840
+ we have to put them into our dot vim dot bash RC dot local file.
+
+20:14.840 --> 20:22.840
+ So that's going to be.
+
+20:22.840 --> 20:27.840
+ Okay. So it looks like I don't currently have one.
+
+20:27.840 --> 20:33.840
+ So let's create one dot bash RC dot local.
+
+20:33.840 --> 20:35.840
+ All right.
+
+20:35.840 --> 20:38.840
+ So.
+
+20:38.840 --> 20:42.840
+ This is a file that needs to be run with bash.
+
+20:42.840 --> 20:48.840
+ And what we're going to do is we're going to so export sets of variable.
+
+20:48.840 --> 20:51.840
+ And so the variable we need to set is path.
+
+20:51.840 --> 20:56.840
+ And we want to set it equal to.
+
+20:56.840 --> 20:59.840
+ The conda bin directory.
+
+20:59.840 --> 21:01.840
+ In our home directory.
+
+21:01.840 --> 21:04.840
+ And then we want to also have the contents of the existing path variable.
+
+21:04.840 --> 21:11.840
+ So you have to put dollar path to say the contents of a variable.
+
+21:11.840 --> 21:19.840
+ Okay. So now if we create a new terminal, we can test whether that worked.
+
+21:19.840 --> 21:23.840
+ By printing the contents of dollar path echo was how you print things.
+
+21:23.840 --> 21:25.840
+ Okay.
+
+21:25.840 --> 21:28.840
+ See, so that did not work.
+
+21:28.840 --> 21:32.840
+ Let's try running it manually and see if it works.
+
+21:32.840 --> 21:41.840
+ So source is a way of running a script and storing all the variables in this shell.
+
+21:41.840 --> 21:50.840
+ So if we say slash storage slash dot bash RC dot local.
+
+21:50.840 --> 21:51.840
+ There it is.
+
+21:51.840 --> 22:01.840
+ It's kind of been okay. So why was it not working?
+
+22:01.840 --> 22:06.840
+ Oh, it's not bash RC dot local. It's that bash local. That's why.
+
+22:06.840 --> 22:10.840
+ So we could.
+
+22:10.840 --> 22:11.840
+ Move.
+
+22:11.840 --> 22:23.840
+ So I don't have to type up dot bash RC dot local. I can just type exclamation mark dollar because that means the last token from the last line, which in this case is dot bash RC dot local and move it to bash.
+
+22:23.840 --> 22:26.840
+ Local.
+
+22:26.840 --> 22:39.840
+ Let's try again.
+
+22:39.840 --> 22:45.840
+ There it is. Okay. So now if I run C tags.
+
+22:45.840 --> 22:48.840
+ I've got the right version and I should be at a right.
+
+22:48.840 --> 22:58.840
+ Okay, so I'm going to use Mamba.
+
+22:58.840 --> 23:01.840
+ Okay, so Mamba doesn't like being run. So that's fine.
+
+23:01.840 --> 23:08.840
+ What we can do is we can instead use this micro member thing instead.
+
+23:08.840 --> 23:12.840
+ So let's move.
+
+23:12.840 --> 23:24.200
+ remember into Conda bin. And so you can get micro member micro member.
+
+23:24.200 --> 23:41.080
+ You can download it.
+
+23:41.080 --> 23:56.760
+ I'm here. All right, so let's see how we're doing.
+
+24:00.280 --> 24:01.640
+ Let's get rid of Mamba.
+
+24:01.640 --> 24:10.200
+ And let's see how much space we're now taking up.
+
+24:13.640 --> 24:19.800
+ That's not bad, right? 175 megs. So we've now got a, you know, place that we can
+
+24:21.080 --> 24:29.480
+ install software like CTACs into and it will work. So to make sure that that'll work next time,
+
+24:29.480 --> 24:36.920
+ we now need to move that into our slash storage.
+
+24:40.920 --> 24:50.440
+ And then of course we'll need to sim link it back again. So let's edit our prerun.sh file.
+
+24:50.440 --> 24:59.400
+ Okay, we definitely don't have to remove anything so it won't be there. So we just sim link slash
+
+24:59.400 --> 25:05.480
+ storage slash Conda back to the home directory.
+
+25:12.600 --> 25:13.000
+ Okay.
+
+25:13.000 --> 25:21.800
+ Okay. So there's one other thing I'd like which is my dot bash history file. It's really nice to
+
+25:22.600 --> 25:30.200
+ come in each time and have the same bash history file on a machine in my opinion.
+
+25:32.120 --> 25:40.520
+ So let's move that also into slash storage because that means that our control are and our app
+
+25:40.520 --> 25:46.840
+ arrow and stuff like that are going to always work.
+
+25:56.600 --> 25:58.360
+ So that goes into slash storage.
+
+26:04.360 --> 26:06.040
+ And so let's do that as well.
+
+26:06.040 --> 26:11.480
+ So how am I going to do this in VM? I want to copy two lines and paste them.
+
+26:11.480 --> 26:19.240
+ So to copy two lines, to copy a line is shift y. So to copy two lines, I press to shift y to
+
+26:19.240 --> 26:25.560
+ copy two lines and then shift p to paste those two lines above. Okay. And then I can press shift
+
+26:25.560 --> 26:35.080
+ w to move a word forwards and shift c to change the rest of the line. So that deletes and then
+
+26:35.080 --> 26:44.040
+ it puts it in insert mode and I can type bash underscore history history. Now here's where it gets fun
+
+26:45.000 --> 26:50.840
+ is I want to do exactly the same thing for this line is to replace this the rest of this line
+
+26:50.840 --> 26:57.320
+ with dot bash history. So to repeat myself, I just press dot. Isn't that fun? So
+
+26:57.320 --> 27:05.560
+ all right, let's and that's not a directory. So it doesn't need to be recursive.
+
+27:05.560 --> 27:21.560
+ Okay, so let's try this out, shall we, by spinning up a new machine?
+
+27:21.560 --> 27:35.320
+ I guess I mean, what I mean is spin up an existing machine, do you instance of it?
+
+27:45.480 --> 27:50.120
+ So the reason we're spending quite a bit of time to kind of set up our paper space environment
+
+27:50.120 --> 27:58.200
+ is like, because I think it's good, like practical examples of using bm and using links and using
+
+27:58.200 --> 28:05.960
+ scripts, you know, which hopefully you'll better reuse these ideas lots of times. So let's start
+
+28:05.960 --> 28:13.320
+ that one. Okay, so I'm just going to start up another machine and see if that all works.
+
+28:13.320 --> 28:22.360
+ Okay, well, we wait for it. So yeah, I have a feeling now once you've installed universal CTACs
+
+28:22.360 --> 28:30.040
+ properly and it's in your path, it's just a case of checking the version. So let's create a new shell
+
+28:30.040 --> 28:41.560
+ because that one's and I hit up arrow. Oh, this is still not giving me the right version that's
+
+28:41.560 --> 28:47.080
+ interesting. Add up the shell to the path.
+
+28:50.680 --> 28:53.240
+ It kind of been that's interesting.
+
+28:57.240 --> 29:00.440
+ Conda in CTACs.
+
+29:05.560 --> 29:09.320
+ Oh, okay, it's not sim linked back again because we didn't run that storage script because this
+
+29:09.320 --> 29:12.920
+ is not a new machine. So for now, I'm just going to run the storage script manually.
+
+29:17.960 --> 29:19.080
+ Okay, and
+
+29:26.440 --> 29:28.040
+ okay, still not right.
+
+29:30.840 --> 29:34.760
+ Oh, then the thing that puts it in the path is meant to be the dot bash dot local, right,
+
+29:34.760 --> 29:43.080
+ which should have run. Just create a new shell just to see something weird happened.
+
+29:48.040 --> 29:53.000
+ Okay, so all right, that's in root conda bin. So now for CTACs minus minus version
+
+29:54.360 --> 29:59.240
+ with control R to find it quickly. Okay, it is working. So it's just a case of
+
+29:59.240 --> 30:06.280
+ getting that running it again. Okay, so here's our new machine, which is now finished starting.
+
+30:06.280 --> 30:27.080
+ So let's see if the same thing works on a brand new machine.
+
+30:27.080 --> 30:29.080
+ So,
+
+30:33.400 --> 30:38.040
+ where is this take a long time to start? Open up to put a lab the first time for some reason.
+
+30:41.960 --> 30:42.840
+ On each machine.
+
+30:48.840 --> 30:51.880
+ Here it comes. Okay, so fingers crossed.
+
+30:51.880 --> 31:02.360
+ See tags minus minus version. There it is. And in theory,
+
+31:06.760 --> 31:11.880
+ yeah, we've also got our history. So our history is actually saved between machines,
+
+31:11.880 --> 31:17.640
+ which is quite nice, right? I love it. So if I wanted to echo path again, I could type control
+
+31:17.640 --> 31:23.160
+ R, capital P and it'll find it from my history, even though we're on a totally separate machine.
+
+31:26.120 --> 31:40.440
+ One thing weird is we're getting the path years repeating itself. Not quite sure why that's happening.
+
+31:40.440 --> 31:48.280
+ It doesn't really matter to you, to be honest, but I'm just curious about why
+
+31:48.920 --> 31:53.400
+ slash opt conda, is appearing. But it's not appearing twice.
+
+31:54.200 --> 31:59.960
+ I just use a, oh, no, they're all unique. Don't mind me. Okay, I was imagining things.
+
+32:01.720 --> 32:08.280
+ So on this computer, I don't really want all this stuff in my notebooks either. So let me Rm
+
+32:08.280 --> 32:17.240
+ minus RF everything. That's a really dangerous command.
+
+32:18.840 --> 32:23.000
+ Oh, Hamels here. Hi, Hamel. Yeah, I'm so sorry for being late. I forgot.
+
+32:23.880 --> 32:26.920
+ I didn't even tell people you're coming, so they don't know you're late. So you could have
+
+32:27.960 --> 32:33.640
+ stayed silent and not known. So Hamel hopefully is going to be joining most to all of our sessions
+
+32:33.640 --> 32:41.320
+ from now. So do you want to quickly introduce yourself, Hamel? Yeah, yeah, I'm Hamel. I have,
+
+32:41.320 --> 32:47.560
+ you know, work on fast AI a lot. I especially like contributing to all the dev tools,
+
+32:48.200 --> 32:55.480
+ like NB dev and fast core and stuff like that. And like two other tools that help people
+
+32:55.480 --> 33:04.520
+ automate what people do. So yeah, happy to be here. So Hamels got background as a machine learning
+
+33:04.520 --> 33:13.160
+ researcher and developer and also quite a bit of stuff with MLOps. And also training as a lawyer.
+
+33:13.160 --> 33:19.160
+ So, you know, if anybody needs help with the law, here's the guy. Please don't.
+
+33:19.160 --> 33:28.200
+ That's what the tell people about that, Jeremy. All right. Nice to see you. So we're just setting
+
+33:28.200 --> 33:35.080
+ up our paper space environment, Hamel. And we've got to a point now where I just launched a
+
+33:36.600 --> 33:41.800
+ new instance. And everything is exactly how I want it straight away, which is really nice.
+
+33:41.800 --> 33:49.800
+ We've got a way to install persistently Python modules. We can install persistently binaries.
+
+33:51.320 --> 33:58.440
+ So I think that's a good place to start working through the book because we've got ourselves
+
+33:58.440 --> 34:03.400
+ an environment. So that is step one. Is there anything else that people felt like we're kind of
+
+34:03.400 --> 34:07.800
+ missing from the environment that they would really want? Or should we start working on chapter
+
+34:07.800 --> 34:17.960
+ one of the book? Sounds like we're all happy. Okay, great. I'll stop this machine because that
+
+34:17.960 --> 34:24.600
+ one's costing me money. So here we are in slash notebook. So the first thing we're going to need
+
+34:24.600 --> 34:38.520
+ is we're going to need a copy of the book. So first book is here. So we can copy the SSH GitHub
+
+34:38.520 --> 34:51.480
+ thingy and clone it into slash notebooks. Actually, wait, we're trying to do this properly, right?
+
+34:51.480 --> 34:57.560
+ So if we're going to do it properly, what we should actually do is create our own fork of it
+
+34:58.120 --> 35:05.720
+ so that we can make changes and save it back again. So actually, rather, so what I'm going to do
+
+35:05.720 --> 35:14.200
+ is I'm going to click fork. And that's going to create my own copy in JPHOO. Okay, so let's
+
+35:14.200 --> 35:22.680
+ get rid of that copy in JPHOO. So we can actually do this all from scratch. Okay, so try following
+
+35:22.680 --> 35:29.240
+ along with these steps. Make sure it works for you. So I'm just going to delete my copy of this.
+
+35:29.240 --> 35:41.640
+ JPHOO slash fast book so that we can start from scratch.
+
+35:41.640 --> 35:59.720
+ All right, looks like I need to get my phone. Excuse me.
+
+36:42.440 --> 36:51.000
+ Normally, let's be used GitHub on my phone. All right, I'm just going to do this on my other
+
+36:51.000 --> 36:53.400
+ computer rather than set the soil up.
+
+36:53.400 --> 37:00.280
+ It's a show.
+
+37:02.120 --> 37:02.840
+ First book.
+
+37:06.280 --> 37:11.080
+ The this device option, it was promising to me.
+
+37:13.240 --> 37:19.160
+ This device? Yeah, no, because like, despite DMACC, that like, I don't even have
+
+37:19.160 --> 37:23.720
+ a phone. Normally on my Windows machine, I use Windows Hello to do freeze recognition.
+
+37:26.440 --> 37:30.840
+ And when I say do it on my phone, it's not doing it with the GitHub app on my phone,
+
+37:30.840 --> 37:34.520
+ which is what normally happens. But instead of saying on my phone, I have to install a USB
+
+37:34.520 --> 37:40.680
+ security key. So I don't know. That's right. I can just do it over on my other computer.
+
+37:40.680 --> 37:49.000
+ So delete this repository. And I'm worried about that another time. Okay,
+
+37:49.000 --> 37:53.080
+ on my other computer, I should be able to use my security key. Yes, because it uses fast recognition.
+
+37:57.560 --> 38:05.000
+ Okay, great. My love Windows Hello. It's very handy. Okay, so now that's all done. So right now,
+
+38:05.000 --> 38:12.760
+ great. So now I can. Okay, so now I can create my fork.
+
+38:18.680 --> 38:19.080
+ Whoops.
+
+38:21.800 --> 38:29.960
+ Walk. There we go. So this is going to create a, basically, a copy of the repository.
+
+38:29.960 --> 38:36.440
+ But it's a copy that is linked back to the fastai's version of the repository.
+
+38:37.880 --> 38:45.320
+ So as if, if fastai makes changes, then I can click fetch upstream, it'll copy those changes
+
+38:45.320 --> 38:51.480
+ into our version, which is nice, but it'll also keep our changes as well, as long as they don't
+
+38:51.480 --> 39:00.360
+ conflict. So now, rather than cloning fastai's version, we will clone our version, and we can
+
+39:00.360 --> 39:08.760
+ save those changes back as we need to. Okay, so I'm going to go get clone our fork.
+
+39:08.760 --> 39:20.760
+ You can see here it's got our username and then the repo name.
+
+39:22.760 --> 39:25.800
+ And notice that I'm inside slash notebooks when I do that,
+
+39:30.280 --> 39:31.800
+ which means that now we can see it.
+
+39:31.800 --> 39:38.360
+ And here it is. So let's open chapter one and let's open chapter one and clean.
+
+39:49.320 --> 39:49.880
+ Checking.
+
+39:52.360 --> 39:58.840
+ I remember previously with get clone, you'd done depth of one to not clone the whole repo.
+
+39:58.840 --> 40:05.400
+ Yeah, I wondered about doing that this time, but because we want to probably save, like,
+
+40:05.400 --> 40:11.000
+ commit things back to our fork of the repo, I decided not to go with depth one this time,
+
+40:12.200 --> 40:14.520
+ because we're not just reading it, but we're actually changing it.
+
+40:17.320 --> 40:23.400
+ I have a question. I have never done a fork and an emerge.
+
+40:24.120 --> 40:27.080
+ And I wonder if you can do a sample, just a little test.
+
+40:27.080 --> 40:30.680
+ If that's okay. Yeah, let's make a change and copy it back.
+
+40:31.240 --> 40:32.360
+ So let's just.
+
+40:32.360 --> 40:33.880
+ On the way to the master.
+
+40:35.080 --> 40:41.160
+ Yes, yes, yes. Okay, so let's see if this first cell runs, first of all.
+
+40:50.280 --> 40:54.520
+ You'll see at the very top, there's a pip install fastbook, but it checks.
+
+40:54.520 --> 40:58.840
+ This is a bash line, it starts with exclamation mark, and it's checking whether
+
+40:58.840 --> 41:01.880
+ something called slash content exists. That only exists on coLab.
+
+41:01.880 --> 41:03.240
+ So that'll only run on coLab.
+
+41:04.920 --> 41:08.760
+ So actually it's importing the fastbook and then it's going to import it.
+
+41:09.960 --> 41:10.680
+ Okay, great.
+
+41:13.000 --> 41:14.360
+ And we can try running something.
+
+41:15.240 --> 41:15.880
+ Okay, great.
+
+41:16.920 --> 41:20.440
+ So now let's try pushing that back to our repo.
+
+41:20.440 --> 41:26.760
+ So if we now cd into fastbook.
+
+41:26.760 --> 41:28.600
+ And we do a git status.
+
+41:32.360 --> 41:33.640
+ git status.
+
+41:38.840 --> 41:39.400
+ Oh, good.
+
+41:39.400 --> 41:40.440
+ No, this is going to happen.
+
+41:40.440 --> 41:41.320
+ It changes.
+
+41:41.320 --> 41:41.560
+ Sorry.
+
+41:42.600 --> 41:44.600
+ It looks like you haven't saved that site.
+
+41:44.600 --> 41:45.240
+ Not okay.
+
+41:45.240 --> 41:47.960
+ Yeah, I thought I did, but apparently I didn't.
+
+41:47.960 --> 41:53.160
+ Oh, because it's on a Mac and you have to press command S, and I'm just not used to using a Mac yet.
+
+41:56.680 --> 41:58.760
+ Okay, so it tells us that we've made a change.
+
+41:59.720 --> 42:04.680
+ So to remind you that kind of the shortcut for adding something to a commit
+
+42:05.320 --> 42:10.600
+ and giving it a commit message is git minus a to add it and m to provide a message.
+
+42:12.840 --> 42:14.680
+ And then you need to say what it was you want to do.
+
+42:14.680 --> 42:18.920
+ So I'm going to commit and the message has to be in single quotes.
+
+42:18.920 --> 42:20.520
+ So it knows that's all one string.
+
+42:22.040 --> 42:24.200
+ Test making a change.
+
+42:26.760 --> 42:29.480
+ Okay, ah, so here's another thing that we're going to want to add.
+
+42:38.520 --> 42:39.000
+ To our,
+
+42:39.000 --> 42:41.000
+ um,
+
+42:42.840 --> 42:47.080
+ here's another thing we're going to want to add to our persistent stuff is who am I?
+
+42:47.080 --> 43:06.520
+ Okay, so let's run the things it says to.
+
+43:10.360 --> 43:12.520
+ Okay, and then what you'll find is
+
+43:12.520 --> 43:18.440
+ that there's now a.config file that's appeared here
+
+43:22.760 --> 43:24.200
+ that contains that information.
+
+43:24.760 --> 43:30.600
+ So hopefully you won't be too surprised to hear that what I want to do is move that into slash storage
+
+43:34.360 --> 43:35.960
+ and then vim slash storage
+
+43:37.880 --> 43:38.440
+ prerun
+
+43:38.440 --> 43:55.080
+ and sim link it in our script.
+
+44:00.600 --> 44:02.840
+ Ah, first time around we'll have to do that manually.
+
+44:02.840 --> 44:14.600
+ Okay, and so I rerun the commit by typing control r to search backwards and type commit.
+
+44:17.960 --> 44:20.920
+ Oh, and I'm in the wrong place to get back to where I was is cd hyphen.
+
+44:25.000 --> 44:25.880
+ There we go.
+
+44:25.880 --> 44:31.080
+ Okay, so that's committed it to my local version of the git repository.
+
+44:31.080 --> 44:37.960
+ So if I control our status, you can see that I don't have anything left to commit,
+
+44:37.960 --> 44:40.120
+ but it does say that your branch is ahead of master.
+
+44:40.120 --> 44:42.600
+ So that means that I haven't pushed it back to the server.
+
+44:42.600 --> 44:44.600
+ So git push will push it back to the server.
+
+44:47.320 --> 44:47.800
+ There we go.
+
+44:47.800 --> 44:49.320
+ So if I now go back to
+
+44:53.640 --> 44:54.120
+ github,
+
+44:55.720 --> 44:59.080
+ you'll see that this branch is one commit ahead of faster your master.
+
+44:59.080 --> 45:01.800
+ So I've made a commit that isn't part of fast.
+
+45:03.480 --> 45:05.960
+ So, you know, by the way, sometimes,
+
+45:05.960 --> 45:10.520
+ so like, a lot of the time you create a fork and you make changes because you just want to make
+
+45:10.520 --> 45:11.880
+ changes to your version.
+
+45:11.880 --> 45:16.120
+ Sometimes you make a fork and make changes because you actually want to provide those changes back
+
+45:16.680 --> 45:19.320
+ to the original project.
+
+45:19.320 --> 45:22.120
+ You know, you fixed a bug of theirs or added a feature of theirs.
+
+45:22.120 --> 45:28.120
+ And so if I wanted to send my changes back to fast.ai,
+
+45:28.120 --> 45:32.760
+ because I think they're an improvement to the book, then I can say contribute, right?
+
+45:33.640 --> 45:37.480
+ And then that'll say, oh, okay, you can create something called a pull request.
+
+45:37.480 --> 45:39.960
+ And so the pull request, it's going to show you the changes,
+
+45:39.960 --> 45:42.600
+ which is I've executed some cells I hadn't executed before.
+
+45:43.320 --> 45:47.400
+ And I've added a cell where the source was one plus one and the result was two.
+
+45:47.400 --> 45:53.320
+ And then I could create a pull request and that would send something back up to
+
+45:53.320 --> 45:56.760
+ fast.ai and I'll show you what that would look like.
+
+45:56.760 --> 46:03.240
+ Obviously never do this unless you assure you want to because that's just going to annoy the
+
+46:04.440 --> 46:05.080
+ developers.
+
+46:08.440 --> 46:12.200
+ So then what happens is that would appear on my copy of fast book.
+
+46:12.200 --> 46:13.560
+ It would appear in pull requests.
+
+46:15.000 --> 46:15.960
+ And so here's an example.
+
+46:15.960 --> 46:19.880
+ So when you send in a pull request, I'll then be able to see what files you changed.
+
+46:19.880 --> 46:26.360
+ Using this thing called review and be, I'll even be able to see the changes that were made
+
+46:27.800 --> 46:29.480
+ to the notebooks in a graphical view.
+
+46:30.200 --> 46:31.480
+ So I'll show you what that looks like.
+
+46:33.080 --> 46:33.720
+ So there we go.
+
+46:36.600 --> 46:37.960
+ Questions added these cells.
+
+46:43.480 --> 46:45.400
+ And they've provided a description.
+
+46:45.400 --> 46:49.080
+ And so then if I wanted to add this back to fast.ai, I go click this button.
+
+46:49.080 --> 46:51.720
+ So that's what people talk about when they talk about making a pull request.
+
+46:53.560 --> 46:55.160
+ Anyway, that's not quite what we're doing.
+
+46:55.160 --> 46:58.280
+ We're just keeping our own copy of it as we discussed.
+
+46:59.560 --> 46:59.960
+ All right.
+
+47:05.160 --> 47:10.200
+ And can we have a version of review in the local machine?
+
+47:11.800 --> 47:12.920
+ Yeah, absolutely.
+
+47:12.920 --> 47:15.080
+ Review and be is a startup.
+
+47:15.080 --> 47:16.120
+ They're very, very good.
+
+47:16.120 --> 47:21.160
+ You can absolutely so you can totally add it to your own repos,
+
+47:21.160 --> 47:22.680
+ just by going to review and be calm.
+
+47:23.400 --> 47:25.960
+ No, I mean in my local machine.
+
+47:27.160 --> 47:31.400
+ No, but you can use something quite similar called and be dime.
+
+47:33.480 --> 47:38.600
+ Which is actually so it doesn't really make sense to like have it on a local machine because like you
+
+47:38.600 --> 47:42.360
+ don't pull request to yourself on your machine.
+
+47:42.360 --> 47:45.880
+ But what you do want us to be able to see is to see differences.
+
+47:47.640 --> 47:50.840
+ And so for example, with mine because I've got nbdive installed.
+
+47:52.520 --> 47:54.600
+ If I let's make a change.
+
+47:54.600 --> 47:55.880
+ So let's delete this cell.
+
+47:57.240 --> 47:57.800
+ Save it.
+
+47:59.400 --> 48:02.760
+ And so it's nbdimes already installed on paper space.
+
+48:02.760 --> 48:06.920
+ So I can click here and I can see, okay, I've made this change as I've deleted one cell.
+
+48:06.920 --> 48:13.320
+ All right, so let's try running.
+
+48:16.520 --> 48:17.720
+ Oh, something's happening.
+
+48:18.680 --> 48:19.000
+ Okay.
+
+48:20.360 --> 48:23.720
+ While this is running, let's talk about what's happening here.
+
+48:23.720 --> 48:29.720
+ So the first thing we've got here is a from blah import blah statement.
+
+48:31.320 --> 48:33.320
+ So let's understand what's happening here.
+
+48:33.320 --> 48:39.800
+ And to do that, let's cd into the fast AI repo.
+
+48:40.360 --> 48:42.120
+ Okay, so here's the fast AI repo.
+
+48:42.120 --> 48:48.840
+ And the fast AI repo contains a folder called fast AI.
+
+48:50.520 --> 48:54.360
+ And that contains the fast AI library.
+
+48:55.400 --> 49:01.560
+ And in the fast AI library, there are some also as well as some Python files, there's some sub
+
+49:01.560 --> 49:06.520
+ folders. Now in this case, we were importing stuff from fast AI.vision.
+
+49:07.320 --> 49:11.240
+ And that tells us that there must be a directory called vision.
+
+49:11.240 --> 49:13.320
+ And there is indeed, here's a directory called vision.
+
+49:17.480 --> 49:19.800
+ cd fast AI slash vision.
+
+49:22.360 --> 49:22.920
+ Right.
+
+49:22.920 --> 49:27.320
+ And then in there, finally, we're importing from a module called all.
+
+49:27.320 --> 49:33.960
+ And that means that there must be a directory called all sorry, a file called all dot pi.
+
+49:33.960 --> 49:35.240
+ And here it is all dot pi.
+
+49:35.880 --> 49:42.680
+ So what happens when we say from blah import blah is it goes through all the dot separated
+
+49:42.680 --> 49:45.480
+ components except for the last one and treats these as directories.
+
+49:46.040 --> 49:46.520
+ Right.
+
+49:46.520 --> 49:51.960
+ And so basically what it's doing is it's going to look for a file called
+
+49:51.960 --> 50:03.560
+ called fast AI slash vision slash all dot pi.
+
+50:03.560 --> 50:04.760
+ That's how it gets translated.
+
+50:06.840 --> 50:08.120
+ It's all very mechanical.
+
+50:08.120 --> 50:10.680
+ You know, there's nothing magical weird about it.
+
+50:13.400 --> 50:14.920
+ And so then if we look at that file,
+
+50:18.440 --> 50:19.080
+ here it is.
+
+50:19.080 --> 50:19.640
+ Right.
+
+50:19.640 --> 50:21.080
+ And what does this file do?
+
+50:21.080 --> 50:23.720
+ Well, this file is just importing things.
+
+50:24.440 --> 50:30.120
+ And so it's importing something from models, basics, blah blah blah.
+
+50:30.120 --> 50:37.640
+ Now, when you're inside a library like this, you'll see sometimes it uses dot or dot dot
+
+50:37.640 --> 50:38.280
+ prefixes.
+
+50:39.640 --> 50:45.000
+ That's going to be replaced with a file called dot dot slash basics dot pi.
+
+50:45.000 --> 50:49.400
+ This will be replaced with a file called dot slash augment dot pi.
+
+50:49.400 --> 50:55.800
+ So we should be able to find if I go control split control sp a ug tab.
+
+50:56.360 --> 50:59.800
+ Yep, there is indeed a augment.
+
+50:59.800 --> 51:01.080
+ So I've just got a split pane here.
+
+51:01.080 --> 51:02.280
+ Here's my augment file.
+
+51:03.160 --> 51:08.280
+ And so when it goes from dot augment import star, what does that do?
+
+51:09.800 --> 51:12.440
+ If there's a special variable called done to all,
+
+51:13.080 --> 51:16.680
+ this when you've got underscore underscore blah underscore underscore,
+
+51:16.680 --> 51:18.840
+ we pronounce that done to blah.
+
+51:18.840 --> 51:19.880
+ So this is done to all.
+
+51:20.440 --> 51:23.000
+ If there's a special variable called done to all,
+
+51:23.000 --> 51:29.080
+ that's a list of all of the symbols that it wants to bring in.
+
+51:29.720 --> 51:30.040
+ Right.
+
+51:30.040 --> 51:32.600
+ And so here's a list of all the symbols it wants to bring in.
+
+51:32.600 --> 51:37.000
+ So this file, this command here will bring in, for example,
+
+51:37.000 --> 51:39.880
+ a symbol called round transform into this file.
+
+51:41.240 --> 51:43.800
+ Now, this file doesn't have something called done to all.
+
+51:43.800 --> 51:47.160
+ And so if you don't have a file called done to all,
+
+51:47.160 --> 51:50.920
+ then every single thing that is imported or defined in this file
+
+51:50.920 --> 51:53.800
+ will end up being exported from it.
+
+51:54.360 --> 51:59.000
+ So since this line here imports something called round transform
+
+51:59.560 --> 52:01.000
+ and there's no done to all here,
+
+52:01.000 --> 52:05.000
+ that means importing all dot pi should also import round transform.
+
+52:05.000 --> 52:10.040
+ And so that means I should be able to type round t tab.
+
+52:10.040 --> 52:11.800
+ And there it is.
+
+52:11.800 --> 52:13.320
+ There is a round transform.
+
+52:13.320 --> 52:17.160
+ And if I hit shift enter, you can see where it's come from.
+
+52:17.160 --> 52:20.200
+ So it's come from fast.ai.vision.org.
+
+52:20.200 --> 52:25.400
+ dot round transform, which remember is translated to fast.ai
+
+52:25.400 --> 52:27.800
+ slash vision slash augments slash.
+
+52:27.800 --> 52:28.360
+ Sorry.
+
+52:28.360 --> 52:29.320
+ Okay.
+
+52:29.320 --> 52:31.320
+ This is actually the name of a method.
+
+52:31.320 --> 52:33.480
+ So this will become fast.ai.vision.
+
+52:33.480 --> 52:36.920
+ Fast.ai slash vision slash augment dot pi.
+
+52:36.920 --> 52:42.040
+ And then we'll find the round transform class or symbol inside there.
+
+52:42.040 --> 52:43.880
+ And so let's find it.
+
+52:43.880 --> 52:48.360
+ So if I click on round transform, I'll show you a really nifty trick.
+
+52:49.000 --> 52:54.040
+ If you select something in VIM and hit the asterisk key, shift eight,
+
+52:54.040 --> 52:58.920
+ it will search for the next place that this word occurs.
+
+52:58.920 --> 53:04.280
+ So if I press star asterisk, here's the next copy of round transform.
+
+53:04.280 --> 53:06.520
+ And so here's the definition of it.
+
+53:07.720 --> 53:11.960
+ So that's what it does when you say from blah, import, blah.
+
+53:11.960 --> 53:16.600
+ If you say import star, then that will import everything that's exported.
+
+53:16.600 --> 53:19.560
+ So everything in done to all, or if there's no done to all,
+
+53:19.560 --> 53:21.160
+ everything that's defined or imported.
+
+53:22.920 --> 53:26.760
+ So that's why we now have a thing called round transform available to us.
+
+53:29.160 --> 53:29.480
+ Yeah.
+
+53:29.480 --> 53:32.440
+ If you ever want to know where something's from,
+
+53:32.440 --> 53:37.480
+ a lot of people are used to not using a wildcard import,
+
+53:37.480 --> 53:42.760
+ so not using star, but instead listing specifically exactly all the symbols they import.
+
+53:42.760 --> 53:43.720
+ And so somebody does that.
+
+53:43.720 --> 53:47.720
+ You can scroll back to the top of the file and search through it and try to find it.
+
+53:48.680 --> 53:49.640
+ But you don't have to.
+
+53:50.360 --> 53:55.480
+ It's much easier than a deed with star necessary to simply type in and press shift enter,
+
+53:55.480 --> 53:56.760
+ and you can find out where it's from.
+
+53:56.760 --> 54:01.480
+ Want to get more info about it through the same thing with the question mark.
+
+54:02.520 --> 54:07.240
+ And as you can see, it will give you the signature, the doc string,
+
+54:07.240 --> 54:08.840
+ and the full path name of where it's from.
+
+54:09.800 --> 54:13.640
+ And so this is one way if you want to go and look at the source code for this,
+
+54:14.360 --> 54:20.760
+ is I could copy that and type colon sp and paste it.
+
+54:20.760 --> 54:25.560
+ And now I've got a third split and here's the file.
+
+54:30.120 --> 54:32.680
+ But if I just want the source code for that one thing,
+
+54:32.680 --> 54:34.120
+ I can just put two question marks.
+
+54:35.720 --> 54:38.040
+ And as you can see, this gives me the source code for that thing.
+
+54:41.400 --> 54:43.640
+ Okay. So that's what the first line does,
+
+54:43.640 --> 54:54.360
+ first AI vision all imports. What does the next line do?
+
+55:01.720 --> 55:06.600
+ So if I type doc on data in a first AI library, it'll tell me
+
+55:06.600 --> 55:12.120
+ what this one didn't quite work correctly somehow.
+
+55:16.120 --> 55:18.520
+ It'll tell me all the information about it.
+
+55:19.800 --> 55:22.920
+ For some reason, this one's not getting the usual documentation.
+
+55:22.920 --> 55:24.360
+ I would expect to see that's okay.
+
+55:25.240 --> 55:32.440
+ You can always click on source to get a link to where it's defined.
+
+55:32.440 --> 55:36.200
+ So here it is, on hard data.
+
+55:38.600 --> 55:40.760
+ Or you can click on show in docs.
+
+55:43.800 --> 55:45.160
+ Oh, this one works correctly.
+
+55:45.880 --> 55:46.600
+ That's interesting.
+
+55:46.600 --> 55:49.240
+ So for some reason, the help the doc commands not working right.
+
+55:49.240 --> 55:49.800
+ I'll fix that.
+
+55:52.760 --> 55:55.400
+ Yeah. So you can see here's the details here.
+
+55:55.400 --> 56:00.360
+ And you can see that there's, you know, it says here, for example,
+
+56:00.360 --> 56:03.800
+ C URLs, you can click on these things to get more information about them.
+
+56:05.320 --> 56:09.880
+ So there's lots of sim links, as you can see within the documentation.
+
+56:10.920 --> 56:11.960
+ So untired data
+
+56:14.840 --> 56:19.160
+ downloads and extracts URL by default into subdirectories of
+
+56:19.160 --> 56:20.760
+ tilde slash dot plus.io.
+
+56:20.760 --> 56:25.000
+ So we now know that means you're your home directory and it returns a path.
+
+56:25.000 --> 56:29.560
+ Okay, so let's see if we can understand what this is doing.
+
+56:33.160 --> 56:40.920
+ So what I generally like to do to understand a cell is to run every single line separately.
+
+56:40.920 --> 56:45.800
+ So the most important thing to know how to run every single line separately is to
+
+56:47.800 --> 56:50.680
+ know that you can press control shift hyphen.
+
+56:50.680 --> 56:54.200
+ It's control even on a Mac, not command control shift hyphen to split.
+
+56:54.200 --> 56:57.000
+ It's going to get into two cells at the cursor.
+
+56:58.040 --> 57:00.600
+ The step one is to separate this out into separate cells.
+
+57:01.400 --> 57:01.720
+ Okay.
+
+57:03.000 --> 57:07.800
+ And so then, you know, run each one and see what happens.
+
+57:07.800 --> 57:09.880
+ So after I run this one, I should be able to look at path.
+
+57:12.040 --> 57:13.720
+ Okay, so it tells me here that
+
+57:17.000 --> 57:19.960
+ it's been stored in slash storage slash data,
+
+57:19.960 --> 57:21.080
+ slash, etc.
+
+57:21.080 --> 57:24.200
+ Now that's good news because we know that means it's persistent.
+
+57:25.800 --> 57:30.680
+ So if I create a new instance, whatever, I'm going to have this same thing.
+
+57:30.680 --> 57:36.360
+ Now downside is if you have a free or cheap account,
+
+57:36.360 --> 57:40.360
+ you don't have much space and you might not want all that space being taken up.
+
+57:40.360 --> 57:42.680
+ So let's find out how much space is being taken up.
+
+57:42.680 --> 57:45.400
+ So let's copy that, head up over to our terminal,
+
+57:45.400 --> 57:49.640
+ get over there.
+
+57:50.360 --> 57:55.720
+ And so remember we can type du minus SH dot 789x.
+
+57:55.720 --> 57:56.680
+ So that's pretty big.
+
+57:56.680 --> 58:02.600
+ So you might not want that to be there, which is fine.
+
+58:02.600 --> 58:04.440
+ So you can just move it somewhere else, you know,
+
+58:04.440 --> 58:06.360
+ put it in the home directory or something like that.
+
+58:06.920 --> 58:08.760
+ So one interesting question is here is like,
+
+58:09.960 --> 58:11.320
+ according to the documentation,
+
+58:11.320 --> 58:16.680
+ it was going to extract things by default to sub directories of tilde slash dot fastai,
+
+58:16.680 --> 58:17.720
+ but that's not what happened.
+
+58:18.360 --> 58:19.640
+ Why is that not how it happened?
+
+58:19.640 --> 58:23.400
+ Well, it says it's a wrapper around fast download dot get.
+
+58:23.400 --> 58:28.920
+ So we should probably look up that documentation to find out what's going on.
+
+58:33.160 --> 58:37.240
+ So here's fast download and here's fast download dot get.
+
+58:37.240 --> 58:42.280
+ Okay, so this is pretty much what we saw.
+
+58:42.280 --> 58:45.880
+ Rather than, you know, this is using d.get, it returns a path by default.
+
+58:45.880 --> 58:50.040
+ It goes into base archive, which by default is, in this case,
+
+58:50.040 --> 58:52.920
+ dot fast download for fastai might change it to fastai.
+
+58:55.400 --> 58:58.920
+ You can change them by passing fast download.
+
+58:58.920 --> 58:59.560
+ Okay.
+
+58:59.560 --> 59:00.200
+ Oh, look at this.
+
+59:00.200 --> 59:03.160
+ If there's a config file in the base directory,
+
+59:03.160 --> 59:04.920
+ then they will be used for fast download.
+
+59:04.920 --> 59:08.280
+ Now our base directory for fastai is dot fastai.
+
+59:08.280 --> 59:10.680
+ So let's go and have a look in the dot fastai directory.
+
+59:12.920 --> 59:15.560
+ That cd tilde slash dot fastai.
+
+59:17.240 --> 59:17.720
+ There we go.
+
+59:17.720 --> 59:19.000
+ There is indeed a config dot any.
+
+59:22.120 --> 59:25.800
+ Ah, so you can see that paper space has actually set things up for us.
+
+59:25.800 --> 59:28.280
+ So that by default, all of the archives,
+
+59:30.280 --> 59:34.040
+ models we create, data we download is all going to be put in
+
+59:34.040 --> 59:35.560
+ the persistent storage.
+
+59:35.560 --> 59:38.440
+ So that's like, that's a good thing.
+
+59:39.800 --> 59:41.720
+ Unless it's not what you want.
+
+59:41.720 --> 59:41.960
+ Right.
+
+59:43.720 --> 59:49.000
+ So I would say this is another of these things that we probably want to be able to adjust
+
+59:49.000 --> 59:49.640
+ if we want to.
+
+59:50.520 --> 59:54.600
+ So how about we move that into slash storage.
+
+59:54.600 --> 1:00:04.280
+ And then as per usual,
+
+1:00:06.920 --> 1:00:07.720
+ dim link it back.
+
+1:00:11.400 --> 1:00:17.400
+ So when we start the machine, I don't know if there's a dot fastai folder there or not.
+
+1:00:17.400 --> 1:00:18.920
+ So what we can do is we can say,
+
+1:00:18.920 --> 1:00:24.680
+ a make down bonus P basically creates a folder and all of its subfolders,
+
+1:00:24.680 --> 1:00:28.440
+ sorry, all its parent folders and doesn't complain if it's not already there.
+
+1:00:28.440 --> 1:00:31.880
+ So I use make down as P to create a dot fastai.
+
+1:00:34.360 --> 1:00:41.880
+ And we will then remove a.
+
+1:00:45.480 --> 1:00:46.360
+ Dot fastai.
+
+1:00:46.360 --> 1:00:48.280
+ Oh, now I'll show you a little trick.
+
+1:00:50.280 --> 1:00:53.800
+ I want to fill out the word fastai with that type in the whole thing.
+
+1:00:54.360 --> 1:01:00.600
+ If I hit control P, it will fill in the rest of the word P for previous,
+
+1:01:00.600 --> 1:01:03.000
+ it will fill in the rest of the last word that it confined.
+
+1:01:03.000 --> 1:01:04.040
+ It starts with those letters.
+
+1:01:05.400 --> 1:01:08.680
+ So I want to remove fastai slash config.
+
+1:01:09.800 --> 1:01:10.360
+ Dot any.
+
+1:01:11.880 --> 1:01:14.200
+ And then we will link that back again.
+
+1:01:14.200 --> 1:01:19.160
+ So it's going to be in slash storage.
+
+1:01:19.160 --> 1:01:23.640
+ So I hit control P that's less storage and it's going to be called config.any.
+
+1:01:23.640 --> 1:01:27.080
+ So I press control P and actually if you then hit control X,
+
+1:01:27.080 --> 1:01:30.600
+ control P, it keeps filling in the rest.
+
+1:01:34.600 --> 1:01:39.640
+ All right, so now we're going to have config any file.
+
+1:01:39.640 --> 1:01:46.760
+ Oh, except I don't want to put it in the home directory.
+
+1:01:46.760 --> 1:01:48.520
+ I want to put it in the dot fastai directory.
+
+1:01:54.360 --> 1:01:55.720
+ And so we can test that.
+
+1:01:57.400 --> 1:01:58.200
+ Copy it.
+
+1:02:03.160 --> 1:02:03.800
+ Paste it.
+
+1:02:05.960 --> 1:02:06.680
+ There we go.
+
+1:02:06.680 --> 1:02:09.560
+ Okay, so we've now got a consistent config.any.
+
+1:02:09.560 --> 1:02:17.400
+ I think in my case, what I want to do, and this might not be bad for most people,
+
+1:02:18.200 --> 1:02:24.360
+ is I probably don't want the archives to be stored in my storage directory
+
+1:02:24.360 --> 1:02:26.840
+ because I'm not going to need them again once it's been unarchived.
+
+1:02:28.600 --> 1:02:32.920
+ And so let's cd to slash storage slash archive.
+
+1:02:32.920 --> 1:02:35.480
+ Yeah, I don't want this there.
+
+1:02:35.480 --> 1:02:36.440
+ So let's just remove it.
+
+1:02:38.680 --> 1:02:38.920
+ Cool.
+
+1:02:40.360 --> 1:02:49.560
+ Okay, so this is now going to put by default stuff that I download will be in my storage.
+
+1:02:49.560 --> 1:02:53.560
+ I'll be able to use it anywhere, but I can always move it somewhere else if I want to.
+
+1:02:53.560 --> 1:03:01.560
+ Okay, the next two lines kind of go together,
+
+1:03:04.600 --> 1:03:06.600
+ which is I'm going to use image data letters.
+
+1:03:07.320 --> 1:03:13.240
+ So again, you know, before you use something, it's good to understand what it is.
+
+1:03:15.880 --> 1:03:16.120
+ So
+
+1:03:16.120 --> 1:03:18.120
+ so
+
+1:03:26.760 --> 1:03:27.560
+ Show in docs.
+
+1:03:30.200 --> 1:03:35.000
+ All right, image data loaders is a wrapper around several data loaders,
+
+1:03:35.000 --> 1:03:37.160
+ with methods for computer vision problems.
+
+1:03:39.400 --> 1:03:41.800
+ And what you're going to be using is one of the factory methods,
+
+1:03:41.800 --> 1:03:47.720
+ so there are things underneath and all these factory methods accept various things.
+
+1:03:47.720 --> 1:03:51.560
+ So this tells me that there are various different ways of creating image data loaders,
+
+1:03:51.560 --> 1:03:53.080
+ and they've got a consistent API.
+
+1:03:54.440 --> 1:03:55.080
+ So that's good.
+
+1:03:56.840 --> 1:04:05.320
+ In our case, we've got, if I hit shift tab, I can find out what the parameters are.
+
+1:04:06.360 --> 1:04:07.240
+ So I've got the path.
+
+1:04:07.240 --> 1:04:09.960
+ I've got a list of file names.
+
+1:04:12.120 --> 1:04:16.200
+ I've got a labeling, let's see, oh, then I've got valid percent and seed.
+
+1:04:17.960 --> 1:04:19.480
+ So valid percent and seed.
+
+1:04:19.480 --> 1:04:20.440
+ So what do those mean?
+
+1:04:24.040 --> 1:04:25.000
+ Are we using
+
+1:04:26.680 --> 1:04:32.040
+ from name, valid percent is passed to image data loaders from path.
+
+1:04:32.040 --> 1:04:36.040
+ Okay, so quite often, you know, we'll take a argument and just pass it to something else.
+
+1:04:36.040 --> 1:04:39.160
+ So I have to click on here to find out what that does.
+
+1:04:39.160 --> 1:04:40.600
+ Here we have validation set.
+
+1:04:40.600 --> 1:04:43.800
+ Validation set is a random subset of size validation percent.
+
+1:04:44.520 --> 1:04:47.400
+ Okay, no worries, optionally created with seed for reproducibility.
+
+1:04:51.400 --> 1:04:51.640
+ Cool.
+
+1:04:52.840 --> 1:04:54.360
+ And it's got a labeling function.
+
+1:04:58.280 --> 1:04:58.520
+ So...
+
+1:04:58.520 --> 1:05:02.520
+ So...
+
+1:05:02.520 --> 1:05:03.080
+ Oh, wait.
+
+1:05:05.320 --> 1:05:07.080
+ From name function.
+
+1:05:09.640 --> 1:05:13.240
+ A function that receives a string, which is a file name and outputs a label.
+
+1:05:13.240 --> 1:05:15.320
+ Okay, so let's just have a look at some of these things.
+
+1:05:15.320 --> 1:05:22.520
+ So the list of file names, so remember the second argument with a list of file names is this.
+
+1:05:22.520 --> 1:05:27.560
+ So let's pull this out and create something called files.
+
+1:05:27.560 --> 1:05:33.800
+ So if I press A for append above, I'll type files equals pasted here.
+
+1:05:35.480 --> 1:05:36.680
+ Okay, and let's look at that.
+
+1:05:36.680 --> 1:05:53.240
+ Okay, so files is a list of 7,390 items and it contains various paths in it.
+
+1:05:55.720 --> 1:05:57.080
+ Now I'm going to mine myself.
+
+1:05:57.080 --> 1:06:00.120
+ If you go path.base or base path,
+
+1:06:00.120 --> 1:06:07.960
+ I'll show you what I'm doing in the tick.
+
+1:06:07.960 --> 1:06:14.120
+ Let's get rid of all this prefix copy and paste.
+
+1:06:19.720 --> 1:06:20.440
+ There we go.
+
+1:06:20.440 --> 1:06:23.880
+ Yeah, so if you create a special variable called path.base.path,
+
+1:06:24.440 --> 1:06:29.640
+ then it will delete that from the start of everything it prints out.
+
+1:06:29.640 --> 1:06:32.520
+ So it just shows you the relative to here.
+
+1:06:32.520 --> 1:06:33.480
+ It's a bit easier to read.
+
+1:06:34.280 --> 1:06:40.840
+ So the 7,390 things with images slash blah, images slash blah.
+
+1:06:40.840 --> 1:06:42.600
+ And it looks like it's going to be the name of the breed.
+
+1:06:43.880 --> 1:06:47.080
+ And then an underscore and then some consecutive number.
+
+1:06:49.160 --> 1:06:52.440
+ Now this looks a little bit different to what you might be used to seeing.
+
+1:06:52.440 --> 1:06:59.480
+ Normally, if you look at something like a list,
+
+1:06:59.480 --> 1:07:03.880
+ you expect it to look something more like this.
+
+1:07:04.840 --> 1:07:07.880
+ This is what lists look like in Python.
+
+1:07:08.600 --> 1:07:10.280
+ So to find out why that looks different,
+
+1:07:10.280 --> 1:07:13.720
+ we can check out what the type of it is by typing type.
+
+1:07:15.800 --> 1:07:17.080
+ And it turns out it's not a list.
+
+1:07:17.720 --> 1:07:19.640
+ It's something of type capital L.
+
+1:07:19.640 --> 1:07:28.680
+ That's a special kind of list, which has lots of convenience functions in it.
+
+1:07:31.880 --> 1:07:37.080
+ We could just use question mark to find out a bit more about it.
+
+1:07:37.080 --> 1:07:39.240
+ So here's the definition of where it's coming from.
+
+1:07:39.240 --> 1:07:40.680
+ Here's the doc string from it.
+
+1:07:40.680 --> 1:07:51.320
+ Or we could type help L and not help doc.
+
+1:07:51.880 --> 1:07:54.360
+ So help is useful as well.
+
+1:07:54.360 --> 1:07:55.560
+ That's a built into Python.
+
+1:07:55.560 --> 1:07:58.200
+ It shows you a list of all the stuff it can do.
+
+1:07:58.200 --> 1:07:59.480
+ Actually, maybe that's useful.
+
+1:08:00.680 --> 1:08:04.840
+ So as you can see, it's got lots of functionality in addition to everything that a list does.
+
+1:08:05.960 --> 1:08:06.920
+ Or we could type doc.
+
+1:08:06.920 --> 1:08:13.960
+ So you can see this stuff's not just for fast AI libraries.
+
+1:08:13.960 --> 1:08:17.800
+ It's for all libraries created by fast.ai look pretty similar.
+
+1:08:19.160 --> 1:08:22.760
+ And so here's lots of information about L.
+
+1:08:25.240 --> 1:08:27.560
+ Let's learn how to read this documentation.
+
+1:08:27.560 --> 1:08:28.440
+ And then I think we'll stop.
+
+1:08:31.560 --> 1:08:33.160
+ So L is like a list.
+
+1:08:33.160 --> 1:08:41.080
+ Okay, so a list in Python is something that you create like this.
+
+1:08:42.680 --> 1:08:43.400
+ Square brackets.
+
+1:08:44.120 --> 1:08:48.360
+ And you can print them, for example, or you can index into them.
+
+1:08:50.200 --> 1:08:52.040
+ Or you can select multiple things from them.
+
+1:08:53.800 --> 1:08:56.520
+ Everything up to, but not including element two.
+
+1:08:57.800 --> 1:08:58.440
+ That's a list.
+
+1:08:58.440 --> 1:09:03.000
+ Okay, and L is very similar.
+
+1:09:05.800 --> 1:09:09.880
+ But it doesn't have any special syntax like Python does.
+
+1:09:09.880 --> 1:09:10.840
+ You have to create it like this.
+
+1:09:11.960 --> 1:09:14.680
+ But it basically looks much the same.
+
+1:09:19.960 --> 1:09:20.760
+ As you can see.
+
+1:09:20.760 --> 1:09:27.400
+ But it has quite a lot more functionality than a list.
+
+1:09:27.400 --> 1:09:31.000
+ So I don't use a normal Python list that often.
+
+1:09:31.000 --> 1:09:34.040
+ Because like, why use something which is less useful.
+
+1:09:36.200 --> 1:09:36.840
+ So let's see.
+
+1:09:36.840 --> 1:09:37.800
+ Okay, there is like a list.
+
+1:09:37.800 --> 1:09:39.080
+ So you know what a list looks like.
+
+1:09:39.080 --> 1:09:40.680
+ So drop in replacement for a list.
+
+1:09:40.680 --> 1:09:43.080
+ So when something's described as a drop in replacement,
+
+1:09:43.080 --> 1:09:45.400
+ anywhere that uses a list, you should be able to use this as well.
+
+1:09:46.280 --> 1:09:49.080
+ So it's got a super set of the functionality.
+
+1:09:49.080 --> 1:09:52.440
+ It's like NumPy.
+
+1:09:52.440 --> 1:09:54.440
+ It supports advanced indexing.
+
+1:09:55.640 --> 1:09:58.440
+ Okay, so what that means is that
+
+1:10:00.760 --> 1:10:03.880
+ you should be able to select multiple things from a list at once.
+
+1:10:04.840 --> 1:10:07.480
+ I'm just trying to remember exactly how we do that.
+
+1:10:07.480 --> 1:10:10.440
+ I think you can go like this.
+
+1:10:13.080 --> 1:10:16.120
+ Yes, okay, so I can select the zero thing and the second thing and one go.
+
+1:10:16.120 --> 1:10:18.040
+ So that's an example.
+
+1:10:18.040 --> 1:10:21.240
+ And as it mentioned, this is similar to what NumPy can do.
+
+1:10:24.040 --> 1:10:26.840
+ So NumPy has a thing called an array.
+
+1:10:34.840 --> 1:10:37.160
+ And so in NumPy, you can do the same kind of thing.
+
+1:10:37.160 --> 1:10:43.480
+ But a regular list, remember, a is our regular list.
+
+1:10:48.120 --> 1:10:48.760
+ Can't do that.
+
+1:10:50.040 --> 1:10:55.640
+ So you can kind of think of a capital L object as being a bit like a hybrid between
+
+1:10:56.280 --> 1:10:58.280
+ a NumPy array and a Python list.
+
+1:10:58.280 --> 1:11:08.360
+ You could try to use a NumPy array for things that you would otherwise use an L for.
+
+1:11:08.360 --> 1:11:13.160
+ But the problem is that a NumPy array kind of expects everything to be of the same type.
+
+1:11:15.960 --> 1:11:17.960
+ So you have to be a bit careful.
+
+1:11:23.400 --> 1:11:25.000
+ Sometimes it might do it for us.
+
+1:11:25.000 --> 1:11:26.840
+ No, sometimes it can actually handle it for us.
+
+1:11:26.840 --> 1:11:28.680
+ It's going to put them into something called an object.
+
+1:11:30.040 --> 1:11:31.960
+ So, you know, I mean, actually, no, I think about it.
+
+1:11:31.960 --> 1:11:35.400
+ You probably could use an array quite often, but they do behave differently.
+
+1:11:35.400 --> 1:11:36.520
+ Actually, I'll show an example.
+
+1:11:38.040 --> 1:11:44.200
+ So if we go B plus below,
+
+1:11:48.680 --> 1:11:52.760
+ then that's what that does in an L.
+
+1:11:52.760 --> 1:11:54.840
+ It adds hello to the list.
+
+1:11:54.840 --> 1:11:58.360
+ So notice that Ls show you how many items are in it.
+
+1:11:58.920 --> 1:12:02.760
+ And it also by default doesn't show you all of them, but it puts dot dot dot,
+
+1:12:02.760 --> 1:12:04.360
+ which is both very convenient things.
+
+1:12:05.320 --> 1:12:06.200
+ A Python list.
+
+1:12:11.240 --> 1:12:14.600
+ Oops, I used control by mistake.
+
+1:12:16.680 --> 1:12:17.560
+ Works the same way.
+
+1:12:17.560 --> 1:12:25.560
+ An NumPy array doesn't work the same way.
+
+1:12:27.560 --> 1:12:31.240
+ And that's because NumPy is designed mainly for math.
+
+1:12:31.240 --> 1:12:33.320
+ So if we make all of these into numbers,
+
+1:12:36.360 --> 1:12:39.720
+ then a NumPy array, we could do this.
+
+1:12:42.600 --> 1:12:43.880
+ It adds element wise.
+
+1:12:43.880 --> 1:12:48.360
+ Okay, so, you know, if you're kind of trying to
+
+1:12:50.280 --> 1:12:54.360
+ go deep and fully understand each line of code,
+
+1:12:54.360 --> 1:12:56.680
+ this is a kind of experimentation that you can do.
+
+1:12:57.560 --> 1:12:59.640
+ And hopefully what you can see here is that
+
+1:13:03.320 --> 1:13:06.360
+ all of the information you need to fully understand all of these things
+
+1:13:06.360 --> 1:13:09.480
+ is available to you in the documentation,
+
+1:13:09.480 --> 1:13:15.560
+ which you can link to directly using the dot command and by experimenting.
+
+1:13:16.920 --> 1:13:21.160
+ But it is like, initially, it's a lot to learn.
+
+1:13:22.200 --> 1:13:26.600
+ But the nice thing is that the things you're learning are very reusable,
+
+1:13:26.600 --> 1:13:30.440
+ right, because all this stuff is used all over the place.
+
+1:13:31.400 --> 1:13:33.880
+ All right, so I'm going to wrap it up.
+
+1:13:33.880 --> 1:13:36.920
+ Does anybody have any questions or comments?
+
+1:13:36.920 --> 1:13:40.760
+ It's been a bit less interactive than usual.
+
+1:13:40.760 --> 1:13:43.000
+ So I apologize if that's because I'm talking too much,
+
+1:13:43.000 --> 1:13:46.360
+ but I definitely want to hear your thoughts or questions.
+
+1:13:53.000 --> 1:13:54.680
+ Nothing? That's fine.
+
+1:13:54.680 --> 1:13:55.640
+ Thank you.
+
+1:13:56.200 --> 1:14:01.480
+ Is that because it's too easy or too hard or totally obvious or
+
+1:14:01.480 --> 1:14:06.280
+ I want to go away and think about it.
+
+1:14:09.880 --> 1:14:11.800
+ For me, it was very good, Jeremy.
+
+1:14:11.800 --> 1:14:12.680
+ Okay, great.
+
+1:14:13.640 --> 1:14:15.880
+ No, I think it was perfect for me.
+
+1:14:15.880 --> 1:14:17.080
+ Oh, awesome. Cool, Jess.
+
+1:14:17.080 --> 1:14:17.400
+ Okay.
+
+1:14:19.160 --> 1:14:21.320
+ I haven't seen somebody called Jess in a stream before.
+
+1:14:21.320 --> 1:14:24.280
+ Are you a new person here or who does not notice you?
+
+1:14:25.640 --> 1:14:29.480
+ A new old person who just saw it pop up in the forum.
+
+1:14:29.480 --> 1:14:30.360
+ Awesome.
+
+1:14:30.360 --> 1:14:33.560
+ That's like how did it not pop up for me sooner?
+
+1:14:33.560 --> 1:14:35.400
+ Thank you for joining Jess.
+
+1:14:35.400 --> 1:14:36.440
+ Where are you joining us from?
+
+1:14:38.280 --> 1:14:42.120
+ I am in the Seattle area of USA.
+
+1:14:42.840 --> 1:14:43.400
+ Fantastic.
+
+1:14:45.400 --> 1:14:45.560
+ Great.
+
+1:14:45.560 --> 1:14:48.920
+ I think, yeah, okay, well, that's a good time to finish.
+
+1:14:48.920 --> 1:14:51.800
+ So I hope to see you all tomorrow.
+
+1:14:54.600 --> 1:14:54.840
+ Great.
+
+1:14:54.840 --> 1:14:55.160
+ Awesome.
+
+1:14:55.160 --> 1:14:56.040
+ See everybody.
+
+1:14:56.040 --> 1:14:56.600
+ Bye, everyone.
+
+1:14:56.600 --> 1:14:58.600
+ Okay, thank you.
+

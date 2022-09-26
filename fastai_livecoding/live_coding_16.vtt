@@ -1,0 +1,1235 @@
+WEBVTT
+
+00:00.000 --> 00:07.040
+ Mr. May, I am recording now, so but please keep talking. Don't be shy, Sir, it's okay.
+
+00:11.600 --> 00:16.240
+ Oh, getting a bit noisy out here with street plating something.
+
+00:19.040 --> 00:22.880
+ I think your head said it's very good for 30 about.
+
+00:22.880 --> 00:28.000
+ Oh, good. I didn't hear anything. So, I mean, I say street plating, it's more like
+
+00:28.000 --> 00:31.440
+ footpath plating. We have a walking path along the front of their house.
+
+00:32.720 --> 00:33.280
+ Sure.
+
+00:36.720 --> 00:40.320
+ Oh, come on. I start the pressing the recording, but not everybody stops talking.
+
+00:40.320 --> 00:41.280
+ Well, you know,
+
+00:45.200 --> 00:48.240
+ I don't want to just hear my voice all the time on these recordings, guys.
+
+00:52.160 --> 00:57.280
+ There are things I wanted to cover in today's session, but then the responsible part of me says
+
+00:57.280 --> 01:02.480
+ I probably ought to create a lesson before Tuesday's class. So maybe we'll do that.
+
+01:04.640 --> 01:11.440
+ I've got a question, Jeremy. I had to leave before you finished that code change yesterday.
+
+01:11.440 --> 01:18.880
+ Did you? Was that actually, did you want to recap on where we got to with waiting with data?
+
+01:19.760 --> 01:23.680
+ Probably not because you can just watch the video. And so, like otherwise, I guess we're just doing
+
+01:23.680 --> 01:29.600
+ it. So is it working now? Yeah, yeah, it's all good. You know, I mean, it's
+
+01:32.160 --> 01:34.880
+ the concept is working correctly in terms of the code.
+
+01:37.600 --> 01:40.800
+ We didn't like get a better score, but I didn't particularly expect to either.
+
+01:43.920 --> 01:48.160
+ You know, maybe after next Tuesday's lesson, we will revisit it because I actually think the
+
+01:48.160 --> 01:54.160
+ main thing it might be useful for is what's called curriculum learning, which is basically focusing
+
+01:54.160 --> 02:00.800
+ on the hard bits. Looks like Nick's internet still isn't working, but Nick was saying the other day
+
+02:00.800 --> 02:06.640
+ that he looked at which ones we're having the errors on, which is like what we've, which what
+
+02:06.640 --> 02:13.040
+ we look at in the book, like looking at the classification interpretation and looking at like plot,
+
+02:13.040 --> 02:18.000
+ plot, blosses and stuff. And he said like, yeah, all the ones that we're making that we're getting
+
+02:18.000 --> 02:25.920
+ wrong are basically from the same one or two classes. So I haven't done much with curriculum
+
+02:26.480 --> 02:32.240
+ learning in practice. Like I like all it means in theory is that we use our weighted data loader
+
+02:32.800 --> 02:36.320
+ to wait the ones that we're getting wrong higher. And
+
+02:36.320 --> 02:44.080
+ whether that will actually give us a better result or not, I'm not sure. But that I think
+
+02:44.080 --> 02:52.560
+ that's more likely to be a useful path than simply reweighting things to be more balanced.
+
+02:53.120 --> 02:59.760
+ Because we don't want things to be more balanced because the ones that we observe the most often
+
+02:59.760 --> 03:10.560
+ in the test set are actually the ones we want to be the best at. I will say I didn't check whether
+
+03:10.560 --> 03:16.000
+ the distribution of the test set is the same as the training set. If it's randomly selected,
+
+03:16.000 --> 03:20.960
+ then it will be. And if it's not, then that would be a reason to use a weighted data loader as well.
+
+03:20.960 --> 03:27.760
+ So, yeah.
+
+03:34.560 --> 03:42.720
+ Okay. So, what's the difference? I guess like what's the, is it is a curriculum learning kind of
+
+03:42.720 --> 03:52.080
+ related to boosting in conceptually? Not really. I mean, maybe. So boosting is where you calculate
+
+03:52.080 --> 03:55.920
+ the difference between the actuals and your predictions to get residuals. And then you create
+
+03:55.920 --> 04:01.440
+ a model that tries to predict the residuals. And then you can add those two predictions together.
+
+04:02.960 --> 04:09.520
+ Which is, if not done carefully as a recipe for overfitting. But if done carefully, can be very
+
+04:09.520 --> 04:15.600
+ effective. Yeah. We're talking about something which is conceptually very different, which is
+
+04:15.600 --> 04:23.360
+ saying like, oh, we're like really bad at recognizing this category. So let's show that category more
+
+04:23.360 --> 04:28.320
+ often during training. That's a good question. I guess that really
+
+04:30.320 --> 04:35.280
+ kind of focusing on examples, you're getting it wrong, like more and then conceptually doing
+
+04:35.280 --> 04:42.640
+ something similar. I was just going to ask, are the labels ever wrong? Like by accident or intentionally
+
+04:42.640 --> 04:46.960
+ in Kaggle? Of course, absolutely. So, so are both intentionally as well?
+
+04:46.960 --> 04:51.520
+ No, not intentionally. I mean, I mean, not normally. Like sometimes there might be a competition
+
+04:51.520 --> 04:55.600
+ where they say like, Oh, this is a synthetically generated data set and some of the data is wrong
+
+04:55.600 --> 05:01.040
+ because we're trying to do something like what happens in practice, but we can't share the real
+
+05:01.040 --> 05:06.480
+ data. So is there any other advantage in trying something like some uncertainty values from
+
+05:06.480 --> 05:11.280
+ something like MC dropout, try to find like a threshold of things that are too difficult and then
+
+05:11.280 --> 05:15.360
+ potentially they're wrongly labeled. I'm not sure you would need that. Like the thing we use in the
+
+05:15.360 --> 05:24.400
+ book and the course is simply to find the things that we are confident of. But we know we're
+
+05:24.400 --> 05:28.080
+ about that turned out to be wrong. And then just look at the pictures.
+
+05:28.080 --> 05:32.960
+ So the more soft things value is enough, you think to basically know whether or not I do. Yeah,
+
+05:32.960 --> 05:36.320
+ I mean, that seems to work pretty well. I mean, the only thing is you would need to be
+
+05:36.960 --> 05:43.520
+ able to recognize these things in photos. But I'm sure if you spent an hour reading on the
+
+05:43.520 --> 05:47.600
+ internet about what these different diseases are and how they look, you would be able to pick it up
+
+05:47.600 --> 05:51.760
+ fast, soon enough. And then, you know, just like we did in chapter two, if you're recognizing the
+
+05:51.760 --> 05:56.480
+ things that aren't black and brown, daddy bears. Okay, but so plausibly, even just knocking out
+
+05:56.480 --> 06:01.040
+ some of the extremely difficult examples might get you higher on the leaderboard by virtue of
+
+06:01.040 --> 06:08.080
+ them misleading the model. Not by knocking out the hard ones, but by knocking out the wrong ones.
+
+06:08.080 --> 06:15.680
+ Yes. Unless the test set is mislabeled consistently with the training set, in which case you would
+
+06:15.680 --> 06:19.040
+ not want to knock them out because you would want to be able to correctly predict the things
+
+06:19.040 --> 06:23.360
+ which people are incorrectly recognizing as the one of the things. Something to try though.
+
+06:23.360 --> 06:30.960
+ Yeah. Yeah. So I would do exactly what we did in chapter two, you know, you can use exactly the
+
+06:30.960 --> 06:35.840
+ same widget. But as I say, you'd have to probably spend an hour learning about rice disease, which
+
+06:36.400 --> 06:45.040
+ probably be a reasonably interesting thing to do anyway. I just a main discussion in the peti.
+
+06:46.080 --> 06:51.520
+ Some people identified there some mislabeling at least over 20 already.
+
+06:51.520 --> 06:57.760
+ Oh, okay. Yeah, so definitely happens. It says we have manually annotated every image
+
+06:57.760 --> 07:01.040
+ with the help of agricultural experts, but there could be errors.
+
+07:06.640 --> 07:11.200
+ Wow, this person knows more about rice than I do. I think the images in the tungro have
+
+07:11.200 --> 07:25.440
+ chance of issues. This symptoms can easily be confused with potassium deficiency. Fair enough.
+
+07:25.440 --> 07:30.480
+ Is that an example of what you're talking about? Where if a layman or sorry for semi expert gets
+
+07:30.480 --> 07:34.720
+ confused, then the labeling in the test sets probably the same? Yeah, exactly. So you're probably
+
+07:34.720 --> 07:41.040
+ fixing these would probably screw up your model because assuming that the test set was labeled
+
+07:41.040 --> 07:47.600
+ used by the same people in the same way. I mean, sometimes test sets, the test set is more of a
+
+07:47.600 --> 07:52.000
+ gold standard. They'll make more effort to talk to like a larger number of high quality experts
+
+07:52.000 --> 07:57.920
+ and have them vote or something. Honestly, this competition seems like it doesn't even have any
+
+07:57.920 --> 08:04.400
+ prize money attached. So I'd like, I think it's really low, low investment probably. That's why
+
+08:04.400 --> 08:11.040
+ doubt they did that. But that can happen. Yeah, that the test set could have. I mean, it makes
+
+08:11.040 --> 08:16.960
+ sense to invest in getting really good labels for the test set actually.
+
+08:23.840 --> 08:30.480
+ I was looking at one of the other competitions on uni FESP, the x rays. I think there there was one
+
+08:30.480 --> 08:55.960
+ somebody who had identified that a wrist was wrongly labeled as a carot bl
+
+08:55.960 --> 09:01.560
+ teams. Yeah, sorry. I don't know. I was just looking around and it looked interesting. So I'm
+
+09:01.560 --> 09:09.320
+ I'm number 15 at the moment. But it is a slightly weird one because well, it's it's interesting
+
+09:09.320 --> 09:17.640
+ because some of the x rays have multiple labels, but the labels are just concatenated. So there's
+
+09:17.640 --> 09:24.760
+ interesting discussion on how you'd analyze that. Would you treat a combination as a distinct
+
+09:24.760 --> 09:29.640
+ classification, whether it was like a neck and a chest or something? Or do you look at each of
+
+09:29.640 --> 09:35.560
+ them individually and then try and label a multiple one from the different things? So, so.
+
+09:36.520 --> 09:41.480
+ Okay, so I'm just having a look at this competition. So when does it
+
+09:41.480 --> 09:53.720
+ close? This is a month to go. But I don't know exactly when that is. Not really.
+
+09:53.720 --> 09:56.120
+ The light is the first. Okay, where do you see that?
+
+09:56.120 --> 10:02.680
+ When you go to the bottom of like on the overview and it says there's a whole timeline. So then
+
+10:02.680 --> 10:07.800
+ you just hover over the oh my god, I see it says close in a month, but you actually have to get
+
+10:07.800 --> 10:15.720
+ a tall tip by hovering. Okay, thanks to NISK. That's change UX. Okay, so it actually got more
+
+10:15.720 --> 10:19.240
+ than a month. So maybe next week we could have a look at this one because it would be a good
+
+10:19.240 --> 10:24.360
+ opportunity to play around with medical image stuff because they're using DICOM, I think.
+
+10:25.880 --> 10:32.440
+ Yeah, somebody is also which I used, supplied a library of PNGs, which made it easier to use,
+
+10:32.440 --> 10:38.600
+ but I don't know what you'd lose in using that rather than the DICOM images.
+
+10:38.600 --> 10:46.440
+ Well, it rather depends. So DICOM is a very generic file format that can contain lots of different
+
+10:46.440 --> 10:51.880
+ things. One of the things DICOM contain is higher bit depth images than a PNG allows.
+
+10:52.440 --> 10:56.520
+ So if they've, yes, they might have gotten rid of that.
+
+10:56.520 --> 11:03.800
+ But last AI has a nice medical imaging, it's pretty small, but like has some useful stuff,
+
+11:03.800 --> 11:10.760
+ medical imaging library, which I think is fastai.vision.medical, which can handle DICOM directly.
+
+11:10.760 --> 11:25.000
+ And I say there's a fastai entry as well. That'd be fun. We should try this next week.
+
+11:27.080 --> 11:28.440
+ I see and there's the PNGs.
+
+11:32.440 --> 11:35.640
+ I think the DICOMs come to about 27 gigabytes.
+
+11:35.640 --> 11:36.840
+ Oh my god. Okay.
+
+11:36.840 --> 11:40.120
+ So the PNG was quite attractive from that point.
+
+11:40.920 --> 11:45.400
+ So one thing that you can do with DICOM is to compress them,
+
+11:45.400 --> 11:51.240
+ particularly using JPEG 2000, which is a really good compression. But yeah, people often don't,
+
+11:51.240 --> 11:55.720
+ for some reason. So probably the first thing I'd look at in that competition is to see,
+
+11:56.520 --> 12:03.640
+ look at our DICOM and see is it storing 16 bit data or not. And if it is, I would try to find a way to
+
+12:03.640 --> 12:09.560
+ re save that without losing the extra information,
+
+12:12.840 --> 12:16.920
+ which I think we've got examples of in our medical imaging tutorial.
+
+12:18.360 --> 12:26.360
+ All right. I'm going to share my screen. Even though I don't know what I'm doing.
+
+12:27.400 --> 12:31.000
+ Yeah. I'm going to have to drop in a few minutes, but I'll catch the rest on the recorder.
+
+12:31.000 --> 12:31.640
+ Thanks for this.
+
+12:31.640 --> 12:33.720
+ Nice to see you.
+
+12:38.440 --> 12:40.520
+ By the way, I was looking at this
+
+12:41.720 --> 12:42.920
+ conf next paper.
+
+12:45.560 --> 12:47.320
+ And gosh, everybody
+
+12:48.200 --> 12:50.280
+ congratulates transformers on everything.
+
+12:51.400 --> 12:55.400
+ Vision transformers bring new ideas like the Adam W optimizer.
+
+12:55.400 --> 13:00.760
+ I guess I actually wrote the first thing saying we should always use the other W optimizer.
+
+13:01.560 --> 13:07.960
+ That would be silver. In fast AI, I think that was years before vision transformers.
+
+13:09.480 --> 13:14.040
+ Adam W here we go. Mid 2018.
+
+13:18.840 --> 13:23.720
+ I read that paper last night and I was just thinking like, they kind of talk about how
+
+13:23.720 --> 13:28.280
+ all of these things were already there, right? That they just rediscovered them like slightly
+
+13:28.280 --> 13:34.840
+ larger kernel size and things like that. Which begs the question, why is it no one just done
+
+13:34.840 --> 13:40.600
+ like experiments to just tweak these things together? I mean, it's been pretty.
+
+13:40.600 --> 13:45.720
+ I mean, but nobody takes any notice because they're not written in PDFs.
+
+13:47.560 --> 13:47.960
+ Is it?
+
+13:48.840 --> 13:50.520
+ I mean, these benchmarks, though, like,
+
+13:50.520 --> 13:55.640
+ the thing is that like a lot of researchers aren't good practitioners.
+
+13:56.360 --> 14:00.760
+ So they just they're not very good at training accurate neural networks and they don't know
+
+14:00.760 --> 14:05.640
+ these tricks, you know, and they don't hang out on cackle and learn about what actually works.
+
+14:07.000 --> 14:11.080
+ But then the thing is like, it's not always easy to publish.
+
+14:11.080 --> 14:15.000
+ Like, even if you did stick it into a PDF and submit it to NeurIPS, there's no particular
+
+14:15.000 --> 14:22.520
+ high likelihood that they're going to accept it because the field research wise is very focused on
+
+14:23.160 --> 14:26.200
+ theory results and, you know, things with lots of Greek letters in them.
+
+14:26.840 --> 14:30.760
+ Does that mean that the part of the problem is that the data sets, the benchmarks are just
+
+14:30.760 --> 14:32.920
+ too inaccessible to the average person? So,
+
+14:32.920 --> 14:35.640
+ No, I wouldn't say that for ImageNet 1K.
+
+14:35.640 --> 14:39.080
+ No, I wouldn't say that. The issue is I think the culture of
+
+14:39.080 --> 14:45.880
+ research is not particularly interested in experimental results, you know.
+
+14:50.280 --> 14:56.440
+ Okay, my limited experience, I will say it's very hard to find the viewer as well,
+
+14:56.440 --> 15:01.080
+ especially you have a very strong domain, not just one thing or the
+
+15:03.000 --> 15:05.640
+ sample data set you can find in open source.
+
+15:05.640 --> 15:12.600
+ When you cause domain and then a lot of peer reviewers, they're just not taking up to the viewer.
+
+15:12.600 --> 15:21.400
+ Even if we pay for the viewer, we're using, so people can get it for free and we take a
+
+15:21.400 --> 15:23.080
+ few months just to find the viewer.
+
+15:27.000 --> 15:32.520
+ Jeremy, is that on the topic of papers, one do you know when a paper is worth reading
+
+15:32.520 --> 15:34.440
+ in, given the situation?
+
+15:40.680 --> 15:51.240
+ I mean, it don't like until, I mean, I'm very fond of like papers that describe things which
+
+15:52.440 --> 15:56.440
+ did very well in an actual competition. You know, that then we know this is something
+
+15:56.440 --> 16:04.920
+ that actually predicts things accurately. You know, you can get similar results if they've got a good
+
+16:06.920 --> 16:10.360
+ you know, just table of results. So generally speaking, I like things that actually have good
+
+16:10.360 --> 16:15.480
+ results, particularly if they show like how long it took to train and how much data they trained on.
+
+16:17.640 --> 16:23.000
+ And yeah, so are they getting good results using less data and less time than you might
+
+16:23.000 --> 16:31.560
+ expect from the same thing. And yeah, I certainly wouldn't focus only on those that get good results
+
+16:31.560 --> 16:37.800
+ on really big data sets. That's not necessarily more interesting. I'm very interested in things
+
+16:37.800 --> 16:42.600
+ that show good results using transfer learning. So I look for things that are like, practically
+
+16:42.600 --> 16:47.320
+ useful. I don't train that much from random. So I'm very interested in things that do well on
+
+16:47.320 --> 16:56.680
+ transfer learning. Also, like look for people who you've liked their work before, you know, and
+
+16:57.400 --> 17:02.760
+ in particular, that doesn't mean like always reading the latest papers. You know, if you come
+
+17:02.760 --> 17:08.600
+ across a paper from somebody that you find useful, go back and look at their Google scholar and
+
+17:08.600 --> 17:17.480
+ look at read their older papers. See who they collaborate with and read their papers. So for example, I
+
+17:17.480 --> 17:23.560
+ really like Quok Lee in Google Brain. His, him and his team do a lot of good work. It tends to be,
+
+17:25.080 --> 17:32.920
+ you know, very practical and high quality results. And so we know when his team releases a paper,
+
+17:33.720 --> 17:37.240
+ and I also know like he seems to have similar interests to mine, like he tends to do stuff
+
+17:37.240 --> 17:42.280
+ involving transfer learning and getting good results in less epochs and stuff like that. So
+
+17:43.000 --> 17:46.120
+ if I say he's got a new paper out, I'm pretty likely to read it.
+
+17:49.800 --> 17:54.760
+ I have a question. And I mean, for the, the, the, the,
+
+17:54.760 --> 18:00.520
+ character competitions and like, like in a lab type of environment is, I mean,
+
+18:00.520 --> 18:07.800
+ I mean, when to, the question that I have is when to stop iterating on a model, on a model that
+
+18:07.800 --> 18:18.040
+ you have is, is, I have the, someone asked me when is enough enough to do the training on the data
+
+18:18.040 --> 18:24.520
+ that you have, when is enough. So that question. I mean,
+
+18:24.520 --> 18:33.320
+ I mean, there's some reason you're doing this work, right? So like you hopefully know
+
+18:35.080 --> 18:41.240
+ when it does what you want it to do. I mean, the thing that happens, all that,
+
+18:41.240 --> 18:47.080
+ that happens is especially to me all the time is that he trained the model and it works perfectly
+
+18:47.080 --> 18:53.560
+ fine on the lab. We're doing it. And then as soon as we throw a couple of images that they are not
+
+18:53.560 --> 19:01.160
+ part of the set, I mean, that goes nuts. And okay, because it's like live or more light or the
+
+19:01.160 --> 19:06.440
+ temperature is different or stuff like that. So that's a different problem, right? So that,
+
+19:06.440 --> 19:12.440
+ that, that means your problem is that you're, you're not using
+
+19:12.440 --> 19:25.560
+ the, you know, the right data to train on. So like you need to, you need to be thinking about
+
+19:25.560 --> 19:31.880
+ how you're going to deploy this thing when you train it. And if you train it with data that's
+
+19:31.880 --> 19:36.360
+ different to, you know, how you're going to deploy it, it's not going to work.
+
+19:36.360 --> 19:42.120
+ Yeah, so that's, that's what that means. And
+
+19:46.680 --> 19:51.800
+ it might be difficult to get data, enough data of the kind you're going to deploy it on. But like,
+
+19:51.800 --> 19:55.960
+ at some point you're going to be deploying this thing, which means by definition, you've got some
+
+19:55.960 --> 20:00.040
+ way of getting that data you're going to deploy it with. So like do the exact thing you're going to
+
+20:00.040 --> 20:07.480
+ use to deploy it, but don't deploy it, just capture that data until you've got some, some actual data
+
+20:07.480 --> 20:15.000
+ from the actual environment you want to deploy the model in. You can also take advantage of
+
+20:15.800 --> 20:23.480
+ semi supervised learning techniques to then, you know, transfer learning to maximize the amount
+
+20:23.480 --> 20:33.320
+ of juice you get from that data that you've collected. And finally, I'd say, like let's say
+
+20:33.320 --> 20:38.360
+ for medical imaging, like, okay, you want to deploy a model to like a new hospital, they've got a
+
+20:38.360 --> 20:46.040
+ different brand of MRI machine you haven't seen before. I would take advantage of fine tuning,
+
+20:46.040 --> 20:50.040
+ you know, each time I deployed it to some different environment where things a bit different, I would
+
+20:50.040 --> 20:57.960
+ expect to have to go through a fine tuning process to train it to recognize that particular MRI
+
+20:57.960 --> 21:05.080
+ machines images. But you know, each time you do that fine tuning, it shouldn't take very much
+
+21:05.080 --> 21:12.280
+ data or very much time, because it's your models already learnt the key features, and you're just
+
+21:12.280 --> 21:15.560
+ asking it to learn to recognize slightly different ways of seeing those features.
+
+21:15.560 --> 21:23.480
+ Yeah, I don't think you'll solve this by trading for longer, you know, you'll solve it by
+
+21:23.480 --> 21:32.200
+ figuring out your data pipeline, your data labeling, and your rollout strategy.
+
+21:33.400 --> 21:39.800
+ Usually the issues that we're having is that we don't have enough data of a certain category,
+
+21:39.800 --> 21:46.920
+ but I mean, the thing that you did yesterday, it resolves a little bit of that problem, I think
+
+21:46.920 --> 21:51.800
+ we're going to start using this. Yeah, well, also, like, if you don't have enough data of some category,
+
+21:52.360 --> 22:02.600
+ don't use the model for that category, you know, so like, you know, rather than using softbacks,
+
+22:02.600 --> 22:07.160
+ use binary sigmoid, you know, as your last layer, and so then you've kind of got like a
+
+22:07.160 --> 22:15.480
+ probability that X appears in this image, and so then you can you can recognize when none of the
+
+22:15.480 --> 22:23.000
+ things that you can predict will appear in the image, and so then have a, you know, you always
+
+22:23.000 --> 22:28.040
+ want to human in the loop anyway, so when you didn't find any of the categories of things that you've
+
+22:28.040 --> 22:39.880
+ got enough data to be able to find, then triage those to human review. One thing that we did is,
+
+22:39.880 --> 23:07.240
+ I mean, we have like 50 something categories. Oh, just one moment, hang on. Sorry about that.
+
+23:07.240 --> 23:15.080
+ We had like 50 categories, and some of them are like, they have a lot, like 10 of them have a lot
+
+23:15.080 --> 23:21.720
+ of items. So we end up doing like in a three step kind of process, like the ones with a lot,
+
+23:21.720 --> 23:28.280
+ the ones with medium number, and then with a smaller number, and it looks like it resolved
+
+23:28.280 --> 23:38.440
+ the problem a little bit. But this was to classify metadata coming from other systems,
+
+23:39.960 --> 23:45.000
+ classify for legal purposes, for legal retention.
+
+23:45.000 --> 23:57.800
+ I see. I had a question actually, actually, you tried the beta data lot also, right? So I think
+
+23:57.800 --> 24:03.160
+ you have it submitted that to Kaggle not book. So did you do any validation locally first,
+
+24:03.160 --> 24:07.160
+ before submitting to Kaggle, something like that? So you have a set of, right?
+
+24:07.160 --> 24:14.920
+ No, I mean, you saw what I did, right? And when I did it, so I just, yeah, I just,
+
+24:15.800 --> 24:21.160
+ I was intentionally using a very mechanistic approach.
+
+24:24.440 --> 24:31.000
+ Because it was kind of like just, yeah, showing like his, the basic steps of pretty much any
+
+24:31.000 --> 24:36.520
+ computer vision model, which is entirely mechanical and doesn't require any domain expertise.
+
+24:38.360 --> 24:42.920
+ So yeah, my question more was, like, shouldn't we always treat the publicly
+
+24:42.920 --> 24:48.200
+ readable, like a good or like should we take a hold out local data sets first to validate?
+
+24:48.840 --> 24:52.920
+ Yeah, so I mean, I always have a validation set, yeah,
+
+24:52.920 --> 25:02.040
+ yeah, which we saw in this, in this, I just used a random splitter because as far as I know,
+
+25:04.200 --> 25:10.040
+ test set in the Kaggle competition is a random split validation set. Yeah, so like,
+
+25:10.040 --> 25:15.720
+ whether it be for Kaggle or anything, I'd think creating a validation set that as
+
+25:15.720 --> 25:22.600
+ closely as possible represents the data you expect to get in deployment or in your test set
+
+25:22.600 --> 25:31.720
+ is really important. And yeah, I actually didn't spend the time doing that on this Paddy competition.
+
+25:34.200 --> 25:38.600
+ Normally on Kaggle, if somebody does and notices there's a difference between the private leader
+
+25:38.600 --> 25:43.080
+ board and the public leader board, like the test set and the trading set, normally it'll appear,
+
+25:43.080 --> 25:51.080
+ you know, in discussions or on a Kaggle kernel or something, which is partly why I didn't look
+
+25:51.080 --> 25:55.800
+ into it. But yeah, I mean, you should probably check, doesn't have the same distribution of
+
+25:56.520 --> 26:00.520
+ disease types, you know, from the predictions that you create.
+
+26:03.400 --> 26:10.120
+ Do the images look similar? Do they have the same sizes? And for me, if I said, as I see any
+
+26:10.120 --> 26:15.880
+ difference between the test set and the trading set, that puts my alarm bells on, right? Because
+
+26:15.880 --> 26:22.280
+ now I know that it's not randomly selected. And if you know it's not randomly selected, then you
+
+26:22.280 --> 26:27.960
+ immediately have to think, okay, they're trying to trick us. So I would then look everything I could
+
+26:27.960 --> 26:35.480
+ for differences. Because it takes effort to not randomly select a trade a test set. So then they
+
+26:35.480 --> 26:42.120
+ must be doing it very intentionally for some reason. Quite often for wrong reasons,
+
+26:42.120 --> 26:48.680
+ but I think so. Like I don't think a Kaggle competition should ever silently give you
+
+26:49.720 --> 26:54.200
+ a systematically different test set. I think there's great reasons to create a systematically
+
+26:54.200 --> 26:58.760
+ different test set, but there's never a reason not to tell people. So if it's like medical imaging
+
+26:58.760 --> 27:02.440
+ as a different hospital, you should say this is a different hospital or if it's fishing,
+
+27:02.440 --> 27:05.960
+ you should say these are different boats or, you know, because like you want people to do well
+
+27:05.960 --> 27:14.120
+ on your data. So if you tell them, then they can use that information to give you better models.
+
+27:17.480 --> 27:23.560
+ So, Kuryan, like going back to what you asked about, there's this validation in training,
+
+27:23.560 --> 27:29.240
+ then there's this whether your local validation maps to what's happening on the leaderboard,
+
+27:29.240 --> 27:34.120
+ the score on the hidden test set. But there's one other scenario that I encountered recently,
+
+27:34.120 --> 27:39.560
+ and maybe it will be interesting to someone. When you're working on a competition, sometimes you
+
+27:39.560 --> 27:44.440
+ might miss something in your code or the prediction. You know, your model is doing something useful,
+
+27:44.440 --> 27:50.440
+ but you're failing to output a correctly formatted submission file. And not in a sense that the
+
+27:50.440 --> 27:56.200
+ submission phase on Kaggle, but some predictions are not aligned where there should be or, you know,
+
+27:56.200 --> 28:05.080
+ therefore a different customer ID or stuff like that. So once you have one good submission file,
+
+28:05.080 --> 28:13.240
+ relatively good, you can just sort it locally and then see, you know, run a check the correlation
+
+28:13.240 --> 28:17.880
+ between your new submission and the one that you know that this is okay. And you know,
+
+28:17.880 --> 28:23.000
+ the correlation should be upwards of 0.9. And then, you know, yeah, okay, so I didn't mess up anything
+
+28:23.000 --> 28:29.720
+ with the technical aspect of the prediction. I mean, it's not a great straight, but, you know,
+
+28:29.720 --> 28:34.920
+ I was like, you put my hair out, why is it not working? It's a better model. So this was like a
+
+28:34.920 --> 28:45.320
+ sanity check step, maybe at some point. Thanks. Cool. Thanks.
+
+28:45.320 --> 28:55.080
+ Alright, so let me share my screen.
+
+28:55.080 --> 29:08.600
+ Let's find zoom. Zoom. Share screen. Yeah.
+
+29:08.600 --> 29:25.240
+ Oh, that's not the right button. Control, shift, H. Okay.
+
+29:25.240 --> 29:47.000
+ Where did we get to in the last lesson? We finished random forests, right? And,
+
+29:47.000 --> 29:59.640
+ oh, that's right. I haven't posted that video yet. That's okay. We can check the live.
+
+29:59.640 --> 30:12.760
+ First year, live.
+
+30:12.760 --> 30:31.400
+ Okay, so we could get some more models. And do we get to the end of this?
+
+30:44.600 --> 31:00.680
+ Okay. So that basically finished the second one of our Kaggle things. So next week,
+
+31:00.680 --> 31:08.840
+ see what's in part three.
+
+31:17.960 --> 31:24.200
+ Right. Gradient accumulation. I think that's worth covering. So one thing that somebody pointed
+
+31:24.200 --> 31:35.000
+ out on Kaggle is I'm using gradient accumulation wrong. I was passing in two here to make create
+
+31:35.000 --> 31:41.880
+ two batches before you accumulate. But actually what I'm meant to be putting in here is the target
+
+31:41.880 --> 31:50.280
+ batch size I want. So that would be actually, I should be putting 64 here. So I feel a bit
+
+31:50.280 --> 31:57.400
+ stupid. So what I've been doing is I've been actually not using gradient
+
+31:57.400 --> 32:00.760
+ accumulation at all. I guess it's been doing a batch and saying that's over,
+
+32:01.560 --> 32:07.400
+ saying my maximum batch size would be two. Okay. So this has actually been not working at all.
+
+32:07.400 --> 32:17.640
+ That's interesting. Whoops. So I've been using a batch size of 32 and not accumulating.
+
+32:17.640 --> 32:28.280
+ Okay. So that's one thing to note. So when I get Kaggle GPU time again, we'll need to rerun this.
+
+32:31.000 --> 32:41.240
+ Actually, it only took 4,000 seconds. So I guess we should, we could just get it running right
+
+32:41.240 --> 32:49.240
+ now, couldn't we?
+
+32:56.280 --> 32:56.600
+ So
+
+32:56.600 --> 33:02.600
+ So
+
+33:05.080 --> 33:06.200
+ that should be 64.
+
+33:06.200 --> 33:25.720
+ How many of past defines how large the effective batch size you want is
+
+33:25.720 --> 33:41.080
+ over batches. Oh, we can just remove this sentence entirely. Oh, no, that's right.
+
+33:41.080 --> 33:49.400
+ Okay. We divide
+
+33:52.040 --> 33:54.120
+ the batch size by
+
+33:57.720 --> 34:02.440
+ some number based on how
+
+34:02.440 --> 34:21.800
+ small we need it to be for our GPUs. Okay. So
+
+34:33.880 --> 34:39.880
+ and on Kaggle, I think these were all smaller. I don't know why, but the Kaggle GPUs use less
+
+34:39.880 --> 34:52.360
+ memory than my GPU for some reason. Okay. So we're now,
+
+34:52.360 --> 35:01.800
+ let's try running it.
+
+35:01.800 --> 35:23.400
+ So Jeremy, if you would increase that
+
+35:23.400 --> 35:34.440
+ I've come number until the longer get could I have a memory? Yeah. And you could be able to pretty much guess it's by looking at like, I mean, you can just,
+
+35:36.840 --> 35:53.320
+ once you found a batch size, it fits, you know, so the default batch size, I believe, is 32. So once you find a batch size that fits, sorry, 64 is a default batch size, it fits, you just like, it's like, okay, what fits in 32, then I just need to set
+
+35:53.320 --> 36:11.320
+ it to two because 64 divided by two is enough. And the key thing I do here is, you know, so I've got this report GPU function. So what I did at home was I just, you know, changed this until it got less than 16 gig.
+
+36:11.320 --> 36:25.320
+ And as you can see, I'm just doing like a single a park on small images. So this ran in, I don't know, 15 seconds or something.
+
+36:25.320 --> 36:47.320
+ Yeah, batch size 64 by default.
+
+36:47.320 --> 36:59.320
+ Yeah, so then I just went through checking the memory use of Conf next large or different image sizes again just keeping on using just one epoch.
+
+36:59.320 --> 37:15.320
+ And that's how I figured out what I could do to just set a queue to get to work.
+
+37:15.320 --> 37:23.320
+ All right, so that should be right to save and run.
+
+37:23.320 --> 37:32.320
+ And then,
+
+37:32.320 --> 37:35.320
+ turn off this one.
+
+37:35.320 --> 37:45.320
+ So when you're running something like he clicks a version and you click run, you'll then see it down here.
+
+37:45.320 --> 37:48.320
+ And that runs in the background, you don't have to leave this open.
+
+37:48.320 --> 37:53.320
+ And so you can go back to it later. So if I just copy that can close it.
+
+37:53.320 --> 38:03.320
+ And if I go to my notebook in Kaggle.
+
+38:03.320 --> 38:07.320
+ And it shows me version three of four because version four hasn't finished running yet.
+
+38:07.320 --> 38:17.320
+ So if I click here, I can go to version four and it says, oh, that's still running.
+
+38:17.320 --> 38:21.320
+ And I can see here you go it's been running for about a minute.
+
+38:21.320 --> 38:25.320
+ And it shows me anything that you print out will appear.
+
+38:25.320 --> 38:29.320
+ Including warnings.
+
+38:29.320 --> 38:35.320
+ Yeah, that's what happens in Kaggle.
+
+38:35.320 --> 38:42.320
+ So if we also do the multi objective loss function thing.
+
+38:42.320 --> 38:46.320
+ That would be cool.
+
+38:46.320 --> 38:53.320
+ So I thought like next time in our next lesson, broadly speaking.
+
+38:53.320 --> 38:56.320
+ Actually, this is taking a long time.
+
+38:56.320 --> 39:04.320
+ I kind of want to cover like what the inputs to a model look like and what the outputs to a model look like.
+
+39:04.320 --> 39:11.320
+ So like in terms of inputs, really the key thing is embeddings.
+
+39:11.320 --> 39:18.320
+ That's the key thing we haven't seen yet in terms of what model inputs look like.
+
+39:18.320 --> 39:31.320
+ So model outputs, I think we need to look at soft max.
+
+39:31.320 --> 39:38.320
+ Outputs, soft max cross entropy loss.
+
+39:38.320 --> 39:44.320
+ Entropy loss.
+
+39:44.320 --> 39:50.320
+ And then you know our multi target loss.
+
+39:50.320 --> 39:55.320
+ Which we could do first kind of a segue.
+
+39:55.320 --> 40:06.320
+ So maybe in terms of the ordering, the segue would be like doing multi target loss first.
+
+40:06.320 --> 40:18.320
+ And then we could talk about soft max and cross entropy, which would then lead us potentially to like looking at the bear classifier.
+
+40:18.320 --> 40:23.320
+ What if there's no bears.
+
+40:23.320 --> 40:29.320
+ So we can just use the binary sigmoid.
+
+40:29.320 --> 40:45.320
+ So then for embeddings, I guess that's where we'd cover the collaborative filtering, collaborative filtering because that's like a really nice version of embeddings.
+
+40:45.320 --> 40:50.320
+ So I guess the question is for those who have done the course before.
+
+40:50.320 --> 41:12.320
+ Are there any other topics, I guess like time and bidding, it would be nice to look at like the conf net what a conf net is just kind of so that's like that we've got like the outputs, the inputs, and then the middle.
+
+41:12.320 --> 41:18.320
+ What about more and old piece of, you know, people like what.
+
+41:18.320 --> 41:21.320
+ Well, I've heard that.
+
+41:21.320 --> 41:26.320
+ I can face is getting integrated was past day I may be looking at that works.
+
+41:26.320 --> 41:33.320
+ Well, it's not done yet so we can't do that yet but definitely in part two.
+
+41:33.320 --> 41:39.320
+ I got a question I don't know if it's helpful but there's a lot of emphasis on outputs and inputs.
+
+41:39.320 --> 41:55.320
+ But like in the middle just understanding like the outputs of a layer, whether they're going to write on how do you debug that how do you understand, you know, when to kind of look at the yeah very helpful.
+
+41:55.320 --> 42:08.320
+ Last time we did a part two we did a very deep dive into that and I think we should do that again and apart to because like most people won't have to debug that because if you're using an off the shelf.
+
+42:08.320 --> 42:18.320
+ Model, you know, like it's, you know, with off the shelf initializations that shouldn't happen.
+
+42:18.320 --> 42:23.320
+ So it's probably more of an advanced debugging technique, I would say.
+
+42:23.320 --> 42:37.320
+ But yeah, if you're interested in looking at it now definitely check out our previous part two, because we did a very deep dive into that and developed the, the so forth colorful dimension plot, which is absolutely.
+
+42:37.320 --> 42:40.320
+ Great for that.
+
+42:40.320 --> 42:42.320
+ Yeah.
+
+42:42.320 --> 42:46.320
+ Yeah.
+
+42:46.320 --> 42:52.320
+ So that would exactly so collaborative filtering would lead us exactly into that. Thank you.
+
+42:52.320 --> 42:54.320
+ Yeah sorry, Sarah.
+
+42:54.320 --> 43:03.320
+ Do you like to spend finally talking about the importance of the ethical side, at least you point to the resources.
+
+43:03.320 --> 43:14.320
+ I think it's a very crucial prepare before so I think people, because it's so easy to build a model but how to apply is getting more scary now.
+
+43:14.320 --> 43:16.320
+ Yes.
+
+43:16.320 --> 43:24.320
+ Yes, I mentioned in lesson one, the data ethics course but you're right it would be nice to kind of like.
+
+43:24.320 --> 43:34.320
+ Isn't it.
+
+43:34.320 --> 43:51.320
+ Yeah, I mean that I mean that actually would be a great thing just to talk about, you know, that that lecture is not at all out of date. So,
+
+43:51.320 --> 44:11.320
+ So maybe touch on it in this one and also talk link to, you know, for varying levels of interest, the two hour version would be Rachel's talk in the 2020 lecture, and then deeper interest deal would be the yes, the four ethics course it's a great point.
+
+44:11.320 --> 44:16.320
+ Thank you.
+
+44:16.320 --> 44:31.320
+ So then, for, for actually pretty much all of these things.
+
+44:31.320 --> 44:41.320
+ We have Excel spreadsheets, which is fun.
+
+44:41.320 --> 44:59.320
+ So there's, let's have a look, collaborative filtering.
+
+44:59.320 --> 45:06.320
+ Oh, looks like I've already downloaded that.
+
+45:06.320 --> 45:23.320
+ I will encourage you to continue teaching in Excel yesterday I on the panel in a data science conference and when I mentioned I start with Excel actually inspired a lot of people, they want to help go with data science and learning it.
+
+45:23.320 --> 45:26.320
+ Oh, that's good feedback.
+
+45:26.320 --> 45:44.320
+ Because there's a certainly some people who don't find it useful at all, and they tend to be quite loud about that so certainly nice to hear that that feedback.
+
+45:44.320 --> 45:58.320
+ So I thought you didn't let those people get to you. Oh, I only pretend that anybody doesn't get to me.
+
+45:58.320 --> 46:18.320
+ So I don't necessarily say that's that was really great to see running the city done once before.
+
+46:18.320 --> 46:30.320
+ Great. Okay. Thank you. I will.
+
+46:30.320 --> 46:35.320
+ So I think these are actually from the 2019 course.
+
+46:35.320 --> 46:40.320
+ First day, I won courses, do one.
+
+46:40.320 --> 46:44.320
+ So I'm just going to grab them all.
+
+46:44.320 --> 47:03.320
+ So one thing I don't think we're going to cover this year, this part one that we will cover in part two is like different optimizers, like momentum and Adam and stuff. But I think that's okay because I feel like nowadays just use the default Adam W and it works.
+
+47:03.320 --> 47:06.320
+ So I don't, I think it's fine.
+
+47:06.320 --> 47:11.320
+ Not to know too much more than that.
+
+47:11.320 --> 47:18.320
+ It's a little bit of a technicality nowadays. Yeah.
+
+47:18.320 --> 47:31.320
+ It used to be something we did in one of the first lessons, you know, but that was when you kind of had to know it right because you was fiddled around with momentum and blah, blah, blah.
+
+47:31.320 --> 47:44.320
+ So we always like the biggest thing when starting on something is to how to, you know, once I figure out how to read in the data, then things.
+
+47:44.320 --> 48:05.320
+ But I'm really grateful that there's such an emphasis in this edition of the course on the reading, you know, theta and, you know, with similar data, that is something that we also study the lookout for just understanding better reading the data.
+
+48:05.320 --> 48:32.320
+ Great. I don't think we did this one anymore, because we kind of have better versions in in Jupiter with IPay widgets so we've got this fun convolutions example, which I think is still valuable.
+
+48:32.320 --> 48:41.320
+ Softmax, and cross entropy examples.
+
+48:41.320 --> 48:47.320
+ And we've got collaborative filtering.
+
+48:47.320 --> 48:51.320
+ And something interesting. What are what that is.
+
+48:51.320 --> 49:04.320
+ And then, also we've got word embeddings.
+
+49:04.320 --> 49:06.320
+ All right.
+
+49:06.320 --> 49:09.320
+ And then, also we've got word embeddings.
+
+49:09.320 --> 49:10.320
+ All right.
+
+49:10.320 --> 49:12.320
+ And there are such a cool and important subject.
+
+49:12.320 --> 49:15.320
+ And the something that we haven't discussed that much in this course.
+
+49:15.320 --> 49:19.320
+ No, we haven't touched them at all.
+
+49:19.320 --> 49:22.320
+ All right.
+
+49:22.320 --> 49:25.320
+ It feels like a lot to cover.
+
+49:25.320 --> 49:27.320
+ Hmm.
+
+49:27.320 --> 49:29.320
+ That we will.
+
+49:29.320 --> 49:32.320
+ We will do our best.
+
+49:32.320 --> 49:34.320
+ Okay.
+
+49:34.320 --> 49:37.320
+ I think we're up to our hour. So thanks everybody.
+
+49:37.320 --> 49:44.320
+ Nice chat today. And I will get to work on putting this together.
+
+49:44.320 --> 49:46.320
+ Have a nice weekend.
+
+49:46.320 --> 49:50.320
+ Thank you so much.
+
+49:50.320 --> 49:52.320
+ We might everyone.
+
+49:52.320 --> 49:55.320
+ There's a waste and bias.
+
+49:55.320 --> 49:57.320
+ Video today.
+
+49:57.320 --> 50:00.320
+ I think six or four.
+
+50:00.320 --> 50:03.320
+ This one time. So with anyone interest.
+
+50:03.320 --> 50:08.320
+ The guy mentioned he told us to mention you're going to have another US session as well.
+
+50:08.320 --> 50:09.320
+ We can join.
+
+50:09.320 --> 50:11.320
+ Yes, I think there's details on the forum.
+
+50:11.320 --> 50:13.320
+ Thanks.
+
+50:13.320 --> 50:16.320
+ See you.
+

@@ -1,0 +1,2465 @@
+WEBVTT
+
+00:00.000 --> 00:03.240
+ All right, I will start recording.
+
+00:03.240 --> 00:19.080
+ I wanted to start with an issue which I can't remember, Mark or Matt, somebody pointed out
+
+00:19.080 --> 00:21.840
+ that there are paper spaces.
+
+00:21.840 --> 00:23.320
+ Yeah.
+
+00:23.320 --> 00:30.360
+ So anybody else who's been following along probably found the same thing that they couldn't
+
+00:30.360 --> 00:39.640
+ see their notebooks anymore, which is a bit of an issue.
+
+00:39.640 --> 00:46.120
+ So let me start an instance and we can see it create.
+
+00:46.120 --> 00:55.720
+ Oh, and I should share my screen, I suppose.
+
+00:55.720 --> 01:22.040
+ The screen advanced, portion of screen.
+
+01:22.040 --> 01:32.000
+ There and right.
+
+01:32.000 --> 01:42.160
+ You guys can see my paper space window now.
+
+01:42.160 --> 01:44.360
+ Cool.
+
+01:44.360 --> 01:57.360
+ All right, so to let the workspace URL as we do.
+
+01:57.360 --> 01:59.360
+ Start.
+
+01:59.360 --> 02:09.800
+ Okay, while that's starting up, I'll show you the other thing which is I mentioned the other
+
+02:09.800 --> 02:17.600
+ day when we were talking about how do we create bash scripts.
+
+02:17.600 --> 02:20.360
+ For example, we created that bash script, run.sh and gradient.
+
+02:20.360 --> 02:26.880
+ And I said, you know, you can use the Jupyter text editor if you want, but that's not how
+
+02:26.880 --> 02:28.720
+ I would do it myself.
+
+02:28.720 --> 02:33.640
+ And I said I would show you how I would do it myself.
+
+02:33.640 --> 02:40.480
+ And the way I would do it myself would be using a program called VIM.
+
+02:40.480 --> 02:53.120
+ And VIM is a text editor which has a somewhat deserved reputation for being a bit obscure
+
+02:53.120 --> 02:56.560
+ and challenging, but also for being powerful.
+
+02:56.560 --> 02:59.040
+ And all of those things are true.
+
+02:59.040 --> 03:05.720
+ And it's something I wouldn't normally cover in a beginner's guide, but in a guide of the
+
+03:05.720 --> 03:10.200
+ things that are going to make your life better, I would certainly say, yeah, we do need to
+
+03:10.200 --> 03:16.000
+ include it because it's actually really quite terrific.
+
+03:16.000 --> 03:17.880
+ But I don't want you to take my word for it.
+
+03:17.880 --> 03:25.920
+ I wanted to give you an example of how it works and why it's terrific.
+
+03:25.920 --> 03:33.280
+ And so I thought it was a good example was one of the folks who's been following along
+
+03:33.280 --> 03:38.080
+ on these, let me just try to make this bigger.
+
+03:38.080 --> 03:42.280
+ So we can see more faces.
+
+03:42.280 --> 03:50.280
+ One of the folks who's been watching these courses, Daniel, has been kind enough to create
+
+03:50.280 --> 03:55.080
+ these timelines, which I think, you know, actually really useful to remind yourself of
+
+03:55.080 --> 03:58.040
+ what we covered.
+
+03:58.040 --> 04:10.960
+ And they're useful for me because I can use them to create timestamps in YouTube.
+
+04:10.960 --> 04:18.600
+ So timestamps in YouTube, let's show you an example.
+
+04:18.600 --> 04:29.080
+ You see how the bottom here, those little chapter markers appear?
+
+04:29.080 --> 04:36.160
+ And to make them appear, you basically have to have like times in a particular format
+
+04:36.160 --> 04:38.560
+ in the description.
+
+04:38.560 --> 04:47.400
+ So I actually used them to turn Daniel's thing into those timestamps.
+
+04:47.400 --> 04:51.960
+ I thought that might be just a good example of how VIMS are a bit different to your average
+
+04:51.960 --> 04:55.280
+ editor.
+
+04:55.280 --> 04:59.680
+ By the way, you might have noticed when I selected this, I actually selected it quite
+
+04:59.680 --> 05:00.680
+ quickly.
+
+05:00.680 --> 05:02.520
+ And the reason I did that was with the keyboard.
+
+05:02.520 --> 05:09.960
+ Like, most things I use have good keyboard bindings.
+
+05:09.960 --> 05:11.880
+ The forums have good keyboard bindings.
+
+05:11.880 --> 05:14.800
+ If you just hit question mark, you'll see them.
+
+05:14.800 --> 05:18.840
+ But they tend to be pretty consistent across programs.
+
+05:18.840 --> 05:28.360
+ And you'll see that J and K move the selection up and down.
+
+05:28.360 --> 05:31.040
+ So if I press K, it moves the selection up.
+
+05:31.040 --> 05:35.280
+ And if I press J, it moves it down.
+
+05:35.280 --> 05:37.200
+ And it kind of selects it.
+
+05:37.200 --> 05:41.200
+ And then if I hit E, it edits it.
+
+05:41.200 --> 05:48.240
+ So now I can hit Apple A to select all, Apple C to copy.
+
+05:48.240 --> 05:53.240
+ And you'll see that these keyboard shortcuts have a lot of overlap with VIMS.
+
+05:53.240 --> 05:56.680
+ And so it's kind of nice that as you do more stuff with the keyboard, you start to realize
+
+05:56.680 --> 06:01.920
+ you don't have to relearn everything from scratch.
+
+06:01.920 --> 06:06.920
+ So I only just set up this Mac.
+
+06:06.920 --> 06:13.080
+ And so I just installed VIMS literally before we started this session by typing brew install
+
+06:13.080 --> 06:14.080
+ VIMS.
+
+06:14.080 --> 06:20.240
+ You need, because I'm using, because I'm trying to use a Mac a little bit.
+
+06:20.240 --> 06:24.680
+ And you need to set up Homebrew, which you can do from their website.
+
+06:24.680 --> 06:29.800
+ And so when VIMS opens, this is what it looks like.
+
+06:29.800 --> 06:31.800
+ It's going to be preinstalled.
+
+06:31.800 --> 06:35.000
+ I assume this is now running.
+
+06:35.000 --> 06:37.760
+ Yep.
+
+06:37.760 --> 06:44.000
+ It should be preinstalled on paper space.
+
+06:44.000 --> 06:49.000
+ So we should be able to use it straight away there as well.
+
+06:49.000 --> 07:01.000
+ It's taking a while to start for some reason.
+
+07:01.000 --> 07:25.000
+ It's taking a while for me to.
+
+07:25.000 --> 07:30.720
+ Okay, I don't have to watch it doing that.
+
+07:30.720 --> 07:33.880
+ So while we're waiting, I'm just going to go back to this one on my Mac.
+
+07:33.880 --> 07:34.880
+ Okay.
+
+07:34.880 --> 07:35.880
+ So here's VIMS.
+
+07:35.880 --> 07:37.040
+ So the first thing you'll notice if you start VIMS.
+
+07:37.040 --> 07:42.960
+ So if you're on, actually, let's talk about different options.
+
+07:42.960 --> 07:54.320
+ So on Linux, to run VIMS, you would type pseudo apt.
+
+07:54.320 --> 07:57.600
+ Actually, let me do it in the VIM window, because otherwise it's going to auto complete
+
+07:57.600 --> 07:59.400
+ things in nine ways.
+
+07:59.400 --> 08:04.440
+ So in Linux to install VIM, if you don't have it already, you would type pseudo apt install
+
+08:04.440 --> 08:05.440
+ VIM.
+
+08:05.440 --> 08:12.360
+ On Mac, you would type brew install VIMS after you've googled for Mac brew and installed
+
+08:12.360 --> 08:15.560
+ brew, home brew.
+
+08:15.560 --> 08:23.840
+ Windows is going to be the same as Linux, of course, because it is Linux and WSL.
+
+08:23.840 --> 08:31.640
+ And so once it's installed, you can just type VIM at the command line.
+
+08:31.640 --> 08:33.160
+ And yeah, the window appears.
+
+08:33.160 --> 08:36.880
+ And one thing you'll notice is if you start typing, nothing happens.
+
+08:36.880 --> 08:37.880
+ Text doesn't appear.
+
+08:37.880 --> 08:41.920
+ So that seems like a problem, a text editor, where when you type, it doesn't put text
+
+08:41.920 --> 08:44.120
+ on the screen, what on earth is going on?
+
+08:44.120 --> 08:52.280
+ Well, it's exactly actually the same as Jupyter Notebook, which is in Jupyter Notebook when
+
+08:52.280 --> 08:53.280
+ it appears.
+
+08:53.280 --> 09:00.920
+ So if I create a Notebook, if I start typing, nothing happens either.
+
+09:00.920 --> 09:01.920
+ Right?
+
+09:01.920 --> 09:05.880
+ And that's because in a Notebook, you have to click inside a cell or press enter to go
+
+09:05.880 --> 09:07.960
+ into edit mode.
+
+09:07.960 --> 09:13.400
+ And then if I press escape, I'm now in command mode and buttons do things rather than type.
+
+09:13.400 --> 09:15.320
+ So for example, X cuts.
+
+09:15.320 --> 09:17.360
+ VIM is the same.
+
+09:17.360 --> 09:18.360
+ It's modal.
+
+09:18.360 --> 09:23.520
+ It's either in a mode where you're entering an editing text or you're in a command mode.
+
+09:23.520 --> 09:26.560
+ So by default, just like in Jupyter, you're in a command mode.
+
+09:26.560 --> 09:29.760
+ So to go into edit mode, you press I.
+
+09:29.760 --> 09:31.320
+ I stands for insert.
+
+09:31.320 --> 09:32.320
+ So I can start.
+
+09:32.320 --> 09:35.320
+ If I press I, and it says down at the bottom here, insert.
+
+09:35.320 --> 09:38.720
+ So now in insert mode, now if I type, it types.
+
+09:38.720 --> 09:39.720
+ Okay?
+
+09:39.720 --> 09:44.440
+ And then if I want to go back into command mode, I press escape.
+
+09:44.440 --> 09:48.120
+ And if you don't see a mode, that means you're in command mode.
+
+09:48.120 --> 09:52.600
+ My arrows, keys, workers, usual.
+
+09:52.600 --> 09:56.160
+ And up and down, workers, usual.
+
+09:56.160 --> 10:00.600
+ But one thing you might notice is in command mode, the same buttons that we use in Discord
+
+10:00.600 --> 10:04.760
+ for up and down, J and K, also work for going up and down.
+
+10:04.760 --> 10:09.400
+ That's not just J and K. It's actually all the letters in a row there are all movement.
+
+10:09.400 --> 10:14.680
+ So J and K go up and down and L and H go left and right.
+
+10:14.680 --> 10:19.080
+ It's totally fine to use the key board, the arrow keys in your keyboard as well.
+
+10:19.080 --> 10:22.240
+ And I would say honestly, probably for the first couple of years of using VMO, I always
+
+10:22.240 --> 10:24.120
+ use the arrow keys.
+
+10:24.120 --> 10:30.200
+ At some point, I started using H J K L all the time instead.
+
+10:30.200 --> 10:33.880
+ I guess my fingers noticed they were a bit closer and I didn't have to move.
+
+10:33.880 --> 10:37.160
+ And they decided that they liked doing that better.
+
+10:37.160 --> 10:40.160
+ That's fine.
+
+10:40.160 --> 10:41.640
+ So yeah, so you can move around.
+
+10:41.640 --> 10:47.640
+ And so at this point, we can run VIM, we can enter text.
+
+10:47.640 --> 10:53.760
+ And then the one thing we don't yet know how to do is to exit and save.
+
+10:53.760 --> 10:56.480
+ So I almost never just type VIM.
+
+10:56.480 --> 10:59.000
+ I almost always VIM something.
+
+10:59.000 --> 11:00.560
+ I want to VIM a file.
+
+11:00.560 --> 11:09.800
+ So for example, let's say I wanted to VIM my.z profile file, which is one of the startup
+
+11:09.800 --> 11:16.000
+ scripts that's run automatically when you start the terminal, I would type VIM space.zptab.
+
+11:16.000 --> 11:18.080
+ And there it is.
+
+11:18.080 --> 11:19.080
+ Okay.
+
+11:19.080 --> 11:21.600
+ And so this is something that Bruce installed for me.
+
+11:21.600 --> 11:26.720
+ So if I wanted to now edit this, maybe I wanted to put a comment above here.
+
+11:26.720 --> 11:28.120
+ I want to go into edit mode.
+
+11:28.120 --> 11:31.120
+ And I'll show you like the slow way to do this.
+
+11:31.120 --> 11:32.120
+ I can press I for insert.
+
+11:32.120 --> 11:33.120
+ I can press enter.
+
+11:33.120 --> 11:35.800
+ I can press up and I can start typing.
+
+11:35.800 --> 11:40.200
+ So that'd be one way so I could type my comment.
+
+11:40.200 --> 11:41.200
+ Okay.
+
+11:41.200 --> 11:43.640
+ And then press escape.
+
+11:43.640 --> 11:45.960
+ Now I want to show you a different way.
+
+11:45.960 --> 11:47.680
+ So I want to undo all that.
+
+11:47.680 --> 11:54.400
+ So to undo the last thing you did, it's press U for undo and U again.
+
+11:54.400 --> 11:56.640
+ I is not the only way to go into edit mode.
+
+11:56.640 --> 12:00.840
+ There's lots of ways to go into edit mode to go into edit mode in different places.
+
+12:00.840 --> 12:07.160
+ And one of them is to press O, which opens a new line underneath.
+
+12:07.160 --> 12:09.760
+ So that puts a new line underneath edit mode.
+
+12:09.760 --> 12:13.880
+ I want a new line above, which is shift O. Shift O is a new line above.
+
+12:13.880 --> 12:17.920
+ So it's pretty common that like a letter and the capitalized version of the letter in VIM
+
+12:17.920 --> 12:25.480
+ are kind of related versions of similar things.
+
+12:25.480 --> 12:34.400
+ So if I could put a comma here, shift O, auto added by homebrew installer, for example.
+
+12:34.400 --> 12:35.880
+ Okay, that's good.
+
+12:35.880 --> 12:40.200
+ So now I want to save and close.
+
+12:40.200 --> 12:41.440
+ So there's actually a third mode.
+
+12:41.440 --> 12:44.080
+ There's not just command mode and edit mode.
+
+12:44.080 --> 12:48.000
+ There's also a mode they call EX mode, which is where you hit colon.
+
+12:48.000 --> 12:53.600
+ Now when you hit colon, our cursor moves to the bottom and you can enter various different
+
+12:53.600 --> 12:55.000
+ commands here.
+
+12:55.000 --> 12:58.760
+ So one of the commands you can enter is W for write.
+
+12:58.760 --> 13:00.840
+ And so that will save.
+
+13:00.840 --> 13:04.160
+ So by default, it saves it to whatever I loaded it as.
+
+13:04.160 --> 13:06.560
+ So it saved it back to.z profile.
+
+13:06.560 --> 13:12.000
+ I could save it to something else by going W backup profile or something.
+
+13:12.000 --> 13:15.720
+ And that would save it to that funnel.
+
+13:15.720 --> 13:19.520
+ Another useful EX command is Q, which quits.
+
+13:19.520 --> 13:24.080
+ So colon Q quits.
+
+13:24.080 --> 13:33.640
+ So if I now decide I don't want to capitalize that, so I'll change that to a small A, you
+
+13:33.640 --> 13:36.480
+ can combine EX commands together.
+
+13:36.480 --> 13:42.880
+ So to save and quit, you would take colon WQ write and quit.
+
+13:42.880 --> 13:49.320
+ And so when people say, how do I exit VIM, you'll normally hear people say colon WQ.
+
+13:49.320 --> 13:51.720
+ That's way.
+
+13:51.720 --> 13:56.920
+ And so by the way, when I just did there, when I changed the big A to a small A, I did that
+
+13:56.920 --> 13:58.520
+ in a single button press.
+
+13:58.520 --> 14:07.280
+ And that's because the tilde command changes case and moves one to the right.
+
+14:07.280 --> 14:12.240
+ So this is an example of, you know, when you've got the whole keyboard available and shifted
+
+14:12.240 --> 14:17.560
+ versions available, like there's a lot of things you can add, right?
+
+14:17.560 --> 14:20.080
+ And then you a few times.
+
+14:20.080 --> 14:27.120
+ So if I wanted to change the case of the next 10 letters, I could hit tilde 10 times.
+
+14:27.120 --> 14:30.760
+ One, two, three, four, five, six, seven, eight, nine, ten.
+
+14:30.760 --> 14:31.760
+ Okay.
+
+14:31.760 --> 14:45.240
+ But I wouldn't do that because in VIM, you can always say before you do a call it a verb
+
+14:45.240 --> 14:50.960
+ before you do like one of these, you know, letter commands, single letter commands, you
+
+14:50.960 --> 14:52.480
+ can type a number, which is how many times do you want to do it.
+
+14:52.480 --> 14:54.600
+ So if I type one zero is 10.
+
+14:54.600 --> 14:59.840
+ So if I type 10 tilde, it runs at 10 times.
+
+14:59.840 --> 15:05.000
+ And so this is where things start getting interesting, right?
+
+15:05.000 --> 15:19.000
+ Because every single, you know, verb you can run in VIM, you can also say how many times
+
+15:19.000 --> 15:21.200
+ to do it.
+
+15:21.200 --> 15:26.720
+ So for example, to delete a line, let me just create.
+
+15:26.720 --> 15:29.920
+ Oops, I've accidentally created far too many lines.
+
+15:29.920 --> 15:35.440
+ So to delete a line, you press DD, to delete five lines, you just press 5DD.
+
+15:35.440 --> 15:36.440
+ Okay.
+
+15:36.440 --> 15:39.640
+ So it's important to remember like everything you can do.
+
+15:39.640 --> 15:45.000
+ You can put a number after it.
+
+15:45.000 --> 15:53.840
+ But actually it's even more powerful because after most commands, you can also say, you
+
+15:53.840 --> 15:55.640
+ can add something called a motion.
+
+15:55.640 --> 16:02.560
+ A motion, for example, is right arrow moves right one, left arrow moves down one.
+
+16:02.560 --> 16:04.800
+ Shift G goes to the bottom of a file.
+
+16:04.800 --> 16:06.840
+ Motions are things that move your cursor around.
+
+16:06.840 --> 16:08.720
+ Now that doesn't sound very exciting.
+
+16:08.720 --> 16:15.960
+ Unless I tell you after a command, you can type a motion and the command will apply to
+
+16:15.960 --> 16:18.560
+ the region that that motion covers.
+
+16:18.560 --> 16:21.240
+ So for example, I'm currently on line three.
+
+16:21.240 --> 16:26.200
+ And if I press shift G, shift G is the motion to go to the end of the file.
+
+16:26.200 --> 16:28.720
+ D is the command to delete.
+
+16:28.720 --> 16:30.440
+ So I can combine these together.
+
+16:30.440 --> 16:32.960
+ D shift G will delete to the end of a file.
+
+16:32.960 --> 16:34.520
+ D shift G.
+
+16:34.520 --> 16:36.000
+ Right?
+
+16:36.000 --> 16:40.600
+ So that's pretty interesting.
+
+16:40.600 --> 16:43.840
+ So GG takes you to the start of a file.
+
+16:43.840 --> 16:47.320
+ So to delete from here to the start of a file, DGG.
+
+16:47.320 --> 16:49.280
+ Right?
+
+16:49.280 --> 16:51.520
+ Or there's some really interesting motions.
+
+16:51.520 --> 16:57.480
+ For example, let's create two bits.
+
+16:57.480 --> 16:58.480
+ Right?
+
+16:58.480 --> 17:00.920
+ There's a concept of a paragraph.
+
+17:00.920 --> 17:04.880
+ So right curly bracket takes you to the end of a paragraph, i.e. it takes you to the end
+
+17:04.880 --> 17:07.000
+ to the next empty line.
+
+17:07.000 --> 17:08.000
+ Right?
+
+17:08.000 --> 17:10.280
+ Press it again.
+
+17:10.280 --> 17:14.960
+ So that means if I want to delete everything from here to the end of the paragraph, I would
+
+17:14.960 --> 17:21.560
+ like to do that twice.
+
+17:21.560 --> 17:25.680
+ So delete from here to the end of the paragraph and also delete the next paragraph.
+
+17:25.680 --> 17:28.720
+ Actually, so let me show.
+
+17:28.720 --> 17:34.080
+ I want to copy this whole second bit and make a copy of it.
+
+17:34.080 --> 17:39.800
+ So in Vim, copying something, it's not control or command C. It's called ganking.
+
+17:39.800 --> 17:41.520
+ So you press Y.
+
+17:41.520 --> 17:43.640
+ So I want to copy the next paragraph.
+
+17:43.640 --> 17:48.280
+ So to copy this paragraph, I would press Y, right curly bracket.
+
+17:48.280 --> 17:53.400
+ And then to paste its P, and by default, it pastes it to the line underneath.
+
+17:53.400 --> 17:57.120
+ To paste it to the line above, you won't be surprised to hear it's shift P.
+
+17:57.120 --> 17:59.200
+ So there's a copy.
+
+17:59.200 --> 18:02.400
+ Now I want to go down to the next paragraph and change that to third bit.
+
+18:02.400 --> 18:05.440
+ So I'll press right curly bracket.
+
+18:05.440 --> 18:11.480
+ And I now want to delete this word and replace it with a different one.
+
+18:11.480 --> 18:14.920
+ Blocking and replacing in Vim is called changing.
+
+18:14.920 --> 18:19.920
+ And that's C. And so like everything else, that can be combined with a motion.
+
+18:19.920 --> 18:26.160
+ So the motion to move to the next word is W. W goes to the next word, right?
+
+18:26.160 --> 18:28.040
+ B goes back a word.
+
+18:28.040 --> 18:33.840
+ So to delete this word and let me start typing in a new one, it would be change word, C W.
+
+18:33.840 --> 18:35.640
+ Third bit.
+
+18:35.640 --> 18:36.640
+ Okay.
+
+18:36.640 --> 18:44.400
+ So if I want to delete from here to the end of the paragraph and the paragraph underneath,
+
+18:44.400 --> 18:46.560
+ I can just delete two paragraphs.
+
+18:46.560 --> 18:51.920
+ So that would be two D, right curly bracket.
+
+18:51.920 --> 18:56.240
+ So I would describe this as being highly compositional, right?
+
+18:56.240 --> 19:08.560
+ You can combine numbers, motions and commands together.
+
+19:08.560 --> 19:13.240
+ And then we haven't even touched on EX, right?
+
+19:13.240 --> 19:14.240
+ So let's talk about EX.
+
+19:14.240 --> 19:20.280
+ So I'm going to delete to the end of the file, D, shift G and delete this line, DD and colon
+
+19:20.280 --> 19:23.880
+ WQ to exit.
+
+19:23.880 --> 19:34.600
+ So I mentioned that we wanted to change this into something suitable to put in a YouTube
+
+19:34.600 --> 19:35.600
+ video.
+
+19:35.600 --> 19:43.560
+ So I press E, Apple A, Apple C, cancel.
+
+19:43.560 --> 19:50.840
+ And then I'll go Vim, I don't know, temporary, insert.
+
+19:50.840 --> 19:54.080
+ Apple V, GG.
+
+19:54.080 --> 19:58.520
+ Okay, so here I've just pasted in this text, right?
+
+19:58.520 --> 20:01.400
+ To, and I want to clean this up.
+
+20:01.400 --> 20:07.280
+ So I want to clean up the title, so I'll just press DD.
+
+20:07.280 --> 20:09.240
+ And I want to do the same thing to the next line.
+
+20:09.240 --> 20:14.840
+ So to do the same thing, you just did again, press dot.
+
+20:14.840 --> 20:16.480
+ So that's going to delete the line again.
+
+20:16.480 --> 20:26.760
+ Now where this gets interesting is that will redo the entire, like, number, command, motion
+
+20:26.760 --> 20:27.760
+ that you just did.
+
+20:27.760 --> 20:33.760
+ So for example, if I press 4DW to delete four words, 4DW to delete four words, and then
+
+20:33.760 --> 20:37.640
+ press dot, that deletes another four words.
+
+20:37.640 --> 20:39.720
+ And so that can get pretty interesting.
+
+20:39.720 --> 20:52.480
+ So for example, oh, okay, I'll show you a really cool example.
+
+20:52.480 --> 20:57.480
+ To search in Vim, you use slash, which is pretty common in a lot of different tools.
+
+20:57.480 --> 21:01.160
+ And so if I want to search, I don't know if you're familiar with regular expressions,
+
+21:01.160 --> 21:03.480
+ but you can put any regular expression here.
+
+21:03.480 --> 21:07.920
+ If I wanted to search for the next timestamp that Daniel created, I'd want to find a digit
+
+21:07.920 --> 21:10.000
+ at the start of the line.
+
+21:10.000 --> 21:15.560
+ So to go to the next place where there's a digit at the start of the line, regular expressions
+
+21:15.560 --> 21:19.480
+ use carrot for start of line and backslash D for digit.
+
+21:19.480 --> 21:24.520
+ So this is going to search, there you go, and selects the next digit at the start of
+
+21:24.520 --> 21:25.520
+ the line.
+
+21:25.520 --> 21:29.760
+ To search again, press N, N.
+
+21:29.760 --> 21:31.360
+ So this is kind of cool, right?
+
+21:31.360 --> 21:37.240
+ Because what we could do now is if I want to delete everything up to all the next digit
+
+21:37.240 --> 21:40.640
+ at the start of the line, well, slash is a motion.
+
+21:40.640 --> 21:48.760
+ So I could type D slash carrot backslash D, and that searches for the next digit at the
+
+21:48.760 --> 21:51.840
+ start of the line and deletes to it.
+
+21:51.840 --> 21:57.080
+ And so now I want to do it again, I press down, I just press dot.
+
+21:57.080 --> 22:05.800
+ So now I'm removing everything that's not a chapter header.
+
+22:05.800 --> 22:07.880
+ So that's pretty interesting.
+
+22:07.880 --> 22:11.960
+ And then I can just delete to the end of the line with D shift G and delete the first
+
+22:11.960 --> 22:12.960
+ line.
+
+22:12.960 --> 22:14.960
+ And I'm just about done, right?
+
+22:14.960 --> 22:17.480
+ Of course, there's more than one way to do it.
+
+22:17.480 --> 22:21.800
+ So let's look at a few different ways.
+
+22:21.800 --> 22:28.160
+ Another way we could do it is we could delete all the lines that start with a hyphen.
+
+22:28.160 --> 22:34.840
+ So there's a really useful EX command, which is the command G.
+
+22:34.840 --> 22:38.680
+ G is, I think it stands for grep.
+
+22:38.680 --> 22:40.280
+ It searches for things.
+
+22:40.280 --> 22:46.240
+ And it does an action to anything, any line that it finds.
+
+22:46.240 --> 22:50.640
+ So with any EX command, you first of all have to say what lines do you want to apply it
+
+22:50.640 --> 22:51.640
+ to?
+
+22:51.640 --> 22:55.480
+ And nearly always you want to apply it to all lines, which is percent.
+
+22:55.480 --> 23:00.120
+ So generally speaking, for most, EX commands just start with percent.
+
+23:00.120 --> 23:01.560
+ And then you say, what command do you want to run?
+
+23:01.560 --> 23:06.160
+ So I want to run G, which is I'm searching for something.
+
+23:06.160 --> 23:10.080
+ And then in EX, the different parts, the kind of the different parameters are generally
+
+23:10.080 --> 23:12.840
+ separated by slash.
+
+23:12.840 --> 23:15.560
+ So the next thing is what do you want to search for?
+
+23:15.560 --> 23:19.760
+ I want to search for at the start of a line a hyphen.
+
+23:19.760 --> 23:20.760
+ Okay.
+
+23:20.760 --> 23:21.760
+ And then another slash.
+
+23:21.760 --> 23:22.760
+ Okay.
+
+23:22.760 --> 23:23.760
+ What do you want to do?
+
+23:23.760 --> 23:26.160
+ And now I can put in any Vim command.
+
+23:26.160 --> 23:29.800
+ And so remember the command to delete in Vim is D.
+
+23:29.800 --> 23:33.760
+ So this is going to search for anything with a hyphen at the start of the line and delete
+
+23:33.760 --> 23:34.760
+ it.
+
+23:34.760 --> 23:36.960
+ There we go.
+
+23:36.960 --> 23:37.960
+ Okay.
+
+23:37.960 --> 23:41.120
+ So we could now do a similar thing to delete all the empty lines.
+
+23:41.120 --> 23:42.520
+ So delete all the empty lines.
+
+23:42.520 --> 23:44.680
+ I would do percent G slash.
+
+23:44.680 --> 23:45.680
+ Okay.
+
+23:45.680 --> 23:51.720
+ I want to do any time you've got the start of a line followed by zero or more spaces
+
+23:51.720 --> 23:53.520
+ followed by the end of a line.
+
+23:53.520 --> 23:54.520
+ That's an empty line.
+
+23:54.520 --> 23:56.520
+ What do I want to do?
+
+23:56.520 --> 23:57.520
+ Delete it.
+
+23:57.520 --> 23:58.520
+ Okay.
+
+23:58.520 --> 24:00.040
+ Okay.
+
+24:00.040 --> 24:07.360
+ So and then finally I want to put a dash between that first space and the thing after it.
+
+24:07.360 --> 24:09.320
+ So that's a search and replace.
+
+24:09.320 --> 24:14.480
+ So again, we do column percent to apply some EX command to the whole file.
+
+24:14.480 --> 24:17.480
+ S for search and replace.
+
+24:17.480 --> 24:19.480
+ Then the slash to put in our different parameters.
+
+24:19.480 --> 24:21.240
+ So first what are we searching for?
+
+24:21.240 --> 24:22.720
+ A space.
+
+24:22.720 --> 24:24.400
+ And then what are we replacing it with?
+
+24:24.400 --> 24:26.760
+ Space hyphen space.
+
+24:26.760 --> 24:27.760
+ And then enter.
+
+24:27.760 --> 24:31.640
+ So this will just apply it by default the first time it finds it.
+
+24:31.640 --> 24:34.560
+ Okay.
+
+24:34.560 --> 24:39.080
+ So that's like an overview of like why VIM is cool.
+
+24:39.080 --> 24:43.120
+ Like when say people say VIM is cool, they're not saying like, oh, you should use it because
+
+24:43.120 --> 24:44.360
+ it's retro and interesting.
+
+24:44.360 --> 24:46.440
+ They're saying you should use it because it's powerful.
+
+24:46.440 --> 24:54.680
+ And specifically data scientists should learn VIM because this interactive text munging is
+
+24:54.680 --> 24:59.600
+ what we do with input data files and output data files all the time.
+
+24:59.600 --> 25:05.040
+ And there is something we can look at later if we want to is it's super easy to create
+
+25:05.040 --> 25:10.280
+ macros in VIM, which is where like literally it'll just record each button you press.
+
+25:10.280 --> 25:12.040
+ And then you can just rerun that macro.
+
+25:12.040 --> 25:18.800
+ So if you want to re run the same process on six different files, you just run the macro
+
+25:18.800 --> 25:21.000
+ six times.
+
+25:21.000 --> 25:24.520
+ Now, this case, I want to close without saving.
+
+25:24.520 --> 25:28.480
+ So normally if I go colon queue and it says, no, you haven't saved.
+
+25:28.480 --> 25:30.440
+ So it's kind of careful to help you there.
+
+25:30.440 --> 25:32.560
+ It says add exclamation mark to override.
+
+25:32.560 --> 25:37.200
+ So I do that Q exclamation mark.
+
+25:37.200 --> 25:38.520
+ Okay.
+
+25:38.520 --> 25:56.760
+ So we can use that in Jupyter.
+
+25:56.760 --> 26:03.200
+ And so now we're going to fix the problem which we talked about earlier, which is how
+
+26:03.200 --> 26:07.720
+ come our files disappeared.
+
+26:07.720 --> 26:12.240
+ And to fix it, we need to edit prerun.sh.
+
+26:12.240 --> 26:16.920
+ So if I type vim prerun.sh.
+
+26:16.920 --> 26:18.360
+ So here we've got this.
+
+26:18.360 --> 26:23.560
+ And the reason that the files disappeared is that at the start of our script, we typed
+
+26:23.560 --> 26:27.640
+ CD and that changed to our home directory.
+
+26:27.640 --> 26:29.840
+ And we never went back to where we were.
+
+26:29.840 --> 26:32.880
+ And so that meant when it ran Jupyter, it ran it from our home directory.
+
+26:32.880 --> 26:35.880
+ This is actually currently showing the contents of our home directory.
+
+26:35.880 --> 26:42.600
+ Now, okay, I want to show you now how we know this by looking at run.sh.
+
+26:42.600 --> 26:47.960
+ I want to switch to editing run.sh without saving where I'm up to.
+
+26:47.960 --> 26:53.440
+ And I want to show you a really neat thing in Linux that lets you do this and Mac, which
+
+26:53.440 --> 26:56.680
+ is control Z.
+
+26:56.680 --> 26:58.880
+ Control Z does something really interesting.
+
+26:58.880 --> 27:03.160
+ It stops the process I was running and it puts it in the background.
+
+27:03.160 --> 27:06.320
+ So if I type jobs, I can see what's running in the background.
+
+27:06.320 --> 27:07.600
+ Vim is running in the background.
+
+27:07.600 --> 27:09.600
+ I can do anything I like.
+
+27:09.600 --> 27:14.000
+ And then anytime I want, I can type 4FG for foreground.
+
+27:14.000 --> 27:17.320
+ And it comes back to where I was.
+
+27:17.320 --> 27:19.160
+ So I can hit control Z.
+
+27:19.160 --> 27:25.640
+ And then I can type vim slash run.sh, which is actually what I was going to show you.
+
+27:25.640 --> 27:30.320
+ This is the thing that they run for us when we start an instance.
+
+27:30.320 --> 27:34.920
+ And you can see here it runs our script and then it runs Jupyter.
+
+27:34.920 --> 27:39.000
+ So our script was CDing to our home directory and then running Jupyter.
+
+27:39.000 --> 27:42.760
+ And so Jupyter was in our home directory when it ran.
+
+27:42.760 --> 27:47.600
+ So I go colon queue to exit that and I go FG.
+
+27:47.600 --> 27:48.600
+ There we go.
+
+27:48.600 --> 27:56.440
+ Now, optional power user thing, which I use a lot is I would not, that's not how personally
+
+27:56.440 --> 28:00.640
+ I would have looked at the run.sh file.
+
+28:00.640 --> 28:04.960
+ To look at the run.sh file, what I would do in Vim was I type colon SP, which stands
+
+28:04.960 --> 28:09.520
+ for split slash run.sh.
+
+28:09.520 --> 28:15.440
+ And as you can see, Vim actually allows me to have multiple windows open at once.
+
+28:15.440 --> 28:16.440
+ Okay.
+
+28:16.440 --> 28:21.040
+ Kind of like Tmux actually, Tmux and Vim has very similar functionality.
+
+28:21.040 --> 28:28.640
+ And so then I can scroll around here and then in Vim, instead of pressing Ctrl B and an
+
+28:28.640 --> 28:32.560
+ arrow to go to a different window, which is Tmux in Vim, it's Ctrl W.
+
+28:32.560 --> 28:38.560
+ So except that Ctrl W closes a tab in Chrome.
+
+28:38.560 --> 28:43.160
+ So that's possibly not going to work.
+
+28:43.160 --> 28:45.960
+ Okay.
+
+28:45.960 --> 28:51.480
+ So there's a couple of ways we could solve this.
+
+28:51.480 --> 28:56.440
+ The probably the best way in a script is to use that check I showed you last time, push
+
+28:56.440 --> 29:01.000
+ D, tilt it is a home directory.
+
+29:01.000 --> 29:05.400
+ So that's the same as CD, changes to a home directory, but it remembers where we were.
+
+29:05.400 --> 29:10.000
+ And then pop D, what's this back to where we were before.
+
+29:10.000 --> 29:13.120
+ So that should fix our problem.
+
+29:13.120 --> 29:22.760
+ Okay, so this untitled dot ipi and be, we'll probably find that, yeah, see here it's in
+
+29:22.760 --> 29:27.320
+ our, here it is in our home directory, which was not what we intended.
+
+29:27.320 --> 29:33.520
+ So let's delete it.
+
+29:33.520 --> 29:36.080
+ And we'll shut this down.
+
+29:36.080 --> 29:50.360
+ And then we'll create another instance just to check that worked.
+
+29:50.360 --> 29:51.360
+ Okay.
+
+29:51.360 --> 29:56.520
+ So while we're waiting for that to get started, does anybody have any questions or comments
+
+29:56.520 --> 29:58.320
+ about Vim?
+
+29:58.320 --> 30:00.560
+ Hi, Jeremy.
+
+30:00.560 --> 30:02.480
+ That was very good.
+
+30:02.480 --> 30:07.240
+ That took me back to a previous life where I used to install WordPerfect on Unix boxes
+
+30:07.240 --> 30:12.840
+ and just working in a legal firm and said, what do you use for a Word processor today
+
+30:12.840 --> 30:14.360
+ before I put on WordPerfect?
+
+30:14.360 --> 30:22.760
+ And this person, legal secretary said, I use vi, which was like Vim is vi improved or
+
+30:22.760 --> 30:23.760
+ vise.
+
+30:23.760 --> 30:27.440
+ But it's just amazing the power of it.
+
+30:27.440 --> 30:33.520
+ If you know everything it can do, it's a perfect Word processor.
+
+30:33.520 --> 30:35.200
+ Yeah, it's great.
+
+30:35.200 --> 30:38.680
+ I mean, I don't use it as a Word processor to be clear.
+
+30:38.680 --> 30:44.440
+ I use Microsoft Word or Google Docs as a Word processor because I think they're very good
+
+30:44.440 --> 30:45.440
+ Word processors.
+
+30:45.440 --> 30:48.240
+ But for a text editor, I use it a lot.
+
+30:48.240 --> 30:57.160
+ If I've got a CSV file, I want to do some quick cleanup too or something like that.
+
+30:57.160 --> 30:58.160
+ Or a log file.
+
+30:58.160 --> 30:59.160
+ I'll use it.
+
+30:59.160 --> 31:08.360
+ Yeah, pretty much any time I'm editing a quick script or something on a terminal.
+
+31:08.360 --> 31:10.720
+ That's great.
+
+31:10.720 --> 31:18.200
+ I will say Visual Studio Code is also excellent.
+
+31:18.200 --> 31:22.120
+ And I wouldn't say like Vim is better or worse than Visual Studio Code.
+
+31:22.120 --> 31:23.720
+ I use both of them.
+
+31:23.720 --> 31:27.480
+ I use Vim more often than Visual Studio Code, but I do use both of them.
+
+31:27.480 --> 31:29.720
+ And in fact, there is a button here.
+
+31:29.720 --> 31:31.440
+ I thought somewhere.
+
+31:31.440 --> 31:46.680
+ I thought there was like an open Visual Studio Code button, but maybe I'm imagining things.
+
+31:46.680 --> 31:51.440
+ Or maybe it has to wait until it's finished opening the server.
+
+31:51.440 --> 31:54.440
+ Oh, there it is.
+
+31:54.440 --> 32:00.080
+ So there's an access remote kernel actually that's you connect Visual Studio on your machine
+
+32:00.080 --> 32:02.480
+ to the remote machine.
+
+32:02.480 --> 32:05.400
+ So you can even use Visual Studio remotely.
+
+32:05.400 --> 32:10.320
+ You can also use it in WSL on Windows.
+
+32:10.320 --> 32:13.040
+ Don't install Visual Studio Code into the Linux box.
+
+32:13.040 --> 32:17.800
+ Install it into the Windows box because it's got a WSL connector built in.
+
+32:17.800 --> 32:24.280
+ So it treats WSL just as if it's a local Windows directory.
+
+32:24.280 --> 32:30.000
+ You can also connect to any SSH instance using the VS Code remote connector or this remote
+
+32:30.000 --> 32:32.000
+ kernel thing.
+
+32:32.000 --> 32:36.760
+ Yeah, I had a question.
+
+32:36.760 --> 32:40.400
+ So you showed a lot of keyboard shortcuts for a name, right?
+
+32:40.400 --> 32:45.960
+ So how can an approach learning it because it feels a bit intimidating when you are a
+
+32:45.960 --> 32:46.960
+ beginner?
+
+32:46.960 --> 32:58.440
+ Yeah, so I mean the trick with learning something new is for try and do it in small chunks,
+
+32:58.440 --> 32:59.440
+ right?
+
+32:59.440 --> 33:01.960
+ So don't expect to learn all of them.
+
+33:01.960 --> 33:06.960
+ So at this point, I would say learn I to start inserting things.
+
+33:06.960 --> 33:09.040
+ Arrow keys to move around.
+
+33:09.040 --> 33:13.560
+ Escape to go back to command mode, colon wq to close and save.
+
+33:13.560 --> 33:20.080
+ But at that point, you can now use Vim to edit your shell scripts and stuff.
+
+33:20.080 --> 33:26.960
+ And then like try and learn maybe one or two new commands each day.
+
+33:26.960 --> 33:30.200
+ So one useful one or emotion each day.
+
+33:30.200 --> 33:37.360
+ So W and B are useful to know to move forward and backward a word.
+
+33:37.360 --> 33:41.360
+ And yeah, there's a lot of Vim tutorials and things out there.
+
+33:41.360 --> 33:49.120
+ So for example, here's open Vim.com, which is going to introduce you by saying, oh, hit
+
+33:49.120 --> 33:50.120
+ the enter key.
+
+33:50.120 --> 33:51.600
+ Like, okay, I'll hit the enter key.
+
+33:51.600 --> 33:55.040
+ And so you could work through a tutorial like this.
+
+33:55.040 --> 34:04.000
+ Yeah, it's we all get intimidated, honestly, Kirian, when we see an expert working with
+
+34:04.000 --> 34:06.760
+ something that we don't know yet.
+
+34:06.760 --> 34:08.480
+ And at first it's like, wow, that's powerful.
+
+34:08.480 --> 34:09.800
+ I wish I could do that.
+
+34:09.800 --> 34:12.240
+ But my God, how would I ever get to that point?
+
+34:12.240 --> 34:15.880
+ And the goal is not to be an expert at Vim.
+
+34:15.880 --> 34:21.440
+ The goal is to be able to do Vim to like slowly do something that you want to be able to do.
+
+34:21.440 --> 34:26.400
+ And this is one of the things I really had to practice for myself in my late teens and
+
+34:26.400 --> 34:34.080
+ early twenties was to repeatedly put myself in a position where I was intentionally doing
+
+34:34.080 --> 34:38.320
+ things slowly by using a tool that I wanted to know.
+
+34:38.320 --> 34:42.400
+ And I was pretty sure at some point would be useful, but I didn't know well enough to
+
+34:42.400 --> 34:44.680
+ do it faster than without some other tool.
+
+34:44.680 --> 34:53.200
+ So I've always, since like 16 been pretty good at using Lotus 123 and Excel spreadsheets.
+
+34:53.200 --> 34:56.320
+ And I tended to turn to them for everything.
+
+34:56.320 --> 34:58.920
+ And then I went to learn SQL databases.
+
+34:58.920 --> 35:03.200
+ So I kind of forced myself to do things involving lists with databases for a while, even though
+
+35:03.200 --> 35:04.200
+ I got slower.
+
+35:04.200 --> 35:09.120
+ Then I was like, okay, well, I'm going to stop using, you know, I'm going to start doing
+
+35:09.120 --> 35:11.960
+ more stuff with VBA macros and stop doing stuff manually.
+
+35:11.960 --> 35:14.320
+ And again, it was kind of slower for a while.
+
+35:14.320 --> 35:24.440
+ And particularly like, you know, things like cleaning up that YouTube timestamp thing.
+
+35:24.440 --> 35:29.600
+ I could have done that manually, you know, and the first ten times it would be faster
+
+35:29.600 --> 35:31.040
+ to do it manually.
+
+35:31.040 --> 35:32.040
+ But don't do it manually.
+
+35:32.040 --> 35:36.960
+ Right, because each time you do it manually, you know, you're missing out on the opportunity
+
+35:36.960 --> 35:39.840
+ to get better at the thing that's going to make you faster.
+
+35:39.840 --> 35:46.520
+ And the thing about practicing what you think might eventually be the fast way is that those
+
+35:46.520 --> 35:52.120
+ fast ways accumulate together in kind of these multiplicative ways.
+
+35:52.120 --> 35:59.320
+ And so, you know, I've been kind of using this approach of always trying to do things
+
+35:59.320 --> 36:03.360
+ the way I suspect would be the fastest if I was an expert at it.
+
+36:03.360 --> 36:06.640
+ I've been doing that for like 30 years.
+
+36:06.640 --> 36:12.040
+ And now most people who watch me work go, wow, you're very fast at doing stuff.
+
+36:12.040 --> 36:14.960
+ You must be really smart, you know, like, no, I'm not really smart.
+
+36:14.960 --> 36:16.400
+ Like you should have seen me when I started.
+
+36:16.400 --> 36:17.560
+ I was terrible.
+
+36:17.560 --> 36:20.600
+ But now these things have all accumulated.
+
+36:20.600 --> 36:21.600
+ Right.
+
+36:21.600 --> 36:22.600
+ So, yeah.
+
+36:22.600 --> 36:26.760
+ And if anybody finds, you know, good tutorials, let me know.
+
+36:26.760 --> 36:29.320
+ Honestly, it's been a long time since I've run a VM tutorial.
+
+36:29.320 --> 36:31.160
+ So I don't know if this one's good or bad.
+
+36:31.160 --> 36:33.680
+ It's just the first one that came up in Google.
+
+36:33.680 --> 36:36.240
+ But the typing, large tutorial is good.
+
+36:36.240 --> 36:37.240
+ So.
+
+36:37.240 --> 36:42.000
+ The best tutorial is on Linux in the terminal.
+
+36:42.000 --> 36:47.600
+ If you just type in a view to tour in the terminal, it should pop up a very nice tutorial.
+
+36:47.600 --> 36:53.000
+ And I just wanted to say, Jeremy, that, you know, few minutes of speech that you just gave
+
+36:53.000 --> 36:57.320
+ is the subson of T wonderful and very useful.
+
+36:57.320 --> 36:58.320
+ Okay.
+
+36:58.320 --> 36:59.320
+ Yeah.
+
+36:59.320 --> 37:05.000
+ So here is what happens if you type VM tutor and it will teach you exiting VM.
+
+37:05.000 --> 37:07.920
+ So one moving the cursor lesson to exiting VM.
+
+37:07.920 --> 37:10.200
+ So that's, that's a good start.
+
+37:10.200 --> 37:14.360
+ Make sure caps lock is not depressed and press J enough times so that lesson point 1.1
+
+37:14.360 --> 37:15.360
+ fills the screen.
+
+37:15.360 --> 37:17.600
+ J, J, J, J, J. Okay.
+
+37:17.600 --> 37:25.920
+ So because the VM tutor is in VM, it forces you to use VM, which is good.
+
+37:25.920 --> 37:29.920
+ And the nice thing about this is, you know, move the cursor to the line below marked,
+
+37:29.920 --> 37:30.920
+ blah, blah, blah.
+
+37:30.920 --> 37:31.920
+ Here it is.
+
+37:31.920 --> 37:34.520
+ Fix the errors, move the cursor.
+
+37:34.520 --> 37:35.520
+ Okay.
+
+37:35.520 --> 37:39.040
+ So here's a useful one to know X to cross out something.
+
+37:39.040 --> 37:40.040
+ So X.
+
+37:40.040 --> 37:41.600
+ There we go.
+
+37:41.600 --> 37:44.040
+ Thanks to that reminder.
+
+37:44.040 --> 37:50.640
+ And the first time you do, you go through the, the tutorial, you will feel overwhelming
+
+37:50.640 --> 37:57.560
+ that to me, only after, you know, on like third, fourth try, does it start to make sense
+
+37:57.560 --> 38:00.240
+ and are able to complete the entire thing.
+
+38:00.240 --> 38:07.960
+ But also when I was learning the basics of them, I realized that it has a steep learning
+
+38:07.960 --> 38:09.160
+ curve.
+
+38:09.160 --> 38:14.120
+ And I like to make things appealing, attractive and simple for me.
+
+38:14.120 --> 38:18.200
+ So I think the metric also mentioned this in the chat here a second ago.
+
+38:18.200 --> 38:22.800
+ There is a game called VIM adventures, which is in your browser.
+
+38:22.800 --> 38:28.160
+ And it's another way that you can get exposed to them.
+
+38:28.160 --> 38:29.960
+ That's how I learned it.
+
+38:29.960 --> 38:35.520
+ So I would dive into a call when I had my corporate job.
+
+38:35.520 --> 38:43.200
+ Instead of, you know, whatever people do on calls, which is just, I don't know, browser
+
+38:43.200 --> 38:44.200
+ edits.
+
+38:44.200 --> 38:47.080
+ I would do this.
+
+38:47.080 --> 38:49.480
+ And that was my time.
+
+38:49.480 --> 38:50.480
+ Okay.
+
+38:50.480 --> 38:55.000
+ Now I just tried pressing the arrow keys and VIM to see what the VIM adventures.
+
+38:55.000 --> 38:57.840
+ And it says, don't use the arrow keys using JK.
+
+38:57.840 --> 39:02.200
+ Now, I don't agree with that, by the way, I, you know, some, like a lot of people are
+
+39:02.200 --> 39:08.480
+ overly purists about like you have to do things the VIM way.
+
+39:08.480 --> 39:13.520
+ So okay, yes, you can use HJK and all, but seriously, it doesn't matter.
+
+39:13.520 --> 39:20.600
+ Anyway, by the way, I see this if actually just notices a few things in the Zoom chat.
+
+39:20.600 --> 39:23.600
+ If you can, please say it out loud.
+
+39:23.600 --> 39:28.120
+ There's a couple of reasons why the first is I really enjoy social interaction.
+
+39:28.120 --> 39:34.040
+ Otherwise, I'm kind of sitting in my little office, you know, and then the second is,
+
+39:34.040 --> 39:36.040
+ of course, for the video, people can hear the questions.
+
+39:36.040 --> 39:39.320
+ Now, I know sometimes people just can't really talk because they're in some environment.
+
+39:39.320 --> 39:40.320
+ They can't do it.
+
+39:40.320 --> 39:44.920
+ In that case, if you see somebody asking something in the chat, could you say, Oh, Mike M asked,
+
+39:44.920 --> 39:48.560
+ what key are you pressing to undo Jeremy, rather than just answering in the chat?
+
+39:48.560 --> 39:51.240
+ And that way I could like say that anyway.
+
+39:51.240 --> 39:55.040
+ It looks like, so yeah, somebody said, how did you do undo?
+
+39:55.040 --> 39:57.040
+ So the answer is you to undo.
+
+39:57.040 --> 40:01.600
+ Can I suggest one last resource that is quite amazing for them?
+
+40:01.600 --> 40:06.680
+ It's the VIN book editing at the speed of light.
+
+40:06.680 --> 40:10.320
+ Editing, I don't know that one.
+
+40:10.320 --> 40:11.320
+ Speed.
+
+40:11.320 --> 40:12.320
+ Speed of thought?
+
+40:12.320 --> 40:13.320
+ Oh, thought yes.
+
+40:13.320 --> 40:14.320
+ Yes, yes.
+
+40:14.320 --> 40:15.320
+ Practical VIN.
+
+40:15.320 --> 40:18.320
+ That should be really well written.
+
+40:18.320 --> 40:24.400
+ And there's a similar book for Tmux.
+
+40:24.400 --> 40:27.640
+ So that's how I...
+
+40:27.640 --> 40:28.640
+ I see.
+
+40:28.640 --> 40:30.360
+...would really be different.
+
+40:30.360 --> 40:36.040
+ Now, let me tell you something not to do, which is don't install lots of plugins.
+
+40:36.040 --> 40:38.680
+ There's lots of plugins you can install.
+
+40:38.680 --> 40:47.360
+ And after using VIN for well over 20 years, I don't use any plugins at all.
+
+40:47.360 --> 41:00.040
+ It's not to say that there are none that are any use, but they're not that useful, honestly.
+
+41:00.040 --> 41:03.800
+ And you can get lost in that whole customizing things thing.
+
+41:03.800 --> 41:09.040
+ And I just wanted to make it clear to say like actually out of the box VIN works extremely
+
+41:09.040 --> 41:10.040
+ well.
+
+41:10.040 --> 41:21.000
+ Having said that, I customize it using a VMRC, so an RC file in Linux and stuff is like the
+
+41:21.000 --> 41:24.680
+ normal kind of suffix for configuration files.
+
+41:24.680 --> 41:27.920
+ And I do do some customization of it.
+
+41:27.920 --> 41:38.240
+ And I actually put all my configuration files in a GitHub repository.
+
+41:38.240 --> 41:44.720
+ And you'll see here there's a VMRC.
+
+41:44.720 --> 41:49.440
+ And but it's only 99 lines.
+
+41:49.440 --> 41:53.960
+ And there's things like, for example, remember I mentioned that you can jump to the next...
+
+41:53.960 --> 41:57.360
+ You can jump around windows by pressing Ctrl W.
+
+41:57.360 --> 42:00.320
+ C W means Ctrl W.
+
+42:00.320 --> 42:05.560
+ I made it so you can also press backslash W and backslash up and backslash down instead
+
+42:05.560 --> 42:08.720
+ of Ctrl W because it's like one key rather than two.
+
+42:08.720 --> 42:12.320
+ It's like it's just really minor things like that.
+
+42:12.320 --> 42:14.120
+ And also some little things like...
+
+42:14.120 --> 42:16.560
+ I guess I do have some things installed.
+
+42:16.560 --> 42:20.680
+ I don't use them anymore.
+
+42:20.680 --> 42:30.240
+ Also some things like Python syntax highlighting.
+
+42:30.240 --> 42:34.680
+ And also to be able to see things clearly when you've got a black background with light
+
+42:34.680 --> 42:37.480
+ text, you have to say set background equals dark.
+
+42:37.480 --> 42:39.480
+ So I don't know, little things like that.
+
+42:39.480 --> 42:41.280
+ And it comes with some nice defaults.
+
+42:41.280 --> 42:44.880
+ You can just actually do this source command to get some nice defaults.
+
+42:44.880 --> 42:48.680
+ Quick question, please.
+
+42:48.680 --> 42:52.200
+ Is this one public or private?
+
+42:52.200 --> 42:53.200
+ Everything of mine is public.
+
+42:53.200 --> 42:54.200
+ Fantastic.
+
+42:54.200 --> 42:55.200
+ Thank you.
+
+42:55.200 --> 42:56.200
+ Pretty much, I think.
+
+42:56.200 --> 42:57.200
+ Yeah.
+
+42:57.200 --> 42:58.200
+ I have a question.
+
+42:58.200 --> 43:04.200
+ What are your thoughts about visual history of code to edit those, edit files?
+
+43:04.200 --> 43:05.200
+ They're great.
+
+43:05.200 --> 43:06.200
+ I just talked about it.
+
+43:06.200 --> 43:07.200
+ Yeah.
+
+43:07.200 --> 43:08.200
+ I said it's really good.
+
+43:08.200 --> 43:09.200
+ Yep.
+
+43:09.200 --> 43:11.200
+ I like visual studio code.
+
+43:11.200 --> 43:12.200
+ Hi.
+
+43:12.200 --> 43:20.280
+ Do you suggest using whim key bindings for Jupyter and VS code as well?
+
+43:20.280 --> 43:24.720
+ I don't because I find it's not about the key bindings.
+
+43:24.720 --> 43:30.920
+ It's about the numbers and the motions and the dot and the macros and that stuff.
+
+43:30.920 --> 43:36.560
+ And I don't find that there are other editors that the VM as well as VM do.
+
+43:36.560 --> 43:43.080
+ So when I use VS code, I rather, you know, like fully inhabit the VS code world.
+
+43:43.080 --> 43:47.760
+ And so I use the normal VS code key bindings and try to learn to use VS code as well as
+
+43:47.760 --> 43:48.840
+ I can.
+
+43:48.840 --> 43:54.840
+ So yeah, I don't do that.
+
+43:54.840 --> 43:59.280
+ I've sometimes I've tried and I'm always disappointed.
+
+43:59.280 --> 44:02.840
+ So it's always like, yeah, it's not really him.
+
+44:02.840 --> 44:07.680
+ So VS code's great at being VS code.
+
+44:07.680 --> 44:18.280
+ And I, you know, I would use that for, I don't know, like editing a big markdown file maybe.
+
+44:18.280 --> 44:21.760
+ Oh gosh, I don't use it much.
+
+44:21.760 --> 44:28.120
+ But like, I guess if I was like working with HTML or CSS or something, I feel like the
+
+44:28.120 --> 44:33.920
+ way it kind of handles those kind of file formats is really nice.
+
+44:33.920 --> 44:38.240
+ You can set up them to be really nice as well, but VS code works a bit better, more
+
+44:38.240 --> 44:40.240
+ out of the box, I suppose.
+
+44:40.240 --> 44:48.040
+ Yeah, and also for like navigating through a large repository, VS code can be a bit easier
+
+44:48.040 --> 44:50.040
+ to use maybe.
+
+44:50.040 --> 44:58.800
+ I'll ask whether you could use a fairly large project with multiple files and whether it
+
+44:58.800 --> 45:01.040
+ was doable via VIM.
+
+45:01.040 --> 45:04.560
+ Yeah, it's definitely doable via VIM.
+
+45:04.560 --> 45:08.560
+ Yeah, I mean, we can take a look if you're interested.
+
+45:08.560 --> 45:11.400
+ So, so yeah, let's take a look.
+
+45:11.400 --> 45:13.360
+ Actually it's it is useful to know how to do this.
+
+45:13.360 --> 45:17.720
+ So let's take, for example, the fast AI repo.
+
+45:17.720 --> 45:28.360
+ Okay, so let's clone it.
+
+45:28.360 --> 45:31.840
+ And so let's do it all in paper space.
+
+45:31.840 --> 45:44.200
+ Now in paper space, the slash notebooks directory is persistent across machines, right?
+
+45:44.200 --> 45:50.640
+ So it probably makes sense to clone this into the slash notebooks directory.
+
+45:50.640 --> 45:55.640
+ So if I open up my terminal, so it's persistent within a machine and it's persistent across
+
+45:55.640 --> 45:56.640
+ restart.
+
+45:56.640 --> 46:05.400
+ So if I get cloned here, it'll still be on this machine next time I open it, because that's
+
+46:05.400 --> 46:09.560
+ what slash notebooks is it's persistent across restart on one machine.
+
+46:09.560 --> 46:11.920
+ Quick question, Jeremy.
+
+46:11.920 --> 46:16.920
+ Yeah, actually, just before you do, I'm just going to cancel this and mention some a little
+
+46:16.920 --> 46:18.440
+ shortcut, if that's okay.
+
+46:18.440 --> 46:21.600
+ Did you see that was taking a really long time to clone?
+
+46:21.600 --> 46:27.080
+ The reason why is it's cloning every single version of fast AI that's ever existed.
+
+46:27.080 --> 46:33.960
+ And since I don't need every single version, if you type minus minus depth one, it'll just
+
+46:33.960 --> 46:37.720
+ give you the most recent version that'll save some time.
+
+46:37.720 --> 46:40.280
+ So yeah, so go ahead.
+
+46:40.280 --> 46:47.320
+ One of the other scripts you had, you were bringing in slash notebooks from storage, like
+
+46:47.320 --> 46:48.320
+ storage somewhere.
+
+46:48.320 --> 46:49.320
+ Is that a change?
+
+46:49.320 --> 46:54.640
+ Yeah, I didn't really understand how notebooks slash notebooks persistence worked at that
+
+46:54.640 --> 46:55.640
+ point.
+
+46:55.640 --> 46:57.040
+ I hadn't spent enough time reading the docs.
+
+46:57.040 --> 46:59.880
+ Yeah, so let's pretend that never happened.
+
+46:59.880 --> 47:03.960
+ Okay, so now that I've cloned this into slash notebooks, you can see it's appeared, right?
+
+47:03.960 --> 47:07.640
+ Because this is where Jupiter is running from.
+
+47:07.640 --> 47:13.520
+ Now, so fast AI is what's called an NB dev project, which means it's all developed in
+
+47:13.520 --> 47:14.520
+ notebooks.
+
+47:14.520 --> 47:16.960
+ So these are the notebooks which create fast AI.
+
+47:16.960 --> 47:25.360
+ And then those all get exported as Python modules into here.
+
+47:25.360 --> 47:31.360
+ It's not a very interesting one.
+
+47:31.360 --> 47:35.360
+ And as you can see, it says, oh, don't edit me edit the notebook.
+
+47:35.360 --> 47:36.360
+ That's fine.
+
+47:36.360 --> 47:47.720
+ Now, if you want to explore through a code base, it's really helpful to be able to like click
+
+47:47.720 --> 47:52.120
+ on symbols, whatever, and jump to their definitions and then jump back again to kind of see how
+
+47:52.120 --> 47:55.160
+ it all works.
+
+47:55.160 --> 48:00.840
+ And so you can actually do that on on GitHub, by the way, I don't know if you've noticed
+
+48:00.840 --> 48:05.200
+ this, but it's quite neat.
+
+48:05.200 --> 48:15.880
+ So for example, to detach, if I click on it, no, it's interesting.
+
+48:15.880 --> 48:17.680
+ It doesn't know how to find that one.
+
+48:17.680 --> 48:19.800
+ It's not perfect.
+
+48:19.800 --> 48:20.960
+ That one's actually from PyTorch.
+
+48:20.960 --> 48:24.520
+ That's something that knows how to find.
+
+48:24.520 --> 48:27.520
+ All right, this one.
+
+48:27.520 --> 48:29.760
+ That's more than maybe.
+
+48:29.760 --> 48:31.760
+ What is fine?
+
+48:31.760 --> 48:33.840
+ Yeah, that's a tapillum model.
+
+48:33.840 --> 48:40.240
+ Okay, well, this is very strange.
+
+48:40.240 --> 48:45.720
+ In theory, it would have finally the found one.
+
+48:45.720 --> 48:46.720
+ Okay.
+
+48:46.720 --> 48:52.920
+ So, okay, one problem with doing it in GitHub is it's not particularly good at it.
+
+48:52.920 --> 48:59.120
+ But yeah, so Vim can also do that as can VS code.
+
+48:59.120 --> 49:05.320
+ And VS code and Vim both rely on something called CTAGs to do that.
+
+49:05.320 --> 49:20.640
+ CTAGs is a project to create an index of the symbols that are in your program.
+
+49:20.640 --> 49:31.520
+ So we want to install that.
+
+49:31.520 --> 49:36.680
+ I actually haven't bothered Googling it for like 20 years, so I didn't realize that the
+
+49:36.680 --> 49:42.080
+ thing I am used to using has been updated to this new thing.
+
+49:42.080 --> 49:43.080
+ So that's interesting.
+
+49:43.080 --> 49:46.600
+ I guess I should try using it.
+
+49:46.600 --> 49:52.600
+ So Ubuntu, install, universal CTAGs.
+
+49:52.600 --> 49:55.320
+ Oh, God, snap.
+
+49:55.320 --> 49:58.760
+ I don't like snap.
+
+49:58.760 --> 50:05.240
+ I guess I can if I have to.
+
+50:05.240 --> 50:08.960
+ Actually, I tell you what I normally do for installing things is I like to find out if
+
+50:08.960 --> 50:13.920
+ there's a Condor installer because that makes life very easy.
+
+50:13.920 --> 50:14.920
+ And there is.
+
+50:14.920 --> 50:15.920
+ There's a universal CTAGs.
+
+50:15.920 --> 50:16.920
+ Okay, that's handy.
+
+50:16.920 --> 50:17.920
+ Universal CTAGs.
+
+50:17.920 --> 50:26.320
+ So, member, install, universal CTAGs.
+
+50:26.320 --> 50:31.960
+ And this is one of the really cool things about Condor and Mamber is that I can install.
+
+50:31.960 --> 50:36.000
+ Ah, well, we don't have Mamber installed.
+
+50:36.000 --> 50:37.640
+ That's fine.
+
+50:37.640 --> 50:42.560
+ We can set that up.
+
+50:42.560 --> 50:51.800
+ Condor, install, and see Condor for each member.
+
+50:51.800 --> 50:56.120
+ And so in some future lesson, we'll talk about how to get these Condor and Mamber installed
+
+50:56.120 --> 51:05.600
+ things working in persistently in, in paper space.
+
+51:05.600 --> 51:11.080
+ There's probably some way to do it in snap as well.
+
+51:11.080 --> 51:12.080
+ I've never bothered checking.
+
+51:12.080 --> 51:13.080
+ I don't know if anybody knows.
+
+51:13.080 --> 51:16.080
+ You've been to snap install home directory.
+
+51:16.080 --> 51:17.080
+ I wonder if that's possible.
+
+51:17.080 --> 51:18.080
+ This thing that Jeremy is going to show us.
+
+51:18.080 --> 51:19.080
+ This will give us superpowers.
+
+51:19.080 --> 51:34.360
+ You know, this is one of my favorite features of them and of just jumping into them whenever
+
+51:34.360 --> 51:39.440
+ I'm browsing through any code on the next in the team, I'm expanding.
+
+51:39.440 --> 51:45.440
+ This is the way that professional developers interact with code.
+
+51:45.440 --> 51:48.440
+ And it's not even all the professional developers.
+
+51:48.440 --> 51:53.440
+ So, you know, there was who like a limited fear.
+
+51:53.440 --> 51:58.440
+ I'm very few people can navigate around code that quickly.
+
+51:58.440 --> 52:01.440
+ And I think that that really makes them enormous difference.
+
+52:01.440 --> 52:04.440
+ So whenever Jeremy covers this, I become excited.
+
+52:04.440 --> 52:08.440
+ And, you know.
+
+52:08.440 --> 52:09.440
+ That's great.
+
+52:09.440 --> 52:12.440
+ We're lucky getting excited, right?
+
+52:12.440 --> 52:13.440
+ Okay.
+
+52:13.440 --> 52:21.440
+ So, there's Mamber so we can never Mamber install.
+
+52:21.440 --> 52:25.440
+ Oh, I just press up over a couple of times.
+
+52:25.440 --> 52:27.440
+ Universal CTEGS.
+
+52:27.440 --> 52:29.440
+ Oh, and we don't.
+
+52:29.440 --> 52:30.440
+ Okay.
+
+52:30.440 --> 52:32.440
+ So we're not using Mamber forge here.
+
+52:32.440 --> 52:35.440
+ We should probably, I might ask papers base if they can switch to using Mamber forge.
+
+52:35.440 --> 52:41.440
+ So we don't have to worry about this in the future, but for now we'll have to put it's from the condor forge channel.
+
+52:41.440 --> 52:46.440
+ Because the one that they've got installed does not use condor forge by default.
+
+52:46.440 --> 53:04.440
+ I might also.
+
+53:04.440 --> 53:09.440
+ I might also talk to them about making it so that Python 3.9 is the default.
+
+53:09.440 --> 53:19.440
+ It's still using 3.7 as we saw last time.
+
+53:19.440 --> 53:20.440
+ All right.
+
+53:20.440 --> 53:30.440
+ So, if we CD into the fast AI directory, there's a bunch of Python code we want to look through.
+
+53:30.440 --> 53:37.440
+ So if you type CTEGS, that's the program that creates the index that we want.
+
+53:37.440 --> 53:49.440
+ And to run it recursively on the current folder, most things in Linux and stuff for capital for recursive and then dot means the current folder.
+
+53:49.440 --> 53:58.440
+ So that's indexed the current folder and it's created.
+
+53:58.440 --> 54:07.440
+ I expected it to create a file called CTEGS. I wonder if it's changed how this works.
+
+54:07.440 --> 54:11.440
+ Sorry, it's created a file called tags. So it's created this file here called tags.
+
+54:11.440 --> 54:20.440
+ And if you look at it, you're basically, it's just a whole list of like symbols that it found in my code and red jacks is to find where they are and what file it came from.
+
+54:20.440 --> 54:26.440
+ You don't ever have to look at that. The key thing to know is now we can jump straight to a tag.
+
+54:26.440 --> 54:43.440
+ So, for example, if we want to open up the array mask, whatever file defines array mask and put it in the right place second type, VIM minus T for VM jumped to a tag and type array mask.
+
+54:43.440 --> 54:47.440
+ And that will jump straight to the definition.
+
+54:47.440 --> 54:48.440
+ Okay.
+
+54:48.440 --> 54:50.440
+ So that's one way to do it.
+
+54:50.440 --> 55:08.440
+ Another way to do it would be, let's say we were looking at something else like layers.py is you can type tag jump and then type AR tab and then it'll list all the things that match.
+
+55:08.440 --> 55:14.440
+ And then I can hit enter and that will jump to that tag.
+
+55:14.440 --> 55:25.440
+ Another thing that you can do is you can notice, for example, this is inheriting from a ray image base to jump to the definition of array image base.
+
+55:25.440 --> 55:30.440
+ It's control right square, right square, right square bracket.
+
+55:30.440 --> 55:38.440
+ And so when I hit that it jumps to that definition and then go to go back to the previous tag, it's control T for tag.
+
+55:38.440 --> 55:40.440
+ Okay.
+
+55:40.440 --> 55:43.440
+ So they're the key ways to jump around.
+
+55:43.440 --> 55:53.440
+ So for example, if we wanted to find out some tabular class, I could go tab, tag jump and I start typing tabular and hit tab. And here's my various tabular classes.
+
+55:53.440 --> 55:57.440
+ Go to tabular collab.
+
+55:57.440 --> 56:00.440
+ Okay. So tabular collab is defined in two places.
+
+56:00.440 --> 56:02.440
+ Now that's annoying.
+
+56:02.440 --> 56:06.440
+ One is it's in an iPad checkpoints, which is the backups.
+
+56:06.440 --> 56:17.440
+ So this is where you would actually create a c tags config file, telling it to ignore anything inside iPad and be checkpoints because you never want to go to the backup version.
+
+56:17.440 --> 56:32.440
+ Anyway, so for now it's confused about which one I want so I'll hit to go to the non confusing one. There you go.
+
+56:32.440 --> 56:35.440
+ Any other tricks you know with tags, Radik.
+
+56:35.440 --> 56:44.440
+ Yeah, yeah, just wanted to mention one and this is where I did only once or twice because I'm always too lazy to set it up.
+
+56:44.440 --> 56:54.440
+ But there is some way like with the first day I code here. So you know that it's using PyTorch a lot.
+
+56:54.440 --> 57:06.440
+ Sometimes you will be editing a fast AI file, but you would like to jump to the definition of some functionality in the PyTorch is code base.
+
+57:06.440 --> 57:09.440
+ Yes, that's a good one.
+
+57:09.440 --> 57:25.440
+ I'm very happy especially for, you know, if you're just starting with PyTorch starting out. It's so much nicer than using their documentation on their website, which is slow and you know you have to still search for it.
+
+57:25.440 --> 57:39.440
+ Yeah, so you know maybe in the future we can try setting that up as well so yeah you can set it up so that these tag jumps can jump into the Python PyTorch source code as well as the fast AI source code.
+
+57:39.440 --> 57:54.440
+ I just show you one more trick, which is if I wanted to look up to find out how data load is worked, but I want to be able to see colab data load is at the same time, then he hitting right square bracket isn't quite ideal because I've now lost what I was looking at.
+
+57:54.440 --> 58:05.440
+ So instead if you type S tag, that means split tag, and I can start typing data loaders.
+
+58:05.440 --> 58:14.440
+ Then that will split the window and jump to the tag so I can now see the two things that I'm doing, which I find handy.
+
+58:14.440 --> 58:23.440
+ Anyway, there's a lot more stuff you can do with this, but hopefully you've got a sense of like, yeah, this seems worth investing time in because here are some things that I didn't know how to do.
+
+58:23.440 --> 58:26.440
+ Before it might be helpful.
+
+58:26.440 --> 58:34.440
+ Just on the split again Jeremy, my tab closed down when I pressed command w.
+
+58:34.440 --> 58:41.440
+ Yes, to move around. How did you how would you do that within the Chrome browser again.
+
+58:41.440 --> 58:48.440
+ So between windows on a Mac it's fine because control and command are different.
+
+58:48.440 --> 58:52.440
+ So you can just control W does work.
+
+58:52.440 --> 58:58.440
+ On the Mac on on Windows.
+
+58:58.440 --> 59:07.440
+ If you use my dot files, maybe we can, in some future one will learn about my dot files, but in my dot files I set up.
+
+59:07.440 --> 59:17.440
+ And so if you make this your VM RC, then basically you can hit backslash up and backslash down to go up and down a split.
+
+59:17.440 --> 59:29.440
+ And I think this CW, this means control W will be sent to beam rather than the browser so I think that should work fine.
+
+59:29.440 --> 59:31.440
+ Great.
+
+59:31.440 --> 59:34.440
+ All right.
+
+59:34.440 --> 59:36.440
+ Nice to see you all again.
+
+59:36.440 --> 59:38.440
+ Have fun with them.
+
+59:38.440 --> 59:44.440
+ Tell us if you find any cool tricks on the forum.
+
+59:44.440 --> 59:46.440
+ And I'll see you next time.
+
+59:46.440 --> 59:47.440
+ Thank you.
+
+59:47.440 --> 59:48.440
+ Thank you.
+
+59:48.440 --> 59:49.440
+ Thank you.
+
+59:49.440 --> 59:50.440
+ Bye everybody.
+
+59:50.440 --> 1:00:18.440
+ Thank you.
+

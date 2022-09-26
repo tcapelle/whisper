@@ -1,0 +1,1682 @@
+WEBVTT
+
+00:00.000 --> 00:06.320
+ that to be complicated. So I think I've broken the back of it. I think I've basically figured it out.
+
+00:10.800 --> 00:13.680
+ Does anybody have any questions or
+
+00:16.640 --> 00:20.160
+ areas of interest or anything following last chat?
+
+00:20.160 --> 00:27.120
+ Hi Jimmy.
+
+00:27.120 --> 00:28.000
+ Hello Korean.
+
+00:28.960 --> 00:35.040
+ Yeah I'm interested to know more about fast chat generally because I just Google and found it very
+
+00:35.040 --> 00:37.840
+ cute. We will get to that. That might be a little while though.
+
+00:40.560 --> 00:46.000
+ Hi Jeremy. I'm Joe. Hi Joe. Where are you? I'm enjoying this from Jack.
+
+00:46.000 --> 00:51.040
+ Oh just about seven minutes away from where you're at. Oh you're in the other red cliff
+
+00:51.040 --> 00:55.520
+ potential somewhere? No sorry I thought you were in Brisbane.
+
+00:58.000 --> 01:03.920
+ Not red cliff. Not too bad. It's about seven minutes away. So it's still a question I have.
+
+01:04.960 --> 01:10.640
+ Like really impressed with the blogging sort of set up out of Jupiter and just I'm curious what
+
+01:10.640 --> 01:18.400
+ your workflow is and how you are able to do an experiment and be able to blog about it very easily
+
+01:18.400 --> 01:25.360
+ because I find I've got to move it from this GitHub to another sort of thing and there may be things
+
+01:25.360 --> 01:34.480
+ in that space. Definitely. I think we've already let me just double check our list of things to
+
+01:34.480 --> 01:38.720
+ cover. Yeah how to blog is actually number one of our list of things to cover in our walkthroughs
+
+01:38.720 --> 01:42.640
+ topic and I don't think fast chance there yet sort of the add that.
+
+01:44.000 --> 01:48.240
+ Fast chance. There we go.
+
+01:54.640 --> 02:01.840
+ All good questions. I'll introduce myself for a match in Britain as well.
+
+02:01.840 --> 02:18.000
+ I would like to I think we started looking at setting up Jupiter lab last week from
+
+02:18.000 --> 02:27.920
+ remember correctly and so I think we'd install Jupiter lab prior to arch so I even managed to
+
+02:27.920 --> 02:36.000
+ get that working successfully. I let that all work okay. It works. It looks like it's working.
+
+02:38.480 --> 02:53.280
+ And I managed to install fast. So I guess being confident that I can work on that to my machine
+
+02:53.280 --> 02:57.520
+ would be. Yeah that's actually what we're going to do today I think we're going to focus on.
+
+02:58.560 --> 03:02.800
+ Yep get our own kind of start doing some work on our own machine.
+
+03:02.800 --> 03:17.920
+ Yeah exactly. Okay well let's get underway with that.
+
+03:17.920 --> 03:34.960
+ Just to explain something oh this week's something you might have seen last time.
+
+03:37.840 --> 03:45.360
+ I have two different users in my WSL installation. I don't normally but it's just like I just wanted
+
+03:45.360 --> 03:54.240
+ to mention that in a Linux distribution you can add multiple users and switch to them.
+
+03:55.840 --> 04:04.400
+ And so the way you switch between users is by typing pseudo minus u for username and then the
+
+04:04.400 --> 04:09.680
+ username you want then minus i to open up an interactive terminal as that user. So that's why
+
+04:09.680 --> 04:15.040
+ you see me doing this sometimes. So when I do that you can see it's like I said oh welcome
+
+04:15.040 --> 04:20.400
+ JPH 00 and kind of starts in scratch and you can now see before the ad sign it tells me that.
+
+04:20.400 --> 04:23.600
+ The only reason I'm doing that is so that I've got like an empty user
+
+04:25.200 --> 04:29.440
+ that doesn't have anything installed or anything set up so I don't accidentally assume something
+
+04:30.560 --> 04:38.880
+ and fail to create something. Generally speaking there's you won't normally have a reason to
+
+04:39.920 --> 04:44.400
+ create multiple users on your account unless you want to kind of set up something like this
+
+04:44.400 --> 04:55.280
+ it's totally separate. So yeah I thought we could try to like create you know a notebook and
+
+04:57.040 --> 05:06.080
+ Python script and put them in a git repository and you know just kind of go through that workflow
+
+05:06.080 --> 05:18.880
+ basically. So I normally create a directory to put my git repository. So what's a git repository?
+
+05:19.520 --> 05:25.280
+ A git repository is a folder containing files and potentially subfolders
+
+05:25.280 --> 05:38.080
+ which basically to simplify slightly you can easily store somewhere else and the most common
+
+05:38.080 --> 05:44.880
+ place people store it is github.com that they provide free storage of git repositories.
+
+05:46.640 --> 05:54.960
+ And most interestingly git keeps a kind of a copy of every version of your files and you can switch
+
+05:54.960 --> 06:00.560
+ back to any previous version at any time. So if you have a mess something up and save it and then
+
+06:00.560 --> 06:07.920
+ realize later oh I messed it up you can go back and get an old version. So maybe before we create
+
+06:07.920 --> 06:13.280
+ our own github repo we could look at a github repo so we could look at the first AI one. So
+
+06:13.760 --> 06:20.960
+ github as I say is just one particular company that stores git repositories for you. You don't
+
+06:20.960 --> 06:29.760
+ have to use them there's also one called gitlab but I don't know most people use github so I think
+
+06:29.760 --> 06:35.840
+ it's easier to go you know be where everybody else is. And so this is an example of repository.
+
+06:37.440 --> 06:45.280
+ So the name of the repository is fastai and then that belongs to some particular person or organization
+
+06:45.280 --> 06:51.200
+ in this case it belongs to an organization. The organization is called fastai. So if we get rid
+
+06:51.200 --> 06:56.400
+ of the first of those the last of those fastai's this is the organization fastai and you can see
+
+06:56.400 --> 07:02.320
+ the 119 repositories that are in that organization. So if I click on one say fast release
+
+07:03.840 --> 07:10.000
+ see how the URLs change this is this is now the fastai's organizations repository called fast
+
+07:10.000 --> 07:16.000
+ release. So this pair of things with a slash is basically a unique identifier in gitlab for
+
+07:16.000 --> 07:24.400
+ repository because it has the username or organization and the repository. So fastai is an organization
+
+07:24.400 --> 07:34.960
+ my github username is jph 00 and then that also has repositories and so I can click on one like
+
+07:34.960 --> 07:40.160
+ tiny pets and you can see this is now the tiny pets repository in jph 00.
+
+07:42.240 --> 07:44.880
+ Okay so let's go back to the fastai repository.
+
+07:48.560 --> 07:54.480
+ So a repository as I mentioned contains folders and files and then folders can contain folders and
+
+07:54.480 --> 08:01.680
+ files. They can contain basically any kind of folder or any kind of file you like. They ask
+
+08:01.680 --> 08:09.520
+ that your files that each individual file is smaller than 50 megabytes. They don't particularly
+
+08:09.520 --> 08:18.880
+ enforce that though. So that's what we see here. There's a special file which is the file called
+
+08:18.880 --> 08:28.960
+ read me or read me dot md and that file is special because in this display it's automatically shown
+
+08:28.960 --> 08:37.280
+ in this repository website. So a kind of minimal useful repository is something that just contains
+
+08:37.280 --> 08:41.120
+ a read me dot md file and in fact as soon as you have that you have something that you can
+
+08:42.720 --> 08:48.160
+ a website you can show people. So maybe we should start by doing that.
+
+08:48.160 --> 08:59.280
+ So if you go to your own github page github.com slash your username
+
+09:03.920 --> 09:09.760
+ you can click repositories and so you might not have any repositories yet which is fine
+
+09:10.800 --> 09:16.800
+ and here you could click near repository so why don't you go ahead and do that click near
+
+09:16.800 --> 09:34.720
+ repository. And so you need to give it a name. Walk through three. If you want a description not
+
+09:34.720 --> 09:41.440
+ a bad idea to remind yourself of what things are. Sample repo for walk through three of
+
+09:41.440 --> 09:46.880
+ first.ai course. So you can make it private so nobody else can see it or public.
+
+09:48.880 --> 09:53.920
+ Something you'll hear a lot from first AI folks the community alumni myself is that
+
+09:55.280 --> 10:00.720
+ the more you can work in public the better the more you can share your portfolio the better.
+
+10:01.520 --> 10:07.200
+ Something which a lot of folks aren't used to and can feel uncomfortable but like here's
+
+10:07.200 --> 10:11.760
+ here's a place you could start trying that is to make this public if your default is to always
+
+10:11.760 --> 10:19.840
+ make things private maybe try not doing that this time. Okay so we can. Yeah. Walk through
+
+10:19.840 --> 10:28.560
+ second please walk through to. Sorry. The second walk through. Yeah sorry. Yeah thank you. I don't
+
+10:28.560 --> 10:34.960
+ know why I imagined that there was another walk through. Maybe I dreamt it. Okay I guess it's
+
+10:34.960 --> 10:38.880
+ because it's the weekend it's been a long time. So we can say add a read me file.
+
+10:40.480 --> 10:44.400
+ Now there are some things that you don't want to put in Git kind of like temporary files and
+
+10:44.400 --> 10:50.160
+ stuff like that. And there's a special file called dot get ignore which lists all the kinds of
+
+10:50.160 --> 10:57.360
+ files you don't want to store. So if you click on here and start typing Python this will kind of
+
+10:57.360 --> 11:06.960
+ create a list automatically of the kinds of like Python's intermediate files and stuff. So again
+
+11:06.960 --> 11:11.280
+ it's good idea to use a license that allows other people to use this if you don't then other people
+
+11:11.280 --> 11:17.520
+ can't use your code. I always use Apache license too and the reason for that is that it's like
+
+11:18.320 --> 11:23.600
+ gives users you know really as much flexibility as possible and how they use the code but it
+
+11:23.600 --> 11:29.760
+ also has a clause that minimizes the chance that I'm going to get sued for patent violations or that
+
+11:29.760 --> 11:37.120
+ people would use this to kind of enforce patents in inappropriate ways. So can I ask a question?
+
+11:37.120 --> 11:43.360
+ Of course. Sorry my name is Mark I'm from Toronto I'm representing North America here tonight I think.
+
+11:43.360 --> 11:48.480
+ Great. Or this morning. So late night for you. Well it's only nine. It's okay.
+
+11:48.480 --> 11:59.120
+ You're at the of course your west coast. Sorry can you just go a little bit more into the get
+
+11:59.120 --> 12:04.720
+ ignore and I didn't quite follow what that was. Yeah let's create the repository and take a look
+
+12:04.720 --> 12:11.280
+ at it. Okay. Sorry I'm embarrassed I've actually been to Toronto and I've completely butchering my
+
+12:11.280 --> 12:15.440
+ geography. Is this the way you want questions asked or do you want hands put up or something?
+
+12:15.440 --> 12:23.440
+ I like I like you know as informal a conversation as possible. So yeah I'm not even sure I would
+
+12:23.440 --> 12:29.520
+ see if hands go up. So here's the repo we just created and if I click on get ignore
+
+12:31.680 --> 12:37.040
+ it will show me the contents of that text file and so here is the text file called get ignore
+
+12:37.040 --> 12:42.000
+ with line numbers on it. You can see it without anything else by clicking raw.
+
+12:42.000 --> 12:53.200
+ So that's this is just what the text file contains. And you can see for example in Linux a.so file
+
+12:53.200 --> 13:00.400
+ is a compiled C library which is not something you'd normally want to save into a repo. So star.so
+
+13:00.400 --> 13:09.280
+ star means anything. So CXC library files would not be stored. Python has a cache of things that
+
+13:09.280 --> 13:15.280
+ it's pre compiled which it puts in the done to pie cache directory. So this says don't put that
+
+13:16.160 --> 13:24.160
+ into your get repo. So basically when we add stuff to get repos shortly it will by default not
+
+13:24.160 --> 13:30.160
+ include anything that matches these patterns. Does that answer your question Mark?
+
+13:30.160 --> 13:39.040
+ It does in the sort of literal sense I guess. Tell me more about what your non literal sense is.
+
+13:40.000 --> 13:45.280
+ Well so I understand that it's I understand that these are the files that will be excluded but I
+
+13:45.280 --> 13:51.280
+ guess other than just always choosing Python for get ignore I don't know how to decide which
+
+13:51.280 --> 13:55.520
+ files to include and which files to it. Oh yeah okay well we'll see that as we go.
+
+13:55.520 --> 14:04.640
+ One example that will come up if it's not already in here is Jupiter stores backups.
+
+14:05.360 --> 14:10.400
+ The most recent backup saved copy in a backup directory called ipide checkpoints.
+
+14:11.840 --> 14:17.200
+ And when you go to get ads you might say oh it's adding this directory called ipide checkpoints
+
+14:17.200 --> 14:22.080
+ I don't want that. Oh okay I'll put it in my get ignore. So it's generally like if you'll see
+
+14:22.080 --> 14:27.440
+ things that you're like oh I don't need that to be backed up or like oh that's the thing that
+
+14:27.440 --> 14:31.920
+ contains my password. I definitely don't want that in my public get repo. So those are the
+
+14:31.920 --> 14:36.240
+ two main reasons. It's either stuff that doesn't need to be there or stuff that you actively don't
+
+14:36.240 --> 14:41.920
+ want to be there. Okay so but choosing the Python for get ignore is generally a good first step.
+
+14:41.920 --> 14:45.600
+ This is a good start. So this is just kind of pre populated it with a bunch of lines that we'll
+
+14:45.600 --> 14:51.920
+ add to later as we find stuff that we don't want to include. Okay so you can see it's
+
+14:51.920 --> 14:59.120
+ created a readme.md file and if I click that you can see it's here's its contents and that's the
+
+14:59.120 --> 15:06.080
+ same as the contents down here. And so we could like create you know a little website now which is
+
+15:06.080 --> 15:10.720
+ basically having websites a bit of a hit I guess it's a website by editing readme.md.
+
+15:11.600 --> 15:19.600
+ So if you click that little pencil we can now edit. So try editing your readme.md and this is
+
+15:19.600 --> 15:27.120
+ this is markdown which we use in Jupyter. We use in readme files. It's kind of used pretty much
+
+15:27.120 --> 15:35.360
+ everywhere and so it's well worth getting used to. So at this stage the markdown file you've got one
+
+15:35.360 --> 15:41.760
+ line that starts with a hash that means this is a level one heading. A level two heading would have
+
+15:41.760 --> 15:53.600
+ two hashes. Introduction. Okay and then you just put things on separate lines of text. So this is a
+
+15:53.600 --> 16:00.480
+ sample repo or walkthrough of the first today our course and then if you want a new paragraph just
+
+16:00.480 --> 16:09.280
+ put an empty line between them. This is another paragraph and then you know you can have lists by
+
+16:09.280 --> 16:21.280
+ putting hyphens. Okay and so forth. And maybe another header here.
+
+16:24.160 --> 16:33.920
+ Okay so if I save that it doesn't say save it says commit. So this is the concept in Git
+
+16:33.920 --> 16:42.320
+ is that you don't just save things but you create you know a version it's called a commit which is
+
+16:42.320 --> 16:49.040
+ basically all the changes since last time you saved. So commit means save but it means save
+
+16:49.840 --> 16:57.440
+ with version control. And so when you save you need to have some description of what the change
+
+16:57.440 --> 17:02.320
+ was that you made and optionally you can add more details about it. So by default it's made a
+
+17:02.320 --> 17:13.360
+ description for me. So I can commit my changes. And so now if we go to our repo you'll see that we've
+
+17:14.880 --> 17:24.000
+ got more in our readme. You'll also see that this repository now has two commits. So if I
+
+17:24.000 --> 17:29.360
+ want to go back and see what it used to look like then I can see here's the initial commit
+
+17:29.360 --> 17:34.880
+ and here's my update readme. If I click on this commit code over here
+
+17:37.200 --> 17:43.360
+ it shows me the difference. So things with a minus and a red are things I deleted and things
+
+17:43.360 --> 17:49.440
+ and plus and green are things I added. And this is called a diff. A diff for a difference.
+
+17:51.360 --> 17:55.360
+ And so very often people will you know say that they want to have a look at a diff
+
+17:55.360 --> 18:00.240
+ to see like if you've made some changes to their code to see what changes did you make. Otherwise
+
+18:00.240 --> 18:05.040
+ it's very difficult to know what somebody did. So this commit gets automatically gets a little
+
+18:05.040 --> 18:13.120
+ unique name as you see and we can see the diff. Or you can even click on this little button here
+
+18:13.760 --> 18:19.360
+ browse repository at this point in the history. So you can go back and pretend that life was before
+
+18:19.360 --> 18:25.280
+ a minute ago and see exactly what this looked like back then. So this is now looking at the
+
+18:25.280 --> 18:34.560
+ state of this repo before I made the change. So get is pretty handy and get hub is a very useful
+
+18:34.560 --> 18:43.760
+ place to store stuff in get. So generally speaking we don't normally edit things directly with
+
+18:43.760 --> 18:48.960
+ the get hub editor because it's pretty basic. I mean I do sometimes you know if I just want to
+
+18:48.960 --> 18:53.680
+ make a quick change to read me I will sometimes click that pencil button but more often I'll do it
+
+18:53.680 --> 19:02.960
+ on my computer. So to put it on my computer we need to clone the repository. So cloning it
+
+19:02.960 --> 19:08.000
+ means making a kind of a linked copy on our computer. So you see this code button here.
+
+19:12.640 --> 19:16.960
+ We can clone it. We're going to clone it using something called SSH which is something we'll use
+
+19:16.960 --> 19:23.280
+ a lot. And SSH is a way of logging into remote computers and also automatically doing stuff
+
+19:23.280 --> 19:30.640
+ with remote computers and copying stuff from remote computers. So here is a URL it's not to a website
+
+19:30.640 --> 19:38.560
+ but to get repository using SSH. So I can click here to click copy.
+
+19:41.040 --> 19:46.320
+ Right so I've copied that. So how do I clone it? Well the first thing I do is like say let's
+
+19:46.320 --> 19:51.360
+ get things organized. So I like to have a directory for all my clone get repos. So I'll go make to
+
+19:51.360 --> 19:58.560
+ bit cd git and so if I go print working directory you can see I'm in my home and remember that
+
+19:58.560 --> 20:06.240
+ tilde is a shortcut for your home. So I can now type so git is a program on your computer
+
+20:07.040 --> 20:15.520
+ and so you can type get clone and then the URL. So I just pasted it.
+
+20:15.520 --> 20:25.680
+ Okay so there's a lot of security stuff built into SSH and one thing is to make sure that you
+
+20:25.680 --> 20:32.800
+ don't accidentally connect to places you didn't mean to. I don't use that much of the security
+
+20:32.800 --> 20:37.840
+ stuff because I'm not too worried for most things I do. So in this case it's just saying
+
+20:37.840 --> 20:45.440
+ you're sure you want to connect to this new place and I'll just say yes and it's going to save that.
+
+20:45.440 --> 20:53.600
+ Okay so permission denied. All right so I've asked to clone a repository using SSH
+
+20:54.880 --> 21:02.240
+ but I got permission denied and that's because to use SSH you have to use an SSH key.
+
+21:03.280 --> 21:06.720
+ So the first thing I mentioned is if you want to clone somebody else's repository
+
+21:06.720 --> 21:16.720
+ you can use HTTP instead of SSH so I can click here HTTP copy and then I could clone that.
+
+21:20.480 --> 21:26.080
+ And that works fine that's a perfectly reasonable way to work with other people's code. So if I go
+
+21:26.080 --> 21:34.160
+ cd walkthrough to here it is and I can edit the readme and then I could go down and I could
+
+21:34.160 --> 21:44.800
+ add something else and the problem is I can't save that back again without logging in to
+
+21:45.360 --> 21:50.640
+ GitHub. So if I try to commit that I'll explain committing from the command line in a moment
+
+21:51.360 --> 21:54.000
+ but I just want to show you that.
+
+21:54.000 --> 22:08.560
+ Oh okay so the next thing to know is if you want to save stuff back to
+
+22:10.320 --> 22:17.840
+ back to GitHub it needs to know your name and email address. So it tells you some commands
+
+22:17.840 --> 22:24.000
+ you can use so one approach would be just to paste them in. Right and obviously that's not
+
+22:24.000 --> 22:31.520
+ the right email and username but things like this in the terminal they basically always create
+
+22:32.800 --> 22:37.440
+ hidden files in your home directory so if I just type cd it takes me to my home directory
+
+22:38.880 --> 22:42.000
+ and you can actually see here there's now a file called dot get config
+
+22:42.000 --> 22:46.960
+ and so I could edit that and here we go.
+
+22:49.440 --> 22:54.880
+ So info wrap fast.ai say Jeremy Howard.
+
+22:57.520 --> 23:02.720
+ All right now I'll show you a little trick which most people don't know.
+
+23:04.320 --> 23:08.800
+ I want to go back to the directory I was in before. I could type cd git slash walkthrough
+
+23:08.800 --> 23:15.120
+ too or I could just type cd space hyphen and space cd hyphen means change directory to your most
+
+23:15.120 --> 23:24.160
+ recently used directory. So that's very handy no no. One issue with that is if you've like cd three
+
+23:24.160 --> 23:30.000
+ or four times there's no kind of history there so what I would do if I want to come back here
+
+23:30.000 --> 23:35.440
+ later and I'm going all over the place is instead of typing cd you can go push d which is the same
+
+23:35.440 --> 23:40.960
+ as cd but it remembers where you were so if I go push d and change to my home directory I'm now
+
+23:40.960 --> 23:50.000
+ in my home directory I can cd it downloads I can cd to nb's how do I get back to where I was before
+
+23:50.640 --> 23:56.480
+ well I pushed from get walkthrough too so I can pop if I type pop d
+
+23:56.480 --> 24:06.160
+ there we go I'm back where I got worse originally so there's a couple of good tricks for zipping
+
+24:06.160 --> 24:11.600
+ around in your directory structure it's a bit like pressing the back button I guess almost on
+
+24:12.160 --> 24:19.600
+ on a browser. Anyway if I now try to save my change and the way you do that we'll talk about
+
+24:19.600 --> 24:27.680
+ this more in a moment is you push you can see here it's asking for username and so you obviously
+
+24:27.680 --> 24:34.560
+ can't save things to other people's repositories if you don't have their credentials. It's also
+
+24:34.560 --> 24:42.320
+ annoying to type in your username and password all the time so I never use almost never use
+
+24:42.320 --> 24:49.200
+ http get clone for my own repositories instead I use SSH so let's delete that directory
+
+24:51.360 --> 24:58.880
+ and get clone with SSH so click SSH and copy and let's take a look again at this error we got
+
+25:02.480 --> 25:06.320
+ okay so why do we not have permission that's because it doesn't know who we are
+
+25:06.320 --> 25:13.120
+ and it doesn't know that we have permission to copy and change this repository SSH is really nifty
+
+25:13.760 --> 25:20.320
+ it doesn't use passwords instead we create a secret key on our computer
+
+25:21.920 --> 25:27.280
+ for the private key and the second thing called the public key which we can give to other people
+
+25:27.280 --> 25:33.520
+ and then anybody who has our public key will be able to accept we will be able to log into
+
+25:33.520 --> 25:39.280
+ basically but they can't log into us that's why it's cool it's not like a password it's a one way thing
+
+25:40.640 --> 25:48.880
+ so we can get into github into our repos but nobody on github could like log into our computer
+
+25:48.880 --> 25:56.160
+ or anything so we need to create it's called a key pair a public key and a private key so to do that
+
+25:56.160 --> 26:10.480
+ you type SSH oops dash key gen SSH key gen so that's generate SSH keys and then just hit enter
+
+26:10.480 --> 26:16.720
+ hit enter again hit enter again all right so that's created
+
+26:16.720 --> 26:27.280
+ keys in my home directory in dot SSH this one here's the private key and this one here's the public key
+
+26:27.280 --> 26:40.320
+ so we need to tell github about our public key so that we can log in there so to display a file
+
+26:40.320 --> 26:48.960
+ in the terminal without like basically show it all at once you can just type cat so if I go cat
+
+26:49.760 --> 26:57.120
+ in my home directory dot sh dot pub there it is now there's no problem with me showing this on a
+
+26:57.120 --> 27:02.480
+ live stream and it being on a video this is not in any way private or secret because this is just
+
+27:02.480 --> 27:11.920
+ something that lets me if it's placed on another computer let's me log into another computer
+
+27:13.920 --> 27:18.560
+ you think that you've been stored publicly like anyone can access this public key which
+
+27:18.560 --> 27:24.240
+ around me because it's on github yeah so let's put it what we've got to put it on github so let's do
+
+27:24.240 --> 27:37.360
+ that yeah so let's go back to github click on my face and probably going to be in setting somewhere
+
+27:40.400 --> 27:47.040
+ all right here we are SSH and gpg keys there we go
+
+27:47.040 --> 27:49.760
+ um
+
+27:53.440 --> 28:00.240
+ do we not add them here here we go new SSH key title I'll just call this the walkthrough key
+
+28:01.520 --> 28:02.240
+ and paste
+
+28:02.240 --> 28:18.160
+ there we go add maybe at the username I used
+
+28:18.160 --> 28:35.040
+ all right so that is now in my account so I should now be able to rerun that git clone command so
+
+28:35.040 --> 28:40.480
+ remember if you press control R you can type a few letters from a previous command so I'll start
+
+28:40.480 --> 28:48.960
+ typing clone and there it is and so if I hit enter now it's working so I don't have to worry about
+
+28:48.960 --> 28:58.000
+ ever typing in a git password github password so here we are great
+
+28:58.000 --> 29:05.520
+ um let's make sure I've closed my other
+
+29:09.040 --> 29:10.080
+ jupiter session
+
+29:15.920 --> 29:22.960
+ Jeremy I noticed when I did that when I did the SSH key gen yeah I already already had one
+
+29:22.960 --> 29:28.960
+ okay no worries so if you've just used that one yep just use that one there should be an ID
+
+29:29.600 --> 29:34.400
+ ID RSA or ID DSA or something like that that's your private key and the one that ends in dot
+
+29:34.400 --> 29:43.440
+ pub is the one you'll copy over yeah and so you don't need like how did you just split your terminal
+
+29:43.440 --> 29:49.360
+ like that we will learn it's something called tmax tmux but we'll certainly be covering that
+
+29:49.360 --> 29:53.120
+ one of the best things ever
+
+29:54.160 --> 29:59.680
+ all right Jeremy one thing that I just thought might be interesting for people or just to
+
+29:59.680 --> 30:05.200
+ something that can catch people out is making sure that your identity that you set up in your
+
+30:05.200 --> 30:11.520
+ terminal as you showed before and that the email that you use in github said that they're
+
+30:11.520 --> 30:16.800
+ consistent sometimes if you are using a different email or especially if you it's probably not a
+
+30:16.800 --> 30:22.400
+ case here but if you have multiple github accounts you can end up having one identity
+
+30:22.400 --> 30:27.040
+ making commits to a repository that you didn't intend to under that identity and back and forth so
+
+30:27.040 --> 30:33.600
+ just just be careful when you first get started that you're using a consistent email identifier like
+
+30:33.600 --> 30:38.880
+ yeah it's not necessarily always important for your public key but certainly for your identity on
+
+30:38.880 --> 30:43.600
+ github and for where you're going to be making commits and things like that it's often helpful
+
+30:43.600 --> 30:48.720
+ when you get started to make sure they're consistent yeah i mean i don't honestly ever think about
+
+30:48.720 --> 30:54.880
+ that i kind of just chuck in any old email address it doesn't like it's it comes up sometimes but
+
+30:55.840 --> 31:02.320
+ not too often because it's kind of mainly informational i think this information so that
+
+31:02.320 --> 31:08.560
+ other people can it's i find i've found it's more down the line if especially if you have a separate
+
+31:08.560 --> 31:14.080
+ github account for personal and a separate one for work then if you if you have different identities
+
+31:14.080 --> 31:18.080
+ or different emails being so said with it then when you make a commit to a work repo you've
+
+31:18.080 --> 31:21.200
+ accidentally committed it from your personal one which you didn't want to reveal your identity on
+
+31:21.200 --> 31:29.680
+ or whatever so yep okay and somebody else have a question or comment yeah just a in the same context
+
+31:29.680 --> 31:36.800
+ like you said the public key even if somebody else knows it they cannot commit to your bit is that
+
+31:36.800 --> 31:41.520
+ because the private key is unique only on your computer like correct high level correct the
+
+31:41.520 --> 31:48.480
+ private key is the secret code so if you wanted to be able to um you know log in from another computer
+
+31:48.480 --> 31:53.280
+ you would you would copy the private key over there and then that that computer can log in yep so
+
+31:53.280 --> 32:00.000
+ the private key is the thing that says i i can prove i'm jeremy howard and the public key is a thing
+
+32:00.000 --> 32:09.120
+ that says anyone who proved that jeremy howard can log in here thank you no worries this is
+
+32:09.120 --> 32:15.920
+ something that is the display of authentication it's just across many different contexts so github
+
+32:15.920 --> 32:26.960
+ uses it but for instance today i was installing Ubuntu server on my local machine and i could point
+
+32:26.960 --> 32:34.480
+ the installation to take my public key from github just to make things easier let's grab the public
+
+32:34.480 --> 32:41.520
+ key and it's set it up so that i can easily connect to my computer without any additional setup steps
+
+32:41.520 --> 32:48.480
+ so there is absolutely no danger given the current state of mathematics you know to make
+
+32:48.480 --> 32:58.960
+ new information public and uh yeah without that you know going to the uh HTTPS and password authentication
+
+32:58.960 --> 33:06.880
+ that makes it for such a cumbersome uh github workflow that this is so so much yeah yeah SSH is
+
+33:06.880 --> 33:12.880
+ used everywhere so for example i've got a GPU server sitting next to me here which um and then
+
+33:12.880 --> 33:21.120
+ i've set up a um not somebody at my door and i take
+
+33:21.120 --> 33:26.400
+ okay
+
+33:39.040 --> 33:43.440
+ our doorbell keeps switching itself to a christmas chimes for some reason
+
+33:43.440 --> 33:53.840
+ um yeah so i've actually created a profile here for logging into my box which uh
+
+33:56.640 --> 34:03.680
+ as you can see it just calls SSH so and then that's attached to control shift three so any time
+
+34:03.680 --> 34:09.360
+ if i want to log into my GPU box i hit control shift three and here i am i'm now you know typing
+
+34:09.360 --> 34:13.680
+ in just as if i was at my own computer but i'm actually now typing into my GPU server
+
+34:15.840 --> 34:23.680
+ so SSH is a good thing to learn about properly um okay so we have
+
+34:30.000 --> 34:37.040
+ try me uh with regards to creating repose and committing and i mean what we are practicing
+
+34:37.040 --> 34:42.880
+ right now i guess i'm in the course itself you show how we can deploy an application and sometimes
+
+34:42.880 --> 34:48.560
+ you need to do the same thing i mean git push to those application yeah and just wanted to see
+
+34:48.560 --> 34:55.920
+ is it possible to have both github and also pushing a repo communicate with two different
+
+34:57.280 --> 35:02.880
+ destination sources if it makes sense yeah yeah we can do that and we'll be saying that once we
+
+35:02.880 --> 35:10.400
+ start looking at hugging face bases yep yep you can so um you can have as many repos as you like
+
+35:10.400 --> 35:16.080
+ and each repo kind of has this kind of default destination it's connected to which will normally
+
+35:16.080 --> 35:22.000
+ be github but you can even connect one to multiple destinations um choose which one you're
+
+35:22.960 --> 35:30.640
+ pulling and pushing from into um yeah can i ask one more with regards to the token password that
+
+35:30.640 --> 35:36.960
+ you mentioned that for for that ignore file just wanted to see if that is important only for the
+
+35:36.960 --> 35:43.280
+ public reports or even a private repo on github you shouldn't share token passwords or yeah i would
+
+35:43.280 --> 35:50.480
+ tend not to i mean it depends how important it is you know um i mean at least the people on great
+
+35:50.480 --> 35:56.320
+ hub can see it um so you know and it's uh yeah i would i would try to avoid putting
+
+35:56.320 --> 36:03.280
+ private stuff onto public websites in in general um particularly things like that where it's like
+
+36:04.560 --> 36:08.800
+ at some point you might decide oh i want to make this repo public and then you forget that
+
+36:08.800 --> 36:14.400
+ somewhere there was a at some point there was a secret file in there and you know one thing to
+
+36:14.400 --> 36:20.720
+ be very aware of is even if i um in fact let me show um let's create a super secret file
+
+36:20.720 --> 36:32.720
+ and my secret is i don't like bananas i don't want anybody to know this right but let's say you know
+
+36:32.720 --> 36:45.040
+ it was a currently um uh private repo pretend and so if we put that into github because it's fine
+
+36:45.040 --> 36:59.440
+ it's all private and then i push that over to github.com and then later on i say oh okay i want to
+
+36:59.440 --> 37:05.440
+ actually make this a public repo so i need to delete this from from github so i'll get rm
+
+37:06.000 --> 37:08.560
+ that file
+
+37:08.560 --> 37:13.840
+ go move secret
+
+37:17.440 --> 37:22.800
+ and like okay now i make my repo public everything's fine nobody has to know that i don't like bananas
+
+37:23.440 --> 37:25.280
+ and then i can check on my repo
+
+37:27.920 --> 37:33.760
+ and okay my super secret file's not there but remember connects
+
+37:33.760 --> 37:42.960
+ let's go back to the world as it was oh it's here in my history right when you remove things from
+
+37:42.960 --> 37:49.200
+ github it removes it from the current commit but it's not changing history so people could still
+
+37:49.200 --> 37:52.240
+ find out my secret
+
+37:55.840 --> 37:59.680
+ keremy i just um i just noticed there as well that was a good example when you look at those
+
+37:59.680 --> 38:04.320
+ commits of the um the identity issue we were just talking about before because on that commit
+
+38:04.320 --> 38:09.120
+ screen you had some commits that were verified because you will have had an sshk that was tied to
+
+38:09.120 --> 38:14.160
+ your github email we see you've got those first two commits there are verified and then the latest
+
+38:14.160 --> 38:19.040
+ two aren't that's because you just created a new key so that's a bit the key one have had the same
+
+38:19.040 --> 38:23.280
+ email ideas you first one so that's uh that's an example where especially like if you are trying
+
+38:23.280 --> 38:27.920
+ to make verified commits if that's important to some project you're involved in um yeah that's
+
+38:27.920 --> 38:31.360
+ where that'll pick you up so i just saw that i mentioned that never been of interest in my
+
+38:31.360 --> 38:39.040
+ projects i guess i never thought about it but yeah so this one was actually yeah because you know
+
+38:39.040 --> 38:45.600
+ anybody could create a dot git config file that says i'm minus 12 volts and push and it'll say this
+
+38:45.600 --> 38:57.840
+ is a commit from minus 12 volts um it won't say it's verified um yep yeah um okay so um let's
+
+38:57.840 --> 39:08.320
+ put a notebook in here so um i can run jipitelab and i think we created an alias last time
+
+39:10.240 --> 39:19.120
+ jl um and i pointed out that at this point it's it's you know this terminal i can't use it anymore
+
+39:19.120 --> 39:29.280
+ because it's busy running jipitelab now i could run another terminal session in windows terminal
+
+39:30.160 --> 39:38.160
+ um but i actually never do um i actually always use instead something called tmux
+
+39:39.280 --> 39:44.880
+ tmux is something which actually runs inside your terminal so regardless of what operating
+
+39:44.880 --> 39:49.280
+ system you're on and what your term preferred terminal is you'll always be able to use tmux
+
+39:50.800 --> 39:59.280
+ and let me show it to you if you type tmux um well the first thing i'd mention is if you type tmux
+
+40:01.360 --> 40:08.400
+ it might say command not installed um and if it does say that then in um linux you can type
+
+40:08.400 --> 40:15.280
+ pseudo and pseudo um if you don't say what user to run it is it says run it as an admin
+
+40:15.280 --> 40:22.400
+ it's called root route so so so so install software you have to be root so pseudo apt install
+
+40:22.400 --> 40:27.840
+ means installed in x software or ubuntu software tmux and so that's how you would install tmux
+
+40:28.560 --> 40:34.480
+ if you got that error and so to run stuff as root you have to put in your password and so in my
+
+40:34.480 --> 40:41.280
+ case i already have tmux okay um but yeah so that's that's what you would do on um mac you would
+
+40:41.280 --> 40:51.680
+ normally use brew um which unfortunately does not come with mac so if you as it says it's the
+
+40:51.680 --> 40:58.640
+ missing package manager so if you just copy and paste this into your terminal and mac you'll then
+
+40:58.640 --> 41:04.080
+ be able to should be able to do brew install tmux if you double check that it's available yep it is
+
+41:06.400 --> 41:12.720
+ so brew and apt uh equivalence for mac and linux and remember when i say linux i'm
+
+41:12.720 --> 41:19.520
+ including windows is linux because it's it is linux so once it's installed if you type tmux
+
+41:19.520 --> 41:23.680
+ you'll get a deuce screen that looks exactly like your old screen but now it's got a green bar on
+
+41:23.680 --> 41:31.600
+ the bottom um and this is what tmux looks like and it behaves the same way as usual um
+
+41:37.760 --> 41:43.920
+ you know one thing is if i kind of like go off the end of the screen it's nice i can use my scroll
+
+41:45.840 --> 41:51.440
+ if you got this mouth set up um but you know basically just look like a normal terminal where
+
+41:51.440 --> 41:59.360
+ things get interesting is that i can add additional windows um and so in tmux everything um
+
+42:00.720 --> 42:08.000
+ almost everything you do tmux um starts by pressing the uh key the keyboard shortcut control b control
+
+42:08.000 --> 42:16.160
+ b is the tmux shortcut and so let's say i cd into git and i run jupiter lab i always like to run it
+
+42:16.160 --> 42:22.960
+ from the place where i've kind of got my notebooks and repositories and i'm like oh okay what do i
+
+42:22.960 --> 42:30.160
+ do now well i'll create another github window uh sorry another um tmux pain i should call them tmux
+
+42:30.160 --> 42:35.600
+ pain um and i can create another either split them horizontally or vertically so if you hold it hold
+
+42:35.600 --> 42:42.960
+ can hold down control press b nothing happens and then press percent so control b percent and you can
+
+42:42.960 --> 42:48.880
+ see what that's done is it's created a second window over here as opposed to control b double
+
+42:48.880 --> 42:56.320
+ inverted hummers which creates another window down here the pain and you can close them in the
+
+42:56.320 --> 43:02.800
+ usual way and remember the usual way is control d and each time you close them they just disappear
+
+43:02.800 --> 43:18.560
+ okay so i pretty much always do that um now then how do you move around between these different
+
+43:18.560 --> 43:23.600
+ pains um depending on how your terminal is configured you might be able to click with your mouse i
+
+43:23.600 --> 43:30.880
+ never do um i just press control b and press arrow keys control b right control b up see how my curse
+
+43:30.880 --> 43:40.080
+ is moving here i am in the bottom right control b left i'm in the bottom left control b left up
+
+43:40.080 --> 43:45.120
+ now i'm in the top so that's how you can move around between the pains
+
+43:47.760 --> 43:55.520
+ and then another thing to know is um this window looks very small now this pain looks very small i'd
+
+43:55.520 --> 44:02.320
+ like more room please to get more room is zoom with z so control bz so if i press control bz
+
+44:03.040 --> 44:09.200
+ that makes that pain take up the whole screen and once i'm done you know and i don't want the
+
+44:09.200 --> 44:28.400
+ whole thing to be maximised anymore i just press control bz again and now it goes back
+
+44:28.080 --> 44:37.760
+ um okay yeah Jeremy what how did you get the four by four right so um so we got again so it's
+
+44:37.760 --> 44:42.000
+ let me get back to where it was so um i'm going to first of all split vertically so that'll be
+
+44:42.000 --> 44:49.120
+ control b double quotes sorry control b percent and then i'm going to split the one on the right
+
+44:49.680 --> 44:57.520
+ um uh up and down so control b double quotes and then i press control b left to go to the left hand
+
+44:57.520 --> 45:03.840
+ tab the pain i should say and then i'll go control b double quote again and there you've got it
+
+45:03.840 --> 45:10.320
+ and you kind of like there are things you can do to make that automatic but after a while
+
+45:10.320 --> 45:14.720
+ you get so used to it that like i show you when i do it i just go control b percent control b double
+
+45:14.720 --> 45:21.440
+ quote control b double quote and i'm done you know it only takes three seconds um and then the other
+
+45:21.440 --> 45:26.720
+ nice thing about tmux is it sits there running in the background for as long as you like so i can
+
+45:26.720 --> 45:31.840
+ actually detach from this tmux session as long as i don't turn off my computer by pressing control
+
+45:31.840 --> 45:39.840
+ b d for detach and then i'll close down my whole terminal everything's gone okay don't have a
+
+45:39.840 --> 45:45.120
+ terminal running anymore um oh that's going to be annoying to have to set everything up again
+
+45:45.120 --> 45:51.600
+ get to the right directory rerun jibber notebook blah blah blah um but actually i don't because i
+
+45:51.600 --> 45:59.280
+ detached from tmux so now all i have to do is attach to read tmux again um i do have to be the right
+
+45:59.280 --> 46:10.000
+ person so let me go back to my extra account to attach to tmux again you type tmux a a for attach
+
+46:11.600 --> 46:19.520
+ and everything's back so that is one of the very handy things about tmux and so if you
+
+46:19.520 --> 46:27.040
+ have got some long running job or something it's totally fine you can detach if you need to and
+
+46:27.040 --> 46:32.240
+ come back to it later um obviously if you read about your computer it won't work otherwise it should
+
+46:32.240 --> 46:39.760
+ be fine i think there's a main yep yeah just to confirm if you close any of these windows that
+
+46:39.760 --> 46:43.680
+ ends the process that's killed the process no i just closed the window and it didn't close the
+
+46:43.680 --> 46:49.440
+ process but i detached first so control b d to detach and i closed the that it's all gone it's closed
+
+46:50.000 --> 46:54.720
+ sure but i mean that at the beginning when you split into the four and then you close the three
+
+46:54.720 --> 46:58.880
+ and then went back to the original the so for example the movie the jukey oh if you close if
+
+46:58.880 --> 47:16.480
+ you close a pain yeah um so yeah so like the pain here i can't close it because it's running a program
+
+47:17.040 --> 47:23.120
+ so the only way to close that would be to actually cancel the program this pain's not running anything
+
+47:23.120 --> 47:29.280
+ so i can close it so i can just hit control d and so that just closes that session then if i do
+
+47:29.840 --> 47:36.960
+ control b double quote it just creates a new session a new a new interactive login if you like
+
+47:37.680 --> 47:43.760
+ so each of these windows are totally separate to each other so if i over here cd and to walk through
+
+47:43.760 --> 47:48.240
+ too you can see none of the other ones you know these are all like separate copies of bash
+
+47:48.240 --> 47:53.200
+ running this one i know if this is a copy over here is actually running jipita
+
+47:57.840 --> 48:02.880
+ all right there may be one more doubt like can we assess each into a differentiation from
+
+48:03.440 --> 48:11.280
+ t month literal yeah so um absolutely so i i you know i could SSH into my machine into my gpu machine
+
+48:11.280 --> 48:19.200
+ from here um i need to be not jph 00 so let me just do that as somebody else
+
+48:23.840 --> 48:30.720
+ yeah so i could SSH into another machine no worries you can even run tmux inside tmux if you want to
+
+48:30.720 --> 48:48.560
+ get a bit crazy um yeah they're all totally separate um okay so let's so i got jipita running so i
+
+48:48.560 --> 49:02.000
+ can control click on this url to open it up ah that's interesting so that didn't work because
+
+49:02.000 --> 49:07.360
+ you see how it's wrapped to the next line so it didn't get the fa91 it's kind of not considered
+
+49:07.360 --> 49:16.400
+ part of it um that's why this didn't log in correctly so what i could do is to um zoom in with control
+
+49:16.400 --> 49:28.000
+ bz and then click on it there we go um the other thing you can do is to set a password which isn't
+
+49:28.000 --> 49:34.080
+ a bad idea um but for now we can just use this it's because it's using this uh unique token that
+
+49:34.080 --> 49:42.160
+ it already creates um okay so because i launched um jupita lab from inside the git directory
+
+49:42.160 --> 49:49.040
+ that's why i'm here inside the git directory so here's walkthrough to so i could now create a notebook
+
+49:51.760 --> 50:00.880
+ um turn that to a markdown cell so um i strongly recommend learning keyboard shortcuts um
+
+50:02.240 --> 50:02.560
+ which
+
+50:06.480 --> 50:11.280
+ what's the easiest way to see that in a lab i'm much more familiar with classic notebook
+
+50:11.280 --> 50:15.920
+ so here's launch classic notebook which is what i normally use in classic notebook
+
+50:19.600 --> 50:24.240
+ you can hit h to bring up the keyboard shortcuts
+
+50:24.240 --> 50:36.080
+ um let's see how to do it and jupita lab jupita lab keyboard shortcuts
+
+50:36.080 --> 50:57.520
+ advanced settings editor in the settings menu doesn't sound very friendly
+
+50:57.520 --> 51:09.520
+ okay settings advanced settings okay that's control comma keyboard keyboard there we go all right
+
+51:17.520 --> 51:17.840
+ great
+
+51:20.160 --> 51:25.360
+ so anyway the keyboard shortcut to turn a um it's change a cell to markdown it's just to hit m
+
+51:25.360 --> 51:33.440
+ and so this is now markdown as you see um or to switch it back to code you press y
+
+51:34.000 --> 51:39.920
+ and that's now code um another useful keyboard shortcut is you can just press one two or three
+
+51:39.920 --> 51:47.200
+ to create a first level second level or third level header or change one to one to a header as you can see
+
+51:49.200 --> 51:50.000
+ so
+
+51:50.000 --> 51:56.880
+ so walk through sample notebook
+
+52:02.480 --> 52:05.120
+ here is how i calculate
+
+52:05.120 --> 52:21.040
+ one plus one put things in backtext to mix to say this is just download as code
+
+52:24.240 --> 52:26.960
+ here is how i calculate
+
+52:26.960 --> 52:40.720
+ so if you hit shift tab after typing a function it'll tell you
+
+52:42.640 --> 52:44.640
+ the parameters and so forth of a function
+
+52:44.640 --> 52:55.920
+ a equals array 1.0 comma pi over 2 whatever
+
+53:02.160 --> 53:05.200
+ so okay
+
+53:05.200 --> 53:13.600
+ okay so by default things get called untitled.ipandb which is not a great name so you can rename it
+
+53:14.800 --> 53:16.480
+ to sample whatever
+
+53:19.040 --> 53:20.240
+ now if i close that
+
+53:24.560 --> 53:33.360
+ um it's actually running so that that that Python session is still in memory most of the time
+
+53:33.360 --> 53:37.920
+ that doesn't matter unless it's something where you're like training a model on a GPU in which
+
+53:37.920 --> 53:44.160
+ case it continues to use your GPU memory so a couple of things you can do one is rather than
+
+53:44.160 --> 53:53.840
+ closing from the x you can click um close and shut down notebook which is control shift q
+
+53:53.840 --> 54:02.960
+ um or alternatively you can click the x here all right
+
+54:06.800 --> 54:12.160
+ since we've got a proper terminal on our computer we don't really need to use it much but if by
+
+54:12.160 --> 54:17.680
+ i you know and we will use it later you can create a terminal inside your browser which is
+
+54:17.680 --> 54:26.240
+ identical to the terminals we've seen before and just like before control d will close it all right
+
+54:26.240 --> 54:29.040
+ so we've now got um
+
+54:33.440 --> 54:39.520
+ another file called sample.ipandb so we would like to put that into our github repo for other
+
+54:39.520 --> 54:44.240
+ people to to share and just so i put it back up and so it's version control and so forth
+
+54:44.240 --> 54:52.960
+ um so everything you want to do and get your first type get um so what you'll often do at this
+
+54:52.960 --> 54:58.480
+ point is type get status which tells you what's in get and what's not in get and so it'll give you
+
+54:58.480 --> 55:04.720
+ a list of untracked files these are things you haven't yet got in get so to put it in to get
+
+55:04.720 --> 55:14.160
+ you have to commit it um so if you type so if you type get commit um that'll commit anything
+
+55:14.160 --> 55:18.960
+ that you've added to get so first of all you have to say okay what do i want in my next commit
+
+55:19.520 --> 55:23.680
+ i want sample.ipandb so get add sample.ipandb i'll zoom in
+
+55:26.080 --> 55:32.240
+ okay so now this is a it's not untracked it's now a change to be committed
+
+55:32.240 --> 55:40.160
+ is the we've added a file um so now we can commit what we've added by saying get commit
+
+55:42.480 --> 55:49.520
+ and then it'll say okay tell me your commit message and so by default it's opening up an
+
+55:49.520 --> 55:55.920
+ editor called nano um and we can change this but nano is probably like the easiest editor to get
+
+55:55.920 --> 56:03.200
+ started with um so it's not a bad place to start um so let's put in our commit message for people
+
+56:03.200 --> 56:11.440
+ to see what have you done are we added sample notebook and you can see down at the bottom that
+
+56:11.440 --> 56:17.440
+ we can exit by pressing ctrl x and it'll say do you want to save and i press y for yes
+
+56:17.440 --> 56:25.920
+ and by default just leave the file name as it is so hit enter okay so that has now
+
+56:27.040 --> 56:36.240
+ added the file to my commit so if i now say get status it's now in a third place it's gone from
+
+56:36.240 --> 56:42.000
+ untracked to do be committed to be committed and it is now committed and that means it is now
+
+56:42.000 --> 56:47.680
+ actually version controlled on your computer so get actually version control things on your
+
+56:47.680 --> 56:54.960
+ computer even without using github um in fact originally when get was created by Linus 12
+
+56:54.960 --> 57:00.640
+ volts there was no such thing as github and people kind of sent changes to each other directly
+
+57:00.640 --> 57:06.080
+ rather than going through a server but in this case we are connected to a server and it said oh
+
+57:06.080 --> 57:13.360
+ your your branch so your copy of this repo is ahead of the copy the place that you got it from
+
+57:13.360 --> 57:21.200
+ by one commit so use push to to send your commits back to the server so get push
+
+57:26.000 --> 57:33.360
+ there we go um so now if we do get status again there we go so that's the whole
+
+57:33.360 --> 57:35.360
+ cycle
+
+57:39.120 --> 57:40.960
+ and so if we now go back to github
+
+57:45.280 --> 57:46.160
+ there's our notebook
+
+57:51.920 --> 57:58.560
+ and github does have a basic notebook viewer it's not amazing but it does the job most of the time
+
+57:58.560 --> 58:05.200
+ and so there's our notebook and so here's like a really minimal way of like it's not a blog or
+
+58:05.200 --> 58:09.200
+ anything but you know to just like quickly share things with people this is the easiest way to
+
+58:09.200 --> 58:15.120
+ do it you know and you can just say here's here's a repo and you know you can create as many repos
+
+58:15.120 --> 58:23.120
+ as you like um so like don't feel like it's in some way inappropriate to create a repo for one or two
+
+58:23.120 --> 58:29.120
+ notebooks you want to share with somebody it's totally fine um you know I generally have kind of
+
+58:30.000 --> 58:39.760
+ a repo I put somewhat temporary things into but you know often when we're kind of sharing
+
+58:39.760 --> 58:44.560
+ something with somebody else for example the bug we found we want to show how to recreate the bug
+
+58:44.560 --> 58:51.920
+ where it is like create a repo just to send somebody an example of a bug for instance so yeah so
+
+58:51.920 --> 58:59.680
+ repositories you can create as many as you like um a really good way to use repositories
+
+59:01.040 --> 59:04.240
+ is let's go to the fast book repository
+
+59:07.520 --> 59:13.360
+ is it would be nice to have your own copy of the book because you would like to run cells,
+
+59:13.360 --> 59:22.720
+ edit things stuff like that so um if you clone this right you won't be able to do an SSH clone
+
+59:22.720 --> 59:30.880
+ at all because my because your public key is not in my account you can HTTP clone it but you won't
+
+59:30.880 --> 59:36.960
+ be able to save changes back to github so ideally you'd like your own separate copy of this and so
+
+59:36.960 --> 59:42.880
+ you can create your own separate copy of this by clicking fork and so fork's going to create your
+
+59:42.880 --> 59:50.400
+ own copy so you just say create fork there's a fork's a copy and you can experiment with changes
+
+59:50.400 --> 59:57.840
+ without affecting the original and here you go so it looks exactly the same right but now I can
+
+59:59.600 --> 1:00:01.120
+ there's a SH copy this
+
+1:00:04.320 --> 1:00:09.840
+ and then cd so cd dot dot means go to the parent directory which in this case is get
+
+1:00:09.840 --> 1:00:23.120
+ get clone paste um actually ash yeah no that's fine yeah so we'll go get clone there we go
+
+1:00:29.200 --> 1:00:36.640
+ and so now it downloads the the whole book and so now if we in fact let's do it let's open up
+
+1:00:36.640 --> 1:00:44.480
+ a notebook so let's go back to jupiter lab fast book
+
+1:00:49.040 --> 1:00:50.160
+ and nest basics
+
+1:00:56.240 --> 1:00:59.520
+ actually you know what would be good would be let's go into the clean version
+
+1:00:59.520 --> 1:01:04.640
+ because this is really the one you want to be experimenting with
+
+1:01:20.320 --> 1:01:25.840
+ and so I can now start running cells oh can't run fastai fair enough
+
+1:01:25.840 --> 1:01:31.440
+ so at this point we need to install fastai
+
+1:01:36.640 --> 1:01:43.680
+ so we can see here it says kinder install minus c fastchan fastai so I'm going to copy that
+
+1:01:45.520 --> 1:01:47.600
+ except for the kind of it so when you use mamba
+
+1:01:47.600 --> 1:01:49.200
+ so
+
+1:01:54.080 --> 1:01:57.040
+ so my the c remember says to bring it from some other channel
+
+1:01:57.680 --> 1:02:02.400
+ so this is not coming from the main channel but from a channel called fastchan so fastchan is a
+
+1:02:02.400 --> 1:02:10.000
+ channel that fastai provides where we try to put in you know a lot of the kind of pieces of software
+
+1:02:10.000 --> 1:02:22.240
+ that data scientists are likely to want to use okay so we can now say yep that all looks fine
+
+1:02:42.000 --> 1:02:48.880
+ so fastai relies on the kind of the whole you know kind of ecosystem of python scientific
+
+1:02:48.880 --> 1:02:53.520
+ libraries and since this is a brand new user you know things like matplotlib that's used for
+
+1:02:53.520 --> 1:02:57.920
+ plotting for example and psychic learn that's used for classic machine learning then none of
+
+1:02:57.920 --> 1:03:05.280
+ those were there so because it relies on all these it it grabs them all and downloads them
+
+1:03:05.280 --> 1:03:12.640
+ and installs them can I ask a question while it's downloading please um is
+
+1:03:13.040 --> 1:03:17.680
+ you're I noticed you're installing it in the base directory is that usually how you do it that's
+
+1:03:17.680 --> 1:03:23.440
+ how I always do it yes but you don't create separate virtual environments never never like okay
+
+1:03:24.320 --> 1:03:30.000
+ a lot of people do but I strongly dislike them particularly for beginners or unless you've got
+
+1:03:30.000 --> 1:03:36.080
+ some very special reason I always put stuff in the base okay and the other thing I noticed was that
+
+1:03:36.960 --> 1:03:45.120
+ the notebooks all use hip yes they do but it won't do anything for you because it says here
+
+1:03:47.200 --> 1:03:51.360
+ see if there's a this is a bash thing it says see if there's a directory called slash content
+
+1:03:51.360 --> 1:03:56.880
+ which there isn't this exists for something called colab which is a free Jupiter server
+
+1:03:56.880 --> 1:04:01.760
+ environment which doesn't generally have up to date things installed in fact I think they still
+
+1:04:01.760 --> 1:04:09.440
+ have fast AI version one so this cell will on colab install everything because colab uses
+
+1:04:09.440 --> 1:04:24.960
+ hip basically but yeah what do we want to think on our computer and we also need fast book now fast
+
+1:04:24.960 --> 1:04:34.320
+ book I'm not even sure I'm not sure if there is a kind of package at the moment for fast book so
+
+1:04:34.320 --> 1:04:41.040
+ I will use well let's check mamba install minus c fastchan fast book
+
+1:04:44.880 --> 1:04:46.160
+ I don't feel like that won't work
+
+1:04:52.480 --> 1:04:57.680
+ apparently it does work there you go
+
+1:04:57.680 --> 1:05:03.440
+ oh that was easy
+
+1:05:06.800 --> 1:05:13.040
+ and actually fast book includes fast fast AI so we could have skipped the whole fast AI one
+
+1:05:17.120 --> 1:05:22.960
+ fast book is just a it's basically just a list of dependencies of like all the different things
+
+1:05:22.960 --> 1:05:30.240
+ we use in the book it doesn't really have much code at all of its own it's just a kind of quick
+
+1:05:30.240 --> 1:05:34.880
+ and easy way to grab all the stuff that you'll need for the book all right so now we should be
+
+1:05:34.880 --> 1:05:47.120
+ able to run this okay that is actually I think a little out of data I think we can use any
+
+1:05:47.120 --> 1:05:57.680
+ sentence piece nowadays and I think we might have that in fastchan to sentence piece
+
+1:06:01.200 --> 1:06:05.280
+ that's something we use in the nlp chapter
+
+1:06:08.080 --> 1:06:09.680
+ yep looks good
+
+1:06:09.680 --> 1:06:16.960
+ good wow that's a slow download that's beating up at last
+
+1:06:19.760 --> 1:06:27.440
+ let's try again okay so now we've got a copy of everything we need so this is like a unusually
+
+1:06:28.720 --> 1:06:34.720
+ you know big kind of set of dependencies because it's a big book that teaches lots and lots of
+
+1:06:34.720 --> 1:06:40.000
+ things but the nice thing is once this works you know you'll generally find everything you need is
+
+1:06:40.000 --> 1:06:45.760
+ going to is going to work okay so at this point you know I've started doing things you know maybe
+
+1:06:45.760 --> 1:06:57.120
+ I'll make some notes to myself to install we have to go member install basically this is all we'd
+
+1:06:57.120 --> 1:07:06.160
+ need would be member install minus c firstchan first book sentence piece that would actually be
+
+1:07:06.160 --> 1:07:13.040
+ all you would need to do so if I save this and so now you know we've created a note to
+
+1:07:13.040 --> 1:07:21.680
+ ourselves in our own copy of the book so we'll close that and if we now cd to first book
+
+1:07:21.680 --> 1:07:30.160
+ get status you can see it tells us we've modified that file so we would like to save that back to
+
+1:07:30.160 --> 1:07:41.040
+ our copy typing git add and then git minus m and then changing things in the editor is a bit slow
+
+1:07:42.240 --> 1:07:48.320
+ so a shortcut is if you type git commit minus am that minus a means add everything that's not
+
+1:07:48.320 --> 1:07:53.680
+ committed and this this m here says I'm going to put a message right here on the command line
+
+1:07:53.680 --> 1:08:03.280
+ it's got to be in courts um change mnest maybe add install notes
+
+1:08:06.080 --> 1:08:10.800
+ so at that point if I type git status you can see now it's going to head and
+
+1:08:10.800 --> 1:08:19.440
+ add it and committed it and it now says all right we're ready to push so if I take git push
+
+1:08:19.440 --> 1:08:24.960
+ that's saying to save that change so that change has not been saved to fastai's copy of the book
+
+1:08:25.840 --> 1:08:29.280
+ of course but it has been changed saved to
+
+1:08:31.440 --> 1:08:39.440
+ the jph fork so at this point my fork is one commit ahead of fastai right so that is i've made
+
+1:08:39.440 --> 1:08:48.320
+ changes that are not in fastai's copy and so I could see what commits there are and that
+
+1:08:48.320 --> 1:08:52.640
+ and here's all the commits that are in the what I've forked and here's my addition
+
+1:08:55.680 --> 1:08:58.880
+ and here's the change which is that I added this one cell
+
+1:08:58.880 --> 1:09:14.720
+ okay I think that's probably about enough for one day does any have any
+
+1:09:16.160 --> 1:09:18.560
+ questions or comments about that?
+
+1:09:18.560 --> 1:09:31.440
+ um the only one I've found was that sometimes if you sort of we started off creating a repo
+
+1:09:31.440 --> 1:09:39.360
+ within github sometimes I've done the reverse where I've created the repo on my computer and then
+
+1:09:40.080 --> 1:09:47.760
+ had a few issues trying to get it into github and yeah okay well let's add that to a list of things
+
+1:09:47.760 --> 1:09:55.840
+ to do in a future session I find it easier to do it in github so I actually always try to do it that
+
+1:09:55.840 --> 1:10:02.880
+ way like literally like because I find it so we like I always have to look it up to remind myself
+
+1:10:02.880 --> 1:10:09.200
+ how to do it otherwise so often I'll like I'll create it in github pull it and then copy over
+
+1:10:09.200 --> 1:10:15.680
+ things that are on my computer you know like that's a really lazy way to do it but let's do how to
+
+1:10:15.680 --> 1:10:23.280
+ create get repo locally all right let me pop that
+
+1:10:26.400 --> 1:10:34.000
+ all right thanks kang so we're doing Tuesday Wednesday Thursday Friday this week
+
+1:10:34.560 --> 1:10:38.000
+ so see you tomorrow thanks for joining us and to rock
+
+1:10:38.000 --> 1:11:03.000
+ today so bye thanks forCC
+

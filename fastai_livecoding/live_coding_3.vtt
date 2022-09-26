@@ -1,0 +1,2066 @@
+WEBVTT
+
+00:00.000 --> 00:09.120
+ All right. Does anybody have anything? Yeah, they wanted to ask about or talk about or
+
+00:10.400 --> 00:18.160
+ anything else before I had a quick question. Yeah, I was quick. When we're talking yesterday
+
+00:18.160 --> 00:21.760
+ and I asked you about the environments, you seem to feel very strongly that you should work in
+
+00:21.760 --> 00:27.360
+ the base environment and I've been rolling it over in my head. And I'm just when I think about
+
+00:27.360 --> 00:31.040
+ the mistakes that I've made and how I've screwed up environments and gotten conflicts and stuff like
+
+00:31.040 --> 00:35.920
+ that. I was wondering why you feel so strongly about that. Sure. I mean, we'll talk about it more
+
+00:35.920 --> 00:40.320
+ when we kind of get to environments, but because we haven't discussed them yet, but you know, briefly,
+
+00:42.000 --> 00:48.000
+ you know, environments are basically separate folders with separate installations of Python
+
+00:48.000 --> 00:59.200
+ and Python libraries and so forth. They're often used for kind of keeping separate projects
+
+00:59.920 --> 01:04.560
+ separated with different sets of kind of dependencies or versions of Python or whatever.
+
+01:05.760 --> 01:14.160
+ And they certainly have a role to play for advanced users. I almost never use them. I mean,
+
+01:14.160 --> 01:19.680
+ very, very occasionally use them. But my feeling is the most important thing is to
+
+01:20.880 --> 01:29.520
+ be able to rapidly iterate and experiment. And I kind of want my projects to live together as a
+
+01:29.520 --> 01:35.040
+ as a whole as a bunch of things which all help each other and come together. So I don't like the
+
+01:35.040 --> 01:40.880
+ idea of like, oh, I'm working on this project now. I go over there and everything's kind of new,
+
+01:40.880 --> 01:50.560
+ you know. So instead, I really like to get very fast and very good at just quickly just going
+
+01:50.560 --> 01:57.520
+ RM minus RF mini forge and it's gone and run setup Conda dot SH and it's back and have a single
+
+01:57.520 --> 02:01.520
+ script that if I need one, it don't mean I don't even need a script on a scale member
+
+02:01.520 --> 02:07.040
+ install minus C first Chan fast book, and that installs everything that I need. And I'll go.
+
+02:07.040 --> 02:13.840
+ So I kind of like never want to be in a situation where anything on my computer is
+
+02:14.880 --> 02:19.040
+ I don't really like it's working, but I don't know how I got to a point that it's working and I
+
+02:19.040 --> 02:26.240
+ don't want to touch anything less I undo that, you know. So I'm more in the kind of chaos monkey
+
+02:26.240 --> 02:31.360
+ side of like, explode things from time to time intentionally and be really good at putting them
+
+02:31.360 --> 02:40.480
+ back to where they were, I guess. And yeah, so nowadays I never have problems basically with
+
+02:40.480 --> 02:46.560
+ dependencies or weird things going on in Python or whatever, because I just, you know, like probably
+
+02:46.560 --> 02:52.320
+ every few weeks I'll just throw it away and clean install it just to try something out for teaching
+
+02:52.320 --> 02:59.760
+ or whatever. I always feel fine. You know, this morning, I did use an environment because I
+
+02:59.760 --> 03:04.320
+ specifically wanted to test something on a different version of Python. And I wanted to
+
+03:04.320 --> 03:11.200
+ check that it would install into somebody's fresh new environment. And so I, I used it for that.
+
+03:12.800 --> 03:21.200
+ I think it's useful if you are like, installing some library where they've done a poor job of
+
+03:21.200 --> 03:27.120
+ keeping their dependencies up to date. So you need like Python 3.6 and sentence P one point eight,
+
+03:27.120 --> 03:29.840
+ and I don't know old versions of things, in which case you want to be able to go
+
+03:30.640 --> 03:34.480
+ pit minus our requirements dot text and get all these exact versions of things.
+
+03:35.680 --> 03:44.800
+ But my approach is to, for my projects is to not pin versions, not pin dependencies. I want to be
+
+03:44.800 --> 03:50.720
+ but I want anybody to be able to install my work into whatever they're doing and work with all
+
+03:50.720 --> 03:54.720
+ their other programs that they're running and libraries that they're using without anything
+
+03:54.720 --> 04:02.400
+ getting messed up. Unfortunately, not everybody works that way. But that's how I, you know,
+
+04:02.400 --> 04:07.200
+ try to make other people's life easier. And so therefore, any programs you use from me,
+
+04:07.200 --> 04:10.560
+ you'll be able to install into your base environment without messing anything up or
+
+04:10.560 --> 04:13.040
+ install into any environment without messing things up.
+
+04:14.960 --> 04:20.880
+ And when sorry, just a quick follow up. If you're installing, if you're installing into like a
+
+04:20.880 --> 04:28.560
+ new computer or whatever, would you install fast book or would you install fast AI?
+
+04:30.800 --> 04:34.000
+ You know, I would, it depends. I would just probably install fast book,
+
+04:34.000 --> 04:40.960
+ because fast book installs fast AI, which installs NumPy pandas with a map plot lib.
+
+04:40.960 --> 04:46.160
+ Also installs transformers, it also installs data sets, it also installs sentence piece,
+
+04:46.160 --> 04:49.360
+ you know, maybe it doesn't install a sentence piece. I think everything
+
+04:49.360 --> 04:54.880
+ accepts sentence piece. There's no reason it shouldn't install sentence piece.
+
+04:56.800 --> 05:00.320
+ So it didn't yesterday. Yeah, just remembering that.
+
+05:02.720 --> 05:05.920
+ So Jeremy, yeah. So if you're blowing,
+
+05:06.640 --> 05:12.560
+ blowing it away and you're basically using a new OS installers as like people do with
+
+05:12.560 --> 05:17.680
+ environments, what, how are you keeping track of your things like RSA keys, etc. How are you
+
+05:17.680 --> 05:24.000
+ not blowing those away? Those are not part of a country environment. So that's, that's fine.
+
+05:24.000 --> 05:28.240
+ They sit there in my home directory. It's just that many forge directory or many cons
+
+05:28.240 --> 05:33.040
+ directory or anaconda directory, depending on what you're using. I just delete that. Cool.
+
+05:35.360 --> 05:39.360
+ You talked about uninstalling always, right? In this base environment. So
+
+05:39.360 --> 05:44.640
+ yesterday I was trying to, I messed up one of the dependencies. So what are the steps for
+
+05:44.640 --> 05:50.320
+ running this joining? Usually I know that I just go to your home directory and type RM minus RF
+
+05:50.960 --> 05:57.440
+ member forge. Only that is required. Okay. I then close your terminal and reopen it because I
+
+05:57.440 --> 06:01.360
+ remember the other day, she didn't do that step. And so I didn't install properly.
+
+06:03.280 --> 06:06.240
+ Yeah. Let me show you a quick trick.
+
+06:06.240 --> 06:16.320
+ Yeah. So this is sorry. This is a little more advanced than normal, but that's, that's okay.
+
+06:24.000 --> 06:27.200
+ So the, the, this is slightly confusing, but the fast book
+
+06:27.200 --> 06:35.440
+ pipi and condo installer actually comes from a repo called course 20. And it's here.
+
+06:39.840 --> 06:46.720
+ It doesn't really contain any code. It contains a few utils, but that's actually like
+
+06:49.360 --> 06:54.000
+ search images being, but you know, this has got nothing to do with what we're using it for.
+
+06:54.000 --> 07:03.040
+ Or something that returns an image of a cat. But actually the key thing is it's got a settings.any
+
+07:03.040 --> 07:12.320
+ file, which contains a list of requirements. And so if I now put this up on pi pi and condo,
+
+07:12.320 --> 07:20.000
+ then if I say condo install or pip install fast book, then that's one quick way of just getting
+
+07:20.000 --> 07:26.640
+ all these. Or you could create a tiny little script that goes, you know, condo install.
+
+07:27.440 --> 07:31.840
+ And then with these things in it. But yeah, you want some way to
+
+07:33.760 --> 07:39.120
+ get yourself into the basics set up instantly. Oh, here we are. This is why I didn't give
+
+07:39.120 --> 07:43.040
+ me sentence piece. Sentence piece only comes with pip. And that's because when I set this up,
+
+07:43.040 --> 07:48.720
+ I didn't have fast Chan. And so I didn't have sentence piece in condo. So I mean,
+
+07:48.720 --> 07:54.400
+ Jeremy, I think you've got a you've got minimum Python there 3.6. But I think fast AI
+
+07:55.600 --> 08:03.520
+ repo has 3.7 in. Yeah, yeah. Which I suspect it probably overrides. But yeah, so here's a good
+
+08:03.520 --> 08:09.040
+ physical use of the the GitHub GUI. Right. I want to just change it while I'm looking at it.
+
+08:09.040 --> 08:25.760
+ And we're done. Cool. Yeah. Okay. So that was a good question. And, you know, we'll,
+
+08:25.760 --> 08:31.440
+ at some point, I'm sure we'll need to create an environment for something and we'll talk more
+
+08:31.440 --> 08:35.760
+ about that. I guess like maybe something else just, well, we're here since we are, as I said,
+
+08:35.760 --> 08:42.240
+ this is a bit more advanced and people can totally skip this. But just, I mean, it's probably worth
+
+08:43.040 --> 08:51.360
+ understanding what Conda slash member is and how it works. Right.
+
+08:53.200 --> 09:03.120
+ So remember the other day I typed which Python. And I saw that I'm getting that Python is coming
+
+09:03.120 --> 09:07.920
+ from this directory. So like one obvious question is, well, how does why is it coming from this
+
+09:07.920 --> 09:17.600
+ directory? And the reason why it's coming from this directory is, let me just open up this a bit
+
+09:17.600 --> 09:26.800
+ more so I can see my people. There we go. Is that Linux, I mean, I shouldn't say Linux, you know,
+
+09:26.800 --> 09:30.960
+ bash and pretty much all shells. They use the concept of something called the path.
+
+09:30.960 --> 09:38.000
+ And the path is the list of places to look for programs to run. And the path lives in something
+
+09:38.000 --> 09:42.720
+ called an environment variable and an environment variable is just like a Python variable, but it's
+
+09:42.720 --> 09:48.480
+ a variable that lives in your shell. And you can, you can print them out. So that instead of print
+
+09:48.480 --> 09:54.000
+ in your shell, you type echo. And then an environment variable, you know, normally if I just say echo
+
+09:54.000 --> 10:00.720
+ something, it just prints it. Right. So if I want to echo the contents of an environment variable,
+
+10:00.720 --> 10:05.200
+ I have to put dollar before it dollar means this is a variable that I'm printing. And so the variable
+
+10:05.200 --> 10:12.320
+ path, there it is. Right. And so you can see that this is a string as colon separated string.
+
+10:13.120 --> 10:18.240
+ And in my colon separated string, there's something which is home, jhow, at member forge,
+
+10:18.240 --> 10:22.800
+ bin. And so that directory, if we take a look at it,
+
+10:22.800 --> 10:30.800
+ it contains lots of programs. And one of those programs is
+
+10:32.960 --> 10:41.520
+ pi, Python. Okay. So that's, that's why it is when I type Python that,
+
+10:41.520 --> 10:50.720
+ that, I'm sorry, I didn't mean to do that. When I type Python, that's the Python that it runs.
+
+10:52.800 --> 10:58.080
+ So here's a little trick. I want to type which Python, and I'm so lazy, I couldn't have even
+
+10:58.080 --> 11:02.400
+ be bothered typing Python. So if you remember, double, double exclamation mark means the previous
+
+11:02.400 --> 11:08.160
+ command. So that's going to be which Python. So it's worth looking and seeing like, well, what is
+
+11:08.160 --> 11:15.360
+ this member forge directory? So the member forge directory, for those of you that are kind of
+
+11:15.760 --> 11:24.000
+ seen Unix type directories before, it, it contains a bin directory and an etc.
+
+11:24.000 --> 11:28.400
+ directory and a lib directory. And this basically looks very similar to my,
+
+11:28.400 --> 11:38.480
+ to my Ubuntu's root directory. And so basically, you know, a Condor or member forge or whatever,
+
+11:39.200 --> 11:46.880
+ root directory is kind of a copy of a Linux or even actually a Mac root directory, contains
+
+11:46.880 --> 11:58.160
+ very similar things, etc. User, so forth. And what happens is that the thing that it puts into our
+
+11:58.160 --> 12:03.200
+ bash RC, so remember our dot bash RC is the script that automatically gets run this thing here.
+
+12:04.000 --> 12:08.560
+ Basically, this is a little, it runs a little shell script that sets some environment variables.
+
+12:08.560 --> 12:14.000
+ And one of the environment variables that sets, for example, is the path environment variable,
+
+12:14.000 --> 12:18.320
+ and it adds this to path. And it does similar, something similar to kind of make all the libraries
+
+12:18.320 --> 12:29.040
+ work as well. And so we mentioned how you can create a totally separate, you know, environment,
+
+12:29.040 --> 12:34.080
+ a totally separate place you can work that has its own copy of Python and libraries and stuff.
+
+12:35.520 --> 12:42.240
+ The way you do that is you go mamba create minus n, give it a name, and then say,
+
+12:42.240 --> 12:47.520
+ what do you want to have in it? So let's say, okay, I want to have Python in it. I don't normally
+
+12:47.520 --> 12:57.200
+ like to have, I don't normally like to have the latest Python, so let's get something before 3.10.
+
+12:59.120 --> 13:05.280
+ And I also want fast work in it. So that's going to create, so you can go mamba create or conda create.
+
+13:07.200 --> 13:11.440
+ Actually, you already have that because I used it this morning, as I mentioned, so I'll remove
+
+13:11.440 --> 13:24.400
+ that automatically and create a new one. And so that's going to set up a new environment,
+
+13:24.400 --> 13:29.040
+ which we will take a look at. So currently, what it's doing is it's downloading from the
+
+13:29.040 --> 13:35.920
+ Internet a list of all of the conda packages that are available from a channel called CondaForge,
+
+13:35.920 --> 13:41.840
+ which is the main channel that mamba forge uses. And it says, okay, I'm going to install Python
+
+13:41.840 --> 13:46.000
+ and fast core to install those things. I'm going to need these other things as well.
+
+13:47.760 --> 13:53.040
+ That sounds fine. You'll see it's cached. So basically, one of the nice things about
+
+13:53.840 --> 13:59.200
+ mamba and conda is that it kind of saves the archives that you've downloaded. It doesn't
+
+13:59.200 --> 14:05.280
+ have to redownload them. So as it now says, you can activate this environment by typing
+
+14:05.280 --> 14:13.760
+ mamba activate term, or conda activate temp. So that's changed my shell. If I now say which Python,
+
+14:16.160 --> 14:21.040
+ it's getting it from a new place, and it's getting it from the same places before, home
+
+14:21.040 --> 14:29.760
+ j how with mamba forge, but it's now getting it from m's temp. And that's because this mamba forge
+
+14:29.760 --> 14:37.360
+ directory has a directory called n's. And that m's directory is a folder that contains each of
+
+14:37.360 --> 14:43.760
+ those environments. And it's really interesting to see what's in them. Because look, it's yet
+
+14:43.760 --> 14:50.880
+ another copy of the kind of things you would see in the root of a Linux installation. So that's
+
+14:50.880 --> 14:55.440
+ that's why it works, right? It's basically yet another copy. So for example, we'll see that in
+
+14:55.440 --> 15:04.720
+ m's temp bin. Here's another copy of Python. So if I type Python, it's running that Python,
+
+15:04.720 --> 15:13.280
+ and it's got its own set of libraries. So it's using those libraries. So it's yeah, it's really neat.
+
+15:14.160 --> 15:19.440
+ And you can install compilers, you can install, you know, any binaries you like, you can install
+
+15:19.440 --> 15:26.240
+ Rust, you know, separate copy of Jupiter, whatever. You know, by the way, something that's quite neat,
+
+15:26.240 --> 15:31.360
+ not as important as it used to be, but these are actually using something called hard links to
+
+15:31.360 --> 15:36.640
+ to create these. So they're actually not even separate copies. So it's like not even using disk
+
+15:36.640 --> 15:43.360
+ space. So yeah, the whole thing is really quite nifty. So yeah, so basically, when you go activate,
+
+15:43.360 --> 15:50.960
+ it's in fact, let's take a look at my path. It changes my path. See, so now this comes first.
+
+15:51.920 --> 15:58.640
+ Look at hard links. So I find hard links quite useful for myself. When I have a lot of data in
+
+15:58.640 --> 16:04.880
+ a folder, and I want to run something on this data from another place, I just create the hard link.
+
+16:05.840 --> 16:09.200
+ You create some links or hard links, because normally you'd use symbols for that.
+
+16:09.200 --> 16:15.120
+ Yes, that's the word. That's the wrong question. I create some links.
+
+16:15.120 --> 16:21.440
+ Yeah, yeah, we will get to some links. Let's wait until we kind of need them, maybe.
+
+16:23.840 --> 16:29.440
+ Okay, so to go back to activating the base directory, I just take contact to activate. Now I'm back in
+
+16:29.440 --> 16:39.200
+ my own site, main environment. So yeah, hopefully that explains a little bit about what environments
+
+16:42.480 --> 16:54.720
+ and why you might use them. There's a certain way of developing software, which is particularly
+
+16:54.720 --> 17:04.800
+ common in the JavaScript world, where you freeze the exact versions of everything at a particular
+
+17:04.800 --> 17:12.160
+ point in time. And so you end up with things like, you know, well, in the Ruby world, you end up
+
+17:12.160 --> 17:18.080
+ with a gem.block file in the Python world, you end up with a requirements.text file in the JavaScript
+
+17:18.080 --> 17:26.400
+ world, you end up with your packages.json file. This is something that I would strongly recommend
+
+17:26.400 --> 17:32.800
+ trying to avoid as a data scientist when you freeze particular version numbers.
+
+17:34.960 --> 17:39.440
+ It makes it almost impossible to mix and match things from different places, you know,
+
+17:39.440 --> 17:43.840
+ this library from here and this thing from here. You end up going into this huge,
+
+17:43.840 --> 17:54.320
+ complex ecosystem of Docker containers and, you know, trying to find ways to make that all work
+
+17:54.320 --> 18:00.640
+ as can get quite overwhelming. And you can actually, you can actually entirely avoid it
+
+18:01.600 --> 18:09.040
+ by just, you know, using a single base environment and keeping your libraries up to date and having
+
+18:09.040 --> 18:14.480
+ good tests and knowing when a release has broken something and so forth. You know, this is not
+
+18:14.480 --> 18:20.640
+ always the way, but this is my suggestion for, you know, rapid iteration data science is to
+
+18:21.680 --> 18:34.400
+ do things this particular way. All right, so then we've got our own computer running. And
+
+18:34.400 --> 18:42.080
+ it's nice to be able to use Python on your own computer because, you know, you can rip it out
+
+18:42.080 --> 18:47.760
+ a laptop anywhere, don't have to be on the internet, you don't have to start a server somewhere,
+
+18:47.760 --> 18:53.280
+ it's, you know, it's nice to be able to quickly play with things. And, you know, I think, like,
+
+18:53.840 --> 18:58.320
+ ideally, a large amount of the time you're not using the GPU because a large amount of the time,
+
+18:58.320 --> 19:03.440
+ hopefully, you're like exploring results or you're testing out things and really small samples that
+
+19:03.440 --> 19:09.920
+ don't need a GPU or, you know, hopefully you can do a lot of stuff on your computer. At some point,
+
+19:09.920 --> 19:21.920
+ you need a GPU. And my view is that you should try to use a GPU in a way that feels as much like
+
+19:21.920 --> 19:31.280
+ your computer as possible, but doesn't cost you much, if any money. So, at the moment,
+
+19:31.280 --> 19:38.880
+ my view is by far the best option for that is, paper space, paper space is actually a company
+
+19:38.880 --> 19:44.960
+ that have a few different products and specifically it's a product called Gradient. Gradient is,
+
+19:48.160 --> 19:52.320
+ in fact, specifically, it's Gradient Notebooks, let's keep going to you by Gradient Notebooks.
+
+19:52.320 --> 20:03.600
+ So, Gradient Notebooks is basically something where you can get a free GPU server, which behaves
+
+20:03.600 --> 20:08.480
+ a lot like what we've just been working with, you know, you'll get a terminal and all that stuff.
+
+20:08.480 --> 20:19.920
+ So, let me sign in.
+
+20:28.800 --> 20:35.920
+ Okay, so paper space has this concept of projects. I have no idea what they're useful for. I just
+
+20:35.920 --> 20:41.440
+ have one project, so I'll just go ahead and click on it. They're just they're the things that contain
+
+20:41.440 --> 20:45.680
+ your they call them notebooks, but these are basically servers. These are some servers.
+
+20:47.280 --> 21:00.000
+ Now, I there's a few options for like paying their money. And if you can afford it, you know,
+
+21:00.000 --> 21:04.960
+ this is such a good deal, the eight dollars a month, not only because as you'll see, you get
+
+21:04.960 --> 21:11.200
+ some pretty good GPU options and you can keep things private, but you also get more persistent
+
+21:11.200 --> 21:18.480
+ storage. So that means you can store things between sessions. Now, the reason this is really
+
+21:18.480 --> 21:24.240
+ important is because these aren't actually my servers that paper space has not put aside servers
+
+21:24.240 --> 21:37.040
+ to me to use. These are kind of small little saved snapshots, basically. And it's got to kind
+
+21:37.040 --> 21:47.680
+ of create a new computer each time I fire one of these up. And so it's really nice that as you go
+
+21:47.680 --> 21:58.400
+ from instance to instance, to be able to access the same files each time. So let's start from scratch
+
+21:58.400 --> 22:04.640
+ because that's what we're doing. Okay, so it says select a runtime. Basically, what this is going
+
+22:04.640 --> 22:10.480
+ to do is it's just going to pre populate your server with some files. And so if you choose the
+
+22:10.480 --> 22:17.280
+ first AI one, then you'll have the main stuff, you know, basically everything you need for the book pre
+
+22:17.280 --> 22:28.880
+ installed. So let's do that. And so as you can see, there's various three options and various paid
+
+22:28.880 --> 22:38.400
+ options. So I'll use there. So basically, you know, important things to know about is how many,
+
+22:38.400 --> 22:44.880
+ how big is the GPU? These are all pretty good. Eight or 16 is great. Sixteen is obviously better.
+
+22:46.640 --> 22:53.360
+ And then how fast is it? P that that'll probably be a Pascal card. So that's a couple of generations
+
+22:53.360 --> 22:59.600
+ old. So it's like quite a lot slower than modern cards. RTX is totally up to date card.
+
+23:01.840 --> 23:04.720
+ But this one's got a lot more GPU. So I'm just going to pick this one.
+
+23:04.720 --> 23:11.920
+ Six hours. So it's going to, you know, if you're paying for it, make sure you've got all the shutdown
+
+23:11.920 --> 23:18.240
+ set to something sane. Otherwise, you'll end up paying for it for a long time. You can easily
+
+23:18.240 --> 23:24.560
+ share notebooks with other people by turning public access on, which is by default. There's a few
+
+23:24.560 --> 23:32.640
+ advanced options here. I don't think we particularly need to touch them, to be honest. One thing I'm
+
+23:32.640 --> 23:38.400
+ just going to note now is that it's going to run a command called run.sh. So we'll just note that
+
+23:38.400 --> 23:42.720
+ down because we're going to check it out later. And you'll also see it's actually going to
+
+23:44.000 --> 23:50.880
+ clone a git repo. So, I mean, one thing you could do is if you've got a fork of fast book,
+
+23:51.440 --> 23:55.680
+ then replace fast AI with your username and you're going to get your forked version.
+
+23:55.680 --> 24:03.200
+ Okay, so I'll start. So, yeah, so I don't know. I find it's a bit confusing that it says start
+
+24:03.200 --> 24:10.640
+ notebook. It's not a notebook, right? It's starting a server for us. And that server is going to run
+
+24:10.640 --> 24:23.600
+ a duperton notebook automatically. So the thing that appears here is the paper space GUI.
+
+24:26.000 --> 24:36.800
+ I don't love it, honestly. So I don't really use it very much. The one thing that you do
+
+24:36.800 --> 24:41.360
+ particularly want it for though is to be able to stop your server when you're finished, especially
+
+24:41.360 --> 24:45.600
+ if you're paying for it. But I mean, you should do it anyway, because there's no points using
+
+24:45.600 --> 24:51.360
+ their server hours. So what I'm going to do is I'm going to just copy this URL and create a second
+
+24:51.360 --> 24:56.800
+ tab and paste it just so that I've got two versions of that. So this one here is just going to be
+
+24:56.800 --> 25:02.000
+ sitting here and I can go back to it and click stop later. In fact, when I close this tab, it'll
+
+25:02.000 --> 25:10.000
+ remind me that I have to click stop. So this is a good way to not accidentally forget to stop your
+
+25:10.000 --> 25:19.200
+ server. Yeah, that auto shutdown. It happens if you're inactive, or that would shut down regardless.
+
+25:19.200 --> 25:23.840
+ Just shut down regardless. Yeah. Yeah. So that because they don't really know
+
+25:25.040 --> 25:29.360
+ if you're doing things that don't really have any telemetry or anything.
+
+25:29.360 --> 25:34.560
+ Oh, by the way, this five hours seems to be truncated down. So it's actually
+
+25:35.280 --> 25:41.040
+ five point nine hours. That's just something I noticed. It's a bit of a bug, I guess.
+
+25:42.880 --> 25:47.040
+ Yeah. So in five hours time, it's going to shut down. You have five and, you know,
+
+25:47.040 --> 25:50.960
+ hours and fifty five minutes time. It's going to shut down regardless. So the first thing I do
+
+25:50.960 --> 25:56.640
+ actually is I click this button, which gives us proper jubilant lab. And then I don't have to
+
+25:56.640 --> 26:02.080
+ use their slightly crummy GUI anymore. And this is also nice because now we're going to be using
+
+26:02.080 --> 26:09.600
+ something that's just like what we have on our computer, which is the goal. Okay. So here's jubilant
+
+26:09.600 --> 26:28.720
+ lab. And you can see that the book is here. And yeah, this is basically the get repo that we,
+
+26:29.280 --> 26:32.960
+ that was automatically filled in for us has been cloned into here.
+
+26:32.960 --> 26:42.160
+ Okay. Just what I'm going to do is start a copy of an old machine as well.
+
+26:44.640 --> 26:46.240
+ Not great. What am I doing? Gradient.
+
+26:46.240 --> 27:02.160
+ Because I want to access some files from there.
+
+27:02.160 --> 27:24.080
+ Start machine. Okay. So, um, let's, I mean, so I guess to start with, we could go into clean,
+
+27:24.080 --> 27:35.520
+ open up MNIST basics. So let's see how much they've got installed, see if it's all ready to go.
+
+27:35.520 --> 27:36.960
+ Let's try running this cell.
+
+27:46.640 --> 27:49.760
+ Well, there we go. It looks like it's got everything else. Try running this cell.
+
+27:49.760 --> 27:57.600
+ Nice. Okay. So it's basically got fast book installed and sentence based installed. So that's good.
+
+27:58.640 --> 28:03.760
+ So you, we checking to be the level of checking the paper space.
+
+28:04.800 --> 28:07.120
+ We are in paper space right now, see?
+
+28:09.600 --> 28:15.280
+ I'll just remind you, I expect on this button. And that gives us jubilant lab in paper space.
+
+28:15.280 --> 28:17.360
+ Thank you. So, no problem.
+
+28:17.360 --> 28:20.400
+ No, no problem. It's easy to miss things. Ask any time.
+
+28:23.920 --> 28:32.400
+ So one thing that is actually, I find kind of confusing about Jupyter lab is it has its own set
+
+28:32.400 --> 28:37.840
+ of tabs in its own interface and it kind of replicates things like that could be in a browser. So in
+
+28:37.840 --> 28:43.040
+ a lot of ways, I kind of prefer the older version of Jupyter, Jupyter classic, which you can always
+
+28:43.040 --> 28:50.640
+ switch to. But you know, you can get used to it. And one thing that helps a lot is if you just
+
+28:50.640 --> 28:58.400
+ full screen this, right, and kind of know the keyboard shortcuts. So control shift left and
+
+28:58.400 --> 29:04.480
+ right square brackets switch between tabs. And that's the main one to know. And control B
+
+29:05.600 --> 29:11.040
+ turns on and off the sidebar. So this way, at least you can like get a nice, you know,
+
+29:11.040 --> 29:15.280
+ gorgeous if the screen, particularly when I click terminal. So if I click terminal here,
+
+29:16.560 --> 29:20.160
+ that's not bad, right? I've got plenty of room to see my terminal. So that's nice.
+
+29:21.760 --> 29:29.280
+ Okay. So I don't.
+
+29:31.920 --> 29:35.920
+ Oh, Jeremy, just on the bottom there, if you want to get rid of those tabs for any reason,
+
+29:35.920 --> 29:41.200
+ there's that little switch that says simple. Yeah, they'll hide those tabs. Yeah, that actually
+
+29:41.200 --> 29:47.040
+ gets rid of the tabs as well, which I'm actually using the tabs. But what you can do is you can
+
+29:47.040 --> 29:53.200
+ go remove status bar, it gets you a bit more room as well. So yeah, now we've actually doing
+
+29:53.200 --> 29:57.040
+ pretty well. And one particularly nice thing in Jupyter, by the way, is it actually has a
+
+29:57.040 --> 30:10.880
+ graphical debugger, which, you know, so if we go for in range 10 print, I, and then we turn on
+
+30:10.880 --> 30:16.480
+ the debugger with this little button here. And
+
+30:16.480 --> 30:29.280
+ so we can turn this, we can put a break point here on and off by just clicking. And so now if
+
+30:29.280 --> 30:47.760
+ I run this cell, you'll see that it's got a break point, which is very nice. And we can.
+
+30:47.760 --> 31:00.640
+ Got a lot of things in here, doesn't it?
+
+31:00.640 --> 31:14.880
+ Why is that? There we go. Music. What?
+
+31:16.560 --> 31:24.640
+ Let's get that one. Okay, so you can see like, here's I, and so if I now step through this,
+
+31:24.640 --> 31:31.760
+ let's be a better way to just show what we want.
+
+31:31.760 --> 31:58.800
+ Okay, so it's kind of like, yeah, it's, it's, that's kind of a useful thing to have, I think.
+
+32:02.480 --> 32:07.520
+ Yeah, I guess this would probably be easier if this is actually probably a really good place to
+
+32:09.520 --> 32:14.320
+ not use import star because I don't see an obvious way to only add variables we want to
+
+32:14.320 --> 32:38.960
+ the debugger. So let's restart the kernel. Turn on the debugger. Okay, and then run this cell.
+
+32:38.960 --> 32:47.520
+ There we go, that's much better. So now we can just see that variable changing.
+
+32:49.200 --> 32:54.000
+ You might be wondering why it is that I clearly am not very competent using the graphical debugger,
+
+32:54.000 --> 33:00.400
+ and that's because I don't use it myself because I actually really like the,
+
+33:00.400 --> 33:10.240
+ the non graphical debugger, which I'll quickly show you, the non graphical debugger, you can use
+
+33:10.240 --> 33:16.800
+ anywhere. Jupyter doesn't have to be a terminal or whatever, but inside Jupyter, if you just put
+
+33:16.800 --> 33:27.840
+ percent, percent debug at the top of your cell, it runs the regular Python debugger, which is a,
+
+33:27.840 --> 33:35.520
+ it's a REPL, a reboot of our print loop based debugger. And you can type h for help to find out
+
+33:35.520 --> 33:41.520
+ what you can do. And basically, you can type just the first letter of any of these if they're
+
+33:43.840 --> 33:49.920
+ unique by first letter. You can see actually the ones which have the first letter. So C is short
+
+33:49.920 --> 33:55.120
+ for continue, h is short for help, and is short for next, p is short for print. So the single
+
+33:55.120 --> 34:00.000
+ letter ones are short for like the ones that you use all the time. And I always use the single
+
+34:00.000 --> 34:09.280
+ letters because, you know, I wouldn't you. So for example, L, actually, I'm not really in a file. So
+
+34:11.920 --> 34:18.480
+ that won't work. So let's try, for example, we can do n for next. So that just n goes to the next line.
+
+34:18.480 --> 34:25.680
+ So here we are. So we've now gone into the, you know, the code that we have in our cell. So we
+
+34:25.680 --> 34:38.800
+ should now be able to next again. This is really weird. Why is this not? Must be something to do.
+
+34:38.800 --> 34:53.840
+ What if this is some weird G put a lab thing? Yeah, okay, I think what happened was that because
+
+34:53.840 --> 35:00.240
+ I had used the graphical debugger, it broke the normal debugger. Okay, so let's start again. So,
+
+35:00.240 --> 35:13.120
+ so I hit n for next, and that's still not really working. Okay, no worries. Let's switch to
+
+35:13.120 --> 35:37.280
+ a regular Jupyter because I know it'll work there. Okay, and here we are.
+
+35:51.360 --> 35:58.400
+ Okay, descent, descent debug for I n range 10
+
+35:58.400 --> 36:19.200
+ and i. Now, curious.
+
+36:19.200 --> 36:26.480
+ What if I put this in a function with a function?
+
+36:36.160 --> 36:42.320
+ Oh, okay. I don't know. I pretty much always debug things that are in functions. So that's
+
+36:42.320 --> 36:49.760
+ what's going on. Okay, so I create a little function. I put subcent debug, I called the function.
+
+36:51.440 --> 36:58.320
+ And then the first thing I did is I take s steps into the current function. So this is pointing
+
+36:58.320 --> 37:02.960
+ out the thing it's about to run. It's about to run the thing called define f. So we're now inside
+
+37:02.960 --> 37:09.360
+ the definition of f. And now it's going to run something for i in range 10. So n is next. So n
+
+37:09.360 --> 37:15.440
+ just advances one instruction. So now that I've done that, I should exist. So you can print the
+
+37:15.440 --> 37:20.320
+ contents of something by pressing p, and then the thing you want to print. So i is now zero.
+
+37:21.040 --> 37:25.440
+ And so then I can go next. And in fact, you don't even have to type n. If you just hit enter,
+
+37:25.440 --> 37:30.880
+ it redoes the last thing you did. So that just jumps to the next line. And so I can
+
+37:30.880 --> 37:41.520
+ p I. Okay, now it's one. And so you get the idea. So basically, and then I can type l to list the
+
+37:42.800 --> 37:48.480
+ file that I'm currently at. I can also see w to see like what called this,
+
+37:49.840 --> 37:54.240
+ which it was actually called in this case by i Python or by deep notebook.
+
+37:56.240 --> 38:00.080
+ So this is how I always debug things. And I'm sure at some point, well, actually need to debug
+
+38:00.080 --> 38:03.520
+ something. I thought I'll just quickly show you that.
+
+38:07.600 --> 38:12.640
+ Fergs here who have used both the graphical and the regular Python debugger, do you have any
+
+38:12.640 --> 38:18.480
+ preferences or anybody here that has just used one or the other and likes it doesn't like it.
+
+38:18.480 --> 38:32.320
+ I have only used the text debugger. Yeah, I love it. Yeah, wonderful, especially learning about,
+
+38:32.320 --> 38:37.680
+ you know, doing the first day, of course, you can just put set stress wherever you'd like.
+
+38:38.080 --> 38:45.760
+ And you are immediately transported to there. So for instance, when working on a new architecture
+
+38:45.760 --> 38:52.080
+ where implementing some architecture of, I don't know, my own idea or trying to re implement something,
+
+38:52.080 --> 38:59.680
+ I create my own class, and then I can step through the shapes of the tensor. It's just super useful.
+
+39:01.040 --> 39:05.520
+ Yeah, so you mentioned set trace. So,
+
+39:07.200 --> 39:14.640
+ pdb stands for the Python debugger. So set trace is very useful. It's how you set, oopsie does it,
+
+39:14.640 --> 39:21.440
+ it's how you set a breakpoint. It may seem like a weird way to set a breakpoint, but basically,
+
+39:21.440 --> 39:26.960
+ if we run this now, we don't even have to say percent percent debug, it jumps into the debugger
+
+39:26.960 --> 39:34.320
+ immediately after that set trace call. So you can put that not only in your own Python files,
+
+39:34.320 --> 39:39.040
+ but in Python files that you've installed from pep or condor or whatever, and then step through
+
+39:39.040 --> 39:44.400
+ it in the way we just talked about hit n and start running through and check the values of
+
+39:44.400 --> 39:50.240
+ variables, whatever. Oh, I didn't say how to exit. You press q for quick.
+
+39:52.000 --> 39:57.280
+ If you're learning in your library, this is super useful because you just put the library from
+
+39:57.280 --> 40:06.160
+ GitHub, you do pep at the temple install, and then you literally can step into the code that you're
+
+40:06.160 --> 40:14.880
+ reading about. So, like, very synthesis. And also, basically, pretty much every major programming
+
+40:14.880 --> 40:22.880
+ language debugger works the same way. So you can, yeah, if you're doing c code, there's a debugger
+
+40:22.880 --> 40:27.760
+ called gdb that works the same way. If you're doing pep or code, the pep or debugger works the same
+
+40:27.760 --> 40:34.400
+ way, they'll have the same keyboard shortcuts, the same way of working. So, it's skills you can reuse.
+
+40:34.400 --> 40:43.040
+ And that's another thing, like, in general, I really try to avoid, you know, unless they're really,
+
+40:43.040 --> 40:47.920
+ really good, but in general, proprietary tools, I generally avoid instead, try to use tools that
+
+40:47.920 --> 40:53.280
+ I can use everywhere, because then I don't have to learn as many things. I can learn a small number
+
+40:53.280 --> 40:59.600
+ of things and reuse them all the time. And particularly these, like, really old tools, like the way
+
+40:59.600 --> 41:05.920
+ the Python debugger works goes back a long time, even before Python existed, these tools have been
+
+41:05.920 --> 41:10.720
+ developed over many years to get, make them really perfect, you know, really to make them work really
+
+41:10.720 --> 41:16.960
+ well by many people. And so they're very nicely optimized once you learn them. And they do take
+
+41:16.960 --> 41:23.200
+ some time to learn. But if you're doing these work throughs, then you're the kind of person
+
+41:23.200 --> 41:24.480
+ who's prepared to put in that time.
+
+41:24.480 --> 41:32.320
+ So there's another thing related to what Jeremy just talked about. And those are key bindings
+
+41:32.320 --> 41:40.640
+ in things like TMAX or even in Jupyter Notebook that we're looking at right now. So my normal
+
+41:42.160 --> 41:47.920
+ intuition and what I would do a couple of years ago, when I jumped into something new,
+
+41:47.920 --> 41:54.240
+ oh, I would just come up with my own unique key bindings that, hey, they will make life comfortable
+
+41:54.240 --> 42:01.680
+ for Radit. They make it, you know, they're ergonomic and they're easy to remember. But then as we switch
+
+42:01.680 --> 42:07.040
+ to a new environment, you sort of have to bring the key bindings with you, which is a horrible
+
+42:07.040 --> 42:14.560
+ pain. So just like Jeremy mentioned that he tries to use software that is readily available.
+
+42:14.560 --> 42:20.400
+ A way to shoot yourself in the foot would be to come up with your intricate key bindings.
+
+42:20.400 --> 42:25.760
+ It's just sometimes very useful to go with the key bindings that are already there.
+
+42:26.960 --> 42:29.360
+ And I mean, and even more importantly,
+
+42:32.240 --> 42:38.320
+ learning to use the keyboard for everything is a good idea. I tend to use the mouth
+
+42:38.320 --> 42:44.000
+ a little bit for teaching because I want people to see what I'm doing. But in normal life, I
+
+42:44.000 --> 42:52.320
+ hardly ever touch my mouth because I'm just zipping around. So yeah, there's a few tips.
+
+42:52.880 --> 43:00.160
+ Okay. Just a question, slightly on a different topic, but on the same thing, if the library
+
+43:00.160 --> 43:05.520
+ behind this notebook has changed or get upgraded, how do we get the latest?
+
+43:05.520 --> 43:11.920
+ That's what we're going to do right now. So, exactly. Okay. So let's say I want to upgrade
+
+43:11.920 --> 43:18.880
+ something or install something in this environment, in this on this paper space server.
+
+43:18.880 --> 43:23.840
+ No, as we discussed, a paper say service, not really a server at all. And so if I people
+
+43:23.840 --> 43:29.600
+ ponder install something, it's actually not going to be here next time I come here.
+
+43:30.320 --> 43:34.560
+ So that's a bit of a bummer. So how do we fix that? It's
+
+43:37.280 --> 43:41.680
+ we're actually going to learn a lot in order to fix this. The first thing to know is that
+
+43:41.680 --> 43:46.640
+ paper space has this idea of persistent storage. And specifically, there's a directory
+
+43:48.480 --> 43:53.920
+ called slash storage, which contains your persistent storage. And so as you can see,
+
+43:53.920 --> 43:59.600
+ even though I only just created this server, you know, just now there's already things in here.
+
+44:00.240 --> 44:08.880
+ And that's because that's my persistent storage. So this is basically a mounted network drive.
+
+44:08.880 --> 44:14.480
+ You can see all of the drives and how much room you've got on each one by using diff
+
+44:14.480 --> 44:20.560
+ df, which is disk free. And then if you remember minus h is the human eyes, it tells you sizes in
+
+44:20.560 --> 44:25.680
+ like gigabytes and megabytes and stuff. And so here's a list of all the disks that
+
+44:27.600 --> 44:34.080
+ paper spaces provided for me. And so there's one called slash, which has got 168 gigabytes
+
+44:34.080 --> 44:40.640
+ available. And here's my storage, which has got 496 gigabytes available. So that like that by
+
+44:40.640 --> 44:46.240
+ default, the free for free, you get five gig. I just feel pretty good, right? But for eight bucks,
+
+44:46.240 --> 44:50.720
+ you get 15 gig, which is a hell of a lot better. Not all of these are rideable. So for example,
+
+44:50.720 --> 44:54.880
+ they have actually a slash data sets thing mounted there for you, which is kind of cool,
+
+44:54.880 --> 45:01.360
+ because you can actually start using data sets that's used by fast AI straight away, which is
+
+45:01.360 --> 45:15.360
+ pretty nice. Yeah, they're the main ones, basically. So what are we going to do about this, you know,
+
+45:15.360 --> 45:21.280
+ slash storage? This is really where we want to install pip libraries or Conda libraries too.
+
+45:21.280 --> 45:34.720
+ So let's just try to think of anybody think of a pip library they want to install. Any
+
+45:34.720 --> 45:41.280
+ favorite ones? You use something like auto pip eight or Jedi or something like that.
+
+45:41.280 --> 45:57.920
+ Yeah, I'm sorry. Maybe we'll just be able to let a version of a fast core. So normally to
+
+45:57.920 --> 46:02.720
+ install the latest version of something, so you can use people kind of for this actually,
+
+46:02.720 --> 46:09.360
+ for installing stuff kind of like locally, the way we're describing it, it's actually going to be
+
+46:09.360 --> 46:17.360
+ easier to use pip than Conda. So we're going to use pip in the in a past lesson, I said like avoid
+
+46:17.360 --> 46:24.960
+ pip. You know, I think we're down actually at a point where we can talk about where it's okay to
+
+46:24.960 --> 46:33.680
+ use pip. So pip is a perfectly good way to install things which just contain Python code,
+
+46:33.680 --> 46:40.640
+ or which you kind of pretty self contained. You wouldn't normally want to pip install PyTorch
+
+46:40.640 --> 46:48.080
+ because it requires like CUDA and stuff. And yeah, pip doesn't really have a way of installing
+
+46:48.080 --> 46:53.520
+ those kind of libraries. That's why if you use pip to install PyTorch, you have to like separately
+
+46:53.520 --> 46:59.680
+ install the Nvidia software development kit with Conda, you don't have to. But for a library like
+
+46:59.680 --> 47:06.240
+ fast core, and in fact, honestly, most libraries, you know, that like GPU kind of libraries,
+
+47:07.200 --> 47:15.040
+ pips actually fine. And so normally to upgrade software with pip, you would type pip minus u,
+
+47:15.040 --> 47:19.280
+ and then you type the thing that you want to upgrade. Or if you just want to install it,
+
+47:19.280 --> 47:25.200
+ you do it without the minus u. There's an extra flag you can use, which is minus minus user.
+
+47:25.200 --> 47:32.640
+ And that's going to install it into your home directory. And so there's lots of reasons you
+
+47:32.640 --> 47:38.320
+ would want to do that. For example, if you don't have root access, or like in our case, we don't
+
+47:38.320 --> 47:46.720
+ have the ability to like save the stuff in the root directory. So if I run that, oh, and of course,
+
+47:46.720 --> 48:00.160
+ I have to say install. Okay, so it's upgraded it from 1.4 to 1.4.3. So let's see if that actually
+
+48:00.160 --> 48:07.120
+ worked. Jeremy, why are you using like is Mamba not an option for this?
+
+48:07.120 --> 48:13.040
+ Yeah, so this is this is it's not a great option for installing stuff into a user directory. At
+
+48:13.040 --> 48:18.480
+ least I'm less familiar with with that. This is a way that I know is going to work fine for
+
+48:19.200 --> 48:25.120
+ this special situation where we want to put stuff into our, into our home directory.
+
+48:26.960 --> 48:33.920
+ So yeah, Mamba and Condor kind of synonyms, Mamba's a faster way to do it. Whereas pip
+
+48:34.800 --> 48:39.280
+ is a different thing altogether. And it has it has this special thing I'm showing you right now,
+
+48:39.280 --> 48:45.920
+ which is minus minus user. And if Condor or Mamba has such a thing, I don't know about it and
+
+48:45.920 --> 48:50.720
+ haven't learned how to use it yet. I'm not saying it doesn't exist, but at least for pip, this works
+
+48:50.720 --> 49:01.680
+ fine. So if we now look at fast cause version, there we go. So it has in fact installed 1.4.3.
+
+49:01.680 --> 49:11.680
+ Now where did it put that? So oops, here in our home directory, you can see it's actually created
+
+49:11.680 --> 49:20.320
+ something called dot local and dot local is where pip puts stuff that you install with dash, dash
+
+49:20.320 --> 49:34.640
+ user. And as you can see, it's got various sub directories. And here is fast core. So if we want
+
+49:34.640 --> 49:42.560
+ to be able to continue to use the latest version of fast core next time, we start this notebook server.
+
+49:42.560 --> 49:59.920
+ We want this dot local directory to still be there. Right. So how do we do that? Well, what we can do
+
+49:59.920 --> 50:15.520
+ is we can actually put that into our storage. So we could move that into our storage.
+
+50:18.160 --> 50:24.800
+ Now, we've, okay, that's all very well, but we've that it's, it will now be in storage next time we
+
+50:24.800 --> 50:32.480
+ come back. But Python needs it to be here in our, in our home directory. So what do we do? Well,
+
+50:32.480 --> 50:38.960
+ what we have to do is we have to make it so that dot local in our home directory and dot local in
+
+50:38.960 --> 50:43.840
+ our persistent storage are the same thing. And the way we do that is something with something
+
+50:43.840 --> 50:49.280
+ Radik was mentioning before, which is using a sim link or a symbolic link. If I say ln for link
+
+50:49.280 --> 50:56.080
+ and minus s for symbolic, and I say what's the thing that you want to symbolically link? And I say it's
+
+50:58.480 --> 51:01.120
+ slash George slash dot local. That's the thing I just moved.
+
+51:03.360 --> 51:07.120
+ Then you'll find that in this directory,
+
+51:11.200 --> 51:18.400
+ oops, if hidden, there is now a dot local, but it looks special. Looks different. And it's like
+
+51:18.400 --> 51:24.400
+ saying, oh, it's not a folder at all. It's actually just pointing at this other place. But it's like
+
+51:24.400 --> 51:32.720
+ it really exists. I can, I'll ask it, for example, I can cd into it. And remember to say the last
+
+51:32.720 --> 51:38.160
+ token from the previous line, I said this before is exclamation mark dollar. So that'll be dot local.
+
+51:38.880 --> 51:45.600
+ You can see it does cd dot local. So yeah, it's basically like a, it's not a copy of it.
+
+51:45.600 --> 51:51.600
+ It's like a shortcut into it. In fact, I think on Mac, they're called aliases and on windows,
+
+51:51.600 --> 51:59.600
+ they're called shortcuts. It's the same thing. And on eudix type things, it's called a
+
+51:59.600 --> 52:07.600
+ similar, a symbolic link. So now if I run i Python again and check the version,
+
+52:07.600 --> 52:18.480
+ yep, it's still 1.4.3. So it's still finding it. So this way, we can actually
+
+52:21.680 --> 52:28.800
+ make sure we've got, you know, that we can install and upgrade packages and still see them every
+
+52:28.800 --> 52:33.360
+ time we launch, even if it's a new notebook server or relaunch an existing one or whatever.
+
+52:33.360 --> 52:40.800
+ We just have to make sure that every time we start a new paper space instance, that it creates
+
+52:40.800 --> 52:49.120
+ these any sim links we want. And so paper space has this really nifty thing, which is
+
+52:50.800 --> 52:57.840
+ you can create a file called dot bash dot local in storage. And it will run that file every time
+
+52:57.840 --> 53:08.960
+ you start a notebook. And so you'll see I've got a file there that goes through and creates a
+
+53:08.960 --> 53:14.720
+ sim link to dot SSH and to dot local and to dot git credentials and a bunch of stuff that we
+
+53:14.720 --> 53:19.920
+ haven't talked about all of them yet and dot caggle and sim links them all to slash storage.
+
+53:19.920 --> 53:29.120
+ And so this way, every time I start a new computer, I'm going to have all that stuff
+
+53:31.680 --> 53:39.920
+ set up automatically, which is, yeah, I think it's pretty, which is pretty great. So that's how you can
+
+53:41.760 --> 53:46.000
+ customize your paper space instance.
+
+53:46.000 --> 53:51.040
+ So Jeremy, just to recap there, to make sure I've got that clear in my head and for everyone else,
+
+53:51.040 --> 53:54.880
+ too. So essentially what you've done is that you've got this bash script that you keep inside your
+
+53:54.880 --> 53:59.280
+ persistent storage, which contains all your config and bits and pieces that you want. And then
+
+53:59.280 --> 54:05.200
+ every time you fire up a new instance, you're just sim linking all that stuff you've got in storage
+
+54:05.200 --> 54:15.120
+ to the machine you've just created. Yeah. Yeah. And in particular, you know, after I
+
+54:15.120 --> 54:21.920
+ type, you know, pip install minus minus user something, it's created this dot local directory.
+
+54:21.920 --> 54:27.120
+ So, and that's something that I want to be persistent. So I move that into storage and then sim link
+
+54:27.120 --> 54:31.200
+ it back to where it's meant to be understood. Thanks.
+
+54:32.880 --> 54:38.560
+ And the reason that you're doing this is because you can't get access to the
+
+54:39.120 --> 54:43.680
+ the root directory on their server. Like, would you need to do this on your own computer?
+
+54:43.680 --> 54:49.520
+ No, this is just for paper spaces. Not that I can't access it, Mark, I can, I can install it.
+
+54:49.520 --> 54:56.080
+ But the problem is, these are not real servers. That's not that that's not persisted. So if I
+
+54:56.080 --> 55:01.200
+ took when in five hours time, when this shuts itself down, and then I start up the server again,
+
+55:01.200 --> 55:08.720
+ it's not there. It's it's a it's a mock server. It looks like it's your own server, but it doesn't
+
+55:08.720 --> 55:15.600
+ actually keep your changes. So unless they're necessary only on virtual machines, but like on
+
+55:15.600 --> 55:20.080
+ a on your own computer, you wouldn't need this is not only just this is like just this one. This
+
+55:20.080 --> 55:25.280
+ is just paper space. Yeah, this is just for paper space. And we're spending time talking about
+
+55:25.280 --> 55:31.120
+ paper space because it's so much better than any other option out there for for GPU servers.
+
+55:31.120 --> 55:37.440
+ Like they're the only ones that have these nifty tricks. Yeah, on your own computer,
+
+55:37.440 --> 55:41.760
+ you don't have to worry about any of this stuff. And if you've got your own GPU, you certainly don't
+
+55:41.760 --> 55:47.360
+ have to worry about it. But you know, there are other notebook servers like Google CoLab,
+
+55:47.360 --> 55:52.240
+ or whatever, but they don't have anything like this. So on Google CoLab, you're going to have to like
+
+55:53.200 --> 55:58.400
+ reinstall everything you need every time you start up a new notebook. And you know, you won't
+
+55:58.400 --> 56:04.480
+ have any of this proper environment. So yeah, as I as you might have seen, even my SSH keys
+
+56:04.480 --> 56:12.320
+ are sim linked here. So I'm always going to have my SSH keys anytime I create a new
+
+56:12.320 --> 56:21.200
+ paper space instance. So yeah, this is like a super convenient way to have a free
+
+56:22.560 --> 56:26.320
+ GPU server whenever you want it, which I think is pretty amazing.
+
+56:26.320 --> 56:33.680
+ Jeremy, a question I followed what you did in terms of installing people installing the fast core.
+
+56:34.480 --> 56:41.040
+ But then when I use Python and try to import fast core, it throws an error. But when I do
+
+56:41.040 --> 56:44.560
+ iPitan and import fast core, it can find it, does it?
+
+56:44.560 --> 56:47.680
+ That's interesting. Do you want to share your screen and we could try to
+
+56:47.680 --> 57:01.520
+ I'll see back that. I might have to stop sharing first. Let's see. Okay, I stopped sharing.
+
+57:01.520 --> 57:03.520
+ Okay.
+
+57:16.320 --> 57:17.920
+ Should share now. Let me know.
+
+57:24.720 --> 57:26.640
+ We're not saying here comes.
+
+57:26.640 --> 57:38.880
+ I forgot to press. Okay, so let's have a look. So this is on
+
+57:39.760 --> 57:45.040
+ paper space and you went pip install good and you went
+
+57:48.080 --> 57:50.960
+ Python. Interesting. Okay, so
+
+57:50.960 --> 57:57.120
+ great. So press control D to exit from iPython.
+
+57:59.040 --> 58:03.360
+ And you can press it again or hit enter. You didn't actually have to press Y,
+
+58:03.360 --> 58:05.600
+ see how it's in square brackets. That means it's a default.
+
+58:05.600 --> 58:10.560
+ So you can just do it. Okay, so let's find out what's going on. So type which Python.
+
+58:10.560 --> 58:17.200
+ Okay, so
+
+58:23.440 --> 58:27.360
+ Okay, and then type which iPython.
+
+58:31.200 --> 58:36.400
+ I've got a strong suspicion. Try typing Python 3 instead of Python.
+
+58:36.400 --> 58:40.560
+ So type Python 3 or one word. Not which Python.
+
+58:44.560 --> 58:46.400
+ Okay, now try importing first core.
+
+58:50.160 --> 58:54.560
+ Interesting. Let's see if I have the same problem online. So Python.
+
+58:56.480 --> 59:02.160
+ Import first core. Oh, I'm getting the same error in mine. Very interesting.
+
+59:02.160 --> 59:06.240
+ Okay, I'm going to share my screen again.
+
+59:11.360 --> 59:12.320
+ Very well spotted.
+
+59:16.080 --> 59:19.360
+ So this is exactly the kind of bug that I want us to have so we can
+
+59:19.360 --> 59:33.040
+ learn how to hopefully fix it. I wonder if
+
+59:37.840 --> 59:42.720
+ because how do you ever just run Python and I've only recently started using pip install user
+
+59:42.720 --> 59:50.400
+ because it's because of this paper space thing.
+
+59:50.400 --> 1:00:07.520
+ So I wonder if it's something specific to pip store user. So let's see if we can debug this.
+
+1:00:12.880 --> 1:00:14.160
+ Actually, what's interesting
+
+1:00:14.160 --> 1:00:21.840
+ is that module name first core is actually very interesting because that means it
+
+1:00:21.840 --> 1:00:24.800
+ also doesn't have fast AI. Which.
+
+1:00:28.480 --> 1:00:40.880
+ Yeah, okay, so the way Python finds modules is a very similar idea of how bash finds
+
+1:00:40.880 --> 1:00:46.960
+ executables as there's a path basically. And so in Python, there's a module called sys
+
+1:00:48.320 --> 1:00:52.960
+ which is where all kinds of things are stored.
+
+1:00:57.600 --> 1:00:58.960
+ And so if we go sys.
+
+1:01:03.280 --> 1:01:04.480
+ There's a sys.path.
+
+1:01:04.480 --> 1:01:09.440
+ Now this is not the.
+
+1:01:12.800 --> 1:01:17.600
+ This is not the bash path environment variable.
+
+1:01:17.600 --> 1:01:22.800
+ This is a totally separate thing with a similar name, which is an all lower case path, sys.path
+
+1:01:22.800 --> 1:01:27.680
+ in Python. This is a list of places that Python will search for Python libraries.
+
+1:01:27.680 --> 1:01:33.200
+ Now, if I.
+
+1:01:35.600 --> 1:01:37.280
+ Import first core.
+
+1:01:40.880 --> 1:01:46.320
+ And you can see it's getting it from opt conda lib python 3.7 site packages.
+
+1:01:46.320 --> 1:01:52.960
+ And you can see that is in my sys.path. So that's how it's finding first core.
+
+1:01:52.960 --> 1:01:58.720
+ So why isn't Python finding it? Well, we could do the same thing.
+
+1:02:04.000 --> 1:02:06.320
+ Um, sys.path.
+
+1:02:10.480 --> 1:02:16.960
+ So that's interesting. So Python here is not including site packages.
+
+1:02:16.960 --> 1:02:24.320
+ Whereas, where as I Python is. So there's something I guess about how
+
+1:02:28.880 --> 1:02:29.920
+ um,
+
+1:02:29.920 --> 1:02:34.400
+ package space of installed things because I'm pretty sure that's not what happens here.
+
+1:02:34.400 --> 1:02:39.920
+ Let's try it. Python import sys, sys.path.
+
+1:02:41.280 --> 1:02:42.720
+ Yeah, so here's site packages.
+
+1:02:42.720 --> 1:02:45.760
+ Um, so.
+
+1:02:49.120 --> 1:02:50.720
+ Let's see what happens if we.
+
+1:02:52.720 --> 1:02:57.840
+ Site packages. So this is a, this is like the normal place that
+
+1:02:57.840 --> 1:03:01.600
+ pep and kind of install things is into the site packages directory.
+
+1:03:01.600 --> 1:03:13.360
+ Um, and yeah, I've never really looked into it because I've never had problems accessing it before.
+
+1:03:18.880 --> 1:03:22.480
+ Oh, it's something to do with Debian puts things in
+
+1:03:22.480 --> 1:03:35.360
+ in just packages. That's interesting.
+
+1:03:35.360 --> 1:03:54.320
+ Site packages not in path.
+
+1:04:29.120 --> 1:04:32.080
+ Um, Jeremy, why is this talking to me? Hang on a sec. Sorry.
+
+1:04:32.080 --> 1:04:38.400
+ Oh, go on. Yes. Sorry. No, just when you were looking at those two paths, one was 3.7 and one was 3.9.
+
+1:04:38.400 --> 1:04:42.560
+ I guess there were two different. Oh, I didn't even notice that. Is that sure?
+
+1:04:43.680 --> 1:04:44.160
+ Um,
+
+1:04:46.640 --> 1:04:53.840
+ You mean here? 3.9? Yeah. And 3.7. There you go. You're quite right. Thank you.
+
+1:04:54.640 --> 1:04:56.560
+ Okay. So that'll be the reason.
+
+1:04:56.560 --> 1:05:02.080
+ Um, which Python, which I Python.
+
+1:05:04.240 --> 1:05:05.360
+ Yes. Okay.
+
+1:05:07.280 --> 1:05:11.680
+ Yeah. All right. So it wasn't just a case for typing Python three. It was a case of typing Python 3.9.
+
+1:05:12.560 --> 1:05:21.920
+ There we go. Oh, still not there. Oh, it's 3.7 that I Python is using Python 3.7.
+
+1:05:21.920 --> 1:05:30.080
+ Uh, huh. Okay. Thanks. That's exactly what it was.
+
+1:05:32.560 --> 1:05:37.200
+ I don't know why they've got so many Python installed. It seems a bit like overkill.
+
+1:05:40.000 --> 1:05:45.520
+ So the Python 3.9 here was the system by temporary and that I didn't read and was
+
+1:05:45.520 --> 1:05:54.160
+ I mean, because we're on paper space, um, I think they were all, um,
+
+1:05:56.560 --> 1:06:05.040
+ which Python, which Python 3, they're actually all the ones in Conda. So it's,
+
+1:06:05.920 --> 1:06:12.240
+ so paper space is installed. Conda is the root. And so none of these are the system Python, actually.
+
+1:06:12.240 --> 1:06:19.760
+ Um, yeah, paper space is a bit unusual in that they have us run as root.
+
+1:06:20.640 --> 1:06:23.360
+ Um, so things are a little bit confusing, actually.
+
+1:06:24.800 --> 1:06:31.440
+ Um, yeah. Now as to why I Python is running 3.7.
+
+1:06:31.440 --> 1:06:48.800
+ Um, I'm actually not sure. Um, so something else that I do is, um,
+
+1:06:50.880 --> 1:06:58.800
+ is I create a get directory and obviously I create a get directory.
+
+1:06:58.800 --> 1:07:08.240
+ Um, and then I get clone things into it using my SSH keys. Um, and then what I do,
+
+1:07:08.240 --> 1:07:14.560
+ then what I do is I move the get directory into slash storage and then sim link it back.
+
+1:07:15.680 --> 1:07:21.040
+ Um, and actually where I sim link it to, I don't actually sim link it to my, um,
+
+1:07:21.040 --> 1:07:28.880
+ home folder actually sim link it inside slash notebooks. And the reason for that is that, um,
+
+1:07:30.960 --> 1:07:42.080
+ that's where, um, uh, that's where paper space uses as the root of its Jupiter lab.
+
+1:07:43.440 --> 1:07:47.920
+ So actually you can see here I've done it before, um, because it's in slash storage, right? So you can
+
+1:07:47.920 --> 1:07:54.160
+ see here's my, my get stuff. And so I actually
+
+1:07:57.120 --> 1:08:02.640
+ think, you know, it's, I don't really want any of this stuff that they've put put in here for me.
+
+1:08:02.640 --> 1:08:08.880
+ Um, so actually maybe I should try deleting. In fact, let's try that. What happens if we,
+
+1:08:10.240 --> 1:08:10.720
+ um,
+
+1:08:10.720 --> 1:08:23.520
+ um, create a server and we make that get repo thing empty. Because that's really what I want.
+
+1:08:28.480 --> 1:08:34.640
+ So we've uploaded your SSH keys into paper space. Yeah, I've uploaded them and I've put them in
+
+1:08:34.640 --> 1:08:40.640
+ slash storage and in my dot, but slash storage slash dot bash RC dot local, I sim link them into
+
+1:08:40.640 --> 1:08:49.680
+ my home directory. Correct. I'm not entirely paranoid about such things. Yeah. I mean, if you were,
+
+1:08:49.680 --> 1:08:58.000
+ if you were paranoid about things, then create a separate SSH key pair just for this and put that
+
+1:08:58.000 --> 1:09:04.800
+ in your GitHub. So then people, if somebody steals your SSH private key, the worst thing they could
+
+1:09:04.800 --> 1:09:11.760
+ do is to get into your GitHub. That's so cool. I didn't think about that. Wonderful. We'll do that.
+
+1:09:14.320 --> 1:09:16.240
+ Um, all right. So what would happen?
+
+1:09:16.240 --> 1:09:25.280
+ Let's get overkill for notebooks at the moment. Let's delete some of these.
+
+1:09:36.080 --> 1:09:41.680
+ Um, so yeah, but for me on paper space, um, you know, everything's kind of going into that
+
+1:09:41.680 --> 1:09:51.360
+ slash storage. So I don't really care about deleting things. All right. So if I,
+
+1:09:54.640 --> 1:09:57.200
+ will it let me delete this? Because that's really what I want to do.
+
+1:10:03.920 --> 1:10:07.600
+ So I pressed delete. It's still showing me this. I don't know if that's a default or if it's just an
+
+1:10:07.600 --> 1:10:13.520
+ example.
+
+1:10:22.800 --> 1:10:27.760
+ Well, I'm here. So I just want to mention maybe, sorry, maybe I'm the only one. Um, I understand
+
+1:10:27.760 --> 1:10:31.920
+ it in principle, but you're talking about with the SSH keys and importing them and everything, but
+
+1:10:32.640 --> 1:10:36.560
+ the details of the execution. If I'm the only one that's fine, I'll struggle with it. Oh, yeah.
+
+1:10:36.560 --> 1:10:41.280
+ Let's let's do that. I don't know that I can actually do it. Yeah, let's do it. I, that's, that's
+
+1:10:41.280 --> 1:10:46.800
+ excellent. Thank you. Um, one thing I just want to do for my own interest is I'm just going to
+
+1:10:47.680 --> 1:10:53.760
+ jump onto YouTube and see if anybody actually watches these live streams. Because if they don't,
+
+1:10:53.760 --> 1:11:02.880
+ I won't waste my time running them.
+
+1:11:02.880 --> 1:11:04.880
+ Yeah.
+
+1:11:04.880 --> 1:11:10.880
+ I'm not sure it's worth it. I might just assume in the future.
+
+1:11:10.880 --> 1:11:14.880
+ Did you know your hands are credit, by the way?
+
+1:11:14.880 --> 1:11:16.880
+ Yeah.
+
+1:11:16.880 --> 1:11:18.880
+ So.
+
+1:11:18.880 --> 1:11:22.880
+ You don't have to put your hand up. You can just talk.
+
+1:11:22.880 --> 1:11:30.880
+ Okay. Okay. Um, you know, some libraries, the more exotic ones, like I'm not sure maybe grabs this
+
+1:11:30.880 --> 1:11:38.880
+ or that they require to use something, yeah, I'll just install some library. Oh, yeah.
+
+1:11:38.880 --> 1:11:46.880
+ Let's talk about that as well. Great. Um, okay. So this thing has successfully started
+
+1:11:46.880 --> 1:11:52.880
+ in the machine. Let's see if there's anything in it.
+
+1:11:52.880 --> 1:12:10.880
+ So I was just starting the machine wouldn't delete it. The git repo thing. Yeah. Okay. Great. So this is actually just empty. This is actually probably what I would be more inclined to do. Although I expected to see my slash get there.
+
+1:12:10.880 --> 1:12:12.880
+ Oh, wait.
+
+1:12:12.880 --> 1:12:20.880
+ Okay.
+
+1:12:20.880 --> 1:12:24.880
+ All right. Here's an interesting problem.
+
+1:12:24.880 --> 1:12:26.880
+ That dot bash RC.
+
+1:12:26.880 --> 1:12:32.880
+ Local file. It runs when you run a terminal.
+
+1:12:32.880 --> 1:12:39.880
+ So my git folder, SimLink, didn't appear until I actually opened a terminal. As soon as I did that.
+
+1:12:39.880 --> 1:12:42.880
+ It appears.
+
+1:12:42.880 --> 1:12:47.880
+ Um, and I probably hadn't noticed that before, because I always run a terminal as soon as I start.
+
+1:12:47.880 --> 1:12:52.880
+ Pretty much. Um, there is a way actually.
+
+1:12:52.880 --> 1:13:13.880
+ That what they actually run when you start a notebook, when you start a server is it actually runs this file run.sh, which we can't change. But, um, it does actually have a pre run.sh file, which is, if you put stuff in slash storage slash pre run.sh.
+
+1:13:13.880 --> 1:13:27.880
+ It will run before Jupiter starts, which maybe is actually a better place for all the stuff I'm doing. Maybe that's what we should use instead of dot bash RC dot local.
+
+1:13:27.880 --> 1:13:37.880
+ Because this only runs when you run a terminal.
+
+1:13:37.880 --> 1:13:41.880
+ Yes, interesting.
+
+1:13:41.880 --> 1:13:44.880
+ Let's try that.
+
+1:13:44.880 --> 1:13:49.880
+ Actually, I'd forgotten. It looks like I have got local member stuff working as well.
+
+1:13:49.880 --> 1:13:52.880
+ Maybe we can try that next time.
+
+1:13:52.880 --> 1:14:02.880
+ So, um, by the way, to look at the, the end of a file, you can just type tail. So if I go tail slash run dot sh.
+
+1:14:02.880 --> 1:14:14.880
+ Um, there it is. So if I move dot bash RC dot, sorry, dot bash local to pre dash run.sh.
+
+1:14:14.880 --> 1:14:23.880
+ All right, let's try that.
+
+1:14:23.880 --> 1:14:37.880
+ So, if we now create a new notebook.
+
+1:14:37.880 --> 1:14:42.880
+ If you're wondering why it is, by the way, that paper space is so perfectly set up for everything to work really well.
+
+1:14:42.880 --> 1:14:47.880
+ It's because I've basically been nagging the perks of paper space for the last.
+
+1:14:47.880 --> 1:14:55.880
+ Four years about all these things and actually it's just really in the last three months that they actually really started listening and they've.
+
+1:14:55.880 --> 1:14:58.880
+ I told them put this here, put this here, then it's going to be great.
+
+1:14:58.880 --> 1:15:04.880
+ So they actually, yeah, they've been really great, particularly recently.
+
+1:15:04.880 --> 1:15:09.880
+ That's setting everything up exactly the way we need it.
+
+1:15:09.880 --> 1:15:11.880
+ Okay.
+
+1:15:11.880 --> 1:15:15.880
+ So delete that.
+
+1:15:15.880 --> 1:15:20.880
+ And so I think, yeah, see here's that command slash run dot sh.
+
+1:15:20.880 --> 1:15:29.880
+ So I guess what you could do, by the way, is you could like put some different, like your own URL here, and it's going to like automatically put that in slash notebooks.
+
+1:15:29.880 --> 1:15:35.880
+ And maybe you could even put a shell script then that comes from github. I haven't really thought about that.
+
+1:15:35.880 --> 1:15:36.880
+ Anyway.
+
+1:15:36.880 --> 1:15:38.880
+ Okay.
+
+1:15:38.880 --> 1:15:52.880
+ So I think it was Mark that was asking, how would I actually get my dot SSH keys onto this machine.
+
+1:15:52.880 --> 1:16:00.880
+ The short that I think the easy way to do it would be to use the upload file feature in JupyterLab.
+
+1:16:00.880 --> 1:16:06.880
+ This is a really handy feature to know about. So you see this little button here upload files.
+
+1:16:06.880 --> 1:16:13.880
+ So you could click that, and then you could go into your.
+
+1:16:13.880 --> 1:16:17.880
+ Ssh folder.
+
+1:16:17.880 --> 1:16:26.880
+ And find the files you want to upload and upload them.
+
+1:16:26.880 --> 1:16:38.880
+ So for example, I do config, and you can see here it appears. And so then if I open my terminal.
+
+1:16:38.880 --> 1:16:46.880
+ There it is there. Right. And then you could just move that to where you need it.
+
+1:16:46.880 --> 1:16:53.880
+ One tip with SH keys actually. In fact, let's do it from scratch.
+
+1:16:53.880 --> 1:17:01.880
+ That's what I meant to be doing. Let's do it from scratch to make sure everything works. So I'm going to arm.sh.
+
+1:17:01.880 --> 1:17:02.880
+ Okay.
+
+1:17:02.880 --> 1:17:05.880
+ So let's do it from scratch.
+
+1:17:05.880 --> 1:17:18.880
+ Ssh keys actually have to have very exact permissions on them. If they're if it's possible for anybody else to read or write your SSH keys SSH will refuse to use them.
+
+1:17:18.880 --> 1:17:31.880
+ And so one way to actually see the correct permissions is to create some SSH keys. So I could go SSH dash key gen.
+
+1:17:31.880 --> 1:17:37.880
+ Enter, enter, enter, and then I can go LS minus LA dot SSH.
+
+1:17:37.880 --> 1:17:43.880
+ And so to remind you we just briefly see this the other day, the permissions.
+
+1:17:43.880 --> 1:17:51.880
+ These three here tell you this user, which is root, can they read, write, and execute the file.
+
+1:17:51.880 --> 1:17:57.880
+ So this user. So the root can read, write, and execute the practices of private key file.
+
+1:17:57.880 --> 1:18:03.880
+ And it can also read, write, and execute the public, sorry, read and write the public key file.
+
+1:18:03.880 --> 1:18:12.880
+ These three here is what about everybody else. And this says everybody can read the public key file.
+
+1:18:12.880 --> 1:18:15.880
+ But they can't do anything to the private key file.
+
+1:18:15.880 --> 1:18:21.880
+ And then dot refers to the current directory. So the directory itself.
+
+1:18:21.880 --> 1:18:31.880
+ Only the root user can read, write, and execute the directory. The idea of executing a directory might sound weird. It actually refers to seeing what is in a directory.
+
+1:18:31.880 --> 1:18:37.880
+ They call executing a directory. So let's upload.
+
+1:18:37.880 --> 1:18:43.880
+ So I'm going to put the key.
+
+1:18:43.880 --> 1:18:49.880
+ Okay, so there they are. Now they're going to be put into slash notebook slash git.
+
+1:18:49.880 --> 1:18:59.880
+ So if I go cd dot SSH, and then I'll move slash notebook slash git slash IDRSA.
+
+1:18:59.880 --> 1:19:05.880
+ Now if I hit tab again, it'll show me that there's multiple things starting with those letters.
+
+1:19:05.880 --> 1:19:16.880
+ So I'm going to move all of those things into the current directory. So the current directory, remember, is dot. So dot slash.
+
+1:19:16.880 --> 1:19:25.880
+ And so there they now are. And now they don't have the right permissions anymore.
+
+1:19:25.880 --> 1:19:29.880
+ My private key is readable by everybody, which is no good.
+
+1:19:29.880 --> 1:19:40.880
+ So to change permissions, we say CH mod change. I don't know what's called mod rather than CH per modeling.
+
+1:19:40.880 --> 1:19:55.880
+ And we can say that the group and the user should not have read permission. So the user and the group subtract read permissions on the private key.
+
+1:19:55.880 --> 1:20:00.880
+ And then check again.
+
+1:20:00.880 --> 1:20:05.880
+ Oh, I shouldn't have said user and group.
+
+1:20:05.880 --> 1:20:12.880
+ What I meant to say, it just gave remove permissions for myself to read it.
+
+1:20:12.880 --> 1:20:24.880
+ I meant should have said group and everybody, which I think is all.
+
+1:20:24.880 --> 1:20:38.880
+ So, the first three dashes are for user. The next three dashes are for the first is for directory or not directory, but the next three dashes. Yeah, go on. The next three dashes are for user.
+
+1:20:38.880 --> 1:20:55.880
+ The next three dashes are for group. And the last three dashes are for everyone. That's correct.
+
+1:20:55.880 --> 1:21:00.880
+ Okay, that's what we want. So now the user can read and write the private key.
+
+1:21:00.880 --> 1:21:10.880
+ So, we can test this by SSHing to github.com and github.com expects you to log in with the user name get.
+
+1:21:10.880 --> 1:21:15.880
+ So when you SSH before the app sign, you say the user name to login as.
+
+1:21:15.880 --> 1:21:23.880
+ And by default, it uses your current username, which is root. I definitely can't log in to github.com is root.
+
+1:21:23.880 --> 1:21:30.880
+ GitHub.com. Yes.
+
+1:21:30.880 --> 1:21:40.880
+ Great. Hello, JPH. So it knows who I am, right, because it knows who has my public key in that account. You've successfully authenticated.
+
+1:21:40.880 --> 1:21:48.880
+ And then it closes it because you can't actually use a terminal on github.com. It's only used for forget, but you can see my key is working.
+
+1:21:48.880 --> 1:22:01.880
+ So, I'm just going to ask, wouldn't it be simpler or am I missing something to generate a new key in paper space rather than imported and then just give github that new key.
+
+1:22:01.880 --> 1:22:03.880
+ Maybe.
+
+1:22:03.880 --> 1:22:04.880
+ I don't know.
+
+1:22:04.880 --> 1:22:12.880
+ I'm just thinking with all these, with all these like changing, with all these changing of permissions and stuff.
+
+1:22:12.880 --> 1:22:26.880
+ I'm going to say like, okay, so I, obviously I don't think so because I don't do it that way. But if I think about why I don't do it that way, like some people do it your way.
+
+1:22:26.880 --> 1:22:52.880
+ Your way is in many ways, more correct in that you would have different public keys on github.com for every machine you're using. And if somebody like stole a machine, you could delete just that public key and that person now couldn't log in, but you could still log in and maybe that's more convenient or something.
+
+1:22:52.880 --> 1:22:58.880
+ It's a perfectly fine way to do it, Mark, honestly.
+
+1:22:58.880 --> 1:23:08.880
+ I don't like the mental overhead of having to think about having multiple keys and which is which and because like I've had a good up account for quite a long time and probably used.
+
+1:23:08.880 --> 1:23:16.880
+ I don't know, maybe a hundred different machines to access it and I don't like the idea of having a hundred public keys and thinking where, where are they and should they still be there.
+
+1:23:16.880 --> 1:23:20.880
+ Yeah, I think it's fine.
+
+1:23:20.880 --> 1:23:25.880
+ So that was actually pretty intense today.
+
+1:23:25.880 --> 1:23:30.880
+ So for folks who, you know, just getting started.
+
+1:23:30.880 --> 1:23:37.880
+ There was nothing we'd use today I don't think that we haven't learned how to use before.
+
+1:23:37.880 --> 1:23:45.880
+ But it's tough using things that you've only just learned about and so therefore you know, it does need a lot of practice.
+
+1:23:45.880 --> 1:23:56.880
+ So, if you're kind of new to this, then yeah, then like, you probably want to rewatch the video and like, also pepper me with questions next time.
+
+1:23:56.880 --> 1:24:00.880
+ If you try things and, and it doesn't work.
+
+1:24:00.880 --> 1:24:04.880
+ Or you're not sure why we do it or whatever.
+
+1:24:04.880 --> 1:24:07.880
+ All right, anything else before we yeah.
+
+1:24:07.880 --> 1:24:15.880
+ Yeah, what about these things you have to have to install.
+
+1:24:15.880 --> 1:24:17.880
+ Okay, let's do that next time.
+
+1:24:17.880 --> 1:24:24.880
+ Yeah, next time. I will put it on the forum. Thanks so nice to see you all.
+
+1:24:24.880 --> 1:24:25.880
+ So much.
+
+1:24:25.880 --> 1:24:26.880
+ Bye.
+
+1:24:26.880 --> 1:24:28.880
+ Thank you.
+
+1:24:28.880 --> 1:24:30.880
+ Bye.
+
+1:24:30.880 --> 1:24:32.880
+ Bye.
+
+1:24:32.880 --> 1:24:38.880
+ Thank you.
+

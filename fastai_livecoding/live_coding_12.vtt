@@ -1,0 +1,2300 @@
+WEBVTT
+
+00:00.000 --> 00:13.100
+ Yeah, so I guess the thing I've kind of learned, I guess I should share my screen and turn
+
+00:13.100 --> 00:43.060
+ it over here but I feel like I've learned from this sweet scraven kettle.
+
+00:43.060 --> 00:56.180
+ So on pets, this is the top 15 after running a few more sweeps to see if there's some better
+
+00:56.180 --> 01:04.980
+ options but basically I think what's interesting is in the top 15 on pets you have like a bit
+
+01:04.980 --> 01:05.980
+ of everything right?
+
+01:05.980 --> 01:17.220
+ You've got ResNet RS and ResNet V2 to steal.
+
+01:17.220 --> 01:21.820
+ You've got VIT, Transformers 1s, VIT, SWIN, mobile VIT.
+
+01:21.820 --> 01:26.020
+ Classic ResNet 26D, steal in there.
+
+01:26.020 --> 01:31.060
+ It's actually the fastest of all which maybe reflects like maybe that's the most well optimized
+
+01:31.060 --> 01:37.620
+ kind of because VIN around a while and VIT is probably worked hard on that.
+
+01:37.620 --> 01:40.140
+ ResNet GPU memory.
+
+01:40.140 --> 01:44.980
+ Like yeah, it's kind of interesting the way there's all these very different approaches
+
+01:44.980 --> 01:53.420
+ but they all kind of end up in there.
+
+01:53.420 --> 02:02.900
+ I think one thing interesting when you look at it on the graph is these green ones is
+
+02:02.900 --> 02:12.620
+ VIT which they kind of cut off here at this fit time of 150 and I think that's because
+
+02:12.620 --> 02:23.380
+ the larger vision transformers only work on larger images and I only did 24 pixel images.
+
+02:23.380 --> 02:33.820
+ So if I included larger images we might see VIT at the very best in terms of error rate.
+
+02:33.820 --> 02:44.780
+ I was pleasantly surprised to see that some of the VITs didn't actually use much memory
+
+02:44.780 --> 02:47.700
+ and they were pretty fast.
+
+02:47.700 --> 02:50.180
+ That's interesting because that was quite a while ago right?
+
+02:50.180 --> 02:59.420
+ The vision transformers paper came out quite a while ago and it's kind of like the way
+
+02:59.420 --> 03:03.380
+ I remember it was like just tacking together the first and most obvious thing people thought
+
+03:03.380 --> 03:10.300
+ of when it came to kind of making transformers work on vision and yeah the fact that it still
+
+03:10.300 --> 03:17.140
+ works so well seems that people haven't improved on it much other than perhaps swing.
+
+03:17.140 --> 03:22.940
+ So I guess that might take a ways.
+
+03:22.940 --> 03:28.460
+ Under like small and fast models yeah I guess I hadn't really looked much at ResNet RS
+
+03:28.460 --> 03:36.900
+ before so it's interesting to see that one right up there.
+
+03:36.900 --> 03:45.460
+ And then on planet it doesn't look that different except you know it really is just VIT, swimming
+
+03:45.460 --> 03:50.940
+ com of next and in fact entirely is VIT, swimming com of next.
+
+03:50.940 --> 03:56.180
+ The whole top 15.
+
+03:56.180 --> 04:05.060
+ Yeah so I guess that's some of the things I noticed.
+
+04:05.060 --> 04:09.020
+ That's cool.
+
+04:09.020 --> 04:15.620
+ Yeah look at this one.
+
+04:15.620 --> 04:19.380
+ You're able to try so many different kinds of models and so anything.
+
+04:19.380 --> 04:27.300
+ Yeah, it ran in less than 24 hours on my 3 GPUs.
+
+04:27.300 --> 04:30.020
+ Something like 1200 runs or something.
+
+04:30.020 --> 04:32.740
+ Yeah I thought this was interesting.
+
+04:32.740 --> 04:35.740
+ Look at this one VIT small patch 32.
+
+04:35.740 --> 04:38.740
+ Memory usage is amazing.
+
+04:38.740 --> 04:49.860
+ And speed is fastest and yeah third from the top of the smaller, faster ones.
+
+04:49.860 --> 04:51.100
+ I have a question.
+
+04:51.100 --> 04:53.260
+ Yeah can you hear me?
+
+04:53.260 --> 04:54.260
+ Sure.
+
+04:54.260 --> 04:57.340
+ Yes hi.
+
+04:57.340 --> 05:01.060
+ Just a small question so you mentioned small and large.
+
+05:01.060 --> 05:06.100
+ Does large mean the size of the image?
+
+05:06.100 --> 05:10.340
+ Sometimes when I was talking about VIT, yes it does.
+
+05:10.340 --> 05:18.860
+ So I was specifically just doing 224 by 224 pixel images and pretty much all the transformer
+
+05:18.860 --> 05:20.820
+ based ones are fixed.
+
+05:20.820 --> 05:24.460
+ They can only do a one size.
+
+05:24.460 --> 05:31.740
+ And so the VIT models, I don't think they have, so there's two meanings of larger here.
+
+05:31.740 --> 05:38.140
+ There's larger as in more bigger models like more layers, wider layers.
+
+05:38.140 --> 05:43.900
+ And I think all the VIT models which are larger, more capacity, slower, properly more accurate,
+
+05:43.900 --> 05:47.500
+ I think only run on literally on bigger images.
+
+05:47.500 --> 05:49.380
+ Which is like doesn't have to be that way.
+
+05:49.380 --> 05:51.660
+ That's just what they happen to do.
+
+05:51.660 --> 05:57.100
+ So that's why yeah, VIT only goes this far.
+
+05:57.100 --> 06:02.060
+ There are bigger VIT models that should be more accurate but they don't work on 224 by
+
+06:02.060 --> 06:03.740
+ 224 pixel images.
+
+06:03.740 --> 06:09.740
+ Is there like a good threshold to know when is a good time to use large versus this small
+
+06:09.740 --> 06:12.300
+ one or is it just all experimental?
+
+06:12.300 --> 06:14.420
+ Larger images.
+
+06:14.420 --> 06:19.940
+ You basically do everything on a smaller image as you can as long as it gets you reasonable
+
+06:19.940 --> 06:24.180
+ results because you want to iterate quickly.
+
+06:24.180 --> 06:29.580
+ And then when you're finished and you want to, like in case of Kaggle, you want the best
+
+06:29.580 --> 06:31.540
+ accuracy you can.
+
+06:31.540 --> 06:35.860
+ So you try bigger and bigger images to see what you can get away with and keep doing
+
+06:35.860 --> 06:39.340
+ that as long as the accuracy improves.
+
+06:39.340 --> 06:44.380
+ And a production environment, it's kind of similar but you make them bigger and bigger
+
+06:44.380 --> 06:48.180
+ until the latency of your model is too high.
+
+06:48.180 --> 06:54.620
+ You find the right tradeoff between model latency and accuracy.
+
+06:54.620 --> 06:59.820
+ Generally speaking, larger images will give you more accurate results.
+
+06:59.820 --> 07:01.900
+ But a bit slower.
+
+07:01.900 --> 07:02.900
+ Correct.
+
+07:02.900 --> 07:05.220
+ I mean, a lot slower, right?
+
+07:05.220 --> 07:15.140
+ Because if you increase it from 224 to one side to 360, then you're going from 224 squared
+
+07:15.140 --> 07:19.380
+ to 360 squared, so you end up with a lot more pixels.
+
+07:19.380 --> 07:24.900
+ So like for example, an application would be like for object detection for video, for
+
+07:24.900 --> 07:33.060
+ example, like live video, then even if it's a larger size, it will still be good to do
+
+07:33.060 --> 07:36.900
+ small because it's faster.
+
+07:36.900 --> 07:42.780
+ Certainly for your iterating, there's no need to have a really accurate model for your iterating
+
+07:42.780 --> 07:46.700
+ because you're trying to find out what data preprocessing works best or what architecture
+
+07:46.700 --> 07:47.900
+ works best or whatever.
+
+07:47.900 --> 07:53.020
+ So yeah, there's no point using large models and large images generally as long as they're
+
+07:53.020 --> 07:57.420
+ big enough to get the job done recently.
+
+07:57.420 --> 07:58.420
+ Okay.
+
+07:58.420 --> 07:59.420
+ Thank you very much.
+
+07:59.420 --> 08:00.940
+ Yeah, no worries.
+
+08:00.940 --> 08:06.060
+ If you were going to do this in like a business context, let's say, and someone said, hey,
+
+08:06.060 --> 08:14.660
+ man, one to have a vision model, would you kind of just pick a reasonable one and just
+
+08:14.660 --> 08:15.660
+ kind of go with that?
+
+08:15.660 --> 08:18.260
+ And if the results were good, do you just use it or?
+
+08:18.260 --> 08:22.420
+ I would do exactly what I'm doing here, you know, which is to try a few things on, you
+
+08:22.420 --> 08:30.300
+ know, small, fast models on small images on a small subset of the data to find out what
+
+08:30.300 --> 08:36.180
+ data preprocessing to use and what architecture to use.
+
+08:36.180 --> 08:41.540
+ And then I would look at, yeah, one of the constraints in terms of operationalizing this.
+
+08:41.540 --> 08:42.940
+ How much RAM do we have?
+
+08:42.940 --> 08:45.180
+ How much latency can we get away with?
+
+08:45.180 --> 08:51.900
+ How expensive is it going to be to then scale it up to the point at which, you know, we're
+
+08:51.900 --> 08:55.660
+ getting acceptable results using acceptable resources.
+
+08:55.660 --> 09:04.780
+ So, yeah, it wouldn't look very different at all to, you know, a CACL competition in
+
+09:04.780 --> 09:11.780
+ terms of the modeling, but then there'd be a whole piece of analysis around user requirements
+
+09:11.780 --> 09:15.020
+ and costs and stuff like that.
+
+09:15.020 --> 09:16.980
+ I see.
+
+09:16.980 --> 09:25.180
+ Yeah, I tried doing what you're doing was going from smaller to larger models.
+
+09:25.180 --> 09:31.820
+ And mind somehow started out with much lower accuracy.
+
+09:31.820 --> 09:37.420
+ Is it just a fluke or I had several issues happen that and then.
+
+09:37.420 --> 09:41.660
+ Oh, it's not a.
+
+09:41.660 --> 09:45.420
+ It means you press the wrong buttons somehow.
+
+09:45.420 --> 09:47.420
+ So I will.
+
+09:47.420 --> 09:54.980
+ I think I already have haven't I shared my notebooks.
+
+09:54.980 --> 09:59.380
+ So if I have it, I'll certainly share them today.
+
+09:59.380 --> 10:06.420
+ Maybe I haven't yet.
+
+10:06.420 --> 10:07.420
+ So I share my notebooks today.
+
+10:07.420 --> 10:12.540
+ So what I suggest you do is like, like, you know, go from mine, make sure you can rerun
+
+10:12.540 --> 10:17.380
+ them and then look at yours and see how they're different and then figure out where you went
+
+10:17.380 --> 10:18.380
+ wrong.
+
+10:18.380 --> 10:22.580
+ But also like, yeah, you know, I always tell people when debugging, like to look at the
+
+10:22.580 --> 10:23.860
+ inputs and the outputs.
+
+10:23.860 --> 10:25.260
+ So what predictions are you making?
+
+10:25.260 --> 10:30.860
+ Are you always predicting zero, for example, you know, did you run the L.R.
+
+10:30.860 --> 10:34.260
+ find or define what learning rate works well?
+
+10:34.260 --> 10:37.060
+ Yeah, stuff like that.
+
+10:37.060 --> 10:39.700
+ Thank you.
+
+10:39.700 --> 10:41.700
+ That was.
+
+10:41.700 --> 10:52.300
+ Jeremy, on the question for the production night, I try to after your work for last week,
+
+10:52.300 --> 10:58.860
+ you did mention learn dot export and then later on we can learn dot no, I found that
+
+10:58.860 --> 11:06.100
+ it's maybe there's a bug there because when I load and they actually looking for the P
+
+11:06.100 --> 11:15.580
+ T H suffix is dot P T H, but when we save and they say to the models folder and then you
+
+11:15.580 --> 11:18.340
+ can give more of a name you want.
+
+11:18.340 --> 11:22.940
+ But when you want to load them, they actually have the suffix at the end.
+
+11:22.940 --> 11:24.620
+ So I'm not sure there's some.
+
+11:24.620 --> 11:28.420
+ Yeah, so just to make sure you save it with a dot P T H suffix.
+
+11:28.420 --> 11:30.660
+ But yeah, it certainly would make sense.
+
+11:30.660 --> 11:32.220
+ You're asked to do that automatically.
+
+11:32.220 --> 11:37.780
+ But being that documentation is seems it's a safe in pickle.
+
+11:37.780 --> 11:39.580
+ The format is pickle.
+
+11:39.580 --> 11:43.780
+ The form that the extent, but but this is just pytorch.
+
+11:43.780 --> 11:49.620
+ So pytorch uses, you know, a variant of the pickle format and they normally use P T H
+
+11:49.620 --> 11:50.620
+ as their extension.
+
+11:50.620 --> 11:55.980
+ So it is pickle and just it does use the P T H extension.
+
+11:55.980 --> 11:56.980
+ Okay.
+
+11:56.980 --> 12:04.420
+ Jeremy, when you were opening this window, you typed in like something in the in the in
+
+12:04.420 --> 12:07.860
+ the URL bar to get what what what are you.
+
+12:07.860 --> 12:11.740
+ Oh, I just typed my port number because I know that the only thing that has 888 that
+
+12:11.740 --> 12:12.740
+ is.
+
+12:12.740 --> 12:13.740
+ Oh, okay.
+
+12:13.740 --> 12:16.740
+ Yeah, some magic going on.
+
+12:16.740 --> 12:17.740
+ Yeah.
+
+12:17.740 --> 12:18.740
+ Nothing like that.
+
+12:18.740 --> 12:34.380
+ I don't just shut these two.
+
+12:34.380 --> 12:45.460
+ I did have one more idea about this competition.
+
+12:45.460 --> 13:00.740
+ Which is there was that CSV file, right?
+
+13:00.740 --> 13:02.740
+ Yes.
+
+13:02.740 --> 13:09.980
+ No, yeah, train.csv.
+
+13:09.980 --> 13:24.100
+ That's right.
+
+13:24.100 --> 13:28.540
+ And it has this variety thing.
+
+13:28.540 --> 13:43.060
+ Oh, and I want for variety.
+
+13:43.060 --> 13:54.260
+ So there's 10,000 rows and 7,000 of them are one variety.
+
+13:54.260 --> 14:00.540
+ But there are 3,000 rows that contain other varieties.
+
+14:00.540 --> 14:09.420
+ So the only idea I had for this was something which is a bit counterintuitive.
+
+14:09.420 --> 14:16.100
+ But those of you that did, I can't remember 2017 or 2018, fast AI might remember.
+
+14:16.100 --> 14:19.660
+ Sometimes if there's two different things, this in this case, what kind of rice is it
+
+14:19.660 --> 14:21.820
+ and what kind of disease is it?
+
+14:21.820 --> 14:28.060
+ Just trying to get your model to predict both of those things makes them better at both.
+
+14:28.060 --> 14:31.700
+ So if we tried to get our model to predict what kind of disease is it and what kind
+
+14:31.700 --> 14:35.300
+ of rice is it?
+
+14:35.300 --> 14:40.500
+ It might actually get better at predicting the kind of disease, which might sound counter
+
+14:40.500 --> 14:43.460
+ intuitive or I think I find it counterintuitive because it sounds like it's got more work
+
+14:43.460 --> 14:45.860
+ to do.
+
+14:45.860 --> 14:49.940
+ But you're also giving it more signal.
+
+14:49.940 --> 14:52.020
+ There's more things you're teaching it to look for.
+
+14:52.020 --> 14:56.820
+ And so maybe if it knows how to recognize different types of rice, it can use that information
+
+14:56.820 --> 15:01.660
+ to also recognize how different kinds of rice are impacted by different diseases.
+
+15:01.660 --> 15:06.780
+ So I have no idea if that's going to be useful or not, but I thought it would be an interesting
+
+15:06.780 --> 15:11.620
+ exercise to try to do that.
+
+15:11.620 --> 15:18.020
+ So that's what I thought we might have a go at today if that sounds of interest.
+
+15:18.020 --> 15:28.780
+ Which also is frankly like a good exercise in deolving into models in a way we've never
+
+15:28.780 --> 15:31.420
+ done before.
+
+15:31.420 --> 15:42.700
+ So this is going to be much more sophisticated than anything we've done with deep learning
+
+15:42.700 --> 15:50.820
+ before, which means it's very much up to you folks to stop me anytime something slightly
+
+15:50.820 --> 15:57.260
+ confusing because I actually want everybody to understand this.
+
+15:57.260 --> 16:05.020
+ And it's a really good test of how well you understand what's going on inside a neural
+
+16:05.020 --> 16:06.020
+ network.
+
+16:06.020 --> 16:10.140
+ So if you're not understanding it, that's a sign I haven't explained it very well.
+
+16:10.140 --> 16:13.460
+ So let me try.
+
+16:13.460 --> 16:16.260
+ Let's have a look.
+
+16:16.260 --> 16:17.260
+ Okay.
+
+16:17.260 --> 16:25.020
+ So one thing I just did yesterday afternoon was I just trained a model three times to
+
+16:25.020 --> 16:29.580
+ see what the error rate was because I wanted to get a sense of like how much variation
+
+16:29.580 --> 16:30.820
+ is there.
+
+16:30.820 --> 16:35.740
+ And I found if a user error, a learning rate of.02 and just trained for three epochs,
+
+16:35.740 --> 16:38.660
+ I seem to pretty consistently get reasonable results.
+
+16:38.660 --> 16:44.460
+ So here's something I can now do in two minutes, see how I'm going.
+
+16:44.460 --> 16:45.940
+ So I thought that would be good.
+
+16:45.940 --> 16:48.900
+ So this is one thing I really like doing.
+
+16:48.900 --> 16:52.860
+ People are often very into doing reproducible training where they have like set the seed
+
+16:52.860 --> 16:55.980
+ for their training and run the same thing every time.
+
+16:55.980 --> 17:00.620
+ I think that's normally a bad idea because I actually want to see like what the natural
+
+17:00.620 --> 17:01.780
+ variation is.
+
+17:01.780 --> 17:07.660
+ And so if I make a change, I don't want to know whether that's, you know, changes the
+
+17:07.660 --> 17:12.860
+ difference I see in the result is might be just due to natural variation or it's actually
+
+17:12.860 --> 17:14.540
+ something significant.
+
+17:14.540 --> 17:15.540
+ So that's why I did the answer.
+
+17:15.540 --> 17:18.420
+ The natural variation is really large.
+
+17:18.420 --> 17:19.420
+ Does that?
+
+17:19.420 --> 17:20.540
+ That's going to be tough.
+
+17:20.540 --> 17:25.100
+ Yeah, that's going to be tough to see like did I improve things, but then if the natural
+
+17:25.100 --> 17:30.220
+ variation so large that improvements are invisible, then trying to improve it seems pointless,
+
+17:30.220 --> 17:31.220
+ right?
+
+17:31.220 --> 17:36.660
+ Because it sounds like you haven't really found a way to stably train something.
+
+17:36.660 --> 17:42.180
+ And normally that happens because my learning rate's too big.
+
+17:42.180 --> 17:46.020
+ So if you try this yourself and bump the learning rate up to.04, you'll see like at least for
+
+17:46.020 --> 17:53.380
+ me, I got like 5%, 6%, 5.5%, you know, it's like all over the place.
+
+17:53.380 --> 17:58.500
+ So yeah, trading for more epochs at a lower learning rate will generally give you more
+
+17:58.500 --> 18:00.780
+ stable results.
+
+18:00.780 --> 18:03.260
+ And there's a compromise because doing more epochs is slow.
+
+18:03.260 --> 18:06.860
+ So that's why I was trying to find a learning rate, the number of epochs, which is fast and
+
+18:06.860 --> 18:07.860
+ stable.
+
+18:07.860 --> 18:14.300
+ You could also try using a smaller subset of the data or I don't know, like in the end
+
+18:14.300 --> 18:16.620
+ sometimes things just will be slow in such as life.
+
+18:16.620 --> 18:23.340
+ But most of the time I find I can get a compromise and I certainly did here, I think.
+
+18:23.340 --> 18:26.540
+ With 6 epochs at half the learning rate, I certainly can do better.
+
+18:26.540 --> 18:30.300
+ I can get to 4%, you know, rather than 5.
+
+18:30.300 --> 18:31.300
+ But that's okay.
+
+18:31.300 --> 18:34.740
+ That's what's something for testing.
+
+18:34.740 --> 18:41.100
+ One thing that was always counterintuitive to me that I think you talk about is like
+
+18:41.100 --> 18:47.100
+ these improvements that you make on a small scale, like show up on the larger scale.
+
+18:47.100 --> 18:48.100
+ Like always.
+
+18:48.100 --> 18:49.100
+ Oh, yeah, absolutely.
+
+18:49.100 --> 18:51.220
+ Basically, they pretty much always will.
+
+18:51.220 --> 18:57.060
+ Yeah, because they're the same models with just more layers or wider activations.
+
+18:57.060 --> 19:03.180
+ Yeah, if you find something that's going to some pre processing steps that works well
+
+19:03.180 --> 19:14.220
+ on a conf next tiny, it's going to work also well on a conf next large 99.9% of the time.
+
+19:14.220 --> 19:18.660
+ Most people act as if that's not true, I find, but you know, like an academia and stuff.
+
+19:18.660 --> 19:27.220
+ I have to do a quick talk that everything.
+
+19:27.220 --> 19:33.540
+ Like most people just never think to try, but like intuitively, of course, it's the same,
+
+19:33.540 --> 19:34.980
+ you know, why wouldn't it be the same?
+
+19:34.980 --> 19:38.060
+ Like it's, it is the same thing just to scout up a bit.
+
+19:38.060 --> 19:40.660
+ They behave very similarly.
+
+19:40.660 --> 19:48.620
+ I mean, it's hard to argue with you because it works.
+
+19:48.620 --> 19:49.620
+ But like you wasn't that a dude.
+
+19:49.620 --> 19:51.660
+ Yeah, you can argue that it's not intuitive.
+
+19:51.660 --> 19:52.660
+ That's fine.
+
+19:52.660 --> 19:55.580
+ But like, I feel like the only reason it would be not intuitive is because everybody's told
+
+19:55.580 --> 19:57.340
+ you for years that it doesn't work that way.
+
+19:57.340 --> 19:58.340
+ Do you know what I mean?
+
+19:58.340 --> 19:59.340
+ Yeah, that's fair.
+
+19:59.340 --> 20:00.340
+ I've been told you that.
+
+20:00.340 --> 20:02.500
+ I think it could be like, yeah, of course it works that way.
+
+20:02.500 --> 20:03.500
+ That's fair.
+
+20:03.500 --> 20:04.500
+ Okay.
+
+20:04.500 --> 20:07.300
+ So, okay, let's do something crazy.
+
+20:07.300 --> 20:10.980
+ Let's actually look at a model.
+
+20:10.980 --> 20:13.260
+ So inside our learner, there's basically two main things.
+
+20:13.260 --> 20:17.220
+ There's the data loaders, learn.deals, and there's the model, learn. model.
+
+20:17.220 --> 20:18.220
+ Okay.
+
+20:18.220 --> 20:19.860
+ And we've seen these before.
+
+20:19.860 --> 20:24.500
+ And if you've forgotten, then yeah, go back and have a look at the older videos from the
+
+20:24.500 --> 20:26.300
+ course.
+
+20:26.300 --> 20:32.860
+ So the model itself basically, yeah, it's got like things in it.
+
+20:32.860 --> 20:36.220
+ And in this case, the first thing in it is called a Tim body.
+
+20:36.220 --> 20:37.740
+ And the Tim body has things in it.
+
+20:37.740 --> 20:39.500
+ The first thing in it is called model.
+
+20:39.500 --> 20:42.860
+ And then Tim body.model has things in it.
+
+20:42.860 --> 20:46.020
+ The first thing is called the stem and the next thing is called the stages and so forth.
+
+20:46.020 --> 20:47.020
+ Right?
+
+20:47.020 --> 20:48.020
+ So you can see how it's this kind of tree.
+
+20:48.020 --> 20:51.820
+ And if you actually want to go all the way to the bottom.
+
+20:51.820 --> 20:56.780
+ So the basic top, the very, there's two things in it at the very top level.
+
+20:56.780 --> 20:58.980
+ There's a Tim body.
+
+20:58.980 --> 21:05.420
+ And there's a thing here, which doesn't actually have a name, but we always call it the head.
+
+21:05.420 --> 21:10.940
+ And so the body is the bit that basically does all the hard work of looking at the pixels
+
+21:10.940 --> 21:13.500
+ and trying to find features and stuff like that.
+
+21:13.500 --> 21:17.220
+ That's something we call a convolutional neural network.
+
+21:17.220 --> 21:20.580
+ And at the very end of that, it's bits out.
+
+21:20.580 --> 21:26.740
+ Yeah, a whole bunch of information about those pixels.
+
+21:26.740 --> 21:30.220
+ And the head is the thing that then tries to make sure it makes sense of that and make
+
+21:30.220 --> 21:33.020
+ some predictions about what we're looking at.
+
+21:33.020 --> 21:36.300
+ And so this is the head.
+
+21:36.300 --> 21:39.300
+ And as you can see, the head is pretty simple.
+
+21:39.300 --> 21:47.700
+ Where else the body, which goes from here all the way to here, is not so simple.
+
+21:47.700 --> 21:52.900
+ And we want to predict two things.
+
+21:52.900 --> 21:56.820
+ What kind of rice it is and what disease it has.
+
+21:56.820 --> 21:59.100
+ Now look at the very, very, very last layer.
+
+21:59.100 --> 22:00.100
+ It's a linear layer.
+
+22:00.100 --> 22:09.300
+ So a linear layer, if you remember, is just something that does a matrix product.
+
+22:09.300 --> 22:18.100
+ And the matrix product is a matrix which takes as import 512 features and spits out 10 features.
+
+22:18.100 --> 22:22.940
+ So it's a 512 by 10 matrix.
+
+22:22.940 --> 22:24.180
+ So let's do a few things.
+
+22:24.180 --> 22:25.340
+ Let's grab the head.
+
+22:25.340 --> 22:30.140
+ So the head is the index one thing in the model.
+
+22:30.140 --> 22:31.740
+ So there's our head.
+
+22:31.740 --> 22:34.420
+ Quick question.
+
+22:34.420 --> 22:43.060
+ You know, I've seen these model sort of whatever you want to call it x rays a lot.
+
+22:43.060 --> 22:47.940
+ Have you ever wanted to like, is there a way that maybe I don't know about to see the
+
+22:47.940 --> 22:53.940
+ shape of the tensors as a flow, or the shape of the data as it flows through the model?
+
+22:53.940 --> 22:57.540
+ You know, like, yeah, man.
+
+22:57.540 --> 23:00.540
+ There it is.
+
+23:00.540 --> 23:04.540
+ Oh, I didn't even know about it.
+
+23:04.540 --> 23:05.540
+ Okay.
+
+23:05.540 --> 23:08.460
+ You should try watching some fast AI lectures.
+
+23:08.460 --> 23:09.460
+ Yeah.
+
+23:09.460 --> 23:14.860
+ So this will tell you how many parameters there are.
+
+23:14.860 --> 23:17.220
+ And yeah, the shape as it goes through.
+
+23:17.220 --> 23:22.700
+ And so the key thing is since we're predicting 10 probabilities, one probability for each
+
+23:22.700 --> 23:27.260
+ of the 10 possible diseases, we end up with a shape of 64 by 10.
+
+23:27.260 --> 23:30.300
+ The 64 is because we're using a batch size of 64.
+
+23:30.300 --> 23:33.100
+ And for each image, we're predicting 10 probabilities.
+
+23:33.100 --> 23:35.220
+ It's very thorough.
+
+23:35.220 --> 23:36.460
+ It shows the callbacks.
+
+23:36.460 --> 23:37.460
+ Wow.
+
+23:37.460 --> 23:38.460
+ I don't remember this.
+
+23:38.460 --> 23:39.980
+ Yeah, we don't look around, man.
+
+23:39.980 --> 23:46.140
+ Here in first, so yeah, so I'm next to the question because that's a great thing for us
+
+23:46.140 --> 23:50.300
+ to look at.
+
+23:50.300 --> 23:58.500
+ So yeah, so in the head, let's create something called the last layer, which is going to be
+
+23:58.500 --> 24:01.660
+ the end of the head.
+
+24:01.660 --> 24:04.940
+ And obviously, that's the very end of the head.
+
+24:04.940 --> 24:10.220
+ So our last layer is this linear thing, right?
+
+24:10.220 --> 24:15.420
+ And so this is so we could actually see the parameters themselves.
+
+24:15.420 --> 24:20.220
+ Oh, I hate what does that.
+
+24:20.220 --> 24:22.980
+ A lot of these things are generated lazily, right?
+
+24:22.980 --> 24:23.980
+ So what do you see?
+
+24:23.980 --> 24:25.900
+ This thing is saying generator object.
+
+24:25.900 --> 24:28.780
+ It's just it's literally the word is lazy.
+
+24:28.780 --> 24:31.140
+ It's too lazy to actually bother calculating what it is.
+
+24:31.140 --> 24:34.300
+ So it doesn't bother until you force it to.
+
+24:34.300 --> 24:37.580
+ So if you turn it into a list, it actually forces to generate it.
+
+24:37.580 --> 24:38.580
+ Okay.
+
+24:38.580 --> 24:42.380
+ So it's a list of one thing, which is not surprising.
+
+24:42.380 --> 24:43.380
+ Right?
+
+24:43.380 --> 24:45.140
+ There it is.
+
+24:45.140 --> 24:56.620
+ And so the last layer parameters is a matrix, which is there we go, 10 by 512.
+
+24:56.620 --> 25:02.100
+ So it's transposed to what I said, but that's okay.
+
+25:02.100 --> 25:04.300
+ So we're getting 512 inputs.
+
+25:04.300 --> 25:11.260
+ And when we multiply this by this matrix, we end up with 10 outputs.
+
+25:11.260 --> 25:18.140
+ So my daughter is wanting me.
+
+25:18.140 --> 25:39.900
+ Sorry about that.
+
+25:39.900 --> 25:48.940
+ I'm scrolling transitions always require some input.
+
+25:48.940 --> 25:58.100
+ All right.
+
+25:58.100 --> 26:03.700
+ So, we're going to basically have to.
+
+26:03.700 --> 26:19.220
+ If we got rid of this, right, then our last linear layer here would be taking in 1536 features
+
+26:19.220 --> 26:24.300
+ and spitting out 512 features.
+
+26:24.300 --> 26:39.420
+ So what we could do would be to delete this layer and instead take those 1536, sorry,
+
+26:39.420 --> 26:47.380
+ like this 512 features and create two linear layers, one with 10 outputs as before.
+
+26:47.380 --> 27:01.380
+ And one with however many varieties there are, which have a look.
+
+27:01.380 --> 27:05.380
+ Hi, Jeremy.
+
+27:05.380 --> 27:06.380
+ Yes.
+
+27:06.380 --> 27:13.820
+ So I was just contemplating whether back in that linear layer where it was the output was
+
+27:13.820 --> 27:14.820
+ 10 by 512.
+
+27:14.820 --> 27:15.820
+ Yes.
+
+27:15.820 --> 27:17.820
+ Not the output.
+
+27:17.820 --> 27:18.820
+ That's the matrix.
+
+27:18.820 --> 27:19.820
+ The output was 10.
+
+27:19.820 --> 27:20.820
+ The output of 64 by 10.
+
+27:20.820 --> 27:21.820
+ Yes.
+
+27:21.820 --> 27:27.700
+ So when you want to mix diseases with like rice in the output, I was wondering whether that
+
+27:27.700 --> 27:31.580
+ might be a, like, I don't know how many rice types there are.
+
+27:31.580 --> 27:32.580
+ So there's five right.
+
+27:32.580 --> 27:33.580
+ Okay.
+
+27:33.580 --> 27:38.780
+ So that 10 might be a 10 by 10 matrix output.
+
+27:38.780 --> 27:40.180
+ No, two by 10.
+
+27:40.180 --> 27:45.420
+ So you want one probability of what type of race is it and one probability of what disease
+
+27:45.420 --> 27:46.420
+ does it have?
+
+27:46.420 --> 27:47.420
+ Okay.
+
+27:47.420 --> 27:48.420
+ Yeah.
+
+27:48.420 --> 27:50.940
+ So just two by 10.
+
+27:50.940 --> 27:56.300
+ So let's, let's go ahead and like do the easy thing first, which is to delete the layer
+
+27:56.300 --> 27:57.300
+ we don't want.
+
+27:57.300 --> 27:58.580
+ So this says sequential.
+
+27:58.580 --> 28:03.700
+ So sequential means like literally PyTorch is going to go through and calculate this and
+
+28:03.700 --> 28:07.060
+ take the output of that and pass it to this and take the output of that and pass it to
+
+28:07.060 --> 28:08.540
+ this and so forth.
+
+28:08.540 --> 28:09.540
+ Right.
+
+28:09.540 --> 28:12.460
+ So if we delete the last layer, that's no problem.
+
+28:12.460 --> 28:15.660
+ That's just won't ever call it.
+
+28:15.660 --> 28:22.860
+ So I can't quite remember if we can do this in sequential, but let's assume it works like
+
+28:22.860 --> 28:23.860
+ normal Python.
+
+28:23.860 --> 28:29.340
+ We should be able to go delete h minus one.
+
+28:29.340 --> 28:32.020
+ That looked helpful.
+
+28:32.020 --> 28:33.020
+ Yep.
+
+28:33.020 --> 28:34.020
+ We can.
+
+28:34.020 --> 28:35.020
+ Okay.
+
+28:35.020 --> 28:40.940
+ So it's got normal Python list semantics.
+
+28:40.940 --> 28:53.420
+ So this model will now be returning, yeah, 512 output.
+
+28:53.420 --> 29:06.140
+ So we want to basically wrap it in a model which instead has too many layers.
+
+29:06.140 --> 29:09.580
+ So there's a couple of ways we can do this, but let's do it like the most.
+
+29:09.580 --> 29:12.420
+ Step by step away.
+
+29:12.420 --> 29:14.860
+ We just use a new little rabbit.
+
+29:14.860 --> 29:16.820
+ That's the second look.
+
+29:16.820 --> 29:18.780
+ So we're going to create a class.
+
+29:18.780 --> 29:20.740
+ So in PyTorch modules are classes.
+
+29:20.740 --> 29:21.740
+ Right.
+
+29:21.740 --> 29:25.460
+ So we're going to take a class which includes this model.
+
+29:25.460 --> 29:36.980
+ So let's call this class disease and type classifier.
+
+29:36.980 --> 29:38.340
+ Right.
+
+29:38.340 --> 29:42.020
+ Now that is a.
+
+29:42.020 --> 29:46.900
+ So PyTorch calls all things that it basically uses as layers in a neural net module.
+
+29:46.900 --> 29:49.660
+ So this is a neural net module.
+
+29:49.660 --> 29:56.020
+ Now, if you haven't done any OO programming in Python before, it would be very helpful
+
+29:56.020 --> 30:03.260
+ to read a tutorial about basic Python OO programming because PyTorch assumes that you are pretty
+
+30:03.260 --> 30:05.460
+ familiar with it.
+
+30:05.460 --> 30:09.420
+ If you've done any kind of OO programming before, I'm going to work on the assumption
+
+30:09.420 --> 30:11.260
+ you have.
+
+30:11.260 --> 30:14.820
+ Then the constructor, there's a lot of weird things in Python.
+
+30:14.820 --> 30:17.020
+ The constructor is called done to it in it.
+
+30:17.020 --> 30:22.700
+ So this is, so done means underscores on each side.
+
+30:22.700 --> 30:27.380
+ And it always passes in the object being constructed or the object we're calling it on first.
+
+30:27.380 --> 30:30.900
+ So we'll give that a name.
+
+30:30.900 --> 30:36.620
+ And so we're basically going to create two linear layers.
+
+30:36.620 --> 30:45.340
+ And one easy way to create the correct kind of layer would be self.L1 equals we could
+
+30:45.340 --> 30:47.940
+ do that.
+
+30:47.940 --> 30:54.140
+ So one question is like, I understand this sub classing thing.
+
+30:54.140 --> 31:01.180
+ Is there some other way that you could push two additional layers onto the existing thing?
+
+31:01.180 --> 31:02.380
+ Or does that not make any sense?
+
+31:02.380 --> 31:03.620
+ Yeah, we could try that.
+
+31:03.620 --> 31:06.380
+ Let's see if we get this one working and then we'll try it the other way.
+
+31:06.380 --> 31:07.380
+ How about that?
+
+31:07.380 --> 31:08.380
+ That'll be fun.
+
+31:08.380 --> 31:15.300
+ And then we could also try using fasta.io as a create head function as well.
+
+31:15.300 --> 31:17.100
+ So we'll see how we go.
+
+31:17.100 --> 31:20.540
+ So here's linear layer number one.
+
+31:20.540 --> 31:23.580
+ And as you can see, I literally just copied and pasted.
+
+31:23.580 --> 31:25.740
+ It's inside the NN sub module.
+
+31:25.740 --> 31:26.900
+ So I just had to add that.
+
+31:26.900 --> 31:33.780
+ But the representation of it is nice and convenient and I can just copy and paste it.
+
+31:33.780 --> 31:36.820
+ In real life, we'd ever normally write the N features now features.
+
+31:36.820 --> 31:41.340
+ Everybody kind of knows that the first two things are N and out features.
+
+31:41.340 --> 31:45.100
+ So I might make it look more normal.
+
+31:45.100 --> 31:50.060
+ So then the second layer, and then maybe we'll just give ourselves a note here.
+
+31:50.060 --> 31:58.900
+ So we'll use this one for rice type and we'll use this one for disease.
+
+31:58.900 --> 32:04.220
+ Okay, so at this point, once we create this, it's going to be these things are going to
+
+32:04.220 --> 32:05.340
+ be in it.
+
+32:05.340 --> 32:09.500
+ And then we also need to wrap the actual model, right?
+
+32:09.500 --> 32:15.580
+ So we'll just call that M and we'll just store that away.
+
+32:15.580 --> 32:17.500
+ M equals N.
+
+32:17.500 --> 32:27.220
+ So what happens is when PyTorch calls, like basically modules act exactly like functions.
+
+32:27.220 --> 32:28.940
+ In Python terms, they're called callables.
+
+32:28.940 --> 32:30.900
+ They act exactly like functions.
+
+32:30.900 --> 32:36.700
+ But the way PyTorch sets it up is when you call this function, which is actually a module,
+
+32:36.700 --> 32:41.380
+ it will always call a specially named method in your class.
+
+32:41.380 --> 32:43.420
+ And the name of that is forward.
+
+32:43.420 --> 32:45.980
+ So you have to create something called forward.
+
+32:45.980 --> 32:56.220
+ And it will pass the current set of features to it, which I normally, I always call X,
+
+32:56.220 --> 33:00.340
+ I think most people call it X if I remember correctly.
+
+33:00.340 --> 33:10.700
+ So this is going to contain a 64 by 512 tensor.
+
+33:10.700 --> 33:12.660
+ Okay.
+
+33:12.660 --> 33:21.380
+ So it's not going to contain a 64 by 512 tensor.
+
+33:21.380 --> 33:24.580
+ It's going to contain an input tensor, because this is going to be our model.
+
+33:24.580 --> 33:35.300
+ So we need to create the 64 by 512 tensor from it by calling the model like so.
+
+33:35.300 --> 33:39.260
+ So results, in fact, what we often do is we'll go X equals because we're kind of making
+
+33:39.260 --> 33:42.780
+ it like a sequential model, we're going X equals.
+
+33:42.780 --> 33:49.260
+ Oh, you know, another idea is we, something else we can try is we can make this whole
+
+33:49.260 --> 33:50.780
+ thing as a sequential model.
+
+33:50.780 --> 33:52.700
+ Let's do that next.
+
+33:52.700 --> 33:56.980
+ So this is probably going to be the least easy way is what I'm doing it here, the most
+
+33:56.980 --> 33:58.180
+ manual way.
+
+33:58.180 --> 34:01.060
+ So first of all, call the original model.
+
+34:01.060 --> 34:15.300
+ And then basically we're going to create two separate outputs, the race type output and
+
+34:15.300 --> 34:19.100
+ the disease type output.
+
+34:19.100 --> 34:24.220
+ And so then we could return both of them.
+
+34:24.220 --> 34:33.260
+ So that's, so what I would then do is I would say, let's create a new model.
+
+34:33.260 --> 34:37.740
+ So disease type classifier.
+
+34:37.740 --> 34:40.540
+ So we'd create it like this.
+
+34:40.540 --> 34:50.220
+ And we need to pass in the existing model, which is this thing here, right?
+
+34:50.220 --> 34:59.900
+ Oh, yes.
+
+34:59.900 --> 35:05.900
+ And you always have to call the super classes done in it to construct the object before
+
+35:05.900 --> 35:07.900
+ you do anything else.
+
+35:07.900 --> 35:15.980
+ There's a lot of annoying boilerplate in Python or I'm afraid.
+
+35:15.980 --> 35:16.980
+ Okay.
+
+35:16.980 --> 35:17.980
+ There we go.
+
+35:17.980 --> 35:18.980
+ Okay.
+
+35:18.980 --> 35:29.820
+ I just wanted to point out how cool it is that you created the model with the last layer
+
+35:29.820 --> 35:31.500
+ by doing the limit.
+
+35:31.500 --> 35:32.500
+ Yeah.
+
+35:32.500 --> 35:33.500
+ That is so cool.
+
+35:33.500 --> 35:34.500
+ I did not exist it.
+
+35:34.500 --> 35:35.500
+ Yeah.
+
+35:35.500 --> 35:40.420
+ And I had to do something quite vertical because how can you do stuff like that?
+
+35:40.420 --> 35:41.420
+ It's not a list.
+
+35:41.420 --> 35:42.420
+ Yeah.
+
+35:42.420 --> 35:44.420
+ And there's only functionality to support this.
+
+35:44.420 --> 35:45.420
+ Yeah.
+
+35:45.420 --> 35:46.420
+ Yeah.
+
+35:46.420 --> 35:47.420
+ I kind of like it's nice.
+
+35:47.420 --> 35:51.700
+ I generally find I can work on the assumption that PyTorch class is the world designed because
+
+35:51.700 --> 35:53.460
+ it turns out they generally are.
+
+35:53.460 --> 35:57.860
+ And so to me, a world, you know, a world designed collection class would have the exact same
+
+35:57.860 --> 36:00.300
+ behavior as Python.
+
+36:00.300 --> 36:06.260
+ For example, fast scores L collection class has the exact same behavior as Python.
+
+36:06.260 --> 36:07.260
+ So yeah.
+
+36:07.260 --> 36:11.980
+ PyTorch is very nicely, very nicely made.
+
+36:11.980 --> 36:12.980
+ I find.
+
+36:12.980 --> 36:17.140
+ So that thing where you deleted the thing, that's a PyTorch thing.
+
+36:17.140 --> 36:18.140
+ It's not a fast AI thing.
+
+36:18.140 --> 36:19.140
+ Yeah.
+
+36:19.140 --> 36:20.140
+ It's a PyTorch thing.
+
+36:20.140 --> 36:21.140
+ This is just a regular.
+
+36:21.140 --> 36:23.300
+ This is just part of the sequential.
+
+36:23.300 --> 36:24.300
+ Yeah.
+
+36:24.300 --> 36:25.300
+ The sequential class.
+
+36:25.300 --> 36:26.300
+ So yeah.
+
+36:26.300 --> 36:27.300
+ Well, let's start.
+
+36:27.300 --> 36:28.300
+ Okay.
+
+36:28.300 --> 36:29.300
+ Nice.
+
+36:29.300 --> 36:30.300
+ Well, that's cool.
+
+36:30.300 --> 36:36.980
+ Then the way I decided I would explode the model into layers and then reconstruct it using
+
+36:36.980 --> 36:37.980
+ sequential.
+
+36:37.980 --> 36:38.980
+ Yeah.
+
+36:38.980 --> 36:39.980
+ Without the layers that I need.
+
+36:39.980 --> 36:40.980
+ Yeah.
+
+36:40.980 --> 36:42.980
+ But hey, you can actually do this.
+
+36:42.980 --> 36:43.980
+ This is so nice.
+
+36:43.980 --> 36:44.980
+ Yeah.
+
+36:44.980 --> 36:45.980
+ Exactly.
+
+36:45.980 --> 36:47.980
+ So let's create a new learner.
+
+36:47.980 --> 36:54.380
+ There's a big copy of the last one, right?
+
+36:54.380 --> 37:05.540
+ And then let's set the model to our new model.
+
+37:05.540 --> 37:11.140
+ So we've now got a learner that contains that new model.
+
+37:11.140 --> 37:20.660
+ So that's cool.
+
+37:20.660 --> 37:34.660
+ I guess at this point, I guess we should get some predictions, right?
+
+37:34.660 --> 37:36.660
+ Wait, one.
+
+37:36.660 --> 37:39.780
+ Oh, yeah.
+
+37:39.780 --> 37:43.100
+ So the main thing I'm waiting for is the loss function.
+
+37:43.100 --> 37:44.100
+ Like how you.
+
+37:44.100 --> 37:45.100
+ Yeah, yeah, yeah.
+
+37:45.100 --> 37:46.100
+ That's we're going to get there.
+
+37:46.100 --> 37:52.340
+ Let's do this first.
+
+37:52.340 --> 37:59.460
+ I suppose you're doing the predictions just to verify the plumbing is working.
+
+37:59.460 --> 38:00.460
+ Exactly.
+
+38:00.460 --> 38:01.460
+ Okay.
+
+38:01.460 --> 38:02.460
+ Exactly.
+
+38:02.460 --> 38:03.460
+ Okay.
+
+38:03.460 --> 38:04.460
+ And it's not.
+
+38:04.460 --> 38:12.660
+ Stack trace input type.
+
+38:12.660 --> 38:19.340
+ Oh, right, right, right, floating point 16.
+
+38:19.340 --> 38:21.340
+ Okay.
+
+38:21.340 --> 38:29.900
+ Fair enough.
+
+38:29.900 --> 38:38.420
+ I think to simplify things, we're going to remove the dot to FP 16.
+
+38:38.420 --> 38:44.300
+ And we'll worry about that later.
+
+38:44.300 --> 38:46.500
+ Is that some kind of mixed precision?
+
+38:46.500 --> 38:48.220
+ That is exactly mixed precision.
+
+38:48.220 --> 38:49.220
+ Yes.
+
+38:49.220 --> 38:52.060
+ So let's just pretend that doesn't exist for a moment.
+
+38:52.060 --> 38:56.460
+ And we'll come back to that.
+
+38:56.460 --> 38:59.460
+ Okay.
+
+38:59.460 --> 39:06.860
+ What on earth just happened?
+
+39:06.860 --> 39:10.580
+ All right.
+
+39:10.580 --> 39:20.340
+ So let's go back even simpler.
+
+39:20.340 --> 39:28.020
+ So it's useful to like if you talk about what's going through your mind when you see this
+
+39:28.020 --> 39:29.980
+ error, like you see that.
+
+39:29.980 --> 39:30.980
+ Yeah.
+
+39:30.980 --> 39:37.380
+ So I want to create like a minimum reproducible example.
+
+39:37.380 --> 39:49.700
+ So let's just like create a learner and then copy it and then not change it at all.
+
+39:49.700 --> 39:50.700
+ Yeah.
+
+39:50.700 --> 39:52.300
+ I can't even do that.
+
+39:52.300 --> 39:53.300
+ All right.
+
+39:53.300 --> 39:54.300
+ So this.
+
+39:54.300 --> 39:58.700
+ So then I would be like, okay, let's not even copy it.
+
+39:58.700 --> 40:01.060
+ But instead, let's just call it directly.
+
+40:01.060 --> 40:05.860
+ What to learn to.
+
+40:05.860 --> 40:07.620
+ Okay.
+
+40:07.620 --> 40:10.340
+ That works.
+
+40:10.340 --> 40:13.140
+ So doing a copy apparently doesn't work.
+
+40:13.140 --> 40:17.020
+ Oh, though, generally speaking, I would be inclined to change copy to deep copy at this
+
+40:17.020 --> 40:18.020
+ point.
+
+40:18.020 --> 40:21.900
+ Wait, but you still got this stack trace in the end.
+
+40:21.900 --> 40:24.660
+ Oh, I think I missed things.
+
+40:24.660 --> 40:33.060
+ Oh, why are we still getting a half precision somewhere?
+
+40:33.060 --> 40:39.660
+ That's various, isn't it?
+
+40:39.660 --> 40:44.140
+ Oh, it's probably because our data load has got changed somehow.
+
+40:44.140 --> 40:48.660
+ Let's recreate the data load as well.
+
+40:48.660 --> 40:51.340
+ Nearly made it, didn't it?
+
+40:51.340 --> 40:52.340
+ Yeah.
+
+40:52.340 --> 40:54.100
+ It looked like it was working.
+
+40:54.100 --> 40:58.940
+ And then at the very end, now there we go.
+
+40:58.940 --> 41:00.180
+ How are we getting half precision?
+
+41:00.180 --> 41:08.860
+ What on earth is making it half precision?
+
+41:08.860 --> 41:12.340
+ That's.
+
+41:12.340 --> 41:15.060
+ Odd.
+
+41:15.060 --> 41:17.140
+ Do you think resetting your kernel?
+
+41:17.140 --> 41:18.140
+ I think so.
+
+41:18.140 --> 41:19.140
+ Yeah.
+
+41:19.140 --> 41:28.940
+ I don't see how this would help, but there's never any harm, right?
+
+41:28.940 --> 41:36.220
+ And you, one of the colbics somehow.
+
+41:36.220 --> 41:43.220
+ To find that.
+
+41:43.220 --> 41:46.220
+ Okay.
+
+41:46.220 --> 41:51.220
+ Into some state.
+
+41:51.220 --> 41:55.220
+ Yeah, maybe.
+
+41:55.220 --> 41:57.220
+ Yep, that's exactly what happened.
+
+41:57.220 --> 41:59.220
+ Okay, well, that's, that shouldn't happen.
+
+41:59.220 --> 42:01.220
+ So that's not a great sign.
+
+42:01.220 --> 42:02.220
+ Wait, you know what happened?
+
+42:02.220 --> 42:03.220
+ Sorry.
+
+42:03.220 --> 42:04.220
+ I don't know what happened.
+
+42:04.220 --> 42:05.220
+ Like some, like, like, like,
+
+42:05.220 --> 42:13.940
+ something has some state that's keeping things in half precision, which, yeah, shouldn't be
+
+42:13.940 --> 42:14.940
+ happening.
+
+42:14.940 --> 42:20.220
+ And so at some point, we can try to figure out what that is, but not now.
+
+42:20.220 --> 42:28.500
+ Okay, so let's make a copy of the learner.
+
+42:28.500 --> 42:34.780
+ And check this in, into it.
+
+42:34.780 --> 42:39.780
+ And then we'll see before we do, we're just going to use the copy directly.
+
+42:39.780 --> 42:44.780
+ So we're just because few changes each time as possible.
+
+42:44.780 --> 43:03.780
+ Okay, that worked.
+
+43:03.780 --> 43:04.780
+ So, I'm looking for in this.
+
+43:04.780 --> 43:07.780
+ To sing, like, I'm trying to see why it's returning.
+
+43:07.780 --> 43:09.780
+ I thought that was a decoded thing.
+
+43:09.780 --> 43:12.780
+ So I was just wondering why it's being returned.
+
+43:12.780 --> 43:18.780
+ So here with just decoded equals false.
+
+43:18.780 --> 43:21.780
+ Oh, they're the targets.
+
+43:21.780 --> 43:23.780
+ That's why that's why.
+
+43:23.780 --> 43:26.780
+ So it actually returns, preds, comma targets.
+
+43:26.780 --> 43:31.780
+ That's what it's returning.
+
+43:31.780 --> 43:33.780
+ Okay.
+
+43:33.780 --> 43:46.780
+ All right, so now it's working quite nicely.
+
+43:46.780 --> 43:55.780
+ And so I would be now inclined to, like, create a really minimal model, which is like a,
+
+43:55.780 --> 44:01.780
+ I'm going to call dummy classifier.
+
+44:01.780 --> 44:08.780
+ And all it does is a call the original model.
+
+44:08.780 --> 44:11.780
+ And let's see if that works.
+
+44:11.780 --> 44:17.780
+ Because if this works, then we're at a point where we can then try out new models, right?
+
+44:17.780 --> 44:25.780
+ So, I'm going to go ahead and do that.
+
+44:25.780 --> 44:26.780
+ It's interesting.
+
+44:26.780 --> 44:29.780
+ I would have just gone straight back to the, the full model and tried that next,
+
+44:29.780 --> 44:31.780
+ but you're slowly walking away.
+
+44:31.780 --> 44:34.780
+ Yeah, I probably should have done it that way in the, you know,
+
+44:34.780 --> 44:36.780
+ done it more slowly in the first place, but.
+
+44:36.780 --> 44:38.780
+ I got an over enthusiastic.
+
+44:38.780 --> 44:40.780
+ No, it seems.
+
+44:40.780 --> 44:41.780
+ Okay.
+
+44:41.780 --> 44:42.780
+ Great.
+
+44:42.780 --> 44:47.780
+ Okay.
+
+44:47.780 --> 44:51.780
+ Oops, you guys.
+
+44:51.780 --> 44:58.780
+ We could do this.
+
+44:58.780 --> 45:11.780
+ We could do this inside our model, I guess.
+
+45:11.780 --> 45:17.780
+ It's a bit, this is all pretty hacky, but we're just trying to get something working.
+
+45:17.780 --> 45:21.780
+ So the head is the number one thing in the model.
+
+45:21.780 --> 45:25.780
+ The last layer is the end of the head.
+
+45:25.780 --> 45:27.780
+ You don't need that.
+
+45:27.780 --> 45:30.780
+ You delete that last thing.
+
+45:30.780 --> 45:33.780
+ It's, we don't need that.
+
+45:33.780 --> 45:34.780
+ Okay.
+
+45:34.780 --> 45:39.780
+ So we might as well inline that.
+
+45:39.780 --> 45:41.780
+ Keep it simple.
+
+45:41.780 --> 45:42.780
+ Okay.
+
+45:42.780 --> 45:47.780
+ So we delete the head and store it away.
+
+45:47.780 --> 45:48.780
+ Okay.
+
+45:48.780 --> 45:56.780
+ So we're going to create.
+
+45:56.780 --> 46:06.780
+ We create a letter.
+
+46:06.780 --> 46:10.780
+ Create a class.
+
+46:10.780 --> 46:16.780
+ This time we call the disease, et cetera, classifier.
+
+46:16.780 --> 46:32.780
+ Set the model to that.
+
+46:32.780 --> 46:42.780
+ Okay.
+
+46:42.780 --> 46:43.780
+ Cool.
+
+46:43.780 --> 46:44.780
+ Okay.
+
+46:44.780 --> 46:58.780
+ So we're now at the point where it's trying to calculate loss and it has no way to do that.
+
+46:58.780 --> 47:03.780
+ So I'm slightly surprised it's trying to calculate loss at all.
+
+47:03.780 --> 47:06.780
+ Since we've lost his false.
+
+47:06.780 --> 47:10.780
+ That's fine.
+
+47:10.780 --> 47:13.780
+ So, okay. So the loss function.
+
+47:13.780 --> 47:20.780
+ To remind you is the thing which is like a number, which says.
+
+47:20.780 --> 47:26.780
+ How good is this model?
+
+47:26.780 --> 47:30.780
+ And the loss function.
+
+47:30.780 --> 47:45.780
+ That we were using was designed on something that only returned a single, a single tensor and we're returning a tuple of tensors.
+
+47:45.780 --> 47:53.780
+ And so that's why when it tries to call the loss function, it gets confused, which is fair enough.
+
+47:53.780 --> 48:03.780
+ So the loss function is another thing that is stored inside the learner.
+
+48:03.780 --> 48:13.780
+ Okay. There it is.
+
+48:13.780 --> 48:22.780
+ So what we could do is we could.
+
+48:22.780 --> 48:28.780
+ What's the best way to do this?
+
+48:28.780 --> 48:36.780
+ One thing would be we could look at the source code for vision learner and see how that creates the loss function.
+
+48:36.780 --> 48:53.780
+ I'll just pass it to learner.
+
+48:53.780 --> 49:04.780
+ Okay. So let's look at that.
+
+49:04.780 --> 49:08.780
+ Okay. So it's trying to get it from the training dataset.
+
+49:08.780 --> 49:17.780
+ So the training dataset knows what function loss function to use, which is pretty nifty.
+
+49:17.780 --> 49:22.780
+ So to start with, we could let's create a loss function.
+
+49:22.780 --> 49:25.780
+ So let's create a really simple loss function.
+
+49:25.780 --> 49:37.780
+ So disease and type classifier loss.
+
+49:37.780 --> 49:42.780
+ We're going to be past predictions and actuals.
+
+49:42.780 --> 49:51.780
+ Okay. So we're going to be past predictions or some of those called the targets.
+
+49:51.780 --> 50:06.780
+ And what we could do is we could just say like for now, let's say the current loss function is whatever loss function we had before.
+
+50:06.780 --> 50:09.780
+ And let's just try to predict.
+
+50:09.780 --> 50:17.780
+ Let's just try to get it so it's working just on the disease prediction, which is this bit here.
+
+50:17.780 --> 50:21.780
+ So predictions will be a tuple.
+
+50:21.780 --> 50:25.780
+ So this will be rice predictions.
+
+50:25.780 --> 50:29.780
+ And it will be disease predictions.
+
+50:29.780 --> 50:31.780
+ That'll be what's in our threads.
+
+50:31.780 --> 50:37.780
+ And so just to start with, let's just keep getting this kick, get this so it keeps your works on disease predictions.
+
+50:37.780 --> 50:42.780
+ So we just return whatever the current loss function was.
+
+50:42.780 --> 50:49.780
+ And we'll call it on the disease predictions.
+
+50:49.780 --> 50:50.780
+ Okay.
+
+50:50.780 --> 50:56.780
+ So,
+
+50:56.780 --> 51:19.780
+ now we need to go learn to dot loss function is that function we just created.
+
+51:19.780 --> 51:29.780
+ Interesting. Sorry, when you did that. To like set the current loss, set the gloss function in the learner.
+
+51:29.780 --> 51:36.780
+ Didn't want this mess up your code. I guess like you need to create the learner again.
+
+51:36.780 --> 51:40.780
+ Never mind. Sorry.
+
+51:40.780 --> 51:42.780
+ Okay.
+
+51:42.780 --> 51:55.780
+ So,
+
+51:55.780 --> 52:01.780
+ I just kind of ignore the rice type prediction for now.
+
+52:01.780 --> 52:11.780
+ And just try to get it, our new thing working to continue to do exactly what it did before, but with this new structure around it.
+
+52:11.780 --> 52:19.780
+ Do we have to split the targets as well?
+
+52:19.780 --> 52:39.780
+ No, because at the moment our targets, we haven't included anything other than just the diseases in the targets. So, yeah, we're going to have to change our data loading as well to include the rice type as well.
+
+52:39.780 --> 52:41.780
+ But we haven't done that yet.
+
+52:41.780 --> 52:42.780
+ Okay.
+
+52:42.780 --> 52:47.780
+ Yeah.
+
+52:47.780 --> 52:52.780
+ Okay.
+
+52:52.780 --> 52:55.780
+ Ah, yes. Okay. So, then we've got metrics.
+
+52:55.780 --> 53:02.780
+ So, metrics are the things that just get printed out as you go. And we don't yet have a metric that works on this.
+
+53:02.780 --> 53:15.780
+ So, a very easy way to fix that is just to remove metrics for now.
+
+53:15.780 --> 53:24.780
+ Great. Now, preds.shape shouldn't work. Good. It doesn't. Because now we've got two sets of predictions.
+
+53:24.780 --> 53:33.780
+ Right. We've got a tuple because that's the predictions is just whatever the model creates and the model is creating two things, not one.
+
+53:33.780 --> 53:37.780
+ So, we've now got.
+
+53:37.780 --> 53:51.780
+ Rice predictions and disease predictions.
+
+53:51.780 --> 53:56.780
+ So that's actually pretty good progress, I think.
+
+53:56.780 --> 54:07.780
+ But, you know, like, for those of you who involved in fast development, you know, it's pretty clear to me and try to do this that this is far harder than it should be.
+
+54:07.780 --> 54:14.780
+ And it feels like something that should be easy to do.
+
+54:14.780 --> 54:26.780
+ I used to see, introducing the magic, the percentage and then have a patch and then just some little thing on top of it.
+
+54:26.780 --> 54:36.780
+ Yeah, it's not so much about patching. It's about, I feel like there might even be some multi loss thing.
+
+54:36.780 --> 54:42.780
+ If there's not, I feel like this is something we should add to fast AI to make it easier.
+
+54:42.780 --> 54:46.780
+ So, can you explain a little bit about the, why the loss is stored in the data.
+
+54:46.780 --> 54:55.780
+ Loader like how that is a good thing. Yeah, sure. So, generally speaking.
+
+54:55.780 --> 54:59.780
+ What is the appropriate loss function to use or at least a reasonable default.
+
+54:59.780 --> 55:10.780
+ Depends on what kind of data you have. So if your data is, you know, a single continuous output, you probably have a regression problems. We probably want means grid error.
+
+55:10.780 --> 55:15.780
+ If it's a single categorical variable, you probably want cross entropy loss.
+
+55:15.780 --> 55:25.780
+ If you have a multi categorical variable, you know, you probably want that.
+
+55:25.780 --> 55:31.780
+ Log loss without the softmax and so forth. So yeah, basically by having it come from the.
+
+55:31.780 --> 55:39.780
+ From the data set, means that you can get sensible defaults that ought to work for that data set.
+
+55:39.780 --> 55:48.780
+ So, that's why we generally most of the time don't have to specify what loss function to use.
+
+55:48.780 --> 55:54.780
+ Unless we're doing something kind of non standard.
+
+55:54.780 --> 56:05.780
+ All right. So we're about to wrap up.
+
+56:05.780 --> 56:13.780
+ So the last thing I think I might do is just try to get put this back and we can do it exactly the same way.
+
+56:13.780 --> 56:18.780
+ Which is to say, DTC.
+
+56:18.780 --> 56:37.780
+ Error.
+
+56:37.780 --> 56:51.780
+ So we'll just return error rate on the disease predictions.
+
+56:51.780 --> 57:06.780
+ Learn to metrics equals DTC error.
+
+57:06.780 --> 57:08.780
+ Cool.
+
+57:08.780 --> 57:21.780
+ So I guess we should now be able to do things like learn to LFI and for example.
+
+57:21.780 --> 57:31.780
+ And this should we should be able to just replicate our disease model at this point.
+
+57:31.780 --> 57:36.780
+ We're not doing anything with this extra race type thing yet.
+
+57:36.780 --> 57:39.780
+ And fine tune.
+
+57:39.780 --> 57:43.780
+ One epoch.
+
+57:43.780 --> 57:47.780
+ 0.05 say 0.
+
+57:47.780 --> 58:07.780
+ And while I wait for that, let's see if I search like fast AI multiple loss function or something.
+
+58:07.780 --> 58:19.780
+ Now, 2018 is going to be too long ago.
+
+58:19.780 --> 58:24.780
+ Nothing there.
+
+58:24.780 --> 58:39.780
+ I got to go.
+
+58:39.780 --> 58:40.780
+ Okay.
+
+58:40.780 --> 58:45.780
+ So it looks like this person did something pretty similar.
+
+58:45.780 --> 58:51.780
+ They created their own little multitask loss wrapper.
+
+58:51.780 --> 58:56.780
+ All right, cool. Well, I think we're at a good place to stop.
+
+58:56.780 --> 59:06.780
+ That's we've got back. So it's not totally broken. So that's good.
+
+59:06.780 --> 59:10.780
+ And next time we will try and plug this stuff in.
+
+59:10.780 --> 59:15.780
+ Anybody have any questions or anything before we wrap up?
+
+59:15.780 --> 59:24.780
+ Just a quick question, Jeremy, it says the valley is 0.001, but you use 0.01 for the fine tool.
+
+59:24.780 --> 59:25.780
+ Yeah, I'm not sure.
+
+59:25.780 --> 59:26.780
+ I'm not sure.
+
+59:26.780 --> 59:30.780
+ See, this is pretty, this is, it's picked out something pretty early in the curve.
+
+59:30.780 --> 59:33.780
+ I thought something down here seems more reasonable.
+
+59:33.780 --> 59:35.780
+ Despite balling.
+
+59:35.780 --> 59:41.780
+ You know, it tends to recommend like rather conservative values.
+
+59:41.780 --> 59:51.780
+ So yeah, I tend to kind of look for the bet that's, I kind of look for the bet that's as far to the right as possible, but still looks pretty steep gradient.
+
+59:51.780 --> 59:54.780
+ I guess is my real thumb.
+
+59:54.780 --> 59:55.780
+ Cool. Thank you.
+
+59:55.780 --> 59:56.780
+ All right.
+
+59:56.780 --> 59:58.780
+ See you gang.
+
+59:58.780 --> 1:00:00.780
+ Thanks.
+
+1:00:00.780 --> 1:00:02.780
+ Yeah.
+
